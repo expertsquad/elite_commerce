@@ -1,17 +1,19 @@
+import { MouseEventHandler } from "react";
+
 export const Button = ({
   children,
   className,
-  handler,
+  onClick,
 }: {
   children: React.ReactNode;
   className?: string;
-  handler?: () => void;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }) => {
   const classes = `flex items-center justify-center ${className}`;
   // if handler exist then return button with onClick
-  if (handler) {
+  if (onClick) {
     return (
-      <button className={classes} onClick={handler}>
+      <button className={classes} onClick={onClick}>
         {children}
       </button>
     );

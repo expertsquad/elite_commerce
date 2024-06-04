@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* create a landing page to controll the portal modal */
+body {
+  @apply h-screen w-screen overflow-hidden;
+}
+main {
+  @apply h-full w-full overflow-auto;
+}
+
 /* don't forget to add the color to the config file */
 :root {
   /* colors */
@@ -12,6 +20,7 @@
   --black: black;
   --black-80: #333333;
   --black-50: #7f7f7f;
+  --black-transparent: #7f7f7f63;
 
   /* gradient colors */
   --gradient-primary: linear-gradient(90.37deg, #294393 0.32%, #04a4e6 102.21%);
@@ -40,9 +49,6 @@
     --positive: #61d49d;
   }
 } */
-
-/* utilities */
-/* @layer utilities {} */
 
 /* components */
 @layer components {
