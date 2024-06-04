@@ -3,21 +3,25 @@ import { createPortal } from "react-dom";
 import { Button } from "./Buttons";
 import Image from "next/image";
 import { xIcon } from "@/assets";
+import { useRouter } from "next/navigation";
 
 const Modal = ({
   show,
   setShow,
-  className,
   children,
   alignment,
+  className,
+  isIntercepting = false,
 }: {
   show: boolean | any;
   setShow: Dispatch<SetStateAction<boolean>>;
-  className: string;
   children: React.ReactNode;
   alignment: "left" | "center" | "right";
+  className?: string;
+  isIntercepting?: boolean;
 }) => {
   const [animate, setAnimate] = useState(false);
+  const redirect = useRouter();
 
   let appearAnimation;
   let disappearAnimation;
@@ -43,20 +47,26 @@ const Modal = ({
 
   const handleClose = () => {
     setAnimate(false);
+    if (isIntercepting) {
+      redirect.back();
+    }
     setTimeout(() => setShow(false), 300);
   };
 
   return createPortal(
     <div
-      className={`fixed inset-0 z-50 backdrop-blur-sm bg-black-transparent transition-opacity duration-300 ease-in-out ${
-        animate ? "opacity-100" : "opacity-0"
-      }`}
+      className={`fixed inset-0 z-50 backdrop-blur-sm bg-black-transparent transition-opacity duration-300 ease-in-out flex items-center
+      ${alignment === "right" && "justify-end"} 
+      ${alignment === "center" && "justify-center"} 
+      
+      ${animate ? "opacity-100" : "opacity-0"}`}
       onClick={handleClose}
     >
       <div
-        className={`rounded-3xl relative shadow-lg shadow-black-50 bg-white p-3 lg:p-5 transition-transform duration-300 ease-in-out ${
-          +animate ? appearAnimation : disappearAnimation
-        } ${className} `}
+        className={`rounded-3xl relative shadow-lg shadow-black-50 bg-white p-3 lg:p-5 duration-300 ease-in-out
+         ${alignment !== "center" && "h-[calc(100%-16px)] m-2"}
+           ${animate ? appearAnimation : disappearAnimation}
+            ${className}`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* close handler */}

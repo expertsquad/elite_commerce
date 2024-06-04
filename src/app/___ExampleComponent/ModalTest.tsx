@@ -46,7 +46,7 @@ const ModalTest = () => {
       {showLeft && (
         <Modal
           show={showLeft}
-          className="h-[calc(100%-16px)] w-1/2 m-2"
+          className=" w-3/4"
           alignment="left"
           setShow={setShowLeft}
         >
@@ -57,7 +57,7 @@ const ModalTest = () => {
       {show && (
         <Modal
           show={show}
-          className="h-1/2 w-1/2 mx-auto translate-y-1/2"
+          className="h-1/4 w-3/4"
           alignment="center"
           setShow={setShow}
         >
@@ -68,7 +68,7 @@ const ModalTest = () => {
       {showRight && (
         <Modal
           show={showRight}
-          className="h-[calc(100%-16px)] w-1/2 ml-auto m-2"
+          className="w-3/4"
           alignment="right"
           setShow={setShowRight}
         >
