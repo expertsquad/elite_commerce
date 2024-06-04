@@ -1,4 +1,6 @@
-import { Button } from "./Components/Buttons";
+import { searchIcon } from "@/assets";
+import { Button } from "../Components/Buttons";
+import Image from "next/image";
 
 export const metadata = {
   title: "Home",
@@ -12,7 +14,7 @@ export default function Home() {
   return (
     <main>
       <Button className="border p-2 bg-gradient-primary text-white">
-        Submit
+        Submit <Image src={searchIcon} alt="Icon" />
       </Button>
     </main>
   );
