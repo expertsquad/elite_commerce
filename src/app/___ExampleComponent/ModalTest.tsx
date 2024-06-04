@@ -57,7 +57,7 @@ const ModalTest = () => {
       {show && (
         <Modal
           show={show}
-          className="h-1/4 w-3/4"
+          className="h-3/4 w-3/4"
           alignment="center"
           setShow={setShow}
         >
