@@ -1,5 +1,5 @@
-import CardGridTest from "./ExampleComponent/CardGridTest";
-import ModalTest from "./ExampleComponent/ModalTest";
+import CardGridTest from "./___ExampleComponent/CardGridTest";
+import ModalTest from "./___ExampleComponent/ModalTest";
 
 export default function Home() {
   return (
