@@ -1,4 +1,25 @@
+// arrows
+import expandArrowIcon from "./Icons/expand-arrow.svg";
+import collapseArrowIcon from "./Icons/collapse-arrow.svg";
+// search
 import searchIcon from "./Icons/Search.svg";
-import XIcon from "./Icons/X.svg";
+// X
+import xIcon from "./Icons/X.svg";
+// cart
+import cartIcon from "./Icons/cart.svg";
+// stars
+import filledStar from "./Icons/filled-star.svg";
+import emptyStar from "./Icons/empty-star.svg";
+// heart
+import emptyHeart from "./Icons/empty-heart.svg";
 
-export { searchIcon, XIcon };
+export {
+  expandArrowIcon,
+  collapseArrowIcon,
+  searchIcon,
+  xIcon,
+  cartIcon,
+  filledStar,
+  emptyStar,
+  emptyHeart,
+};

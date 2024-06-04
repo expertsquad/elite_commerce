@@ -9,7 +9,7 @@ export const Button = ({
   className?: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }) => {
-  const classes = `flex items-center justify-center ${className}`;
+  const classes = `flex items-center justify-center gap-2 ${className}`;
   // if handler exist then return button with onClick
   if (onClick) {
     return (
