@@ -2,32 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
+/* don't forget to add the color to the config file */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* colors */
+  --positive: #119f5b;
+  --transparent: transparent;
+  --white: white;
+  --white-15: #ffffff26;
+  --black: black;
+  --black-80: #333333;
+  --black-50: #7f7f7f;
+
+  /* gradient colors */
+  --gradient-primary: linear-gradient(90.37deg, #294393 0.32%, #04a4e6 102.21%);
+  --gradient-primary-light: linear-gradient(
+    90.37deg,
+    rgba(41, 67, 147, 0.1) 0.32%,
+    rgba(4, 164, 230, 0.1) 102.21%
+  );
+
+  --gradient-secondary: linear-gradient(180deg, #fb8e48 0%, #cb380f 100%);
+  --gradient-secondary-light: linear-gradient(
+    180deg,
+    rgba(251, 142, 72, 0.1) 0%,
+    rgba(203, 56, 15, 0.1) 100%
+  );
+
+  --gradient-positive: linear-gradient(
+    90.14deg,
+    rgba(14, 148, 122, 0.1) 8.46%,
+    rgba(13, 164, 135, 0.1) 62.97%
+  );
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --positive: #61d49d;
   }
-}
+} */
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+/* utilities */
+/* @layer utilities {} */
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* components */
+@layer components {
+  .text-gradient-primary {
+    @apply bg-gradient-primary bg-clip-text text-transparent;
   }
 }
