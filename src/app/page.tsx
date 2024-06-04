@@ -1,4 +1,4 @@
-import ModalTest from "./_componentTest/ModalTest";
+import ModalTest from "../ExampleComponent/ModalTest";
 
 export default function Home() {
   return (

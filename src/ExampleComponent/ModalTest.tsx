@@ -13,20 +13,24 @@ const ModalTest = () => {
 
   return (
     <div>
-      <Button
-        className="border p-2 bg-gradient-primary text-white"
-        onClick={() => setShowLeft(true)}
-      >
-        Left Modal <Image src={searchIcon} alt="Icon" />
-      </Button>
-      <div className="min-h-screen"></div>
-      <Button
-        className="border p-2 bg-gradient-primary text-white"
-        onClick={() => setShow(true)}
-      >
-        Center Modal <Image src={searchIcon} alt="Icon" />
-      </Button>
-      <div className="min-h-screen">
+      <div className="min-h-screen flex items-center">
+        <Button
+          className="border p-2 bg-gradient-primary text-white"
+          onClick={() => setShowLeft(true)}
+        >
+          Left Modal <Image src={searchIcon} alt="Icon" />
+        </Button>
+      </div>
+
+      <div className="min-h-screen flex items-center">
+        <Button
+          className="border p-2 bg-gradient-primary text-white"
+          onClick={() => setShow(true)}
+        >
+          Center Modal <Image src={searchIcon} alt="Icon" />
+        </Button>
+      </div>
+      <div className="min-h-screen flex items-center">
         <Button
           className="border p-2 bg-gradient-primary text-white"
           onClick={() => setShowRight(true)}
@@ -40,14 +44,23 @@ const ModalTest = () => {
 ==================================== */}
       {/*left side modal */}
       {showLeft && (
-        <Modal className="h-[calc(100%-16px)] w-1/2 m-2" setShow={setShowLeft}>
+        <Modal
+          show={showLeft}
+          className="h-[calc(100%-16px)] w-1/2 m-2"
+          appearAnimation="translate-x-0"
+          disappearAnimation="-translate-x-1/2"
+          setShow={setShowLeft}
+        >
           Hello
         </Modal>
       )}
       {/*center modal */}
       {show && (
         <Modal
+          show={show}
           className="h-1/2 w-1/2 mx-auto translate-y-1/2"
+          appearAnimation="scale-1"
+          disappearAnimation="scale-0"
           setShow={setShow}
         >
           Hello
@@ -56,7 +69,10 @@ const ModalTest = () => {
       {/*right side modal */}
       {showRight && (
         <Modal
+          show={showRight}
           className="h-[calc(100%-16px)] w-1/2 ml-auto m-2"
+          appearAnimation="translate-x-0"
+          disappearAnimation="translate-x-1/2"
           setShow={setShowRight}
         >
           Hello
