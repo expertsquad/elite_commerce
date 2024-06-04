@@ -47,8 +47,7 @@ const ModalTest = () => {
         <Modal
           show={showLeft}
           className="h-[calc(100%-16px)] w-1/2 m-2"
-          appearAnimation="translate-x-0"
-          disappearAnimation="-translate-x-1/2"
+          alignment="left"
           setShow={setShowLeft}
         >
           Hello
@@ -59,8 +58,7 @@ const ModalTest = () => {
         <Modal
           show={show}
           className="h-1/2 w-1/2 mx-auto translate-y-1/2"
-          appearAnimation="scale-1"
-          disappearAnimation="scale-0"
+          alignment="center"
           setShow={setShow}
         >
           Hello
@@ -71,8 +69,7 @@ const ModalTest = () => {
         <Modal
           show={showRight}
           className="h-[calc(100%-16px)] w-1/2 ml-auto m-2"
-          appearAnimation="translate-x-0"
-          disappearAnimation="translate-x-1/2"
+          alignment="right"
           setShow={setShowRight}
         >
           Hello

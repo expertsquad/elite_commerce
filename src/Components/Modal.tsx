@@ -8,18 +8,30 @@ const Modal = ({
   show,
   setShow,
   className,
-  appearAnimation,
-  disappearAnimation,
   children,
+  alignment,
 }: {
   show: boolean | any;
   setShow: Dispatch<SetStateAction<boolean>>;
   className: string;
-  appearAnimation: string;
-  disappearAnimation: string;
   children: React.ReactNode;
+  alignment: "left" | "center" | "right";
 }) => {
   const [animate, setAnimate] = useState(false);
+
+  let appearAnimation;
+  let disappearAnimation;
+
+  if (alignment === "left") {
+    appearAnimation = "translate-x-0";
+    disappearAnimation = "-translate-x-1/2";
+  } else if (alignment === "center") {
+    appearAnimation = "scale-1";
+    disappearAnimation = "scale-0";
+  } else if (alignment === "right") {
+    appearAnimation = "translate-x-0";
+    disappearAnimation = "translate-x-1/2";
+  }
 
   useEffect(() => {
     if (show) {
