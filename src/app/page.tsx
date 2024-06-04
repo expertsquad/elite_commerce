@@ -1,7 +1,11 @@
+import { Button } from "./Components/Buttons";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 text-9xl text-gradient-primary">
-      Home
+    <main>
+      <Button className="border p-2 bg-gradient-primary text-white">
+        Submit
+      </Button>
     </main>
   );
 }

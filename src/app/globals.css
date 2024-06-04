@@ -49,4 +49,7 @@
   .text-gradient-primary {
     @apply bg-gradient-primary bg-clip-text text-transparent;
   }
+  .text-gradient-secondary {
+    @apply bg-gradient-secondary bg-clip-text text-transparent;
+  }
 }
