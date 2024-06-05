@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "./Buttons";
-import Image from "next/image";
 import { IconX } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 
