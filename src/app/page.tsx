@@ -6,7 +6,7 @@ import SSGTest from "./___ExampleComponent/SSGTest";
 export default async function Home() {
   return (
     <main>
-      <h1>This is Home page</h1>
+      <h1 className="text-9xl text-gradient-secondary">This is Home page</h1>
       <SSGTest />
       <CardGridTest />
       <ModalTest />

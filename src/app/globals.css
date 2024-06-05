@@ -43,10 +43,10 @@ main {
     rgba(13, 164, 135, 0.1) 62.97%
   );
 }
-
-/* @media (prefers-color-scheme: dark) {
+/* 
+@media (prefers-color-scheme: dark) {
   :root {
-    --positive: #61d49d;
+    --positive: red;
   }
 } */
 
