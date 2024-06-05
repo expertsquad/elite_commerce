@@ -1,6 +1,5 @@
 import React from "react";
 import NextBreadcrumb from "./NextBreadcrumb";
-import { breadcrumbBG } from "@/assets";
 import Link from "next/link";
 
 type TBreadcrumbComponentProps = {
@@ -14,7 +13,7 @@ const Breadcrumb = ({ title, elements }: TBreadcrumbComponentProps) => {
     <div
       className="flex flex-col items-center justify-center"
       style={{
-        backgroundImage: `url(${breadcrumbBG})`,
+        // backgroundImage: `url(${breadcrumbBG})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         width: "100%",
