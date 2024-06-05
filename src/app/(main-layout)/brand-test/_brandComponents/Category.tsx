@@ -1,6 +1,7 @@
+import { ICategory } from "@/interfaces/category.interface";
 import React from "react";
 
-const Category = ({}) => {
+const Category = ({ categoryData }: { categoryData: ICategory }) => {
   return (
     <div className="flex items-center gap-3.5">
       <input
@@ -9,7 +10,9 @@ const Category = ({}) => {
         name="category"
         id="category"
       />
-      <span className="text-base text-black-80">Watch</span>
+      <span className="text-base text-black-80">
+        {categoryData?.categoryName}
+      </span>
     </div>
   );
 };
