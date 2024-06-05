@@ -1,6 +1,7 @@
 import React from "react";
 import NextBreadcrumb from "./NextBreadcrumb";
 import Link from "next/link";
+import breadcrumbBG from "../../../../assets/breadcrumb-bg.svg";
 
 type TBreadcrumbComponentProps = {
   title: string;
@@ -8,16 +9,14 @@ type TBreadcrumbComponentProps = {
 };
 
 const Breadcrumb = ({ title, elements }: TBreadcrumbComponentProps) => {
-  console.log(elements, "hello");
   return (
     <div
-      className="flex flex-col items-center justify-center"
+      className="flex flex-col items-center justify-center bg-gradient-primary p-5 md:p-[30px]"
       style={{
+        backgroundImage: `url('breadcrumb-bg.svg')`,
         // backgroundImage: `url(${breadcrumbBG})`,
-        backgroundSize: "cover",
         backgroundPosition: "center",
-        width: "100%",
-        height: "100px",
+        backgroundSize: "cover",
       }}
     >
       <span className="text-2xl md:text-3xl">{title}</span>
@@ -30,7 +29,7 @@ const Breadcrumb = ({ title, elements }: TBreadcrumbComponentProps) => {
         capitalizeLinks
       />
       {/* == Breadcrumb Elements == */}
-      <div>
+      <div className="hidden md:block">
         {elements?.map((element: any, index: number) => (
           <Link key={index} href={"/"}>
             <span>{element?.brandName}</span>
