@@ -7,6 +7,7 @@ type GradientIconProps = {
     IconProps & React.RefAttributes<Icon>
   >;
   className?: string;
+  [key: string]: any;
 };
 
 const GradientIconLayer = () => (
