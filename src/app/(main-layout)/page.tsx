@@ -1,10 +1,11 @@
 import React from "react";
-import ModalTest from "../___ExampleComponent/ModalTest";
+import GradientIconTest from "../___ExampleComponent/GradientIconTest";
 
 const page = () => {
   return (
     <div>
-      <ModalTest />
+      <GradientIconTest />
+      Main
     </div>
   );
 };
