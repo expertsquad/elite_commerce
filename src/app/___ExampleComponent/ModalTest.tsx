@@ -4,7 +4,6 @@ import { IconAB2 } from "@tabler/icons-react";
 
 import { Button } from "@/Components/Buttons";
 import Modal from "@/Components/Modal";
-import Image from "next/image";
 import React from "react";
 
 const ModalTest = () => {
