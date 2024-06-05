@@ -1,5 +1,7 @@
 import React from "react";
 import BrandCard from "./_brandComponents/BrandCard";
+import Category from "./_brandComponents/Category";
+import SmallProductCard from "./_brandComponents/SmallProductCard";
 
 const BrandTest = () => {
   return (
@@ -19,7 +21,24 @@ const BrandTest = () => {
           </div>
         </div>
         <div>
-          <span className="uppercase">Brands Type</span>
+          {/* Categories */}
+          <div className="">
+            <span className="uppercase text-lg font-semibold">Categories</span>
+
+            <div className="flex flex-col gap-5">
+              <Category />
+            </div>
+          </div>
+          <hr className="border-black-50" />
+          {/* To Selling Brands Product */}
+          <div className="flex flex-col gap-7">
+            <span className="uppercase text-lg font-semibold">
+              To Selling Brands Product
+            </span>
+            <div className="flex flex-col gap-7">
+              <SmallProductCard />
+            </div>
+          </div>
         </div>
       </div>
     </div>

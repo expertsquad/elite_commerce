@@ -1,31 +1,7 @@
-// arrows
-import expandArrowIcon from "./Icons/expand-arrow.svg";
-import collapseArrowIcon from "./Icons/collapse-arrow.svg";
-// search
-import searchIcon from "./Icons/Search.svg";
-// X
-import xIcon from "./Icons/X.svg";
-// cart
-import cartIcon from "./Icons/cart.svg";
-// stars
-import filledStar from "./Icons/filled-star.svg";
-import emptyStar from "./Icons/empty-star.svg";
-// heart
-import emptyHeart from "./Icons/empty-heart.svg";
-
 // shariful
 // brand test image
 import brandTestImage from "./Images/brandTest.svg";
+import demoProductPhoto from "./Images/demoProductPhoto.png";
 
-export {
-  expandArrowIcon,
-  collapseArrowIcon,
-  searchIcon,
-  xIcon,
-  cartIcon,
-  filledStar,
-  emptyStar,
-  emptyHeart,
-  brandTestImage,
-};
+export { brandTestImage, demoProductPhoto };
 // add all the assets here
