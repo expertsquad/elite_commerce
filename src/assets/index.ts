@@ -12,6 +12,8 @@ import filledStar from "./Icons/filled-star.svg";
 import emptyStar from "./Icons/empty-star.svg";
 // heart
 import emptyHeart from "./Icons/empty-heart.svg";
+// Breadcrumb Banner
+import breadcrumbBG from "./breadcrumb-bg.svg";
 
 export {
   expandArrowIcon,
@@ -22,4 +24,5 @@ export {
   filledStar,
   emptyStar,
   emptyHeart,
+  breadcrumbBG,
 };
