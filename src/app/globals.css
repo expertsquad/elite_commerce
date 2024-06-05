@@ -18,8 +18,9 @@ main {
   --white: white;
   --white-15: #ffffff26;
   --black: black;
-  --black-80: #333333;
+  --black-10: #e6e6e6;
   --black-50: #7f7f7f;
+  --black-80: #333333;
   --black-transparent: #7f7f7f63;
 
   /* gradient colors */
