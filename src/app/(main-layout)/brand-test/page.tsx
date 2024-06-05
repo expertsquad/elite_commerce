@@ -49,7 +49,7 @@ const BrandTest = async () => {
               })}
             </div>
           </div>
-          <hr className="border-black-50" />
+          <hr className="border-black-10" />
           {/* To Selling Brands Product */}
           <div className="flex flex-col gap-7">
             <span className="uppercase text-lg font-semibold">
@@ -61,7 +61,7 @@ const BrandTest = async () => {
               })}
             </div>
           </div>
-          <hr className="border-black-50" />
+          <hr className="border-black-10" />
         </div>
       </div>
     </div>
