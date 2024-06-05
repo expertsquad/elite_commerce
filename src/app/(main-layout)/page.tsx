@@ -1,7 +1,12 @@
 import React from "react";
+import ModalTest from "../___ExampleComponent/ModalTest";
 
 const page = () => {
-  return <div>Main</div>;
+  return (
+    <div>
+      <ModalTest />
+    </div>
+  );
 };
 
 export default page;
