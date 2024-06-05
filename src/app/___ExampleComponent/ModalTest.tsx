@@ -1,8 +1,9 @@
 "use client";
 
+import { IconAB2 } from "@tabler/icons-react";
+
 import { Button } from "@/Components/Buttons";
 import Modal from "@/Components/Modal";
-import { searchIcon } from "@/assets";
 import Image from "next/image";
 import React from "react";
 
@@ -18,7 +19,8 @@ const ModalTest = () => {
           className="border p-2 bg-gradient-primary text-white"
           onClick={() => setShowLeft(true)}
         >
-          Left Modal <Image src={searchIcon} alt="Icon" />
+          Left Modal
+          <IconAB2 />
         </Button>
       </div>
 
@@ -27,7 +29,8 @@ const ModalTest = () => {
           className="border p-2 bg-gradient-primary text-white"
           onClick={() => setShow(true)}
         >
-          Center Modal <Image src={searchIcon} alt="Icon" />
+          Center Modal
+          <IconAB2 />
         </Button>
       </div>
       <div className="min-h-screen flex items-center">
@@ -35,7 +38,8 @@ const ModalTest = () => {
           className="border p-2 bg-gradient-primary text-white"
           onClick={() => setShowRight(true)}
         >
-          Right Modal <Image src={searchIcon} alt="Icon" />
+          Right Modal
+          <IconAB2 />
         </Button>
       </div>
 

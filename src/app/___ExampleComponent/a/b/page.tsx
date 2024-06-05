@@ -1,10 +1,11 @@
+import Link from "next/link";
 import React from "react";
-import ModalTest from "../___ExampleComponent/ModalTest";
 
 const page = () => {
   return (
     <div>
-      <ModalTest />
+      <p>B Page</p>
+      <Link href="/a">Go to A</Link>
     </div>
   );
 };

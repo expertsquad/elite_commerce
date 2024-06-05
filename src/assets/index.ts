@@ -28,3 +28,4 @@ export {
   emptyHeart,
   brandTestImage,
 };
+// add all the assets here
