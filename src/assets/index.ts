@@ -13,6 +13,10 @@ import emptyStar from "./Icons/empty-star.svg";
 // heart
 import emptyHeart from "./Icons/empty-heart.svg";
 
+// shariful
+// brand test image
+import brandTestImage from "./Images/brandTest.svg";
+
 export {
   expandArrowIcon,
   collapseArrowIcon,
@@ -22,4 +26,5 @@ export {
   filledStar,
   emptyStar,
   emptyHeart,
+  brandTestImage,
 };
