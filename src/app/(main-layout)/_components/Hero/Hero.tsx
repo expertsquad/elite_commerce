@@ -7,8 +7,6 @@ import TopSmallBanner from "./TopSmallBanner";
 const Hero = async () => {
   const data = await fetchData({ route: "/promotions/slider" });
 
-  console.log(data);
-
   const isLoading = false;
 
   const sliderArray = Object.values(data?.data?.slider || {});
@@ -31,10 +29,10 @@ const Hero = async () => {
         ) : (
           <div className="flex flex-col gap-5 w-full">
             <div className="h-[215px]">
-              {/* <TopSmallBanner topOffer={data?.data?.topOffer} /> */}
+              <TopSmallBanner topOffer={data?.data?.topOffer} />
             </div>
             <div className="h-[215px]">
-              {/* <BottomSmallBanner bottomOffer={data?.data?.bottomOffer} /> */}
+              <BottomSmallBanner bottomOffer={data?.data?.bottomOffer} />
             </div>
           </div>
         )}

@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import HeroItemSliderSkeleton from "./Skeleton/HeroItemSliderSkeleton";
 import Carousel from "./Carousel";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
+import { server_url } from "@/constants";
 
 const HeroItemSlide = ({ sliderArray, isLoading }: any) => {
   const [curr, setCurr] = useState(0);
@@ -48,13 +50,13 @@ const HeroItemSlide = ({ sliderArray, isLoading }: any) => {
           onClick={prev}
           className="p-1 rounded-full shadow bg-white/80 text-gray-800 hover:text-white hover:bg-main-bg-color duration-150 -ml-11 group-hover/item:-ml-3 delay-100"
         >
-          {/* <IconChevronLeft stroke={2} /> */}
+          <IconChevronLeft stroke={2} />
         </button>
         <button
           onClick={next}
           className="p-1 rounded-full shadow bg-white/80 text-gray-800 hover:text-white hover:bg-main-bg-color duration-150 -mr-11 group-hover/item:-mr-3 delay-100"
         >
-          {/* <IconChevronRight stroke={2} /> */}
+          <IconChevronRight stroke={2} />
         </button>
       </div>
       <div className="absolute bottom-2 md:bottom-10 right-0 left-0">

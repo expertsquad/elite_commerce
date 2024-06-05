@@ -1,5 +1,7 @@
+import { Button } from "@/Components/Buttons";
 import { server_url } from "@/constants";
 import { heroTopSmallBanner } from "@/interfaces/heroTopCard.interface";
+import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,6 +13,7 @@ const TopSmallBanner = ({ topOffer }: { topOffer: heroTopSmallBanner }) => {
         backgroundColor: `${
           topOffer?.backgroundColor && `#${topOffer?.backgroundColor}`
         }`,
+        backgroundImage: `url(${server_url}${topOffer?.backgroundPhoto})`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -33,11 +36,14 @@ const TopSmallBanner = ({ topOffer }: { topOffer: heroTopSmallBanner }) => {
           {topOffer?.title}
         </h2>
         <div className="flex items-baseline gap-1 main-text-color font-bold">
-          <span className="text-lg">{topOffer?.price}</span>
-          <small>QAR</small>
+          <span className="text-lg">$ {topOffer?.price}</span>
         </div>
 
-        <Link href={topOffer?.link}>{topOffer?.buttonText}</Link>
+        <Link href={topOffer?.link}>
+          <Button className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-full py-2 px-7 ">
+            {topOffer?.buttonText} <IconArrowRight />{" "}
+          </Button>
+        </Link>
       </div>
     </div>
   );

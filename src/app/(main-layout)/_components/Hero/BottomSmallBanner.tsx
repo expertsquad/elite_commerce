@@ -2,7 +2,6 @@ import { Button } from "@/Components/Buttons";
 import { server_url } from "@/constants";
 import { heroBottomSmallBanner } from "@/interfaces/heroBottom.interface";
 import Image from "next/image";
-import Link from "next/link";
 
 const BottomSmallBanner = ({
   bottomOffer,
@@ -27,8 +26,6 @@ const BottomSmallBanner = ({
           {bottomOffer?.offerTag}
         </h2>
         <h2 className="text-sm leading-7 line-clamp-1">{bottomOffer?.title}</h2>
-
-        <Link href={bottomOffer?.link}>{bottomOffer?.buttonText}</Link>
       </div>
 
       <div className=" relative w-36 h-36">
