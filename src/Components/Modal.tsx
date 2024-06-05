@@ -2,7 +2,7 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "./Buttons";
 import Image from "next/image";
-import { xIcon } from "@/assets";
+import { IconX } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 
 const Modal = ({
@@ -74,7 +74,7 @@ const Modal = ({
           className="absolute top-5 right-5 lg:top-6 lg:right-6"
           onClick={handleClose}
         >
-          <Image src={xIcon} alt="Close" />
+          <IconX size={20} />
         </Button>
         {/* children */}
         {children}
