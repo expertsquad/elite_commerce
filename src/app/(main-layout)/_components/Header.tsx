@@ -22,17 +22,20 @@ const Header = () => {
               <Link href="#" className="flex items-center py-2 px-3">
                 All Categories <IconChevronDown className="text-black-50" />
               </Link>
-              {/* =================
-      categories start
-      ================== */}
-              <ul className="absolute bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover:visible group-hover:opacity-100 group-hover:h-80 backdrop-blur-xl w-44 p-2">
-                <li>
+              {/* ================= categories start ================== */}
+              <ul className="absolute bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover:visible group-hover:opacity-100 group-hover:h-[clamp(100px,70vh,600px)] backdrop-blur-xl w-48 p-2 shadow-xl">
+                <li className=" group/category">
                   <Link href="#">Child</Link>
+                  {/* ================= sub categories start ================== */}
+                  <ul className="absolute bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover/category:visible group-hover/category:opacity-100 group-hover/category:h-[clamp(100px,70vh,600px)] backdrop-blur-xl min-w-48 p-2 top-0 left-[196px] shadow-xl">
+                    <li>
+                      <Link href="#">Grand Child</Link>
+                    </li>
+                  </ul>
+                  {/* ================= sub categories end ================== */}
                 </li>
               </ul>
-              {/* =================
-      categories end
-      ================== */}
+              {/* ================= categories end ================== */}
             </li>
             <li>
               <Link href="#">Home</Link>
