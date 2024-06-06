@@ -29,7 +29,7 @@ const GenerateGradientIcon: React.FC<GradientIconProps> = ({
   <div className="relative inline-block">
     <GradientIconLayer />
     <IconComponent
-      className={`w-6 h-6 ${className}`}
+      className={`${className}`}
       style={{ stroke: "url(#gradient1)" }}
       {...props}
     />
