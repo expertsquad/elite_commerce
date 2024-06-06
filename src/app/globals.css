@@ -62,6 +62,13 @@ main {
 }
 
 /* scroll bar */
+.scrollbar-x-remove::-webkit-scrollbar:horizontal {
+  @apply hidden;
+}
+.scrollbar-y-remove::-webkit-scrollbar:vertical {
+  @apply hidden;
+}
+
 ::-webkit-scrollbar {
   @apply w-1;
 }
