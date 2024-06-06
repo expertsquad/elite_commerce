@@ -24,7 +24,7 @@ const BrandCard = ({ brandData }: IBrandCardProps) => {
           />
         </div>
         <span className="text-lg font-semibold text-gradient-primary">
-          {brandData.brandName}
+          {brandData?.brandName}
         </span>
       </div>
       <hr className="h-[1px] border-black-10" />

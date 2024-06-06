@@ -1,6 +1,6 @@
 import ProductImageSlider from "./ProductImageSlider";
 import { IProduct } from "@/interfaces/product.interface";
-import StarRating from "./StarRating";
+import StarRating from "../StarRating";
 import { IconShoppingCart } from "@tabler/icons-react";
 
 const ProductCard = ({ product }: { product: IProduct }) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import Breadcrumb from "../example-poran/_components/Breadcrumb";
-import ProductCard from "./_components/ProductCard";
+import ProductCard from "../../../Components/ProductCard/ProductCard";
 import { fetchData } from "@/actions/fetchData";
 import { IProduct } from "@/interfaces/product.interface";
 

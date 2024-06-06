@@ -1,12 +1,12 @@
 import React from "react";
-import BrandCard, { IBrandCardProps } from "./_brandComponents/BrandCard";
-import Category from "./_brandComponents/Category";
-import SmallProductCard from "./_brandComponents/SmallProductCard";
+import BrandCard, { IBrandCardProps } from "../../../Components/BrandCard";
+import Category from "./_components/Category";
+import SmallProductCard from "./_components/SmallProductCard";
 import { fetchData } from "@/actions/fetchData";
 import { ICategory } from "@/interfaces/category.interface";
-import FilterSort from "./_brandComponents/FilterSort";
-import Filter from "./_brandComponents/Filter";
-import WidgetCard from "./_brandComponents/WidgetCard";
+import FilterSort from "./_components/FilterSort";
+import Filter from "./_components/Filter";
+import WidgetCard from "../../../Components/WidgetCard";
 
 const BrandTest = async () => {
   const brandData = await fetchData({ route: "/brand" });
