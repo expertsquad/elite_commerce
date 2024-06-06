@@ -24,16 +24,22 @@ const LargeDeviceMegaMenu = () => {
               All Categories <IconChevronDown className="text-black-50" />
             </Link>
             {/* ================= categories start ================== */}
-            <ul className="absolute bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover:visible group-hover:opacity-100 group-hover:h-[clamp(100px,70vh,600px)] backdrop-blur-xl w-48 p-2 shadow-xl">
+            <ul className="absolute bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover:visible group-hover:opacity-100 group-hover:h-[clamp(100px,70vh,600px)] backdrop-blur-xl w-48 shadow-xl py-2 flex flex-col gap-2">
               <li className="group/category">
-                <Link href="#" className="block w-full">
+                <Link
+                  href="#"
+                  className="block w-full p-2 group-hover/category:bg-gradient-primary-light"
+                >
                   Child
                 </Link>
                 {/* ================= sub categories start ================== */}
-                <div className="absolute bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover/category:visible group-hover/category:opacity-100 group-hover/category:h-[clamp(100px,70vh,600px)] backdrop-blur-xl p-2 top-0 left-[196px] shadow-xl flex">
-                  <ul className="w-48">
+                <div className="absolute bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover/category:visible group-hover/category:opacity-100 group-hover/category:h-[clamp(100px,70vh,600px)] backdrop-blur-xl py-2 top-0 left-[196px] shadow-xl flex">
+                  <ul className="w-48 flex flex-col gap-2">
                     <li>
-                      <Link href="#" className="block w-full">
+                      <Link
+                        href="#"
+                        className="block w-full p-2 hover:bg-gradient-primary-light"
+                      >
                         Grand Child
                       </Link>
                     </li>
