@@ -15,7 +15,7 @@ const Layout = ({
       <div className="mb-5 md:mb-10">
         <Breadcrumb title="Smart Devices" />
       </div>
-      <div className="flex">
+      <div className="flex gap-x-5 mx-auto max-w-7xl">
         {children}
         <div className="md:hidden">
           <FilterModal filter={filter} />
