@@ -49,7 +49,7 @@ const ModalTest = () => {
       {showLeft && (
         <Modal
           show={showLeft}
-          className="w-3/4"
+          className="w-2/4"
           alignment="left"
           setShow={setShowLeft}
         >

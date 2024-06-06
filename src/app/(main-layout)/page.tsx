@@ -4,12 +4,10 @@ import Hero from "./_components/Hero/Hero";
 
 const page = () => {
   return (
-    <div>
+    <div className="max-w-7xl mx-auto p-3">
       {/* Hero section added */}
 
       <Hero />
-
-      <ModalTest />
     </div>
   );
 };

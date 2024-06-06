@@ -60,3 +60,16 @@ main {
     @apply bg-gradient-secondary bg-clip-text text-transparent;
   }
 }
+
+/* scroll bar */
+::-webkit-scrollbar {
+  @apply w-1;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gradient-primary-light;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gradient-primary;
+}

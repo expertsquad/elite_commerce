@@ -10,7 +10,7 @@ const BrandTest = async () => {
   const brandData = await fetchData({ route: "/brand" });
 
   return (
-    <div className="">
+    <div className="max-w-7xl mx-auto p-3">
       <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
         <div className="flex flex-col gap-5 md:gap-7 md:col-span-3">
           <div className="flex items-center justify-between">
