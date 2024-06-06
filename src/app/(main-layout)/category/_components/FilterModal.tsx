@@ -9,7 +9,12 @@ const FilterModal = ({ filter }: { filter: React.ReactNode }) => {
     <div>
       <button onClick={() => setShow(true)}>Filter</button>
       {show && (
-        <Modal show={show} setShow={setShow} alignment="left">
+        <Modal
+          show={show}
+          setShow={setShow}
+          alignment="left"
+          className="overflow-y-scroll"
+        >
           {filter}
         </Modal>
       )}
