@@ -15,22 +15,27 @@ const BottomSmallBanner = ({
       className={`flex justify-center md:justify-between items-center gap-4 p-5 rounded-lg flex-1 w-full h-full text-white`}
       style={{
         backgroundColor: `${
-          bottomOffer?.backgroundColor && `#${bottomOffer?.backgroundColor}`
+          bottomOffer?.backgroundColor && `${bottomOffer?.backgroundColor}`
         }`,
-        backgroundImage: `url(${server_url}${bottomOffer?.backgroundPhoto})`,
+        backgroundImage: `url(${
+          !bottomOffer?.backgroundColor &&
+          `${server_url + bottomOffer?.backgroundPhoto}`
+        })`,
         backgroundPosition: "center",
         backgroundRepeat: "no - repeat",
         backgroundSize: "cover",
       }}
     >
-      <div className="flex flex-col gap-y-5">
-        <h2 className="text-base md:text-lg leading-7 line-clamp-1">
+      <div className="flex flex-col gap-5">
+        <h2 className="[font-size:_clamp(1.2em,2.5vw,0.1.6em)] line-clamp-1">
           {bottomOffer?.offerTag}
         </h2>
-        <h2 className="text-sm leading-7 line-clamp-1">{bottomOffer?.title}</h2>
+        <h2 className="  line-clamp-1 [font-size:_clamp(0.8em,2.5vw,1em)]">
+          {bottomOffer?.title}
+        </h2>
 
         <Link href={bottomOffer?.link}>
-          <Button className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-full py-2 px-7 ">
+          <Button className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-full py-2 px-4 md:px-6[font-size:_clamp(0.5em,60vw,0.9em)] ">
             {bottomOffer?.buttonText} <IconArrowRight />{" "}
           </Button>
         </Link>

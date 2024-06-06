@@ -1,20 +1,9 @@
+import { Button } from "@/Components/Buttons";
 import { server_url } from "@/constants";
+import { HeroSliderProps } from "@/interfaces/heroSliderProps";
+import { IconArrowRight } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-
-interface HeroSliderProps {
-  backgroundPhoto: string;
-  backgroundColor?: string;
-  productPhoto: string;
-  sliderTag: string;
-  title: string;
-  price: number;
-  discountPercentage: number;
-  buttonText: string;
-  link: string;
-  description: string;
-  _id: string;
-}
 
 const Carousel = ({ item }: { item: HeroSliderProps }) => {
   const discountedPrice =
@@ -23,7 +12,7 @@ const Carousel = ({ item }: { item: HeroSliderProps }) => {
   return (
     <div
       key={item?._id}
-      className={`carousel-item w-full rounded-lg `}
+      className={` w-full rounded-lg h-full `}
       style={{
         backgroundColor: `${
           item?.backgroundColor !== "" && `${item?.backgroundColor}`
@@ -39,7 +28,7 @@ const Carousel = ({ item }: { item: HeroSliderProps }) => {
     >
       <div className="flex items-center md:gap-5 gap-3.5 justify-between lg:px-9 md:px-6 px-4 py-4 h-full w-full">
         <div className="flex flex-col w-6/12">
-          <h3 className="font-bold main-text-color [font-size:_clamp(0.5em,60vw,0.9em)] animate-bounce">
+          <h3 className="font-bold text-gradient-secondary [font-size:_clamp(0.5em,60vw,0.9em)] animate-bounce">
             {item?.sliderTag}
           </h3>
           <h2
@@ -53,19 +42,23 @@ const Carousel = ({ item }: { item: HeroSliderProps }) => {
             {item.description}
           </p>
 
-          <div className="flex items-center gap-x-2 font-bold">
+          <div className="flex items-center font-bold  [font-size:_clamp(0.5em,60vw,0.9em)]">
             <span className="text-lg">
-              {item?.price}
-              <small className="ml-0.5">QAR</small>
+              {item?.price.toFixed(2)}
+              <small className="ml-0.5">USD</small>
             </span>
             <del>
               {discountedPrice}
-              <small className="ml-0.5">QAR</small>
+              <small className="ml-0.5">USD</small>
             </del>
-            <span>{item?.discountPercentage}%</span>
+            <span>{item?.discountPercentage.toFixed(2)}%</span>
           </div>
-          <div className="mt-4">
-            <Link href={item?.link}> Shop Now</Link>
+          <div className="mt-4 ">
+            <Link href={item?.link}>
+              <Button className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-full py-2 px-4 md:px-7  [font-size:_clamp(0.5em,60vw,0.9em)] ">
+                Shop Now <IconArrowRight />{" "}
+              </Button>
+            </Link>
           </div>
         </div>
         <div className="relative md:w-[250px] md:h-[250px] w-[180px] h-[150px]">
@@ -73,7 +66,7 @@ const Carousel = ({ item }: { item: HeroSliderProps }) => {
             src={`${server_url + item?.productPhoto}`}
             alt="hero item images"
             fill
-            priority={true}
+            priority
             sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 33vw"
             className="w-full h-full top-0 left-0 object-contain"
           />

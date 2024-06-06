@@ -11,9 +11,13 @@ const TopSmallBanner = ({ topOffer }: { topOffer: heroTopSmallBanner }) => {
       className={`flex justify-center md:justify-between items-center p-5 gap-4 rounded-lg flex-1 w-full h-full`}
       style={{
         backgroundColor: `${
-          topOffer?.backgroundColor && `#${topOffer?.backgroundColor}`
+          topOffer?.backgroundColor && `${topOffer?.backgroundColor}`
         }`,
-        backgroundImage: `url(${server_url}${topOffer?.backgroundPhoto})`,
+        backgroundImage: `url(${
+          !topOffer?.backgroundColor &&
+          `${server_url + topOffer?.backgroundPhoto}`
+        })`,
+
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -32,7 +36,7 @@ const TopSmallBanner = ({ topOffer }: { topOffer: heroTopSmallBanner }) => {
       </div>
 
       <div className="flex flex-col gap-y-5">
-        <h2 className="text-base md:text-lg leading-7 line-clamp-1">
+        <h2 className="  line-clamp-1 [font-size:_clamp(1.2em,2.5vw,0.1.6em)]">
           {topOffer?.title}
         </h2>
         <div className="flex items-baseline gap-1 main-text-color font-bold">
@@ -40,7 +44,7 @@ const TopSmallBanner = ({ topOffer }: { topOffer: heroTopSmallBanner }) => {
         </div>
 
         <Link href={topOffer?.link}>
-          <Button className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-full py-2 px-7 ">
+          <Button className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-full py-2 px-4 md:px-6 [font-size:_clamp(0.5em,60vw,0.9em)]">
             {topOffer?.buttonText} <IconArrowRight />{" "}
           </Button>
         </Link>
