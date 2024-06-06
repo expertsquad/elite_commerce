@@ -14,12 +14,12 @@ export async function generateMetadata() {
 const CategoryPage = async () => {
   const response = await fetchData({ route: "/product", limit: 20 });
   return (
-    <div>
+    <div className="pt-3">
       {/* == Next Breadcrumbs == */}
       <div className="mb-5 md:mb-10">
         <Breadcrumb title="Smart Devices" />
       </div>
-      <div>
+      <div className="max-w-7xl mx-auto p-3">
         {/* <ProductCard /> */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {response?.data?.map((product: IProduct) => (
