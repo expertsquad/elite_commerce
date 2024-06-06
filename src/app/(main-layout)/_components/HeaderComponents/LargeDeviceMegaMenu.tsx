@@ -23,8 +23,8 @@ const LargeDeviceMegaMenu = async () => {
       {/* Left section of the navigation */}
       <div className="flex gap-5 items-center">
         <span className="text-2xl text-gradient-secondary">Logo</span>
-        <ul className="flex items-center gap-3 z-50">
-          <li className="relative transition-all duration-300 group/categorybtn">
+        <ul className="flex items-center gap-3 z-20">
+          <li className="transition-all duration-300 group/categorybtn">
             <Link
               href="#"
               className="flex items-center py-2 px-3 rounded-full group-hover/categorybtn:bg-gradient-primary-light"
@@ -33,7 +33,9 @@ const LargeDeviceMegaMenu = async () => {
               <IconChevronDown className="text-black-50 group-hover/categorybtn:hidden" />
               <IconChevronUp className="text-black-50 hidden group-hover/categorybtn:block" />
             </Link>
+            {/* ========================================================== */}
             {/* ================= categories start ================== */}
+            {/* ========================================================== */}
             <ul className="absolute bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover/categorybtn:visible group-hover/categorybtn:opacity-100 group-hover/categorybtn:h-[clamp(100px,70vh,600px)] backdrop-blur-xl w-48 shadow-xl py-2 flex flex-col">
               {" "}
               {categories?.data?.map((category: ICategory) => (
@@ -45,7 +47,9 @@ const LargeDeviceMegaMenu = async () => {
                     {category?.categoryName}
                     <IconChevronRight className="text-black-50 hidden group-hover/category:block" />
                   </Link>
+                  {/* ========================================================== */}
                   {/* ================= sub categories start ================== */}
+                  {/* ========================================================== */}
                   <div className="absolute bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover/category:visible group-hover/category:opacity-100 group-hover/category:h-[clamp(100px,70vh,600px)] backdrop-blur-xl py-2 top-0 left-[196px] shadow-xl flex">
                     <ul className="w-48 h-full flex flex-col overflow-auto">
                       {category?.subcategories?.map((subcategory) => (

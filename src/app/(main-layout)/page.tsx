@@ -1,5 +1,4 @@
 import React from "react";
-import ModalTest from "../___ExampleComponent/ModalTest";
 import Hero from "./_components/Hero/Hero";
 
 const page = () => {
