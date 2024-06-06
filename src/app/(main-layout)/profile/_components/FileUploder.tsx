@@ -1,0 +1,101 @@
+"use client";
+import { server_url } from "@/constants";
+import { IFileUploaderProps } from "@/interfaces/fileUploader.interface";
+import { IconPhotoPlus } from "@tabler/icons-react";
+import Image from "next/image";
+
+const FileUploader = ({
+  name,
+  data,
+  onChange,
+  multiple = false,
+  accept,
+  maxSize,
+  error,
+  className,
+  disabled,
+  children,
+  bottomText,
+  uid = 1,
+}: IFileUploaderProps) => {
+  let url;
+  if (typeof data === "string") {
+    url = data && !data?.includes("blob:http") ? `${server_url}${data}` : data;
+  } else {
+    const index = Number(uid) - 1;
+    const fieldName =
+      name === "seo.metaPhoto" ? data?.seo?.metaPhoto : data?.[name];
+    // check if fieldName is an array, if so, get the item at the index, otherwise use the uid if it's not 1, or the fieldName as a string
+    const path = Array.isArray(fieldName)
+      ? (fieldName[index] as string)
+      : uid !== 1
+      ? ""
+      : (fieldName as string);
+
+    // check if the file path is a valid URL, if not, use the default path
+    url = path && !path?.includes("blob:http") ? `${server_url}${path}` : path;
+  }
+
+  const checkSizeAndHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (
+      maxSize &&
+      e?.target?.files &&
+      e?.target?.files[0]?.size > maxSize * 1024 * 1024
+    ) {
+      alert(`File size should be less than ${maxSize} MB`);
+      return;
+    }
+    if (onChange) {
+      onChange(e);
+    }
+  };
+
+  return (
+    <div className="w-full h-full flex flex-col items-center justify-center">
+      <label className={className}>
+        {/* check if data exist or children exist, if so, render the corresponding content */}
+        {url ? (
+          <Image src={url} alt={name} fill className="inset-0 object-cover" />
+        ) : children ? (
+          <span className="flex flex-col items-center justify-center">
+            {children}
+            {maxSize && (
+              <small className="text-gray-500">
+                Max size: <span className="text-orange-700"> {maxSize} MB</span>
+              </small>
+            )}
+          </span>
+        ) : (
+          <>
+            <IconPhotoPlus width={30} height={30} stroke={1} />
+            <span className="flex flex-col text-center">
+              <span>Select Your Image</span>
+              {maxSize && (
+                <small className="text-gray-500">
+                  Max size:{" "}
+                  <span className="text-orange-700"> {maxSize} MB</span>
+                </small>
+              )}
+              <span className="text-fuchsia-800 underline font-medium">
+                Click to browse
+              </span>
+            </span>
+          </>
+        )}
+        <input
+          className="hidden"
+          name={name}
+          id={uid.toString()}
+          type="file"
+          onChange={checkSizeAndHandleChange}
+          accept={accept}
+          multiple={multiple}
+          disabled={disabled}
+        />
+      </label>
+      <p className="mt-2 text-gray-500 ">{bottomText}</p>
+    </div>
+  );
+};
+
+export default FileUploader;

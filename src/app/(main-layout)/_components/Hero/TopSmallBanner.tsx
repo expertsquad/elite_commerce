@@ -30,7 +30,6 @@ const TopSmallBanner = ({ topOffer }: { topOffer: heroTopSmallBanner }) => {
             alt="Hero discount item"
             fill
             sizes="200px"
-            priority={true}
           />
         </div>
       </div>
