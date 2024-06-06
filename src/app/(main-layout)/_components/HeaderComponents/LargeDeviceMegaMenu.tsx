@@ -14,11 +14,11 @@ const LargeDeviceMegaMenu = () => {
   const iconStroke = 1.5;
 
   return (
-    <nav className="hidden md:flex py-[clamp(8px,2vh,20px)] px-[clamp(10px,5vw,30px)] text-md items-center justify-between border-b border-black-10">
+    <nav className="hidden md:flex max-w-7xl mx-auto py-[clamp(8px,2vh,20px)] px-[clamp(10px,5vw,30px)] text-md items-center justify-between">
       {/* Left section of the navigation */}
       <div className="flex gap-5 items-center">
-        <span className="text-2xl">Logo</span>
-        <ul className="flex items-center gap-3">
+        <span className="text-2xl text-gradient-secondary">Logo</span>
+        <ul className="flex items-center gap-3 z-50">
           <li className="h-fit bg-gradient-primary-light rounded-full relative group transition-all duration-300">
             <Link href="#" className="flex items-center py-2 px-3">
               All Categories <IconChevronDown className="text-black-50" />
