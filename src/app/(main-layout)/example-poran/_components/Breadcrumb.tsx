@@ -13,7 +13,7 @@ const Breadcrumb = ({ title, elements }: TBreadcrumbComponentProps) => {
     <div
       className="flex flex-col items-center justify-center bg-gradient-primary p-5 md:p-[30px]"
       style={{
-        backgroundImage: `url('breadcrumb-bg.svg')`,
+        // backgroundImage: `url('breadcrumb-bg.svg')`,
         // backgroundImage: `url(${breadcrumbBG})`,
         backgroundPosition: "center",
         backgroundSize: "cover",

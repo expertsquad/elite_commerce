@@ -1,12 +1,22 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { IconHeart } from "@tabler/icons-react";
+import { IconBolt, IconHeart } from "@tabler/icons-react";
 import { IconEye } from "@tabler/icons-react";
 import { server_url } from "@/constants";
+import { IProduct } from "@/interfaces/product.interface";
 
-const ProductImageSlider = ({ product, defaultVariant, loading }: any) => {
-  console.log(product, "Hello ban");
+type ProductImageSliderProps = {
+  product: IProduct;
+  defaultVariant?: any;
+  loading?: any;
+};
+
+const ProductImageSlider = ({
+  product,
+  defaultVariant,
+  loading,
+}: ProductImageSliderProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -53,14 +63,16 @@ const ProductImageSlider = ({ product, defaultVariant, loading }: any) => {
 
   return (
     <section>
-      <div className="w-full flex justify-between ">
-        <div className="flex flex-col gap-2 ">
+      <div className="w-full flex justify-between gap-x-0.5 relative">
+        <div className="w-1/7">
           {defaultVariant?.discountPercentage ? (
-            <p className="bg-gradient-primary md:h-8 md:w-8 h-6 w-6 rounded-full flex items-center justify-center text-white text-[8px] md:text-[10px]">
+            <span className="bg-gradient-secondary py-1 px-2 rounded-lg text-white text-xs cursor-default">
               {defaultVariant?.discountPercentage}%
-            </p>
+            </span>
           ) : (
-            0
+            <span className="bg-gradient-secondary py-1 px-2 rounded-lg text-white text-xs cursor-default">
+              {20}%
+            </span>
           )}
         </div>
 
@@ -71,22 +83,21 @@ const ProductImageSlider = ({ product, defaultVariant, loading }: any) => {
             onMouseEnter={() => setIsHovered(true)}
             onTouchStart={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="flex justify-center  flex-col relative w-8/12 "
+            className="flex items-center justify-center flex-col w-5/7 w-full"
           >
-            <div className="relative shrink-0 w-[120px] h-[120px] md:h-[150px] md:w-[150px] mx-auto">
+            <div className="relative shrink-0 h-[200px] md:max-h-[200px] md:max-w-[200px] w-full mx-auto">
               <Image
-                alt="Brand Carousel"
+                alt={`${server_url}${productImg}`}
                 fill
                 style={{
                   objectFit: "cover",
                 }}
                 src={`${server_url}${productImg}`}
-                priority
                 sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 33vw"
                 className="w-full h-full top-0 left-0 object-cover"
               />
             </div>
-            <div className=" ">
+            <div className="">
               <div className="indicators gap-2 flex mt-8 justify-center items-center ">
                 {product?.productPhotos?.map((_: any, dotIndex: number) => (
                   <div
@@ -97,8 +108,8 @@ const ProductImageSlider = ({ product, defaultVariant, loading }: any) => {
                     }}
                     className={`indicator w-[6px] h-[6px] rounded-full cursor-pointer ${
                       dotIndex === currentSlide
-                        ? "main-bg-color"
-                        : "bg-gray-300"
+                        ? "bg-gradient-primary"
+                        : "bg-black-50"
                     }`}
                   />
                 ))}
@@ -107,18 +118,15 @@ const ProductImageSlider = ({ product, defaultVariant, loading }: any) => {
           </div>
         ))}
 
-        <div className="flex flex-col gap-2 ">
-          <button className=" cursor-pointer  md:text-[12px]  border hover:text-fuchsia-700  md:h-8 md:w-8 h-6 w-6 rounded-full flex justify-center items-center hover:bg-gray-100  ">
-            <IconHeart className="md:h-4 md:w-4 h-[14px] w-[14px]" />
-            {""}
-          </button>
-          <button
-            onClick={handleQuickProductView}
-            className="cursor-pointer md:text-[12px] invisible group-hover:visible group-hover:duration-500 border hover:text-fuchsia-700  md:h-8 md:w-8 h-6 w-6 rounded-full flex justify-center items-center hover:bg-gray-100"
-          >
-            <IconEye className="md:h-4 md:w-4 h-[10px] w-[10px] " />
-            {""}
-          </button>
+        <div className="w-1/7 flex items-start justify-end">
+          <div className="flex flex-col gap-y-1.5">
+            <button className="cursor-pointer md:text-[12px] border border-black-10 bg-white md:h-8 md:w-8 h-6 w-6 rounded-full flex justify-center items-center">
+              <IconHeart stroke={2} height={16} width={16} />
+            </button>
+            <button className="cursor-pointer md:text-[12px] border border-black-10 bg-white md:h-8 md:w-8 h-6 w-6 rounded-full flex justify-center items-center md:hidden">
+              <IconBolt stroke={2} height={16} width={16} />
+            </button>
+          </div>
         </div>
       </div>
     </section>
