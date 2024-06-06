@@ -6,6 +6,7 @@ import { IconEye } from "@tabler/icons-react";
 import { server_url } from "@/constants";
 
 const ProductImageSlider = ({ product, defaultVariant, loading }: any) => {
+  console.log(product, "Hello ban");
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -55,11 +56,11 @@ const ProductImageSlider = ({ product, defaultVariant, loading }: any) => {
       <div className="w-full flex justify-between ">
         <div className="flex flex-col gap-2 ">
           {defaultVariant?.discountPercentage ? (
-            <p className="bg-[#E73C17] md:h-8 md:w-8 h-6 w-6 rounded-full flex items-center justify-center text-white text-[8px] md:text-[10px]">
+            <p className="bg-gradient-primary md:h-8 md:w-8 h-6 w-6 rounded-full flex items-center justify-center text-white text-[8px] md:text-[10px]">
               {defaultVariant?.discountPercentage}%
             </p>
           ) : (
-            ""
+            0
           )}
         </div>
 
@@ -72,11 +73,14 @@ const ProductImageSlider = ({ product, defaultVariant, loading }: any) => {
             onMouseLeave={() => setIsHovered(false)}
             className="flex justify-center  flex-col relative w-8/12 "
           >
-            <div className="relative shrink-0 w-[120px] h-[120px] md:h-[130px] md:w-[150px] mx-auto">
+            <div className="relative shrink-0 w-[120px] h-[120px] md:h-[150px] md:w-[150px] mx-auto">
               <Image
                 alt="Brand Carousel"
                 fill
-                src={`/${server_url}${productImg}`}
+                style={{
+                  objectFit: "cover",
+                }}
+                src={`${server_url}${productImg}`}
                 priority
                 sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 33vw"
                 className="w-full h-full top-0 left-0 object-cover"
