@@ -15,6 +15,7 @@ const config: Config = {
       white: { 15: "var(--white-15)", DEFAULT: "var(--white)" },
       black: {
         transparent: "var(--black-transparent)",
+        10: "var(--black-10)",
         50: "var(--black-50)",
         80: "var(--black-80)",
         DEFAULT: "var(--black)",
