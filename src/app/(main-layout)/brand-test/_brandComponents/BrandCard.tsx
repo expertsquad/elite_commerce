@@ -27,7 +27,7 @@ const BrandCard = ({ brandData }: IBrandCardProps) => {
           {brandData.brandName}
         </span>
       </div>
-      <hr className="h-[1px] border-black-50" />
+      <hr className="h-[1px] border-black-10" />
       <div className="flex flex-col items-center gap-4">
         <span className="text-lg text-center text-black-80">
           {brandData?.productCount} product available
