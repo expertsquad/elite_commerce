@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import HeroItemSliderSkeleton from "./Skeleton/HeroItemSliderSkeleton";
 import Carousel from "./Carousel";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 

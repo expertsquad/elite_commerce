@@ -1,7 +1,6 @@
 import { fetchData } from "@/actions/fetchData";
 import BottomSmallBanner from "./BottomSmallBanner";
 import HeroItemSlide from "./HeroItemSlide";
-import SmallBannerSkeleton from "./Skeleton/SmallBannerSkeleton";
 import TopSmallBanner from "./TopSmallBanner";
 
 const Hero = async () => {

@@ -8,8 +8,6 @@ const page = () => {
       {/* Hero section added */}
 
       <Hero />
-
-      <ModalTest />
     </div>
   );
 };
