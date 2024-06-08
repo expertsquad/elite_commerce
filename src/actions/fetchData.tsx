@@ -55,7 +55,9 @@ export const fetchProtectedData = async ({
   limit?: number;
 }) => {
   try {
-    const accessToken = cookies().get("accessToken")?.value;
+    // const accessToken = cookies().get("accessToken")?.value;
+    const accessToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIycERoVjdmazhNIiwiX2lkIjoiNjYwOWE4NjY2NTJhZmQ2MDU2Y2RjNWQ4IiwiZnVsbE5hbWUiOiJzZGRmYXNkIHNkZmFzZGZhc2QgYWRzYXNkYyIsInJvbGUiOiJBZG1pbiIsImVtYWlsIjoibmlyaW1vbnBjQGdtYWlsLmNvbSIsInBob25lTnVtYmVyIjoiNjU0NTY0MzUiLCJpc1ZlcmlmaWVkIjp0cnVlLCJpYXQiOjE3MTc4NDc1MzgsImV4cCI6MTcxNzkzMzkzOH0.30O5hrGaDhAxTnvIzVvk2wv_9wa3uotOzWUcs8X9jwA";
 
     if (!accessToken) {
       throw Error("Access token not found, please login again!");
