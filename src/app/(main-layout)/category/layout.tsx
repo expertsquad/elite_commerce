@@ -1,6 +1,7 @@
 import React from "react";
 import FilterModal from "./_components/FilterModal";
 import Breadcrumb from "../example-poran/_components/Breadcrumb";
+import FilterBySelection from "./_components/FilterBySelection";
 
 const Layout = ({
   children,
@@ -15,12 +16,17 @@ const Layout = ({
       <div className="mb-5 md:mb-10">
         <Breadcrumb title="Smart Devices" />
       </div>
-      <div className="flex gap-x-5 mx-auto max-w-7xl">
-        {children}
-        <div className="md:hidden">
+      <div className="mx-auto max-w-7xl px-5">
+        <div className="flex items-center justify-between md:hidden">
+          <FilterBySelection />
           <FilterModal filter={filter} />
         </div>
-        <div className="hidden md:block">{filter}</div>
+        <div className=" gap-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 mx-auto max-w-7xl">
+          <div className="lg:col-span-3 md:grid-cols-2 md:col-span-2">
+            {children}
+          </div>
+          <div className="hidden md:block lg:block">{filter}</div>
+        </div>
       </div>
     </div>
   );

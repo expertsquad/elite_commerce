@@ -19,9 +19,11 @@ const CategoryPage = async () => {
         <div>
           <span>{response?.meta?.total} Items result found - </span>
         </div>
-        <FilterBySelection />
+        <div className="hidden md:block">
+          <FilterBySelection />
+        </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-product-grid gap-5 place-items-center">
         {response?.data?.map((product: IProduct) => (
           <ProductCard key={product?._id} product={product} />
         ))}

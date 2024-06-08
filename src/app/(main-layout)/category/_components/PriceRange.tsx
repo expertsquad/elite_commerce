@@ -8,13 +8,13 @@ const PriceRange = () => {
   const [values, setValues] = useState([minValue, maxValue]);
 
   return (
-    <div>
-      <h2 className="mb-5 md:mb-[30px] font-bold text-lg md:text-2xl">
+    <div className="">
+      <h2 className="mb-5 md:mb-[30px] font-bold [font-size:_clamp(18px,10vw,24px)]">
         PRICE RANGE
       </h2>
       <div>
         <Slider
-          className="w-full h-1.5 bg-gradient-primary rounded-xl slider"
+          className="w-full  h-1.5 bg-gradient-primary rounded-xl slider"
           min={0}
           max={1000}
           value={values}
