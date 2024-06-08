@@ -11,6 +11,7 @@ const Modal = ({
   alignment,
   className,
   isIntercepting = false,
+  showCancelBtnINSmallDevice = false,
 }: {
   show: boolean | any;
   setShow: Dispatch<SetStateAction<boolean>>;
@@ -18,6 +19,7 @@ const Modal = ({
   alignment: "left" | "center" | "right";
   className?: string;
   isIntercepting?: boolean;
+  showCancelBtnINSmallDevice?: boolean;
 }) => {
   const [animate, setAnimate] = useState(false);
   const redirect = useRouter();
@@ -54,23 +56,24 @@ const Modal = ({
 
   return createPortal(
     <div
-      className={`fixed inset-0 z-50 backdrop-blur-sm bg-black-transparent transition-opacity duration-300 ease-in-out flex items-center
-      ${alignment === "right" && "justify-end"} 
-      ${alignment === "center" && "justify-center"} 
-      
-      ${animate ? "opacity-100" : "opacity-0"}`}
+      className={`fixed inset-0 z-50 backdrop-blur-sm bg-black-transparent transition-opacity duration-300 ease-in-out flex items-center ${
+        alignment === "right" && "justify-end"
+      } ${alignment === "center" && "justify-center"} ${
+        animate ? "opacity-100" : "opacity-0"
+      }`}
       onClick={handleClose}
     >
       <div
-        className={`rounded-3xl relative shadow-black-50 drop-shadow-2xl bg-white p-3 lg:p-5 duration-300 ease-in-out
-         ${alignment !== "center" && "h-[calc(100%-16px)] m-2"}
-           ${animate ? appearAnimation : disappearAnimation}
-            ${className}`}
+        className={`rounded-r-xl md:rounded-3xl relative shadow-black-50 drop-shadow-2xl bg-white p-3 lg:p-5 duration-300 ease-in-out
+         ${alignment !== "center" && "h-full md:h-[calc(100%-16px)] md:m-2"}
+           ${animate ? appearAnimation : disappearAnimation} ${className}`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* close handler */}
         <Button
-          className="absolute top-5 right-5 lg:top-6 lg:right-6"
+          className={`absolute top-5 right-5 lg:top-6 lg:right-6 ${
+            showCancelBtnINSmallDevice ? "block" : "hidden"
+          }`}
           onClick={handleClose}
         >
           <IconX size={20} />
