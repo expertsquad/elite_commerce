@@ -16,13 +16,13 @@ const Layout = ({
       <div className="mb-5 md:mb-10">
         <Breadcrumb title="Smart Devices" />
       </div>
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl px-5">
         <div className="flex items-center justify-between md:hidden">
           <FilterBySelection />
           <FilterModal filter={filter} />
         </div>
-        <div className="md:flex gap-x-5">
-          {children}
+        <div className=" gap-5 grid grid-cols-1 lg:grid-cols-4 mx-auto max-w-7xl">
+          <div className="lg:col-span-3">{children}</div>
           <div className="hidden md:block">{filter}</div>
         </div>
       </div>

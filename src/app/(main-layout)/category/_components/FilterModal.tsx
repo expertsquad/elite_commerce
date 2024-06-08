@@ -1,7 +1,7 @@
 "use client";
 import Modal from "@/Components/Modal";
 import { IconFilter } from "@tabler/icons-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const FilterModal = ({ filter }: { filter: React.ReactNode }) => {
   const [show, setShow] = useState(false);

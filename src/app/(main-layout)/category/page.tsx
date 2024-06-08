@@ -23,7 +23,7 @@ const CategoryPage = async () => {
           <FilterBySelection />
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 place-items-center">
+      <div className="grid grid-cols-product-grid gap-5">
         {response?.data?.map((product: IProduct) => (
           <ProductCard key={product?._id} product={product} />
         ))}

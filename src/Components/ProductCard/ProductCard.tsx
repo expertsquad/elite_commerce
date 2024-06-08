@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   return (
-    <div className="border border-black-10 rounded-lg group max-w-[320px] min-w-[320px] w-[calc(300px,2vw,185px)] relative md:min-h-[400px] min-h-[300px] cursor-pointer duration-500  ">
+    <div className="border border-black-10 rounded-lg group w-[calc(280px,2vw,185px)] relative  cursor-pointer duration-500  ">
       <div className="bg-gradient-primary-light p-4">
         <ProductImageSlider
           // loading={loading}
