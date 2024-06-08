@@ -12,7 +12,7 @@ export interface IWidgetCard {
 }
 const WidgetCard = () => {
   return (
-    <div className="flex flex-col items-center gap-3.5 justify-center bg-gradient-primary rounded-[10px] p-5 ">
+    <div className="flex flex-col items-center gap-3.5 justify-center bg-gradient-primary rounded-[10px] p-5 md:w-full max-w:[300px]">
       <div className="flex flex-col items-center gap-1.5 text-white">
         <span className="text-sm">Xiaomi Mobile Phone</span>
         <span className="text-[26px] font-bold">32% Discount</span>

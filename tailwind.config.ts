@@ -45,6 +45,10 @@ const config: Config = {
         "4/5": "4/5",
         "3/7": "3/7",
       },
+      gridTemplateColumns: {
+        "product-grid": "repeat(auto-fill, minmax(280px,1fr))",
+        "brand-card-grid": "repeat(auto-fill, minmax(250px,1fr))",
+      },
     },
   },
   plugins: [],

@@ -6,13 +6,12 @@ import React from "react";
 
 const ProductFilterByBrands = async () => {
   const response = await fetchData({ route: "/brand", limit: 10 });
-  console.log("response", response?.data);
   return (
     <div>
       <h2 className="mb-5 md:mb-[30px] font-bold text-lg md:text-2xl uppercase whitespace-nowrap">
         BRANDS
       </h2>
-      <div>
+      <div className="flex flex-col gap-y-3">
         {response?.data?.map((brand: IBrand) => (
           <div key={brand?._id} className="flex items-center gap-x-2.5">
             <input
