@@ -4,11 +4,11 @@ import WidgetCard from "@/Components/WidgetCard";
 
 const RightSideComponent = () => {
   return (
-    <div className="flex flex-col gap-7 ">
+    <div className="hidden lg:flex flex-col gap-7 ">
       {/* To Selling Brands Product */}
-      <div className="hidden lg:flex flex-col gap-7 ">
+      <div className="flex flex-col gap-7 ">
         <span className="uppercase text-lg font-semibold">
-          To Selling Brands Product
+          Top Selling Brands Product
         </span>
         <div className="flex flex-col gap-7">
           {[...Array(5)].map((_, index) => {
@@ -20,7 +20,7 @@ const RightSideComponent = () => {
 
       {/* Widget Promotion card */}
 
-      <div>
+      <div className="">
         <WidgetCard />
       </div>
     </div>

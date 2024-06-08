@@ -25,6 +25,12 @@ const Pagination = ({
     }
   };
 
+  const handleNextClick = () => {
+    if (currentPage < totalPages) {
+      handlePageClick(currentPage + 1);
+    }
+  };
+
   const renderPageNumbers = () => {
     const pages = [];
     for (let i = 1; i <= totalPages; i++) {
@@ -46,7 +52,19 @@ const Pagination = ({
     return pages;
   };
 
-  return <div className="flex items-center gap-3">{renderPageNumbers()}</div>;
+  return (
+    <div className="flex items-center gap-3">
+      {renderPageNumbers()}
+      <button
+        className="cursor-pointer h-10 px-5 rounded-full border border-black-10 flex items-center justify-center hover:text-white hover:bg-gradient-primary transition-all"
+        onClick={handleNextClick}
+        disabled={currentPage >= totalPages}
+        aria-label="Next Page"
+      >
+        Next
+      </button>
+    </div>
+  );
 };
 
 export default Pagination;
