@@ -13,6 +13,8 @@ import React from "react";
 import FeaturedCard from "./FeaturedCard";
 import { fetchData } from "@/actions/fetchData";
 import { ICategory } from "@/interfaces/category.interface";
+import Logo from "@/utils/Logo";
+import { mainMenus } from "@/constants/mainMenus.constants";
 
 const CategoriesAndSubcategories = async () => {
   const categories = await fetchData({
@@ -62,9 +64,7 @@ const LargeDeviceMegaMenu = () => {
     <nav className="hidden md:flex max-w-7xl mx-auto py-[clamp(8px,2vh,20px)] px-[clamp(10px,5vw,30px)] text-md items-center justify-between">
       {/* Left section of the navigation */}
       <div className="flex gap-5 items-center">
-        <Link href="/" className="text-2xl text-gradient-secondary">
-          Logo
-        </Link>
+        <Logo />
         <ul className="flex items-center gap-3 z-20">
           <li className="transition-all duration-300 group/categorybtn">
             <Link
@@ -83,30 +83,17 @@ const LargeDeviceMegaMenu = () => {
           </li>
 
           {/* ======================== menus ========================== */}
-          <li>
-            <Link
-              href="/"
-              className="block w-full py-2 px-3 rounded-md hover:bg-gradient-primary-light"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/brand-test"
-              className="block w-full py-2 px-3 rounded-md hover:bg-gradient-primary-light"
-            >
-              Brands
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/shop"
-              className="block w-full py-2 px-3 rounded-md hover:bg-gradient-primary-light"
-            >
-              Shop
-            </Link>
-          </li>
+
+          {mainMenus.map((menu) => (
+            <li key={menu.label}>
+              <Link
+                href={menu.href}
+                className="block w-full py-2 px-3 rounded-md hover:bg-gradient-primary-light"
+              >
+                {menu.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
 
