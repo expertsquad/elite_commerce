@@ -33,30 +33,51 @@ const Pagination = ({
 
   const renderPageNumbers = () => {
     const pages = [];
+    const maxVisiblePages = 4;
+
     for (let i = 1; i <= totalPages; i++) {
-      pages.push(
-        <button
-          key={i}
-          className={`cursor-pointer w-10 h-10 rounded-full border border-black-10 flex items-center justify-center hover:text-white hover:bg-gradient-primary transition-all ${
-            i === currentPage ? "text-white bg-gradient-primary" : ""
-          }`}
-          onClick={() => handlePageClick(i)}
-          disabled={i === currentPage}
-          aria-current={i === currentPage ? "page" : undefined}
-          aria-label={`Page ${i}`}
-        >
-          {i}
-        </button>
-      );
+      if (
+        i <= maxVisiblePages ||
+        i > totalPages - maxVisiblePages ||
+        (i >= currentPage - 1 && i <= currentPage + 1)
+      ) {
+        pages.push(
+          <button
+            key={i}
+            className={`cursor-pointer w-10 h-10 rounded-full border border-black-10 flex items-center justify-center hover:text-white hover:bg-gradient-primary transition-all ${
+              i === currentPage ? "text-white bg-gradient-primary" : ""
+            }`}
+            onClick={() => handlePageClick(i)}
+            disabled={i === currentPage}
+            aria-current={i === currentPage ? "page" : undefined}
+            aria-label={`Page ${i}`}
+          >
+            {i}
+          </button>
+        );
+      } else if (
+        i === maxVisiblePages + 1 ||
+        i === totalPages - maxVisiblePages
+      ) {
+        pages.push(
+          <span
+            key={i}
+            className="cursor-default w-10 h-10 rounded-full flex items-center justify-center"
+          >
+            ...
+          </span>
+        );
+      }
     }
+
     return pages;
   };
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center justify-center gap-3">
       {renderPageNumbers()}
       <button
-        className="cursor-pointer h-10 px-5 rounded-full border border-black-10 flex items-center justify-center hover:text-white hover:bg-gradient-primary transition-all"
+        className="cursor-pointer px-5 h-10 rounded-full border border-black-10 flex items-center justify-center hover:text-white hover:bg-gradient-primary transition-all"
         onClick={handleNextClick}
         disabled={currentPage >= totalPages}
         aria-label="Next Page"
