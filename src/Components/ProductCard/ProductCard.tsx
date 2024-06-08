@@ -24,7 +24,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           </span>
           <span className="text-black-10 mx-0.5">|</span>
           <span>
-            <StarRating rating={Math.round(5)} />
+            <StarRating rating={Math.round(product?.averageRating || 0)} />
           </span>
         </div>
 

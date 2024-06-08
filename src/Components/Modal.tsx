@@ -62,7 +62,7 @@ const Modal = ({
       onClick={handleClose}
     >
       <div
-        className={`rounded-3xl relative shadow-lg shadow-black-50 bg-white p-3 lg:p-5 duration-300 ease-in-out
+        className={`rounded-3xl relative shadow-black-50 drop-shadow-2xl bg-white p-3 lg:p-5 duration-300 ease-in-out
          ${alignment !== "center" && "h-[calc(100%-16px)] m-2"}
            ${animate ? appearAnimation : disappearAnimation}
             ${className}`}

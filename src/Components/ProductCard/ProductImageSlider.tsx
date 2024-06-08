@@ -87,7 +87,7 @@ const ProductImageSlider = ({
           >
             <div className="relative shrink-0 h-[200px] md:max-h-[200px] md:max-w-[200px] w-full mx-auto">
               <Image
-                alt={`${server_url}${productImg}`}
+                alt="Product Image"
                 fill
                 style={{
                   objectFit: "cover",

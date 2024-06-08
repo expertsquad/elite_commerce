@@ -1,4 +1,5 @@
 export interface ICategory {
+  _id: string;
   categoryName: string;
   categoryPhoto: string;
   categoryIcon?: string;

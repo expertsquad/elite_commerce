@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return <Fragment>{children}</Fragment>;
 };
 
-export default layout;
+export default Layout;

@@ -47,6 +47,7 @@ export interface IProduct {
   videoLink: string;
   warranty?: string;
   supportedPrinter?: string;
+  averageRating?: number;
   specifications: Array<{
     sectionName: string;
     blocks: Array<{
