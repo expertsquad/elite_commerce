@@ -8,7 +8,7 @@ const FilterByColor = () => {
   return (
     <div>
       <h2 className="mb-5 md:mb-[30px] font-bold text-lg md:text-2xl">COLOR</h2>
-      <div className="flex items-center gap-2.5 flex-wrap">
+      <div className="flex items-center gap-2.5 gap-y-3 flex-wrap">
         {categoryColor?.map((color: ColorTypes, index) => (
           <div
             key={index}

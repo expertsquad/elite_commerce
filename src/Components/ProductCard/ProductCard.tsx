@@ -2,10 +2,11 @@ import ProductImageSlider from "./ProductImageSlider";
 import { IProduct } from "@/interfaces/product.interface";
 import StarRating from "../StarRating";
 import { IconShoppingCart } from "@tabler/icons-react";
+import Link from "next/link";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   return (
-    <div className="border border-black-10 rounded-lg group max-w-[320px] w-[calc(300px,2vw,185px)] relative md:min-h-[400px] min-h-[300px] cursor-pointer duration-500  ">
+    <div className="border border-black-10 rounded-lg group max-w-[320px] min-w-[320px] w-[calc(300px,2vw,185px)] relative md:min-h-[400px] min-h-[300px] cursor-pointer duration-500  ">
       <div className="bg-gradient-primary-light p-4">
         <ProductImageSlider
           // loading={loading}
@@ -44,9 +45,12 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         </div>
       </div>
       <div className="absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 hidden md:group-hover:flex gap-x-4 items-center">
-        <button className="text-base bg-white py-1.5 whitespace-nowrap px-5 rounded-full">
+        <Link
+          href={`products/${product?._id}`}
+          className="text-base bg-white py-1.5 whitespace-nowrap px-5 rounded-full"
+        >
           Quick View
-        </button>
+        </Link>
         <button className="text-base bg-white py-1.5 whitespace-nowrap px-5 rounded-full">
           Quick Order
         </button>

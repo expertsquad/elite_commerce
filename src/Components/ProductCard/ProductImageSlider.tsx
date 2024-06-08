@@ -70,7 +70,7 @@ const ProductImageSlider = ({
               {defaultVariant?.discountPercentage}%
             </span>
           ) : (
-            <span className="bg-gradient-secondary py-1 px-2 rounded-lg text-white text-xs cursor-default">
+            <span className="bg-gradient-secondary py-1 md:px-2 px-0.5 md:rounded-lg rounded-full text-white md:text-xs text-[10px] cursor-default">
               {20}%
             </span>
           )}
