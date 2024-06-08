@@ -4,33 +4,31 @@ import OrderCardHeader from "./OrderCardHeader";
 import { Button } from "@/Components/Buttons";
 import Link from "next/link";
 import OrderItemsCard from "./OrderItemsCard";
+import { Order } from "@/interfaces/oreder.interface";
+import { dateFormat } from "@/utils/dateFormat";
 
-const OrderItems = async () => {
-  const orderItems = await fetchProtectedData({
-    route: "/online-order",
-    query: "buyer.userId=6609a866652afd6056cdc5d8",
-  });
+const OrderItems = async ({ order }: { order: Order }) => {
+  console.log(order);
 
-  console.log(orderItems);
-
+  const date = new Date();
   return (
-    <div>
+    <div className=" md:shadow-lg shadow-none my-5 p-5 rounded-lg">
       {/* Order top section start */}
       <div className="flex items-center md:justify-between flex-col lg:flex-row  border border-transparent lg:border lg:border-black-10 px-0 lg:px-4 py-3 rounded-lg gap-5">
         <div className="flex  gap-3 justify-between lg:justify-around border border-black-10 rounded-lg lg:border-transparent w-full lg:w-7/12 p-3 ">
           <OrderCardHeader
             title="Order ID"
-            value="1234567890"
+            value={order?.orderId}
             className="font-bold"
           />
           <OrderCardHeader
             title="Order Date"
-            value="12/12/2021"
+            value={dateFormat(order?.createdAt)}
             className="font-bold"
           />
           <OrderCardHeader
             title="Estimated Delivery"
-            value="12/12/2021"
+            value={dateFormat(date.toString())}
             className="font-bold"
           />
         </div>
@@ -41,12 +39,16 @@ const OrderItems = async () => {
               Track Order{" "}
             </Button>
           </Link>
-          <p className="bg-black-10 px-5 rounded-lg py-2 "> Order Place</p>
+          <p className="bg-black-10 px-5 rounded-lg py-2 ">
+            {order?.orderStatus?.status}
+          </p>
         </div>
       </div>
       {/* Order top section finish */}
       {/* Order items card */}
-      <OrderItemsCard />
+      {order?.orderItems?.map((orderItem) => (
+        <OrderItemsCard key={orderItem._id} orderItem={orderItem} />
+      ))}
     </div>
   );
 };
