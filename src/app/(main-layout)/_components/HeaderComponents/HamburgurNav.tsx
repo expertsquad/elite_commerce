@@ -1,8 +1,7 @@
 "use client";
-import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import Modal from "@/Components/Modal";
 import { ICategory } from "@/interfaces/category.interface";
-import { Icon12Hours, IconMenu2 } from "@tabler/icons-react";
+import { IconMenu2 } from "@tabler/icons-react";
 import React from "react";
 
 const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
