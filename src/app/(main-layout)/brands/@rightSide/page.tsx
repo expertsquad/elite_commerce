@@ -6,7 +6,7 @@ const RightSideComponent = () => {
   return (
     <div className="flex flex-col gap-7 ">
       {/* To Selling Brands Product */}
-      <div className="hidden md:flex flex-col gap-7 ">
+      <div className="hidden lg:flex flex-col gap-7 ">
         <span className="uppercase text-lg font-semibold">
           To Selling Brands Product
         </span>
