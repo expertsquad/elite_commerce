@@ -14,6 +14,7 @@ import FeaturedCard from "./FeaturedCard";
 import { fetchData } from "@/actions/fetchData";
 import { ICategory } from "@/interfaces/category.interface";
 import Logo from "@/utils/Logo";
+import { mainMenus } from "@/constants/mainMenus.constants";
 
 const CategoriesAndSubcategories = async () => {
   const categories = await fetchData({
@@ -82,30 +83,17 @@ const LargeDeviceMegaMenu = () => {
           </li>
 
           {/* ======================== menus ========================== */}
-          <li>
-            <Link
-              href="/"
-              className="block w-full py-2 px-3 rounded-md hover:bg-gradient-primary-light"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/brands"
-              className="block w-full py-2 px-3 rounded-md hover:bg-gradient-primary-light"
-            >
-              Brands
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/shop"
-              className="block w-full py-2 px-3 rounded-md hover:bg-gradient-primary-light"
-            >
-              Shop
-            </Link>
-          </li>
+
+          {mainMenus.map((menu) => (
+            <li key={menu.label}>
+              <Link
+                href={menu.href}
+                className="block w-full py-2 px-3 rounded-md hover:bg-gradient-primary-light"
+              >
+                {menu.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
 
