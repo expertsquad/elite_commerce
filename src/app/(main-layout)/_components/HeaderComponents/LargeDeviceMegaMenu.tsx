@@ -27,7 +27,7 @@ const CategoriesAndSubcategories = async () => {
         {categories?.data?.map((category: ICategory) => (
           <li key={category?._id} className="group/category">
             <Link
-              href="#"
+              href={`/category/${category?._id}`}
               className="flex w-full p-2 group-hover/category:bg-gradient-primary-light justify-between"
             >
               {category?.categoryName}
@@ -39,7 +39,7 @@ const CategoriesAndSubcategories = async () => {
                 {category?.subcategories?.map((subcategory) => (
                   <li key={subcategory?.subcategoryId}>
                     <Link
-                      href="#"
+                      href={`/category/subcategory/${subcategory?.subcategoryId}`}
                       className="block w-full p-2 hover:bg-gradient-primary-light"
                     >
                       {subcategory?.subcategoryName}
@@ -62,11 +62,13 @@ const LargeDeviceMegaMenu = () => {
     <nav className="hidden md:flex max-w-7xl mx-auto py-[clamp(8px,2vh,20px)] px-[clamp(10px,5vw,30px)] text-md items-center justify-between">
       {/* Left section of the navigation */}
       <div className="flex gap-5 items-center">
-        <span className="text-2xl text-gradient-secondary">Logo</span>
+        <Link href="/" className="text-2xl text-gradient-secondary">
+          Logo
+        </Link>
         <ul className="flex items-center gap-3 z-20">
           <li className="transition-all duration-300 group/categorybtn">
             <Link
-              href="#"
+              href="/category"
               className="flex items-center py-2 px-3 rounded-full group-hover/categorybtn:bg-gradient-primary-light"
             >
               All Categories{" "}
@@ -83,7 +85,7 @@ const LargeDeviceMegaMenu = () => {
           {/* ======================== menus ========================== */}
           <li>
             <Link
-              href="#"
+              href="/"
               className="block w-full py-2 px-3 rounded-md hover:bg-gradient-primary-light"
             >
               Home
@@ -91,7 +93,7 @@ const LargeDeviceMegaMenu = () => {
           </li>
           <li>
             <Link
-              href="#"
+              href="/brand-test"
               className="block w-full py-2 px-3 rounded-md hover:bg-gradient-primary-light"
             >
               Brands
@@ -99,7 +101,7 @@ const LargeDeviceMegaMenu = () => {
           </li>
           <li>
             <Link
-              href="#"
+              href="/shop"
               className="block w-full py-2 px-3 rounded-md hover:bg-gradient-primary-light"
             >
               Shop
@@ -113,13 +115,13 @@ const LargeDeviceMegaMenu = () => {
         <button className="first:after:content-['|'] after:text-black-50 after:opacity-50 flex items-center gap-2">
           <IconSearch stroke={iconStroke} />
         </button>
-        <Link href="#">
+        <Link href="/favourites">
           <IconHeart stroke={iconStroke} />
         </Link>
-        <Link href="#">
+        <Link href="/cart">
           <IconShoppingCart stroke={iconStroke} />
         </Link>
-        <Link href="#" className="mt-2">
+        <Link href="/profile" className="mt-2">
           <GenerateGradientIcon
             IconComponent={IconUserCircle}
             stroke={iconStroke}
