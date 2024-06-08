@@ -22,7 +22,7 @@ const FilterModal = ({ filter }: { filter: React.ReactNode }) => {
           show={show}
           setShow={setShow}
           alignment="left"
-          className="overflow-y-scroll"
+          className="overflow-y-scroll p-3"
         >
           {filter}
         </Modal>
