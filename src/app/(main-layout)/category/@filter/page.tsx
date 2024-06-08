@@ -10,7 +10,7 @@ import CategoryCard from "../_components/CategoryCard";
 const FilterComponent = async () => {
   const response = await fetchData({ route: "/category", limit: 10 });
   return (
-    <div className="min-w-56 max-w-72  w-fit">
+    <div className="">
       <PriceRange />
       <span className="bg-black-10 h-0.5 w-full flex my-5 md:my-[30px]"></span>
       <div>

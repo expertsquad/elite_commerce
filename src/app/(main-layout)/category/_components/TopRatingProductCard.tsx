@@ -27,7 +27,7 @@ const TopRatingProductCard = async ({
   });
   return (
     <div>
-      <h2 className="mb-5 md:mb-[30px] font-bold text-lg md:text-xl uppercase whitespace-nowrap">
+      <h2 className="mb-5 md:mb-[30px] font-bold text-lg uppercase whitespace-nowrap">
         Top 05 Ratings Product
       </h2>
       <div className="flex flex-col gap-y-3">

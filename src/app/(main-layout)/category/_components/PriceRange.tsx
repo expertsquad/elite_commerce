@@ -14,7 +14,7 @@ const PriceRange = () => {
       </h2>
       <div>
         <Slider
-          className="w-full h-1.5 bg-gradient-primary rounded-xl slider"
+          className="w-full  h-1.5 bg-gradient-primary rounded-xl slider"
           min={0}
           max={1000}
           value={values}

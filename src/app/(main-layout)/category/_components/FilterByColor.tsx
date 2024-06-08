@@ -6,9 +6,9 @@ type ColorTypes = {
 };
 const FilterByColor = () => {
   return (
-    <div>
+    <div className="">
       <h2 className="mb-5 md:mb-[30px] font-bold text-lg md:text-2xl">COLOR</h2>
-      <div className="flex items-center gap-2.5 gap-y-3 flex-wrap">
+      <div className="flex items-center gap-2 gap-y-3 flex-wrap">
         {categoryColor?.map((color: ColorTypes, index) => (
           <div
             key={index}
@@ -18,7 +18,7 @@ const FilterByColor = () => {
               className="w-[15px] h-[15px] rounded-full flex"
               style={{ backgroundColor: color?.color }}
             ></span>
-            <span className="">{color?.colorName}</span>
+            <span className="text-[15px]">{color?.colorName}</span>
           </div>
         ))}
       </div>

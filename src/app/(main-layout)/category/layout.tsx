@@ -21,9 +21,11 @@ const Layout = ({
           <FilterBySelection />
           <FilterModal filter={filter} />
         </div>
-        <div className=" gap-5 grid grid-cols-1 lg:grid-cols-4 mx-auto max-w-7xl">
-          <div className="lg:col-span-3">{children}</div>
-          <div className="hidden md:block">{filter}</div>
+        <div className=" gap-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 mx-auto max-w-7xl">
+          <div className="lg:col-span-3 md:grid-cols-2 md:col-span-2">
+            {children}
+          </div>
+          <div className="hidden md:block lg:block">{filter}</div>
         </div>
       </div>
     </div>
