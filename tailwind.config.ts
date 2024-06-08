@@ -47,6 +47,7 @@ const config: Config = {
       },
       gridTemplateColumns: {
         "product-grid": "repeat(auto-fill, minmax(280px,1fr))",
+        "brand-card-grid": "repeat(auto-fill, minmax(250px,1fr))",
       },
     },
   },
