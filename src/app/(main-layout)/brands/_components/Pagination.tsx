@@ -1,5 +1,5 @@
 "use client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Pagination = ({
@@ -11,22 +11,11 @@ const Pagination = ({
   currentPage: number;
   redirectTo: string;
 }) => {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
   const router = useRouter();
-
-  // const createPageURL = (pageNumber: number) => {
-  //   const params = new URLSearchParams(searchParams);
-  //   console.log("created--------", params);
-
-  //   params.set("page", pageNumber.toString());
-  //   return `${pathname}?${params.toString()}`;
-  // };
 
   const handlePageClick = (pageNumber: number) => {
     if (pageNumber !== currentPage) {
-      // router.push(createPageURL(pageNumber));
-      router.push(redirectTo + "/" + pageNumber);
+      router.push(`${redirectTo}/${pageNumber}`);
     }
   };
 
@@ -65,12 +54,12 @@ const Pagination = ({
         i === totalPages - maxVisiblePages
       ) {
         pages.push(
-          <span
+          <div
             key={i}
             className="cursor-default w-10 h-10 rounded-full flex items-center justify-center"
           >
             ...
-          </span>
+          </div>
         );
       }
     }

@@ -37,7 +37,7 @@ const BrandsPage = async ({ params }: { params: { page: number } }) => {
       <div>
         <Pagination
           totalPages={totalPages}
-          currentPage={1}
+          currentPage={Number(params.page)}
           redirectTo="/brands/page"
         />
       </div>
