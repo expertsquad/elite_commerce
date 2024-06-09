@@ -75,6 +75,31 @@ main {
   background-color: #275efe;
 }
 
+/*bottom navigation clipPath */
+.active-bottom-nav {
+  @apply bg-gradient-primary rounded-full mb-6 outline-white outline outline-8 relative text-white;
+}
+.active-bottom-nav::after,
+.active-bottom-nav::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  background: white;
+}
+.active-bottom-nav::after {
+  top: -30px;
+  right: -30px;
+  clip-path: polygon(51% 50%, 74% 59%, 98% 68%, 61% 68%, 50% 62%, 28% 40%);
+}
+.active-bottom-nav::before {
+  top: -25px;
+  left: -40px;
+  rotate: 315deg;
+  clip-path: polygon(51% 50%, 74% 59%, 98% 68%, 61% 68%, 50% 62%, 28% 40%);
+}
+
 /* scroll bar */
 .scrollbar-x-remove::-webkit-scrollbar:horizontal {
   @apply hidden;
@@ -94,7 +119,3 @@ main {
 ::-webkit-scrollbar-thumb {
   @apply bg-gradient-primary;
 }
-
-/* * {
-  outline: red 1px solid;
-} */

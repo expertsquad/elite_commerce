@@ -24,7 +24,7 @@ const CategoriesAndSubcategories = async () => {
   });
 
   return (
-    <div className="absolute bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover/categorybtn:visible group-hover/categorybtn:opacity-100 group-hover/categorybtn:h-[clamp(100px,70vh,600px)] backdrop-blur-xl shadow-xl py-2">
+    <div className="absolute bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover/categorybtn:visible group-hover/categorybtn:opacity-100 group-hover/categorybtn:h-[clamp(100px,70vh,500px)] backdrop-blur-xl shadow-xl py-2">
       <ul className="w-44 h-full overflow-auto">
         {categories?.data?.map((category: ICategory) => (
           <li key={category?._id} className="group/category">
@@ -36,7 +36,7 @@ const CategoriesAndSubcategories = async () => {
               <IconChevronRight className="text-black-50 hidden group-hover/category:block" />
             </Link>
             {/* ================= sub categories ================== */}
-            <div className="fixed top-0 left-[180px] bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover/category:visible group-hover/category:opacity-100 group-hover/category:h-[clamp(100px,70vh,600px)] backdrop-blur-xl py-2 shadow-xl flex">
+            <div className="fixed top-0 left-[180px] bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover/category:visible group-hover/category:opacity-100 group-hover/category:h-[clamp(100px,70vh,500px)] backdrop-blur-xl py-2 shadow-xl flex">
               <ul className="w-48 h-full flex flex-col overflow-auto">
                 {category?.subcategories?.map((subcategory) => (
                   <li key={subcategory?.subcategoryId}>
@@ -61,7 +61,7 @@ const CategoriesAndSubcategories = async () => {
 const LargeDeviceMegaMenu = () => {
   const iconStroke = 1.5;
   return (
-    <nav className="hidden md:flex max-w-7xl mx-auto py-[clamp(8px,2vh,20px)] px-[clamp(10px,5vw,30px)] text-md items-center justify-between">
+    <nav className="hidden md:flex max-w-7xl mx-auto py-[clamp(8px,2vh,20px)] md:px-3 text-md items-center justify-between">
       {/* Left section of the navigation */}
       <div className="flex gap-5 items-center">
         <Logo />
