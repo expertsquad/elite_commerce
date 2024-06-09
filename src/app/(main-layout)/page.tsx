@@ -1,5 +1,6 @@
 import React from "react";
 import Hero from "./_components/Hero/Hero";
+import GradientBorderTest from "../___ExampleComponent/GradientBorderTest";
 
 const page = () => {
   return (
@@ -7,10 +8,7 @@ const page = () => {
       {/* Hero section added */}
 
       <Hero />
-
-      <div className="flex flex-col gap-5 md:gap-7 md:col-span-3 p-10 m-5 border-4 border-gradient-primary">
-        Hello
-      </div>
+      <GradientBorderTest />
     </div>
   );
 };
