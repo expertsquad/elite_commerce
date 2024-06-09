@@ -13,6 +13,10 @@ main {
 /* don't forget to add the color to the config file */
 :root {
   /* colors */
+  --primary: #294393 0.32%;
+  --primary-light: #04a4e6 102.21%;
+  --secondary: #fb8e48 0%;
+  --secondary-light: #cb380f 100%;
   --positive: #119f5b;
   --transparent: transparent;
   --white: white;
@@ -24,14 +28,22 @@ main {
   --black-transparent: #7f7f7f63;
 
   /* gradient colors */
-  --gradient-primary: linear-gradient(90.37deg, #294393 0.32%, #04a4e6 102.21%);
+  --gradient-primary: linear-gradient(
+    90.37deg,
+    var(--primary),
+    var(--primary-light)
+  );
   --gradient-primary-light: linear-gradient(
     90.37deg,
     rgba(41, 67, 147, 0.1) 0.32%,
     rgba(4, 164, 230, 0.1) 102.21%
   );
 
-  --gradient-secondary: linear-gradient(180deg, #fb8e48 0%, #cb380f 100%);
+  --gradient-secondary: linear-gradient(
+    180deg,
+    var(--secondary),
+    var(--secondary-light)
+  );
   --gradient-secondary-light: linear-gradient(
     180deg,
     rgba(251, 142, 72, 0.1) 0%,
@@ -61,6 +73,9 @@ main {
   }
 }
 
+.border-gradient-primary {
+  border-image: linear-gradient(45deg, var(--primary), var(--primary-light)) 12;
+}
 /* <== (slider, thumb, and track-1) this are className take for the price range slider component ==> */
 .slider .thumb {
   width: 15px;
@@ -86,7 +101,7 @@ main {
   height: 100%;
   display: block;
   position: absolute;
-  background: white;
+  background: var(--white);
 }
 .active-bottom-nav::after {
   top: -30px;
