@@ -11,7 +11,7 @@ import Image from "next/image";
 
 const SocialMediaAndOthers = () => {
   return (
-    <div>
+    <div className="flex items-center justify-between">
       <div className="flex items-center">
         <span className="text-black-80 hidden md:block">Message Now: </span>
         <div className="flex items-center gap-x-4">
