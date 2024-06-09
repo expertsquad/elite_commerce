@@ -1,5 +1,4 @@
 import { IconSearch } from "@tabler/icons-react";
-import Link from "next/link";
 import React from "react";
 import { fetchData } from "@/actions/fetchData";
 import HamburgurNav from "./HamburgurNav";

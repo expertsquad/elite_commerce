@@ -4,7 +4,7 @@ import React from "react";
 
 const TopThinNav = () => {
   return (
-    <div className="bg-gradient-primary text-white flex justify-between items-center text-xs px-3 py-1">
+    <div className="hidden md:flex justify-between items-center bg-gradient-primary text-white text-xs px-3 py-1">
       <div className="flex items-center gap-6">
         {topMenus.map((menu) => (
           <span key={menu.label}>{menu.label}</span>
