@@ -4,7 +4,7 @@ import OrderSection from "./_components/OrderSection";
 
 const page = () => {
   return (
-    <div>
+    <div className="">
       <ProfileTopCard />
       <OrderSection />
     </div>

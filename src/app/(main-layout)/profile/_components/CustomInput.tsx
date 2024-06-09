@@ -18,14 +18,14 @@ const CustomInput: React.FC<CustomInputProps> = ({
       className={`w-full flex items-center justify-center relative ${customClassName}`}
     >
       {placeholderIcon && (
-        <div className="absolute top-6 left-0 pl-2 pr-3  pointer-events-none text-black text-opacity-40">
+        <div className="absolute top-6 left-0 pl-2 pr-3  pointer-events-none text-black-10 ">
           {placeholderIcon}
         </div>
       )}
       <div className="flex flex-col gap-2.5 w-full">
         <label
           htmlFor={label?.toLowerCase()}
-          className=" text-black-opacity-60 text-base"
+          className=" text-black-50 text-base"
         >
           {label}
         </label>
@@ -35,8 +35,8 @@ const CustomInput: React.FC<CustomInputProps> = ({
           onChange={onChange}
           value={value}
           name={name}
-          className={` required w-full border border-gray-200  py-3  pr-4 focus:outline-none focus:border-fuchsia-800 rounded-md ${inputStyle} ${
-            readonly ? "text-black-opacity-60" : "text-black"
+          className={` required w-full border border-black-10  py-3  pr-4 focus:outline-none focus:border- rounded-md ${inputStyle} ${
+            readonly ? "text-black-50" : "text-black"
           } placeholder:text-sm ${
             placeholderIcon ? "pl-9" : "pl-5"
           } ${customClassName}`}

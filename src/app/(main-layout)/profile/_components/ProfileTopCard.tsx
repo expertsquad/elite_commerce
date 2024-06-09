@@ -12,10 +12,8 @@ const ProfileTopCard = async () => {
     query: "buyer.userId=6609a866652afd6056cdc5d8",
   });
 
-  console.log(orderItems);
-
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-5 w-full">
+    <section className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-5 w-full ">
       {/* account details */}
       <div className="flex items-center justify-center flex-col gap-4 bg-gradient-primary-light rounded-lg p-7 w-full">
         <GenerateGradientIcon size={36} IconComponent={IconUser} />

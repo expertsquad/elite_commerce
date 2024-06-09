@@ -1,7 +1,12 @@
 import React from "react";
+import PersonalDesign from "./_components/PersonalDesign";
 
 const page = () => {
-  return <div>Account Details</div>;
+  return (
+    <div>
+      <PersonalDesign />
+    </div>
+  );
 };
 
 export default page;
