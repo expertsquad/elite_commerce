@@ -12,24 +12,24 @@ const OrderItems = async ({ order }: { order: Order }) => {
 
   const date = new Date();
   return (
-    <div className=" md:shadow-lg shadow-none my-5 p-5 rounded-lg">
+    <div className=" md:shadow-lg shadow-none border border-black-10 md:border-transparent my-5 p-5 rounded-lg">
       {/* Order top section start */}
       <div className="flex items-center md:justify-between flex-col lg:flex-row  border border-transparent lg:border lg:border-black-10 px-0 lg:px-4 py-3 rounded-lg gap-5">
-        <div className="flex  gap-3 justify-between lg:justify-around border border-black-10 rounded-lg lg:border-transparent w-full lg:w-7/12 p-3 ">
+        <div className="flex   justify-between lg:justify-around border border-black-10 rounded-lg lg:border-transparent w-full lg:w-7/12 p-3 ">
           <OrderCardHeader
             title="Order ID"
             value={order?.orderId}
-            className="font-bold"
+            className="[font-size:_clamp(0.5em,5vw,0.9em)]"
           />
           <OrderCardHeader
             title="Order Date"
             value={dateFormat(order?.createdAt)}
-            className="font-bold"
+            className="[font-size:_clamp(0.5em,5vw,0.9em)]"
           />
           <OrderCardHeader
             title="Estimated Delivery"
             value={dateFormat(date.toString())}
-            className="font-bold"
+            className="[font-size:_clamp(0.5em,5vw,0.9em)]"
           />
         </div>
         <div className="flex  items-center gap-3">
@@ -49,6 +49,23 @@ const OrderItems = async ({ order }: { order: Order }) => {
       {order?.orderItems?.map((orderItem) => (
         <OrderItemsCard key={orderItem._id} orderItem={orderItem} />
       ))}
+
+      {/* bottom section total order  */}
+      <div className="flex  justify-between  w-full py-5">
+        <div className="flex items-center justify-center gap-2 ">
+          {" "}
+          <p className="[font-size:_clamp(0.5em,5vw,1em)]">
+            Total Order :{" "}
+            <small className="text-black-50">
+              ({order?.orderItems.length} Items , {order?.totalQuantity}{" "}
+              Quantity)
+            </small>
+          </p>{" "}
+        </div>
+        <h3 className="[font-size:_clamp(0.8em,5vw,1.5em)] text-gradient-primary font-bold">
+          ${order?.totalPayable}
+        </h3>
+      </div>
     </div>
   );
 };

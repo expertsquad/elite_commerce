@@ -6,11 +6,10 @@ import React from "react";
 import OrderCardHeader from "./OrderCardHeader";
 
 const OrderItemsCard = ({ orderItem }: { orderItem: OrderItem }) => {
-  console.log(orderItem);
   return (
-    <div className="text-black-50 flex gap-5 my-5 w-full">
+    <div className="text-black-50 flex gap-5 py-5 w-full border-b border-black-10">
       {/* flex first div */}
-      <div className="flex gap-3 w-1/2">
+      <div className="flex gap-3 w-full lg:w-1/2">
         {/* image part */}
         <div className="bg-gradient-primary-light rounded-lg flex items-center justify-center">
           <Image
@@ -33,30 +32,48 @@ const OrderItemsCard = ({ orderItem }: { orderItem: OrderItem }) => {
             <div>|</div>
             <StarRating rating={4} />
           </div>
+
+          {/* will apply only sm device */}
+          <div className="block lg:hidden">
+            <div className="flex items-center justify-between">
+              <p>
+                $
+                {orderItem?.variant?.discountedPrice
+                  ? orderItem?.variant?.discountedPrice?.toString()
+                  : orderItem?.variant?.sellingPrice?.toString()}{" "}
+                x {orderItem.orderQuantity}
+              </p>
+              <strong className="text-gradient-primary">
+                ${orderItem?.subTotalPayable}
+              </strong>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* flex second div */}
-      <div className="flex text-center justify-between w-1/2  ">
-        <OrderCardHeader
-          title="QYT"
-          value={orderItem?.orderQuantity.toString()}
-          className="text-lg text-black"
-        />
-        <OrderCardHeader
-          title="Unit Price"
-          value={`$${
-            orderItem?.variant?.discountedPrice
-              ? orderItem?.variant?.discountedPrice?.toString()
-              : orderItem?.variant?.sellingPrice?.toString()
-          }`}
-          className="text-lg text-black"
-        />
-        <OrderCardHeader
-          title="Sub Total"
-          value={`$${orderItem?.subTotalPayable?.toString()}`}
-          className="text-lg font-bold text-gradient-primary"
-        />
+      <div className="hidden lg:block w-1/2">
+        <div className="flex text-center justify-between   ">
+          <OrderCardHeader
+            title="QYT"
+            value={orderItem?.orderQuantity.toString()}
+            className="text-lg text-black"
+          />
+          <OrderCardHeader
+            title="Unit Price"
+            value={`$${
+              orderItem?.variant?.discountedPrice
+                ? orderItem?.variant?.discountedPrice?.toString()
+                : orderItem?.variant?.sellingPrice?.toString()
+            }`}
+            className="text-lg text-black"
+          />
+          <OrderCardHeader
+            title="Sub Total"
+            value={`$${orderItem?.subTotalPayable?.toString()}`}
+            className="text-lg font-bold text-gradient-primary"
+          />
+        </div>
       </div>
     </div>
   );
