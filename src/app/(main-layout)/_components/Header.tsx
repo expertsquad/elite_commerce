@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import LargeDeviceMegaMenu from "./HeaderComponents/LargeDeviceMegaMenu";
 import SmallDeviceMegaMenu from "./HeaderComponents/SmallDeviceMegaMenu";
 import TopThinNav from "./HeaderComponents/TopThinNav";
+import BottomNavSmallDevice from "./HeaderComponents/BottomNavSmallDevice";
 
 const Header = () => {
   return (
@@ -11,6 +12,7 @@ const Header = () => {
         <LargeDeviceMegaMenu />
         <SmallDeviceMegaMenu />
       </header>
+      <BottomNavSmallDevice />
     </Fragment>
   );
 };

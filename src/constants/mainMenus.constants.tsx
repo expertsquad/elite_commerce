@@ -2,8 +2,12 @@ import {
   IconBrandFacebook,
   IconBrandInstagram,
   IconBrandLinkedin,
+  IconBrandMercedes,
   IconBrandPinterest,
   IconBrandTwitter,
+  IconCategory,
+  IconGardenCart,
+  IconHome,
 } from "@tabler/icons-react";
 
 export const mainMenus = [
@@ -33,6 +37,29 @@ export const topMenus = [
   {
     label: "Track order",
     href: "/track-order",
+  },
+];
+
+export const bottomNavMenus = [
+  {
+    label: "Home",
+    href: "/",
+    icon: IconHome,
+  },
+  {
+    label: "Brands",
+    href: "/brands",
+    icon: IconBrandMercedes,
+  },
+  {
+    label: "Cart",
+    href: "/cart",
+    icon: IconGardenCart,
+  },
+  {
+    label: "Products",
+    href: "/products",
+    icon: IconCategory,
   },
 ];
 

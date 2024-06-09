@@ -117,7 +117,7 @@ const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
         <Link
           href={menu.href}
           key={menu.label}
-          className="py-3 px-2"
+          className="py-3 px-2 hover:text-gradient-primary hover:font-bold"
           onClick={() => setShowMenu(false)}
         >
           {menu?.label}
@@ -127,7 +127,7 @@ const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
         <Link
           href={menu.href}
           key={menu.label}
-          className="py-3 px-2"
+          className="py-3 px-2 hover:text-gradient-primary hover:font-bold"
           onClick={() => setShowMenu(false)}
         >
           {menu?.label}
