@@ -74,7 +74,6 @@ main {
 }
 
 .border-gradient-primary {
-  /* border-image: linear-gradient(45deg, var(--primary), var(--primary-light)) 1; */
   background-image: linear-gradient(white, white),
     linear-gradient(45deg, var(--primary), var(--primary-light));
   background-origin: border-box;
