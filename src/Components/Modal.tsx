@@ -21,8 +21,6 @@ const Modal = ({
   isIntercepting?: boolean;
   showCancelBtnINSmallDevice?: boolean;
 }) => {
-  console.log(children);
-
   const [animate, setAnimate] = useState(false);
   const redirect = useRouter();
 

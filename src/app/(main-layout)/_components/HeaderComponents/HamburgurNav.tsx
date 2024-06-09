@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@/Components/Buttons";
 import Modal from "@/Components/Modal";
 import {
   mainMenus,
@@ -7,7 +8,11 @@ import {
 } from "@/constants/mainMenus.constants";
 import { ICategory, ISubcategory } from "@/interfaces/category.interface";
 import Logo from "@/utils/Logo";
-import { IconChevronRight, IconMenu2 } from "@tabler/icons-react";
+import {
+  IconArrowNarrowLeft,
+  IconChevronRight,
+  IconMenu2,
+} from "@tabler/icons-react";
 import Link from "next/link";
 import React from "react";
 
@@ -20,12 +25,14 @@ const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
      sub category
      ==========================*/
   }
-
   const createSubcategoryNode = (subcategories: ISubcategory[] | undefined) => (
     <div className="h-full w-full overflow-auto flex flex-col">
-      <div className="p-2">
-        <Logo />
-      </div>
+      <Button
+        onClick={() => setContent(categoriesNode)}
+        className="m-2 py-2 px-3 rounded-lg w-fit bg-gradient-primary-light hover:bg-gradient-primary hover:text-white"
+      >
+        <IconArrowNarrowLeft />
+      </Button>
       <ul className="flex flex-col">
         {subcategories &&
           subcategories.map((subcategory) => (
@@ -53,9 +60,12 @@ const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
   }
   const categoriesNode = (
     <div className="h-full w-full overflow-auto flex flex-col">
-      <div className="p-2">
-        <Logo />
-      </div>
+      <Button
+        onClick={() => setContent(menusNode)}
+        className="m-2 py-2 px-3 rounded-lg w-fit bg-gradient-primary-light hover:bg-gradient-primary hover:text-white"
+      >
+        <IconArrowNarrowLeft />
+      </Button>
       <ul className="flex flex-col">
         {categories.map((category) => (
           <li
