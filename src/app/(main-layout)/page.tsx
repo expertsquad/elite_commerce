@@ -1,5 +1,6 @@
 import React from "react";
 import Hero from "./_components/Hero/Hero";
+import GradientBorderTest from "../___ExampleComponent/GradientBorderTest";
 
 const page = () => {
   return (
@@ -7,6 +8,7 @@ const page = () => {
       {/* Hero section added */}
 
       <Hero />
+      <GradientBorderTest />
     </div>
   );
 };

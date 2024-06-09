@@ -1,23 +1,13 @@
 import React from "react";
-import BrandCard from "../../../Components/BrandCard";
 import { fetchData } from "@/actions/fetchData";
-import FilterSort from "./_components/FilterSort";
-import Pagination from "../../../Components/Pagination";
-import { IBrand } from "@/interfaces/brand.interface";
+import FilterSort from "../../_components/FilterSort";
+import BrandCard from "@/Components/BrandCard";
+import Pagination from "../../../../../Components/Pagination";
 
-const Brand = async ({
-  searchParams,
-}: {
-  searchParams?: {
-    query?: string;
-    page?: string;
-  };
-}) => {
-  const currentPage = searchParams?.page ? parseInt(searchParams?.page) : 1;
-  // console.log(currentPage);
+const BrandsPage = async ({ params }: { params: { page: number } }) => {
   const brandData = await fetchData({
     route: "/brand",
-    page: currentPage,
+    page: params.page,
   });
 
   const totalPages = Math.ceil(brandData?.meta?.total / brandData?.meta?.limit);
@@ -47,7 +37,7 @@ const Brand = async ({
       <div>
         <Pagination
           totalPages={totalPages}
-          currentPage={currentPage}
+          currentPage={Number(params.page)}
           redirectTo="/brands/page"
         />
       </div>
@@ -55,4 +45,15 @@ const Brand = async ({
   );
 };
 
-export default Brand;
+export default BrandsPage;
+
+export async function generateStaticParams() {
+  const { meta } = await fetchData({
+    route: "/brand",
+  });
+  const totalPages = Math.ceil(meta.total / meta.limit);
+
+  return Array.from({ length: totalPages }).map((_, i) => ({
+    params: { page: i + 1 },
+  }));
+}

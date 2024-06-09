@@ -13,10 +13,15 @@ main {
 /* don't forget to add the color to the config file */
 :root {
   /* colors */
+  --primary: #294393 0.32%;
+  --primary-light: #04a4e6 102.21%;
+  --secondary: #fb8e48 0%;
+  --secondary-light: #cb380f 100%;
   --positive: #119f5b;
   --transparent: transparent;
   --white: white;
   --white-15: #ffffff26;
+  --white-transparent: #ffffffd0;
   --black: black;
   --black-10: #e6e6e6;
   --black-50: #7f7f7f;
@@ -24,14 +29,22 @@ main {
   --black-transparent: #7f7f7f63;
 
   /* gradient colors */
-  --gradient-primary: linear-gradient(90.37deg, #294393 0.32%, #04a4e6 102.21%);
+  --gradient-primary: linear-gradient(
+    90.37deg,
+    var(--primary),
+    var(--primary-light)
+  );
   --gradient-primary-light: linear-gradient(
     90.37deg,
     rgba(41, 67, 147, 0.1) 0.32%,
     rgba(4, 164, 230, 0.1) 102.21%
   );
 
-  --gradient-secondary: linear-gradient(180deg, #fb8e48 0%, #cb380f 100%);
+  --gradient-secondary: linear-gradient(
+    180deg,
+    var(--secondary),
+    var(--secondary-light)
+  );
   --gradient-secondary-light: linear-gradient(
     180deg,
     rgba(251, 142, 72, 0.1) 0%,
@@ -61,6 +74,12 @@ main {
   }
 }
 
+.border-gradient-primary {
+  background-image: linear-gradient(white, white),
+    linear-gradient(45deg, var(--primary), var(--primary-light));
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
 /* <== (slider, thumb, and track-1) this are className take for the price range slider component ==> */
 .slider .thumb {
   width: 15px;
@@ -73,6 +92,31 @@ main {
 }
 .track-1 {
   background-color: #275efe;
+}
+
+/*bottom navigation clipPath */
+.active-bottom-nav {
+  @apply bg-gradient-primary rounded-full mb-6 outline-white outline outline-8 relative text-white;
+}
+.active-bottom-nav::after,
+.active-bottom-nav::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  background: var(--white);
+}
+.active-bottom-nav::after {
+  top: -30px;
+  right: -30px;
+  clip-path: polygon(51% 50%, 74% 59%, 98% 68%, 61% 68%, 50% 62%, 28% 40%);
+}
+.active-bottom-nav::before {
+  top: -25px;
+  left: -40px;
+  rotate: 315deg;
+  clip-path: polygon(51% 50%, 74% 59%, 98% 68%, 61% 68%, 50% 62%, 28% 40%);
 }
 
 /* scroll bar */
@@ -94,7 +138,3 @@ main {
 ::-webkit-scrollbar-thumb {
   @apply bg-gradient-primary;
 }
-
-/* * {
-  outline: red 1px solid;
-} */
