@@ -2,7 +2,7 @@ import React from "react";
 import { fetchData } from "@/actions/fetchData";
 import FilterSort from "../../_components/FilterSort";
 import BrandCard from "@/Components/BrandCard";
-import Pagination from "../../_components/Pagination";
+import Pagination from "../../../../../Components/Pagination";
 
 const BrandsPage = async ({ params }: { params: { page: number } }) => {
   const brandData = await fetchData({

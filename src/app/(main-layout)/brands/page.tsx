@@ -2,7 +2,7 @@ import React from "react";
 import BrandCard from "../../../Components/BrandCard";
 import { fetchData } from "@/actions/fetchData";
 import FilterSort from "./_components/FilterSort";
-import Pagination from "./_components/Pagination";
+import Pagination from "../../../Components/Pagination";
 import { IBrand } from "@/interfaces/brand.interface";
 
 const Brand = async ({
