@@ -12,8 +12,6 @@ const BrandsPage = async ({ params }: { params: { page: number } }) => {
 
   const totalPages = Math.ceil(brandData?.meta?.total / brandData?.meta?.limit);
 
-  console.log("dynamic::::::::", params);
-
   return (
     <div className="flex flex-col gap-5 md:gap-7 md:col-span-3 ">
       <div className="flex items-center justify-between">
@@ -39,7 +37,7 @@ const BrandsPage = async ({ params }: { params: { page: number } }) => {
       <div>
         <Pagination
           totalPages={totalPages}
-          currentPage={1}
+          currentPage={Number(params.page)}
           redirectTo="/brands/page"
         />
       </div>
