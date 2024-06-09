@@ -14,7 +14,7 @@ const Modal = ({
   showCancelBtnINSmallDevice = false,
 }: {
   show: boolean | any;
-  setShow: Dispatch<SetStateAction<boolean>>;
+  setShow: Dispatch<SetStateAction<boolean | any>>;
   children: React.ReactNode;
   alignment: "left" | "center" | "right";
   className?: string;
@@ -64,7 +64,7 @@ const Modal = ({
       onClick={handleClose}
     >
       <div
-        className={`rounded-r-xl md:rounded-3xl relative shadow-black-50 drop-shadow-2xl bg-white p-3 lg:p-5 duration-300 ease-in-out
+        className={`rounded-r-xl md:rounded-3xl relative shadow-black-50 drop-shadow-2xl bg-white lg:p-5 duration-300 ease-in-out
          ${alignment !== "center" && "h-full md:h-[calc(100%-16px)] md:m-2"}
            ${animate ? appearAnimation : disappearAnimation} ${className}`}
         onClick={(e) => e.stopPropagation()}
