@@ -29,6 +29,8 @@ export interface OrderItem {
   orderQuantity: number;
   bulkDiscountAmount: number;
   subTotalPayable: number;
+  discountedPrice: number;
+  sellingPrice: number;
   isReviewed: boolean;
   _id: string;
 }
