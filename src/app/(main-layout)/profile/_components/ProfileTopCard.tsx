@@ -4,8 +4,16 @@ import Link from "next/link";
 import totalOrderIcon from "@/assets/Images/totalOrderIcon.svg";
 import starIcon from "@/assets/Images/starIcon.svg";
 import Image from "next/image";
+import { fetchProtectedData } from "@/actions/fetchData";
 
-const ProfileTopCard = () => {
+const ProfileTopCard = async () => {
+  const orderItems = await fetchProtectedData({
+    route: "/online-order",
+    query: "buyer.userId=6609a866652afd6056cdc5d8",
+  });
+
+  console.log(orderItems);
+
   return (
     <section className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-5 w-full">
       {/* account details */}
@@ -23,7 +31,7 @@ const ProfileTopCard = () => {
       <div className="flex items-center justify-center flex-col gap-4 bg-gradient-positive rounded-lg p-7 w-full">
         <Image src={totalOrderIcon} alt="total order" width={40} height={40} />
         <h3 className="text-lg whitespace-nowrap">Total Order</h3>
-        <p className="text-lg font-bold">77</p>
+        <p className="text-lg font-bold">{orderItems?.meta?.total}</p>
       </div>
       {/* Pending Review */}
       <div className="flex items-center justify-center flex-col gap-4 bg-gradient-secondary-light rounded-lg p-7 w-full">
