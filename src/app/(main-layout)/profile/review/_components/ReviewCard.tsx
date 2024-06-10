@@ -19,7 +19,7 @@ const ReviewCard = ({
      "
     >
       {/* Image and titile */}
-      <div className="w-full lg:w-1/2 flex lg:justify-center justify-start items-center gap-4">
+      <div className="w-full lg:w-1/2 flex  justify-start items-center gap-4">
         <div className="flex justify-center items-center bg-gradient-primary-light rounded-lg w-16 h-16">
           <Image
             alt="Product Image"

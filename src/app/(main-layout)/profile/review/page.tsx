@@ -12,7 +12,7 @@ const page = () => {
             To Review
           </Button>
         </Link>
-        <Link className=" " href="/profile/review">
+        <Link className=" " href="/profile/review/review-history">
           <Button className="px-5 py-2 rounded-full border border-black-10  ">
             Review History
           </Button>
