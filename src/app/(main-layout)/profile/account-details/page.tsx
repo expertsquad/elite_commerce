@@ -1,7 +1,12 @@
 import React from "react";
+import PersonalInformation from "./_components/PersonalInformation";
 
 const page = () => {
-  return <div>Account Details</div>;
+  return (
+    <div>
+      <PersonalInformation />
+    </div>
+  );
 };
 
 export default page;

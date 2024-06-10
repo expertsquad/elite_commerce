@@ -1,10 +1,10 @@
 import React from "react";
-import ReviewSection from "./_components/ReviewSection";
+import ShippingAddress from "../_components/ShippingAddress";
 
 const page = () => {
   return (
     <div>
-      <ReviewSection />
+      <ShippingAddress />
     </div>
   );
 };
