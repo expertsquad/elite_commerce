@@ -6,7 +6,6 @@
   display: flex;
   align-items: center;
   margin-top: 10px;
-  color: red;
   overflow: hidden;
 }
 
@@ -14,9 +13,8 @@
   display: flex;
   gap: var(--animated-element-gap);
   width: fit-content;
-  animation: slider 20s infinite linear;
-
-  font-size: 100px;
+  white-space: nowrap;
+  animation: slider 10s infinite linear;
 }
 
 .container::after,

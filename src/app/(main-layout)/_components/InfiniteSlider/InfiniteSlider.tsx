@@ -1,36 +1,44 @@
-"use client";
-import React, { useEffect } from "react";
+import { fetchData } from "@/actions/fetchData";
 import style from "./InfiniteSlider.module.css";
+import { IBrand } from "@/interfaces/brand.interface";
+import Image from "next/image";
+import { server_url } from "@/constants";
 
-const InfiniteSlider = () => {
-  useEffect(() => {
-    const slider = document.querySelector("#infinite-slider");
-    if (slider) {
-      const child = Array.from(slider?.children);
-      child.forEach((element) => {
-        const duplicate = element.cloneNode(true);
-        slider.appendChild(duplicate);
-      });
-    }
-  }, []);
+const InfiniteSlider = async () => {
+  const brands: { data: IBrand[] } = await fetchData({
+    route: "/brand",
+    revalidate: 86400,
+  });
+
   return (
     <div className={style.container}>
       <div className={style.slider} id="infinite-slider">
-        <p>1</p>
-        <p>2</p>
-        <p>3</p>
-        <p>4</p>
-        <p>5</p>
-        <p>6</p>
-        <p>7</p>
-        <p>8</p>
-        <p>9</p>
-        <p>10</p>
-        <p>N</p>
-        <p>U</p>
-        <p>R</p>
-        <p>U</p>
-        <p>L</p>
+        {brands?.data?.map((brand) => (
+          <div
+            key={brand?._id}
+            className="h-16 w-16 relative border rounded-full overflow-hidden"
+          >
+            <Image
+              src={server_url + brand.brandPhoto}
+              fill
+              alt="brand photo"
+              className="z-0"
+            />
+          </div>
+        ))}
+        {brands?.data?.map((brand) => (
+          <div
+            key={brand?._id}
+            className="h-16 w-16 relative border rounded-full overflow-hidden"
+          >
+            <Image
+              src={server_url + brand.brandPhoto}
+              fill
+              alt="brand photo"
+              className="z-0"
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
