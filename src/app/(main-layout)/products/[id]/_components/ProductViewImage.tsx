@@ -23,27 +23,29 @@ const ProductViewImage = ({ product }: { product: IProduct }) => {
         {slicedProducts?.map((image: any) => (
           <div
             key={image._id}
-            className={`border cursor-pointer rounded-lg flex items-center justify-center hover:shadow-[0px_4px_24px_0px_rgba(127,_53,_205,_0.15)] overflow-hidden ${
-              selectedImage === image ? "border-fuchsia-700 " : ""
+            className={`cursor-pointer flex items-center justify-center hover:shadow-md overflow-hidden p-[1px] rounded-full ${
+              selectedImage === image ? "border-gradient-primary" : ""
             }`}
             onClick={() => handleChangePhoto(image)}
           >
-            <div className="w-14 h-14 md:w-20 md:h-24 shrink-0 relative">
+            <div className="w-10 h-10 md:w-24 md:h-24 shrink-0 relative rounded-full bg-gradient-primary-light">
               <Image
                 src={`${server_url + image}`}
                 alt="demo Printer"
                 fill
-                objectFit="cover"
+                style={{
+                  objectFit: "cover",
+                }}
                 sizes="(max-width: 80px) 10vw, (max-width: 100px) 10vw, 15vw"
-                className="w-full h-full top-0 left-0 object-contain p-2"
+                className="w-full h-full top-0 left-0 object-cover rounded-full p-1 md:p-3"
               />
             </div>
           </div>
         ))}
       </div>
-      <div className="flex items-center justify-center border border-gray-300  rounded-lg w-full">
+      <div className="flex items-center justify-center border-black-10 rounded-lg w-full bg-gradient-primary-light">
         {selectedImage && (
-          <div className="relative shrink-0 h-96 w-96 md:h-[420px] md:w-[400px]">
+          <div className="relative shrink-0 h-96 w-96 md:h-[400px] md:w-[400px]">
             <Image
               src={`${server_url + selectedImage}`}
               alt="Product Photo"
