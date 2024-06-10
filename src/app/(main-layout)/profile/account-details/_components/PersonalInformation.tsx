@@ -34,44 +34,13 @@ const PersonalInformation = async () => {
           name="phoneNumber"
           placeholder="017*******"
         />
-
-        {/* all country name */}
-        {/* <label htmlFor="state" className="text-black-50">
-          Select State
-          <select
-            name="state"
-            id="state"
-            className="w-full border border-black-10 text-black-80 px-3.5 py-3 my-2.5 focus:outline-none focus:border-fuchsia-800 rounded-md"
-          >
-            {countryNames?.map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
-        </label> */}
-
-        {/* gender name */}
-
-        {/* <label htmlFor="state" className="text-black-50">
-          Select State
-          <select
-            name="state"
-            id="state"
-            className="w-full border border-black-10 text-black-80 px-3.5 py-3 my-2.5 focus:outline-none focus:border-fuchsia-800 rounded-md"
-          >
-            {gender?.map((gender) => (
-              <option key={gender} value={gender}>
-                {gender}
-              </option>
-            ))}
-          </select>
-        </label> */}
       </div>
 
-      <Button className="bg-gradient-primary text-white py-2.5 px-5 my-3 rounded-full w-full lg:max-w-fit ">
-        Update Account Details
-      </Button>
+      <div className="flex justify-end items-center mt-10">
+        <Button className="bg-gradient-primary text-white py-2.5 px-5 my-3 rounded-full w-full lg:max-w-fit ">
+          Update Account Details
+        </Button>
+      </div>
     </div>
   );
 };

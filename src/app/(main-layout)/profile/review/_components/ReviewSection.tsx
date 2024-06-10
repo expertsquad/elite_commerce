@@ -1,14 +1,33 @@
-import React from "react";
+import { Order } from "@/interfaces/oreder.interface";
 import ReviewCard from "./ReviewCard";
-import { fetchProtectedData } from "@/actions/fetchData";
+import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 
-const ReviewSection = () => {
-  // const data = fetchProtectedData({
-  //     route: "/user/me",
-  // });
+const ReviewSection = async () => {
+  const getMe = await fetchProtectedData({
+    route: "/user/me",
+  });
+
+  const allOrder = await fetchData({
+    route: "/online-order",
+    query: `buyer.userId=${getMe?.data?._id}&orderItems.isReviewed=false`,
+  });
+
+  console.log(allOrder);
+
   return (
     <div>
-      <ReviewCard />
+      {allOrder?.data?.map((order: Order) => (
+        <div key={order._id}>
+          {order.orderItems.map((orderItem: any) => (
+            <ReviewCard
+              key={orderItem._id}
+              orderItem={orderItem}
+              createdAt={order?.createdAt}
+              orderStatus={order?.orderStatus?.status}
+            />
+          ))}
+        </div>
+      ))}
     </div>
   );
 };

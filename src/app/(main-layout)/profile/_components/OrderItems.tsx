@@ -30,9 +30,12 @@ const OrderItems = async ({ order }: { order: Order }) => {
             className="[font-size:_clamp(0.5em,5vw,0.9em)]"
           />
         </div>
-        <div className="flex  items-center gap-3">
-          <Link href="#" className="">
-            <Button className="text-gradient-primary border border-gradient-primary px-5 rounded-full py-2 ">
+        <div className="flex items-center gap-3">
+          <Link
+            href="#"
+            className="border-gradient-primary p-[2px] rounded-full "
+          >
+            <Button className="text-gradient-primary   px-5  py-1 ">
               {" "}
               Track Order{" "}
             </Button>
