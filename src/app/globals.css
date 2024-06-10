@@ -134,3 +134,7 @@ main {
 ::-webkit-scrollbar-thumb {
   @apply bg-gradient-primary;
 }
+
+* {
+  outline: red 1px solid;
+}

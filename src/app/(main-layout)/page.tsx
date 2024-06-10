@@ -8,7 +8,7 @@ const page = () => {
 
       <Hero />
 
-      <div className="flex flex-col gap-5 md:gap-7 md:col-span-3 p-10 m-5 border-4 border-gradient-primary">
+      <div className="flex flex-col gap-5 md:gap-7 md:col-span-3 p-10 m-5 border-4 border-gradient-primary rounded-lg">
         Hello
       </div>
     </div>

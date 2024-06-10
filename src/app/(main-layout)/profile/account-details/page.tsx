@@ -1,10 +1,10 @@
 import React from "react";
-import PersonalDesign from "./_components/PersonalDesign";
+import PersonalInformation from "./_components/PersonalInformation";
 
 const page = () => {
   return (
     <div>
-      <PersonalDesign />
+      <PersonalInformation />
     </div>
   );
 };

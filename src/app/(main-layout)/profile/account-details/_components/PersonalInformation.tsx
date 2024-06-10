@@ -1,9 +1,14 @@
-import { countryNames } from "@/constants/countryNames.constant";
+import { fetchProtectedData } from "@/actions/fetchData";
 import CustomInput from "../../_components/CustomInput";
-import { gender } from "@/constants/gender.constant";
 import { Button } from "@/Components/Buttons";
 
-const PersonalDesign = () => {
+const PersonalInformation = async () => {
+  const getMe = await fetchProtectedData({
+    route: "/user/me",
+  });
+
+  console.log(getMe);
+
   return (
     <div>
       <h3 className="[font-size:_clamp(1em,5vw,1.5em)] font-semibold text-gradient-primary my-7 ">
@@ -71,4 +76,4 @@ const PersonalDesign = () => {
   );
 };
 
-export default PersonalDesign;
+export default PersonalInformation;

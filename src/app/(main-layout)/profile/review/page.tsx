@@ -1,7 +1,12 @@
 import React from "react";
+import ReviewSection from "./_components/ReviewSection";
 
 const page = () => {
-  return <div>Review page</div>;
+  return (
+    <div>
+      <ReviewSection />
+    </div>
+  );
 };
 
 export default page;
