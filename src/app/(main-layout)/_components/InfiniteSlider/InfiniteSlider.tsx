@@ -1,5 +1,5 @@
-import { fetchData } from "@/actions/fetchData";
 import style from "./InfiniteSlider.module.css";
+import { fetchData } from "@/actions/fetchData";
 import { IBrand } from "@/interfaces/brand.interface";
 import Image from "next/image";
 import { server_url } from "@/constants";
@@ -16,7 +16,7 @@ const InfiniteSlider = async () => {
         {brands?.data?.map((brand) => (
           <div
             key={brand?._id}
-            className="h-16 w-16 relative border rounded-full overflow-hidden"
+            className="h-28 w-28 relative border border-black-10 rounded-full overflow-hidden"
           >
             <Image
               src={server_url + brand.brandPhoto}
@@ -29,7 +29,7 @@ const InfiniteSlider = async () => {
         {brands?.data?.map((brand) => (
           <div
             key={brand?._id}
-            className="h-16 w-16 relative border rounded-full overflow-hidden"
+            className="h-28 w-28 relative border border-black-10 rounded-full overflow-hidden"
           >
             <Image
               src={server_url + brand.brandPhoto}
