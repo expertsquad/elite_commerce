@@ -3,6 +3,7 @@ import { OrderItem } from "@/interfaces/OrderItem.interface";
 import { dateFormat } from "@/utils/dateFormat";
 import Image from "next/image";
 import ButtonSection from "./ButtonSection";
+import { fetchProtectedData } from "@/actions/fetchData";
 
 const ReviewCard = ({
   orderItem,
@@ -13,6 +14,8 @@ const ReviewCard = ({
   createdAt: string;
   orderStatus: string;
 }) => {
+  console.log(orderId);
+
   return (
     <div
       className="flex w-full lg:flex-row flex-col  border-b border-black-10 py-5
