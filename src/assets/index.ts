@@ -9,6 +9,7 @@ import servicesImgFour from "./Images/servies-img-4.svg";
 import customerPayment from "./Images/shopping-bag.svg";
 import messenger from "./Images/messenger.svg";
 import whatsapp from "./Images/whatsapp.svg";
+import gradientLine from "./Images/gradient-line.svg";
 export {
   brandTestImage,
   demoProductPhoto,
@@ -19,5 +20,6 @@ export {
   customerPayment,
   messenger,
   whatsapp,
+  gradientLine,
 };
 // add all the assets here

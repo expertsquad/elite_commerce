@@ -4,6 +4,9 @@ import { fetchData } from "@/actions/fetchData";
 import ProductVariantColor from "./_components/ProductVariantColor";
 import ProductViewImage from "./_components/ProductViewImage";
 import ProductViewDescAndOthers from "./_components/ProductViewDescAndOthers";
+import Specifications from "./_components/Specifications";
+import RelatedProductsByCategory from "./_components/RelatedProductsByCategory";
+import CustomerReview from "./_components/CustomerReview";
 
 const ProductViewPage = async ({ params }: { params: { id: string } }) => {
   const response = await fetchData({
@@ -16,6 +19,14 @@ const ProductViewPage = async ({ params }: { params: { id: string } }) => {
         <ProductViewDescAndOthers product={response?.data} />
       </div>
       <ProductViewServices />
+      <Specifications product={response?.data} />
+      {/* == Customer Review == */}
+      <div id="customerreview">
+        <CustomerReview />
+      </div>
+      <RelatedProductsByCategory
+        categoryName={response?.data?.category?.categoryName}
+      />
     </div>
   );
 };
