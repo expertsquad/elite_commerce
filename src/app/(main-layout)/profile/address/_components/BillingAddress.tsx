@@ -85,9 +85,11 @@ const BillingAddress = async () => {
           placeholder="1234 Main St"
         />
       </div>
-      <Button className="bg-gradient-primary text-white py-2.5 px-5 my-3 rounded-full w-full lg:max-w-fit ">
-        Update Account Details
-      </Button>
+      <div className="flex justify-end items-center mt-5">
+        <Button className="bg-gradient-primary text-white py-2.5 px-5 my-3 rounded-full w-full lg:max-w-fit ">
+          Update Account Details
+        </Button>
+      </div>
     </div>
   );
 };

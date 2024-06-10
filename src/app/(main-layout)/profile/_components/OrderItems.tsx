@@ -37,7 +37,19 @@ const OrderItems = async ({ order }: { order: Order }) => {
               Track Order{" "}
             </Button>
           </Link>
-          <p className="bg-black-10 px-5 rounded-lg py-2 ">
+          <p
+            className={`${
+              order?.orderStatus?.status === "Order Place"
+                ? "bg-black-10  px-5 rounded-lg py-2"
+                : order?.orderStatus?.status === "Packaging"
+                ? "bg-gradient-positive text-positive  px-5 rounded-lg py-2"
+                : order?.orderStatus?.status === "Shipping"
+                ? "bg-gradient-primary-light  px-5 rounded-lg py-2"
+                : order?.orderStatus?.status === "Delivered"
+                ? "bg-gradient-secondary-light    px-5 rounded-lg py-2"
+                : ""
+            } " px-5 rounded-lg py-2"`}
+          >
             {order?.orderStatus?.status}
           </p>
         </div>
