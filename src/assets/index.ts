@@ -16,6 +16,13 @@ import discoverPay from "./Images/paymentMehods/Method=Discover.svg";
 import mastercardPay from "./Images/paymentMehods/Method=Mastercard.svg";
 import securePayment from "./Images/paymentMehods/securePayment.svg";
 
+import freeShipping from "./Images/delivery-truck.svg";
+import headphone from "./Images/headphones.svg";
+import servicesImgFour from "./Images/servies-img-4.svg";
+import customerPayment from "./Images/shopping-bag.svg";
+import messenger from "./Images/messenger.svg";
+import whatsapp from "./Images/whatsapp.svg";
+import gradientLine from "./Images/gradient-line.svg";
 export {
   brandTestImage,
   demoProductPhoto,
@@ -32,5 +39,12 @@ export {
   discoverPay,
   mastercardPay,
   securePayment,
+  freeShipping,
+  headphone,
+  servicesImgFour,
+  customerPayment,
+  messenger,
+  whatsapp,
+  gradientLine,
 };
 // add all the assets here
