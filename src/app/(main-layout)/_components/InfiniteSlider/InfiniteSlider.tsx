@@ -16,7 +16,7 @@ const InfiniteSlider = async () => {
         {cateogriesData?.data?.map((category) => (
           <div
             key={category?._id}
-            className="h-28 w-28 relative border border-black-10 rounded-full overflow-hidden"
+            className="h-16 w-16 md:h-28 md:w-28 relative border border-black-10 rounded-full overflow-hidden"
           >
             <Image
               src={server_url + category.categoryPhoto}
@@ -29,7 +29,7 @@ const InfiniteSlider = async () => {
         {cateogriesData?.data?.map((category) => (
           <div
             key={category?._id}
-            className="h-28 w-28 relative border border-black-10 rounded-full overflow-hidden"
+            className="h-16 w-16 md:h-28 md:w-28 relative border border-black-10 rounded-full overflow-hidden"
           >
             <Image
               src={server_url + category.categoryPhoto}
