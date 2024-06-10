@@ -21,6 +21,7 @@ main {
   --transparent: transparent;
   --white: white;
   --white-15: #ffffff26;
+  --white-transparent: #ffffffd0;
   --black: black;
   --black-10: #e6e6e6;
   --black-50: #7f7f7f;
@@ -74,7 +75,10 @@ main {
 }
 
 .border-gradient-primary {
-  border-image: linear-gradient(45deg, var(--primary), var(--primary-light)) 12;
+  background-image: linear-gradient(white, white),
+    linear-gradient(45deg, var(--primary), var(--primary-light));
+  background-origin: border-box;
+  background-clip: content-box, border-box;
 }
 /* <== (slider, thumb, and track-1) this are className take for the price range slider component ==> */
 .slider .thumb {

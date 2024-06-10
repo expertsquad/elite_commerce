@@ -12,7 +12,11 @@ const config: Config = {
     colors: {
       positive: "var(--positive)",
       transparent: "var(--transparent)",
-      white: { 15: "var(--white-15)", DEFAULT: "var(--white)" },
+      white: {
+        transparent: "var(--white-transparent)",
+        15: "var(--white-15)",
+        DEFAULT: "var(--white)",
+      },
       black: {
         transparent: "var(--black-transparent)",
         10: "var(--black-10)",
