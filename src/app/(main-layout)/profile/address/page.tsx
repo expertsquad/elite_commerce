@@ -4,6 +4,8 @@ import Link from "next/link";
 const page = () => {
   return (
     <div>
+      {/* tab to toggle section */}
+
       <div className="flex gap-5 items-center justify-start">
         <div className="py-2 border-b-2 border-gradient-primary">
           <Link
