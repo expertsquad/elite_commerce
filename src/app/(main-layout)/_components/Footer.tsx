@@ -38,20 +38,21 @@ const Footer = () => {
             <h6 className="text-black md:font-medium md:text-base text-lg ">
               My Account
             </h6>
-            <ul className="flex flex-col md:items-start items-center  gap-1 ">
+            <ul className="flex flex-col md:items-start items-center  md:gap-1 gap-3.5 ">
               {myAccount.map((item: string, index: number) => (
                 <li className="md:text-black-80 text-black-50" key={index}>
                   {item}
                 </li>
               ))}
             </ul>
+            <div className="md:hidden bg-black-50 h-[1px] w-full"></div>
           </div>
 
           <div className="flex flex-col md:items-start items-center md:gap-5 gap-3.5 ">
             <h6 className="text-black md:font-medium md:text-base text-lg ">
               Helps
             </h6>
-            <ul className="flex flex-col md:items-start items-center  gap-1 ">
+            <ul className="flex flex-col md:items-start items-center  md:gap-1 gap-3.5 ">
               {Helps.map((item: string, index: number) => (
                 <li className="md:text-black-80 text-black-50" key={index}>
                   {item}
@@ -65,7 +66,7 @@ const Footer = () => {
             <h6 className="text-black md:font-medium md:text-base text-lg ">
               Categories
             </h6>
-            <ul className="flex flex-col md:items-start items-center gap-1 ">
+            <ul className="flex flex-col md:items-start items-center md:gap-1 gap-3.5 ">
               {Categories.map((item: string, index: number) => (
                 <li className="md:text-black-80 text-black-50" key={index}>
                   {item}
