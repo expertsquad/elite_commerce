@@ -8,7 +8,7 @@ const page = () => {
       {/* Hero section added */}
       <Hero />
       <p className="text-sm text-gradient-secondary mt-10">Shop by Category</p>
-      <p className="text-xl text-gradient-primary font-semibold">
+      <p className="text-xl text-gradient-primary font-semibold mt-3 mb-5">
         Browse Our Hottest Categories
       </p>
       <InfiniteSlider />
