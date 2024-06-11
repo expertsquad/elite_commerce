@@ -8,7 +8,7 @@ const page = () => {
       {/* tab to toggle section */}
 
       <div className="flex gap-5 items-center border-b border-black-10 justify-start">
-        <div className="pb-[3px]  border-gradient-primary">
+        <div className="pb-[2px]  border-gradient-primary">
           <Link
             className=" text-gradient-primary font-bold text-lg "
             href="/profile/account-details"

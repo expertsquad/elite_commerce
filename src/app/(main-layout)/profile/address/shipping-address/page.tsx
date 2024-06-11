@@ -13,7 +13,7 @@ const page = () => {
             Billing Address
           </Link>
         </div>
-        <div className="pb-[3px]  border-gradient-primary">
+        <div className="pb-[2px]  border-gradient-primary">
           <Link
             className=" text-gradient-primary font-bold text-lg "
             href="/profile/address/shipping-address"
