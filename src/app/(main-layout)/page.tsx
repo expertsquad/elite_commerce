@@ -11,22 +11,27 @@ import FavouriteBrandSection from "./_components/FavouriteBrandSection/Favourite
 import { IProduct } from "@/interfaces/product.interface";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import Loading from "../loading";
+import Pagination from "@/Components/Pagination";
 
 const page = async () => {
-  const newestProducts = await fetchData({ route: "/product" });
+  const newestProducts = await fetchData({ route: "/product", limit: 8 });
+  const allProducts = await fetchData({ route: "/product", limit: 12 });
   const topSellProducts = await fetchData({
     route: "/product",
     query: "sortBy=totalSoldQuantity",
+    limit: 8,
   });
   const popularProducts = await fetchData({
     route: "/product",
     query: "sortBy=averageRating",
+    limit: 8,
   });
   const favouriteBrands = await fetchData({
     route: "/brand",
     limit: 20,
     // query: "sortBy=",
   });
+
   return (
     <>
       <div className="max-w-7xl mx-auto p-3">
@@ -116,11 +121,19 @@ const page = async () => {
             className="w-[clamp(250px,80vw,400px)]"
           />
         </div>
-        <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5 min-h-96 justify-around mt-5">
-          {newestProducts?.data?.map((product: IProduct) => {
-            return <ProductCard key={product?._id} product={product} />;
-          })}
+        <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5 min-h-96 justify-around my-5">
+          <Suspense fallback={<Loading />}>
+            {allProducts?.data?.map((product: IProduct) => {
+              return <ProductCard key={product?._id} product={product} />;
+            })}
+          </Suspense>
         </div>
+
+        <Pagination
+          totalPages={allProducts?.meta?.total}
+          currentPage={1}
+          redirectTo="/product"
+        />
       </div>{" "}
     </>
   );
