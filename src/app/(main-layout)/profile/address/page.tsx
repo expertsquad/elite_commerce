@@ -17,7 +17,7 @@ const page = () => {
         </div>
         <div className="py-2  text-lg">
           <Link className=" " href="/profile/address/shipping-address">
-            Billing Address
+            Shipping Address
           </Link>
         </div>
       </div>
