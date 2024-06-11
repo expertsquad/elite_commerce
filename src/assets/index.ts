@@ -24,6 +24,7 @@ import messenger from "./Images/messenger.svg";
 import whatsapp from "./Images/whatsapp.svg";
 import gradientLine from "./Images/gradient-line.svg";
 import wave from "./Images/wave.svg";
+
 export {
   brandTestImage,
   demoProductPhoto,
