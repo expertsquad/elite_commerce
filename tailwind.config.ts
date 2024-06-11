@@ -50,7 +50,7 @@ const config: Config = {
         "3/7": "3/7",
       },
       gridTemplateColumns: {
-        "product-grid": "repeat(auto-fill, minmax(220px,1fr))",
+        "product-grid": "repeat(auto-fill, minmax(250px,1fr))",
         "brand-card-grid": "repeat(auto-fill, minmax(250px,1fr))",
       },
       gridTemplateRows: {
