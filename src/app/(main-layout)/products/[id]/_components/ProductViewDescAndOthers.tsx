@@ -12,11 +12,15 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
+import ProductVariantPrice from "./ProductVariantPrice";
+import { Button } from "@/Components/Buttons";
 
 const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
   return (
     <div>
-      <SocialMediaAndOthers />
+      <div className="hidden md:block">
+        <SocialMediaAndOthers />
+      </div>
       <span className="font-semibold text-lg md:text-2xl line-clamp-2 my-5">
         {product?.productName}
       </span>
@@ -31,23 +35,11 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
           soldQuantity={product?.variants[0].soldQuantity}
         />
       </div>
-      <div className="flex items-center gap-x-2">
-        <span className="text-2xl font-bold text-gradient-primary">
-          ${product?.variants[0].discountPercentage}
-        </span>
-        <span className="text-black-50">|</span>
-        <del className="text-base text-black-50">
-          ${product?.variants[0].sellingPrice}
-        </del>
-        <span className="text-black-50">|</span>
-        <span className="text-sm text-gradient-secondary px-2 py-0.5 border border-black-10 rounded-full">
-          ${product?.variants[0].discountPercentage}% OFF
-        </span>
-      </div>
+      <ProductVariantPrice product={product} />
       <div className="flex items-center gap-x-5 my-5">
         <div>
           <span className="text-sm text-black-80">Color</span>
-          <div className="flex items-center gap-x-2">
+          <div className="flex items-center gap-x-2 mt-1">
             <ProductVariantColor variants={product?.variants} />
           </div>
         </div>
@@ -88,10 +80,10 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
               BUY NOW
             </Link>
           </div>
-          <button className="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2 rounded-md w-full">
+          <Button className="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2 rounded-md w-full">
             <IconBolt fill="#fff" size={20} />
             QUICK ORDER
-          </button>
+          </Button>
         </div>
       </div>
     </div>

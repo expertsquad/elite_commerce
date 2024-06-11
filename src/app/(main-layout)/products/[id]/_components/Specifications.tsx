@@ -33,7 +33,7 @@ const Specifications = ({ product }: { product: IProduct }) => {
         </h2>
         <Image src={gradientLine} alt="underline" />
         <div
-          className="mt-7"
+          className="mt-3 md:mt-7"
           dangerouslySetInnerHTML={{ __html: product?.description }}
         />
       </div>

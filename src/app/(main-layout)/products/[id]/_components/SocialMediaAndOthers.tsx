@@ -14,20 +14,28 @@ const SocialMediaAndOthers = () => {
     <div className="flex items-center justify-between">
       <div className="flex items-center">
         <span className="text-black-80 hidden md:block">Message Now: </span>
-        <div className="flex items-center gap-x-4">
+        <div className="flex items-center gap-x-2 md:gap-x-4">
           <div className="flex items-center gap-x-1 border border-black-10 rounded-full py-1 px-1.5">
-            <Image src={whatsapp} alt="whatsapp" />
+            <Image
+              src={whatsapp}
+              alt="whatsapp"
+              className="w-4 h-4 md:w-5 md:h-5"
+            />
             <span className="text-xs">WhatsApp</span>
           </div>
           <div className="flex items-center gap-x-1 border border-black-10 rounded-full py-1 px-1.5">
-            <Image src={messenger} alt="messenger" />
+            <Image
+              src={messenger}
+              alt="messenger"
+              className="w-4 h-4 md:w-5 md:h-5"
+            />
             <span className="text-xs">Messenger</span>
           </div>
         </div>
       </div>
       <div className="flex items-center">
         <span className="text-black-80 hidden md:block">Share Items: </span>
-        <div className="flex items-center gap-x-4">
+        <div className="flex items-center gap-x-2 md:gap-x-4">
           <GenerateGradientIcon
             IconComponent={IconBrandFacebook}
             stroke={2}

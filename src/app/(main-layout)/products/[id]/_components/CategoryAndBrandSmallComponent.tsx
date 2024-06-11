@@ -24,7 +24,7 @@ const CategoryAndBrandSmallComponent = ({
           className="w-full h-full top-0 left-0 object-cover"
         />
       </div>
-      <span className="text-black-50">|</span>
+      <span className="text-black-10">|</span>
       <span>Category: {categoryName}</span>
     </div>
   );

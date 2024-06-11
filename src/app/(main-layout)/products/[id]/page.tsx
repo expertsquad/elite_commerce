@@ -7,6 +7,7 @@ import ProductViewDescAndOthers from "./_components/ProductViewDescAndOthers";
 import Specifications from "./_components/Specifications";
 import RelatedProductsByCategory from "./_components/RelatedProductsByCategory";
 import CustomerReview from "./_components/CustomerReview";
+import SocialMediaAndOthers from "./_components/SocialMediaAndOthers";
 
 const ProductViewPage = async ({ params }: { params: { id: string } }) => {
   const response = await fetchData({
@@ -15,7 +16,10 @@ const ProductViewPage = async ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="max-w-7xl mx-auto px-5">
-      <div className="grid lg:grid-cols-2 grid-cols-1 mb-16 md:gap-3 gap-7">
+      <div className="block md:hidden mb-5">
+        <SocialMediaAndOthers />
+      </div>
+      <div className="grid lg:grid-cols-2 grid-cols-1 mb-16 md:gap-3 gap-5">
         <div>
           <ProductViewImage product={response?.data} />
         </div>
