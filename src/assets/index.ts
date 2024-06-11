@@ -16,7 +16,6 @@ import visaPay from "./Images/paymentMehods/Method=Visa.svg";
 import discoverPay from "./Images/paymentMehods/Method=Discover.svg";
 import mastercardPay from "./Images/paymentMehods/Method=Mastercard.svg";
 import securePayment from "./Images/paymentMehods/securePayment.svg";
-
 import freeShipping from "./Images/delivery-truck.svg";
 import headphone from "./Images/headphones.svg";
 import servicesImgFour from "./Images/servies-img-4.svg";
@@ -26,6 +25,8 @@ import whatsapp from "./Images/whatsapp.svg";
 import gradientLine from "./Images/gradient-line.svg";
 import wave from "./Images/wave.svg";
 import demoIphone from "./Images/demoiphone.svg";
+import orderPlacedDesign from "./Images/orderplacedesign.svg";
+import orderPlacedDesign2 from "./Images/orderplaceddesign2.svg";
 export {
   brandTestImage,
   demoProductPhoto,
@@ -52,5 +53,7 @@ export {
   wave,
   demoIphone,
   logo,
+  orderPlacedDesign,
+  orderPlacedDesign2,
 };
 // add all the assets here
