@@ -96,7 +96,7 @@ export const OrderSummery = () => {
         </strong>
       </div>
       <div className="md:block hidden">
-        <ButtonPrimary>
+        <ButtonPrimary buttonType="submit">
           <IconBolt height={18} width={18} />
           <span className="uppercase">Confirm Order - $1264.00</span>
         </ButtonPrimary>
@@ -117,16 +117,11 @@ const QuickOrderModal = ({
       show={show}
       setShow={setShow}
       alignment="center"
-      className="  h-[800px] overflow-y-auto"
+      className="h-[800px] md:w-3/4 w-full  overflow-y-auto scrollbar-y-remove "
+      showCancelBtnINSmallDevice={show}
     >
       <div className="">
-        <div className="flex justify-between gap-5 md:flex-row flex-col-reverse md:p-0 p-3.5 relative">
-          <button
-            onClick={() => setShow(false)}
-            className="absolute right-5 top-5"
-          >
-            <IconX />
-          </button>
+        <div className="flex justify-between gap-5 md:flex-row flex-col-reverse md:p-2 p-3.5 relative">
           <div className="flex-1 flex  border-r border-black-10  flex-col pr-5 ">
             <div className="md:flex flex-col gap-3.5 hidden">
               <span className="font-semibold  text-lg md:block hidden">
@@ -147,7 +142,10 @@ const QuickOrderModal = ({
               </span>
             </div>
             <hr className="border-black-10 my-5" />
-            <div className="flex flex-col gap-5 overflow-y-auto h-[600px]">
+            <span className="md:hidden block text-black-50 text-sm mb-5">
+              Item lists
+            </span>
+            <div className="flex flex-col gap-5 overflow-y-auto h-[600px] scrollbar-y-remove scrollbar-x-remove">
               {[...Array(10)].map((item, index) => (
                 <QuickOrderItem key={index} />
               ))}
@@ -223,7 +221,16 @@ const QuickOrderModal = ({
                     <IconMapPin stroke={1} />
                   </div>
                 </div>
+                <div className="md:hidden block ">
+                  <ButtonPrimary buttonType="submit">
+                    <IconBolt height={18} width={18} />
+                    <span className="uppercase text-sm">
+                      Confirm Order - $1264.00
+                    </span>
+                  </ButtonPrimary>
+                </div>
               </div>
+
               <div className="md:block hidden">
                 <OrderSummery />
               </div>
