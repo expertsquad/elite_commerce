@@ -4,8 +4,18 @@ import InfiniteSlider from "./_components/InfiniteSlider/InfiniteSlider";
 import Image from "next/image";
 import { wave } from "@/assets";
 import FeaturedProducts from "./_components/FeaturedProducts/FeaturedProducts";
+import { fetchData } from "@/actions/fetchData";
 
-const page = () => {
+const page = async () => {
+  const newestProducts = await fetchData({ route: "/product" });
+  const topSellProducts = await fetchData({
+    route: "/product",
+    query: "sortBy=totalSoldQuantity",
+  });
+  const popularProducts = await fetchData({
+    route: "/product",
+    query: "sortBy=averageRating",
+  });
   return (
     <div className="max-w-7xl mx-auto p-3">
       {/* Hero section added */}
@@ -27,7 +37,11 @@ const page = () => {
           className="w-[clamp(200px,70vw,300px)]"
         />
       </div>
-      <FeaturedProducts />
+      <FeaturedProducts
+        newestProducts={newestProducts?.data}
+        topSellProducts={topSellProducts?.data}
+        popularProducts={popularProducts?.data}
+      />
     </div>
   );
 };

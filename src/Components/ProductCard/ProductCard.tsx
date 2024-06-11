@@ -8,7 +8,7 @@ import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderB
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   return (
-    <div className="border border-black-10 rounded-lg group min-w-[280px] max-w-[280px] w-[calc(280px,2vw,185px)] relative  cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg">
+    <div className="border border-black-10 rounded-lg group relative w-full max-w-[280px] cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg mx-auto">
       <div className="bg-gradient-primary-light">
         <ProductImageSlider
           // loading={loading}
