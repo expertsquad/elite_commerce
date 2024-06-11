@@ -49,22 +49,22 @@ const BestDealsSection = async () => {
             {bestDeals?.data?.description}
           </h1>
           <div className="flex gap-[clamp(10px,2vw,20px)] text-gradient-primary items-center text-xl text-center mt-9">
-            <div className="bg-white h-16 md:h-12 w-16 md:w-12 flex flex-col items-center justify-center rounded-xl">
+            <div className="bg-white h-16 md:h-12 lg:h-16 w-16 md:w-12 lg:w-16 flex flex-col items-center justify-center rounded-xl">
               <p className="text-gradient-primary font-semibold">{days}</p>
               <p className="text-gradient-primary text-xs">Days</p>
             </div>{" "}
             :
-            <div className="bg-white h-16 md:h-12 w-16 md:w-12 flex flex-col items-center justify-center rounded-xl">
+            <div className="bg-white h-16 md:h-12 lg:h-16 w-16 md:w-12 lg:w-16 flex flex-col items-center justify-center rounded-xl">
               <p className="text-gradient-primary font-semibold">{hours}</p>
               <p className="text-gradient-primary text-xs">Hours</p>
             </div>{" "}
             :
-            <div className="bg-white h-16 md:h-12 w-16 md:w-12 flex flex-col items-center justify-center rounded-xl">
+            <div className="bg-white h-16 md:h-12 lg:h-16 w-16 md:w-12 lg:w-16 flex flex-col items-center justify-center rounded-xl">
               <p className="text-gradient-primary font-semibold">{minutes}</p>
               <p className="text-gradient-primary text-xs">Mins</p>
             </div>{" "}
             :
-            <div className="bg-white h-16 md:h-12 w-16 md:w-12 flex flex-col items-center justify-center rounded-xl">
+            <div className="bg-white h-16 md:h-12 lg:h-16 w-16 md:w-12 lg:w-16 flex flex-col items-center justify-center rounded-xl">
               <p className="text-gradient-primary font-semibold">{seconds}</p>
               <p className="text-gradient-primary text-xs">Secs</p>
             </div>{" "}
