@@ -1,0 +1,47 @@
+.container {
+  --animated-element-gap: 50px;
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  gap: var(--animated-element-gap);
+  width: fit-content;
+  white-space: nowrap;
+  animation: slider 10s infinite linear;
+}
+
+.container::after,
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100px;
+  z-index: 10;
+}
+
+.container::after {
+  right: 0;
+  background: linear-gradient(90deg, transparent, var(--white));
+}
+
+.container::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--white), transparent);
+}
+
+.slider:hover {
+  animation-play-state: paused;
+}
+
+@keyframes slider {
+  to {
+    transform: translate(calc(-50% - (var(--animated-element-gap) / 2)));
+  }
+}
