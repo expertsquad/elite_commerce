@@ -2,7 +2,6 @@ import { fetchData } from "@/actions/fetchData";
 import { server_url } from "@/constants";
 import Image from "next/image";
 import React from "react";
-import CountdownTimer from "./CountDownTimer";
 import StarRating from "@/Components/StarRating";
 
 interface IProduct {
@@ -20,8 +19,9 @@ const BestDealsSection = async () => {
   const endDate = new Date(bestDeals?.data?.endDate);
   //   const days=new Date(endDate) - new Date()
   const days = 4;
-
-  console.log(bestDeals);
+  const hours = 10;
+  const minutes = 10;
+  const seconds = 10;
 
   return (
     <div
@@ -31,8 +31,8 @@ const BestDealsSection = async () => {
           bestDeals?.data?.backgroundColor || bestDeals?.data?.backgroundPhoto,
       }}
     >
-      <div className="max-w-7xl mx-auto grid grid-cols-3 gap-16 p-10">
-        <div className="relative h-44 w-44 lg:h-60 lg:w-60 mx-auto my-auto">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 p-10">
+        <div className="relative h-60 w-60 md:h-40 md:w-40 lg:h-60 lg:w-60 mx-auto my-auto">
           {" "}
           <Image
             src={server_url + bestDeals?.data?.firstProductPhoto}
@@ -49,29 +49,29 @@ const BestDealsSection = async () => {
             {bestDeals?.data?.description}
           </h1>
           <div className="flex gap-[clamp(10px,2vw,20px)] text-gradient-primary items-center text-xl text-center mt-9">
-            <div className="bg-white h-[clamp(40px,5vw,80px)] w-[clamp(40px,5vw,80px)] flex flex-col items-center justify-center rounded-xl">
+            <div className="bg-white h-16 md:h-12 w-16 md:w-12 flex flex-col items-center justify-center rounded-xl">
               <p className="text-gradient-primary font-semibold">{days}</p>
               <p className="text-gradient-primary text-xs">Days</p>
             </div>{" "}
             :
-            <div className="bg-white h-[clamp(40px,5vw,80px)] w-[clamp(40px,5vw,80px)] flex flex-col items-center justify-center rounded-xl">
-              <p className="text-gradient-primary font-semibold">24</p>
+            <div className="bg-white h-16 md:h-12 w-16 md:w-12 flex flex-col items-center justify-center rounded-xl">
+              <p className="text-gradient-primary font-semibold">{hours}</p>
               <p className="text-gradient-primary text-xs">Hours</p>
             </div>{" "}
             :
-            <div className="bg-white h-[clamp(40px,5vw,80px)] w-[clamp(40px,5vw,80px)] flex flex-col items-center justify-center rounded-xl">
-              <p className="text-gradient-primary font-semibold">24</p>
+            <div className="bg-white h-16 md:h-12 w-16 md:w-12 flex flex-col items-center justify-center rounded-xl">
+              <p className="text-gradient-primary font-semibold">{minutes}</p>
               <p className="text-gradient-primary text-xs">Mins</p>
             </div>{" "}
             :
-            <div className="bg-white h-[clamp(40px,5vw,80px)] w-[clamp(40px,5vw,80px)] flex flex-col items-center justify-center rounded-xl">
-              <p className="text-gradient-primary font-semibold">24</p>
+            <div className="bg-white h-16 md:h-12 w-16 md:w-12 flex flex-col items-center justify-center rounded-xl">
+              <p className="text-gradient-primary font-semibold">{seconds}</p>
               <p className="text-gradient-primary text-xs">Secs</p>
             </div>{" "}
           </div>
           {/* <CountdownTimer endDate={endDate} /> */}
         </div>
-        <div className="relative h-44 w-44 lg:h-60 lg:w-60 mx-auto my-auto">
+        <div className="relative hidden md:block md:h-40 md:w-40 lg:h-60 lg:w-60 mx-auto my-auto">
           <Image
             src={server_url + bestDeals?.data?.secondProductPhoto}
             alt="product photo"
