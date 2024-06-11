@@ -4,7 +4,7 @@ import ProfileNavMenu from "./ProfileNavMenu";
 
 const ProfileNavCard = () => {
   return (
-    <div className="bg-gradient-primary-light p-5 rounded-xl w-full">
+    <div className="bg-gradient-primary-light p-5 rounded-xl w-full h-[calc(100vh-200px)] sticky top-5 ">
       {/* profile image and name start */}
       <div className="flex md:items-center items-start justify-center gap-2 md:flex-col flex-row border-b-2 border-black-10 mb-4">
         <Image

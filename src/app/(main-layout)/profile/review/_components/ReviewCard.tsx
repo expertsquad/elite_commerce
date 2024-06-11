@@ -59,12 +59,14 @@ const ReviewCard = async ({
           />
         </div>
       </div>
-      <div className="border-b border-black-10 py-5">
-        <div className="my-4">
-          <StarRating rating={comments?.data[0]?.rating} />
+      {comments?.data?.length && (
+        <div className="border-b border-black-10 py-5">
+          <div className="my-4">
+            <StarRating rating={comments?.data[0]?.rating} />
+          </div>
+          <p>{comments?.data[0]?.comment}</p>
         </div>
-        <p>{comments?.data[0]?.comment}</p>
-      </div>
+      )}
     </>
   );
 };
