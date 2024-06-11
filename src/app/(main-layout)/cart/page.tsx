@@ -4,7 +4,10 @@ import Image from "next/image";
 import { demoProductPhoto } from "@/assets";
 import StarRating from "@/Components/StarRating";
 import IncreaseDecrease from "../brands/_components/IncreaseDecrease";
-import { IconX } from "@tabler/icons-react";
+import { IconBolt, IconX } from "@tabler/icons-react";
+import ButtonPrimary from "../brands/_components/ButtonPrimary";
+import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
+import Link from "next/link";
 
 export const CartItem = () => {
   return (
@@ -20,31 +23,43 @@ export const CartItem = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-4">
-          <span className="line-clamp-1">Apple Watch Series 8 GP</span>
+        <div className="flex flex-col md:gap-4">
+          <span className="line-clamp-1 [font-size:clamp(10px,5vw,14px)]">
+            Apple Watch Series 8 GP
+          </span>
           <div className="flex items-center gap-2">
             <span className="text-positive">Apple</span>
             <span className="text-black-10 text-xs ">|</span>
             <StarRating rating={2} />
           </div>
+          <div className="md:hidden flex items-center gap-3">
+            <strong className="text-black-50 text-xs font-normal">
+              ${1500.03}
+            </strong>
+            <IconX className="text-black-50" width={12} height={12} />
+            <IncreaseDecrease />
+          </div>
         </div>
       </div>
-      <div className="flex  justify-between flex-col">
+      <div className="md:flex flex-col justify-between hidden">
         <span className="text-sm text-black-80">Unit Price</span>
         <strong className="text-gradient-primary">${1500.03}</strong>
       </div>
-      <div className="flex flex-col justify-between">
-        <span>Quantity</span>
+      <div className="md:flex flex-col justify-between hidden">
+        <span className="text-sm text-black-80">Quantity</span>
         <IncreaseDecrease />
       </div>
-      <div className="flex flex-col items-center justify-between">
-        <span>Sub Total</span>
+      <div className="md:flex flex-col justify-between hidden">
+        <span className="text-sm text-black-80">Sub Total</span>
         <strong className="text-gradient-primary">${4500.09}</strong>
       </div>
-      <div className="flex items-center justify-center">
-        <button className="">
-          <IconX stroke={1} color="#FF3838" />
+      <div className="flex flex-col md:items-center items-end md:justify-center justify-between">
+        <button className="md:border rounded-full border-danger p-1">
+          <IconX stroke={1} color="#FF3838" width={18} height={18} />
         </button>
+        <strong className="text-gradient-primary md:hidden block">
+          ${4500.09}
+        </strong>
       </div>
     </div>
   );
@@ -76,13 +91,61 @@ const CartView = () => {
             🔥
           </span>
         </div>
-        <div className="flex gap-5 mt-7">
+        <div className="flex md:flex-row flex-col gap-5 mt-7">
           <div className=" flex flex-col gap-5 md:border border-black-10 md:p-[30px] md:basis-4/6 rounded-[10px]">
             {[...Array(5)].map((item, index) => {
               return <CartItem key={index} />;
             })}
           </div>
-          <div className="md:basis-1/3"></div>
+          <div className="md:basis-1/3">
+            <div className="bg-white p-5 md:shadow-2xl rounded-[10px] md:border-none border border-black-10">
+              <span className="text-gradient-primary font-semibold text-xl ">
+                Cart Total
+              </span>
+              <div className="flex flex-col gap-3.5 mt-5">
+                <div className="flex items-center justify-between gap-5">
+                  <span className="text-base text-black-80">Sub Total</span>
+                  <strong className="text-base font-semibold">${1300}</strong>
+                </div>
+                <div className="flex items-center justify-between gap-5">
+                  <span className="text-base text-black-80">Sub Shipping</span>
+                  <strong className="text-base font-semibold">${100}</strong>
+                </div>
+                <div className="flex items-center justify-between gap-5">
+                  <span className="text-base text-black-80 capitalize">
+                    discount
+                  </span>
+                  <strong className="text-base font-semibold text-danger">
+                    -${50}
+                  </strong>
+                </div>
+                <hr className="border border-black-10" />
+              </div>
+              <div className="flex items-center justify-between mt-5 gap-5">
+                <span className="font-semibold text-2xl">Total</span>
+                <span className="text-gradient-primary font-semibold text-2xl">
+                  $1250
+                </span>
+              </div>
+              <div className="flex flex-col gap-2.5 mt-12">
+                <ButtonPrimary className="!rounded-full">
+                  Proceed To Checkout &rarr;
+                </ButtonPrimary>
+                <ButtonPrimaryLight className="!text-black !rounded-full">
+                  <IconBolt />
+                  Quick Order
+                </ButtonPrimaryLight>
+              </div>
+              <div className="mt-5">
+                <Link
+                  href={"/"}
+                  className="flex items-center justify-center uppercase font-semibold text-sm"
+                >
+                  &larr; Continue Shopping
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
