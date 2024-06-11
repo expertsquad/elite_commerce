@@ -88,7 +88,7 @@ const page = async () => {
         {/* favourite brand section */}
         <div className="md:flex items-start gap-5">
           {/* wiget card */}
-          <WidgetCard />
+          <WidgetCard className="w-[350px] mx-auto" />
           <div className="w-full">
             <div className="relative w-full after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-36 after:h-1 after:bg-gradient-primary">
               <h1 className="text-2xl font-bold text-gradient-primary">
