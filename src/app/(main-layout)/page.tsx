@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Hero from "./_components/Hero/Hero";
 import InfiniteSlider from "./_components/InfiniteSlider/InfiniteSlider";
 import Image from "next/image";
@@ -7,10 +7,10 @@ import FeaturedProducts from "./_components/FeaturedProducts/FeaturedProducts";
 import { fetchData } from "@/actions/fetchData";
 import BestDealsSection from "./_components/BestDealsSection/BestDealsSection";
 import { extraServices } from "@/constants/extraServices.constants";
-import WidgetCard from "@/Components/WidgetCard";
-import { IconArrowNarrowRight } from "@tabler/icons-react";
-import { IBrand } from "@/interfaces/brand.interface";
-import { server_url } from "@/constants";
+import FavouriteBrandSection from "./_components/FavouriteBrandSection/FavouriteBrandSection";
+import { IProduct } from "@/interfaces/product.interface";
+import ProductCard from "@/Components/ProductCard/ProductCard";
+import Loading from "../loading";
 
 const page = async () => {
   const newestProducts = await fetchData({ route: "/product" });
@@ -86,38 +86,40 @@ const page = async () => {
           ))}
         </div>
         {/* favourite brand section */}
-        <div className="md:flex items-start gap-5">
-          {/* wiget card */}
-          <WidgetCard className="w-[350px] mx-auto" />
-          <div className="w-full">
-            <div className="relative w-full after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-36 after:h-1 after:bg-gradient-primary">
-              <h1 className="text-2xl font-bold text-gradient-primary">
-                Explore your Favorite Brand
-              </h1>
-              <div className="flex justify-end">
-                <button className="flex items-center gap-3 text-primary">
-                  See all
-                  <IconArrowNarrowRight className="text-primary" />
-                </button>
-              </div>
-            </div>
-            {/* <div className="flex flex-wrap gap-5 mx-auto my-10"> */}
-            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-5 my-10">
-              {favouriteBrands?.data?.map((brand: IBrand) => (
-                <div
-                  key={brand?._id}
-                  className="border border-black-10 w-32 h-16 relative"
-                >
-                  <Image
-                    src={server_url + brand?.brandPhoto}
-                    alt="brand photo"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+        <FavouriteBrandSection favouriteBrands={favouriteBrands?.data} />
+
+        {/* Deals of the day */}
+        <div className="flex justify-center items-center uppercase flex-col mt-16">
+          <p className="text-[clamp(20px,5vw,25px)] text-gradient-primary">
+            Deals Of The Day
+          </p>
+          <Image
+            src={wave}
+            alt="gradient line"
+            className="w-[clamp(200px,70vw,300px)]"
+          />
+        </div>
+        <div className="md:flex justify-around mt-5">
+          <div className="w-[clamp(250px,25vw,300px)] border h-80 mx-auto"></div>
+          <div className="w-[clamp(250px,25vw,300px)] border h-80 mx-auto"></div>
+          <div className="w-[clamp(250px,25vw,300px)] border h-80 mx-auto"></div>
+        </div>
+
+        {/* All products */}
+        <div className="flex justify-center items-center uppercase flex-col mt-16">
+          <p className="text-[clamp(18px,5vw,25px)] text-gradient-primary">
+            Explore Our All Products
+          </p>
+          <Image
+            src={wave}
+            alt="gradient line"
+            className="w-[clamp(250px,80vw,400px)]"
+          />
+        </div>
+        <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5 min-h-96 justify-around mt-5">
+          {newestProducts?.data?.map((product: IProduct) => {
+            return <ProductCard key={product?._id} product={product} />;
+          })}
         </div>
       </div>{" "}
     </>
