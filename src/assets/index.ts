@@ -24,6 +24,7 @@ import messenger from "./Images/messenger.svg";
 import whatsapp from "./Images/whatsapp.svg";
 import gradientLine from "./Images/gradient-line.svg";
 import wave from "./Images/wave.svg";
+import demoIphone from "./Images/demoiphone.svg";
 export {
   brandTestImage,
   demoProductPhoto,
@@ -48,5 +49,6 @@ export {
   whatsapp,
   gradientLine,
   wave,
+  demoIphone,
 };
 // add all the assets here

@@ -14,14 +14,13 @@ const ProductVariantColor = ({ variants, onSelectVariant }: any) => {
       return (
         <div
           key={index}
-          className={`w-6 h-6 rounded-sm bg-white cursor-pointer flex items-center justify-center border ${
-            index === selectedVariantIndex
-              ? `border-${color?.variantName} border-2 border-[#${color?.variantName}]`
-              : "border-transparent"
-          }`}
+          className={`w-6 h-6 rounded-sm bg-white cursor-pointer flex items-center justify-center`}
           onClick={() => handleClick(index)}
           style={{
-            border: `2px solid ${color?.variantName}`,
+            border: `${
+              index === selectedVariantIndex &&
+              `2px solid ${color?.variantName}`
+            }`,
           }}
         >
           <div

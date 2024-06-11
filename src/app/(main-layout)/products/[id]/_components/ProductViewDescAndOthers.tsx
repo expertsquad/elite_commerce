@@ -14,6 +14,7 @@ import Link from "next/link";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import ProductVariantPrice from "./ProductVariantPrice";
 import { Button } from "@/Components/Buttons";
+import PercentageSlider from "./PercentageSlider";
 
 const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
   return (
@@ -34,6 +35,27 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
           instock={product?.variants[0].inStock}
           soldQuantity={product?.variants[0].soldQuantity}
         />
+      </div>
+      <div className="my-5">
+        <PercentageSlider />
+        <div>
+          {product?.bulk &&
+            (product?.bulk?.minOrder > 1 ||
+              (product.bulk && typeof product.bulk !== "boolean")) && (
+              <div className="whitespace-nowrap text-black-opacity-60">
+                <p>
+                  Buy{" "}
+                  <span className="font-semibold main-text-color">
+                    {product?.bulk?.minOrder}
+                  </span>{" "}
+                  item to get more{" "}
+                  <span className="font-semibold text-black">
+                    {product?.bulk?.discount} extra!
+                  </span>
+                </p>
+              </div>
+            )}
+        </div>
       </div>
       <ProductVariantPrice product={product} />
       <div className="flex items-center gap-x-5 my-5">

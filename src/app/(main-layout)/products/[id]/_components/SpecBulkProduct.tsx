@@ -47,7 +47,9 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
       <div className="flex items-center justify-between gap-x-5 mb-5">
         <div>
           <span className="text-sm text-black-80">Color</span>
-          <ProductVariantColor variants={productdata?.variants} />
+          <div className="flex items-center gap-x-2">
+            <ProductVariantColor variants={productdata?.variants} />
+          </div>
         </div>
         <div>
           <span className="text-sm text-black-80">Storage</span>
