@@ -8,6 +8,9 @@ import { fetchData } from "@/actions/fetchData";
 import BestDealsSection from "./_components/BestDealsSection/BestDealsSection";
 import { extraServices } from "@/constants/extraServices.constants";
 import WidgetCard from "@/Components/WidgetCard";
+import { IconArrowNarrowRight } from "@tabler/icons-react";
+import { IBrand } from "@/interfaces/brand.interface";
+import { server_url } from "@/constants";
 
 const page = async () => {
   const newestProducts = await fetchData({ route: "/product" });
@@ -18,6 +21,11 @@ const page = async () => {
   const popularProducts = await fetchData({
     route: "/product",
     query: "sortBy=averageRating",
+  });
+  const favouriteBrands = await fetchData({
+    route: "/brand",
+    limit: 20,
+    // query: "sortBy=",
   });
   return (
     <>
@@ -78,15 +86,37 @@ const page = async () => {
           ))}
         </div>
         {/* favourite brand section */}
-        <div className="flex items-start gap-5">
+        <div className="md:flex items-start gap-5">
           {/* wiget card */}
-          <div className="w-[400px]">
-            <WidgetCard />
-          </div>
-          <div className="w-full relative after:content-[''] after:absolute inset-0 ">
-            <h1 className="text-2xl font-bold text-gradient-primary">
-              Explore your Favorite Brand
-            </h1>
+          <WidgetCard />
+          <div className="w-full">
+            <div className="relative w-full after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-36 after:h-1 after:bg-gradient-primary">
+              <h1 className="text-2xl font-bold text-gradient-primary">
+                Explore your Favorite Brand
+              </h1>
+              <div className="flex justify-end">
+                <button className="flex items-center gap-3 text-primary">
+                  See all
+                  <IconArrowNarrowRight className="text-primary" />
+                </button>
+              </div>
+            </div>
+            {/* <div className="flex flex-wrap gap-5 mx-auto my-10"> */}
+            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-5 my-10">
+              {favouriteBrands?.data?.map((brand: IBrand) => (
+                <div
+                  key={brand?._id}
+                  className="border border-black-10 w-32 h-16 relative"
+                >
+                  <Image
+                    src={server_url + brand?.brandPhoto}
+                    alt="brand photo"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>{" "}
