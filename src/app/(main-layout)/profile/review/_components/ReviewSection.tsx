@@ -7,14 +7,10 @@ const ReviewSection = async () => {
     route: "/user/me",
   });
 
-  console.log(getMe);
-
   const allOrder = await fetchData({
     route: "/online-order",
     query: `buyer.userId=${getMe?.data?._id}&orderItems.isReviewed=false`,
   });
-
-  console.log(allOrder);
 
   return (
     <div>

@@ -1,5 +1,4 @@
 import { Button } from "@/Components/Buttons";
-import React from "react";
 
 const ButtonSection = ({
   isReviewed,

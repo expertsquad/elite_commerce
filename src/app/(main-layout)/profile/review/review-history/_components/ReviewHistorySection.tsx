@@ -10,10 +10,7 @@ const ReviewHistorySection = async () => {
   const allOrder = await fetchData({
     route: "/online-order",
     query: `buyer.userId=${getMe?.data?._id}&orderItems.isReviewed=true`,
-    // query: `reviewer.userId=${getMe?.data?._id}`,
   });
-
-  console.log(allOrder);
 
   return (
     <div>
@@ -24,6 +21,7 @@ const ReviewHistorySection = async () => {
             <ReviewCard
               key={orderItem._id}
               orderItem={orderItem}
+              orderId={order._id}
               createdAt={order?.createdAt}
               orderStatus={order?.orderStatus?.status}
             />
