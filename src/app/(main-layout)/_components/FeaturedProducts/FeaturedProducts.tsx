@@ -3,14 +3,21 @@ import { IconArrowNarrowRight } from "@tabler/icons-react";
 import React, { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Loading from "@/app/loading";
+import { IProduct } from "@/interfaces/product.interface";
 
-const NewestProducts = dynamic(() => import("./NewestProducts"), {
-  ssr: false,
-});
+const NewestProducts = dynamic(() => import("./NewestProducts"));
 const TopSellProducts = dynamic(() => import("./TopSellProduct"));
 const PopularProducts = dynamic(() => import("./PopularProducts"));
 
-const FeaturedProducts = () => {
+const FeaturedProducts = ({
+  newestProducts,
+  topSellProducts,
+  popularProducts,
+}: {
+  newestProducts: IProduct[];
+  topSellProducts: IProduct[];
+  popularProducts: IProduct[];
+}) => {
   const [filter, setFilter] = React.useState("Newest");
   return (
     <div>
@@ -47,18 +54,18 @@ const FeaturedProducts = () => {
         </button>
       </div>
       {/* layout */}
-      <div className="grid grid-cols-4">
+      <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5 min-h-96 justify-around">
         {filter === "Newest" ? (
           <Suspense fallback={<Loading />}>
-            <NewestProducts />
+            <NewestProducts products={newestProducts} />
           </Suspense>
         ) : filter === "TopSell" ? (
           <Suspense fallback={<Loading />}>
-            <TopSellProducts />
+            <TopSellProducts products={topSellProducts} />
           </Suspense>
         ) : (
           <Suspense fallback={<Loading />}>
-            <PopularProducts />
+            <PopularProducts products={popularProducts} />
           </Suspense>
         )}
       </div>

@@ -17,6 +17,7 @@ main {
   --primary-light: #04a4e6 102.21%;
   --secondary: #fb8e48 0%;
   --secondary-light: #cb380f 100%;
+  --danger: red;
   --positive: #119f5b;
   --transparent: transparent;
   --white: white;

@@ -10,6 +10,7 @@ const config: Config = {
     // use color variables please
     // colors
     colors: {
+      danger: "var(--danger)",
       positive: "var(--positive)",
       transparent: "var(--transparent)",
       white: {
@@ -50,8 +51,11 @@ const config: Config = {
         "3/7": "3/7",
       },
       gridTemplateColumns: {
-        "product-grid": "repeat(auto-fill, minmax(280px,1fr))",
+        "product-grid": "repeat(auto-fill, minmax(250px,1fr))",
         "brand-card-grid": "repeat(auto-fill, minmax(250px,1fr))",
+      },
+      gridTemplateRows: {
+        "product-grid": "repeat(auto-fill, minmax(405px,1fr))",
       },
     },
   },
