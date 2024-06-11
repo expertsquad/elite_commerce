@@ -3,6 +3,8 @@ import { IProduct } from "@/interfaces/product.interface";
 import StarRating from "../StarRating";
 import { IconShoppingCart } from "@tabler/icons-react";
 import Link from "next/link";
+import QuickViewButton from "@/app/(main-layout)/brands/_components/QuickViewButton";
+import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   return (
@@ -45,15 +47,8 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         </div>
       </div>
       <div className="absolute flex gap-3 items-center top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 opacity-0 md:group-hover:opacity-100 transition-all duration-300">
-        <Link
-          href={`products/${product?._id}`}
-          className="text-base bg-white py-1.5 whitespace-nowrap px-5 rounded-full"
-        >
-          Quick View
-        </Link>
-        <button className="text-base bg-white py-1.5 whitespace-nowrap px-5 rounded-full">
-          Quick Order
-        </button>
+        <QuickViewButton />
+        <QuickOrderButton />
       </div>
     </div>
   );

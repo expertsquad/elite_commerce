@@ -1,7 +1,7 @@
 // shariful
 // brand test image
 import brandTestImage from "./Images/brandTest.svg";
-import demoProductPhoto from "./Images/demoProductPhoto.png";
+import demoProductPhoto from "./Images/demoslkdf.svg";
 import testWidget from "./Images/demoProduct.svg";
 import facebookIcon from "./SocialIcons/Facebook.svg";
 import redditIcon from "./SocialIcons/reddit.svg";
