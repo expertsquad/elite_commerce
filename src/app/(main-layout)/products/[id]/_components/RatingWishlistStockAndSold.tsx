@@ -14,10 +14,10 @@ const RatingWishlistStockAndSold = ({
   soldQuantity,
 }: RatingWishlistStockAndSoldProps) => {
   return (
-    <div className="flex items-center gap-x-1.5 md:gap-x-2.5">
+    <div className="flex items-center gap-x-1 md:gap-x-2.5">
       <div className="flex items-center gap-x-1">
         <IconStarFilled className="text-[#E73C17] w-4 h-4" />
-        <span className="text-gradient-secondary">
+        <span className="text-gradient-secondary text-xs md:text-base">
           {(averageRating || 0).toFixed(2)}
         </span>
       </div>

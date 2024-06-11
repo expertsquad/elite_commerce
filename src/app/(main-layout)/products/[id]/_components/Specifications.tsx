@@ -8,13 +8,11 @@ const Specifications = ({ product }: { product: IProduct }) => {
   return (
     <div>
       {/* == Specification == */}
-      <div className="mt-12">
-        <div id="specification">
-          <div id="specification" className="w-full">
-            <SpecificationDetails
-              specificationDetails={product?.specifications}
-            />
-          </div>
+      <div id="specification">
+        <div id="specification" className="w-full">
+          <SpecificationDetails
+            specificationDetails={product?.specifications}
+          />
         </div>
       </div>
       {/* == Description == */}

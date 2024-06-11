@@ -1,7 +1,6 @@
 import React from "react";
 import ProductViewServices from "./_components/ProductViewServices";
 import { fetchData } from "@/actions/fetchData";
-import ProductVariantColor from "./_components/ProductVariantColor";
 import ProductViewImage from "./_components/ProductViewImage";
 import ProductViewDescAndOthers from "./_components/ProductViewDescAndOthers";
 import Specifications from "./_components/Specifications";
@@ -15,7 +14,6 @@ const ProductViewPage = async ({ params }: { params: { id: string } }) => {
   const response = await fetchData({
     route: `/product/${params?.id}`,
   });
-  console.log(params?.id);
   return (
     <div className="max-w-7xl mx-auto px-5">
       <div className="block md:hidden mb-5">

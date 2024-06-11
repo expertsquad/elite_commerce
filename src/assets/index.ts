@@ -1,5 +1,6 @@
 // shariful
 // brand test image
+import logo from "./Images/logo.svg";
 import brandTestImage from "./Images/brandTest.svg";
 import demoProductPhoto from "./Images/demoslkdf.svg";
 import testWidget from "./Images/demoProduct.svg";
@@ -50,5 +51,6 @@ export {
   gradientLine,
   wave,
   demoIphone,
+  logo,
 };
 // add all the assets here
