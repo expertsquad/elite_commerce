@@ -1,8 +1,9 @@
+import { fetchData } from "@/actions/fetchData";
 import { gradientLine } from "@/assets";
 import Image from "next/image";
 import React from "react";
 
-const CustomerReview = () => {
+const CustomerReview = ({ productId }: { productId: string }) => {
   return (
     <div>
       <h2 className="text-gradient-primary text-[18px] md:text-[24px] font-semibold">

@@ -16,7 +16,7 @@ const RelatedProductsByCategory = async ({
   });
   return (
     <div className="my-10 md:my-[70px]">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-6">
         <h2 className="text-lg md:text-2xl font-semibold">
           You’ll love this too
         </h2>
@@ -27,12 +27,9 @@ const RelatedProductsByCategory = async ({
           See All
         </Link>
       </div>
-      <div>
+      <div className="flex items-center gap-x-2.5 md:gap-x-5 overflow-x-scroll scrollbar-x-remove">
         {response?.data?.map((product: IProduct) => (
-          <div
-            key={product?._id}
-            className="flex items-center gap-x-2.5 md:gap-x-5"
-          >
+          <div key={product?._id} className="">
             <ProductCard product={product} />
           </div>
         ))}
