@@ -10,6 +10,7 @@ const config: Config = {
     // use color variables please
     // colors
     colors: {
+      danger: "var(--danger)",
       positive: "var(--positive)",
       transparent: "var(--transparent)",
       white: {
