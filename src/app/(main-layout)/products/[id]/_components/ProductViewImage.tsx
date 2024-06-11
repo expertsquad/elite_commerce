@@ -43,16 +43,16 @@ const ProductViewImage = ({ product }: { product: IProduct }) => {
           </div>
         ))}
       </div>
-      <div className="flex items-center justify-center border-black-10 rounded-lg w-full">
+      <div className="flex items-center justify-center border-black-10 rounded-lg w-full bg-gradient-primary-light">
         {selectedImage && (
-          <div className="relative shrink-0  min-h-80 min-w-80 md:h-[470px] max-w-[400px] bg-gradient-primary-light">
+          <div className="relative shrink-0 min-h-80 min-w-80 md:h-[485px] max-w-[400px] ">
             <Image
               src={`${server_url + selectedImage}`}
               alt="Product Photo"
               fill
               objectFit="cover"
               sizes="(max-width: 350px) 50vw, (max-width: 350px) 60vw, 65vw"
-              className="w-full h-full top-0 left-0 object-cover rounded-lg"
+              className="w-full h-full top-0 left-0 object-cover rounded-lg py-10 px-5 md:px-0"
             />
           </div>
         )}
