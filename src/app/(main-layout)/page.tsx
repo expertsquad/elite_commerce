@@ -12,6 +12,7 @@ import { IProduct } from "@/interfaces/product.interface";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import Loading from "../loading";
 import Pagination from "@/Components/Pagination";
+import DealsOfTheDaySection from "./_components/DealsOfTheDaySection/DealsOfTheDaySection";
 
 const page = async () => {
   const newestProducts = await fetchData({ route: "/product", limit: 8 });
@@ -104,11 +105,7 @@ const page = async () => {
             className="w-[clamp(200px,70vw,300px)]"
           />
         </div>
-        <div className="md:flex justify-around mt-5">
-          <div className="w-[clamp(250px,25vw,300px)] border h-80 mx-auto"></div>
-          <div className="w-[clamp(250px,25vw,300px)] border h-80 mx-auto"></div>
-          <div className="w-[clamp(250px,25vw,300px)] border h-80 mx-auto"></div>
-        </div>
+        <DealsOfTheDaySection />
 
         {/* All products */}
         <div className="flex justify-center items-center uppercase flex-col mt-16">

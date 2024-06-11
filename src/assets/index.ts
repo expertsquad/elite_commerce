@@ -24,6 +24,8 @@ import messenger from "./Images/messenger.svg";
 import whatsapp from "./Images/whatsapp.svg";
 import gradientLine from "./Images/gradient-line.svg";
 import wave from "./Images/wave.svg";
+import cornerGolden from "./Images/corner-gold.svg";
+import cornerBlue from "./Images/corner-blue.svg";
 
 export {
   brandTestImage,
@@ -49,5 +51,7 @@ export {
   whatsapp,
   gradientLine,
   wave,
+  cornerGolden,
+  cornerBlue,
 };
 // add all the assets here
