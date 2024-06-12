@@ -13,7 +13,9 @@ const SocialMediaAndOthers = () => {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center">
-        <span className="text-black-80 hidden md:block">Message Now: </span>
+        <span className="text-black-80 hidden md:block [font-size:_clamp(14px,10vw,16px)]">
+          Message Now:{" "}
+        </span>
         <div className="flex items-center gap-x-2 md:gap-x-4">
           <div className="flex items-center gap-x-1 border border-black-10 rounded-full py-1 px-1.5">
             <Image

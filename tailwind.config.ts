@@ -10,7 +10,16 @@ const config: Config = {
     // use color variables please
     // colors
     colors: {
+      primary: {
+        light: "var(--primary-light)",
+        DEFAULT: "var(--primary)",
+      },
+      secondary: {
+        light: "var(--secondary-light)",
+        DEFAULT: "var(--secondary)",
+      },
       positive: "var(--positive)",
+      danger: "var(--danger)",
       transparent: "var(--transparent)",
       white: {
         transparent: "var(--white-transparent)",
@@ -50,8 +59,11 @@ const config: Config = {
         "3/7": "3/7",
       },
       gridTemplateColumns: {
-        "product-grid": "repeat(auto-fill, minmax(280px,1fr))",
+        "product-grid": "repeat(auto-fill, minmax(250px,1fr))",
         "brand-card-grid": "repeat(auto-fill, minmax(250px,1fr))",
+      },
+      gridTemplateRows: {
+        "product-grid": "repeat(auto-fill, minmax(405px,1fr))",
       },
     },
   },

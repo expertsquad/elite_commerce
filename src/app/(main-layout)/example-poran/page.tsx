@@ -4,7 +4,6 @@ import { fetchData } from "@/actions/fetchData";
 
 const ExampleRoute = async () => {
   const response = await fetchData({ route: "/brand" });
-  console.log(response?.data);
   return (
     <div>
       <Breadcrumb title="Smart Devices" elements={response?.data} />

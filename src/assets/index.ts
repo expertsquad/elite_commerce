@@ -1,5 +1,6 @@
 // shariful
 // brand test image
+import logo from "./Images/logo.svg";
 import brandTestImage from "./Images/brandTest.svg";
 import demoProductPhoto from "./Images/demoslkdf.svg";
 import testWidget from "./Images/demoProduct.svg";
@@ -16,14 +17,20 @@ import discoverPay from "./Images/paymentMehods/Method=Discover.svg";
 import mastercardPay from "./Images/paymentMehods/Method=Mastercard.svg";
 import securePayment from "./Images/paymentMehods/securePayment.svg";
 
-import freeShipping from "./Images/delivery-truck.svg";
-import headphone from "./Images/headphones.svg";
-import servicesImgFour from "./Images/servies-img-4.svg";
-import customerPayment from "./Images/shopping-bag.svg";
+import deliveryTruck from "./Images/delivery-truck.svg";
+import customerCare from "./Images/customer-care.svg";
+import moneyBack from "./Images/money-back.svg";
+import shoppingBag from "./Images/shopping-bag.svg";
 import messenger from "./Images/messenger.svg";
 import whatsapp from "./Images/whatsapp.svg";
 import gradientLine from "./Images/gradient-line.svg";
 import wave from "./Images/wave.svg";
+import cornerGolden from "./Images/corner-gold.svg";
+import cornerBlue from "./Images/corner-blue.svg";
+
+import demoIphone from "./Images/demoiphone.svg";
+import orderPlacedDesign from "./Images/orderplacedesign.svg";
+import orderPlacedDesign2 from "./Images/orderplaceddesign2.svg";
 export {
   brandTestImage,
   demoProductPhoto,
@@ -40,13 +47,19 @@ export {
   discoverPay,
   mastercardPay,
   securePayment,
-  freeShipping,
-  headphone,
-  servicesImgFour,
-  customerPayment,
+  deliveryTruck,
+  customerCare,
+  moneyBack,
+  shoppingBag,
   messenger,
   whatsapp,
   gradientLine,
   wave,
+  cornerGolden,
+  cornerBlue,
+  demoIphone,
+  logo,
+  orderPlacedDesign,
+  orderPlacedDesign2,
 };
 // add all the assets here

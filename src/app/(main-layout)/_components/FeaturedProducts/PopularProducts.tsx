@@ -1,16 +1,13 @@
+import ProductCard from "@/Components/ProductCard/ProductCard";
+import { IProduct } from "@/interfaces/product.interface";
 import React, { Fragment } from "react";
 
-const PopularProducts = () => {
+const PopularProducts = ({ products }: { products: IProduct[] }) => {
   return (
     <Fragment>
-      <div>3</div>
-      <div>3</div>
-      <div>3</div>
-      <div>3</div>
-      <div>3</div>
-      <div>3</div>
-      <div>3</div>
-      <div>3</div>
+      {products?.map((product: IProduct) => (
+        <ProductCard key={product?._id} product={product} />
+      ))}
     </Fragment>
   );
 };

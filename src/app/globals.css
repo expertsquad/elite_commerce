@@ -13,10 +13,11 @@ main {
 /* don't forget to add the color to the config file */
 :root {
   /* colors */
-  --primary: #294393 0.32%;
-  --primary-light: #04a4e6 102.21%;
-  --secondary: #fb8e48 0%;
-  --secondary-light: #cb380f 100%;
+  --primary: #294393;
+  --primary-light: #04a4e6;
+  --secondary: #fb8e48;
+  --secondary-light: #cb380f;
+  --danger: red;
   --positive: #119f5b;
   --transparent: transparent;
   --white: white;

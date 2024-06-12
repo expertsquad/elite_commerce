@@ -9,7 +9,6 @@ const RelatedProductsByCategory = async ({
 }: {
   categoryName: string;
 }) => {
-  console.log(categoryName);
   const response = await fetchData({
     route: `/product`,
     query: `category.categoryName=${categoryName}`,

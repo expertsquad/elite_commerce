@@ -1,6 +1,7 @@
 import React, { MouseEventHandler } from "react";
 
 type IButtonPrimary = {
+  buttonType?: "reset" | "submit" | undefined;
   children: React.ReactNode;
   buttonText?: string;
   className?: string;
@@ -8,6 +9,7 @@ type IButtonPrimary = {
 };
 
 const ButtonPrimary = ({
+  buttonType,
   buttonText,
   className,
   children,
@@ -15,8 +17,9 @@ const ButtonPrimary = ({
 }: IButtonPrimary) => {
   return (
     <button
+      type={buttonType}
       onClick={onClick}
-      className={`flex items-center justify-center gap-2.5 px-5 w-full py-3.5 hover:scale-105 transition-all bg-gradient-primary  text-white rounded-lg ${className}`}
+      className={`flex items-center justify-center gap-2.5 px-5 w-full py-3.5  bg-gradient-primary  text-white rounded-lg ${className}`}
     >
       {children}
       {buttonText}
