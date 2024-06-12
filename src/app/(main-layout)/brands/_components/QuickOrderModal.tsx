@@ -118,7 +118,7 @@ const QuickOrderModal = ({
       setShow={setShow}
       alignment="center"
       className="h-[800px] md:w-3/4 w-full  overflow-y-auto scrollbar-y-remove "
-      showCancelBtnINSmallDevice={show}
+      showCancelBtnINSmallDevice={true}
     >
       <div className="">
         <div className="flex justify-between gap-5 md:flex-row flex-col-reverse md:p-2 p-3.5 relative">

@@ -5,7 +5,6 @@ import Image from "next/image";
 import React from "react";
 
 const EditCommentModalContent = ({ comment }: any) => {
-  console.log(comment);
   let rating = 3;
   return (
     <div className="flex flex-col h-full">

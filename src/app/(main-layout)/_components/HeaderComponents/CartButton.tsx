@@ -13,7 +13,6 @@ import StarRating from "@/Components/StarRating";
 import Image from "next/image";
 import { demoProductPhoto } from "@/assets";
 import ButtonPrimary from "../../brands/_components/ButtonPrimary";
-import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import ButtonPrimaryLight from "../../brands/_components/ButtonPrimaryLight";
 import Link from "next/link";
 
