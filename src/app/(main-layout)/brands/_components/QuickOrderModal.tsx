@@ -117,7 +117,7 @@ const QuickOrderModal = ({
       show={show}
       setShow={setShow}
       alignment="center"
-      className="h-[800px] md:w-3/4 w-full  overflow-y-auto scrollbar-y-remove "
+      className="max-h-screen md:w-3/4 w-full overflow-hidden"
       showCancelBtnINSmallDevice={true}
     >
       <div className="">
@@ -179,7 +179,10 @@ const QuickOrderModal = ({
               </span>
             </div>
 
-            <form action="" className="mt-12 flex flex-col gap-[50px]">
+            <form
+              action=""
+              className="mt-12 flex flex-col gap-[50px] h-[calc(100%-450px)] overflow-auto"
+            >
               <div className="flex flex-col gap-5  ">
                 <div className="flex flex-col gap-2.5">
                   <label htmlFor="fullName">

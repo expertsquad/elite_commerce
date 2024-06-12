@@ -71,7 +71,7 @@ const Modal = ({
       >
         {/* close handler */}
         <Button
-          className={`absolute top-5 right-5 lg:top-6 lg:right-6 ${
+          className={`absolute top-5 right-5 lg:top-6 lg:right-6 z-50 ${
             showCancelBtnINSmallDevice ? "block" : "hidden"
           }`}
           onClick={handleClose}
