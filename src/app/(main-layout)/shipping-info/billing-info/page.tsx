@@ -1,9 +1,8 @@
-import React from "react";
-import ShippingInfoContent from "./_components/ShippingInfoContent";
-import ShippingAddess from "./_components/ShippingAddess";
 import { fetchProtectedData } from "@/actions/fetchData";
-import AddNewShippingAddress from "./_components/AddNewShippingAddress";
-import OrderItemsRightSection from "./_components/OrderItemsRightSection";
+import ShippingInfoContent from "../_components/ShippingInfoContent";
+import ShippingAddess from "../_components/ShippingAddess";
+import AddNewShippingAddress from "../_components/AddNewShippingAddress";
+import OrderItemsRightSection from "../_components/OrderItemsRightSection";
 
 const page = async () => {
   const defaultAddress = await fetchProtectedData({
