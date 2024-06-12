@@ -1,5 +1,5 @@
 import React from "react";
-import CustomInput from "../../profile/_components/CustomInput";
+import CustomInput from "../../../../Components/CustomInput";
 import { countryNames } from "@/constants/countryNames.constant";
 
 const AddNewShippingInputSection = () => {

@@ -1,6 +1,6 @@
 import { server_api } from "@/constants";
 import { revalidateTagAction } from "@/actions/revalidateTag";
-import CustomInput from "../_components/CustomInput";
+import CustomInput from "../../../../Components/CustomInput";
 
 const ServerAction = () => {
   async function addUserData(value: FormData) {

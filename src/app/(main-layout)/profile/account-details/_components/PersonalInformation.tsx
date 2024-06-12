@@ -1,5 +1,5 @@
 import { fetchProtectedData } from "@/actions/fetchData";
-import CustomInput from "../../_components/CustomInput";
+import CustomInput from "../../../../../Components/CustomInput";
 import { Button } from "@/Components/Buttons";
 
 const PersonalInformation = async () => {
