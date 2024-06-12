@@ -1,18 +1,20 @@
-import style from "./DealsOfTheDaySection.module.css";
+import { fetchData } from "@/actions/fetchData";
 import React from "react";
+import DealsOfTheDayCard from "./DealsOfTheDayCard";
 
-const DealsOfTheDaySection = () => {
+const DealsOfTheDaySection = async () => {
+  const dealsOfTheDay = await fetchData({
+    route: "/promotions/deals-of-the-day",
+  });
+  const firstDeal = dealsOfTheDay?.data?.firstDeal;
+  const secondDeal = dealsOfTheDay?.data?.secondDeal;
+  const deals = [firstDeal, secondDeal];
+
   return (
-    <div className="md:flex justify-around mt-5">
-      <div
-        className={`w-[clamp(250px,25vw,300px)] border h-96 mx-auto ${style?.cornerGold}`}
-      ></div>
-      <div
-        className={`w-[clamp(250px,25vw,300px)] border h-96 mx-auto ${style?.cornerBlue}`}
-      ></div>
-      <div
-        className={`w-[clamp(250px,25vw,300px)] border h-96 mx-auto ${style?.cornerGold}`}
-      ></div>
+    <div className="flex items-center md:flex-row flex-col justify-center gap-5 mt-5">
+      {deals?.map((deal, index) => {
+        return <DealsOfTheDayCard key={index} index={index} deal={deal} />;
+      })}
     </div>
   );
 };

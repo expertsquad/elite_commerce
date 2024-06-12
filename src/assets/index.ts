@@ -31,6 +31,7 @@ import cornerBlue from "./Images/corner-blue.svg";
 import demoIphone from "./Images/demoiphone.svg";
 import orderPlacedDesign from "./Images/orderplacedesign.svg";
 import orderPlacedDesign2 from "./Images/orderplaceddesign2.svg";
+import demoBrand from "./Images/demoBrandImg.svg";
 export {
   brandTestImage,
   demoProductPhoto,
@@ -61,5 +62,6 @@ export {
   logo,
   orderPlacedDesign,
   orderPlacedDesign2,
+  demoBrand,
 };
 // add all the assets here
