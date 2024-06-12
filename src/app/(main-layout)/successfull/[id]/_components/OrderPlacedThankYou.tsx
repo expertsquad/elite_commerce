@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const OrderPlacedThankYou = () => {
+const OrderPlacedThankYou = ({ id }: { id: string }) => {
   return (
     <div className="flex-1 bg-[#2943931A] bg-opacity-10 md:rounded-lg">
       <div className="flex items-center">
@@ -24,7 +24,10 @@ const OrderPlacedThankYou = () => {
             fermentum sed quis.
           </p>
           <button className="border-gradient-primary p-[1px] rounded-full mt-2.5">
-            <Link href={"/"} className="text-gradient-secondary px-4 py-2">
+            <Link
+              href={`/order-track/${id}`}
+              className="text-gradient-secondary px-4 py-2"
+            >
               TRACK YOUR ORDER
             </Link>
           </button>

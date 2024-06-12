@@ -26,8 +26,8 @@ const RelatedProductsByCategory = async ({
           See All
         </Link>
       </div>
-      <div className="flex items-center gap-x-2.5 md:gap-x-5 overflow-x-scroll scrollbar-x-remove">
-        {response?.data?.map((product: IProduct) => (
+      <div className="grid grid-cols-product-grid gap-2.5 md:gap-5 overflow-x-scroll scrollbar-x-remove">
+        {response?.data?.slice(0, 8)?.map((product: IProduct) => (
           <div key={product?._id} className="">
             <ProductCard product={product} />
           </div>
