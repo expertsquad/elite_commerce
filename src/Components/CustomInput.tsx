@@ -8,6 +8,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
   type,
   onChange,
   value,
+  defaultValue,
   name,
   readonly,
   label,
@@ -33,6 +34,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
           // disabled={disabled}
           type={type}
           onChange={onChange}
+          defaultValue={defaultValue}
           value={value}
           name={name}
           className={` required w-full border border-black-10  py-3  pr-4 focus:outline-none focus:border- rounded-md ${inputStyle} ${

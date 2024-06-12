@@ -8,6 +8,7 @@ export interface CustomInputProps {
   type?: "text" | "email" | "number";
   onChange?: (e: any) => void;
   value?: string | number | unknown | any;
+  defaultValue?: string | number | unknown | any;
   name?: string;
   readonly?: boolean;
   label?: string;
