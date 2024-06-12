@@ -13,7 +13,7 @@ import {
 
 const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
   return (
-    <div className="max-w-[370px] min-w-80 px-5 py-7 shadow-lg rounded-md hidden md:block">
+    <div className="max-w-[370px] min-w-80 px-5 py-7 shadow-lg rounded-md hidden md:block sticky top-20">
       <div className="flex items-center gap-x-4 mb-3">
         {productdata?.productPhotos?.map((photo, index) => (
           <div
@@ -47,7 +47,9 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
       <div className="flex items-center justify-between gap-x-5 mb-5">
         <div>
           <span className="text-sm text-black-80">Color</span>
-          <ProductVariantColor variants={productdata?.variants} />
+          <div className="flex items-center gap-x-2">
+            <ProductVariantColor variants={productdata?.variants} />
+          </div>
         </div>
         <div>
           <span className="text-sm text-black-80">Storage</span>
@@ -67,15 +69,15 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
       {/* == Price == */}
       <div className="flex items-center gap-x-2 mb-10">
         <span className="text-2xl font-bold text-gradient-primary">
-          ${productdata?.variants[0].discountPercentage}
+          ${productdata?.variants[0]?.discountPercentage}
         </span>
         <span className="text-black-50">|</span>
         <del className="text-base text-black-50">
-          ${productdata?.variants[0].sellingPrice}
+          ${productdata?.variants[0]?.sellingPrice}
         </del>
         <span className="text-black-50">|</span>
         <span className="text-sm text-gradient-secondary px-2 py-0.5 border border-black-10 rounded-full">
-          ${productdata?.variants[0].discountPercentage}% OFF
+          ${productdata?.variants[0]?.discountPercentage}% OFF
         </span>
       </div>
       {/* == Buy now, quick order and add to cart == */}
