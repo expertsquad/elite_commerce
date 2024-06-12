@@ -5,6 +5,8 @@ import React from "react";
 import Form from "../../../Components/Form";
 import CustomInput from "@/Components/CustomInput";
 import SubmitButton from "@/Components/SubmitButton";
+import { cookies } from "next/headers";
+import { permanentRedirect } from "next/navigation";
 
 const Page = () => {
   const handleSubmit = async (formData: FormData) => {
@@ -13,7 +15,11 @@ const Page = () => {
       route: "/user/login",
       data: formData,
     });
-    console.log(result);
+
+    if (result?.data?.accessToken) {
+      cookies().set("accessToken", result?.data?.accessToken);
+      permanentRedirect("/");
+    }
   };
   return (
     <div className="flex items-center justify-center h-full w-full relative">

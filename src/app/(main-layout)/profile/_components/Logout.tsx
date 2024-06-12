@@ -1,16 +1,31 @@
-import React from "react";
-import { profileNavMenu } from "@/constants/profileNavMenu.constants";
+"use client";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
-import Link from "next/link";
-import Logout from "./Logout";
+import { profileNavMenu } from "@/constants/profileNavMenu.constants";
+import React from "react";
 
-const ProfileNavMenu = () => {
+const Logout = () => {
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("/api/logout", {
+        method: "POST",
+      });
+      if (res.ok) {
+        // router.push('/login'); // Redirect to the login page
+        console.log("logout");
+      } else {
+        console.error("Failed to logout");
+      }
+    } catch (error) {
+      console.error("An error occurred while logging out:", error);
+    }
+  };
+
   return (
-    <div className="">
-      {profileNavMenu.slice(0, -1).map((item, index) => (
+    <>
+      {profileNavMenu.slice(-1).map((item, index) => (
         <div className="flex gap-5 w-full " key={index}>
-          <Link
-            href={item?.link}
+          <button
+            onClick={handleLogout}
             className="flex items-center gap-2 py-4 px-7 my-2 rounded-full group w-full hover:bg-gradient-primary-light"
           >
             <div className="w-6 h-6">
@@ -23,12 +38,11 @@ const ProfileNavMenu = () => {
             <span className="text-base group-hover:text-gradient-primary group-hover:font-bold  ml-3">
               {item.name}
             </span>
-          </Link>
+          </button>
         </div>
       ))}
-      <Logout />
-    </div>
+    </>
   );
 };
 
-export default ProfileNavMenu;
+export default Logout;
