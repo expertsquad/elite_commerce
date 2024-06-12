@@ -9,6 +9,7 @@ const ShippingInfoContent = async () => {
     <>
       {/* contact information here */}
       <div className="my-2">
+        {" "}
         <h3 className="uppercase text-lg font-semibold text-gradient-primary my-5 ">
           {" "}
           Contact Information

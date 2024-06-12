@@ -1,14 +1,10 @@
 "use client";
-import { ResponseShippingAddress } from "@/interfaces/defaultShippingAddress.interface";
 import React, { useState } from "react";
-import DefaultAddress from "./DefaultAddress";
-import AddNewShippingInputSection from "./AddNewShippingInputSection";
+import ShipToCard from "./ShipToCard";
+import AddNewShippingInputSection from "../../_components/AddNewShippingInputSection";
+import { GetMeApiRes } from "@/interfaces/getMe.interface";
 
-const ShippingAddess = ({
-  defaultAddress,
-}: {
-  defaultAddress: ResponseShippingAddress;
-}) => {
+const ShipToAndBillingSection = ({ getMe }: { getMe: GetMeApiRes }) => {
   const [selectedOption, setSelectedOption] = useState("addedAddress");
 
   const handleOptionChange = (event: any) => {
@@ -16,8 +12,8 @@ const ShippingAddess = ({
   };
 
   return (
-    <div className="p-7 border border-black-10 rounded-lg ">
-      <DefaultAddress defaultAddress={defaultAddress?.data?.[0]} />
+    <div className="">
+      <ShipToCard getMe={getMe} />
 
       {/* Radio button */}
       <div className="my-5 flex items-center justify-start gap-5">
@@ -73,4 +69,4 @@ const ShippingAddess = ({
   );
 };
 
-export default ShippingAddess;
+export default ShipToAndBillingSection;

@@ -3,26 +3,17 @@ import ShippingInfoContent from "../_components/ShippingInfoContent";
 import ShippingAddess from "../_components/ShippingAddess";
 import AddNewShippingAddress from "../_components/AddNewShippingAddress";
 import OrderItemsRightSection from "../_components/OrderItemsRightSection";
+import ShipToCard from "./_components/ShipToCard";
+import ShipToAndBillingSection from "./_components/ShipToAndBillingSection";
 
 const page = async () => {
-  const defaultAddress = await fetchProtectedData({
-    route: "/user-address/me",
-    query: "isDefault=true",
+  const getMe = await fetchProtectedData({
+    route: "/user/me",
   });
-
   return (
     <section className="max-w-7xl mx-auto flex w-full gap-5 flex-col md:flex-row mb-10">
       <div className="w-full">
-        <div className="">
-          {/* Name and email only */}
-          <ShippingInfoContent />
-          {/* shipping and shipping input section */}
-          {defaultAddress?.data?.length ? (
-            <ShippingAddess defaultAddress={defaultAddress} />
-          ) : (
-            <AddNewShippingAddress />
-          )}
-        </div>
+        <ShipToAndBillingSection getMe={getMe} />
       </div>
 
       <div className="">
