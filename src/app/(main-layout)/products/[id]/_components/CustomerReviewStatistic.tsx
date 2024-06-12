@@ -17,7 +17,7 @@ const CustomerReviewStatistic = ({
     <div className="my-6">
       <div className="flex items-center gap-x-4 mb-5">
         <span className="text-4xl md:text-6xl font-bold">
-          {averageRating.toFixed(2)}
+          {averageRating?.toFixed(2)}
         </span>
         <div className="flex flex-col gap-y-2">
           <StarRating rating={averageRating} />

@@ -143,3 +143,17 @@ main {
 /* * {
   outline: red 1px solid;
 } */
+
+/* ==Order item data responsive== */
+.order-item-data {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .md\:order-item-data {
+    display: grid;
+    grid-template-columns: 2.5fr 0.7fr 0.5fr 0.7fr 0.2fr;
+    grid-gap: 5px;
+    align-items: center;
+  }
+}
