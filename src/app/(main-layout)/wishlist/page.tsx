@@ -7,21 +7,20 @@ import {
   IconShoppingCart,
   IconX,
 } from "@tabler/icons-react";
-import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
+
 import Image from "next/image";
 import { demoProductPhoto } from "@/assets";
 import StarRating from "@/Components/StarRating";
 import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
-import ButtonPrimary from "../brands/_components/ButtonPrimary";
 
 export const WishlistItem = () => {
   return (
     <tr>
       <td className="px-5 border border-black-10 border-collapse">
-        <span>
+        <button>
           {" "}
           <IconX color="#FF3838" />
-        </span>
+        </button>
       </td>
       <td className="border border-black-10 border-collapse px-5 py-6">
         <div className="flex gap-5">
@@ -111,7 +110,7 @@ const Wishlist = () => {
               </tr>
             </thead>
             <tbody>
-              {[...Array(10)].map((td, index) => {
+              {[...Array(5)].map((td, index) => {
                 return <WishlistItem key={index} />;
               })}
             </tbody>
@@ -125,7 +124,7 @@ const Wishlist = () => {
             ← BACK TO SHOPPING
           </Link>
           <Link
-            href={"/"}
+            href={"/cart"}
             className="py-4 bg-gradient-primary-light px-5 rounded flex items-center justify-center text-base gap-[5px] whitespace-nowrap"
           >
             <IconShoppingCart color="#24509E" width={20} height={20} /> GO TO

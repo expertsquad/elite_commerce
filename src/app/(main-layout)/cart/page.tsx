@@ -8,6 +8,7 @@ import { IconBolt, IconX } from "@tabler/icons-react";
 import ButtonPrimary from "../brands/_components/ButtonPrimary";
 import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
 import Link from "next/link";
+import ProductCard from "@/Components/ProductCard/ProductCard";
 
 export const CartItem = () => {
   return (
@@ -145,6 +146,16 @@ const CartView = () => {
                 </Link>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="mt-10 flex flex-col gap-7">
+          <span className="font-semibold text-2xl">
+            You May be Interested in...
+          </span>
+          <div className="flex items-center gap-5 overflow-y-auto scrollbar-x-remove">
+            {[...Array(10)].map((product, index) => {
+              return <ProductCard key={index} />;
+            })}
           </div>
         </div>
       </div>

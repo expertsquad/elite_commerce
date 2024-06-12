@@ -47,7 +47,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         </div>
       </div>
       <div className="absolute flex gap-3 items-center top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 opacity-0 md:group-hover:opacity-100 transition-all duration-300">
-        <QuickViewButton />
+        <QuickViewButton product={product} />
         <QuickOrderButton />
       </div>
     </div>

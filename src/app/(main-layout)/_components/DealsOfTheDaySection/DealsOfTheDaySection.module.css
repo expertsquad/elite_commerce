@@ -1,8 +1,10 @@
 .cornerGold {
   background: url("../../../../assets/Images/corner-gold.svg");
+
   background-repeat: no-repeat;
   background-position: top right;
 }
+
 .cornerBlue {
   background: url("../../../../assets/Images/corner-blue.svg");
   background-repeat: no-repeat;
