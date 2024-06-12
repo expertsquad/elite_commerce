@@ -4,10 +4,12 @@ export const Button = ({
   children,
   className,
   onClick,
+  disabled,
 }: {
   children: React.ReactNode;
   className?: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
 }) => {
   const classes = `flex items-center justify-center gap-2 ${className}`;
   // if handler exist then return button with onClick
@@ -20,7 +22,11 @@ export const Button = ({
     // if handler does not exist then return button with type submit
   } else {
     return (
-      <button className={classes} type="submit">
+      <button
+        className={`${classes} ${disabled && "opacity-50"}`}
+        type="submit"
+        disabled={disabled}
+      >
         {children}
       </button>
     );
