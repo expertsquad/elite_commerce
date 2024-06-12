@@ -1,6 +1,7 @@
 import { Button } from "@/Components/Buttons";
 import CustomInput from "@/Components/CustomInput";
 import FileUploader from "@/Components/FileUploder";
+import { postDataMutation } from "@/actions/postDataMutation";
 import Logo from "@/utils/Logo";
 import Link from "next/link";
 import React from "react";
@@ -8,7 +9,12 @@ import React from "react";
 const Page = () => {
   const handleSubmit = async (formData: FormData) => {
     "use server";
-    console.log(formData);
+
+    const result = await postDataMutation({
+      route: "/user/login",
+      data: formData,
+    });
+    console.log(result);
   };
   return (
     <div className="flex items-center justify-center h-full w-full">

@@ -8,14 +8,12 @@ import { useState } from "react";
 const FileUploader = ({
   name,
   url,
-  onChange,
   multiple = false,
   accept,
   maxSize,
   error,
   className,
   disabled,
-  children,
   bottomText,
   uid = 1,
 }: IFileUploaderProps) => {
