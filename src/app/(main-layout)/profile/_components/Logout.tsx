@@ -1,17 +1,18 @@
 "use client";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import { profileNavMenu } from "@/constants/profileNavMenu.constants";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Logout = () => {
+  const router = useRouter();
   const handleLogout = async () => {
     try {
       const res = await fetch("/api/logout", {
         method: "POST",
       });
       if (res.ok) {
-        // router.push('/login'); // Redirect to the login page
-        console.log("logout");
+        router.push("/login"); // Redirect to the login page
       } else {
         console.error("Failed to logout");
       }
