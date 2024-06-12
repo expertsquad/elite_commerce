@@ -1,10 +1,7 @@
 import { fetchProtectedData } from "@/actions/fetchData";
-import ShippingInfoContent from "../_components/ShippingInfoContent";
-import ShippingAddess from "../_components/ShippingAddess";
-import AddNewShippingAddress from "../_components/AddNewShippingAddress";
 import OrderItemsRightSection from "../_components/OrderItemsRightSection";
-import ShipToCard from "./_components/ShipToCard";
 import ShipToAndBillingSection from "./_components/ShipToAndBillingSection";
+import PaymentOption from "./_components/PaymentOption";
 
 const page = async () => {
   const getMe = await fetchProtectedData({
@@ -13,7 +10,10 @@ const page = async () => {
   return (
     <section className="max-w-7xl mx-auto flex w-full gap-5 flex-col md:flex-row mb-10">
       <div className="w-full">
+        {/* Contact Information and added shipping info */}
         <ShipToAndBillingSection getMe={getMe} />
+        {/* Choose payment option  */}
+        <PaymentOption />
       </div>
 
       <div className="">

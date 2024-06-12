@@ -7,7 +7,7 @@ import { GetMeApiRes } from "@/interfaces/getMe.interface";
 
 const ShipToCard = ({ getMe }: { getMe: GetMeApiRes }) => {
   return (
-    <div className="border border-black-10 p-7 rounded-lg">
+    <div className="">
       <h3 className="uppercase text-lg font-semibold text-gradient-primary my-3 ">
         {" "}
         Contact Information
@@ -17,11 +17,11 @@ const ShipToCard = ({ getMe }: { getMe: GetMeApiRes }) => {
         <div className=" ">
           <div className="flex items-center justify-between  gap-2 border-b border-black-10 py-2">
             <div className="flex lg:flex-row flex-col gap-2 lg:justify-between justify-start">
-              <small className="flex items-center justify-center text-base  gap-2">
+              <small className="flex items-center justify-center text-sm  gap-2">
                 Email:{" "}
                 <p className="text-base text-black-80"> {getMe?.data?.email}</p>
               </small>
-              <small className="flex items-center justify-center text-base  gap-2">
+              <small className="flex items-center justify-center text-sm  gap-2">
                 Phone:{" "}
                 <p className="text-base text-black-80">
                   {" "}
