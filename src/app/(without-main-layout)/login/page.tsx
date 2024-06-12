@@ -1,5 +1,6 @@
 import { Button } from "@/Components/Buttons";
 import CustomInput from "@/Components/CustomInput";
+import FileUploader from "@/Components/FileUploder";
 import Logo from "@/utils/Logo";
 import Link from "next/link";
 import React from "react";

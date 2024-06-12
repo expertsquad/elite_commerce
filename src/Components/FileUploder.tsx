@@ -3,10 +3,11 @@ import { server_url } from "@/constants";
 import { IFileUploaderProps } from "@/interfaces/fileUploader.interface";
 import { IconPhotoPlus } from "@tabler/icons-react";
 import Image from "next/image";
+import { useState } from "react";
 
 const FileUploader = ({
   name,
-  data,
+  url,
   onChange,
   multiple = false,
   accept,
@@ -18,24 +19,7 @@ const FileUploader = ({
   bottomText,
   uid = 1,
 }: IFileUploaderProps) => {
-  let url;
-  if (typeof data === "string") {
-    url = data && !data?.includes("blob:http") ? `${server_url}${data}` : data;
-  } else {
-    const index = Number(uid) - 1;
-    const fieldName =
-      name === "seo.metaPhoto" ? data?.seo?.metaPhoto : data?.[name];
-    // check if fieldName is an array, if so, get the item at the index, otherwise use the uid if it's not 1, or the fieldName as a string
-    const path = Array.isArray(fieldName)
-      ? (fieldName[index] as string)
-      : uid !== 1
-      ? ""
-      : (fieldName as string);
-
-    // check if the file path is a valid URL, if not, use the default path
-    url = path && !path?.includes("blob:http") ? `${server_url}${path}` : path;
-  }
-
+  const [newPhoto, setNewPhoto] = useState("");
   const checkSizeAndHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (
       maxSize &&
@@ -45,30 +29,38 @@ const FileUploader = ({
       alert(`File size should be less than ${maxSize} MB`);
       return;
     }
-    if (onChange) {
-      onChange(e);
+    if (e.target.files?.length) {
+      const newUrl = URL.createObjectURL(e.target.files[0]);
+      setNewPhoto(newUrl);
     }
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center">
-      <label className={className}>
+    <div
+      className={`w-full h-full flex flex-col items-center justify-center relative bg-positive ${className}`}
+    >
+      <label
+        className={`flex flex-col justify-center items-center h-full w-full`}
+      >
         {/* check if data exist or children exist, if so, render the corresponding content */}
-        {url ? (
-          <Image src={url} alt={name} fill className="inset-0 object-cover" />
-        ) : children ? (
-          <span className="flex flex-col items-center justify-center">
-            {children}
-            {maxSize && (
-              <small className="text-gray-500">
-                Max size: <span className="text-orange-700"> {maxSize} MB</span>
-              </small>
-            )}
-          </span>
+        {newPhoto ? (
+          <Image
+            src={newPhoto}
+            alt={name}
+            fill
+            className="inset-0 object-cover"
+          />
+        ) : url ? (
+          <Image
+            src={server_url + url}
+            alt={name}
+            fill
+            className="inset-0 object-cover"
+          />
         ) : (
           <>
             <IconPhotoPlus width={30} height={30} stroke={1} />
-            <span className="flex flex-col text-center">
+            <span className="flex flex-col text-center text-sm">
               <span>Select Your Image</span>
               {maxSize && (
                 <small className="text-gray-500">

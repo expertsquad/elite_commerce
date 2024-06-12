@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export interface IFileUploaderProps {
   name: string;
-  data: Record<string, any> | string;
+  url?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   accept?: string;
