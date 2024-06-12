@@ -9,7 +9,6 @@ import SubmitButton from "@/Components/SubmitButton";
 const Page = () => {
   const handleSubmit = async (formData: FormData) => {
     "use server";
-
     const result = await postDataMutation({
       route: "/user/login",
       data: formData,

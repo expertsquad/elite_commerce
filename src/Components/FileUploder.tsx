@@ -35,7 +35,7 @@ const FileUploader = ({
 
   return (
     <div
-      className={`w-full h-full flex flex-col items-center justify-center relative bg-positive ${className}`}
+      className={`w-full h-full flex flex-col items-center justify-center relative ${className}`}
     >
       <label
         className={`flex flex-col justify-center items-center h-full w-full`}
