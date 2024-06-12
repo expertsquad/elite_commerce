@@ -17,9 +17,6 @@ const ReviewCard = async ({
   orderStatus: string;
   orderId?: string;
 }) => {
-  console.log(orderId);
-  console.log(orderItem);
-
   const comments = await fetchData({
     route: "/review",
     query: `product.productId=${orderItem?.productId}&orderId=${orderId}`,
@@ -54,17 +51,28 @@ const ReviewCard = async ({
             <p>{dateFormat(createdAt)}</p>
           </div>
           <ButtonSection
+            comment={comments?.data?.length && comments?.data[0]}
             isReviewed={orderItem?.isReviewed}
             orderStatus={orderStatus}
           />
         </div>
       </div>
-      <div className="border-b border-black-10 py-5">
-        <div className="my-4">
-          <StarRating rating={comments?.data[0]?.rating} />
+      {comments?.data?.length && (
+        <div className="border-b border-black-10 py-5">
+          <div className="my-4">
+            <StarRating rating={comments?.data[0]?.rating} />
+          </div>
+          <p>{comments?.data[0]?.comment}</p>
+          <div>
+            <Image
+              src="/images/product-image.png"
+              width={60}
+              height={60}
+              alt="Review Image"
+            />
+          </div>
         </div>
-        <p>{comments?.data[0]?.comment}</p>
-      </div>
+      )}
     </>
   );
 };

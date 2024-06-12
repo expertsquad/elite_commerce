@@ -7,8 +7,6 @@ const PersonalInformation = async () => {
     route: "/user/me",
   });
 
-  console.log(getMe);
-
   return (
     <div>
       <h3 className="[font-size:_clamp(1em,5vw,1.5em)] font-semibold text-gradient-primary my-7 ">
