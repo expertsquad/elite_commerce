@@ -27,10 +27,10 @@ const BottomSmallBanner = ({
       }}
     >
       <div className="flex flex-col gap-5">
-        <h2 className="[font-size:_clamp(1.2em,2.5vw,0.1.6em)] line-clamp-1">
+        <h2 className="[font-size:_clamp(1.2em,2.60vw,1.6em)] line-clamp-1">
           {bottomOffer?.offerTag}
         </h2>
-        <h2 className="  line-clamp-1 [font-size:_clamp(0.8em,2.5vw,1em)]">
+        <h2 className="  line-clamp-1 [font-size:_clamp(0.8em,60vw,1em)]">
           {bottomOffer?.title}
         </h2>
 

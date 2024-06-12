@@ -12,7 +12,7 @@ const page = async () => {
   });
 
   return (
-    <section className="max-w-7xl mx-auto flex w-full gap-5 flex-col md:flex-row mb-10">
+    <section className=" p-5 lg:p-0 max-w-7xl mx-auto flex w-full gap-5 flex-col md:flex-row mb-10">
       <div className="w-full">
         <div className="">
           {/* Name and email only */}

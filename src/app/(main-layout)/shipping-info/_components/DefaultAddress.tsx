@@ -6,7 +6,6 @@ const DefaultAddress = ({
 }: {
   defaultAddress: AddressData;
 }) => {
-  console.log(defaultAddress);
   return (
     <div className="flex items-start justify-start gap-3 flex-col p-5 border border-black-10 rounded-lg">
       <strong>

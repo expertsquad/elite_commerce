@@ -1,6 +1,6 @@
 import { fetchProtectedData } from "@/actions/fetchData";
-import CustomInput from "../../../../../Components/CustomInput";
 import { Button } from "@/Components/Buttons";
+import CustomInput from "@/Components/CustomInput";
 
 const PersonalInformation = async () => {
   const getMe = await fetchProtectedData({

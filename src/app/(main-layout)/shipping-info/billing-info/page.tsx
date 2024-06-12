@@ -1,28 +1,19 @@
 import { fetchProtectedData } from "@/actions/fetchData";
-import ShippingInfoContent from "../_components/ShippingInfoContent";
-import ShippingAddess from "../_components/ShippingAddess";
-import AddNewShippingAddress from "../_components/AddNewShippingAddress";
 import OrderItemsRightSection from "../_components/OrderItemsRightSection";
+import ShipToAndBillingSection from "./_components/ShipToAndBillingSection";
+import PaymentOption from "./_components/PaymentOption";
 
 const page = async () => {
-  const defaultAddress = await fetchProtectedData({
-    route: "/user-address/me",
-    query: "isDefault=true",
+  const getMe = await fetchProtectedData({
+    route: "/user/me",
   });
-
   return (
-    <section className="max-w-7xl mx-auto flex w-full gap-5 flex-col md:flex-row mb-10">
+    <section className="p-5 lg:p-0 max-w-7xl mx-auto flex w-full gap-5 flex-col md:flex-row mb-10">
       <div className="w-full">
-        <div className="">
-          {/* Name and email only */}
-          <ShippingInfoContent />
-          {/* shipping and shipping input section */}
-          {defaultAddress?.data?.length ? (
-            <ShippingAddess defaultAddress={defaultAddress} />
-          ) : (
-            <AddNewShippingAddress />
-          )}
-        </div>
+        {/* Contact Information and added shipping info */}
+        <ShipToAndBillingSection getMe={getMe} />
+        {/* Choose payment option  */}
+        <PaymentOption />
       </div>
 
       <div className="">

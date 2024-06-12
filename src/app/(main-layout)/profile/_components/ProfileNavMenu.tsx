@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const ProfileNavMenu = () => {
   return (
-    <div>
+    <div className="">
       {profileNavMenu.map((item, index) => (
         <div className="flex gap-5 w-full " key={index}>
           <Link
