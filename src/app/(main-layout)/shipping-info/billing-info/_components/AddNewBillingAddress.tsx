@@ -1,4 +1,4 @@
-import CustomInput from "@/app/(main-layout)/profile/_components/CustomInput";
+import CustomInput from "@/Components/CustomInput";
 import { countryNames } from "@/constants/countryNames.constant";
 
 const AddNewBillingAddress = () => {
