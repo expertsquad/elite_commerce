@@ -9,6 +9,8 @@ const OrderCancelModal = ({ id }: { id: string }) => {
   const [reason, setReason] = useState("");
   const [comment, setComment] = useState("");
 
+  console.log(reason, comment);
+
   return (
     <div>
       <button onClick={() => setShow(true)} className="">
@@ -39,8 +41,8 @@ const OrderCancelModal = ({ id }: { id: string }) => {
                 className={`group w-full border border-black-10 mt-2 py-3 px-3 rounded-lg outline-none mb-7`}
                 name="reason"
                 id="cancelation reason"
-                //   value={cancelReason}
-                //   onChange={(e) => setCancelReason(e.target.value)}
+                value={reason}
+                onChange={(e) => setReason(e.target.value)}
               >
                 {[
                   "Select Reason",
