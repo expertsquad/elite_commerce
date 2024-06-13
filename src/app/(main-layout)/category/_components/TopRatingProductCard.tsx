@@ -5,33 +5,18 @@ import { IProduct } from "@/interfaces/product.interface";
 import Image from "next/image";
 import React from "react";
 
-type TopRatingProductProps = {
-  image?: string;
-  productName?: string;
-  sellingPrice?: number;
-  discountedPrice?: number;
-  rating?: number;
+type ITopRatingProductProps = {
+  products: IProduct[];
 };
 
-const TopRatingProductCard = async ({
-  discountedPrice,
-  image,
-  productName,
-  rating,
-  sellingPrice,
-}: TopRatingProductProps) => {
-  const response = await fetchData({
-    route: "/product",
-    limit: 5,
-    query: "sortBy=averageRating",
-  });
+const TopRatingProductCard = ({ products }: ITopRatingProductProps) => {
   return (
     <div>
       <h2 className="mb-5 md:mb-[30px] font-bold text-lg uppercase whitespace-nowrap">
         Top 05 Ratings Product
       </h2>
       <div className="flex flex-col gap-y-3">
-        {response?.data?.map((product: IProduct) => (
+        {products?.map((product: IProduct) => (
           <div
             className="flex items-center hover:bg-gradient-primary-light"
             key={product?._id}
@@ -62,7 +47,7 @@ const TopRatingProductCard = async ({
                 </small>
               </div>
               <div>
-                <StarRating rating={product?.averageRating} />
+                <StarRating rating={product?.averageRating || 0} />
               </div>
             </div>
           </div>

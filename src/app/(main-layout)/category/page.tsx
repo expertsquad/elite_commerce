@@ -2,7 +2,7 @@ import React from "react";
 import ProductCard from "../../../Components/ProductCard/ProductCard";
 import { fetchData } from "@/actions/fetchData";
 import { IProduct } from "@/interfaces/product.interface";
-import FilterBySelection from "./_components/FilterBySelection";
+import SortingSection from "./_components/FilterBySelection";
 
 export async function generateMetadata() {
   return {
@@ -20,7 +20,7 @@ const CategoryPage = async () => {
           <span>{response?.meta?.total} Items result found - </span>
         </div>
         <div className="hidden md:block">
-          <FilterBySelection />
+          <SortingSection />
         </div>
       </div>
       <div className="grid grid-cols-product-grid gap-5 place-items-center">

@@ -1,5 +1,5 @@
 import React from "react";
-import FilterBySelection from "../../category/_components/FilterBySelection";
+import SortingSection from "../../category/_components/FilterBySelection";
 import FilterModal from "../../category/_components/FilterModal";
 
 const Layout = ({
@@ -13,7 +13,7 @@ const Layout = ({
     <div>
       <div className="mx-auto max-w-7xl px-5">
         <div className="flex items-center justify-between md:hidden">
-          <FilterBySelection />
+          <SortingSection />
           <FilterModal filter={brandFilter} />
         </div>
         <div className=" gap-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 mx-auto max-w-7xl">

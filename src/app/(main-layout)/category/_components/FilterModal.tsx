@@ -2,10 +2,14 @@
 import Modal from "@/Components/Modal";
 import { IconFilter } from "@tabler/icons-react";
 import React, { useState } from "react";
+import FilteringSection, { IFilteringSectionProps } from "./FilteringSection";
 
-const FilterModal = ({ filter }: { filter: React.ReactNode }) => {
+const FilterModal = ({
+  categories,
+  products,
+  brands,
+}: IFilteringSectionProps) => {
   const [show, setShow] = useState(false);
-
   return (
     <div>
       <button
@@ -24,7 +28,11 @@ const FilterModal = ({ filter }: { filter: React.ReactNode }) => {
           alignment="left"
           className="overflow-y-scroll p-3 w-[clamp(250px,80vw,350px)] md:hidden"
         >
-          {filter}
+          <FilteringSection
+            categories={categories}
+            products={products}
+            brands={brands}
+          />
         </Modal>
       )}
     </div>
