@@ -5,23 +5,31 @@ import React from "react";
 import Form from "../../../Components/Form";
 import CustomInput from "@/Components/CustomInput";
 import SubmitButton from "@/Components/SubmitButton";
+import { cookies } from "next/headers";
+import { permanentRedirect } from "next/navigation";
 
 const Page = () => {
   const handleSubmit = async (formData: FormData) => {
     "use server";
-
     const result = await postDataMutation({
       route: "/user/login",
       data: formData,
     });
-    console.log(result);
+
+    if (result?.data?.accessToken) {
+      cookies().set("accessToken", result?.data?.accessToken);
+      permanentRedirect("/");
+    }
   };
   return (
     <div className="flex items-center justify-center h-full w-full relative">
       <div className="w-[clamp(350px,90vw,450px)] bg-white border border-black-10 aspect-square flex flex-col items-center justify-center gap-3">
         <Logo />
         <p>Best Online ecommerce website for you</p>
-        <Form handleSubmit={handleSubmit}>
+        <Form
+          handleSubmit={handleSubmit}
+          className="w-full flex items-start justify-center"
+        >
           <fieldset className="w-3/4 flex flex-col gap-3 border-t border-black-10">
             <legend className="mx-auto">Log in</legend>
 
@@ -32,7 +40,9 @@ const Page = () => {
               className={
                 "bg-gradient-primary w-full py-1 text-white rounded-md"
               }
-            />
+            >
+              Login
+            </SubmitButton>
             <div className="flex mx-auto gap-2 text-xs">
               <input type="checkbox" id="expandDate" name="isDayExtended" />
               <label htmlFor="expandDate">Remember me for 30 days</label>

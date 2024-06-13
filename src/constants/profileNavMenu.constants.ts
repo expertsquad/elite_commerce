@@ -35,7 +35,7 @@ export const profileNavMenu = [
   },
   {
     name: "Logout",
-    link: "/profile/logout",
+    link: "",
     icon: IconLogout,
   },
 ];
