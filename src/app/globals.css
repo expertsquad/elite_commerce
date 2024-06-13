@@ -153,3 +153,16 @@ main {
     align-items: center;
   }
 }
+/* ==Cart item data responsive== */
+.cart-item-data {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .md\:cart-item-data {
+    display: grid;
+    grid-template-columns: 2fr 0.7fr 0.5fr 0.7fr 0.2fr;
+    grid-gap: 5px;
+    align-items: center;
+  }
+}

@@ -45,7 +45,7 @@ const ProductImageSlider = ({
     return () => {
       stopSlideshow();
     };
-  }, [isHovered, product.productPhotos.length]);
+  }, [isHovered, product?.productPhotos?.length]);
 
   const showSlide = (index: number) => {
     return { display: index === currentSlide ? "block" : "none" };
