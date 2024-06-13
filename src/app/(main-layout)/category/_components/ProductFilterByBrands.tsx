@@ -4,15 +4,14 @@ import { IBrand } from "@/interfaces/brand.interface";
 import Image from "next/image";
 import React from "react";
 
-const ProductFilterByBrands = async () => {
-  const response = await fetchData({ route: "/brand", limit: 10 });
+const ProductFilterByBrandsSection = ({ brands }: { brands: IBrand[] }) => {
   return (
     <div>
       <h2 className="mb-5 md:mb-[30px] font-bold text-lg md:text-2xl uppercase whitespace-nowrap">
         BRANDS
       </h2>
       <div className="flex flex-col gap-y-3">
-        {response?.data?.map((brand: IBrand) => (
+        {brands?.map((brand: IBrand) => (
           <div key={brand?._id} className="flex items-center gap-x-2.5">
             <input
               type="checkbox"
@@ -37,4 +36,4 @@ const ProductFilterByBrands = async () => {
   );
 };
 
-export default ProductFilterByBrands;
+export default ProductFilterByBrandsSection;

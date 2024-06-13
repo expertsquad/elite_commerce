@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-const FilterBySelection = () => {
+const SortingSection = () => {
   const [selected, setSelected] = useState("MostPopular");
   return (
     <div className="border border-black-10 px-3 rounded-md">
@@ -20,4 +20,4 @@ const FilterBySelection = () => {
   );
 };
 
-export default FilterBySelection;
+export default SortingSection;

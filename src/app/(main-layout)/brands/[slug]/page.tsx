@@ -1,6 +1,6 @@
 import { fetchData } from "@/actions/fetchData";
 import React from "react";
-import FilterBySelection from "../../category/_components/FilterBySelection";
+import SortingSection from "../../category/_components/FilterBySelection";
 import { IProduct } from "@/interfaces/product.interface";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 
@@ -17,7 +17,7 @@ const BrandPage = async ({ params }: { params: { slug: string } }) => {
           <span>{response?.meta?.total} Items result found - </span>
         </div>
         <div className="hidden md:block">
-          <FilterBySelection />
+          <SortingSection />
         </div>
       </div>
       <div className="grid grid-cols-product-grid gap-5 place-items-center">
