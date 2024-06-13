@@ -33,7 +33,7 @@ const Brand = async ({ params }: { params: { page: number } }) => {
               }
             )}
           </div>
-          <div>
+          <div className="my-10">
             {totalPages > 1 && (
               <Pagination
                 totalPages={totalPages}
