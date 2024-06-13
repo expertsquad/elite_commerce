@@ -35,13 +35,13 @@ const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
       </Button>
       <ul className="flex flex-col">
         {subcategories &&
-          subcategories.map((subcategory) => (
+          subcategories?.map((subcategory) => (
             <li
-              key={subcategory.subcategoryId}
+              key={subcategory?.subcategoryId}
               className="hover:bg-gradient-primary hover:text-white flex items-center justify-between group/category"
             >
               <Link
-                href={"/subcategory/" + subcategory.subcategoryId}
+                href={"/subcategory/" + subcategory.subcategoryName}
                 className="py-3 px-2 flex w-full"
                 onClick={() => setShowMenu(false)}
               >
@@ -73,7 +73,7 @@ const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
             className="hover:bg-gradient-primary hover:text-white flex items-center justify-between group/category"
           >
             <Link
-              href={"/category/" + category._id}
+              href={"/category/" + category?.categoryName}
               className={`py-3 px-2 flex ${
                 category?.subcategories?.length ? "basis-10/12" : "basis-full"
               }`}
