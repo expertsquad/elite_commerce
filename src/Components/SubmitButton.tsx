@@ -1,15 +1,15 @@
 "use client";
 
-import { Button } from "@/Components/Buttons";
+import { Button, IButtonProps } from "@/Components/Buttons";
 import React from "react";
 import { useFormStatus } from "react-dom";
 
-const SubmitButton = ({ ...props }) => {
+const SubmitButton = ({ children, ...props }: IButtonProps) => {
   const { pending } = useFormStatus();
 
   return (
     <Button {...props} disabled={pending}>
-      Login
+      {children}
     </Button>
   );
 };

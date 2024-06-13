@@ -1,16 +1,17 @@
 import { MouseEventHandler } from "react";
 
+export interface IButtonProps {
+  children: React.ReactNode;
+  className?: string;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
+}
 export const Button = ({
   children,
   className,
   onClick,
   disabled,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  disabled?: boolean;
-}) => {
+}: IButtonProps) => {
   const classes = `flex items-center justify-center gap-2 ${className}`;
   // if handler exist then return button with onClick
   if (onClick) {
