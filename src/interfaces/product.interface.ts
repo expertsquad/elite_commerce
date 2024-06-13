@@ -30,18 +30,7 @@ export interface IProduct {
   };
   activityStatus: boolean;
   productPhotos: Array<string>;
-  variants: Array<{
-    isDefault: boolean;
-    variantName: string;
-    variantPhotos: string[];
-    inStock: number;
-    soldQuantity?: number;
-    stockAlert: number;
-    buyingPrice: number;
-    sellingPrice: number;
-    discountPercentage?: number;
-    discountedPrice?: number;
-  }>;
+  variants: Array<IProductVariant>;
   series?: string;
   productModel?: string;
   videoLink: string;
@@ -66,4 +55,12 @@ export interface IProduct {
     minOrder: number;
     discount: number;
   };
+}
+
+export interface ICartProduct extends IProduct {
+  brandName: string;
+  variant: IProductVariant;
+  orderQuantity: number;
+  productPhoto: string;
+  productId: string;
 }
