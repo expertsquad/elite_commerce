@@ -2,11 +2,12 @@ import React from "react";
 import { profileNavMenu } from "@/constants/profileNavMenu.constants";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import Link from "next/link";
+import Logout from "./Logout";
 
 const ProfileNavMenu = () => {
   return (
     <div className="">
-      {profileNavMenu.map((item, index) => (
+      {profileNavMenu.slice(0, -1).map((item, index) => (
         <div className="flex gap-5 w-full " key={index}>
           <Link
             href={item?.link}
@@ -25,6 +26,7 @@ const ProfileNavMenu = () => {
           </Link>
         </div>
       ))}
+      <Logout />
     </div>
   );
 };

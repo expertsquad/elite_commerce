@@ -4,17 +4,19 @@ import { server_api } from "@/constants";
 import { cookies } from "next/headers";
 
 // use this for ssg and isr
-export const postDataMutation = async ({
+export const updateDataMutation = async ({
   route,
   dataType = "json",
   //   set format value true if you don't want format here
   formatted = false,
   data,
+  method = "PATCH",
 }: {
   route: string;
   dataType?: "json" | "formData";
   formatted?: boolean;
   data: string | FormData;
+  method: "PATCH" | "PUT" | "POST";
 }) => {
   try {
     const accessToken = cookies().get("accessToken")?.value;
@@ -59,7 +61,7 @@ export const postDataMutation = async ({
 
     // make api request
     const res = await fetch(server_api + route, {
-      method: "POST",
+      method,
       headers,
       body: structuredData,
     });
