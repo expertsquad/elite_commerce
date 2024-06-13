@@ -5,6 +5,7 @@ import Image from "next/image";
 import ButtonSection from "./ButtonSection";
 import { fetchData } from "@/actions/fetchData";
 import StarRating from "@/Components/StarRating";
+import { postDataMutation } from "@/actions/postDataMutation";
 
 const ReviewCard = async ({
   orderId,
@@ -15,14 +16,32 @@ const ReviewCard = async ({
   orderItem: OrderItem;
   createdAt: string;
   orderStatus: string;
-  orderId?: string;
+  orderId: string;
 }) => {
   const comments = await fetchData({
     route: "/review",
     query: `product.productId=${orderItem?.productId}&orderId=${orderId}`,
   });
 
-  console.log(comments);
+  // add comment submit action
+
+  const addCommentSubmitAction = async (
+    productId: string,
+    orderId: string,
+    rating: number,
+    formData: FormData
+  ) => {
+    "use server";
+    formData.set("productId", productId);
+    formData.set("orderId", orderId);
+    formData.set("rating", rating);
+
+    const result = await postDataMutation({
+      route: "/review/add",
+      data: formData,
+    });
+    console.log(result);
+  };
 
   return (
     <>
@@ -54,6 +73,9 @@ const ReviewCard = async ({
             comment={comments?.data?.length && comments?.data[0]}
             isReviewed={orderItem?.isReviewed}
             orderStatus={orderStatus}
+            orderItem={orderItem}
+            orderId={orderId}
+            addCommentSubmitAction={addCommentSubmitAction}
           />
         </div>
       </div>

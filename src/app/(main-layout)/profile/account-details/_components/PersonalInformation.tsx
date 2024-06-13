@@ -25,7 +25,10 @@ const PersonalInformation = async () => {
         Personal Information
       </h3>
       <Form handleSubmit={handleSubmit}>
-        <div className="grid grid-cols-1 gap-4 md:gap-6 lg:grid-cols-2 w-full">
+        <div
+          id="myform"
+          className="grid grid-cols-1 gap-4 md:gap-6 lg:grid-cols-2 w-full"
+        >
           <CustomInput
             label="Full Name"
             type="text"

@@ -22,6 +22,7 @@ const ReviewSection = async () => {
               orderItem={orderItem}
               createdAt={order?.createdAt}
               orderStatus={order?.orderStatus?.status}
+              orderId={order._id}
             />
           ))}
         </div>

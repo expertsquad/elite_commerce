@@ -1,8 +1,38 @@
 import React from "react";
 import ShippingAddress from "../_components/ShippingAddress";
 import Link from "next/link";
+import { fetchProtectedData } from "@/actions/fetchData";
+import { postDataMutation } from "@/actions/postDataMutation";
+import { updateDataMutation } from "@/actions/updateDataMutation";
 
-const page = () => {
+const page = async () => {
+  // Get data
+  const shippingAddress = await fetchProtectedData({
+    route: "/user-address/me",
+    query: "isDefault=true",
+  });
+
+  console.log(shippingAddress);
+
+  const submitAction = async (addressId: string, formData: FormData) => {
+    "use server";
+
+    if (!shippingAddress?.data.length) {
+      const result = await postDataMutation({
+        //having problem with api we will have to add here billing address api
+        route: "/user-address/add",
+        data: formData,
+      });
+      console.log(result);
+    } else {
+      const result = await updateDataMutation({
+        route: "/user-address" + "/" + addressId,
+        data: formData,
+        method: "PUT",
+      });
+      console.log(result);
+    }
+  };
   return (
     <div>
       {/* tab to toggle section */}
@@ -23,7 +53,10 @@ const page = () => {
         </div>
       </div>
 
-      <ShippingAddress />
+      <ShippingAddress
+        submitAction={submitAction}
+        shippingAddress={shippingAddress?.data[0]}
+      />
     </div>
   );
 };
