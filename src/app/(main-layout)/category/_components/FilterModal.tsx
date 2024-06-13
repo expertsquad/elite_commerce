@@ -26,7 +26,7 @@ const FilterModal = ({
           show={show}
           setShow={setShow}
           alignment="left"
-          className="overflow-y-scroll p-3 w-[clamp(250px,80vw,350px)] md:hidden"
+          className="overflow-y-scroll scrollbar-y-remove p-3 w-[clamp(250px,80vw,350px)] md:hidden"
         >
           <FilteringSection
             categories={categories}
