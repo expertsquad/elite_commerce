@@ -2,13 +2,20 @@
 import Modal from "@/Components/Modal";
 import { IconFilter } from "@tabler/icons-react";
 import React, { useState } from "react";
-import FilteringSection, { IFilteringSectionProps } from "./FilteringSection";
+import BrandFilterSection from "./BrandFilterSection";
+import { ICategory } from "@/interfaces/category.interface";
+import { IProduct } from "@/interfaces/product.interface";
+import { IBrand } from "@/interfaces/brand.interface";
 
-const FilterModal = ({
+const BrandFilterModal = ({
   categories,
   products,
   brands,
-}: IFilteringSectionProps) => {
+}: {
+  categories: ICategory[];
+  products: IProduct[];
+  brands: IBrand[];
+}) => {
   const [show, setShow] = useState(false);
   return (
     <div>
@@ -28,10 +35,10 @@ const FilterModal = ({
           alignment="left"
           className="overflow-y-scroll scrollbar-y-remove p-3 w-[clamp(250px,80vw,350px)] md:hidden"
         >
-          <FilteringSection
-            categories={categories}
-            products={products}
+          <BrandFilterSection
             brands={brands}
+            products={products}
+            categories={categories}
           />
         </Modal>
       )}
@@ -39,4 +46,4 @@ const FilterModal = ({
   );
 };
 
-export default FilterModal;
+export default BrandFilterModal;

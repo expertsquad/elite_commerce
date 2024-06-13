@@ -5,7 +5,6 @@ import { IProduct } from "@/interfaces/product.interface";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 
 const BrandPage = async ({ params }: { params: { slug: string } }) => {
-  console.log(params);
   const response = await fetchData({
     route: "/product",
     query: `brand.brandName=${params.slug}`,
