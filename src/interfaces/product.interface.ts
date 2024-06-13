@@ -59,8 +59,7 @@ export interface IProduct {
 
 export interface ICartProduct extends IProduct {
   brandName: string;
-  variant: IProductVariant | undefined;
-  price: number | undefined;
+  variant: IProductVariant;
   orderQuantity: number;
   productPhoto: string;
   productId: string;

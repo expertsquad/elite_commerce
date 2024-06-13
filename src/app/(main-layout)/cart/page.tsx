@@ -1,7 +1,6 @@
 import React from "react";
 import Breadcrumb from "../example-poran/_components/Breadcrumb";
 import Image from "next/image";
-import { demoProductPhoto } from "@/assets";
 import StarRating from "@/Components/StarRating";
 import IncreaseDecrease from "../brands/_components/IncreaseDecrease";
 import { IconBolt, IconX } from "@tabler/icons-react";
@@ -9,8 +8,13 @@ import ButtonPrimary from "../brands/_components/ButtonPrimary";
 import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
 import Link from "next/link";
 import ProductCard from "@/Components/ProductCard/ProductCard";
+import { fetchData, fetchProtectedData } from "@/actions/fetchData";
+import { ICartProduct, IProduct } from "@/interfaces/product.interface";
+import { server_url } from "@/constants";
 
-export const CartItem = () => {
+const CartItem = ({ product }: { product: ICartProduct }) => {
+  const price =
+    product?.variant?.discountedPrice || product?.variant?.sellingPrice;
   return (
     <div className="flex  justify-between border-b pb-5 border-black-10">
       <div className="flex items-center gap-3">
@@ -18,7 +22,7 @@ export const CartItem = () => {
           <div className="relative  md:w-[44px] md:h-[44px]  w-[40px] h-[40px]">
             <Image
               alt="product"
-              src={demoProductPhoto}
+              src={server_url + product?.productPhoto}
               fill
               objectFit="cover"
             />
@@ -26,16 +30,16 @@ export const CartItem = () => {
         </div>
         <div className="flex flex-col md:gap-4">
           <span className="line-clamp-1 [font-size:clamp(10px,5vw,14px)]">
-            Apple Watch Series 8 GP
+            {product?.productName}
           </span>
           <div className="flex items-center gap-2">
             <span className="text-positive">Apple</span>
             <span className="text-black-10 text-xs ">|</span>
-            <StarRating rating={2} />
+            <StarRating rating={product?.averageRating || 0} />
           </div>
           <div className="md:hidden flex items-center gap-3">
             <strong className="text-black-50 text-xs font-normal">
-              ${1500.03}
+              ${price}
             </strong>
             <IconX className="text-black-50" width={12} height={12} />
             <IncreaseDecrease />
@@ -44,7 +48,7 @@ export const CartItem = () => {
       </div>
       <div className="md:flex flex-col justify-between hidden">
         <span className="text-sm text-black-80">Unit Price</span>
-        <strong className="text-gradient-primary">${1500.03}</strong>
+        <strong className="text-gradient-primary">${price}</strong>
       </div>
       <div className="md:flex flex-col justify-between hidden">
         <span className="text-sm text-black-80">Quantity</span>
@@ -52,21 +56,32 @@ export const CartItem = () => {
       </div>
       <div className="md:flex flex-col justify-between hidden">
         <span className="text-sm text-black-80">Sub Total</span>
-        <strong className="text-gradient-primary">${4500.09}</strong>
+        <strong className="text-gradient-primary">
+          ${price * product?.orderQuantity}
+        </strong>
       </div>
       <div className="flex flex-col md:items-center items-end md:justify-center justify-between">
         <button className="md:border rounded-full border-danger p-1">
           <IconX stroke={1} color="#FF3838" width={18} height={18} />
         </button>
         <strong className="text-gradient-primary md:hidden block">
-          ${4500.09}
+          ${price * product?.orderQuantity}
         </strong>
       </div>
     </div>
   );
 };
 
-const CartView = () => {
+const CartView = async () => {
+  const productsData = await fetchData({
+    route: "/product",
+    query: "sortBy=averageRating",
+    limit: 3,
+  });
+  const cartProductsData = await fetchProtectedData({
+    route: "/cart/me",
+  });
+
   return (
     <div>
       <div>
@@ -94,8 +109,8 @@ const CartView = () => {
         </div>
         <div className="flex md:flex-row flex-col gap-5 mt-7">
           <div className=" flex flex-col gap-5 md:border border-black-10 md:p-[30px] md:basis-4/6 rounded-[10px]">
-            {[...Array(5)].map((item, index) => {
-              return <CartItem key={index} />;
+            {cartProductsData?.data?.products?.map((product: ICartProduct) => {
+              return <CartItem key={product?._id} product={product} />;
             })}
           </div>
           <div className="md:basis-1/3">
@@ -148,13 +163,13 @@ const CartView = () => {
             </div>
           </div>
         </div>
-        <div className="mt-10 flex flex-col gap-7">
+        <div className="my-10 flex flex-col gap-7">
           <span className="font-semibold text-2xl">
             You May be Interested in...
           </span>
-          <div className="flex items-center gap-5 overflow-y-auto scrollbar-x-remove">
-            {[...Array(10)].map((product, index) => {
-              return <ProductCard key={index} product={product} />;
+          <div className="grid grid-cols-product-grid gap-5 overflow-y-auto scrollbar-x-remove">
+            {productsData?.data?.map((product: IProduct) => {
+              return <ProductCard key={product?._id} product={product} />;
             })}
           </div>
         </div>
