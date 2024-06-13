@@ -1,4 +1,4 @@
-import { postDataMutation } from "@/actions/postDataMutation";
+import { postDataUnauthenticatedMutation } from "@/actions/postDataMutation";
 import Logo from "@/utils/Logo";
 import Link from "next/link";
 import React from "react";
@@ -11,7 +11,7 @@ import { permanentRedirect } from "next/navigation";
 const Page = () => {
   const handleSubmit = async (formData: FormData) => {
     "use server";
-    const result = await postDataMutation({
+    const result = await postDataUnauthenticatedMutation({
       route: "/user/login",
       data: formData,
     });
@@ -21,6 +21,7 @@ const Page = () => {
       permanentRedirect("/");
     }
   };
+
   return (
     <div className="flex items-center justify-center h-full w-full relative">
       <div className="w-[clamp(350px,90vw,450px)] bg-white border border-black-10 aspect-square flex flex-col items-center justify-center gap-3">
