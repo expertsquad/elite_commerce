@@ -13,6 +13,29 @@ export async function generateMetadata() {
 
 const CategoryPage = async () => {
   const response = await fetchData({ route: "/product", limit: 20 });
+
+  const mostPopularProducts = await fetchData({
+    route: "/product",
+    query: "sortBy=averageRating&sortOrder=desc",
+    limit: 12,
+  });
+
+  const newProducts = await fetchData({
+    route: "/product",
+    query: "sortBy=createdAt&sortOrder=desc",
+    limit: 12,
+  });
+  const lowPriceProducts = await fetchData({
+    route: "/product",
+    query: "sortBy=variants.sellingPrice&sortOrder=asc",
+    limit: 12,
+  });
+  const highPriceProducts = await fetchData({
+    route: "/product",
+    query: "sortBy=variants.sellingPrice&sortOrder=desc",
+    limit: 12,
+  });
+
   return (
     <div className="">
       <div className="flex items-center justify-between mb-6">
@@ -20,14 +43,19 @@ const CategoryPage = async () => {
           <span>{response?.meta?.total} Items result found - </span>
         </div>
         <div className="hidden md:block">
-          <SortingSection />
+          <SortingSection
+            mostPopularProducts={mostPopularProducts?.data}
+            newProducts={newProducts?.data}
+            highPriceProducts={highPriceProducts?.data}
+            lowPriceProducts={lowPriceProducts?.data}
+          />
         </div>
       </div>
-      <div className="grid grid-cols-product-grid gap-5 place-items-center">
+      {/* <div className="grid grid-cols-product-grid gap-5 place-items-center">
         {response?.data?.map((product: IProduct) => (
           <ProductCard key={product?._id} product={product} />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
