@@ -1,7 +1,9 @@
 import { fetchProtectedData } from "@/actions/fetchData";
+import { updateDataMutation } from "@/actions/updateDataMutation";
 import { Button } from "@/Components/Buttons";
 import CustomInput from "@/Components/CustomInput";
 import Form from "@/Components/Form";
+import SubmitButton from "@/Components/SubmitButton";
 
 const PersonalInformation = async () => {
   const getMe = await fetchProtectedData({
@@ -10,6 +12,11 @@ const PersonalInformation = async () => {
 
   const handleSubmit = async (formData: FormData) => {
     "use server";
+    const result = await updateDataMutation({
+      route: "/user/update",
+      data: formData,
+      method: "PUT",
+    });
   };
 
   return (
@@ -45,9 +52,9 @@ const PersonalInformation = async () => {
         </div>
 
         <div className="flex justify-end items-center mt-10">
-          <Button className="bg-gradient-primary text-white py-2.5 px-5 my-3 rounded-full w-full lg:max-w-fit ">
+          <SubmitButton className="bg-gradient-primary text-white py-2.5 px-5 my-3 rounded-full w-full lg:max-w-fit ">
             Update Account Details
-          </Button>
+          </SubmitButton>
         </div>
       </Form>
     </div>

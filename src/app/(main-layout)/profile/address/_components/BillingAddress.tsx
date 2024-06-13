@@ -2,14 +2,19 @@ import { fetchProtectedData } from "@/actions/fetchData";
 import CustomInput from "../../../../../Components/CustomInput";
 import { Button } from "@/Components/Buttons";
 import { countryNames } from "@/constants/countryNames.constant";
+import Form from "@/Components/Form";
 
 const BillingAddress = async () => {
   const getMe = await fetchProtectedData({
     route: "/user/me",
   });
 
+  const handleSubmit = async () => {
+    "use server";
+  };
+
   return (
-    <div>
+    <Form handleSubmit={handleSubmit}>
       <h3 className="[font-size:_clamp(1em,5vw,1.5em)] font-semibold text-gradient-primary my-7 ">
         Billing Address
       </h3>
@@ -90,7 +95,7 @@ const BillingAddress = async () => {
           Update Account Details
         </Button>
       </div>
-    </div>
+    </Form>
   );
 };
 
