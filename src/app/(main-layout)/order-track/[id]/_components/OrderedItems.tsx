@@ -1,10 +1,4 @@
-import { IconTruckDelivery, IconX } from "@tabler/icons-react";
-import React from "react";
 import OrderItemsTop from "./OrderItemsTop";
-import { OrderItemsTypes } from "@/interfaces/orderitems.interface";
-import Image from "next/image";
-import { server_url } from "@/constants";
-import StarRating from "@/Components/StarRating";
 import OrderedItemsTableData from "./OrderedItemsTableData";
 
 type OrderItemsProps = {
@@ -13,6 +7,8 @@ type OrderItemsProps = {
   createdAt: string;
   updatedAt: string;
   orderItems: any;
+  id: string;
+  orderStatusLength: number;
 };
 
 const OrderedItems = ({
@@ -21,6 +17,8 @@ const OrderedItems = ({
   orderItems,
   orderQuanity,
   updatedAt,
+  id,
+  orderStatusLength,
 }: OrderItemsProps) => {
   return (
     <div className="md:border border-black-10 md:p-[30px] p-5 md:rounded-lg w-full">
@@ -32,7 +30,11 @@ const OrderedItems = ({
         updatedAt={updatedAt}
       />
 
-      <OrderedItemsTableData orderItems={orderItems} />
+      <OrderedItemsTableData
+        id={id}
+        orderItems={orderItems}
+        orderStatusLength={orderStatusLength}
+      />
     </div>
   );
 };

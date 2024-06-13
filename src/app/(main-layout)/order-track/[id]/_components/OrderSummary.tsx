@@ -32,7 +32,7 @@ const OrderSummary = ({
       </div>
       <div className="flex items-center justify-between mb-3">
         <span>Discount </span>
-        <span className="text-[#FF3838]">-${discount}</span>
+        <span className="text-danger">-${discount}</span>
       </div>
       <span className="h-[1px] bg-black-10 flex w-full mb-5"></span>
       <div className="flex items-center justify-between mb-3">

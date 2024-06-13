@@ -22,7 +22,7 @@ const TotalSubTotalShippingFee = ({
       <span className="h-[1px] w-full flex bg-[#4C4C4C]"></span>
       <div className="flex items-center justify-between font-light">
         <span>Discount</span>
-        <span className="text-[#FF3838]">-${discount}</span>
+        <span className="text-danger">-${discount}</span>
       </div>
       <span className="h-[1px] w-full flex bg-[#4C4C4C]"></span>
 
