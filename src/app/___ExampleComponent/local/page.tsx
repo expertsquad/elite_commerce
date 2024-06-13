@@ -14,7 +14,7 @@ const Page = () => {
       const product = await fetchData({ route: "/product", limit: 1 });
 
       const v = {
-        variantName: "Not specified",
+        variantName: "Blue",
       };
 
       const formattedProduct = formatProductForCart({
