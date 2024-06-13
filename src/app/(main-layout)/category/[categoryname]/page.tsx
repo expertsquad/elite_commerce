@@ -3,15 +3,39 @@ import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct } from "@/interfaces/product.interface";
 import React from "react";
 
-// export async function generateMetadata({params}: {params: {categoryname: string}}) {
-//  try {
+export async function generateMetadata({
+  params,
+}: {
+  params: { categoryname: string };
+}) {
+  try {
+    const response = await fetchData({
+      route: "/product",
+      query: `category.categoryName=${params?.categoryname}`,
+    });
 
-//  } catch (error) {
-//    return {
-//     title:"Not Found"
-//   }
-//  }
-// }
+    if (!response?.data) {
+      return {
+        title: "Not Found",
+        description: "The page you're looking for does not exist!",
+      };
+    }
+
+    const productNames = response.data.map(
+      (product: IProduct) => product?.productName
+    );
+
+    return {
+      title: `Products in ${params?.categoryname}: ${productNames} | Elite Commerece`,
+      description: `Browse through our selection of products in the ${params?.categoryname} category.`,
+    };
+  } catch (error) {
+    return {
+      title: "Not Found",
+      description: "The page you're looking for does not exist!",
+    };
+  }
+}
 
 const CategoryName = async ({
   params,

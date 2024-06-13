@@ -3,7 +3,43 @@ import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct } from "@/interfaces/product.interface";
 import React from "react";
 
-const IndividualSubcategoryPage = async ({
+export async function generateMetadata({
+  params,
+}: {
+  params: { subcategoryname: string };
+}) {
+  try {
+    const response = await fetchData({
+      route: "/product",
+      query: `category.subcategory.subcategoryName=${params?.subcategoryname}`,
+    });
+    const product = response.data[0];
+
+    if (!response?.data) {
+      return {
+        title: "Not Found",
+        description: "The page you're looking for does not exist!",
+      };
+    }
+
+    const productNames = response.data.map(
+      (product: IProduct) => product?.productName
+    );
+
+    return {
+      title: `Products in ${params?.subcategoryname}: ${productNames} | Elite Commerece`,
+      description: `Browse through our selection of products in the ${params?.subcategoryname} category.`,
+      "og:image": `${product?.productPhotos[0]}`,
+    };
+  } catch (error) {
+    return {
+      title: "Not Found",
+      description: "The page you're looking for does not exist!",
+    };
+  }
+}
+
+const ProductsBySubCategory = async ({
   params,
 }: {
   params: { subcategoryname: string };
@@ -12,6 +48,7 @@ const IndividualSubcategoryPage = async ({
     route: "/product",
     query: `category.subcategory.subcategoryName=${params?.subcategoryname}`,
   });
+
   return (
     <div>
       <div className="grid grid-cols-product-grid gap-5 place-items-center">
@@ -23,4 +60,4 @@ const IndividualSubcategoryPage = async ({
   );
 };
 
-export default IndividualSubcategoryPage;
+export default ProductsBySubCategory;
