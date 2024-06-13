@@ -17,9 +17,9 @@ export const postDataMutation = async ({
   data: string | FormData;
 }) => {
   try {
-    // const accessToken = cookies().get("accessToken")?.value;
-    const accessToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIycERoVjdmazhNIiwiX2lkIjoiNjYwOWE4NjY2NTJhZmQ2MDU2Y2RjNWQ4IiwiZnVsbE5hbWUiOiJzZGRmYXNkIHNkZmFzZGZhc2QgYWRzYXNkYyIsInJvbGUiOiJBZG1pbiIsImVtYWlsIjoibmlyaW1vbnBjQGdtYWlsLmNvbSIsInBob25lTnVtYmVyIjoiNjU0NTY0MzUiLCJpc1ZlcmlmaWVkIjp0cnVlLCJpYXQiOjE3MTgxODU3MzksImV4cCI6MTcxODI3MjEzOX0.S2qmpzv-ZZ7iuB5J2ivcXcXCU7xWM1olF9kekyecIfE";
+    const accessToken = cookies().get("accessToken")?.value;
+    // const accessToken =
+    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIycERoVjdmazhNIiwiX2lkIjoiNjYwOWE4NjY2NTJhZmQ2MDU2Y2RjNWQ4IiwiZnVsbE5hbWUiOiJzZGRmYXNkIHNkZmFzZGZhc2QgYWRzYXNkYyIsInJvbGUiOiJBZG1pbiIsImVtYWlsIjoibmlyaW1vbnBjQGdtYWlsLmNvbSIsInBob25lTnVtYmVyIjoiNjU0NTY0MzUiLCJpc1ZlcmlmaWVkIjp0cnVlLCJpYXQiOjE3MTgxODU3MzksImV4cCI6MTcxODI3MjEzOX0.S2qmpzv-ZZ7iuB5J2ivcXcXCU7xWM1olF9kekyecIfE";
 
     if (!accessToken) {
       throw Error("Access token not found, please login again!");

@@ -1,10 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import ShipToCard from "./ShipToCard";
-import { GetMeApiRes } from "@/interfaces/getMe.interface";
 import AddNewBillingAddress from "./AddNewBillingAddress";
+import { IApiResponse } from "@/interfaces/apiResponse.interface";
+import { IUserMe } from "@/interfaces/getMe.interface";
 
-const ShipToAndBillingSection = ({ getMe }: { getMe: GetMeApiRes }) => {
+const ShipToAndBillingSection = ({
+  getMe,
+}: {
+  getMe: IApiResponse<IUserMe>;
+}) => {
   const [selectedOption, setSelectedOption] = useState("sameAsShipping");
 
   const handleOptionChange = (event: any) => {

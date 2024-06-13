@@ -3,9 +3,10 @@ import Link from "next/link";
 import React from "react";
 import { IconEdit } from "@tabler/icons-react";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
-import { GetMeApiRes } from "@/interfaces/getMe.interface";
+import { IApiResponse } from "@/interfaces/apiResponse.interface";
+import { IUserMe } from "@/interfaces/getMe.interface";
 
-const ShipToCard = ({ getMe }: { getMe: GetMeApiRes }) => {
+const ShipToCard = ({ getMe }: { getMe: IApiResponse<IUserMe> }) => {
   return (
     <div className="">
       <h3 className="uppercase text-lg font-semibold text-gradient-primary my-3 ">
