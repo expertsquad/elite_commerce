@@ -4,15 +4,27 @@ import Modal from "@/Components/Modal";
 import React, { useState } from "react";
 import AddCommentModalContent from "./AddCommentModalContent";
 import EditCommentModalContent from "./EditCommentModalContent";
+import { OrderItem } from "@/interfaces/OrderItem.interface";
 
 const ButtonSection = ({
   isReviewed,
   orderStatus,
   comment,
+  orderItem,
+  orderId,
+  addCommentSubmitAction,
 }: {
   isReviewed: boolean;
   orderStatus: string;
   comment: React.ReactNode;
+  orderItem: OrderItem;
+  orderId: string;
+  addCommentSubmitAction: (
+    productId: string,
+    orderId: string,
+    rating: number,
+    formData: FormData
+  ) => Promise<void>;
 }) => {
   // add comment modal state
   const [addComments, setAddComments] = useState(false);
@@ -51,7 +63,11 @@ const ButtonSection = ({
           className="overflow-y-scroll p-3 w-[clamp(350px,80vw,450px)]"
           showCancelBtnINSmallDevice={true}
         >
-          <AddCommentModalContent />
+          <AddCommentModalContent
+            orderItem={orderItem}
+            orderId={orderId}
+            addCommentSubmitAction={addCommentSubmitAction}
+          />
         </Modal>
       )}
       {/* edit  modal start here */}
