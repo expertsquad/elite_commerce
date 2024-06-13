@@ -3,6 +3,16 @@ import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct } from "@/interfaces/product.interface";
 import React from "react";
 
+// export async function generateMetadata({params}: {params: {categoryname: string}}) {
+//  try {
+
+//  } catch (error) {
+//    return {
+//     title:"Not Found"
+//   }
+//  }
+// }
+
 const CategoryName = async ({
   params,
 }: {
