@@ -31,7 +31,7 @@ const CategoriesAndSubcategories = async () => {
         {categories?.data?.map((category: ICategory) => (
           <li key={category?._id} className="group/category">
             <Link
-              href={`/category/${category?._id}`}
+              href={`/category/${category?.categoryName}`}
               className="flex w-full p-2 group-hover/category:bg-gradient-primary-light justify-between"
             >
               {category?.categoryName}
@@ -43,7 +43,7 @@ const CategoriesAndSubcategories = async () => {
                 {category?.subcategories?.map((subcategory) => (
                   <li key={subcategory?.subcategoryId}>
                     <Link
-                      href={`/category/subcategory/${subcategory?.subcategoryId}`}
+                      href={`/category/subcategory/${subcategory?.subcategoryName}`}
                       className="block w-full p-2 hover:bg-gradient-primary-light"
                     >
                       {subcategory?.subcategoryName}

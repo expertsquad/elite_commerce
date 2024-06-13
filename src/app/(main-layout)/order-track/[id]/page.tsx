@@ -4,8 +4,16 @@ import OrderInformation from "./_components/OrderInformation";
 import OrderSummary from "./_components/OrderSummary";
 import OrderedItems from "./_components/OrderedItems";
 
+type OrderStatus = {
+  status: string;
+  time: string;
+  _id: string;
+  id: string;
+};
+
 const OrderTrackPage = async ({ params }: { params: { id: string } }) => {
   const response = await fetchData({ route: `/online-order/${params?.id}` });
+
   return (
     <div className="max-w-7xl mx-auto mb-10 md:mb-28">
       <OrderStatusStep orderStatus={response?.data?.orderStatus} />
@@ -13,11 +21,13 @@ const OrderTrackPage = async ({ params }: { params: { id: string } }) => {
       <div className="flex flex-col md:flex-row md:justify-between md:gap-x-7 mt-[30px]">
         <div className="md:w-2/3 flex flex-col gap-y-6">
           <OrderedItems
+            id={params?.id}
             createdAt={response?.data?.createdAt}
             orderId={response?.data?.orderId}
             orderItems={response?.data?.orderItems}
             orderQuanity={response?.data?.totalQuantity}
             updatedAt={response?.data?.updatedAt}
+            orderStatusLength={response?.data?.orderStatus?.length}
           />
           <OrderSummary
             shipping={response?.data?.shippingCharge}

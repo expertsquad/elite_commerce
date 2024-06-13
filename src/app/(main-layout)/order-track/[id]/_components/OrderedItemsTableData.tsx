@@ -8,9 +8,14 @@ import OrderCancelModal from "./OrderCancelModal";
 
 const OrderedItemsTableData = ({
   orderItems,
+  id,
+  orderStatusLength,
 }: {
   orderItems: OrderItemsTypes[];
+  id: string;
+  orderStatusLength: number;
 }) => {
+  console.log(orderStatusLength);
   return (
     <section>
       <div className="hidden md:order-item-data bg-[#F7F7F7] px-3 py-2 text-sm font-medium mb-5">
@@ -42,9 +47,11 @@ const OrderedItemsTableData = ({
                   <span className="line-clamp-1 text-sm md:text-base">
                     {item?.productName}
                   </span>
-                  <div className="block md:hidden">
-                    <OrderCancelModal id={item?._id} />
-                  </div>
+                  {orderStatusLength <= 2 && (
+                    <div className="block md:hidden">
+                      <OrderCancelModal id={id} />
+                    </div>
+                  )}
                 </div>
                 <div className="flex items-center">
                   <span className="text-xs md:text-sm">
@@ -89,9 +96,11 @@ const OrderedItemsTableData = ({
             <div className="hidden md:block font-bold text-gradient-primary">
               ${item?.subTotalPayable?.toFixed(2)}
             </div>
-            <div className="hidden md:block">
-              <OrderCancelModal id={item?._id} />
-            </div>
+            {orderStatusLength <= 2 && (
+              <div className="md:block hidden">
+                <OrderCancelModal id={id} />
+              </div>
+            )}
           </div>
         ))}
       </div>

@@ -4,6 +4,7 @@ import { IconX } from "@tabler/icons-react";
 import React, { useState } from "react";
 
 const OrderCancelModal = ({ id }: { id: string }) => {
+  console.log(id);
   const [show, setShow] = useState(false);
   const [reason, setReason] = useState("");
   const [comment, setComment] = useState("");
@@ -11,7 +12,7 @@ const OrderCancelModal = ({ id }: { id: string }) => {
   return (
     <div>
       <button onClick={() => setShow(true)} className="">
-        <span className="text-[#FF3838]">
+        <span className="text-danger">
           <IconX size={18} className="" />
         </span>
       </button>
@@ -27,7 +28,7 @@ const OrderCancelModal = ({ id }: { id: string }) => {
             <h4 className="text-black-80 text-[18px] font-semibold mb-7 md:mb-11 text-center">
               Cancellation Request
             </h4>
-            <form action="">
+            <form action={""}>
               <label
                 htmlFor="cancelation reason"
                 className="text-black-opacity-70"
@@ -36,7 +37,7 @@ const OrderCancelModal = ({ id }: { id: string }) => {
               </label>
               <select
                 className={`group w-full border border-black-10 mt-2 py-3 px-3 rounded-lg outline-none mb-7`}
-                name="cancelation reason"
+                name="reason"
                 id="cancelation reason"
                 //   value={cancelReason}
                 //   onChange={(e) => setCancelReason(e.target.value)}
