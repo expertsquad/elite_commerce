@@ -31,7 +31,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
           {label}
         </label>
         <input
-          // disabled={disabled}
+          disabled={disabled}
           type={type}
           onChange={onChange}
           defaultValue={defaultValue}

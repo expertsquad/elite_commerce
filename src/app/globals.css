@@ -140,10 +140,6 @@ main {
   @apply bg-gradient-primary;
 }
 
-/* * {
-  outline: red 1px solid;
-} */
-
 /* ==Order item data responsive== */
 .order-item-data {
   display: flex;
