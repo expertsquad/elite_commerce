@@ -154,7 +154,7 @@ const CartView = () => {
           </span>
           <div className="flex items-center gap-5 overflow-y-auto scrollbar-x-remove">
             {[...Array(10)].map((product, index) => {
-              return <ProductCard key={index} />;
+              return <ProductCard key={index} product={product} />;
             })}
           </div>
         </div>
