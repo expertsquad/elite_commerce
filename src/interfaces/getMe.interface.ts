@@ -1,4 +1,4 @@
-export type UserData = {
+export type IUserMe = {
   _id: string;
   uid: string;
   fullName: string;
@@ -16,10 +16,4 @@ export type UserData = {
   };
   profilePhoto: string;
   id: string;
-};
-
-export type GetMeApiRes = {
-  success: boolean;
-  message: string;
-  data: UserData;
 };
