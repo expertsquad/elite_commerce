@@ -17,7 +17,12 @@ import DealsOfTheDaySection from "./_components/DealsOfTheDaySection/DealsOfTheD
 const page = async () => {
   const newestProducts = await fetchData({ route: "/product", limit: 8 });
   const allProducts = await fetchData({ route: "/product", limit: 12 });
-  console.log(allProducts);
+
+  // for counting total product page
+  const totalPages = Math.ceil(
+    allProducts?.meta?.total / allProducts?.meta?.limit
+  );
+
   const topSellProducts = await fetchData({
     route: "/product",
     query: "sortBy=totalSoldQuantity",
@@ -128,7 +133,7 @@ const page = async () => {
         </div>
 
         <Pagination
-          totalPages={allProducts?.meta?.total / allProducts?.meta?.limit}
+          totalPages={totalPages}
           currentPage={1}
           redirectTo="/category/page"
         />
