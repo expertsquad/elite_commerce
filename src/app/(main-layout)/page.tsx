@@ -17,6 +17,7 @@ import DealsOfTheDaySection from "./_components/DealsOfTheDaySection/DealsOfTheD
 const page = async () => {
   const newestProducts = await fetchData({ route: "/product", limit: 8 });
   const allProducts = await fetchData({ route: "/product", limit: 12 });
+  console.log(allProducts);
   const topSellProducts = await fetchData({
     route: "/product",
     query: "sortBy=totalSoldQuantity",
@@ -127,9 +128,9 @@ const page = async () => {
         </div>
 
         <Pagination
-          totalPages={allProducts?.meta?.total}
+          totalPages={allProducts?.meta?.total / allProducts?.meta?.limit}
           currentPage={1}
-          redirectTo="/product"
+          redirectTo="/category/page"
         />
       </div>{" "}
     </>
