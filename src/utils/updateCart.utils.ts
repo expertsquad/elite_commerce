@@ -6,8 +6,6 @@ import {
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { IProduct, IProductVariant } from "@/interfaces/product.interface";
 import { formatProductForCart } from "./formatProductForCart.utils";
-import { updateDataMutation } from "@/actions/updateDataMutation";
-import { cookies } from "next/headers";
 
 export interface IUpdateCartProps {
   actionType: "add" | "remove" | "decrease";
