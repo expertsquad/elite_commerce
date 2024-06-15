@@ -3,10 +3,27 @@ import Logo from "@/utils/Logo";
 import OTPInput from "./_components/OTPsection";
 import Form from "@/Components/Form";
 import SubmitButton from "@/Components/SubmitButton";
+import { postDataMutation } from "@/actions/postDataMutation";
+import { updateDataMutation } from "@/actions/updateDataMutation";
 
 const VerifyEmail = () => {
-  const handleSubmit = async () => {
+  const handleSubmit = async (formData: FormData) => {
     "use server";
+    const dataObj: Record<string, any> = {};
+
+    for (const [key, value] of Array.from(formData.entries())) {
+      if (key === "otp") {
+        dataObj[key] = dataObj[key] ? dataObj[key] + value : value;
+      }
+    }
+
+    const res = await updateDataMutation({
+      route: "/user/verify-email",
+      data: JSON.stringify({ otp: Number(dataObj["otp"]) }),
+      method: "PUT",
+      formatted: true,
+    });
+    console.log(res);
   };
 
   return (

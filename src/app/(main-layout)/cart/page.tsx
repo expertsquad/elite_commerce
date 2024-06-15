@@ -17,17 +17,7 @@ const CartView = async () => {
         <Breadcrumb title="Shopping Cart" />
       </div>
       <div className="max-w-7xl mx-auto px-5">
-        <CartItems />
-        <div className="my-10 flex flex-col gap-7">
-          <span className="font-semibold text-2xl">
-            You May be Interested in...
-          </span>
-          <div className="grid grid-cols-product-grid gap-5 overflow-y-auto scrollbar-x-remove">
-            {productsData?.data?.map((product: IProduct) => {
-              return <ProductCard key={product?._id} product={product} />;
-            })}
-          </div>
-        </div>
+        <CartItems suggestions={productsData?.data} />
       </div>
     </div>
   );
