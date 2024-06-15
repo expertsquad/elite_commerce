@@ -61,7 +61,7 @@ const CategoriesAndSubcategories = async () => {
 };
 
 const LargeDeviceMegaMenu = () => {
-  const iconStroke = 1.5;
+  const iconStroke = 1.2;
   return (
     <nav className="hidden md:flex max-w-7xl mx-auto py-[clamp(8px,2vh,20px)] md:px-3 text-md items-center justify-between">
       {/* Left section of the navigation */}

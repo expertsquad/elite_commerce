@@ -1,11 +1,11 @@
 "use client";
 import { fetchData, fetchProtectedData } from "@/actions/fetchData";
-import { formatProductForCart } from "@/helpers/formatProductForCart.helper";
 import {
   getLocalStorageData,
   setLocalStorageData,
 } from "@/helpers/localStorage.helper";
-import { mergeProducts } from "@/helpers/mergeProduct.helper";
+import { formatProductForCart } from "@/utils/formatProductForCart.utils";
+import { mergeProducts } from "@/utils/mergeProduct.utils";
 import React, { useEffect } from "react";
 
 const Page = () => {
@@ -20,12 +20,11 @@ const Page = () => {
       const formattedProduct = formatProductForCart({
         product: product?.data?.[0],
         selectedVariant: v,
-        orderQuantity: 5,
       });
 
       setLocalStorageData("data", formattedProduct);
       const remoteCart = await fetchProtectedData({ route: "/cart/me" });
-      //   setLocalStorageData("data", data?.data?.products);
+      // setLocalStorageData("cartProducts", remoteCart?.data?.products);
 
       const localProducts = getLocalStorageData("data");
       const remoteProducts = remoteCart?.data?.products;

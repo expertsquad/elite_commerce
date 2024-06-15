@@ -1,4 +1,4 @@
-import { ICartProduct } from "@/interfaces/product.interface";
+import { ICartProduct } from "@/interfaces/cart.interface";
 
 export const mergeProducts = (
   localStorageProducts: ICartProduct[],

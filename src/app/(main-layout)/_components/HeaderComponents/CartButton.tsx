@@ -49,7 +49,7 @@ export const QuickOrderItem = () => {
             <span>
               <IconX stroke={1} height={12} width={12} />
             </span>
-            <IncreaseDecrease />
+            <IncreaseDecrease orderQuantity={5} />
           </div>
         </div>
       </div>
@@ -118,7 +118,7 @@ const CartButton = () => {
           0
         </circle>
         <IconShoppingCart
-          stroke={1.5}
+          stroke={1.2}
           className="text-black-80"
           width={24}
           height={24}

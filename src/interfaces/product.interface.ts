@@ -56,11 +56,3 @@ export interface IProduct {
     discount: number;
   };
 }
-
-export interface ICartProduct extends IProduct {
-  brandName: string;
-  variant: IProductVariant;
-  orderQuantity: number;
-  productPhoto: string;
-  productId: string;
-}

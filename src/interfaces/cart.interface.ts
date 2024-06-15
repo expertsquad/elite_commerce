@@ -1,17 +1,14 @@
-import { IProductVariant } from "./product.interface";
+import { IProduct, IProductVariant } from "./product.interface";
+
+export interface ICartProduct extends IProduct {
+  brandName: string;
+  variant: IProductVariant;
+  orderQuantity: number;
+  productPhoto: string;
+  productId: string;
+}
 
 export interface ICart {
   userId: string;
-  products: {
-    productName: string;
-    brandName: string;
-    productPhoto: string;
-    productId: string;
-    variant: Partial<IProductVariant>;
-    bulk: {
-      minOrder: number;
-      discount: number;
-    };
-    orderQuantity: number;
-  }[];
+  products: ICartProduct[];
 }
