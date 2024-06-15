@@ -82,12 +82,12 @@ const WishlistButton = () => {
             <span className="font-semibold text-xl text-black-80">
               My Wishlist
             </span>
-            <div className="mt-[30px] flex flex-col gap-5 overflow-y-auto md:h-[500px] h-[400px] scrollbar-y-remove">
-              {[...Array(5)].map((_, i) => {
+            <div className="mt-[30px] flex flex-col gap-5 overflow-y-auto md:h-[calc(100vh-300px)] h-[calc(100vh-250px)] scrollbar-y-remove bg-white ">
+              {[...Array(10)].map((_, i) => {
                 return <WishlistItem key={i} />;
               })}
             </div>
-            <div className="flex flex-col gap-5 bg-white fixed bottom-5 w-[92%] mx-auto">
+            <div className="flex flex-col gap-5 bg-white fixed bottom-5 w-[92%] mx-auto ">
               <Link
                 href={"/wishlist"}
                 className="flex items-center justify-center gap-2.5 px-5 w-full py-3.5  bg-gradient-primary  text-white rounded-full "

@@ -66,7 +66,7 @@ export const QuickOrderItem = () => {
 };
 export const OrderSummery = () => {
   return (
-    <div className="md:border border-black-10 rounded-[10px] px-5 py-3.5  space-y-2.5 bg-white">
+    <div className="md:border border-black-10 rounded-[10px] md:px-5  py-3.5  space-y-2.5 bg-white">
       <div className="flex items-center justify-between ">
         <span className="text-black-80 md:text-base text-sm">Subtotal</span>
         <strong className="text-black-80 md:text-base text-sm font-semibold">
@@ -94,12 +94,12 @@ export const OrderSummery = () => {
           $<span>1264</span>
         </strong>
       </div>
-      <div className="flex items-center justify-center gap-5 ">
-        <ButtonPrimaryLight className="!uppercase !text-black-80">
+      <div className="mt-10 flex items-center justify-center gap-5 md:px-5">
+        <ButtonPrimaryLight className="!uppercase !text-black-80 !whitespace-nowrap">
           <IconShoppingCart />
           Check Out
         </ButtonPrimaryLight>
-        <ButtonPrimary className="!uppercase">
+        <ButtonPrimary className="!uppercase !whitespace-nowrap">
           <IconBolt height={18} width={18} />
           Order Now
         </ButtonPrimary>
@@ -150,12 +150,12 @@ const CartButton = () => {
             </div>
             <hr className="border border-black-10 h-[1px] my-5" />
 
-            <div className="flex flex-col md:gap-7 gap-4 overflow-y-auto scrollbar-y-remove h-[350px]">
+            <div className="flex flex-col  gap-2  overflow-y-auto scrollbar-y-remove md:h-[calc(100vh-500px)] h-[calc(100vh-550px)]">
               {[...Array(10)].map((item, index) => {
                 return <QuickOrderItem key={index} />;
               })}
             </div>
-            <div className="fixed bottom-5 w-[91%] mx-auto">
+            <div className="fixed bottom-5 w-[95%]  mx-auto bg-white">
               <OrderSummery />
               <div className=" mt-5 flex items-center justify-center">
                 {" "}
