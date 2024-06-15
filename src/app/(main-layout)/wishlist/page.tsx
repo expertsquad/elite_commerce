@@ -1,5 +1,5 @@
 import React from "react";
-import Breadcrumb from "../example-poran/_components/Breadcrumb";
+import Breadcrumb from "../../../Components/BreadCrumb/Breadcrumb";
 import Link from "next/link";
 import {
   IconBolt,
@@ -13,74 +13,74 @@ import { demoProductPhoto } from "@/assets";
 import StarRating from "@/Components/StarRating";
 import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
 
-export const WishlistItem = () => {
-  return (
-    <tr>
-      <td className="px-5 border border-black-10 border-collapse">
-        <button>
-          {" "}
-          <IconX color="#FF3838" />
-        </button>
-      </td>
-      <td className="border border-black-10 border-collapse px-5 py-6">
-        <div className="flex gap-5">
-          <div className="bg-gradient-primary-light md:p-3.5 p-1.5 rounded-[10px]">
-            <div className="relative  md:w-[60px] md:h-[60px]  w-[50px] h-[50px]">
-              <Image
-                alt="product"
-                src={demoProductPhoto}
-                fill
-                objectFit="cover"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col gap-2.5">
-            <span className="line-clamp-2 [font-size:_clamp(10px,5vw,18px)]">
-              Apple Watch Series 8 GPS 45mm Silver Aluminum Case
-            </span>
-            <div className="flex items-center  gap-2">
-              <span className="text-positive text-sm">Apple</span>
-              <span className="text-black-10 text-sm">|</span>
-              <StarRating rating={2} />
-            </div>
-          </div>
-        </div>
-      </td>
-      <td className=" border border-black-10 border-collapse px-5">
-        <span className="text-gradient-primary text-lg font-semibold">
-          $1500.03
-        </span>
-      </td>
-      <td className="border border-black-10 border-collapse px-5">
-        <span className="text-positive text-lg font-semibold whitespace-nowrap">
-          {"205"} In Stock
-        </span>
-      </td>
-      <td className="border border-black-10 border-collapse px-5">
-        <div className=" flex items-center justify-center gap-5">
-          <button className="border border-black-10 rounded-full p-2">
-            <IconEye />
-          </button>
-          <ButtonPrimaryLight className="!rounded-full !text-black-80 !whitespace-nowrap !py-2 !px-3.5">
-            <IconShoppingCart color="#24509E" />
-            Add To Cart
-          </ButtonPrimaryLight>
-        </div>
-      </td>
-      <td className="border border-black-10 border-collapse px-5">
-        <button className="bg-gradient-primary whitespace-nowrap text-white rounded-full px-3.5 uppercase flex items-center justify-center gap-2.5 text-sm py-2">
-          <IconBolt width={20} />
-          Quick order
-        </button>
-      </td>
-    </tr>
-  );
-};
+// export const WishlistItem = () => {
+//   return (
+//     <tr>
+//       <td className="px-5 border border-black-10 border-collapse">
+//         <button>
+//           {" "}
+//           <IconX color="#FF3838" />
+//         </button>
+//       </td>
+//       <td className="border border-black-10 border-collapse px-5 py-6">
+//         <div className="flex gap-5">
+//           <div className="bg-gradient-primary-light md:p-3.5 p-1.5 rounded-[10px]">
+//             <div className="relative  md:w-[60px] md:h-[60px]  w-[50px] h-[50px]">
+//               <Image
+//                 alt="product"
+//                 src={demoProductPhoto}
+//                 fill
+//                 objectFit="cover"
+//               />
+//             </div>
+//           </div>
+//           <div className="flex flex-col gap-2.5">
+//             <span className="line-clamp-2 [font-size:_clamp(10px,5vw,18px)]">
+//               Apple Watch Series 8 GPS 45mm Silver Aluminum Case
+//             </span>
+//             <div className="flex items-center  gap-2">
+//               <span className="text-positive text-sm">Apple</span>
+//               <span className="text-black-10 text-sm">|</span>
+//               <StarRating rating={2} />
+//             </div>
+//           </div>
+//         </div>
+//       </td>
+//       <td className=" border border-black-10 border-collapse px-5">
+//         <span className="text-gradient-primary text-lg font-semibold">
+//           $1500.03
+//         </span>
+//       </td>
+//       <td className="border border-black-10 border-collapse px-5">
+//         <span className="text-positive text-lg font-semibold whitespace-nowrap">
+//           {"205"} In Stock
+//         </span>
+//       </td>
+//       <td className="border border-black-10 border-collapse px-5">
+//         <div className=" flex items-center justify-center gap-5">
+//           <button className="border border-black-10 rounded-full p-2">
+//             <IconEye />
+//           </button>
+//           <ButtonPrimaryLight className="!rounded-full !text-black-80 !whitespace-nowrap !py-2 !px-3.5">
+//             <IconShoppingCart color="#24509E" />
+//             Add To Cart
+//           </ButtonPrimaryLight>
+//         </div>
+//       </td>
+//       <td className="border border-black-10 border-collapse px-5">
+//         <button className="bg-gradient-primary whitespace-nowrap text-white rounded-full px-3.5 uppercase flex items-center justify-center gap-2.5 text-sm py-2">
+//           <IconBolt width={20} />
+//           Quick order
+//         </button>
+//       </td>
+//     </tr>
+//   );
+// };
 
 const Wishlist = () => {
   return (
     <div>
-      <div>
+      {/* <div>
         <Breadcrumb title="My Wishlist" />
       </div>
       <div className="max-w-[1320px] mx-auto px-5 mt-12  ">
@@ -131,7 +131,7 @@ const Wishlist = () => {
             CART →
           </Link>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

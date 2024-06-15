@@ -1,12 +1,7 @@
 "use client";
 
 import Modal from "@/Components/Modal";
-import {
-  IconBolt,
-  IconShoppingCart,
-  IconTruck,
-  IconX,
-} from "@tabler/icons-react";
+import { IconBolt, IconShoppingCart, IconX } from "@tabler/icons-react";
 import React from "react";
 import IncreaseDecrease from "../../brands/_components/IncreaseDecrease";
 import StarRating from "@/Components/StarRating";
@@ -49,7 +44,7 @@ export const QuickOrderItem = () => {
             <span>
               <IconX stroke={1} height={12} width={12} />
             </span>
-            <IncreaseDecrease orderQuantity={5} />
+            {/* <IncreaseDecrease orderQuantity={5} /> */}
           </div>
         </div>
       </div>

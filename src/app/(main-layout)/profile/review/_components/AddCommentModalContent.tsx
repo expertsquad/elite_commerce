@@ -31,7 +31,7 @@ const AddCommentModalContent = ({
     setRating(index + 1);
   };
 
-  const addCommentAction = (formData: FormData) => {
+  const addCommentAction = async (formData: FormData) => {
     addCommentSubmitAction(orderItem?.productId, orderId, rating, formData);
   };
 

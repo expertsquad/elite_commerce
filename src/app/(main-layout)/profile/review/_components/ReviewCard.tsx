@@ -34,7 +34,7 @@ const ReviewCard = async ({
     "use server";
     formData.set("productId", productId);
     formData.set("orderId", orderId);
-    formData.set("rating", rating);
+    // formData.set("rating", rating);
 
     const result = await postDataMutation({
       route: "/review/add",

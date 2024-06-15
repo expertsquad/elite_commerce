@@ -49,7 +49,7 @@ export const QuickOrderItem = () => {
             <span>
               <IconX stroke={1} height={12} width={12} />
             </span>
-            <IncreaseDecrease />
+            {/* <IncreaseDecrease /> */}
           </div>
         </div>
       </div>

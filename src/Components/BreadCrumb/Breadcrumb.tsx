@@ -1,7 +1,6 @@
 import React from "react";
 import NextBreadcrumb from "./NextBreadcrumb";
 import Link from "next/link";
-import breadcrumbBG from "../../../../assets/breadcrumb-bg.svg";
 
 type TBreadcrumbComponentProps = {
   title: string;
