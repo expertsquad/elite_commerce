@@ -18,9 +18,8 @@ export const updateCart = async ({
   product,
   variant,
 }: IUpdateCartProps) => {
-  const prevCartItems = getLocalStorageData(
-    storages.cartProducts
-  ) as ICartProduct[];
+  const prevCartItems =
+    (getLocalStorageData(storages.cartProducts) as ICartProduct[]) || [];
 
   let updatedCartItems: ICartProduct[] = prevCartItems || [];
   // -----------------------------
