@@ -150,12 +150,12 @@ const CartButton = () => {
             </div>
             <hr className="border border-black-10 h-[1px] my-5" />
 
-            <div className="flex flex-col md:gap-7 gap-4 overflow-y-auto scrollbar-y-remove h-[350px]">
+            <div className="flex flex-col  gap-2  overflow-y-auto scrollbar-y-remove md:h-[calc(100vh-500px)] h-[calc(100vh-550px)]">
               {[...Array(10)].map((item, index) => {
                 return <QuickOrderItem key={index} />;
               })}
             </div>
-            <div className="fixed bottom-5 w-[91%] mx-auto">
+            <div className="fixed bottom-5 w-[95%]  mx-auto bg-white">
               <OrderSummery />
               <div className=" mt-5 flex items-center justify-center">
                 {" "}
