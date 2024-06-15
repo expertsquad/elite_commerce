@@ -8,8 +8,10 @@ import { CartItem } from "./CartItem";
 import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { storages } from "@/constants";
+import ProductCard from "@/Components/ProductCard/ProductCard";
+import { IProduct } from "@/interfaces/product.interface";
 
-const CartItems = () => {
+const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
   const [cartProducts, setCartProducts] = useState([]);
   const [refetch, setRefetch] = useState(0);
 
@@ -128,6 +130,24 @@ const CartItems = () => {
               </Link>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* suggestions section */}
+      <div className="my-10 flex flex-col gap-7">
+        <span className="font-semibold text-2xl">
+          You May be Interested in...
+        </span>
+        <div className="grid grid-cols-product-grid gap-5 overflow-y-auto scrollbar-x-remove">
+          {suggestions?.map((product: IProduct) => {
+            return (
+              <ProductCard
+                key={product?._id}
+                product={product}
+                setRefetch={setRefetch}
+              />
+            );
+          })}
         </div>
       </div>
     </Fragment>

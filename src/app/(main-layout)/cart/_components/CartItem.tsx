@@ -15,6 +15,11 @@ export const CartItem = ({
 }) => {
   const price =
     product?.variant?.discountedPrice || product?.variant?.sellingPrice;
+
+  const handleRemoveItem = () => {
+    updateCart({ actionType: "remove", product });
+    setRefetch((prev) => prev + 1);
+  };
   return (
     <div className="flex items-center md:cart-item-data border-b pb-5 border-black-10">
       <div className="flex items-center gap-x-2.5 w-full">
@@ -77,7 +82,7 @@ export const CartItem = ({
       <div className="md:flex flex-col md:items-center items-end md:justify-center hidden justify-between">
         <button
           className="md:border rounded-full border-danger p-0.5"
-          onClick={() => updateCart({ actionType: "remove", product })}
+          onClick={handleRemoveItem}
         >
           <IconX stroke={1} color="#FF3838" width={16} height={16} />
         </button>
