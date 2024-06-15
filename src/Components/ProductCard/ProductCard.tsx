@@ -8,7 +8,10 @@ import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderB
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   return (
-    <div className="border border-black-10 rounded-lg group relative w-full max-w-[280px] cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg mx-auto">
+    <Link
+      href={`/products/${product?._id}`}
+      className="border border-black-10 rounded-lg group relative w-full max-w-[280px] cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg mx-auto"
+    >
       <div className="bg-gradient-primary-light">
         <ProductImageSlider
           // loading={loading}
@@ -50,7 +53,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         <QuickViewButton product={product} />
         <QuickOrderButton />
       </div>
-    </div>
+    </Link>
   );
 };
 
