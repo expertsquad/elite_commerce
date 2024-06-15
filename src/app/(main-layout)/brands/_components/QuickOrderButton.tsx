@@ -1,9 +1,12 @@
 "use client";
 import React, { Fragment, useState } from "react";
 import QuickOrderModal from "./QuickOrderModal";
+import { IProduct } from "@/interfaces/product.interface";
 
-const QuickOrderButton = () => {
+const QuickOrderButton = ({ product }: { product: IProduct }) => {
   const [show, setShow] = useState(false);
+
+  console.log(product);
 
   const handleQuickOrderButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -19,7 +22,7 @@ const QuickOrderButton = () => {
       >
         Quick Order
       </button>
-      {show && <QuickOrderModal show={show} setShow={setShow} />}
+      {show && <QuickOrderModal show={show} setShow={setShow} data={product} />}
     </Fragment>
   );
 };

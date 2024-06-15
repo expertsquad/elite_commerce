@@ -13,8 +13,10 @@ import React from "react";
 import IncreaseDecrease from "./IncreaseDecrease";
 import { demoProductPhoto } from "@/assets";
 import ButtonPrimary from "./ButtonPrimary";
-import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import Link from "next/link";
+import { IProduct } from "@/interfaces/product.interface";
+import { getLocalStorageData } from "@/helpers/localStorage.helper";
+import { storages } from "@/constants";
 
 export const QuickOrderItem = () => {
   return (
@@ -108,10 +110,17 @@ export const OrderSummery = () => {
 const QuickOrderModal = ({
   show,
   setShow,
+  data,
 }: {
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  data: IProduct;
 }) => {
+  console.log(data);
+
+  const result = getLocalStorageData(storages.cartProducts);
+  console.log(result);
+
   return (
     <Modal
       show={show}
