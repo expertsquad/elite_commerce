@@ -7,9 +7,8 @@ interface OTPInputProps {
   setVerifyOtp?: any;
 }
 
-const OTPInput = ({ length, setVerifyOtp }: OTPInputProps) => {
+const OTPInput = ({ length }: OTPInputProps) => {
   const [otp, setOTP] = useState<number[]>(Array(length).fill(NaN));
-  setVerifyOtp(otp.join(""));
 
   const handleChange = (index: number, value: string) => {
     if (/^\d$/.test(value)) {
