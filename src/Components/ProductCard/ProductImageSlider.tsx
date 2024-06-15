@@ -55,12 +55,6 @@ const ProductImageSlider = ({
     setCurrentSlide(index);
   };
 
-  // <== Handle Quick Product View ==>
-  const handleQuickProductView = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    setShowModal(true);
-  };
-
   return (
     <section>
       <div className="w-full flex justify-between gap-x-0.5 relative">
