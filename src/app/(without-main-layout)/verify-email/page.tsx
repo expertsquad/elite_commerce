@@ -1,12 +1,14 @@
-"use client";
 import Link from "next/link";
-import React, { useState } from "react";
 import Logo from "@/utils/Logo";
-
 import OTPInput from "./_components/OTPsection";
+import Form from "@/Components/Form";
+import SubmitButton from "@/Components/SubmitButton";
 
 const VerifyEmail = () => {
-  const [verifyOtp, setVerifyOtp] = useState(0);
+  const handleSubmit = async () => {
+    "use server";
+  };
+
   return (
     <div className="flex items-center justify-center h-full w-full relative px-5">
       <Link className="absolute top-20 left-[40%]" href={"/signUp"}>
@@ -22,11 +24,17 @@ const VerifyEmail = () => {
           <p>Enter the 6 digits code that you Received on your E-mail</p>
           <span className="text-gradient-primary">+8801879069525</span>
         </div>
+        <Form handleSubmit={handleSubmit}>
+          <OTPInput length={4} />
 
-        <OTPInput length={4} setVerifyOtp={setVerifyOtp} />
-        <button className="py-3.5 px-5 bg-gradient-primary text-white rounded-md md:w-[80%] w-full mt-10">
-          Verify
-        </button>
+          <SubmitButton
+            className={
+              "bg-gradient-primary w-full py-2.5 px-10 text-white rounded-md"
+            }
+          >
+            Verify
+          </SubmitButton>
+        </Form>
       </div>
     </div>
   );

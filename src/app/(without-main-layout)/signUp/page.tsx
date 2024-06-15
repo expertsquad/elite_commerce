@@ -2,8 +2,7 @@ import { postDataUnauthenticatedMutation } from "@/actions/postDataMutation";
 import CustomInput from "@/Components/CustomInput";
 import Form from "@/Components/Form";
 import SubmitButton from "@/Components/SubmitButton";
-import { IconEye } from "@tabler/icons-react";
-import { redirect } from "next/dist/server/api-utils";
+
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { permanentRedirect } from "next/navigation";
@@ -16,6 +15,7 @@ const Page = () => {
       route: "/user/signup",
       data: formData,
     });
+    console.log(res);
 
     if (res?.data?.accessToken) {
       cookies().set("accessToken", res?.data?.accessToken);
