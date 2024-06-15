@@ -2,12 +2,20 @@ import { ICartProduct } from "@/interfaces/cart.interface";
 import { updateCart } from "@/utils/updateCart.utils";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
 
-const IncreaseDecrease = ({ product }: { product: ICartProduct }) => {
+const IncreaseDecrease = ({
+  product,
+  setRefetch,
+}: {
+  product: ICartProduct;
+  setRefetch: React.Dispatch<React.SetStateAction<number>>;
+}) => {
   const handleIncreaseQuantity = () => {
     updateCart({ actionType: "add", product: product });
+    setRefetch((prev) => prev + 1);
   };
   const handleDecreaseQuantity = () => {
     updateCart({ actionType: "decrease", product: product });
+    setRefetch((prev) => prev + 1);
   };
   return (
     <div className="bg-gradient-primary-light rounded-full px-1 py-[3px] flex items-center gap-2">

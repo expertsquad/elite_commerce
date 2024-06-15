@@ -6,7 +6,13 @@ import IncreaseDecrease from "../../brands/_components/IncreaseDecrease";
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { updateCart } from "@/utils/updateCart.utils";
 
-export const CartItem = ({ product }: { product: ICartProduct }) => {
+export const CartItem = ({
+  product,
+  setRefetch,
+}: {
+  product: ICartProduct;
+  setRefetch: React.Dispatch<React.SetStateAction<number>>;
+}) => {
   const price =
     product?.variant?.discountedPrice || product?.variant?.sellingPrice;
   return (
@@ -44,7 +50,7 @@ export const CartItem = ({ product }: { product: ICartProduct }) => {
               <strong className="text-black-800 text-xs font-normal">
                 ${price}
               </strong>
-              <IncreaseDecrease product={product} />
+              <IncreaseDecrease product={product} setRefetch={setRefetch} />
             </div>
             <span className="font-bold text-gradient-primary">
               ${price * product?.orderQuantity}
@@ -60,7 +66,7 @@ export const CartItem = ({ product }: { product: ICartProduct }) => {
       </div>
       <div className="md:flex flex-col gap-y-1 items-center justify-between hidden">
         <span className="text-sm text-black-80">Qty</span>
-        <IncreaseDecrease product={product} />
+        <IncreaseDecrease product={product} setRefetch={setRefetch} />
       </div>
       <div className="md:flex flex-col gap-y-0.5 items-center justify-between hidden">
         <span className="text-sm text-black-80">Sub Total</span>

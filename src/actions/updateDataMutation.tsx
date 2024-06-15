@@ -16,7 +16,7 @@ export const updateDataMutation = async ({
   dataType?: "json" | "formData";
   formatted?: boolean;
   data: string | FormData;
-  method: "PATCH" | "PUT" | "POST";
+  method?: "PATCH" | "PUT" | "POST";
 }) => {
   try {
     const accessToken = cookies().get("accessToken")?.value;

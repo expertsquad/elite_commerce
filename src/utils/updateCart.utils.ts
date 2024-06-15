@@ -6,6 +6,8 @@ import {
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { IProduct, IProductVariant } from "@/interfaces/product.interface";
 import { formatProductForCart } from "./formatProductForCart.utils";
+import { updateDataMutation } from "@/actions/updateDataMutation";
+import { cookies } from "next/headers";
 
 export interface IUpdateCartProps {
   actionType: "add" | "remove" | "decrease";
@@ -13,7 +15,7 @@ export interface IUpdateCartProps {
   variant?: IProductVariant;
 }
 
-export const updateCart = ({
+export const updateCart = async ({
   actionType,
   product,
   variant,
@@ -106,5 +108,18 @@ export const updateCart = ({
 
   // update new data
   // if accessToken exist then update both else local storage only
-  setLocalStorageData(storages.cartProducts, updatedCartItems);
+  setLocalStorageData(
+    storages.cartProducts,
+    updatedCartItems.map((item) => {
+      return { ...item, variantName: item?.variant?.variantName };
+    })
+  );
+  // update cart to the remote server
+  await fetch("/api/cart", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ products: updatedCartItems }),
+  });
 };

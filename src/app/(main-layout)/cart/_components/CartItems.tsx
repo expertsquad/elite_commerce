@@ -11,9 +11,11 @@ import { storages } from "@/constants";
 
 const CartItems = () => {
   const [cartProducts, setCartProducts] = useState([]);
+  const [refetch, setRefetch] = useState(0);
+
   useEffect(() => {
     setCartProducts(getLocalStorageData(storages.cartProducts) || []);
-  }, []);
+  }, [refetch]);
 
   const calculateTotalPriceAndDiscount = (products: ICartProduct[]) => {
     let totalPrice = 0;
@@ -67,7 +69,13 @@ const CartItems = () => {
       <div className="flex md:flex-row flex-col gap-5 mt-7">
         <div className=" flex flex-col gap-5 md:border border-black-10 md:p-[30px] md:basis-4/6 rounded-[10px]">
           {cartProducts?.map((product: ICartProduct) => {
-            return <CartItem key={product?._id} product={product} />;
+            return (
+              <CartItem
+                key={product?._id}
+                product={product}
+                setRefetch={setRefetch}
+              />
+            );
           })}
         </div>
         <div className="md:basis-1/3">
