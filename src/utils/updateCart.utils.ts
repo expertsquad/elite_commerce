@@ -87,11 +87,12 @@ export const updateCart = async ({
         { ...isAlreadyExist, orderQuantity: isAlreadyExist.orderQuantity - 1 },
         ...prevCartItems.slice(existingIndex + 1),
       ];
-    } else if (isAlreadyExist) {
-      updatedCartItems = prevCartItems.filter(
-        (prevProduct) => prevProduct?._id !== product?._id
-      );
     }
+    // else if (isAlreadyExist) {
+    //   updatedCartItems = prevCartItems.filter(
+    //     (prevProduct) => prevProduct?._id !== product?._id
+    //   );
+    // }
   }
 
   // -----------------------------
