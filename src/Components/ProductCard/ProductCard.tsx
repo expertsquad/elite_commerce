@@ -16,11 +16,7 @@ const ProductCard = ({ product, setRefetch }: IProductCardProps) => {
       className="border border-black-10 rounded-lg group relative w-full max-w-[280px] cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg mx-auto"
     >
       <div className="bg-gradient-primary-light">
-        <ProductImageSlider
-          // loading={loading}
-          product={product}
-          // defaultVariant={defaultVariant}
-        />
+        <ProductImageSlider product={product} />
       </div>
 
       <div className="p-4">
@@ -52,7 +48,13 @@ const ProductCard = ({ product, setRefetch }: IProductCardProps) => {
       </div>
       <div className="absolute flex gap-3 items-center top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 opacity-0 md:group-hover:opacity-100 transition-all duration-300">
         <QuickViewButton product={product} />
-        <QuickOrderButton product={product} />
+        <QuickOrderButton
+          product={{
+            ...product,
+            orderQuantity: 1,
+            variant: product?.variants[0],
+          }}
+        />
       </div>
     </Link>
   );

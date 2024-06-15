@@ -6,8 +6,6 @@ import { IProduct } from "@/interfaces/product.interface";
 const QuickOrderButton = ({ product }: { product: IProduct }) => {
   const [show, setShow] = useState(false);
 
-  console.log(product);
-
   const handleQuickOrderButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     e.preventDefault();
@@ -22,7 +20,9 @@ const QuickOrderButton = ({ product }: { product: IProduct }) => {
       >
         Quick Order
       </button>
-      {show && <QuickOrderModal show={show} setShow={setShow} data={product} />}
+      {show && (
+        <QuickOrderModal show={show} setShow={setShow} products={[product]} />
+      )}
     </Fragment>
   );
 };

@@ -44,6 +44,8 @@ export interface IProduct {
       description: string;
     }>;
   }>;
+  variant: IProductVariant;
+  orderQuantity: number;
   shortDescription?: string;
   description: string;
   seo: {
