@@ -7,8 +7,10 @@ const QuickViewButton = ({ product }: { product: IProduct }) => {
   const [show, setShow] = useState(false);
   const handleProductCard = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+    e.preventDefault();
     setShow(true);
   };
+
   return (
     <Fragment>
       <button
