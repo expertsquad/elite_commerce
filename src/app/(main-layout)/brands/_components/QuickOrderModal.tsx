@@ -16,7 +16,7 @@ import ButtonPrimary from "./ButtonPrimary";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import Link from "next/link";
 
-export const QuickOrderItem = () => {
+const QuickOrderItem = () => {
   return (
     <div className="flex  justify-between gap-3.5">
       <div className="flex md:items-center gap-3.5">
@@ -65,7 +65,7 @@ export const QuickOrderItem = () => {
   );
 };
 
-export const OrderSummery = () => {
+const OrderSummery = () => {
   return (
     <div className="md:border border-black-10 rounded-[10px] px-5 py-3.5  space-y-2.5 bg-white">
       <div className="flex items-center justify-between ">

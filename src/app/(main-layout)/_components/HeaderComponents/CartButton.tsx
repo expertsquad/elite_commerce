@@ -3,7 +3,6 @@
 import Modal from "@/Components/Modal";
 import { IconBolt, IconShoppingCart, IconX } from "@tabler/icons-react";
 import React from "react";
-import IncreaseDecrease from "../../brands/_components/IncreaseDecrease";
 import StarRating from "@/Components/StarRating";
 import Image from "next/image";
 import { demoProductPhoto } from "@/assets";
@@ -11,7 +10,7 @@ import ButtonPrimary from "../../brands/_components/ButtonPrimary";
 import ButtonPrimaryLight from "../../brands/_components/ButtonPrimaryLight";
 import Link from "next/link";
 
-export const QuickOrderItem = () => {
+const QuickOrderItem = () => {
   return (
     <div className="flex  justify-between gap-3.5">
       <div className="flex md:items-center gap-3.5">
@@ -59,9 +58,10 @@ export const QuickOrderItem = () => {
     </div>
   );
 };
-export const OrderSummery = () => {
+
+const OrderSummery = () => {
   return (
-    <div className="md:border border-black-10 rounded-[10px] md:px-5  py-3.5  space-y-2.5 bg-white">
+    <div className="md:border border-black-10 rounded-[10px] md:px-5 py-[clamp(2px,1.5vh,20px)] space-y-[clamp(2px,.5vh,20px)] bg-white">
       <div className="flex items-center justify-between ">
         <span className="text-black-80 md:text-base text-sm">Subtotal</span>
         <strong className="text-black-80 md:text-base text-sm font-semibold">
@@ -89,12 +89,12 @@ export const OrderSummery = () => {
           $<span>1264</span>
         </strong>
       </div>
-      <div className="mt-10 flex items-center justify-center gap-5 md:px-5">
-        <ButtonPrimaryLight className="!uppercase !text-black-80 !whitespace-nowrap">
+      <div className="flex items-center justify-center gap-5 md:px-5">
+        <ButtonPrimaryLight className="!uppercase !text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)]">
           <IconShoppingCart />
           Check Out
         </ButtonPrimaryLight>
-        <ButtonPrimary className="!uppercase !whitespace-nowrap">
+        <ButtonPrimary className="!uppercase !whitespace-nowrap py-[clamp(2px,1.2vh,20px)]">
           <IconBolt height={18} width={18} />
           Order Now
         </ButtonPrimary>
@@ -109,9 +109,9 @@ const CartButton = () => {
   return (
     <React.Fragment>
       <button onClick={() => setShow(true)} className="relative">
-        <circle className="p-1 w-4 h-4 rounded-full bg-gradient-secondary text-white absolute -right-1.5 -top-1 flex items-center justify-center text-[8px]">
+        <div className="p-1 w-4 h-4 rounded-full bg-gradient-secondary text-white absolute -right-1.5 -top-1 flex items-center justify-center text-[8px]">
           0
-        </circle>
+        </div>
         <IconShoppingCart
           stroke={1.2}
           className="text-black-80"
@@ -128,11 +128,11 @@ const CartButton = () => {
           alignment="right"
           showCancelBtnINSmallDevice={show}
         >
-          <div className="p-3.5 md:p-2 ">
+          <div className="p-2">
             <span className="font-semibold [font-size:clamp(14px,5vw,18px)]">
               Shopping Cart
             </span>
-            <div className="flex flex-col gap-2.5 mt-7">
+            <div className="flex flex-col gap-2 mt-2">
               <input type="range" className="pointer-events-none" value={20} />
               <span className="block text-base">
                 Buy <span className="text-gradient-primary">$900</span> more to
@@ -143,20 +143,21 @@ const CartButton = () => {
                 🔥
               </span>
             </div>
-            <hr className="border border-black-10 h-[1px] my-5" />
+            <hr className="border border-black-10 h-[1px] my-3" />
 
-            <div className="flex flex-col  gap-2  overflow-y-auto scrollbar-y-remove md:h-[calc(100vh-500px)] h-[calc(100vh-550px)]">
+            <div className="flex flex-col gap-2 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(350px,45vh))] pb-10">
               {[...Array(10)].map((item, index) => {
                 return <QuickOrderItem key={index} />;
               })}
             </div>
-            <div className="fixed bottom-5 w-[95%]  mx-auto bg-white">
+            <div className="fixed bottom-0 right-1 w-[95%]  mx-auto bg-white">
               <OrderSummery />
-              <div className=" mt-5 flex items-center justify-center">
+              <div className="my-2 flex items-center justify-center">
                 {" "}
                 <Link
                   href={"/cart"}
                   className="text-positive text-sm uppercase "
+                  onClick={() => setShow(false)}
                 >
                   View Cart &rarr;
                 </Link>
