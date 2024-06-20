@@ -11,6 +11,26 @@ import { storages } from "@/constants";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct } from "@/interfaces/product.interface";
 
+export const calculateTotalPriceAndDiscount = (products: ICartProduct[]) => {
+  let totalPrice = 0;
+  let totalDiscount = 0;
+
+  products.forEach((product) => {
+    const pricePerUnit =
+      product.variant.discountedPrice || product.variant.sellingPrice;
+    let orderTotal = pricePerUnit * product.orderQuantity;
+
+    if (product.bulk && product.orderQuantity >= product.bulk.minOrder) {
+      const discountAmount = (product.bulk.discount / 100) * orderTotal;
+      orderTotal -= discountAmount;
+      totalDiscount += discountAmount;
+    }
+
+    totalPrice += orderTotal;
+  });
+
+  return { totalPrice, totalDiscount };
+};
 const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
   const [cartProducts, setCartProducts] = useState([]);
   const [refetch, setRefetch] = useState(0);
@@ -18,27 +38,6 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
   useEffect(() => {
     setCartProducts(getLocalStorageData(storages.cartProducts) || []);
   }, [refetch]);
-
-  const calculateTotalPriceAndDiscount = (products: ICartProduct[]) => {
-    let totalPrice = 0;
-    let totalDiscount = 0;
-
-    products.forEach((product) => {
-      const pricePerUnit =
-        product.variant.discountedPrice || product.variant.sellingPrice;
-      let orderTotal = pricePerUnit * product.orderQuantity;
-
-      if (product.bulk && product.orderQuantity >= product.bulk.minOrder) {
-        const discountAmount = (product.bulk.discount / 100) * orderTotal;
-        orderTotal -= discountAmount;
-        totalDiscount += discountAmount;
-      }
-
-      totalPrice += orderTotal;
-    });
-
-    return { totalPrice, totalDiscount };
-  };
 
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscount(cartProducts);
@@ -94,7 +93,9 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
               </div>
               <div className="flex items-center justify-between gap-5">
                 <span className="text-base text-black-80">Shipping Fee</span>
-                <strong className="text-base font-semibold">${100}</strong>
+                <strong className="text-base font-semibold">
+                  ${shippingFee}
+                </strong>
               </div>
               <div className="flex items-center justify-between gap-5">
                 <span className="text-base text-black-80 capitalize">

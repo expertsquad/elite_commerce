@@ -16,7 +16,7 @@ import { ICategory } from "@/interfaces/category.interface";
 import Logo from "@/utils/Logo";
 import { mainMenus } from "@/constants/mainMenus.constants";
 import WishlistButton from "./WishlistButton";
-import CartButton from "./CartButton";
+import CartButtonAndModal from "./CartButtonAndModal";
 
 const CategoriesAndSubcategories = async () => {
   const categories = await fetchData({
@@ -105,7 +105,7 @@ const LargeDeviceMegaMenu = () => {
           <IconSearch stroke={iconStroke} />
         </button>
         <WishlistButton />
-        <CartButton />
+        <CartButtonAndModal />
         <Link href="/profile" className="mt-2">
           <GenerateGradientIcon
             IconComponent={IconUserCircle}

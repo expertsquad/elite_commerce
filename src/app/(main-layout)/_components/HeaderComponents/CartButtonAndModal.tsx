@@ -5,12 +5,22 @@ import { IconBolt, IconShoppingCart, IconX } from "@tabler/icons-react";
 import React from "react";
 import StarRating from "@/Components/StarRating";
 import Image from "next/image";
-import { demoProductPhoto } from "@/assets";
 import ButtonPrimary from "../../brands/_components/ButtonPrimary";
 import ButtonPrimaryLight from "../../brands/_components/ButtonPrimaryLight";
 import Link from "next/link";
+import { getLocalStorageData } from "@/helpers/localStorage.helper";
+import { server_url, storages } from "@/constants";
+import { calculateTotalPriceAndDiscount } from "../../cart/_components/CartItems";
+import { ICartProduct } from "@/interfaces/cart.interface";
+import IncreaseDecrease from "../../brands/_components/IncreaseDecrease";
 
-const QuickOrderItem = () => {
+const QuickOrderItem = ({
+  product,
+  setRefetch,
+}: {
+  product: ICartProduct;
+  setRefetch: React.Dispatch<React.SetStateAction<number>>;
+}) => {
   return (
     <div className="flex  justify-between gap-3.5">
       <div className="flex md:items-center gap-3.5">
@@ -19,7 +29,7 @@ const QuickOrderItem = () => {
             <div className="relative  md:w-[70px] md:h-[70px]  w-[50px] h-[50px]">
               <Image
                 alt="product"
-                src={demoProductPhoto}
+                src={server_url + product?.productPhoto}
                 fill
                 objectFit="cover"
               />
@@ -29,21 +39,23 @@ const QuickOrderItem = () => {
         <div className="flex flex-col justify-between md:gap-4">
           <div className="flex flex-col justify-between">
             <span className="line-clamp-1 md:text-base text-sm text-black-80">
-              New UBL Bluetooth Speaker
+              {product?.productName}
             </span>
             <div className="flex items-center gap-2">
-              <span className="text-positive text-[10px] md:text-xs">UBL</span>
+              <span className="text-positive text-[10px] md:text-xs">
+                {product?.brandName}
+              </span>
               <span className="text-black-10">|</span>
-              <StarRating rating={4} />
+              <StarRating rating={product?.averageRating || 0} />
             </div>
             <div className="flex items-center justify-between gap-5"></div>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="text-black-80 text-xs">$500.22</span>
-            <span>
-              <IconX stroke={1} height={12} width={12} />
+            <span className="text-black-80 text-xs">
+              {product?.variant?.sellingPrice}
             </span>
-            {/* <IncreaseDecrease orderQuantity={5} /> */}
+            <span className="text-xs">X</span>
+            <IncreaseDecrease product={product} setRefetch={setRefetch} />
           </div>
         </div>
       </div>
@@ -59,25 +71,31 @@ const QuickOrderItem = () => {
   );
 };
 
-const OrderSummery = () => {
+const OrderSummery = ({ products }: { products: ICartProduct[] }) => {
+  const { totalDiscount, totalPrice } =
+    calculateTotalPriceAndDiscount(products);
+  const shippingFee = 100;
+  const calculateTotalWithShipping = totalPrice + shippingFee;
+  const totalPayable = calculateTotalWithShipping - totalDiscount;
+
   return (
     <div className="md:border border-black-10 rounded-[10px] md:px-5 py-[clamp(2px,1.5vh,20px)] space-y-[clamp(2px,.5vh,20px)] bg-white">
       <div className="flex items-center justify-between ">
         <span className="text-black-80 md:text-base text-sm">Subtotal</span>
         <strong className="text-black-80 md:text-base text-sm font-semibold">
-          $<span>1300</span>
+          $<span>{totalPrice}</span>
         </strong>
       </div>
       <div className="flex items-center justify-between ">
         <span className="text-black-80 md:text-base text-sm">Shipping</span>
         <strong className="text-black-80 md:text-base text-sm font-semibold">
-          $<span>14</span>
+          $<span>{shippingFee}</span>
         </strong>
       </div>
       <div className="flex items-center justify-between ">
         <span className="text-black-80 md:text-base text-sm">Discount</span>
         <strong className="text-gradient-secondary md:text-base text-sm font-semibold">
-          -$<span>50</span>
+          -$<span>{totalDiscount}</span>
         </strong>
       </div>
       <hr className="border-black-10 border my-3.5" />
@@ -86,7 +104,7 @@ const OrderSummery = () => {
           Total
         </span>
         <strong className="text-black-80 md:text-lg text-base font-semibold">
-          $<span>1264</span>
+          $<span>{totalPayable}</span>
         </strong>
       </div>
       <div className="flex items-center justify-center gap-5 md:px-5">
@@ -103,8 +121,15 @@ const OrderSummery = () => {
   );
 };
 
-const CartButton = () => {
+const CartButtonAndModal = () => {
   const [show, setShow] = React.useState(false);
+
+  const [cartProducts, setCartProducts] = React.useState([]);
+  const [refetch, setRefetch] = React.useState(0);
+
+  React.useEffect(() => {
+    setCartProducts(getLocalStorageData(storages.cartProducts) || []);
+  }, [refetch]);
 
   return (
     <React.Fragment>
@@ -146,12 +171,18 @@ const CartButton = () => {
             <hr className="border border-black-10 h-[1px] my-3" />
 
             <div className="flex flex-col gap-2 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(350px,45vh))] pb-10">
-              {[...Array(10)].map((item, index) => {
-                return <QuickOrderItem key={index} />;
+              {cartProducts?.map((product: ICartProduct) => {
+                return (
+                  <QuickOrderItem
+                    key={product?._id}
+                    product={product}
+                    setRefetch={setRefetch}
+                  />
+                );
               })}
             </div>
             <div className="fixed bottom-0 right-1 w-[95%]  mx-auto bg-white">
-              <OrderSummery />
+              <OrderSummery products={cartProducts} />
               <div className="my-2 flex items-center justify-center">
                 {" "}
                 <Link
@@ -170,4 +201,4 @@ const CartButton = () => {
   );
 };
 
-export default CartButton;
+export default CartButtonAndModal;
