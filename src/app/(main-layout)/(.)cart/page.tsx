@@ -11,7 +11,6 @@ import { IconBolt, IconShoppingCart, IconX } from "@tabler/icons-react";
 import { calculateTotalPriceAndDiscount } from "../cart/_components/CartItems";
 import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
 import ButtonPrimary from "../brands/_components/ButtonPrimary";
-import Link from "next/link";
 
 const QuickOrderItem = ({
   product,
@@ -122,7 +121,6 @@ const OrderSummery = ({ products }: { products: ICartProduct[] }) => {
 
 const CartInterceptingPage = () => {
   const [show, setShow] = React.useState(true);
-
   const [cartProducts, setCartProducts] = React.useState([]);
   const [refetch, setRefetch] = React.useState(0);
 
@@ -172,13 +170,12 @@ const CartInterceptingPage = () => {
             <OrderSummery products={cartProducts} />
             <div className="my-2 flex items-center justify-center">
               {" "}
-              <Link
-                href={"/cart"}
+              <button
                 className="text-positive text-sm uppercase "
-                onClick={() => setShow(false)}
+                onClick={() => window.location.reload()}
               >
                 View Cart &rarr;
-              </Link>
+              </button>
             </div>
           </div>
         </div>
