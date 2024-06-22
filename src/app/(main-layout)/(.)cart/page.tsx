@@ -1,18 +1,17 @@
 "use client";
-
 import Modal from "@/Components/Modal";
-import { IconBolt, IconShoppingCart, IconX } from "@tabler/icons-react";
-import React from "react";
 import StarRating from "@/Components/StarRating";
-import Image from "next/image";
-import ButtonPrimary from "../../brands/_components/ButtonPrimary";
-import ButtonPrimaryLight from "../../brands/_components/ButtonPrimaryLight";
-import Link from "next/link";
-import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { server_url, storages } from "@/constants";
-import { calculateTotalPriceAndDiscount } from "../../cart/_components/CartItems";
+import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { ICartProduct } from "@/interfaces/cart.interface";
-import IncreaseDecrease from "../../brands/_components/IncreaseDecrease";
+import Image from "next/image";
+import React from "react";
+import IncreaseDecrease from "../brands/_components/IncreaseDecrease";
+import { IconBolt, IconShoppingCart, IconX } from "@tabler/icons-react";
+import { calculateTotalPriceAndDiscount } from "../cart/_components/CartItems";
+import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
+import ButtonPrimary from "../brands/_components/ButtonPrimary";
+import Link from "next/link";
 
 const QuickOrderItem = ({
   product,
@@ -121,8 +120,8 @@ const OrderSummery = ({ products }: { products: ICartProduct[] }) => {
   );
 };
 
-const CartButtonAndModal = () => {
-  const [show, setShow] = React.useState(false);
+const CartInterceptingPage = () => {
+  const [show, setShow] = React.useState(true);
 
   const [cartProducts, setCartProducts] = React.useState([]);
   const [refetch, setRefetch] = React.useState(0);
@@ -132,73 +131,60 @@ const CartButtonAndModal = () => {
   }, [refetch]);
 
   return (
-    <React.Fragment>
-      <button onClick={() => setShow(true)} className="relative">
-        <div className="p-1 w-4 h-4 rounded-full bg-gradient-secondary text-white absolute -right-1.5 -top-1 flex items-center justify-center text-[8px]">
-          0
-        </div>
-        <IconShoppingCart
-          stroke={1.2}
-          className="text-black-80"
-          width={24}
-          height={24}
-        />
-      </button>
-
-      {show && (
-        <Modal
-          show={show}
-          setShow={setShow}
-          className="w-[600px] overflow-y-auto  scrollbar-y-remove"
-          alignment="right"
-          showCancelBtnINSmallDevice={show}
-        >
-          <div className="p-2">
-            <span className="font-semibold [font-size:clamp(14px,5vw,18px)]">
-              Shopping Cart
+    show && (
+      <Modal
+        show={show}
+        setShow={setShow}
+        className="w-[600px] overflow-y-auto  scrollbar-y-remove"
+        alignment="right"
+        showCancelBtnINSmallDevice={show}
+        isIntercepting={true}
+      >
+        <div className="p-2">
+          <span className="font-semibold [font-size:clamp(14px,5vw,18px)]">
+            Shopping Cart
+          </span>
+          <div className="flex flex-col gap-2 mt-2">
+            <input type="range" className="pointer-events-none" value={20} />
+            <span className="block text-base">
+              Buy <span className="text-gradient-primary">$900</span> more to
+              get{" "}
+              <span className="text-gradient-primary font-semibold">
+                Freeship
+              </span>{" "}
+              🔥
             </span>
-            <div className="flex flex-col gap-2 mt-2">
-              <input type="range" className="pointer-events-none" value={20} />
-              <span className="block text-base">
-                Buy <span className="text-gradient-primary">$900</span> more to
-                get{" "}
-                <span className="text-gradient-primary font-semibold">
-                  Freeship
-                </span>{" "}
-                🔥
-              </span>
-            </div>
-            <hr className="border border-black-10 h-[1px] my-3" />
+          </div>
+          <hr className="border border-black-10 h-[1px] my-3" />
 
-            <div className="flex flex-col gap-2 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(350px,45vh))] pb-10">
-              {cartProducts?.map((product: ICartProduct) => {
-                return (
-                  <QuickOrderItem
-                    key={product?._id}
-                    product={product}
-                    setRefetch={setRefetch}
-                  />
-                );
-              })}
-            </div>
-            <div className="fixed bottom-0 right-1 w-[95%]  mx-auto bg-white">
-              <OrderSummery products={cartProducts} />
-              <div className="my-2 flex items-center justify-center">
-                {" "}
-                <Link
-                  href={"/cart"}
-                  className="text-positive text-sm uppercase "
-                  onClick={() => setShow(false)}
-                >
-                  View Cart &rarr;
-                </Link>
-              </div>
+          <div className="flex flex-col gap-2 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(350px,45vh))] pb-10">
+            {cartProducts?.map((product: ICartProduct) => {
+              return (
+                <QuickOrderItem
+                  key={product?._id}
+                  product={product}
+                  setRefetch={setRefetch}
+                />
+              );
+            })}
+          </div>
+          <div className="fixed bottom-0 right-1 w-[95%]  mx-auto bg-white">
+            <OrderSummery products={cartProducts} />
+            <div className="my-2 flex items-center justify-center">
+              {" "}
+              <Link
+                href={"/cart"}
+                className="text-positive text-sm uppercase "
+                onClick={() => setShow(false)}
+              >
+                View Cart &rarr;
+              </Link>
             </div>
           </div>
-        </Modal>
-      )}
-    </React.Fragment>
+        </div>
+      </Modal>
+    )
   );
 };
 
-export default CartButtonAndModal;
+export default CartInterceptingPage;
