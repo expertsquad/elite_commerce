@@ -10,9 +10,14 @@ import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { storages } from "@/constants";
 import { mergeProducts } from "@/utils/mergeProduct.utils";
 import { updatedCartMutation } from "@/utils/updateCart.utils";
+import PasswordInput from "@/app/(main-layout)/profile/_components/PasswordInput";
+import MergingIndicator from "./MergingIndicator";
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+
+  const [merging, setMerging] = useState(false);
+
   const { replace } = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -24,6 +29,7 @@ const LoginForm = () => {
 
     if (result?.success) {
       setIsLoading(false);
+      setMerging(true);
       // merge remote and local cart items
       const remoteCart = await fetchProtectedData({
         route: "/cart/me",
@@ -32,12 +38,16 @@ const LoginForm = () => {
       const remoteProducts = remoteCart?.data?.products || [];
       const mergedProducts = mergeProducts(localProducts, remoteProducts);
       await updatedCartMutation(mergedProducts);
+      setMerging(false);
       replace("/profile");
     }
   };
 
   if (isLoading) {
     return <Loading />;
+  }
+  if (merging) {
+    return <MergingIndicator />;
   }
   return (
     <form
@@ -48,10 +58,10 @@ const LoginForm = () => {
         <legend className="mx-auto">Log in</legend>
 
         <CustomInput placeholder="Email or Phone" name="email" />
-        <CustomInput placeholder="Type your password" name="password" />
+        <PasswordInput placeholder="Type your password" name="password" />
         <small className="ml-auto">Forgot password</small>
         <SubmitButton
-          className={"bg-gradient-primary w-full py-1 text-white rounded-md"}
+          className={"bg-gradient-primary w-full py-3 text-white rounded-md"}
         >
           Login
         </SubmitButton>

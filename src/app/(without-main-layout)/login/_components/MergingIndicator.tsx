@@ -1,8 +1,10 @@
-export default function Loading() {
+import React from "react";
+
+const MergingIndicator = () => {
   return (
-    <div className="fixed inset-0 bg-white-transparent z-50 h-dvh w-dvw flex items-center justify-center">
+    <div className="absolute bg-white-transparent z-50 h-dvh w-dvw flex items-center justify-center">
       <div className="flex items-center">
-        <span className="text-3xl mr-4">Loading</span>
+        <span className="text-3xl mr-4">Your cart is merging...</span>
         <svg
           className="animate-spin h-8 w-8 text-gray-800"
           xmlns="http://www.w3.org/2000/svg"
@@ -26,4 +28,6 @@ export default function Loading() {
       </div>
     </div>
   );
-}
+};
+
+export default MergingIndicator;
