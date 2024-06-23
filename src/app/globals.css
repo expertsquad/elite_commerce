@@ -120,6 +120,13 @@ main {
   clip-path: polygon(51% 50%, 74% 59%, 98% 68%, 61% 68%, 50% 62%, 28% 40%);
 }
 
+.login-signup-container-background {
+  background-image: url("../assets/Images/login&signupBackground.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 /* scroll bar */
 .scrollbar-x-remove::-webkit-scrollbar:horizontal {
   @apply hidden;

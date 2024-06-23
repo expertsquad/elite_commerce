@@ -38,8 +38,8 @@ const LoginForm = () => {
       const remoteProducts = remoteCart?.data?.products || [];
       const mergedProducts = mergeProducts(localProducts, remoteProducts);
       await updatedCartMutation(mergedProducts);
-      setMerging(false);
       router.back();
+      setMerging(false);
     }
   };
 
