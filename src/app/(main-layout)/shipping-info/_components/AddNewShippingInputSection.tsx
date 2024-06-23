@@ -3,8 +3,11 @@ import CustomInput from "../../../../Components/CustomInput";
 import { countryNames } from "@/constants/countryNames.constant";
 
 const AddNewShippingInputSection = () => {
+  const handleAddShippingInput = async (formData: FormData) => {
+    console.log(formData);
+  };
   return (
-    <div>
+    <form action={handleAddShippingInput}>
       <div className="grid grid-cols-1 gap-4 md:gap-6 lg:grid-cols-2">
         <CustomInput
           label="First Name"
@@ -76,7 +79,7 @@ const AddNewShippingInputSection = () => {
           address
         </label>
       </div>
-    </div>
+    </form>
   );
 };
 

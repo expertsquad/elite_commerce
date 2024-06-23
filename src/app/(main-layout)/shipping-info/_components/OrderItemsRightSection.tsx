@@ -34,7 +34,11 @@ const OrderItemsRightSection = () => {
 
       {/* Total order amount card */}
 
-      <RightSideTotalAmountCard />
+      <RightSideTotalAmountCard
+        cartProducts={cartProducts}
+        buttonLink="/shipping-info/billing-info"
+        buttonText="Continue To Payment"
+      />
     </div>
   );
 };

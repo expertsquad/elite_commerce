@@ -11,6 +11,7 @@ import { IconBolt, IconShoppingCart, IconX } from "@tabler/icons-react";
 import { calculateTotalPriceAndDiscount } from "../cart/_components/CartItems";
 import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
 import ButtonPrimary from "../brands/_components/ButtonPrimary";
+import Link from "next/link";
 
 const QuickOrderItem = ({
   product,
@@ -108,12 +109,14 @@ const OrderSummery = ({ products }: { products: ICartProduct[] }) => {
       <div className="flex items-center justify-center gap-5 md:px-5">
         <ButtonPrimaryLight className="!uppercase !text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)]">
           <IconShoppingCart />
-          Check Out
-        </ButtonPrimaryLight>
-        <ButtonPrimary className="!uppercase !whitespace-nowrap py-[clamp(2px,1.2vh,20px)]">
-          <IconBolt height={18} width={18} />
           Order Now
-        </ButtonPrimary>
+        </ButtonPrimaryLight>
+        <Link href="/shipping-info" className="w-full">
+          <ButtonPrimary className="!uppercase !whitespace-nowrap py-[clamp(2px,1.2vh,20px)]">
+            <IconBolt height={18} width={18} />
+            Check Out
+          </ButtonPrimary>
+        </Link>
       </div>
     </div>
   );
