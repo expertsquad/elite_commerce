@@ -18,7 +18,7 @@ const LoginForm = () => {
 
   const [merging, setMerging] = useState(false);
 
-  const { replace } = useRouter();
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,7 +39,7 @@ const LoginForm = () => {
       const mergedProducts = mergeProducts(localProducts, remoteProducts);
       await updatedCartMutation(mergedProducts);
       setMerging(false);
-      replace("/profile");
+      router.back();
     }
   };
 
