@@ -45,6 +45,8 @@ const OrderItems = async ({ order }: { order: Order }) => {
                 ? "bg-gradient-primary-light  px-5 rounded-lg py-2"
                 : order?.orderStatus?.status === "Delivered"
                 ? "bg-gradient-secondary-light    px-5 rounded-lg py-2"
+                : order?.orderStatus?.status === "Rejected"
+                ? "bg-danger px-5 rounded-lg py-2 "
                 : ""
             } " px-5 rounded-lg py-2"`}
           >

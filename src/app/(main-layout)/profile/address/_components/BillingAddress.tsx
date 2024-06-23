@@ -70,13 +70,13 @@ const BillingAddress = ({
           defaultValue={billingAddress?.state}
         />
 
-        {/* <CustomInput
+        <CustomInput
           label="Zip Code"
           type="text"
           name="zipCode"
           placeholder="00108"
           defaultValue={billingAddress?.zipCode}
-        /> */}
+        />
 
         <CustomInput
           label="Company Name (Optional)"
