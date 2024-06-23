@@ -41,11 +41,11 @@ const ProductCard = ({ product, setRefetch }: IProductCardProps) => {
         <div className="flex items-center justify-between mt-5">
           <div className="flex items-center whitespace-nowrap">
             <span className="[font-size:_clamp(0.6em,4vw,1.1em)] text-gradient-primary font-bold">
-              ${50}
+              ${product?.variants[0]?.discountedPrice}
             </span>
             <span className="mx-0.5 text-black-10">|</span>
             <del className="text-base text-black-50 [font-size:_clamp(0.5em,4vw,0.8em)] ">
-              ${70}
+              ${product?.variants[0]?.sellingPrice}
             </del>
           </div>
           <ProductCartBtn product={product} setRefetch={setRefetch} />
