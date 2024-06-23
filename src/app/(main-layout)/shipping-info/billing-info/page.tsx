@@ -18,7 +18,10 @@ const page = async () => {
 
       <div className="">
         {/* We will add here link to go to next page */}
-        <OrderItemsRightSection />
+        <OrderItemsRightSection
+          buttonText="Continue To Payment"
+          buttonLink="/shipping-info/billing-info"
+        />
       </div>
     </section>
   );

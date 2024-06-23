@@ -14,7 +14,7 @@ export interface AddressData {
   country: string;
   streetAddress: string;
   phoneNumber: string;
-  zipCode: number;
+  zipCode: string;
   companyName: string;
   userId: string;
   createdAt: string;

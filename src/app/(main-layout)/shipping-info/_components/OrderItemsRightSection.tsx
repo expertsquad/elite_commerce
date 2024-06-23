@@ -6,7 +6,13 @@ import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { storages } from "@/constants";
 import { ICartProduct } from "@/interfaces/cart.interface";
 
-const OrderItemsRightSection = () => {
+const OrderItemsRightSection = ({
+  buttonText,
+  buttonLink,
+}: {
+  buttonText: string;
+  buttonLink: string;
+}) => {
   const [cartProducts, setCartProducts] = useState([]);
   const [refetch, setRefetch] = useState(0);
 
@@ -36,8 +42,8 @@ const OrderItemsRightSection = () => {
 
       <RightSideTotalAmountCard
         cartProducts={cartProducts}
-        buttonLink="/shipping-info/billing-info"
-        buttonText="Continue To Payment"
+        buttonLink={buttonLink}
+        buttonText={buttonText}
       />
     </div>
   );

@@ -8,7 +8,7 @@ const AddNewShippingAddress = () => {
         Contact Information
       </h3>
 
-      <AddNewShippingInputSection />
+      {/* <AddNewShippingInputSection /> */}
     </div>
   );
 };

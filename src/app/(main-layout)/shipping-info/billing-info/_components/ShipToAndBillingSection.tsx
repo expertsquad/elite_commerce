@@ -11,10 +11,22 @@ const ShipToAndBillingSection = ({
   getMe: IApiResponse<IUserMe>;
 }) => {
   const [selectedOption, setSelectedOption] = useState("sameAsShipping");
+  const [billingAddress, setBillingAddress] = useState({});
 
   const handleOptionChange = (event: any) => {
-    setSelectedOption(event.target.value);
+    const value = event.target.value;
+    setSelectedOption(value);
+
+    if (value === "sameAsShipping") {
+      setBillingAddress({});
+    }
   };
+
+  const handleNewAddressChange = (newAddress: any) => {
+    setBillingAddress(newAddress);
+  };
+
+  console.log(billingAddress);
 
   return (
     <div className="md:border md:border-black-10 border-transparent md:p-7 p-5 rounded-lg">
@@ -69,7 +81,9 @@ const ShipToAndBillingSection = ({
         </label>
       </div>
 
-      {selectedOption === "addNewBillingAddress" && <AddNewBillingAddress />}
+      {selectedOption === "addNewBillingAddress" && (
+        <AddNewBillingAddress onNewAddressChange={handleNewAddressChange} />
+      )}
     </div>
   );
 };

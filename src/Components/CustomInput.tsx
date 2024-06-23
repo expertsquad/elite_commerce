@@ -37,7 +37,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
           defaultValue={defaultValue}
           value={value}
           name={name}
-          className={` required w-full border border-black-10  py-3  pr-4 focus:outline-none focus:border- rounded-md ${inputStyle} ${
+          className={` ${inputStyle}  required w-full border border-black-10  py-3  pr-4 focus:outline-none  rounded-md ${
             readonly ? "text-black-50" : "text-black"
           } placeholder:text-sm ${
             placeholderIcon ? "pl-9" : "pl-5"
