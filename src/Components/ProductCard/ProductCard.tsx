@@ -19,6 +19,7 @@ const ProductCard = ({ product, setRefetch }: IProductCardProps) => {
         <ProductImageSlider
           // loading={loading}
           product={product}
+          setRefetch={setRefetch}
           // defaultVariant={defaultVariant}
         />
       </div>

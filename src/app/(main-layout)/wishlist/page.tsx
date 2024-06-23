@@ -17,13 +17,25 @@ import { server_url, storages } from "@/constants";
 import { wishlistTableHeader } from "@/constants/tablesHeaders.constants";
 import { IWishlistProduct } from "@/interfaces/wishlist.interface";
 import { fetchProtectedData } from "@/actions/fetchData";
+import {
+  updatedWishlistMutation,
+  updateWishlist,
+} from "@/utils/updateWishlist.utils";
+import { mergeProducts } from "@/utils/mergeProduct.utils";
 
 const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
+  const handleRemoveFromFav = () => {
+    updateWishlist({ product: product });
+  };
   return (
     <tr>
       <td className="px-5 border border-black-10 border-collapse">
-        <button>
-          {" "}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            handleRemoveFromFav();
+          }}
+        >
           <IconX color="#FF3838" />
         </button>
       </td>
@@ -66,7 +78,7 @@ const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
       <td className="border border-black-10 border-collapse px-5">
         <div className=" flex items-center justify-center gap-5">
           <button className="border border-black-10 rounded-full p-2">
-            <IconEye />
+            <IconEye size={18} stroke={1} />
           </button>
           <ButtonPrimaryLight className="!rounded-full !text-black-80 !whitespace-nowrap !py-2 !px-3.5">
             <IconShoppingCart color="#24509E" />
@@ -93,14 +105,16 @@ const Wishlist = () => {
   useEffect(() => {
     const getRemoteData = async () => {
       try {
-        const productsData = await fetchProtectedData({
-          route: "/product",
-          query: "sortBy=averageRating",
-          limit: 3,
+        const remoteWishlist = await fetchProtectedData({
+          route: "/wishlist/me",
         });
-        console.log(productsData);
+        const localProducts =
+          getLocalStorageData(storages.wishlistProducts) || [];
+        const remoteProducts = remoteWishlist?.data?.products || [];
+        const mergedProducts = mergeProducts(localProducts, remoteProducts);
+        await updatedWishlistMutation(mergedProducts);
 
-        return productsData;
+        return localProducts;
       } catch (error) {
         console.log(error);
       }

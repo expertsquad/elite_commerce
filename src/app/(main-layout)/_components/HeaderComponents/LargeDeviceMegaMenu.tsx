@@ -105,7 +105,7 @@ const LargeDeviceMegaMenu = () => {
         {/* wishlist */}
         <Link href="/wishlist" className="relative">
           <span className="p-1 w-4 h-4 rounded-full bg-gradient-secondary text-white absolute -right-1.5 -top-1 flex items-center justify-center text-[8px]">
-            0
+            {99}
           </span>
           <IconHeart stroke={1} />
         </Link>
