@@ -29,21 +29,23 @@ const SortingSection = ({
   const [selected, setSelected] = useState("MostPopular");
 
   return (
-    <Fragment>
-      <div className="border border-black-10 px-3 rounded-md">
-        <select
-          name="products-sort"
-          className="py-2 rounded-md outline-none border-none w-full md:w-min bg-transparent text-gray-700 active:text-fuchsia-700"
-          onChange={(e) => setSelected(e.target.value)}
-        >
-          <option value="MostPopular">Most Popular</option>
-          <option value="New">New Product</option>
-          <option value="HighPrice">High Price</option>
-          <option value="LowPrice">Low Price</option>
-        </select>
+    <div className="">
+      <div>
+        <div className="border border-black-10 px-3 rounded-md">
+          <select
+            name="products-sort"
+            className="py-2 rounded-md outline-none border-none w-full md:w-min bg-transparent text-gray-700 active:text-fuchsia-700 "
+            onChange={(e) => setSelected(e.target.value)}
+          >
+            <option value="MostPopular">Most Popular</option>
+            <option value="New">New Product</option>
+            <option value="HighPrice">High Price</option>
+            <option value="LowPrice">Low Price</option>
+          </select>
+        </div>
       </div>
 
-      <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5 min-h-96 justify-around">
+      <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5  justify-around">
         {selected === "MostPopular" ? (
           <Suspense fallback={<Loading />}>
             <MostPopularProducts products={mostPopularProducts} />
@@ -64,7 +66,7 @@ const SortingSection = ({
           <></>
         )}
       </div>
-    </Fragment>
+    </div>
   );
 };
 
