@@ -11,12 +11,16 @@ const page = async () => {
     query: "isDefault=true",
   });
 
+  const getMe = await fetchProtectedData({
+    route: "/user/me",
+  });
+
   return (
     <section className=" p-5 lg:p-0 max-w-7xl mx-auto flex w-full gap-5 flex-col md:flex-row mb-10">
       <div className="w-full">
         <div className="">
           {/* Name and email only */}
-          <ShippingInfoContent />
+          <ShippingInfoContent getMe={getMe} />
           {/* shipping and shipping input section */}
           {defaultAddress?.data?.length ? (
             <ShippingAddess defaultAddress={defaultAddress} />

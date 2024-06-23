@@ -56,7 +56,7 @@ const ShippingAddess = ({
               <div className="h-3 w-3 bg-gradient-primary rounded-full"></div>
             )}
           </div>
-          <span className="ml-2">Use Different Dhipping Address</span>
+          <span className="ml-2">Use Different Shipping Address</span>
           <input
             type="radio"
             value="addNewAddress"

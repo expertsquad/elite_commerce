@@ -106,6 +106,10 @@ export const updateCart = async ({
 
   // update new data
   // if accessToken exist then update both else local storage only
+  await updatedCartMutation(updatedCartItems);
+};
+
+export const updatedCartMutation = async (updatedCartItems: ICartProduct[]) => {
   setLocalStorageData(
     storages.cartProducts,
     updatedCartItems.map((item) => {

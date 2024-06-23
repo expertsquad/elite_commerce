@@ -1,12 +1,7 @@
 "use client";
 import { demoProductPhoto } from "@/assets";
 import Modal from "@/Components/Modal";
-import {
-  IconArrowLeft,
-  IconHeart,
-  IconShoppingCart,
-  IconX,
-} from "@tabler/icons-react";
+import { IconArrowLeft, IconShoppingCart, IconX } from "@tabler/icons-react";
 import Image from "next/image";
 import React, { Fragment } from "react";
 import ButtonPrimary from "../../brands/_components/ButtonPrimary";
@@ -60,16 +55,10 @@ export const WishlistItem = () => {
 };
 
 const WishlistButton = () => {
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = React.useState(true);
 
   return (
     <Fragment>
-      <button onClick={() => setShow(true)} className="relative">
-        <circle className="p-1 w-4 h-4 rounded-full bg-gradient-secondary text-white absolute -right-1.5 -top-1 flex items-center justify-center text-[8px]">
-          0
-        </circle>
-        <IconHeart stroke={1} />
-      </button>
       {show && (
         <Modal
           show={show}

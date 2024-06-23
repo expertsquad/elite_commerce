@@ -1,5 +1,6 @@
-import React from "react";
-import Breadcrumb from "../example-poran/_components/Breadcrumb";
+"use client";
+import React, { useEffect, useState } from "react";
+import Breadcrumb from "../../../Components/BreadCrumb/Breadcrumb";
 import Link from "next/link";
 import {
   IconBolt,
@@ -9,11 +10,15 @@ import {
 } from "@tabler/icons-react";
 
 import Image from "next/image";
-import { demoProductPhoto } from "@/assets";
 import StarRating from "@/Components/StarRating";
 import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
+import { getLocalStorageData } from "@/helpers/localStorage.helper";
+import { server_url, storages } from "@/constants";
+import { wishlistTableHeader } from "@/constants/tablesHeaders.constants";
+import { IWishlistProduct } from "@/interfaces/wishlist.interface";
+import { fetchProtectedData } from "@/actions/fetchData";
 
-export const WishlistItem = () => {
+const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
   return (
     <tr>
       <td className="px-5 border border-black-10 border-collapse">
@@ -28,7 +33,7 @@ export const WishlistItem = () => {
             <div className="relative  md:w-[60px] md:h-[60px]  w-[50px] h-[50px]">
               <Image
                 alt="product"
-                src={demoProductPhoto}
+                src={server_url + product?.productPhotos?.[0]}
                 fill
                 objectFit="cover"
               />
@@ -36,24 +41,26 @@ export const WishlistItem = () => {
           </div>
           <div className="flex flex-col gap-2.5">
             <span className="line-clamp-2 [font-size:_clamp(10px,5vw,18px)]">
-              Apple Watch Series 8 GPS 45mm Silver Aluminum Case
+              {product?.productName}
             </span>
             <div className="flex items-center  gap-2">
-              <span className="text-positive text-sm">Apple</span>
+              <span className="text-positive text-sm">
+                {product?.brandName}
+              </span>
               <span className="text-black-10 text-sm">|</span>
-              <StarRating rating={2} />
+              <StarRating rating={product?.averageRating || 0} />
             </div>
           </div>
         </div>
       </td>
       <td className=" border border-black-10 border-collapse px-5">
         <span className="text-gradient-primary text-lg font-semibold">
-          $1500.03
+          {product?.variant?.discountedPrice || product?.variant?.sellingPrice}
         </span>
       </td>
       <td className="border border-black-10 border-collapse px-5">
         <span className="text-positive text-lg font-semibold whitespace-nowrap">
-          {"205"} In Stock
+          {product?.variant?.inStock} In Stock
         </span>
       </td>
       <td className="border border-black-10 border-collapse px-5">
@@ -78,6 +85,30 @@ export const WishlistItem = () => {
 };
 
 const Wishlist = () => {
+  const [wishlistProducts, setWishlistProducts] = useState<
+    IWishlistProduct[] | []
+  >([]);
+  const [refetch, setRefetch] = useState(0);
+
+  useEffect(() => {
+    const getRemoteData = async () => {
+      try {
+        const productsData = await fetchProtectedData({
+          route: "/product",
+          query: "sortBy=averageRating",
+          limit: 3,
+        });
+        console.log(productsData);
+
+        return productsData;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getRemoteData();
+    setWishlistProducts(getLocalStorageData(storages.wishlistProducts) || []);
+  }, [refetch]);
+
   return (
     <div>
       <div>
@@ -85,36 +116,35 @@ const Wishlist = () => {
       </div>
       <div className="max-w-[1320px] mx-auto px-5 mt-12  ">
         <div className="relative table-auto overflow-x-auto scrollbar-x-remove">
-          <table className=" border border-black-10 border-collapse">
-            <thead>
-              <tr className="border-black-10 border border-collapse">
-                {[
-                  "X",
-                  "Product Name",
-                  "Price",
-                  "Stock",
-                  "Action",
-                  "Quick Order",
-                ].map((th, i) => {
-                  return (
-                    <th
-                      className={`font-semibold text-black-80 border border-black-10 text-center py-4 ${
-                        th === "X" && "invisible"
-                      }`}
-                      key={i}
-                    >
-                      {th}
-                    </th>
-                  );
+          {wishlistProducts?.length ? (
+            <table className=" border border-black-10 border-collapse w-full">
+              <thead>
+                <tr className="border-black-10 border border-collapse">
+                  {wishlistTableHeader.map((th, i) => {
+                    return (
+                      <th
+                        className={`font-semibold text-black-80 border border-black-10 text-center py-4 ${
+                          th === "x" && "invisible"
+                        }`}
+                        key={i}
+                      >
+                        {th}
+                      </th>
+                    );
+                  })}
+                </tr>
+              </thead>
+              <tbody>
+                {wishlistProducts.map((product, index) => {
+                  return <WishlistItem key={index} product={product} />;
                 })}
-              </tr>
-            </thead>
-            <tbody>
-              {[...Array(5)].map((td, index) => {
-                return <WishlistItem key={index} />;
-              })}
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          ) : (
+            <p className="text-center text-gradient-secondary text-lg font-semibold">
+              No products found in your wishlist
+            </p>
+          )}
         </div>
         <div className="flex items-center justify-center gap-3.5 my-12">
           <Link

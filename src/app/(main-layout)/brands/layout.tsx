@@ -1,5 +1,5 @@
 import React from "react";
-import Breadcrumb from "../example-poran/_components/Breadcrumb";
+import Breadcrumb from "../../../Components/BreadCrumb/Breadcrumb";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (

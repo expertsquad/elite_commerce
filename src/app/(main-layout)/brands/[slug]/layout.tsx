@@ -17,7 +17,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
     <div>
       <div className="mx-auto max-w-7xl px-5">
         <div className="flex items-center justify-between md:hidden">
-          <SortingSection />
+          {/* <SortingSection /> */}
           <BrandFilterModal
             products={products?.data}
             categories={categories?.data}

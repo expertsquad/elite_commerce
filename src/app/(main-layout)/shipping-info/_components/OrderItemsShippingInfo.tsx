@@ -2,8 +2,25 @@ import StarRating from "@/Components/StarRating";
 import { IconX } from "@tabler/icons-react";
 import Image from "next/image";
 import IncreaseDecrease from "../../brands/_components/IncreaseDecrease";
+import { ICartProduct } from "@/interfaces/cart.interface";
+import { updateCart } from "@/utils/updateCart.utils";
 
-export const OrderItemsShippingInfo = () => {
+export const OrderItemsShippingInfo = ({
+  product,
+  setRefetch,
+}: {
+  product: ICartProduct;
+  setRefetch: React.Dispatch<React.SetStateAction<number>>;
+}) => {
+  const handleRemoveItem = () => {
+    updateCart({ actionType: "remove", product });
+    setRefetch((prev) => prev + 1);
+  };
+
+  // product price
+  const price =
+    product?.variant?.discountedPrice || product?.variant?.sellingPrice;
+
   return (
     <div className="flex  justify-between gap-3.5">
       <div className="flex md:items-center gap-3.5">
@@ -17,30 +34,32 @@ export const OrderItemsShippingInfo = () => {
         <div className="flex flex-col justify-between gap-4">
           <div className="flex flex-col justify-between">
             <span className="line-clamp-1 md:text-base text-sm text-black-80">
-              New UBL Bluetooth Speaker
+              {product?.productName}
             </span>
             <div className="flex items-center gap-2">
-              <span className="text-positive text-[10px] md:text-xs">UBL</span>
+              <span className="text-positive text-[10px] md:text-xs">
+                {product?.brandName}
+              </span>
               <span className="text-black-10">|</span>
               <StarRating rating={4} />
             </div>
             <div className="flex items-center justify-between gap-5"></div>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="text-black-80 text-xs">$500.22</span>
+            <span className="text-black-80 text-xs">${price}</span>
             <span>
               <IconX stroke={1} height={12} width={12} />
             </span>
-            <IncreaseDecrease />
+            <IncreaseDecrease product={product} setRefetch={setRefetch} />
           </div>
         </div>
       </div>
       <div className="flex flex-col items-end justify-between">
-        <button>
+        <button onClick={handleRemoveItem}>
           <IconX stroke={1} color="red" height={16} width={16} />
         </button>
         <strong className="font-semibold text-gradient-primary text-base">
-          $1500.66
+          ${price * product?.orderQuantity}
         </strong>
       </div>
     </div>

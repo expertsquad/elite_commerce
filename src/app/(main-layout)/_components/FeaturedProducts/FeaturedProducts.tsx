@@ -1,8 +1,7 @@
 "use client";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
-import React, { Suspense } from "react";
+import React from "react";
 import dynamic from "next/dynamic";
-import Loading from "@/app/loading";
 import { IProduct } from "@/interfaces/product.interface";
 
 const NewestProducts = dynamic(() => import("./NewestProducts"));
@@ -56,17 +55,11 @@ const FeaturedProducts = ({
       {/* layout */}
       <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5 min-h-96 justify-around">
         {filter === "Newest" ? (
-          <Suspense fallback={<Loading />}>
-            <NewestProducts products={newestProducts} />
-          </Suspense>
+          <NewestProducts products={newestProducts} />
         ) : filter === "TopSell" ? (
-          <Suspense fallback={<Loading />}>
-            <TopSellProducts products={topSellProducts} />
-          </Suspense>
+          <TopSellProducts products={topSellProducts} />
         ) : (
-          <Suspense fallback={<Loading />}>
-            <PopularProducts products={popularProducts} />
-          </Suspense>
+          <PopularProducts products={popularProducts} />
         )}
       </div>
     </div>

@@ -1,8 +1,6 @@
 import React from "react";
-import Breadcrumb from "../example-poran/_components/Breadcrumb";
-import ProductCard from "@/Components/ProductCard/ProductCard";
+import Breadcrumb from "../../../Components/BreadCrumb/Breadcrumb";
 import { fetchData } from "@/actions/fetchData";
-import { IProduct } from "@/interfaces/product.interface";
 import CartItems from "./_components/CartItems";
 
 const CartView = async () => {

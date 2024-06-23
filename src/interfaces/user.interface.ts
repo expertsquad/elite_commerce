@@ -8,3 +8,7 @@ export interface IUser {
   profilePhoto?: string;
   isVerified: boolean;
 }
+
+export interface IGetMeResponse {
+  data: IUser;
+}
