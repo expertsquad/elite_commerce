@@ -33,6 +33,8 @@ import orderPlacedDesign from "./Images/orderplacedesign.svg";
 import orderPlacedDesign2 from "./Images/orderplaceddesign2.svg";
 import orderPlacedDesignTemplate from "./Images/orderplaceddesigntemplate.svg";
 import demoBrand from "./Images/demoBrandImg.svg";
+import loginSignupBackground from "./Images/login&signupBackground.svg";
+import loginSignupTopShapeBg from "./Images/login&signupTopShapeBackground.svg";
 export {
   brandTestImage,
   demoProductPhoto,
@@ -65,5 +67,7 @@ export {
   orderPlacedDesign2,
   orderPlacedDesignTemplate,
   demoBrand,
+  loginSignupBackground,
+  loginSignupTopShapeBg,
 };
 // add all the assets here
