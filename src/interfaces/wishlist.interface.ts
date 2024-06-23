@@ -1,9 +1,13 @@
+import { IProduct, IProductVariant } from "./product.interface";
+
+export interface IWishlistProduct extends IProduct {
+  brandName: string;
+  variant: IProductVariant;
+  productPhoto: string;
+  productId: string;
+}
+
 export interface IWishlist {
   userId: string;
-  products: {
-    productName: string;
-    brandName: string;
-    productPhoto: string;
-    productId: string;
-  }[];
+  products: IWishlistProduct[];
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import Breadcrumb from "../example-poran/_components/Breadcrumb";
+import Breadcrumb from "../../../Components/BreadCrumb/Breadcrumb";
 import SortingSection from "./_components/FilterBySelection";
 import FilterModal from "./_components/FilterModal";
 import { fetchData } from "@/actions/fetchData";
@@ -23,7 +23,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
       </div>
       <div className="mx-auto max-w-7xl px-5">
         <div className="flex items-center justify-between md:hidden mb-5">
-          <SortingSection />
+          {/* <SortingSection /> */}
           <FilterModal
             categories={categories?.data}
             products={products?.data}

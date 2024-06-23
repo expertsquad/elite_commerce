@@ -15,8 +15,6 @@ import { fetchData } from "@/actions/fetchData";
 import { ICategory } from "@/interfaces/category.interface";
 import Logo from "@/utils/Logo";
 import { mainMenus } from "@/constants/mainMenus.constants";
-import WishlistButton from "./WishlistButton";
-import CartButton from "./CartButton";
 
 const CategoriesAndSubcategories = async () => {
   const categories = await fetchData({
@@ -104,8 +102,27 @@ const LargeDeviceMegaMenu = () => {
         <button className="first:after:content-['|'] after:text-black-50 after:opacity-50 flex items-center gap-2">
           <IconSearch stroke={iconStroke} />
         </button>
-        <WishlistButton />
-        <CartButton />
+        {/* wishlist */}
+        <Link href="/wishlist" className="relative">
+          <span className="p-1 w-4 h-4 rounded-full bg-gradient-secondary text-white absolute -right-1.5 -top-1 flex items-center justify-center text-[8px]">
+            0
+          </span>
+          <IconHeart stroke={1} />
+        </Link>
+        {/* <WishlistButton /> */}
+        {/* cart */}
+        <Link href="/cart" className="relative">
+          <span className="p-1 w-4 h-4 rounded-full bg-gradient-secondary text-white absolute -right-1.5 -top-1 flex items-center justify-center text-[8px]">
+            0
+          </span>
+          <IconShoppingCart
+            stroke={1.2}
+            className="text-black-80"
+            width={24}
+            height={24}
+          />
+        </Link>
+        {/* profile */}
         <Link href="/profile" className="mt-2">
           <GenerateGradientIcon
             IconComponent={IconUserCircle}

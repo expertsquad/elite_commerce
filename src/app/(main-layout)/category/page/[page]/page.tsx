@@ -20,9 +20,7 @@ const ProductsPage = async ({ params }: { params: { page: number } }) => {
         <div>
           <span>{products?.meta?.total} Items result found - </span>
         </div>
-        <div className="hidden md:block">
-          <SortingSection />
-        </div>
+        <div className="hidden md:block">{/* <SortingSection /> */}</div>
       </div>
       <div className="grid grid-cols-product-grid gap-5 place-items-center">
         {products?.data?.map((product: IProduct) => (
