@@ -15,7 +15,6 @@ const Page = () => {
       route: "/user/signup",
       data: formData,
     });
-    console.log(res);
 
     if (res?.data?.accessToken) {
       cookies().set("accessToken", res?.data?.accessToken);

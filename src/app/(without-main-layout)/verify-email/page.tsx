@@ -5,6 +5,8 @@ import Form from "@/Components/Form";
 import SubmitButton from "@/Components/SubmitButton";
 import { postDataMutation } from "@/actions/postDataMutation";
 import { updateDataMutation } from "@/actions/updateDataMutation";
+import { cookies } from "next/headers";
+import { permanentRedirect } from "next/navigation";
 
 const VerifyEmail = () => {
   const handleSubmit = async (formData: FormData) => {
@@ -23,7 +25,13 @@ const VerifyEmail = () => {
       method: "PUT",
       formatted: true,
     });
-    console.log(res);
+
+    if (res?.data?.accessToken) {
+      cookies().set("accessToken", res?.data?.accessToken);
+      permanentRedirect("/");
+    } else {
+      console.error(res?.error);
+    }
   };
 
   return (
