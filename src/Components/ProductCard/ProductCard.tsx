@@ -16,7 +16,12 @@ const ProductCard = ({ product, setRefetch }: IProductCardProps) => {
       className="border border-black-10 rounded-lg group relative w-full max-w-[280px] cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg mx-auto"
     >
       <div className="bg-gradient-primary-light">
-        <ProductImageSlider product={product} />
+        <ProductImageSlider
+          // loading={loading}
+          product={product}
+          setRefetch={setRefetch}
+          // defaultVariant={defaultVariant}
+        />
       </div>
 
       <div className="p-4">
