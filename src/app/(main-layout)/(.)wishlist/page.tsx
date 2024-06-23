@@ -2,7 +2,7 @@
 import Modal from "@/Components/Modal";
 import { server_url, storages } from "@/constants";
 import { getLocalStorageData } from "@/helpers/localStorage.helper";
-import { IconShoppingCart, IconX } from "@tabler/icons-react";
+import { IconArrowLeft, IconShoppingCart, IconX } from "@tabler/icons-react";
 import React, { useEffect, useState } from "react";
 import ButtonPrimary from "../brands/_components/ButtonPrimary";
 import Image from "next/image";
@@ -11,6 +11,7 @@ import { fetchProtectedData } from "@/actions/fetchData";
 import { mergeProducts } from "@/utils/mergeProduct.utils";
 import { updatedWishlistMutation } from "@/utils/updateWishlist.utils";
 import { IProduct } from "@/interfaces/product.interface";
+import Link from "next/link";
 
 const WishlistInterceptingPage = () => {
   const [show, setShow] = React.useState(true);
@@ -54,11 +55,11 @@ const WishlistInterceptingPage = () => {
           <span className="font-semibold [font-size:clamp(14px,5vw,18px)] ">
             My Wishlist
           </span>
-          <div className="mt-[30px]">
+          <div className="mt-[30px] flex flex-col gap-5 overflow-y-auto md:h-[calc(100vh-250px)] h-[calc(100vh-250px)] scrollbar-y-remove bg-white">
             {wishlistProducts?.map((product: IProduct, index: number) => (
               <div
                 key={product?._id}
-                className="flex justify-between gap-3.5 border-b border-black-10 pb-5"
+                className="flex justify-between gap-3.5 border-b border-black-10 pb-5 mb-5"
               >
                 <div className="flex items-center gap-3">
                   <div className="bg-gradient-primary-light md:p-3 p-1.5 rounded-[10px]">
@@ -104,6 +105,22 @@ const WishlistInterceptingPage = () => {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="flex flex-col gap-5 bg-white fixed bottom-5 w-[92%] mx-auto">
+            <Link
+              href={"/wishlist"}
+              className="flex items-center justify-center gap-2.5 px-5 w-full py-3.5  bg-gradient-primary  text-white rounded-full "
+            >
+              View All Wishlist
+            </Link>
+
+            <Link
+              href={"/"}
+              className="uppercase text-black-80 flex items-center justify-center gap-2  "
+            >
+              <IconArrowLeft />
+              <span>Continue Shopping</span>
+            </Link>
           </div>
         </div>
       </Modal>
