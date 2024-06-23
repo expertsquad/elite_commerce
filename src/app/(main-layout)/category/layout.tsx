@@ -22,7 +22,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
         <Breadcrumb title="Smart Devices" />
       </div>
       <div className="mx-auto max-w-7xl px-5">
-        <div className="flex items-center justify-between md:hidden mb-5">
+        <div className="flex items-center justify-end md:hidden mb-5">
           {/* <SortingSection /> */}
           <FilterModal
             categories={categories?.data}
