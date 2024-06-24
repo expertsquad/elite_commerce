@@ -15,6 +15,14 @@ const HighPriceProducts = dynamic(
 const LowPriceProducts = dynamic(
   () => import("./SortedProducts/LowPriceProducts")
 );
+interface ITotal {
+  total: number;
+  limit: number;
+}
+interface IResposnseProduct {
+  meta: ITotal;
+  data: IProduct[];
+}
 
 const SortingSection = ({
   mostPopularProducts,
@@ -22,10 +30,10 @@ const SortingSection = ({
   highPriceProducts,
   lowPriceProducts,
 }: {
-  mostPopularProducts: IProduct[];
-  newProducts: IProduct[];
-  highPriceProducts: IProduct[];
-  lowPriceProducts: IProduct[];
+  mostPopularProducts: IResposnseProduct;
+  newProducts: IResposnseProduct;
+  highPriceProducts: IResposnseProduct;
+  lowPriceProducts: IResposnseProduct;
 }) => {
   const [selected, setSelected] = useState("MostPopular");
 

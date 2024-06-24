@@ -103,23 +103,6 @@ const Wishlist = () => {
   const [refetch, setRefetch] = useState(0);
 
   useEffect(() => {
-    const getRemoteData = async () => {
-      try {
-        const remoteWishlist = await fetchProtectedData({
-          route: "/wishlist/me",
-        });
-        const localProducts =
-          getLocalStorageData(storages.wishlistProducts) || [];
-        const remoteProducts = remoteWishlist?.data?.products || [];
-        const mergedProducts = mergeProducts(localProducts, remoteProducts);
-        await updatedWishlistMutation(mergedProducts);
-
-        return localProducts;
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getRemoteData();
     setWishlistProducts(getLocalStorageData(storages.wishlistProducts) || []);
   }, [refetch]);
 

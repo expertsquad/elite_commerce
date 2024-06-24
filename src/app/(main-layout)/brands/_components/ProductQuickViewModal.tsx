@@ -155,7 +155,7 @@ const ProductQuickViewModal = ({
                     BUY NOW
                   </Link>
                 </div>
-                <Button className="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2 rounded-md w-full">
+                <Button className="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2 rounded-md w-full uppercase">
                   <IconBolt fill="#fff" size={20} />
                   QUICK ORDER
                 </Button>

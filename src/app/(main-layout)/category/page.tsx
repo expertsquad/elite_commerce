@@ -1,7 +1,5 @@
 import React from "react";
-import ProductCard from "../../../Components/ProductCard/ProductCard";
 import { fetchData } from "@/actions/fetchData";
-import { IProduct } from "@/interfaces/product.interface";
 import SortingSection from "./_components/FilterBySelection";
 import Pagination from "@/Components/Pagination";
 
@@ -47,14 +45,6 @@ const CategoryPage = async () => {
           />
         </div>
       </div>
-
-      {/* <div className="my-5">
-        <Pagination
-          currentPage={1}
-          totalPages={totalPages}
-          redirectTo="/category/page"
-        />
-      </div>  */}
     </div>
   );
 };
