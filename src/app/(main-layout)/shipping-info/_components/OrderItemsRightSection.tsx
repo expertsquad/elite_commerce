@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { OrderItemsShippingInfo } from "./OrderItemsShippingInfo";
+import { ShippingInfoOrderItems } from "./ShippingInfoOrderItems";
 import RightSideTotalAmountCard from "./RightSideTotalAmountCard";
 import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { storages } from "@/constants";
@@ -28,7 +28,7 @@ const OrderItemsRightSection = ({
         <div className="flex flex-col md:gap-7 gap-4 overflow-y-auto scrollbar-y-remove h-[400px] my-4 ">
           {cartProducts.map((product: ICartProduct) => {
             return (
-              <OrderItemsShippingInfo
+              <ShippingInfoOrderItems
                 key={product?._id}
                 product={product}
                 setRefetch={setRefetch}

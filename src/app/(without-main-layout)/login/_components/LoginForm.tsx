@@ -1,7 +1,7 @@
 "use client";
 import CustomInput from "@/Components/CustomInput";
 import SubmitButton from "@/Components/SubmitButton";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { loginServerAction } from "./loginServerAction";
 import { useRouter } from "next/navigation";
 import Loading from "@/app/loading";
@@ -12,8 +12,10 @@ import { mergeProducts } from "@/utils/mergeProduct.utils";
 import { updatedCartMutation } from "@/utils/updateCart.utils";
 import PasswordInput from "@/app/(main-layout)/profile/_components/PasswordInput";
 import MergingIndicator from "./MergingIndicator";
+import { CartContext } from "@/Provider/CartProvider";
 
 const LoginForm = () => {
+  const { setRefetch } = useContext(CartContext);
   const [isLoading, setIsLoading] = useState(false);
 
   const [merging, setMerging] = useState(false);
@@ -38,6 +40,8 @@ const LoginForm = () => {
       const remoteProducts = remoteCart?.data?.products || [];
       const mergedProducts = mergeProducts(localProducts, remoteProducts);
       await updatedCartMutation(mergedProducts);
+      // refetch to show updated cart
+      setRefetch((prev) => prev + 1);
       router.back();
       setMerging(false);
     }

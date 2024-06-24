@@ -1,17 +1,17 @@
 "use client";
 import Modal from "@/Components/Modal";
 import StarRating from "@/Components/StarRating";
-import { server_url, storages } from "@/constants";
-import { getLocalStorageData } from "@/helpers/localStorage.helper";
+import { server_url } from "@/constants";
 import { ICartProduct } from "@/interfaces/cart.interface";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 import IncreaseDecrease from "../brands/_components/IncreaseDecrease";
 import { IconBolt, IconShoppingCart, IconX } from "@tabler/icons-react";
-import { calculateTotalPriceAndDiscount } from "../cart/_components/CartItems";
 import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
 import ButtonPrimary from "../brands/_components/ButtonPrimary";
 import Link from "next/link";
+import { CartContext } from "@/Provider/CartProvider";
+import { updateCart } from "@/utils/updateCart.utils";
 
 const QuickOrderItem = ({
   product,
@@ -20,6 +20,11 @@ const QuickOrderItem = ({
   product: ICartProduct;
   setRefetch: React.Dispatch<React.SetStateAction<number>>;
 }) => {
+  const handleRemoveItem = () => {
+    updateCart({ actionType: "remove", product });
+    setRefetch((prev) => prev + 1);
+  };
+
   return (
     <div className="flex  justify-between gap-3.5">
       <div className="flex md:items-center gap-3.5">
@@ -59,7 +64,7 @@ const QuickOrderItem = ({
         </div>
       </div>
       <div className="flex flex-col items-end justify-between">
-        <button>
+        <button onClick={handleRemoveItem}>
           <IconX stroke={1} color="red" height={16} width={16} />
         </button>
         <strong className="font-semibold text-gradient-primary text-base">
@@ -70,10 +75,20 @@ const QuickOrderItem = ({
   );
 };
 
-const OrderSummery = ({ products }: { products: ICartProduct[] }) => {
+const OrderSummery = ({
+  products,
+  shippingFee,
+  calculateTotalPriceAndDiscountOfCart,
+}: {
+  products: ICartProduct[];
+  shippingFee: number;
+  calculateTotalPriceAndDiscountOfCart: (products: ICartProduct[]) => {
+    totalDiscount: number;
+    totalPrice: number;
+  };
+}) => {
   const { totalDiscount, totalPrice } =
-    calculateTotalPriceAndDiscount(products);
-  const shippingFee = 100;
+    calculateTotalPriceAndDiscountOfCart(products);
   const calculateTotalWithShipping = totalPrice + shippingFee;
   const totalPayable = calculateTotalWithShipping - totalDiscount;
 
@@ -124,13 +139,12 @@ const OrderSummery = ({ products }: { products: ICartProduct[] }) => {
 
 const CartInterceptingPage = () => {
   const [show, setShow] = React.useState(true);
-  const [cartProducts, setCartProducts] = React.useState([]);
-  const [refetch, setRefetch] = React.useState(0);
-
-  React.useEffect(() => {
-    setCartProducts(getLocalStorageData(storages.cartProducts) || []);
-  }, [refetch]);
-
+  const {
+    cartProducts,
+    shippingFee,
+    calculateTotalPriceAndDiscountOfCart,
+    setRefetch,
+  } = useContext(CartContext);
   return (
     show && (
       <Modal
@@ -170,7 +184,13 @@ const CartInterceptingPage = () => {
             })}
           </div>
           <div className="fixed bottom-0 right-1 w-[95%]  mx-auto bg-white">
-            <OrderSummery products={cartProducts} />
+            <OrderSummery
+              products={cartProducts}
+              shippingFee={shippingFee}
+              calculateTotalPriceAndDiscountOfCart={
+                calculateTotalPriceAndDiscountOfCart
+              }
+            />
             <div className="my-2 flex items-center justify-center">
               {" "}
               <button

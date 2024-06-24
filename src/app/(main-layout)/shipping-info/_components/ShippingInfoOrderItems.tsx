@@ -4,8 +4,9 @@ import Image from "next/image";
 import IncreaseDecrease from "../../brands/_components/IncreaseDecrease";
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { updateCart } from "@/utils/updateCart.utils";
+import { server_url } from "@/constants";
 
-export const OrderItemsShippingInfo = ({
+export const ShippingInfoOrderItems = ({
   product,
   setRefetch,
 }: {
@@ -27,7 +28,12 @@ export const OrderItemsShippingInfo = ({
         <div>
           <div className="bg-gradient-primary-light md:p-3.5 p-1.5 rounded-[10px]">
             <div className="relative  md:w-[70px] md:h-[70px]  w-[50px] h-[50px]">
-              <Image alt="product" src={""} fill objectFit="cover" />
+              <Image
+                alt="product"
+                src={server_url + product?.productPhoto}
+                fill
+                objectFit="cover"
+              />
             </div>
           </div>
         </div>
