@@ -1,8 +1,9 @@
 import { fetchData } from "@/actions/fetchData";
+import Loading from "@/app/loading";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct } from "@/interfaces/product.interface";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 
 const RelatedProductsByCategory = async ({
   categoryName,
@@ -26,12 +27,20 @@ const RelatedProductsByCategory = async ({
           See All
         </Link>
       </div>
-      <div className="grid grid-cols-product-grid gap-2.5 md:gap-5 overflow-x-scroll scrollbar-x-remove">
-        {response?.data?.slice(0, 8)?.map((product: IProduct) => (
-          <div key={product?._id} className="">
-            <ProductCard product={product} />
-          </div>
-        ))}
+
+      <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5">
+        <Suspense fallback={<Loading />}>
+          {response?.data?.slice(0, 8)?.map((product: IProduct) => {
+            return (
+              <div
+                className="grid grid-cols-product-grid grid-rows-product-grid gap-5 justify-around mb-5"
+                key={product?._id}
+              >
+                <ProductCard product={product} />
+              </div>
+            );
+          })}
+        </Suspense>
       </div>
     </div>
   );
