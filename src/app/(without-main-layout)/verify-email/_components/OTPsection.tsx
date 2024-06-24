@@ -33,8 +33,10 @@ const OTPInput = ({ length }: OTPInputProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-3">
-      <span>Enter Code</span>
+    <div className="flex flex-col items-center gap-5">
+      <span className="font-bold text-gradient-primary text-base">
+        Enter Code
+      </span>
       <div
         id="otpNumberCounter"
         className="flex justify-center text-center gap-5  "
@@ -56,7 +58,7 @@ const OTPInput = ({ length }: OTPInputProps) => {
           />
         ))}
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center flex-col gap-2.5 justify-between">
         <button className="text-positive">Resend OTP code</button>
         <span className="text-gradient-primary">0:30s </span>
       </div>

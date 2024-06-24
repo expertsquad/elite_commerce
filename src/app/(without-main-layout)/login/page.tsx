@@ -26,7 +26,7 @@ const LoginPage = () => {
         <LoginForm />
         <p className="text-sm mt-3">
           Don&apos;t have your account?{" "}
-          <Link href="/signUp" className="text-gradient-primary font-bold">
+          <Link href="/sign-up" className="text-gradient-primary font-bold">
             Sign Up
           </Link>
         </p>
