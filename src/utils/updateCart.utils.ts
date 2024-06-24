@@ -116,6 +116,7 @@ export const updatedCartMutation = async (updatedCartItems: ICartProduct[]) => {
       return { ...item, variantName: item?.variant?.variantName };
     })
   );
+
   // update cart to the remote server
   await fetch("/api/cart", {
     method: "POST",
