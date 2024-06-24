@@ -79,7 +79,7 @@ const ReviewCard = async ({
           />
         </div>
       </div>
-      {comments?.data?.length && (
+      {comments?.data?.length ? (
         <div className="border-b border-black-10 py-5">
           <div className="my-4">
             <StarRating rating={comments?.data[0]?.rating} />
@@ -94,7 +94,7 @@ const ReviewCard = async ({
             />
           </div>
         </div>
-      )}
+      ) : null}
     </>
   );
 };
