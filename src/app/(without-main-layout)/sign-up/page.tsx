@@ -22,8 +22,9 @@ const Page = () => {
 
     if (res?.data?.accessToken) {
       cookies().set("accessToken", res?.data?.accessToken);
-      cookies().set("email", res?.data?.user?.email);
-      permanentRedirect("/verify-email");
+      permanentRedirect(
+        `/verify-email?email=${encodeURIComponent(res?.data?.user?.email)}`
+      );
     }
   };
 

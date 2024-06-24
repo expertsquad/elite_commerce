@@ -10,7 +10,11 @@ import BackButton from "../sign-up/_components/BackButton";
 import Image from "next/image";
 import { loginSignupTopShapeBg } from "@/assets";
 
-const VerifyEmail = async () => {
+const VerifyEmail = async ({
+  searchParams,
+}: {
+  searchParams: { email: string };
+}) => {
   const handleSubmit = async (formData: FormData) => {
     "use server";
     const dataObj: Record<string, any> = {};
@@ -62,7 +66,7 @@ const VerifyEmail = async () => {
                 OTP Code Sent
               </h3>
               <span className="text-gradient-primary">
-                sharifulafsar@outlook.com
+                {searchParams?.email}
               </span>
               <p className="text-base text-black-80 text-center">
                 Enter the 4 digits code that you Received on your E-mail
