@@ -64,12 +64,12 @@ const WishlistInterceptingPage = () => {
                 <div className="flex items-center gap-3">
                   <div className="bg-gradient-primary-light md:p-3 p-1.5 rounded-[10px]">
                     <div className="relative md:w-[70px] md:h-[70px]  w-[50px] h-[50px]">
-                      <Image
+                      {/* <Image
                         alt="product"
                         src={`${server_url + product?.productPhotos[0]}`}
                         fill
                         objectFit="cover"
-                      />
+                      /> */}
                     </div>
                   </div>
                   <div className="flex flex-col justify-between gap-4">
@@ -84,11 +84,11 @@ const WishlistInterceptingPage = () => {
 
                       <div className="flex items-center gap-1.5">
                         <strong className="font-semibold text-gradient-primary text-base">
-                          ${product?.variants[0]?.discountedPrice}
+                          {/* ${product?.variants[0]?.discountedPrice} */}
                         </strong>
                         <span className="text-black-10">|</span>
                         <strong className="font-normal line-through text-black-50 text-xs">
-                          ${product?.variants[0]?.sellingPrice}
+                          {/* ${product?.variants[0]?.sellingPrice} */}
                         </strong>
                       </div>
                     </div>

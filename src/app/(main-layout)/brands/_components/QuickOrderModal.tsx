@@ -83,19 +83,6 @@ const QuickOrderModal = ({
               <span className="font-semibold  text-lg md:block hidden">
                 Quick Order
               </span>
-              <input
-                type="range"
-                className="w-full  pointer-events-none"
-                value={10}
-              />
-              <span className="block text-base">
-                Buy <span className="text-gradient-primary">$900</span> more to
-                get{" "}
-                <span className="text-gradient-primary font-semibold">
-                  Freeship
-                </span>{" "}
-                🔥
-              </span>
             </div>
             <hr className="border-black-10 my-5" />
             <span className="md:hidden block text-black-50 text-sm mb-5">
@@ -111,19 +98,6 @@ const QuickOrderModal = ({
             <div className="md:hidden flex-col gap-3.5 flex my-10">
               <span className="font-semibold  text-lg md:block hidden">
                 Quick Order
-              </span>
-              <input
-                type="range"
-                className="w-full  pointer-events-none"
-                value={10}
-              />
-              <span className="block text-base">
-                Buy <span className="text-gradient-primary">$900</span> more to
-                get{" "}
-                <span className="text-gradient-primary font-semibold">
-                  Freeship
-                </span>{" "}
-                🔥
               </span>
             </div>
             <div className="flex flex-col gap-2.5">
