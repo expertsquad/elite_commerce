@@ -15,6 +15,7 @@ import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import ProductVariantPrice from "./ProductVariantPrice";
 import { Button } from "@/Components/Buttons";
 import PercentageSlider from "./PercentageSlider";
+import ProgressBar from "@/app/(main-layout)/_components/SliderComponents/RangeSlider";
 
 const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
   return (
@@ -37,7 +38,7 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
         />
       </div>
       <div className="my-5">
-        <PercentageSlider />
+        <ProgressBar progressValue={50} />
         <div>
           {product?.bulk &&
             (product?.bulk?.minOrder > 1 ||
