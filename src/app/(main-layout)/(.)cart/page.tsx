@@ -12,6 +12,7 @@ import { calculateTotalPriceAndDiscount } from "../cart/_components/CartItems";
 import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
 import ButtonPrimary from "../brands/_components/ButtonPrimary";
 import Link from "next/link";
+import ProgressBar from "../_components/SliderComponents/RangeSlider";
 
 const QuickOrderItem = ({
   product,
@@ -146,7 +147,7 @@ const CartInterceptingPage = () => {
             Shopping Cart
           </span>
           <div className="flex flex-col gap-2 mt-2">
-            <input type="range" className="pointer-events-none" value={20} />
+            <ProgressBar progressValue={20} />
             <span className="block text-base">
               Buy <span className="text-gradient-primary">$900</span> more to
               get{" "}

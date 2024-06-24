@@ -7,13 +7,13 @@ import MegaDiscountCard from "./MegaDiscountCard";
 
 const FeaturedCard = () => {
   return (
-    <div className="px-5 flex  gap-5 ">
+    <div className="px-5 flex  gap-5  min-w-max">
       <div className=" flex flex-col gap-5">
         <h1 className="text-base font-semibold text-black-80">
           FEATURED PHONES
         </h1>
-        <div className="flex flex-col gap-4 overflow-y-auto scrollbar-y-remove h-[460px]">
-          {[...Array(3)].map((_, index) => (
+        <div className="flex flex-col gap-4 overflow-y-auto scrollbar-y-remove h-[clamp(100px,70vh,500px)]">
+          {[...Array(5)].map((_, index) => (
             <FeaturedProduct key={index} />
           ))}
         </div>
