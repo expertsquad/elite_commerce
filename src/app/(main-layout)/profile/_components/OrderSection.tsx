@@ -4,9 +4,13 @@ import { fetchProtectedData } from "@/actions/fetchData";
 import { Order } from "@/interfaces/oreder.interface";
 
 const OrderSection = async () => {
+  const getMe = await fetchProtectedData({
+    route: "/user/me",
+  });
+
   const orderItems = await fetchProtectedData({
     route: "/online-order",
-    query: "buyer.userId=6609a866652afd6056cdc5d8",
+    query: "buyer.userId=" + getMe?.data?._id,
   });
 
   return (
