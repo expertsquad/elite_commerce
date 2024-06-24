@@ -36,7 +36,7 @@ const ProgressBar = ({ progressValue }: IProgressBarProps) => {
         min="0"
         max="100"
         onChange={handleInputChange}
-        className="w-full mt-4 hidden pointer-events-none"
+        className="w-full  hidden pointer-events-none"
       />
     </div>
   );
