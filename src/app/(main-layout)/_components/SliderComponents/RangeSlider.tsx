@@ -22,9 +22,9 @@ const ProgressBar = ({ progressValue }: IProgressBarProps) => {
         />
       </div>
       <div
-        className="absolute -top-3 w-[30px] h-[30px]  bg-white rounded-full text-black-80 flex items-center justify-center text-xs "
+        className="absolute -top-3 w-[30px] h-[30px]  bg-white rounded-full text-black-80 flex items-center justify-center text-xs select-none"
         style={{
-          left: `calc(${progress}% - 12px)`,
+          left: `calc(${progress}% - 10px)`,
           border: "1.5px solid #1A69B3",
         }}
       >
