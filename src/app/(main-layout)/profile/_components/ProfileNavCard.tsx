@@ -11,19 +11,18 @@ const ProfileNavCard = async () => {
     route: "/user/me",
   });
 
-  console.log(getMe);
-
   const handleAction = async (formData: FormData) => {
     "use server";
 
-    // console.log(formData.get("profilePhoto"));
+    console.log(formData.get("profilePhoto"));
 
     const result = await updateDataMutation({
       route: "/user/update",
       data: formData,
       method: "PUT",
+      formatted: true,
     });
-    // console.log(result);
+    console.log(result);
   };
 
   return (
