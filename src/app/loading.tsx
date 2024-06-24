@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <div className="fixed inset-0 bg-black-transparent z-50 h-dvh w-dvw flex items-center justify-center">
+    <div className="fixed inset-0 z-50 h-dvh w-dvw flex items-center justify-center bg-white-transparent backdrop-blur-md">
       <div className="flex items-center">
         <span className="text-3xl mr-4">Loading</span>
         <svg
