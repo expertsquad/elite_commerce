@@ -11,6 +11,8 @@ const ProfileNavCard = async () => {
     route: "/user/me",
   });
 
+  console.log(getMe);
+
   const handleAction = async (formData: FormData) => {
     "use server";
 

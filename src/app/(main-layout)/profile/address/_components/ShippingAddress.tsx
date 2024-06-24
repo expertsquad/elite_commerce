@@ -18,7 +18,7 @@ const ShippingAddress = ({
   return (
     <Form handleSubmit={handleSubmitWithId}>
       <h3 className="[font-size:_clamp(1em,5vw,1.5em)] font-semibold text-gradient-primary my-7 ">
-        Billing Address
+        Shipping Address
       </h3>
 
       <div className="grid grid-cols-1 gap-4 md:gap-6 lg:grid-cols-2">
@@ -70,13 +70,13 @@ const ShippingAddress = ({
           defaultValue={shippingAddress?.state}
         />
 
-        {/* <CustomInput
+        <CustomInput
           label="Zip Code"
           type="text"
           name="zipCode"
           placeholder="00108"
           defaultValue={shippingAddress?.zipCode}
-        /> */}
+        />
 
         <CustomInput
           label="Company Name (Optional)"

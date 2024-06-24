@@ -13,20 +13,25 @@ const page = async () => {
 
   const submitAction = async (addressId: string, formData: FormData) => {
     "use server";
+    const dataObj: Record<string, any> = {};
+
+    for (const [key, value] of Array.from(formData.entries())) {
+      dataObj[key] = value;
+    }
 
     if (!billingAddress?.data.length) {
       const result = await postDataMutation({
         route: "/user-address/add",
-        data: formData,
+        data: JSON.stringify({ zipCode: Number(dataObj["zipCode"]) }),
+        formatted: true,
       });
-      // console.log(result);
     } else {
       const result = await updateDataMutation({
         route: "/user-address" + "/" + addressId,
-        data: formData,
+        data: JSON.stringify({ zipCode: Number(dataObj["zipCode"]) }),
         method: "PUT",
+        formatted: true,
       });
-      // console.log(result);
     }
   };
 
@@ -35,17 +40,16 @@ const page = async () => {
       {/* Tab to toggle section */}
 
       <div className="flex gap-5 border-b border-black-10 items-center justify-start">
+        <div className="py-2 text-lg">
+          <Link href="/profile/shipping-address">Shipping Address</Link>
+        </div>
+
         <div className="pb-[2px] border-gradient-primary">
           <Link
             className="text-gradient-primary font-bold text-lg"
             href="/profile/address"
           >
             Billing Address
-          </Link>
-        </div>
-        <div className="py-2 text-lg">
-          <Link className="" href="/profile/address/shipping-address">
-            Shipping Address
           </Link>
         </div>
       </div>

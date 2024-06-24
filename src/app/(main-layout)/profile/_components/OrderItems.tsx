@@ -8,7 +8,7 @@ import { Order } from "@/interfaces/oreder.interface";
 import { dateFormat } from "@/utils/dateFormat";
 
 const OrderItems = async ({ order }: { order: Order }) => {
-  const date = new Date();
+  console.log(order);
   return (
     <div className=" md:shadow-lg shadow-none border border-black-10 md:border-transparent my-5 p-5 rounded-lg">
       {/* Order top section start */}
@@ -27,7 +27,7 @@ const OrderItems = async ({ order }: { order: Order }) => {
         </div>
         <div className="flex items-center gap-3">
           <Link
-            href="#"
+            href={`/order-track/${order?._id}`}
             className="border-gradient-primary p-[2px] rounded-full "
           >
             <Button className="text-gradient-primary   px-5  py-1 ">
