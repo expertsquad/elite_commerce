@@ -13,7 +13,7 @@ export const FeaturedProduct = () => {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <p className="text-sm text-black-80">
+        <p className="text-sm text-black-80 line-clamp-2">
           Samsung Electronics Samsung Galexy S21 5G
         </p>
         <strong className="text-sm text-gradient-primary font-semibold">

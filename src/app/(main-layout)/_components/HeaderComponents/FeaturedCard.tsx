@@ -7,7 +7,7 @@ import MegaDiscountCard from "./MegaDiscountCard";
 
 const FeaturedCard = () => {
   return (
-    <div className="px-5 flex  justify-between gap-5 w-[850px] ">
+    <div className="px-5 flex  gap-5 min-w-max ">
       <div className=" flex flex-col gap-5">
         <h1 className="text-base font-semibold text-black-80">
           FEATURED PHONES
