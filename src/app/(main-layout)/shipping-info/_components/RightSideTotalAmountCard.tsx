@@ -2,8 +2,8 @@ import { Button } from "@/Components/Buttons";
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { IconArrowRight } from "@tabler/icons-react";
 import React from "react";
-import { calculateTotalPriceAndDiscount } from "../../cart/_components/CartItems";
 import Link from "next/link";
+import calculateTotalPriceAndDiscountOfCart from "@/helpers/calculateTotalPriceAndDiscountOfCart";
 
 const RightSideTotalAmountCard = ({
   cartProducts,
@@ -15,7 +15,7 @@ const RightSideTotalAmountCard = ({
   buttonLink: string;
 }) => {
   const { totalDiscount, totalPrice } =
-    calculateTotalPriceAndDiscount(cartProducts);
+    calculateTotalPriceAndDiscountOfCart(cartProducts);
 
   const shippingFee = 100;
   const calculateTotalWithShipping = totalPrice + shippingFee;

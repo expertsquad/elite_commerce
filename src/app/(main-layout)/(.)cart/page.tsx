@@ -8,10 +8,10 @@ import Image from "next/image";
 import React from "react";
 import IncreaseDecrease from "../brands/_components/IncreaseDecrease";
 import { IconBolt, IconShoppingCart, IconX } from "@tabler/icons-react";
-import { calculateTotalPriceAndDiscount } from "../cart/_components/CartItems";
 import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
 import ButtonPrimary from "../brands/_components/ButtonPrimary";
 import Link from "next/link";
+import calculateTotalPriceAndDiscountOfCart from "@/helpers/calculateTotalPriceAndDiscountOfCart";
 
 const QuickOrderItem = ({
   product,
@@ -72,7 +72,7 @@ const QuickOrderItem = ({
 
 const OrderSummery = ({ products }: { products: ICartProduct[] }) => {
   const { totalDiscount, totalPrice } =
-    calculateTotalPriceAndDiscount(products);
+    calculateTotalPriceAndDiscountOfCart(products);
   const shippingFee = 100;
   const calculateTotalWithShipping = totalPrice + shippingFee;
   const totalPayable = calculateTotalWithShipping - totalDiscount;

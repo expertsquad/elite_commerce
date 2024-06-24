@@ -1,49 +1,27 @@
 "use client";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import ButtonPrimary from "../../brands/_components/ButtonPrimary";
 import ButtonPrimaryLight from "../../brands/_components/ButtonPrimaryLight";
 import { IconBolt } from "@tabler/icons-react";
 import Link from "next/link";
 import { CartItem } from "./CartItem";
-import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { ICartProduct } from "@/interfaces/cart.interface";
-import { storages } from "@/constants";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct } from "@/interfaces/product.interface";
+import { CartContext } from "@/Provider/CartProvider";
 
-export const calculateTotalPriceAndDiscount = (products: ICartProduct[]) => {
-  let totalPrice = 0;
-  let totalDiscount = 0;
-
-  products.forEach((product) => {
-    const pricePerUnit =
-      product.variant.discountedPrice || product.variant.sellingPrice;
-    let orderTotal = pricePerUnit * product.orderQuantity;
-
-    if (product.bulk && product.orderQuantity >= product.bulk.minOrder) {
-      const discountAmount = (product.bulk.discount / 100) * orderTotal;
-      orderTotal -= discountAmount;
-      totalDiscount += discountAmount;
-    }
-
-    totalPrice += orderTotal;
-  });
-
-  return { totalPrice, totalDiscount };
-};
 const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
-  const [cartProducts, setCartProducts] = useState([]);
-  const [refetch, setRefetch] = useState(0);
-
-  useEffect(() => {
-    setCartProducts(getLocalStorageData(storages.cartProducts) || []);
-  }, [refetch]);
+  const {
+    cartProducts,
+    calculateTotalPriceAndDiscountOfCart,
+    shippingFee,
+    setRefetch,
+  } = useContext(CartContext);
 
   const { totalDiscount, totalPrice } =
-    calculateTotalPriceAndDiscount(cartProducts);
+    calculateTotalPriceAndDiscountOfCart(cartProducts);
 
   //   console.log(totalPrice, totalDiscount);
-  const shippingFee = 100;
   const calculateTotalWithShipping = totalPrice + shippingFee;
   const totalPayable = calculateTotalWithShipping - totalDiscount;
 

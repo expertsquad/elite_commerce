@@ -42,7 +42,7 @@ export const QuickOrderItem = ({ product }: { product: IProduct }) => {
             </span>
             {/* we will add here refetch  */}
 
-            <IncreaseDecrease product={product} />
+            {/* <IncreaseDecrease product={product} /> */}
           </div>
         </div>
       </div>
