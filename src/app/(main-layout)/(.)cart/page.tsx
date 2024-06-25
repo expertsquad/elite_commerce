@@ -12,7 +12,7 @@ import { calculateTotalPriceAndDiscount } from "../cart/_components/CartItems";
 import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
 import ButtonPrimary from "../brands/_components/ButtonPrimary";
 import Link from "next/link";
-import ProgressBar from "../_components/SliderComponents/RangeSlider";
+import ProgressBar from "../_components/SliderComponents/ProgressBar";
 
 const QuickOrderItem = ({
   product,

@@ -10,7 +10,7 @@ import { ICartProduct } from "@/interfaces/cart.interface";
 import { storages } from "@/constants";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct } from "@/interfaces/product.interface";
-import ProgressBar from "../../_components/SliderComponents/RangeSlider";
+import ProgressBar from "../../_components/SliderComponents/ProgressBar";
 
 export const calculateTotalPriceAndDiscount = (products: ICartProduct[]) => {
   let totalPrice = 0;

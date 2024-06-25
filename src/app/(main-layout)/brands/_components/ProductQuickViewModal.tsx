@@ -17,7 +17,7 @@ import Link from "next/link";
 import { Button } from "@/Components/Buttons";
 import { IProduct } from "@/interfaces/product.interface";
 import { server_url } from "@/constants";
-import ProgressBar from "../../_components/SliderComponents/RangeSlider";
+import ProgressBar from "../../_components/SliderComponents/ProgressBar";
 
 const ProductQuickViewModal = ({
   show,
