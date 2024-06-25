@@ -1,10 +1,25 @@
-import { fetchData } from "@/actions/fetchData";
+"use client";
 import { server_url } from "@/constants";
 import { IBrand } from "@/interfaces/brand.interface";
 import Image from "next/image";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 const ProductFilterByBrandsSection = ({ brands }: { brands: IBrand[] }) => {
+  const router = useRouter();
+
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+
+  const handleCheckboxChange = (brandName: string) => {
+    const updatedSelectedBrands = selectedBrands.includes(brandName)
+      ? selectedBrands.filter((name) => name !== brandName)
+      : [...selectedBrands, brandName];
+    setSelectedBrands(updatedSelectedBrands);
+
+    const query = brandName ? `?brand=${brandName}` : "";
+
+    router.push(`/category/filtered-products/${query}`);
+  };
   return (
     <div>
       <h2 className="mb-5 md:mb-[30px] font-bold text-lg md:text-2xl uppercase whitespace-nowrap">
@@ -16,8 +31,10 @@ const ProductFilterByBrandsSection = ({ brands }: { brands: IBrand[] }) => {
             <input
               type="checkbox"
               className="checkbox border checked:border-fuchsia-700 [--chkbg:purple] [--chkfg:white]"
-              name="inStock"
-              id="inStock"
+              checked={selectedBrands.includes(brand.brandName)}
+              onChange={() => handleCheckboxChange(brand.brandName)}
+              name={brand.brandName}
+              id={brand.brandName}
             />
             <div className="relative shrink-0 w-7 h-4">
               <Image
