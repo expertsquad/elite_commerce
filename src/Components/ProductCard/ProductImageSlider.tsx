@@ -68,7 +68,7 @@ const ProductImageSlider = ({
       <div className="w-full flex justify-between gap-x-0.5 relative">
         <div className="absolute top-2.5 left-2.5 z-10">
           <span className="bg-gradient-secondary py-1 px-2 rounded-lg text-white md:text-xs text-[10px] cursor-default">
-            {product?.variants[0]?.discountPercentage}%
+            {product?.variants?.[0]?.discountPercentage}%
           </span>
         </div>
 
@@ -85,12 +85,9 @@ const ProductImageSlider = ({
               <Image
                 alt="Product Image"
                 fill
-                style={{
-                  objectFit: "cover",
-                }}
                 src={`${server_url}${productImg}`}
                 sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 33vw"
-                className="w-full h-full top-0 left-0 object-cover"
+                className="w-full h-full top-0 left-0 object-contain"
               />
             </div>
             <div className="absolute bottom-5 right-[50%] z-10">

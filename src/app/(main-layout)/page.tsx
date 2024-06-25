@@ -124,7 +124,7 @@ const page = async () => {
             className="w-[clamp(250px,80vw,400px)]"
           />
         </div>
-        <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5 min-h-96 justify-around my-5">
+        <div className="grid grid-cols-product-grid grid-rows-product-grid gap-10 min-h-96 justify-around my-5">
           <Suspense fallback={<Loading />}>
             {allProducts?.data?.map((product: IProduct) => {
               return <ProductCard key={product?._id} product={product} />;

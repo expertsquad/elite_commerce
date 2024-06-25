@@ -17,7 +17,7 @@ const InfiniteSlider = async () => {
           src={server_url + category.categoryPhoto}
           fill
           alt="category photo"
-          className="z-0"
+          className="z-0 object-contain"
         />
       </div>
       <p className="text-gradient-primary font-semibold">

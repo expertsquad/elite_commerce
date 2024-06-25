@@ -20,7 +20,7 @@ const FeaturedProducts = ({
   const [filter, setFilter] = React.useState("Newest");
   return (
     <div>
-      <div className="flex justify-between p-3 border-b border-black-10 mb-2">
+      <div className="flex justify-between p-3 border-b border-black-10 mb-10">
         <div className="flex gap-5 uppercase">
           <button
             className={
@@ -53,7 +53,7 @@ const FeaturedProducts = ({
         </button>
       </div>
       {/* layout */}
-      <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5 min-h-96 justify-around">
+      <div className="grid grid-cols-product-grid grid-rows-product-grid gap-10 min-h-96 justify-around">
         {filter === "Newest" ? (
           <NewestProducts products={newestProducts} />
         ) : filter === "TopSell" ? (
