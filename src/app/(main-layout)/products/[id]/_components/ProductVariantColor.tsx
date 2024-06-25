@@ -1,7 +1,16 @@
 "use client";
-import { useState } from "react";
+import { IProductVariant } from "@/interfaces/product.interface";
+import { Fragment, useState } from "react";
 
-const ProductVariantColor = ({ variants, onSelectVariant }: any) => {
+interface IProductVariantProps {
+  variants: IProductVariant[];
+  onSelectVariant?: any;
+}
+
+const ProductVariantColor = ({
+  variants,
+  onSelectVariant,
+}: IProductVariantProps) => {
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
 
   const handleClick = (index: number) => {
@@ -10,7 +19,7 @@ const ProductVariantColor = ({ variants, onSelectVariant }: any) => {
   };
 
   const renderCircles = () => {
-    return variants?.map((color: any, index: number) => {
+    return variants?.map((color: IProductVariant, index: number) => {
       return (
         <div
           key={index}
@@ -32,7 +41,7 @@ const ProductVariantColor = ({ variants, onSelectVariant }: any) => {
     });
   };
 
-  return <>{renderCircles()}</>;
+  return <Fragment>{renderCircles()}</Fragment>;
 };
 
 export default ProductVariantColor;
