@@ -104,9 +104,6 @@ const LargeDeviceMegaMenu = async () => {
 
       {/* Right section of the navigation */}
       <div className="flex items-center gap-4">
-        {/* <button className="first:after:content-['|'] after:text-black-50 after:opacity-50 flex items-center gap-2">
-          <IconSearch stroke={iconStroke} />
-        </button> */}
         <GlobalSearch products={products?.data} category={categories?.data} />
         {/* wishlist */}
         <Link href="/wishlist" className="relative">

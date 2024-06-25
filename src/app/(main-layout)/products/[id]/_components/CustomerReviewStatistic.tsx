@@ -11,7 +11,7 @@ const CustomerReviewStatistic = ({
   ratingInfo,
 }: CustomerReviewStatisticProps) => {
   const ratings = [5, 4, 3, 2, 1];
-  const totalRatings = ratingInfo.length;
+  const totalRatings = ratingInfo?.length;
 
   return (
     <div className="my-6">
@@ -28,8 +28,8 @@ const CustomerReviewStatistic = ({
       </div>
 
       {ratings.map((rating) => {
-        const ratingCount = ratingInfo.filter(
-          (item) => item.rating === rating
+        const ratingCount = ratingInfo?.filter(
+          (item) => item?.rating === rating
         ).length;
         const percentage = totalRatings
           ? ((ratingCount / totalRatings) * 100).toFixed(2)

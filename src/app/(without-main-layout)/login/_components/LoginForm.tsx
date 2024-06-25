@@ -47,9 +47,9 @@ const LoginForm = () => {
     }
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
   if (merging) {
     return <MergingIndicator />;
   }
