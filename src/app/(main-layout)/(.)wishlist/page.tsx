@@ -10,19 +10,32 @@ import Link from "next/link";
 import { WishlistContext } from "@/Provider/WishlistProvider";
 import { getWishlistRemoteAndLocalDataAndMerge } from "@/helpers/getWishlistRemoteAndLocalDataAndMerge";
 import { updateWishlist } from "@/utils/updateWishlist.utils";
+import { CartContext } from "@/Provider/CartProvider";
+import { updateCart } from "@/utils/updateCart.utils";
 
 const WishlistInterceptingPage = () => {
   const [show, setShow] = React.useState(true);
   const { wishlistProducts, setRefetch } = useContext(WishlistContext);
+  const { cartProducts, setRefetch: setRefetchCart } = useContext(CartContext);
 
   useEffect(() => {
     getWishlistRemoteAndLocalDataAndMerge();
     setRefetch((prev) => prev + 1);
   }, [setRefetch]);
 
-  const handleRemoveFromFav = ({ product }: { product: IWishlistProduct }) => {
+  const handleRemoveFromWishlist = ({
+    product,
+  }: {
+    product: IWishlistProduct;
+  }) => {
     updateWishlist({ product });
     setRefetch((prev) => prev + 1);
+  };
+
+  const handleAddToCart = ({ product }: { product: IWishlistProduct }) => {
+    updateCart({ actionType: "add", product });
+    setRefetch((prev) => prev + 1);
+    setRefetchCart && setRefetchCart((prev) => prev + 1);
   };
 
   return (
@@ -81,13 +94,24 @@ const WishlistInterceptingPage = () => {
                       </div>
                     </div>
                     <div className="flex flex-col items-end justify-between">
-                      <button onClick={() => handleRemoveFromFav({ product })}>
+                      <button
+                        onClick={() => handleRemoveFromWishlist({ product })}
+                      >
                         <IconX stroke={1} color="red" height={16} width={16} />
                       </button>
-                      <ButtonPrimary className="!rounded !py-1.5 !px-2.5 !hover:scale-100">
-                        <IconShoppingCart height={16} width={16} />
-                        Add
-                      </ButtonPrimary>
+                      {cartProducts?.some(
+                        (p) => p?.productId === product?._id
+                      ) ? (
+                        <small className="text-sm">Carted</small>
+                      ) : (
+                        <ButtonPrimary
+                          className="!rounded !py-1.5 !px-2.5 !hover:scale-100"
+                          onClick={() => handleAddToCart({ product })}
+                        >
+                          <IconShoppingCart height={16} width={16} />
+                          Add
+                        </ButtonPrimary>
+                      )}
                     </div>
                   </div>
                 )

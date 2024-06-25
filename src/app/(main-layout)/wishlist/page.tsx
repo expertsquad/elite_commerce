@@ -18,12 +18,22 @@ import { IWishlistProduct } from "@/interfaces/wishlist.interface";
 import { updateWishlist } from "@/utils/updateWishlist.utils";
 import { WishlistContext } from "@/Provider/WishlistProvider";
 import { getWishlistRemoteAndLocalDataAndMerge } from "@/helpers/getWishlistRemoteAndLocalDataAndMerge";
+import { CartContext } from "@/Provider/CartProvider";
+import { updateCart } from "@/utils/updateCart.utils";
 
 const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
   const { setRefetch } = useContext(WishlistContext);
+  const { cartProducts, setRefetch: setRefetchCart } = useContext(CartContext);
+
   const handleRemoveFromFav = () => {
     updateWishlist({ product: product });
     setRefetch((prev) => prev + 1);
+  };
+
+  const handleAddToCart = ({ product }: { product: IWishlistProduct }) => {
+    updateCart({ actionType: "add", product });
+    setRefetch((prev) => prev + 1);
+    setRefetchCart && setRefetchCart((prev) => prev + 1);
   };
   return (
     <tr>
@@ -78,10 +88,17 @@ const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
           <button className="border border-black-10 rounded-full p-2">
             <IconEye size={18} stroke={1} />
           </button>
-          <ButtonPrimaryLight className="!rounded-full !text-black-80 !whitespace-nowrap !py-2 !px-3.5">
-            <IconShoppingCart color="#24509E" />
-            Add To Cart
-          </ButtonPrimaryLight>
+          {cartProducts?.some((p) => p?.productId === product?._id) ? (
+            <small className="text-sm">Already in the cart</small>
+          ) : (
+            <ButtonPrimaryLight
+              className="!rounded-full !text-black-80 !whitespace-nowrap !py-2 !px-3.5"
+              onClick={() => handleAddToCart({ product })}
+            >
+              <IconShoppingCart color="#24509E" />
+              Add To Cart
+            </ButtonPrimaryLight>
+          )}
         </div>
       </td>
       <td className="border border-black-10 border-collapse px-5">
