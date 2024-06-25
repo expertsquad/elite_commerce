@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Breadcrumb from "../../../Components/BreadCrumb/Breadcrumb";
 import Link from "next/link";
 import {
@@ -12,16 +12,12 @@ import {
 import Image from "next/image";
 import StarRating from "@/Components/StarRating";
 import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
-import { getLocalStorageData } from "@/helpers/localStorage.helper";
-import { server_url, storages } from "@/constants";
+import { server_url } from "@/constants";
 import { wishlistTableHeader } from "@/constants/tablesHeaders.constants";
 import { IWishlistProduct } from "@/interfaces/wishlist.interface";
-import { fetchProtectedData } from "@/actions/fetchData";
-import {
-  updatedWishlistMutation,
-  updateWishlist,
-} from "@/utils/updateWishlist.utils";
-import { mergeProducts } from "@/utils/mergeProduct.utils";
+import { updateWishlist } from "@/utils/updateWishlist.utils";
+import { WishlistContext } from "@/Provider/WishlistProvider";
+import { getWishlistRemoteAndLocalDataAndMerge } from "@/helpers/getWishlistRemoteAndLocalDataAndMerge";
 
 const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
   const handleRemoveFromFav = () => {
@@ -45,7 +41,7 @@ const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
             <div className="relative  md:w-[60px] md:h-[60px]  w-[50px] h-[50px]">
               <Image
                 alt="product"
-                src={server_url + product?.productPhotos?.[0]}
+                src={server_url + product?.productPhoto}
                 fill
                 objectFit="cover"
               />
@@ -97,14 +93,12 @@ const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
 };
 
 const Wishlist = () => {
-  const [wishlistProducts, setWishlistProducts] = useState<
-    IWishlistProduct[] | []
-  >([]);
-  const [refetch, setRefetch] = useState(0);
+  const { wishlistProducts, setRefetch } = useContext(WishlistContext);
 
   useEffect(() => {
-    setWishlistProducts(getLocalStorageData(storages.wishlistProducts) || []);
-  }, [refetch]);
+    getWishlistRemoteAndLocalDataAndMerge();
+    setRefetch((prev) => prev + 1);
+  }, [setRefetch]);
 
   return (
     <div>
