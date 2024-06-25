@@ -3,6 +3,7 @@ import { fetchData } from "@/actions/fetchData";
 import Image from "next/image";
 import { server_url } from "@/constants";
 import { ICategory } from "@/interfaces/category.interface";
+import Link from "next/link";
 
 const InfiniteSlider = async () => {
   const cateogriesData: { data: ICategory[] } = await fetchData({
@@ -11,7 +12,11 @@ const InfiniteSlider = async () => {
   });
 
   const element = cateogriesData?.data?.map((category) => (
-    <div key={category?._id} className="flex flex-col items-center gap-2">
+    <Link
+      href={"/category/" + category?.categoryName}
+      key={category?._id}
+      className="flex flex-col items-center gap-2"
+    >
       <div className="h-16 w-16 md:h-28 md:w-28 relative border border-black-10 rounded-full overflow-hidden">
         <Image
           src={server_url + category.categoryPhoto}
@@ -23,7 +28,7 @@ const InfiniteSlider = async () => {
       <p className="text-gradient-primary font-semibold">
         {category?.categoryName}
       </p>
-    </div>
+    </Link>
   ));
 
   return (
