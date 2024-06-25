@@ -2,6 +2,8 @@ import Logo from "@/utils/Logo";
 import Link from "next/link";
 import React from "react";
 import LoginForm from "./_components/LoginForm";
+import Image from "next/image";
+import { loginSignupTopShapeBg } from "@/assets";
 
 const LoginPage = () => {
   // const handleSubmit = async (formData: FormData) => {
@@ -19,8 +21,15 @@ const LoginPage = () => {
   // };
 
   return (
-    <div className="flex items-center justify-center h-full w-full relative">
-      <div className="w-[clamp(350px,90vw,450px)] bg-white border border-black-10 aspect-square flex flex-col items-center justify-center gap-3">
+    <div className="flex items-center justify-center h-full w-full relative login-signup-container-background">
+      <div className="absolute top-0 max-w-7xl w-full h-full md:block hidden ">
+        <Image
+          src={loginSignupTopShapeBg}
+          alt="logintopshape"
+          className="left-0 top-0"
+        />
+      </div>
+      <div className="w-[clamp(350px,90vw,450px)] h-[500px] bg-white border border-black-10 aspect-square flex flex-col items-center justify-center gap-3 z-20 rounded-lg">
         <Logo />
         <p>Best Online ecommerce website for you</p>
         <LoginForm />
