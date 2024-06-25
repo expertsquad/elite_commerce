@@ -6,7 +6,7 @@ import { server_url } from "@/constants";
 import AddProfilePhoto from "./AddProfilePhoto";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 
-const ProfileNavCard = async () => {
+const ProfileNav = async () => {
   const getMe = await fetchProtectedData({
     route: "/user/me",
   });
@@ -55,4 +55,4 @@ const ProfileNavCard = async () => {
   );
 };
 
-export default ProfileNavCard;
+export default ProfileNav;

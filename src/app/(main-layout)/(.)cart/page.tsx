@@ -146,64 +146,66 @@ const CartInterceptingPage = () => {
     setRefetch,
   } = useContext(CartContext);
   return (
-    show && (
-      <Modal
-        show={show}
-        setShow={setShow}
-        className="w-[600px] overflow-y-auto  scrollbar-y-remove"
-        alignment="right"
-        showCancelBtnINSmallDevice={show}
-        isIntercepting={true}
-      >
-        <div className="p-2">
-          <span className="font-semibold [font-size:clamp(14px,5vw,18px)]">
-            Shopping Cart
-          </span>
-          <div className="flex flex-col gap-2 mt-2">
-            <input type="range" className="pointer-events-none" value={20} />
-            <span className="block text-base">
-              Buy <span className="text-gradient-primary">$900</span> more to
-              get{" "}
-              <span className="text-gradient-primary font-semibold">
-                Freeship
-              </span>{" "}
-              🔥
+    <div className="h-screen">
+      {show && (
+        <Modal
+          show={show}
+          setShow={setShow}
+          className="w-[600px] overflow-y-auto  scrollbar-y-remove"
+          alignment="right"
+          showCancelBtnINSmallDevice={show}
+          isIntercepting={true}
+        >
+          <div className="p-2">
+            <span className="font-semibold [font-size:clamp(14px,5vw,18px)]">
+              Shopping Cart
             </span>
-          </div>
-          <hr className="border border-black-10 h-[1px] my-3" />
+            <div className="flex flex-col gap-2 mt-2">
+              <input type="range" className="pointer-events-none" value={20} />
+              <span className="block text-base">
+                Buy <span className="text-gradient-primary">$900</span> more to
+                get{" "}
+                <span className="text-gradient-primary font-semibold">
+                  Freeship
+                </span>{" "}
+                🔥
+              </span>
+            </div>
+            <hr className="border border-black-10 h-[1px] my-3" />
 
-          <div className="flex flex-col gap-2 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(350px,45vh))] pb-10">
-            {cartProducts?.map((product: ICartProduct) => {
-              return (
-                <QuickOrderItem
-                  key={product?._id}
-                  product={product}
-                  setRefetch={setRefetch}
-                />
-              );
-            })}
-          </div>
-          <div className="fixed bottom-0 right-1 w-[95%]  mx-auto bg-white">
-            <OrderSummery
-              products={cartProducts}
-              shippingFee={shippingFee}
-              calculateTotalPriceAndDiscountOfCart={
-                calculateTotalPriceAndDiscountOfCart
-              }
-            />
-            <div className="my-2 flex items-center justify-center">
-              {" "}
-              <button
-                className="text-positive text-sm uppercase "
-                onClick={() => window.location.reload()}
-              >
-                View Cart &rarr;
-              </button>
+            <div className="flex flex-col gap-2 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(350px,45vh))] pb-10">
+              {cartProducts?.map((product: ICartProduct) => {
+                return (
+                  <QuickOrderItem
+                    key={product?._id}
+                    product={product}
+                    setRefetch={setRefetch}
+                  />
+                );
+              })}
+            </div>
+            <div className="fixed bottom-0 right-1 w-[95%]  mx-auto bg-white">
+              <OrderSummery
+                products={cartProducts}
+                shippingFee={shippingFee}
+                calculateTotalPriceAndDiscountOfCart={
+                  calculateTotalPriceAndDiscountOfCart
+                }
+              />
+              <div className="my-2 flex items-center justify-center">
+                {" "}
+                <button
+                  className="text-positive text-sm uppercase "
+                  onClick={() => window.location.reload()}
+                >
+                  View Cart &rarr;
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </Modal>
-    )
+        </Modal>
+      )}
+    </div>
   );
 };
 
