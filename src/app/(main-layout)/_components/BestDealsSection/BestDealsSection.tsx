@@ -80,8 +80,8 @@ const BestDealsSection = async () => {
           />{" "}
         </div>
       </div>
-      <div className="flex pb-5 w-full overflow-auto scrollbar-x-remove">
-        <div className="mx-auto flex">
+      <div className="max-w-7xl mx-auto flex pb-5 w-full overflow-auto scrollbar-x-remove">
+        <div className="mx-auto flex justify-around w-full">
           {bestDeals?.data?.products?.map((product: IProduct) => (
             <div
               // onClick={handleViewProduct}
