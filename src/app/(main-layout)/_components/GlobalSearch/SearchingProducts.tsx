@@ -16,10 +16,12 @@ const SearchingProducts = ({
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
+      setLoading(true);
       try {
         const response = await fetchData({
           route: "/product",
@@ -28,26 +30,38 @@ const SearchingProducts = ({
         setProducts(response?.data || []);
       } catch (error) {
         console.error("Error fetching products:", error);
+        setProducts([]);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchProducts();
+    if (searchValue) {
+      fetchProducts();
+    } else {
+      setProducts([]);
+    }
   }, [searchValue]);
 
   const router = useRouter();
-  const hanldeProductView = (product: IProduct) => {
+  const handleProductView = (product: IProduct) => {
     router.push("/products/" + product?._id);
     setShow(false);
     setSearchValue("");
   };
+
   return (
     <div className="mb-5">
-      {searchValue ? (
-        products.length > 0 ? (
-          products.map((product: IProduct) => (
+      {loading ? (
+        <div className="flex items-center justify-center h-full">
+          Loading...
+        </div>
+      ) : searchValue ? (
+        products?.length > 0 ? (
+          products?.map((product) => (
             <div
               key={product?._id}
-              onClick={() => hanldeProductView(product)}
+              onClick={() => handleProductView(product)}
               className="flex items-center gap-x-5 mb-5 cursor-pointer"
             >
               <div className="bg-gradient-primary-light w-[70px] h-[70px] shrink-0 relative rounded-md">
@@ -63,20 +77,20 @@ const SearchingProducts = ({
               </div>
               <div>
                 <span className="line-clamp-2 text-black-80">
-                  {product?.productName}
+                  {product.productName}
                 </span>
                 <div className="flex items-center gap-x-0.5">
                   <span className="font-semibold text-gradient-primary">
-                    ${product?.variants[0]?.sellingPrice}
+                    ${product.variants[0]?.sellingPrice}
                   </span>
                   <span className="text-black-10 mx-0.5">|</span>
                   <span className="text-positive [font-size:_clamp(0.5em,4vw,0.8em)]">
-                    {product?.brand?.brandName}
+                    {product.brand?.brandName}
                   </span>
                   <span className="text-black-10 mx-0.5">|</span>
                   <span>
                     <StarRating
-                      rating={Math.round(product?.averageRating || 0)}
+                      rating={Math.round(product.averageRating || 0)}
                     />
                   </span>
                 </div>
@@ -90,7 +104,7 @@ const SearchingProducts = ({
         )
       ) : (
         <div className="flex items-center justify-center h-full">
-          Loading...
+          Start typing to search for products...
         </div>
       )}
     </div>
