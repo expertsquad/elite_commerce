@@ -16,6 +16,7 @@ import { ICategory } from "@/interfaces/category.interface";
 import Logo from "@/utils/Logo";
 import { mainMenus } from "@/constants/mainMenus.constants";
 import ShoppingCartBtn from "./ShoppingCartBtn";
+import GlobalSearch from "../GlobalSearch/GlobalSearch";
 
 const CategoriesAndSubcategories = async () => {
   const categories = await fetchData({
@@ -59,7 +60,10 @@ const CategoriesAndSubcategories = async () => {
   );
 };
 
-const LargeDeviceMegaMenu = () => {
+const LargeDeviceMegaMenu = async () => {
+  const categories = await fetchData({ route: "/category", limit: 5 });
+  const products = await fetchData({ route: "/product", limit: 1 });
+
   const iconStroke = 1.2;
   return (
     <nav className="hidden md:flex max-w-7xl mx-auto py-[clamp(8px,2vh,20px)] md:px-3 text-md items-center justify-between">
@@ -100,9 +104,10 @@ const LargeDeviceMegaMenu = () => {
 
       {/* Right section of the navigation */}
       <div className="flex items-center gap-4">
-        <button className="first:after:content-['|'] after:text-black-50 after:opacity-50 flex items-center gap-2">
+        {/* <button className="first:after:content-['|'] after:text-black-50 after:opacity-50 flex items-center gap-2">
           <IconSearch stroke={iconStroke} />
-        </button>
+        </button> */}
+        <GlobalSearch products={products?.data} category={categories?.data} />
         {/* wishlist */}
         <Link href="/wishlist" className="relative">
           <span className="p-1 w-4 h-4 rounded-full bg-gradient-secondary text-white absolute -right-1.5 -top-1 flex items-center justify-center text-[8px]">
