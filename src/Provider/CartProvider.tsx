@@ -14,7 +14,7 @@ import {
 
 const shippingFee = 100;
 
-// cart provider
+// props interface
 interface ICartProviderProps {
   cartProducts: ICartProduct[];
   calculateTotalPriceAndDiscountOfCart: (products: ICartProduct[]) => {
@@ -25,13 +25,18 @@ interface ICartProviderProps {
   setRefetch: Dispatch<SetStateAction<number>>;
 }
 
+// initial state
 const initialState = {
   cartProducts: [],
   calculateTotalPriceAndDiscountOfCart,
   shippingFee,
   setRefetch: () => {},
 };
+
+// context
 export const CartContext = createContext<ICartProviderProps>(initialState);
+
+// Provider
 const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cartProducts, setCartProducts] = useState([]);
   const [refetch, setRefetch] = useState(0); //   get data from local storage
