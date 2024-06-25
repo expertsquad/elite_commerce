@@ -1,38 +1,28 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IconBolt, IconHeart, IconHeartFilled } from "@tabler/icons-react";
 import { server_url, storages } from "@/constants";
 import { IProduct } from "@/interfaces/product.interface";
 import { updateWishlist } from "@/utils/updateWishlist.utils";
 import { getLocalStorageData } from "@/helpers/localStorage.helper";
+import { WishlistContext } from "@/Provider/WishlistProvider";
+import { IWishlistProduct } from "@/interfaces/wishlist.interface";
 
 type ProductImageSliderProps = {
   product: IProduct;
   defaultVariant?: any;
   loading?: any;
-  setRefetch?: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ProductImageSlider = ({
   product,
   defaultVariant,
   loading,
-  setRefetch,
 }: ProductImageSliderProps) => {
+  const { wishlistProducts, setRefetch } = useContext(WishlistContext);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  useEffect(() => {
-    const favouriteProducts =
-      getLocalStorageData(storages.wishlistProducts) || [];
-    const isFav = favouriteProducts.some(
-      (favProduct: IProduct) => favProduct._id === product._id
-    );
-    setIsFavorite(isFav);
-  }, [product]);
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
@@ -70,7 +60,6 @@ const ProductImageSlider = ({
 
   const handleAddToFavourite = () => {
     updateWishlist({ product: product });
-    setIsFavorite(true);
     setRefetch && setRefetch((prev) => prev + 1);
   };
 
@@ -134,7 +123,9 @@ const ProductImageSlider = ({
               }}
               className={`cursor-pointer md:text-[12px] border border-black-10  md:h-8 md:w-8 h-6 w-6 rounded-full flex justify-center items-center bg-white`}
             >
-              {isFavorite ? (
+              {wishlistProducts?.find(
+                (item: IWishlistProduct) => item?.productId === product?._id
+              ) ? (
                 <IconHeartFilled stroke={2} height={18} width={18} />
               ) : (
                 <IconHeart stroke={2} height={18} width={18} />

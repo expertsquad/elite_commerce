@@ -119,13 +119,7 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
         </span>
         <div className="grid grid-cols-product-grid gap-5 overflow-y-auto scrollbar-x-remove">
           {suggestions?.map((product: IProduct) => {
-            return (
-              <ProductCard
-                key={product?._id}
-                product={product}
-                setRefetch={setRefetch}
-              />
-            );
+            return <ProductCard key={product?._id} product={product} />;
           })}
         </div>
       </div>

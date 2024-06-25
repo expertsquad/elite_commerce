@@ -1,10 +1,12 @@
 "use client";
 import { updateCart } from "@/utils/updateCart.utils";
-import React from "react";
+import React, { useContext } from "react";
 import { IProductCardProps } from "./ProductCard";
 import { IconShoppingCart } from "@tabler/icons-react";
+import { CartContext } from "@/Provider/CartProvider";
 
-const ProductCartBtn = ({ product, setRefetch }: IProductCardProps) => {
+const ProductCartBtn = ({ product }: IProductCardProps) => {
+  const { setRefetch } = useContext(CartContext);
   const handleAddToCart = () => {
     updateCart({ actionType: "add", product: product });
     setRefetch && setRefetch((prev) => prev + 1);
