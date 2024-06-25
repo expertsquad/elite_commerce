@@ -1,6 +1,6 @@
 "use client";
 import React, { Fragment, useState } from "react";
-import QuickOrderModal from "./QuickOrderModal";
+import QuickOrderModal from "../../_components/QuickOrder/QuickOrderModal";
 import { IProduct } from "@/interfaces/product.interface";
 
 const QuickOrderButton = ({ product }: { product: IProduct }) => {
