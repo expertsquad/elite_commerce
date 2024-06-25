@@ -20,8 +20,10 @@ import { WishlistContext } from "@/Provider/WishlistProvider";
 import { getWishlistRemoteAndLocalDataAndMerge } from "@/helpers/getWishlistRemoteAndLocalDataAndMerge";
 
 const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
+  const { setRefetch } = useContext(WishlistContext);
   const handleRemoveFromFav = () => {
     updateWishlist({ product: product });
+    setRefetch((prev) => prev + 1);
   };
   return (
     <tr>
