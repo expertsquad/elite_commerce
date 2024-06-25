@@ -1,8 +1,12 @@
 "use client";
-import { ResponseShippingAddress } from "@/interfaces/defaultShippingAddress.interface";
-import React, { useState } from "react";
+import {
+  AddressData,
+  ResponseShippingAddress,
+} from "@/interfaces/defaultShippingAddress.interface";
+import React, { useContext, useState, useEffect } from "react";
 import DefaultAddress from "./DefaultAddress";
 import AddNewShippingInputSection from "./AddNewShippingInputSection";
+import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 
 const ShippingAddess = ({
   defaultAddress,
@@ -13,21 +17,37 @@ const ShippingAddess = ({
   const [shippingAddress, setShippingAddress] = useState(
     defaultAddress?.data[0] || {}
   );
+  const { orderData, setOrderData } = useContext(OrderInitContext);
 
-  const handleOptionChange = (event: any) => {
+  const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSelectedOption(value);
 
     if (value === "defaultAddress") {
-      setShippingAddress(defaultAddress?.data[0] || {});
+      const defaultAddr = defaultAddress?.data[0] || {};
+      setShippingAddress(defaultAddr);
+      updateShippingAddressInContext(defaultAddr);
     }
   };
 
-  const handleNewAddressChange = (newAddress: any) => {
+  const handleNewAddressChange = (newAddress: AddressData) => {
     setShippingAddress(newAddress);
+    updateShippingAddressInContext(newAddress);
   };
 
-  console.log(shippingAddress);
+  const updateShippingAddressInContext = (address: AddressData) => {
+    setOrderData((prevOrderData) => ({
+      ...prevOrderData,
+      shippingAddress: address,
+    }));
+  };
+
+  useEffect(() => {
+    // Initialize with default address if selectedOption is defaultAddress
+    if (selectedOption === "defaultAddress") {
+      updateShippingAddressInContext(shippingAddress);
+    }
+  }, [selectedOption, shippingAddress]);
 
   return (
     <div className="p-7 border border-black-10 rounded-lg ">

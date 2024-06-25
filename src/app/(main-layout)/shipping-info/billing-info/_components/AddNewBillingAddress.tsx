@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { countryNames } from "@/constants/countryNames.constant";
 import CustomInput from "@/Components/CustomInput";
+import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 
 const AddNewBillingAddress = ({
   onNewAddressChange,
@@ -29,6 +30,8 @@ const AddNewBillingAddress = ({
     onNewAddressChange(updatedAddress);
   };
 
+  // order init context
+  const { orderData, setOrderData } = useContext(OrderInitContext);
   return (
     <form>
       <div className="grid grid-cols-1 gap-4 md:gap-6 lg:grid-cols-2">
@@ -39,6 +42,11 @@ const AddNewBillingAddress = ({
           placeholder="Zayed"
           value={newAddress.firstName}
           onChange={handleInputChange}
+          inputStyle={
+            orderData?.billingAddress?.firstName === ""
+              ? " border border-danger"
+              : ""
+          }
         />
         <CustomInput
           label="Last Name"
@@ -47,6 +55,11 @@ const AddNewBillingAddress = ({
           placeholder="Hossain"
           value={newAddress.lastName}
           onChange={handleInputChange}
+          inputStyle={
+            orderData?.billingAddress?.lastName === ""
+              ? " border border-danger"
+              : ""
+          }
         />
 
         <CustomInput
@@ -56,6 +69,11 @@ const AddNewBillingAddress = ({
           placeholder="017*******"
           value={newAddress.phoneNumber}
           onChange={handleInputChange}
+          inputStyle={
+            orderData?.billingAddress?.phoneNumber === ""
+              ? " border border-danger"
+              : ""
+          }
         />
 
         <label htmlFor="country" className="text-black-50">
@@ -82,6 +100,11 @@ const AddNewBillingAddress = ({
           placeholder="California"
           value={newAddress.state}
           onChange={handleInputChange}
+          inputStyle={
+            orderData?.billingAddress?.state === ""
+              ? " border border-danger"
+              : ""
+          }
         />
 
         <CustomInput
@@ -91,6 +114,11 @@ const AddNewBillingAddress = ({
           placeholder="00108"
           value={newAddress.zipCode}
           onChange={handleInputChange}
+          inputStyle={
+            orderData?.billingAddress?.zipCode === ""
+              ? " border border-danger"
+              : ""
+          }
         />
 
         <CustomInput
@@ -108,6 +136,11 @@ const AddNewBillingAddress = ({
           placeholder="1234 Main St"
           value={newAddress.streetAddress}
           onChange={handleInputChange}
+          inputStyle={
+            orderData?.billingAddress?.streetAddress === ""
+              ? " border border-danger"
+              : ""
+          }
         />
       </div>
     </form>

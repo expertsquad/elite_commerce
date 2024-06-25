@@ -4,7 +4,7 @@ export interface IButtonProps {
   children: React.ReactNode;
   className?: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
-  disabled?: boolean;
+  disabled?: boolean | any;
 }
 export const Button = ({
   children,

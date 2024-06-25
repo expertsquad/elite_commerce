@@ -1,4 +1,3 @@
-import React from "react";
 import ShippingInfoContent from "./_components/ShippingInfoContent";
 import ShippingAddess from "./_components/ShippingAddess";
 import { fetchProtectedData } from "@/actions/fetchData";

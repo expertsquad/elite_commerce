@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import CustomInput from "../../../../Components/CustomInput";
 import { countryNames } from "@/constants/countryNames.constant";
+import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import { IAddress } from "@/interfaces/address.interface";
 
 const AddNewShippingInputSection = ({
   onNewAddressChange,
 }: {
-  onNewAddressChange: (newAddress: any) => void;
+  onNewAddressChange: (newAddress: IAddress | any) => void;
 }) => {
   const [newAddress, setNewAddress] = useState({
     firstName: "",
@@ -17,6 +19,7 @@ const AddNewShippingInputSection = ({
     streetAddress: "",
     country: "",
     isDefault: false,
+    selectedShippingAddress: "newAddress",
   });
 
   const handleInputChange = (event: any) => {
@@ -28,10 +31,11 @@ const AddNewShippingInputSection = ({
     setNewAddress(updatedAddress);
     onNewAddressChange(updatedAddress);
   };
+  const { orderData } = useContext(OrderInitContext);
 
   return (
     <form>
-      <div className="grid grid-cols-1 gap-4 md:gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 md:gap-6 lg:grid-cols-2 ">
         <CustomInput
           label="First Name"
           type="text"
@@ -39,6 +43,11 @@ const AddNewShippingInputSection = ({
           placeholder="Zayed"
           value={newAddress.firstName}
           onChange={handleInputChange}
+          inputStyle={
+            orderData?.shippingAddress?.firstName === ""
+              ? " border border-danger"
+              : ""
+          }
         />
         <CustomInput
           label="Last Name"
@@ -47,6 +56,11 @@ const AddNewShippingInputSection = ({
           placeholder="Hossain"
           value={newAddress.lastName}
           onChange={handleInputChange}
+          inputStyle={
+            orderData?.shippingAddress?.lastName === ""
+              ? " border border-danger"
+              : ""
+          }
         />
 
         <CustomInput
@@ -56,6 +70,11 @@ const AddNewShippingInputSection = ({
           placeholder="017*******"
           value={newAddress.phoneNumber}
           onChange={handleInputChange}
+          inputStyle={
+            orderData?.shippingAddress?.phoneNumber === ""
+              ? " border border-danger"
+              : ""
+          }
         />
 
         <label htmlFor="country" className="text-black-50">
@@ -82,6 +101,11 @@ const AddNewShippingInputSection = ({
           placeholder="California"
           value={newAddress.state}
           onChange={handleInputChange}
+          inputStyle={
+            orderData?.shippingAddress?.state === ""
+              ? " border border-danger"
+              : ""
+          }
         />
 
         <CustomInput
@@ -91,6 +115,11 @@ const AddNewShippingInputSection = ({
           placeholder="00108"
           value={newAddress.zipCode}
           onChange={handleInputChange}
+          inputStyle={
+            orderData?.shippingAddress?.zipCode === ""
+              ? " border border-danger"
+              : ""
+          }
         />
 
         <CustomInput
@@ -108,6 +137,11 @@ const AddNewShippingInputSection = ({
           placeholder="1234 Main St"
           value={newAddress.streetAddress}
           onChange={handleInputChange}
+          inputStyle={
+            orderData?.shippingAddress?.streetAddress === ""
+              ? " border border-danger"
+              : ""
+          }
         />
       </div>
 

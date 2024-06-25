@@ -1,9 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import ShipToCard from "./ShipToCard";
 import AddNewBillingAddress from "./AddNewBillingAddress";
 import { IApiResponse } from "@/interfaces/apiResponse.interface";
 import { IUserMe } from "@/interfaces/getMe.interface";
+import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import { AddressData } from "@/interfaces/defaultShippingAddress.interface";
+import { usePathname, useRouter } from "next/navigation";
+import { IAddress } from "@/interfaces/address.interface";
 
 const ShipToAndBillingSection = ({
   getMe,
@@ -11,34 +15,79 @@ const ShipToAndBillingSection = ({
   getMe: IApiResponse<IUserMe>;
 }) => {
   const [selectedOption, setSelectedOption] = useState("sameAsShipping");
-  const [billingAddress, setBillingAddress] = useState({});
+  const [billingAddress, setBillingAddress] = useState<AddressData | {}>({});
+  const pathName = usePathname();
+  const router = useRouter();
+  const { orderData, setOrderData } = useContext(OrderInitContext);
 
-  const handleOptionChange = (event: any) => {
+  useEffect(() => {
+    const isShippingInfoIncomplete = () => {
+      const { shippingAddress } = orderData || {};
+      const requiredFields = [
+        "firstName",
+        "lastName",
+        "phoneNumber",
+        "country",
+        "state",
+        "zipCode",
+        "streetAddress",
+      ];
+
+      return requiredFields.some(
+        (field) => shippingAddress?.[field as keyof IAddress] === undefined
+      );
+    };
+
+    if (
+      pathName === "/shipping-info/billing-info" &&
+      isShippingInfoIncomplete()
+    ) {
+      router.push("/shipping-info");
+    }
+  }, [orderData, pathName, router]);
+
+  useEffect(() => {
+    if (selectedOption === "sameAsShipping") {
+      setOrderData((prevData) => ({
+        ...prevData,
+        billingAddress: orderData?.shippingAddress,
+      }));
+    }
+  }, [selectedOption, orderData?.shippingAddress, setOrderData]);
+
+  const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSelectedOption(value);
 
     if (value === "sameAsShipping") {
-      setBillingAddress({});
+      setBillingAddress(orderData?.shippingAddress || {});
+      setOrderData((prevData) => ({
+        ...prevData,
+        billingAddress: orderData?.shippingAddress,
+      }));
     }
   };
 
-  const handleNewAddressChange = (newAddress: any) => {
+  const handleNewAddressChange = (newAddress: AddressData) => {
     setBillingAddress(newAddress);
+    if (selectedOption === "addNewBillingAddress") {
+      setOrderData((prevData) => ({
+        ...prevData,
+        billingAddress: newAddress,
+      }));
+    }
   };
-
-  console.log(billingAddress);
 
   return (
     <div className="md:border md:border-black-10 border-transparent md:p-7 p-5 rounded-lg">
       <ShipToCard getMe={getMe} />
 
-      {/* Radio button */}
       <div className="my-5 flex items-center justify-start gap-5">
-        <label className="inline-flex items-center mb-4 cursor-pointer  ">
+        <label className="inline-flex items-center mb-4 cursor-pointer">
           <div
-            className={`w-5 h-5 rounded-full bg-white  flex items-center justify-center  border-gradient-primary p-[2px]  ${
+            className={`w-5 h-5 rounded-full bg-white flex items-center justify-center border-gradient-primary p-[2px] ${
               selectedOption === "sameAsShipping"
-                ? " border-gradient-primary p-[2px]"
+                ? "border-gradient-primary p-[2px]"
                 : ""
             }`}
           >
@@ -46,22 +95,22 @@ const ShipToAndBillingSection = ({
               <div className="h-3 w-3 bg-gradient-primary rounded-full"></div>
             )}
           </div>
-          <span className="ml-2">Same as Shipping Address </span>
+          <span className="ml-2">Same as Shipping Address</span>
           <input
             type="radio"
             value="sameAsShipping"
-            name="sameAsShipping"
+            name="billingOption"
             checked={selectedOption === "sameAsShipping"}
             onChange={handleOptionChange}
             className="hidden"
           />
         </label>
 
-        <label className="inline-flex items-center mb-4 cursor-pointer  ">
+        <label className="inline-flex items-center mb-4 cursor-pointer">
           <div
-            className={`w-5 h-5 rounded-full bg-white  flex items-center justify-center  border-gradient-primary p-[2px]  ${
+            className={`w-5 h-5 rounded-full bg-white flex items-center justify-center border-gradient-primary p-[2px] ${
               selectedOption === "addNewBillingAddress"
-                ? " border-gradient-primary p-[2px]"
+                ? "border-gradient-primary p-[2px]"
                 : ""
             }`}
           >
@@ -73,7 +122,7 @@ const ShipToAndBillingSection = ({
           <input
             type="radio"
             value="addNewBillingAddress"
-            name="addNewBillingAddress"
+            name="billingOption"
             checked={selectedOption === "addNewBillingAddress"}
             onChange={handleOptionChange}
             className="hidden"

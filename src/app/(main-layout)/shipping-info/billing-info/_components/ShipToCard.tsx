@@ -1,12 +1,16 @@
 import { fetchProtectedData } from "@/actions/fetchData";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 import { IconEdit } from "@tabler/icons-react";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import { IApiResponse } from "@/interfaces/apiResponse.interface";
 import { IUserMe } from "@/interfaces/getMe.interface";
+import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 
 const ShipToCard = ({ getMe }: { getMe: IApiResponse<IUserMe> }) => {
+  const { orderData } = useContext(OrderInitContext);
+  console.log(orderData);
+
   return (
     <div className="">
       <h3 className="uppercase text-lg font-semibold text-gradient-primary my-3 ">
@@ -42,10 +46,20 @@ const ShipToCard = ({ getMe }: { getMe: IApiResponse<IUserMe> }) => {
         <div className="flex items-center justify-between py-3">
           <div className="flex items-start justify-start gap-3 flex-col ">
             <h4 className="text-black-50">Ship to</h4>
-            <strong>Zayed Hossain</strong>
-            <p>Adress is coming from Shipping info</p>
-            <p>County state and zip is coming</p>
-            <p>0162584568</p>
+            <strong>
+              {orderData?.shippingAddress?.firstName +
+                " " +
+                orderData?.shippingAddress?.lastName}
+            </strong>
+            <p>{orderData?.shippingAddress?.streetAddress}</p>
+            <p>
+              {orderData?.shippingAddress?.country +
+                " " +
+                orderData?.shippingAddress?.state +
+                " " +
+                orderData?.shippingAddress?.zipCode}
+            </p>
+            <p>{orderData?.shippingAddress?.phoneNumber}</p>
           </div>
 
           <div className="flex items-center justify-center ">
