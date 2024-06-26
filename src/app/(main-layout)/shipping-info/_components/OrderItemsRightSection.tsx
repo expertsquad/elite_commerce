@@ -14,7 +14,7 @@ const OrderItemsRightSection = ({
 {
   buttonText: string;
   buttonLink?: string;
-  submitAction?: (formData: FormData) => Promise<void>;
+  submitAction?: (e: React.FormEvent) => Promise<void>;
 }) => {
   const pathName = usePathname();
 

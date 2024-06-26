@@ -5,7 +5,7 @@ const Form = async ({
   children,
   className,
 }: {
-  handleSubmit: (formData: FormData) => Promise<void>;
+  handleSubmit: (formData: FormData) => Promise<void> | any;
   children: React.ReactNode;
   className?: string;
 }) => {

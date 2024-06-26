@@ -6,11 +6,14 @@ import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import { IApiResponse } from "@/interfaces/apiResponse.interface";
 import { IUserMe } from "@/interfaces/getMe.interface";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import { IAddress } from "@/interfaces/address.interface";
+import { UserContext } from "@/Provider/UserProvider";
 
-const ShipToCard = ({ getMe }: { getMe: IApiResponse<IUserMe> }) => {
+const ShipToCard = () => {
+  const { user } = useContext(UserContext);
+
   const { orderData } = useContext(OrderInitContext);
-  console.log(orderData);
-
+  const shippingAddress = orderData.shippingAddress as IAddress;
   return (
     <div className="">
       <h3 className="uppercase text-lg font-semibold text-gradient-primary my-3 ">
@@ -23,15 +26,11 @@ const ShipToCard = ({ getMe }: { getMe: IApiResponse<IUserMe> }) => {
           <div className="flex items-center justify-between  gap-2 border-b border-black-10 py-2">
             <div className="flex lg:flex-row flex-col gap-2 lg:justify-between justify-start">
               <small className="flex items-center justify-center text-sm  gap-2">
-                Email:{" "}
-                <p className="text-base text-black-80"> {getMe?.data?.email}</p>
+                Email: <p className="text-base text-black-80"> {user?.email}</p>
               </small>
               <small className="flex items-center justify-center text-sm  gap-2">
                 Phone:{" "}
-                <p className="text-base text-black-80">
-                  {" "}
-                  {getMe?.data?.phoneNumber}
-                </p>
+                <p className="text-base text-black-80"> {user.phoneNumber}</p>
               </small>
             </div>
             <Link
@@ -47,19 +46,17 @@ const ShipToCard = ({ getMe }: { getMe: IApiResponse<IUserMe> }) => {
           <div className="flex items-start justify-start gap-3 flex-col ">
             <h4 className="text-black-50">Ship to</h4>
             <strong>
-              {orderData?.shippingAddress?.firstName +
-                " " +
-                orderData?.shippingAddress?.lastName}
+              {shippingAddress.firstName + " " + shippingAddress.lastName}
             </strong>
-            <p>{orderData?.shippingAddress?.streetAddress}</p>
+            <p>{shippingAddress.streetAddress}</p>
             <p>
-              {orderData?.shippingAddress?.country +
+              {shippingAddress.country +
                 " " +
-                orderData?.shippingAddress?.state +
+                shippingAddress.state +
                 " " +
-                orderData?.shippingAddress?.zipCode}
+                shippingAddress.zipCode}
             </p>
-            <p>{orderData?.shippingAddress?.phoneNumber}</p>
+            <p>{shippingAddress.phoneNumber}</p>
           </div>
 
           <div className="flex items-center justify-center ">

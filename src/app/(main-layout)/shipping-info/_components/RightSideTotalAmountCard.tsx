@@ -18,7 +18,7 @@ const RightSideTotalAmountCard = ({
   buttonText: string;
   buttonLink?: string;
   disabled?: string;
-  submitAction?: (orderData: any) => Promise<void>;
+  submitAction?: (e: React.FormEvent) => Promise<void>;
 }) => {
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
@@ -26,15 +26,6 @@ const RightSideTotalAmountCard = ({
   const shippingFee = 100;
   const calculateTotalWithShipping = totalPrice + shippingFee;
   const totalPayable = calculateTotalWithShipping - totalDiscount;
-
-  // getting data from order item context
-  const { orderData } = useContext(OrderInitContext);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    if (submitAction) {
-      submitAction(orderData);
-    }
-  };
 
   return (
     <>
@@ -60,14 +51,15 @@ const RightSideTotalAmountCard = ({
       </div>
       {/* Button Link */}
       {submitAction ? (
-        <Form handleSubmit={handleSubmit}>
+        <>
           <Button
+            onClick={(e) => submitAction(e)}
             className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2"
             disabled={disabled}
           >
             {buttonText} <IconArrowRight />
           </Button>
-        </Form>
+        </>
       ) : (
         <Link href={buttonLink}>
           <Button

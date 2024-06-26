@@ -1,34 +1,57 @@
-import { fetchProtectedData } from "@/actions/fetchData";
+"use client";
 import OrderItemsRightSection from "../_components/OrderItemsRightSection";
 import ShipToAndBillingSection from "./_components/ShipToAndBillingSection";
 import PaymentOption from "./_components/PaymentOption";
 import { updateDataMutation } from "@/actions/updateDataMutation";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import { IAddress } from "@/interfaces/address.interface";
 
-const page = async () => {
-  const getMe = await fetchProtectedData({
-    route: "/user/me",
-  });
+const Page = () => {
+  const router = useRouter();
+  const { orderData } = useContext(OrderInitContext);
+  const submitAction = async (e: React.FormEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const shippingAddress = orderData?.shippingAddress as IAddress;
+    let shippingZipCode = shippingAddress?.zipCode;
 
-  const submitAction = async (formData: FormData) => {
-    "use server";
+    if (typeof shippingZipCode === "string") {
+      shippingZipCode = Number(shippingZipCode);
+    }
 
-    console.log(formData);
+    const billingAddress = orderData?.billingAddress as IAddress;
 
-    // Sending the transformed data
-    const result = await updateDataMutation({
-      route: "/online-order/add",
-      data: JSON.stringify(formData),
-      method: "POST",
-      formatted: true,
-    });
+    let billingZipCOde = billingAddress.zipCode;
 
-    console.log(result);
+    if (typeof billingZipCOde === "string") {
+      billingZipCOde = Number(billingZipCOde);
+    }
+
+    try {
+      const result = await updateDataMutation({
+        route: "/online-order/add",
+        data: JSON.stringify(orderData),
+        method: "POST",
+        formatted: true,
+      });
+
+      const orderId = result?.data?._id;
+
+      if (result?.success === true) {
+        localStorage.removeItem("orderInit");
+        router.push(`/successfull/${orderId}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <section className="p-5 lg:p-0 max-w-7xl mx-auto flex w-full gap-5 flex-col md:flex-row mb-10">
       <div className="w-full">
-        <ShipToAndBillingSection getMe={getMe} />
+        <ShipToAndBillingSection />
         <PaymentOption />
       </div>
 
@@ -42,4 +65,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default Page;

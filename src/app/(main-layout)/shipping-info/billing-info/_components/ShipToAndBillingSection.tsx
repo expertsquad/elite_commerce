@@ -7,11 +7,7 @@ import { IUserMe } from "@/interfaces/getMe.interface";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { AddressData } from "@/interfaces/defaultShippingAddress.interface";
 
-const ShipToAndBillingSection = ({
-  getMe,
-}: {
-  getMe: IApiResponse<IUserMe>;
-}) => {
+const ShipToAndBillingSection = () => {
   const [selectedOption, setSelectedOption] = useState("sameAsShipping");
   const { orderData, setOrderData } = useContext(OrderInitContext);
 
@@ -47,7 +43,7 @@ const ShipToAndBillingSection = ({
 
   return (
     <div className="md:border md:border-black-10 border-transparent md:p-7 p-5 rounded-lg">
-      <ShipToCard getMe={getMe} />
+      <ShipToCard />
 
       <div className="my-5 flex items-center justify-start gap-5">
         <label className="inline-flex items-center mb-4 cursor-pointer">
