@@ -2,14 +2,16 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const Pagination = ({
-  totalPages,
-  currentPage,
-  redirectTo,
-}: {
+interface PaginationProps {
   totalPages: number;
   currentPage: number;
   redirectTo: string;
+}
+
+const Pagination: React.FC<PaginationProps> = ({
+  totalPages,
+  currentPage,
+  redirectTo,
 }) => {
   const router = useRouter();
 
@@ -22,6 +24,12 @@ const Pagination = ({
   const handleNextClick = () => {
     if (currentPage < totalPages) {
       handlePageClick(currentPage + 1);
+    }
+  };
+
+  const handlePreviousClick = () => {
+    if (currentPage > 1) {
+      handlePageClick(currentPage - 1);
     }
   };
 
@@ -69,15 +77,25 @@ const Pagination = ({
 
   return (
     <div className="flex items-center justify-center gap-3">
+      {currentPage > 1 && (
+        <button
+          className="cursor-pointer px-5 h-10 rounded-full border border-black-10 flex items-center justify-center hover:text-white hover:bg-gradient-primary transition-all"
+          onClick={handlePreviousClick}
+          aria-label="Previous Page"
+        >
+          Previous
+        </button>
+      )}
       {renderPageNumbers()}
-      <button
-        className="cursor-pointer px-5 h-10 rounded-full border border-black-10 flex items-center justify-center hover:text-white hover:bg-gradient-primary transition-all"
-        onClick={handleNextClick}
-        disabled={currentPage >= totalPages}
-        aria-label="Next Page"
-      >
-        Next
-      </button>
+      {currentPage < totalPages && (
+        <button
+          className="cursor-pointer px-5 h-10 rounded-full border border-black-10 flex items-center justify-center hover:text-white hover:bg-gradient-primary transition-all"
+          onClick={handleNextClick}
+          aria-label="Next Page"
+        >
+          Next
+        </button>
+      )}
     </div>
   );
 };
