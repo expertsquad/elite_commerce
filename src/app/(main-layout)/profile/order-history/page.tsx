@@ -27,6 +27,7 @@ const page = async () => {
     route: "/online-order",
     query: "orderStatus.status=Shipping&buyer.userId=" + getMe?.data?._id,
   });
+  // console.log(orderDeliveredData);
 
   return (
     <div>
