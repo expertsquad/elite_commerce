@@ -1,39 +1,41 @@
 "use client";
 import { fetchData } from "@/actions/fetchData";
 import FilteredProductsGridView from "./_components/FilteredProductsGridView";
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { FilterContext } from "@/Provider/FilteringProvider";
 
-const FilteredProductsPage = ({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string };
-}) => {
-  const { filter, setFilter } = useContext(FilterContext);
-  console.log("filter-----", filter);
+const FilteredProductsPage = () => {
+  const [products, setProducts] = useState([]);
+  const { filter } = useContext(FilterContext);
 
-  let query = "";
+  useEffect(() => {
+    let query: string = "";
+    Object.entries(filter).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach(
+          (item) =>
+            (query = query ? query + `&${key}=${item}` : `${key}=${item}`)
+        );
+      } else {
+        query = query ? query + `&${key}=${value}` : `${key}=${value}`;
+      }
+    });
+    const getDataByFetching = async () => {
+      const response = await fetchData({
+        route: "/product",
+        limit: 40,
+        query: query,
+      });
+      setProducts(response?.data);
+    };
+    getDataByFetching();
+  }, [filter]);
 
-  if (searchParams.categoryName) {
-    query = `?category.categoryName=${encodeURIComponent(
-      searchParams.categoryName
-    )}`;
-  } else if (searchParams.brand) {
-    query = `?brand.brandName=${encodeURIComponent(searchParams.brand)}`;
-  } else {
-    query = ``;
-  }
-
-  // const response = await fetchData({
-  //   route: "/product",
-  //   limit: 40,
-  //   query: query,
-  // });
+  console.log(filter);
 
   return (
     <Fragment>
-      <FilteredProductsGridView products={{ data: [] }} />
-      {/* <FilteredProductsGridView products={response} /> */}
+      <FilteredProductsGridView products={products} />
     </Fragment>
   );
 };
