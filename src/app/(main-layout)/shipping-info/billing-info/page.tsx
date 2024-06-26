@@ -11,20 +11,38 @@ const page = async () => {
 
   const submitAction = async (formData: FormData) => {
     "use server";
-    const dataObj: Record<string, any> = {};
 
     console.log(formData);
 
-    for (const [key, value] of Array.from(formData.entries())) {
-      dataObj[key] = value;
-    }
+    // Transforming the formData to the required format
+    const transformedData = {
+      orderItems: formData.orderItems.map((item) => ({
+        productId: item.productId,
+        variantName: item.variantName,
+        orderQuantity: item.orderQuantity,
+      })),
+      shippingAddress: {
+        firstName: formData.shippingAddress.firstName,
+        lastName: formData.shippingAddress.lastName,
+        streetAddress: formData.shippingAddress.streetAddress,
+        state: formData.shippingAddress.state,
+        country: formData.shippingAddress.country,
+        zipCode: Number(formData.shippingAddress.zipCode), // Ensuring zipCode is a number
+        phoneNumber: formData.shippingAddress.phoneNumber,
+      },
+      payment: {
+        paymentStatus: formData.payment.paymentStatus,
+        paymentMethod: formData.payment.paymentMethod,
+      },
+    };
 
-    await updateDataMutation({
+    const result = await updateDataMutation({
       route: "/online-order/add",
-      data: JSON.stringify({ zipCode: Number(dataObj["zipCode"]) }),
+      data: transformedData,
       method: "POST",
-      // formatted: true,
+      formatted: true,
     });
+    console.log(result);
   };
 
   return (

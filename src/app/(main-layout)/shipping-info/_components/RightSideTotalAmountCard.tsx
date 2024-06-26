@@ -5,6 +5,7 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import calculateTotalPriceAndDiscountOfCart from "@/helpers/calculateTotalPriceAndDiscountOfCart";
 import Form from "@/Components/Form";
+import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 
 const RightSideTotalAmountCard = ({
   products,
@@ -17,7 +18,7 @@ const RightSideTotalAmountCard = ({
   buttonText: string;
   buttonLink?: string;
   disabled?: string;
-  submitAction?: (formData: FormData) => Promise<void>;
+  submitAction?: (orderData: any) => Promise<void>;
 }) => {
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
@@ -27,13 +28,13 @@ const RightSideTotalAmountCard = ({
   const totalPayable = calculateTotalWithShipping - totalDiscount;
 
   // getting data from order item context
+  const { orderData } = useContext(OrderInitContext);
 
-  // const { orderData } = useContext(OrderInitContext);
-  // console.log(orderData);
-
-  // const handleSubmit = (formData: FormData) => {
-  //   submitAction(orderData);
-  // };
+  const handleSubmit = () => {
+    if (submitAction) {
+      submitAction(orderData);
+    }
+  };
 
   return (
     <>
@@ -59,7 +60,7 @@ const RightSideTotalAmountCard = ({
       </div>
       {/* Button Link */}
       {submitAction ? (
-        <Form handleSubmit={submitAction}>
+        <Form handleSubmit={handleSubmit}>
           <Button
             className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2   "
             disabled={disabled}

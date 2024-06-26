@@ -36,8 +36,6 @@ const page = async () => {
         orderShippingData={orderShippingData}
         orderDeliveredData={orderDeliveredData}
       />
-
-      <OrderSection />
     </div>
   );
 };
