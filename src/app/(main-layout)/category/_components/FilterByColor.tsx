@@ -11,12 +11,18 @@ const FilterByColor = ({ redirectPath }: { redirectPath: string }) => {
   const router = useRouter();
   const pathname = usePathname();
   const { filter, setFilter } = useContext(FilterContext);
-  console.log(filter);
 
   const getColorName = (color: string) => {
+    const isSelected = filter?.["variant.variantName"] === color;
+    let updateFilteredColor;
+    if (isSelected) {
+      updateFilteredColor = "";
+    } else {
+      updateFilteredColor = color;
+    }
     setFilter({
       ...filter,
-      "variant.variantName": color,
+      "variant.variantName": updateFilteredColor,
     });
     if (pathname !== redirectPath) {
       router.push(redirectPath);

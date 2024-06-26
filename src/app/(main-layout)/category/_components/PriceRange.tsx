@@ -108,6 +108,7 @@ const PriceRange = ({ redirectPath }: { redirectPath: string }) => {
     debouncedHandleChange(newValues);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedHandleChange = useCallback(
     debounce((newValues) => {
       setFilter({
@@ -119,7 +120,7 @@ const PriceRange = ({ redirectPath }: { redirectPath: string }) => {
       if (pathname !== redirectPath) {
         router.push(redirectPath);
       }
-    }, 1000),
+    }, 1500),
     [filter, setFilter, pathname, redirectPath, router]
   );
 
