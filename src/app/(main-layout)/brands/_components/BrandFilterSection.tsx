@@ -1,7 +1,7 @@
 import React from "react";
 import PriceRange from "../../category/_components/PriceRange";
 import WidgetCard from "@/Components/WidgetCard";
-import CategoryCard from "../../category/_components/CategoryCard";
+import CategoryCard from "../../category/_components/CategoryCard/CategoryCard";
 import { ICategory } from "@/interfaces/category.interface";
 import TopRatingProductCard from "../../category/_components/TopRatingProductCard";
 import { IProduct } from "@/interfaces/product.interface";

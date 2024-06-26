@@ -1,6 +1,6 @@
 import SocialMediaAndOthers from "./SocialMediaAndOthers";
 import ProductVariantColor from "./ProductVariantColor";
-import { IProduct, IProductVariant } from "@/interfaces/product.interface";
+import { IProduct } from "@/interfaces/product.interface";
 import CategoryAndBrandSmallComponent from "./CategoryAndBrandSmallComponent";
 import RatingWishlistStockAndSold from "./RatingWishlistStockAndSold";
 import {
@@ -14,8 +14,7 @@ import Link from "next/link";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import ProductVariantPrice from "./ProductVariantPrice";
 import { Button } from "@/Components/Buttons";
-import PercentageSlider from "./PercentageSlider";
-import { useState } from "react";
+import ProgressBar from "@/app/(main-layout)/_components/SliderComponents/ProgressBar";
 
 const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
   return (
@@ -38,7 +37,7 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
         />
       </div>
       <div className="my-5">
-        <PercentageSlider />
+        <ProgressBar progressValue={50} />
         <div>
           {product?.bulk &&
             (product?.bulk?.minOrder > 1 ||

@@ -9,6 +9,7 @@ import { ICartProduct } from "@/interfaces/cart.interface";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct } from "@/interfaces/product.interface";
 import { CartContext } from "@/Provider/CartProvider";
+import ProgressBar from "../../_components/SliderComponents/ProgressBar";
 
 const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
   const {
@@ -33,17 +34,13 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
         now before your items sell out!
       </div>
 
-      <div className="flex flex-col-reverse gap-2.5">
-        <input
-          type="range"
-          className="w-full  pointer-events-none"
-          value={10}
-        />
+      <div className="flex flex-col gap-5">
         <span className="block text-base">
           Buy <span className="text-gradient-primary">$900</span> more to get{" "}
           <span className="text-gradient-primary font-semibold">Freeship</span>{" "}
           🔥
         </span>
+        <ProgressBar progressValue={50} />
       </div>
       <div className="flex md:flex-row flex-col gap-5 mt-7">
         <div className=" flex flex-col gap-5 md:border border-black-10 md:p-[30px] md:basis-4/6 rounded-[10px]">

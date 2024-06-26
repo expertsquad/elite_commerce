@@ -17,6 +17,7 @@ import Link from "next/link";
 import { Button } from "@/Components/Buttons";
 import { IProduct } from "@/interfaces/product.interface";
 import { server_url } from "@/constants";
+import ProgressBar from "../../_components/SliderComponents/ProgressBar";
 
 const ProductQuickViewModal = ({
   show,
@@ -90,11 +91,7 @@ const ProductQuickViewModal = ({
               </div>
             </div>
             <div className="flex flex-col gap-2.5">
-              <input
-                type="range"
-                className="w-full pointer-events-none"
-                value={68}
-              />
+              <ProgressBar progressValue={10} />
               <span className="text-base text-black-80">
                 Buy <span className="text-gradient-primary">8</span> item more
                 to get off <span className="text-black">15% Extra!</span>

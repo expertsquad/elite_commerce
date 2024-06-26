@@ -1,7 +1,6 @@
 import React from "react";
 import { fetchData } from "@/actions/fetchData";
 import SortingSection from "./_components/FilterBySelection";
-import Pagination from "@/Components/Pagination";
 
 export async function generateMetadata() {
   return {
