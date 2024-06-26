@@ -37,7 +37,6 @@ const page = async () => {
       <div>
         <OrderItemsRightSection
           buttonText="Place Order"
-          buttonLink="#"
           submitAction={submitAction}
         />
       </div>

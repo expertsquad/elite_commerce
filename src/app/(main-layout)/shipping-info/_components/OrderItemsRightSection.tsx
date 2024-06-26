@@ -13,8 +13,8 @@ const OrderItemsRightSection = ({
 }: // ,
 {
   buttonText: string;
-  buttonLink: string;
-  submitAction: (formData: FormData) => Promise<void>;
+  buttonLink?: string;
+  submitAction?: (formData: FormData) => Promise<void>;
 }) => {
   const pathName = usePathname();
 

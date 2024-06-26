@@ -4,20 +4,20 @@ import { IconArrowRight } from "@tabler/icons-react";
 import React, { useContext } from "react";
 import Link from "next/link";
 import calculateTotalPriceAndDiscountOfCart from "@/helpers/calculateTotalPriceAndDiscountOfCart";
-import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import Form from "@/Components/Form";
 
 const RightSideTotalAmountCard = ({
   products,
-  buttonLink,
+  buttonLink = "#",
   buttonText,
   disabled,
   submitAction,
 }: {
   products: ICartProduct[];
   buttonText: string;
-  buttonLink: string;
+  buttonLink?: string;
   disabled?: string;
-  submitAction: (formData: FormData) => Promise<void>;
+  submitAction?: (formData: FormData) => Promise<void>;
 }) => {
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
@@ -58,16 +58,25 @@ const RightSideTotalAmountCard = ({
         <h2 className="text-gradient-primary"> ${totalPayable.toFixed(2)}</h2>
       </div>
       {/* Button Link */}
-      {/* <form onSubmit={handleSubmit}> */}
-      <Link href={buttonLink}>
-        <Button
-          className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2   "
-          disabled={disabled}
-        >
-          {buttonText} <IconArrowRight />{" "}
-        </Button>
-      </Link>
-      {/* </form> */}
+      {submitAction ? (
+        <Form handleSubmit={submitAction}>
+          <Button
+            className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2   "
+            disabled={disabled}
+          >
+            {buttonText} <IconArrowRight />{" "}
+          </Button>
+        </Form>
+      ) : (
+        <Link href={buttonLink}>
+          <Button
+            className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2"
+            disabled={disabled}
+          >
+            {buttonText} <IconArrowRight />{" "}
+          </Button>
+        </Link>
+      )}
     </>
   );
 };
