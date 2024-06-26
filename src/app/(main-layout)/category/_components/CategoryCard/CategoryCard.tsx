@@ -1,24 +1,48 @@
 "use client";
+import { FilterContext } from "@/Provider/FilteringProvider";
 import { ICategory } from "@/interfaces/category.interface";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 type ICategoryCardProps = {
   title?: string;
   categories: ICategory[];
+  redirectPath: string;
 };
 
-const CategoryCard = ({ title, categories }: ICategoryCardProps) => {
+const CategoryCard = ({
+  title,
+  categories,
+  redirectPath,
+}: ICategoryCardProps) => {
   const router = useRouter();
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const pathname = usePathname();
 
+  const { filter, setFilter } = useContext(FilterContext);
   const handleRadioChange = (categoryName: string) => {
-    setSelectedCategory(categoryName);
+    const isExist = filter?.["category.categoryName"]?.find(
+      (c) => c === categoryName
+    );
+    let updateFilterCategories;
+    if (isExist) {
+      updateFilterCategories = filter["category.categoryName"]?.filter(
+        (c) => c !== categoryName
+      );
+    } else {
+      updateFilterCategories = [
+        ...(filter["category.categoryName"] || []),
+        categoryName,
+      ];
+    }
 
-    // Update the query parameter with the selected category
-    const query = categoryName ? `?categoryName=${categoryName}` : "";
-    router.push(`/category/filtered-products${query}`);
+    setFilter({
+      ...filter,
+      "category.categoryName": updateFilterCategories,
+    });
+    if (pathname !== redirectPath) {
+      router.push(redirectPath);
+    }
   };
   return (
     <div>
@@ -35,7 +59,13 @@ const CategoryCard = ({ title, categories }: ICategoryCardProps) => {
               className=" rounded-[50%] bg-gradient-primary text-white hover:bg-gradient-primary cursor-pointer accent-current"
               type="checkbox"
               id={category?.categoryName}
-              checked={selectedCategory === category.categoryName}
+              checked={
+                filter?.["category.categoryName"]?.find(
+                  (c) => c === category.categoryName
+                )
+                  ? true
+                  : false
+              }
               onChange={() => handleRadioChange(category.categoryName)}
             />
             <label htmlFor={category?.categoryName} className="text-black-80">

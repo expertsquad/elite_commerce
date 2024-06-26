@@ -16,10 +16,7 @@ const OrderItemsRightSection = ({
 }) => {
   const pathName = usePathname();
 
-  const { orderData, setOrderData } = useContext(OrderInitContext);
-  const { cartProducts, setRefetch } = useContext(CartContext);
-
-  console.log(orderData?.orderItems);
+  const { orderData } = useContext(OrderInitContext);
 
   // disabled button condition
 
@@ -50,17 +47,13 @@ const OrderItemsRightSection = ({
       <div className="border-b border-black-10">
         <div className="flex flex-col md:gap-7 gap-4 overflow-y-auto scrollbar-y-remove h-[400px] my-4">
           {orderData?.orderItems?.map((product) => (
-            <ShippingInfoOrderItems
-              key={product._id}
-              product={product}
-              setRefetch={setRefetch}
-            />
+            <ShippingInfoOrderItems key={product._id} product={product} />
           ))}
         </div>
       </div>
 
       <RightSideTotalAmountCard
-        cartProducts={cartProducts}
+        products={orderData?.orderItems}
         buttonLink={buttonLink}
         buttonText={buttonText}
         disabled={disableButton ? "disabled" : ""}

@@ -1,4 +1,3 @@
-import { demoBrand, demoProductPhoto } from "@/assets";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import Modal from "@/Components/Modal";
 import {
@@ -11,13 +10,16 @@ import {
   IconStarFilled,
 } from "@tabler/icons-react";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 import ProductVariantColor from "../../products/[id]/_components/ProductVariantColor";
 import Link from "next/link";
 import { Button } from "@/Components/Buttons";
 import { IProduct } from "@/interfaces/product.interface";
-import { server_url } from "@/constants";
+import { server_url, storages } from "@/constants";
 import ProgressBar from "../../_components/SliderComponents/ProgressBar";
+import { formatProductForCart } from "@/utils/formatProductForCart.utils";
+import { setLocalStorageData } from "@/helpers/localStorage.helper";
+import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 
 const ProductQuickViewModal = ({
   show,
@@ -28,6 +30,22 @@ const ProductQuickViewModal = ({
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   product: IProduct;
 }) => {
+  const { orderData, setRefetch } = useContext(OrderInitContext);
+
+  //handling single product to direct order
+  const handleSingleProductClick = (product: IProduct) => {
+    const formattedProduct = formatProductForCart({
+      product: product,
+    });
+
+    // Update the orderItems with the formatted product
+    setLocalStorageData(storages.orderInit, {
+      ...orderData,
+      orderItems: [formattedProduct],
+    });
+    setRefetch((prev) => prev + 1);
+  };
+
   return (
     <Modal
       show={show}
@@ -141,8 +159,9 @@ const ProductQuickViewModal = ({
               <div className="flex items-center justify-between gap-x-2.5">
                 <div className="bg-gradient-primary-light rounded-md w-full">
                   <Link
-                    href={"/"}
+                    href={"/shipping-info"}
                     className="flex items-center justify-center gap-x-1.5 text-gradient-primary py-2"
+                    onClick={() => handleSingleProductClick(product)}
                   >
                     <GenerateGradientIcon
                       IconComponent={IconShoppingBag}

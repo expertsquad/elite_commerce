@@ -1,24 +1,40 @@
 "use client";
+import { FilterContext } from "@/Provider/FilteringProvider";
 import { server_url } from "@/constants";
 import { IBrand } from "@/interfaces/brand.interface";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useContext, useState } from "react";
 
-const ProductFilterByBrandsSection = ({ brands }: { brands: IBrand[] }) => {
+const ProductFilterByBrandsSection = ({
+  brands,
+  redirectPath,
+}: {
+  brands: IBrand[];
+  redirectPath: string;
+}) => {
   const router = useRouter();
-
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const pathname = usePathname();
+  const { filter, setFilter } = useContext(FilterContext);
 
   const handleCheckboxChange = (brandName: string) => {
-    const updatedSelectedBrands = selectedBrands.includes(brandName)
-      ? selectedBrands.filter((name) => name !== brandName)
-      : [...selectedBrands, brandName];
-    setSelectedBrands(updatedSelectedBrands);
+    const isExist = filter?.["brand.brandName"]?.find((b) => b === brandName);
+    let updateFilterBrands;
+    if (isExist) {
+      updateFilterBrands = filter["brand.brandName"]?.filter(
+        (b) => b !== brandName
+      );
+    } else {
+      updateFilterBrands = [...(filter["brand.brandName"] || []), brandName];
+    }
 
-    const query = brandName ? `?brand=${brandName}` : "";
-
-    router.push(`/category/filtered-products/${query}`);
+    setFilter({
+      ...filter,
+      "brand.brandName": updateFilterBrands,
+    });
+    if (pathname !== redirectPath) {
+      router.push(redirectPath);
+    }
   };
   return (
     <div>
@@ -31,21 +47,30 @@ const ProductFilterByBrandsSection = ({ brands }: { brands: IBrand[] }) => {
             <input
               type="checkbox"
               className="checkbox border checked:border-fuchsia-700 [--chkbg:purple] [--chkfg:white]"
-              checked={selectedBrands.includes(brand.brandName)}
-              onChange={() => handleCheckboxChange(brand.brandName)}
+              checked={
+                filter?.["brand.brandName"]?.find((b) => b === brand.brandName)
+                  ? true
+                  : false
+              }
+              onChange={() => handleCheckboxChange(brand?.brandName)}
               name={brand.brandName}
               id={brand.brandName}
             />
-            <div className="relative shrink-0 w-7 h-4">
-              <Image
-                src={`${server_url}${brand?.brandPhoto}`}
-                alt="Brand Image"
-                fill
-                style={{ objectFit: "cover" }}
-                className="w-full h-full top-0 left-0"
-              />
-            </div>
-            <span className="text-black-80">{brand?.brandName}</span>
+            <label
+              htmlFor={brand?.brandName}
+              className="flex items-center gap-x-2"
+            >
+              <span className="relative shrink-0 w-7 h-4">
+                <Image
+                  src={`${server_url}${brand?.brandPhoto}`}
+                  alt="Brand Image"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  className="w-full h-full top-0 left-0"
+                />
+              </span>
+              <span className="text-black-80">{brand?.brandName}</span>
+            </label>
           </div>
         ))}
       </div>

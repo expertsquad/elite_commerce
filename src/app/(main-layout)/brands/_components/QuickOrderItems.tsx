@@ -1,7 +1,7 @@
 import StarRating from "@/Components/StarRating";
 import { IconX } from "@tabler/icons-react";
 import Image from "next/image";
-import IncreaseDecrease from "./IncreaseDecrease";
+import IncreaseDecreaseCartItems from "./IncreaseDecreaseCartItems";
 import { IProduct } from "@/interfaces/product.interface";
 
 export const QuickOrderItem = ({ product }: { product: IProduct }) => {

@@ -2,7 +2,7 @@ import StarRating from "@/Components/StarRating";
 import { server_url } from "@/constants";
 import { IconX } from "@tabler/icons-react";
 import Image from "next/image";
-import IncreaseDecrease from "../../brands/_components/IncreaseDecrease";
+import IncreaseDecreaseCartItems from "../../brands/_components/IncreaseDecreaseCartItems";
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { updateCart } from "@/utils/updateCart.utils";
 
@@ -55,7 +55,10 @@ export const CartItem = ({
               <strong className="text-black-800 text-xs font-normal">
                 ${price}
               </strong>
-              <IncreaseDecrease product={product} setRefetch={setRefetch} />
+              <IncreaseDecreaseCartItems
+                product={product}
+                setRefetch={setRefetch}
+              />
             </div>
             <span className="font-bold text-gradient-primary">
               ${price * product?.orderQuantity}
@@ -71,7 +74,7 @@ export const CartItem = ({
       </div>
       <div className="md:flex flex-col gap-y-1 items-center justify-between hidden">
         <span className="text-sm text-black-80">Qty</span>
-        <IncreaseDecrease product={product} setRefetch={setRefetch} />
+        <IncreaseDecreaseCartItems product={product} setRefetch={setRefetch} />
       </div>
       <div className="md:flex flex-col gap-y-0.5 items-center justify-between hidden">
         <span className="text-sm text-black-80">Sub Total</span>

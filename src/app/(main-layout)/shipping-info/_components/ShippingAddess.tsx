@@ -7,6 +7,11 @@ import React, { useContext, useState, useEffect } from "react";
 import DefaultAddress from "./DefaultAddress";
 import AddNewShippingInputSection from "./AddNewShippingInputSection";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import {
+  getLocalStorageData,
+  setLocalStorageData,
+} from "@/helpers/localStorage.helper";
+import { storages } from "@/constants";
 
 const ShippingAddess = ({
   defaultAddress,
@@ -17,7 +22,7 @@ const ShippingAddess = ({
   const [shippingAddress, setShippingAddress] = useState(
     defaultAddress?.data[0] || {}
   );
-  const { orderData, setOrderData } = useContext(OrderInitContext);
+  const { orderData, setRefetch } = useContext(OrderInitContext);
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -36,10 +41,11 @@ const ShippingAddess = ({
   };
 
   const updateShippingAddressInContext = (address: AddressData) => {
-    setOrderData((prevOrderData) => ({
-      ...prevOrderData,
+    setLocalStorageData(storages.orderInit, {
+      ...getLocalStorageData(storages.orderInit),
       shippingAddress: address,
-    }));
+    });
+    setRefetch((prev) => prev + 1);
   };
 
   useEffect(() => {
@@ -47,6 +53,7 @@ const ShippingAddess = ({
     if (selectedOption === "defaultAddress") {
       updateShippingAddressInContext(shippingAddress);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedOption, shippingAddress]);
 
   return (

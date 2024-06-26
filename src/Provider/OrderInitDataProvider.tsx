@@ -1,12 +1,23 @@
 "use client";
+import { storages } from "@/constants";
+import {
+  getLocalStorageData,
+  setLocalStorageData,
+} from "@/helpers/localStorage.helper";
 import { IAddress } from "@/interfaces/address.interface";
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { IPayment } from "@/interfaces/payment.interface";
-import { Dispatch, SetStateAction, createContext, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useEffect,
+  useState,
+} from "react";
 
 // props interface
-interface IOrderData {
-  orderItems: ICartProduct[] | [];
+export interface IOrderData {
+  orderItems: ICartProduct[];
   shippingAddress: IAddress | {};
   billingAddress: IAddress | {};
   payment: IPayment | {};
@@ -14,17 +25,21 @@ interface IOrderData {
 interface IOrderProviderProps {
   orderData: IOrderData;
   setOrderData: Dispatch<SetStateAction<IOrderData>>;
+  setRefetch: Dispatch<SetStateAction<number>>;
 }
+
+export const orderInitInitialValue = {
+  orderItems: [],
+  shippingAddress: {},
+  billingAddress: {},
+  payment: {},
+};
 
 // initial state
 const initialState = {
-  orderData: {
-    orderItems: [],
-    shippingAddress: {},
-    billingAddress: {},
-    payment: {},
-  },
+  orderData: orderInitInitialValue,
   setOrderData: () => {},
+  setRefetch: () => {},
 };
 
 // context
@@ -36,12 +51,16 @@ const OrderInitProvider = ({ children }: { children: React.ReactNode }) => {
   const [orderData, setOrderData] = useState<IOrderData>(
     initialState.orderData
   );
-
+  const [refetch, setRefetch] = useState(0);
+  useEffect(() => {
+    setOrderData(getLocalStorageData(storages.orderInit));
+  }, [refetch]);
   return (
     <OrderInitContext.Provider
       value={{
         orderData,
         setOrderData,
+        setRefetch,
       }}
     >
       {children}
