@@ -39,7 +39,7 @@ const ProfileTopCard = async () => {
       <div className="flex items-center justify-center flex-col gap-4 bg-gradient-secondary-light rounded-lg p-7 w-full">
         <Image src={starIcon} alt="total order" width={40} height={40} />
         <h3 className="text-lg whitespace-nowrap">Pending Review</h3>
-        {/* i will add here pending review count */}
+        {/* i will add here pending review count later */}
         <p className="text-lg font-bold">12</p>
       </div>
     </section>

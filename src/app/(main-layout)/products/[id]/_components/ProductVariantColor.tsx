@@ -12,6 +12,7 @@ const ProductVariantColor = ({
   onSelectVariant,
 }: IProductVariantProps) => {
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
+  console.log(selectedVariantIndex);
 
   const handleClick = (index: number) => {
     setSelectedVariantIndex(index);

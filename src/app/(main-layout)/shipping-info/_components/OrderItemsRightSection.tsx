@@ -19,7 +19,7 @@ const OrderItemsRightSection = ({
   const { orderData, setOrderData } = useContext(OrderInitContext);
   const { cartProducts, setRefetch } = useContext(CartContext);
 
-  console.log(orderData);
+  console.log(orderData?.orderItems);
 
   // disabled button condition
 
@@ -49,7 +49,7 @@ const OrderItemsRightSection = ({
       <strong className="text-lg uppercase my-2">Your Order Items</strong>
       <div className="border-b border-black-10">
         <div className="flex flex-col md:gap-7 gap-4 overflow-y-auto scrollbar-y-remove h-[400px] my-4">
-          {cartProducts.map((product) => (
+          {orderData?.orderItems?.map((product) => (
             <ShippingInfoOrderItems
               key={product._id}
               product={product}
