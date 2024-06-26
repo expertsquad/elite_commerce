@@ -1,9 +1,32 @@
 import { IconBolt } from "@tabler/icons-react";
-import ButtonPrimary from "./ButtonPrimary";
+import ButtonPrimary from "../../brands/_components/ButtonPrimary";
 
-export const OrderSummery = () => {
+interface IOrderSummaryProps {
+  subTotal?: number;
+  shipping?: number;
+  discount?: number;
+  grandTotal?: number;
+}
+
+export const OrderSummary = ({
+  discount,
+  grandTotal,
+  shipping,
+  subTotal,
+}: IOrderSummaryProps) => {
+  const calculateGrandTotal = () => {
+    let total = subTotal || 0;
+    if (discount) {
+      total = total - discount;
+    }
+    if (shipping) {
+      total = total + shipping;
+    }
+    return total;
+  };
+  console.log(calculateGrandTotal());
   return (
-    <div className="md:border border-black-10 rounded-[10px] px-5 py-3.5  space-y-2.5 bg-white">
+    <div className="md:border border-black-10 rounded-[10px] px-5 py-3.5  space-y-2.5 bg-white drop-shadow-2xl md:drop-shadow-none">
       <div className="flex items-center justify-between ">
         <span className="text-black-80 md:text-base text-sm">Subtotal</span>
         <strong className="text-black-80 md:text-base text-sm font-semibold">
@@ -28,13 +51,15 @@ export const OrderSummery = () => {
           Total
         </span>
         <strong className="text-black-80 md:text-lg text-base font-semibold">
-          $<span></span>
+          ${calculateGrandTotal()}
         </strong>
       </div>
       <div className="md:block hidden">
         <ButtonPrimary buttonType="submit">
           <IconBolt height={18} width={18} />
-          <span className="uppercase">Confirm Order - $1264.00</span>
+          <span className="uppercase">
+            Confirm Order - ${calculateGrandTotal()}
+          </span>
         </ButtonPrimary>
       </div>
     </div>

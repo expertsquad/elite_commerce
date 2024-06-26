@@ -1,8 +1,9 @@
 import StarRating from "@/Components/StarRating";
 import { IconX } from "@tabler/icons-react";
 import Image from "next/image";
-import IncreaseDecrease from "./IncreaseDecrease";
+import IncreaseDecrease from "../../brands/_components/IncreaseDecrease";
 import { IProduct } from "@/interfaces/product.interface";
+import { server_url } from "@/constants";
 
 export const QuickOrderItem = ({ product }: { product: IProduct }) => {
   return (
@@ -10,8 +11,18 @@ export const QuickOrderItem = ({ product }: { product: IProduct }) => {
       <div className="flex md:items-center gap-3.5">
         <div>
           <div className="bg-gradient-primary-light md:p-3.5 p-1.5 rounded-[10px]">
-            <div className="relative  md:w-[70px] md:h-[70px]  w-[50px] h-[50px]">
-              <Image alt="product" src={"/"} fill objectFit="cover" />
+            <div className="relative shrink-0 md:w-[55px] md:h-[55px] w-[50px] h-[50px]">
+              {product?.productPhotos?.length > 0 && (
+                <Image
+                  src={`${server_url + product?.productPhotos[0]}`}
+                  fill
+                  style={{
+                    objectFit: "cover",
+                  }}
+                  alt="product"
+                  className="top-0 left-0 w-full h-full object-cover"
+                />
+              )}
             </div>
           </div>
         </div>

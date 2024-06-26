@@ -10,6 +10,7 @@ import {
   IconShoppingBag,
   IconShoppingCart,
 } from "@tabler/icons-react";
+import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
 
 const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
   return (
@@ -96,10 +97,16 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
               BUY NOW
             </Link>
           </div>
-          <button className="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2 rounded-md w-full">
-            <IconBolt fill="#fff" size={20} />
-            QUICK ORDER
-          </button>
+          <QuickOrderButton
+            product={{
+              ...productdata,
+              orderQuantity: 1,
+              variant: productdata?.variants[0],
+            }}
+            buttonStyle="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2 rounded-md w-full text-base"
+            buttonIcon={<IconBolt size={20} fill="#fff" />}
+            buttonText="QUICK ORDER"
+          />
         </div>
         <div className="border border-black-10 rounded-md mt-8">
           <button className="text-gradient-primary flex items-center justify-center gap-x-1.5 w-full py-2">

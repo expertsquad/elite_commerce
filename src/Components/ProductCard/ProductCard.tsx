@@ -57,6 +57,8 @@ const ProductCard = ({ product }: IProductCardProps) => {
             orderQuantity: 1,
             variant: product?.variants[0],
           }}
+          buttonStyle="text-base bg-white py-1.5 whitespace-nowrap px-5 rounded-full"
+          buttonText="Quick Order"
         />
       </div>
     </Link>

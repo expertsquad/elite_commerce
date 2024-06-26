@@ -1,18 +1,13 @@
+"use client";
 import Modal from "@/Components/Modal";
-import {
-  IconArrowLeft,
-  IconBolt,
-  IconMapPin,
-  IconPhone,
-  IconUser,
-} from "@tabler/icons-react";
-import React from "react";
+import { IconArrowLeft, IconBolt } from "@tabler/icons-react";
+import React, { useState } from "react";
 import ButtonPrimary from "../../brands/_components/ButtonPrimary";
 import Link from "next/link";
 import { IProduct } from "@/interfaces/product.interface";
-
-import { QuickOrderItem } from "../../brands/_components/QuickOrderItems";
-import { OrderSummery } from "../../brands/_components/OrderSummery";
+import { QuickOrderItem } from "./QuickOrderItems";
+import { OrderSummary } from "./OrderSummary";
+import CustomInput from "@/Components/CustomInput";
 
 const QuickOrderModal = ({
   show,
@@ -23,17 +18,26 @@ const QuickOrderModal = ({
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   products: IProduct[];
 }) => {
+  const [formValues, setFormValues] = useState({
+    fullName: "",
+    phoneNumber: "",
+    address: "",
+  });
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
   return (
     <Modal
       show={show}
       setShow={setShow}
       alignment="center"
-      className="max-h-screen md:w-2/4 w-full"
+      className="max-h-screen md:w-[768px] lg:w-[950px] w-full overflow-y-scroll scrollbar-y-remove"
       showCancelBtnINSmallDevice={true}
     >
       <div className="">
         <div className="flex justify-between gap-5 md:flex-row flex-col-reverse md:p-2 p-3.5 relative">
-          <div className="flex-1 flex  border-r border-black-10  flex-col pr-5 ">
+          <div className="flex-1 flex md:border-r border-black-10  flex-col md:pr-5 ">
             <div className="md:flex flex-col gap-3.5 hidden">
               <span className="font-semibold  text-lg md:block hidden">
                 Quick Order
@@ -43,14 +47,14 @@ const QuickOrderModal = ({
             <span className="md:hidden block text-black-50 text-sm mb-5">
               Item lists
             </span>
-            <div className="flex flex-col gap-5 overflow-y-auto h-[600px] scrollbar-y-remove scrollbar-x-remove">
+            <div className="flex flex-col gap-5">
               {products.map((product, index) => (
                 <QuickOrderItem key={index} product={product} />
               ))}
             </div>
           </div>
           <div className="flex-1">
-            <div className="md:hidden flex-col gap-3.5 flex my-10">
+            <div className="md:hidden flex-col gap-3.5 flex md:my-10">
               <span className="font-semibold  text-lg md:block hidden">
                 Quick Order
               </span>
@@ -64,51 +68,32 @@ const QuickOrderModal = ({
               </span>
             </div>
 
-            <form
-              action=""
-              className="mt-12 flex flex-col gap-[50px] h-[calc(100%-450px)] overflow-auto"
-            >
-              <div className="flex flex-col gap-5  ">
-                <div className="flex flex-col gap-2.5">
-                  <label htmlFor="fullName">
-                    Full Name <span className="text-gradient-secondary">*</span>
-                  </label>
-                  <div className="border border-black-10 rounded-lg px-5 py-3 flex justify-between items-center">
-                    <input
-                      type="text"
-                      name="fullName"
-                      className="outline-none w-full"
-                    />
-                    <IconUser stroke={1} />
-                  </div>
-                </div>
-                <div className="flex flex-col gap-2.5">
-                  <label htmlFor="userPhone">
-                    Phone Number{" "}
-                    <span className="text-gradient-secondary">*</span>
-                  </label>
-                  <div className="border border-black-10 rounded-lg px-5 py-3 flex justify-between items-center">
-                    <input
-                      type="text"
-                      name="userPhone"
-                      className="outline-none w-full"
-                    />
-                    <IconPhone stroke={1} />
-                  </div>
-                </div>
-                <div className="flex flex-col gap-2.5">
-                  <label htmlFor="userAddress">
-                    Address <span className="text-gradient-secondary">*</span>
-                  </label>
-                  <div className="border border-black-10 rounded-lg px-5 py-3 flex justify-between items-center">
-                    <input
-                      type="text"
-                      name="userAddress"
-                      className="outline-none w-full"
-                    />
-                    <IconMapPin stroke={1} />
-                  </div>
-                </div>
+            <form action="" className="mt-7 flex flex-col ">
+              <div className="flex flex-col gap-4">
+                <CustomInput
+                  placeholder="Type Name"
+                  label="Full Name"
+                  name="fullName"
+                  type="text"
+                  value={formValues.fullName}
+                  onChange={handleInputChange}
+                />
+                <CustomInput
+                  placeholder="+880"
+                  label="Phone Number"
+                  name="phoneNumber"
+                  type="text"
+                  value={formValues.phoneNumber}
+                  onChange={handleInputChange}
+                />
+                <CustomInput
+                  placeholder="Dhaka, Bangladesh"
+                  label="Address"
+                  name="address"
+                  type="text"
+                  value={formValues.address}
+                  onChange={handleInputChange}
+                />
                 <div className="md:hidden block ">
                   <ButtonPrimary buttonType="submit">
                     <IconBolt height={18} width={18} />
@@ -119,8 +104,8 @@ const QuickOrderModal = ({
                 </div>
               </div>
 
-              <div className="md:block hidden">
-                <OrderSummery />
+              <div className="md:block hidden mt-5">
+                <OrderSummary />
               </div>
             </form>
             <Link
@@ -132,8 +117,8 @@ const QuickOrderModal = ({
             </Link>
           </div>
         </div>
-        <div className="md:hidden mx-auto w-[90%]">
-          <OrderSummery />
+        <div className="md:hidden mx-auto">
+          <OrderSummary />
         </div>
       </div>
     </Modal>

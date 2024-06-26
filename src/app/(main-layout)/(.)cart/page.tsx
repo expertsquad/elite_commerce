@@ -13,6 +13,7 @@ import Link from "next/link";
 import { CartContext } from "@/Provider/CartProvider";
 import { updateCart } from "@/utils/updateCart.utils";
 import ProgressBar from "../_components/SliderComponents/ProgressBar";
+import QuickOrderButton from "../brands/_components/QuickOrderButton";
 
 const QuickOrderItem = ({
   product,
@@ -127,6 +128,16 @@ const OrderSummery = ({
           <IconShoppingCart />
           Order Now
         </ButtonPrimaryLight>
+        {/* <QuickOrderButton
+            product={{
+              ...products,
+              orderQuantity: 1,
+              variant: product?.variants[0],
+            }}
+            buttonStyle="!uppercase !text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)]"
+            buttonIcon={<IconBolt size={20} fill="#fff" />}
+            buttonText="QUICK ORDER"
+          /> */}
         <Link href="/shipping-info" className="w-full">
           <ButtonPrimary className="!uppercase !whitespace-nowrap py-[clamp(2px,1.2vh,20px)]">
             <IconBolt height={18} width={18} />
