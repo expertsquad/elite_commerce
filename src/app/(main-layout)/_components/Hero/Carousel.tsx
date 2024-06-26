@@ -6,8 +6,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Carousel = ({ item }: { item: HeroSliderProps }) => {
-  const discountedPrice =
-    item?.price - item?.price * (item?.discountPercentage / 100);
+  const discountedPrice = (
+    item?.price -
+    item?.price * (item?.discountPercentage / 100)
+  ).toFixed(2);
 
   return (
     <div
@@ -53,7 +55,7 @@ const Carousel = ({ item }: { item: HeroSliderProps }) => {
             </del>
             <span>{item?.discountPercentage.toFixed(2)}%</span>
           </div>
-          <div className="mt-4 ">
+          <div className="mt-4 hover:text-positive">
             <Link href={item?.link}>
               <Button className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-full py-2 px-4 md:px-7  [font-size:_clamp(0.5em,60vw,0.9em)] ">
                 Shop Now <IconArrowRight />{" "}

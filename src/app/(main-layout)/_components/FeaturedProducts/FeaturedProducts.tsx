@@ -3,6 +3,7 @@ import { IconArrowNarrowRight } from "@tabler/icons-react";
 import React from "react";
 import dynamic from "next/dynamic";
 import { IProduct } from "@/interfaces/product.interface";
+import Link from "next/link";
 
 const NewestProducts = dynamic(() => import("./NewestProducts"));
 const TopSellProducts = dynamic(() => import("./TopSellProduct"));
@@ -47,10 +48,13 @@ const FeaturedProducts = ({
             Popular
           </button>
         </div>
-        <button className="flex items-center">
-          See All <IconArrowNarrowRight />
+        <Link
+          className="flex items-center text-gradient-primary"
+          href="/category/page/1"
+        >
+          See All <b className="px-2">&rarr;</b>
           {/* <GenerateGradientIcon IconComponent={IconArrowNarrowRight} /> */}
-        </button>
+        </Link>
       </div>
       {/* layout */}
       <div className="grid grid-cols-product-grid grid-rows-product-grid gap-10 min-h-96 justify-around">
