@@ -3,8 +3,8 @@
 import { Dispatch, SetStateAction, createContext, useState } from "react";
 
 interface IFilterFields {
-  "price[gte]"?: number;
-  "price[lte]"?: number;
+  "variants.sellingPrice[gte]"?: number;
+  "variants.sellingPrice[lte]"?: number;
   "category.categoryName"?: string[];
   "brand.brandName"?: string[];
   "variant.variantName"?: string;

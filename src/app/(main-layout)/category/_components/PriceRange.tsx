@@ -16,8 +16,8 @@ const PriceRange = ({ redirectPath }: { redirectPath: string }) => {
   const handleChange = (newValues: number[]) => {
     setFilter({
       ...filter,
-      "price[gte]": newValues[0],
-      "price[lte]": newValues[1],
+      "variants.sellingPrice[gte]": newValues[0],
+      "variants.sellingPrice[lte]": newValues[1],
     });
 
     if (pathname !== redirectPath) {
@@ -25,8 +25,12 @@ const PriceRange = ({ redirectPath }: { redirectPath: string }) => {
     }
   };
 
-  const min = filter?.["price[gte]"] ? filter["price[gte]"] : minValue;
-  const max = filter?.["price[lte]"] ? filter["price[lte]"] : maxValue;
+  const min = filter?.["variants.sellingPrice[gte]"]
+    ? filter["variants.sellingPrice[gte]"]
+    : minValue;
+  const max = filter?.["variants.sellingPrice[lte]"]
+    ? filter["variants.sellingPrice[lte]"]
+    : maxValue;
 
   return (
     <div className="">
