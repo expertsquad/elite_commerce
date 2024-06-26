@@ -6,25 +6,28 @@ import WishlistProvider from "@/Provider/WishlistProvider";
 import OrderInitProvider from "@/Provider/OrderInitDataProvider";
 import CategoryProductFilteringProvider from "@/Provider/CategoryProductFilteringProvider";
 import BrandProductFilteringProvider from "@/Provider/BrandProductFilteringProvider";
+import UserProvider from "@/Provider/UserProvider";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main>
-      <CartProvider>
-        <WishlistProvider>
-          <OrderInitProvider>
-            <CategoryProductFilteringProvider>
-              {/* main sections */}
-              <BrandProductFilteringProvider>
-                <Header />
-                <section>{children}</section>
-                <Footer />
-              </BrandProductFilteringProvider>
-              {/* main sections */}
-            </CategoryProductFilteringProvider>
-          </OrderInitProvider>
-        </WishlistProvider>
-      </CartProvider>
+      <UserProvider>
+        <CartProvider>
+          <WishlistProvider>
+            <OrderInitProvider>
+              <CategoryProductFilteringProvider>
+                <BrandProductFilteringProvider>
+                  {/* main sections */}
+                  <Header />
+                  <section>{children}</section>
+                  <Footer />
+                  {/* main sections */}
+                </BrandProductFilteringProvider>
+              </CategoryProductFilteringProvider>
+            </OrderInitProvider>
+          </WishlistProvider>
+        </CartProvider>
+      </UserProvider>
     </main>
   );
 };

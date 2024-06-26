@@ -3,10 +3,6 @@ import {
   IconChevronDown,
   IconChevronRight,
   IconChevronUp,
-  IconHeart,
-  IconSearch,
-  IconShoppingCart,
-  IconUserCircle,
 } from "@tabler/icons-react";
 import Link from "next/link";
 import React from "react";
@@ -18,6 +14,7 @@ import { mainMenus } from "@/constants/mainMenus.constants";
 import ShoppingCartBtn from "./ShoppingCartBtn";
 import WishlistBtn from "./WishlistBtn";
 import GlobalSearch from "../GlobalSearch/GlobalSearch";
+import ProfilePhotoOrIcon from "./ProfilePhotoOrIcon";
 
 const CategoriesAndSubcategories = async () => {
   const categories = await fetchData({
@@ -65,7 +62,6 @@ const LargeDeviceMegaMenu = async () => {
   const categories = await fetchData({ route: "/category", limit: 5 });
   const products = await fetchData({ route: "/product", limit: 1 });
 
-  const iconStroke = 1.2;
   return (
     <nav className="hidden md:flex max-w-7xl mx-auto py-[clamp(8px,2vh,20px)] md:px-3 text-md items-center justify-between">
       {/* Left section of the navigation */}
@@ -112,11 +108,7 @@ const LargeDeviceMegaMenu = async () => {
         <ShoppingCartBtn />
         {/* profile */}
         <Link href="/profile" className="mt-2">
-          <GenerateGradientIcon
-            IconComponent={IconUserCircle}
-            stroke={iconStroke}
-            size={34}
-          />
+          <ProfilePhotoOrIcon />
         </Link>
       </div>
     </nav>
