@@ -32,6 +32,7 @@ const AddNewShippingInputSection = ({
     onNewAddressChange(updatedAddress);
   };
   const { orderData } = useContext(OrderInitContext);
+  const shippintAddress = orderData?.shippingAddress as IAddress;
 
   return (
     <form>
@@ -41,12 +42,10 @@ const AddNewShippingInputSection = ({
           type="text"
           name="firstName"
           placeholder="Zayed"
-          value={newAddress.firstName}
+          value={newAddress?.firstName}
           onChange={handleInputChange}
           inputStyle={
-            orderData?.shippingAddress?.firstName === ""
-              ? " border border-danger"
-              : ""
+            shippintAddress?.firstName === "" ? " border border-danger" : ""
           }
         />
         <CustomInput
@@ -54,12 +53,10 @@ const AddNewShippingInputSection = ({
           type="text"
           name="lastName"
           placeholder="Hossain"
-          value={newAddress.lastName}
+          value={newAddress?.lastName}
           onChange={handleInputChange}
           inputStyle={
-            orderData?.shippingAddress?.lastName === ""
-              ? " border border-danger"
-              : ""
+            shippintAddress?.lastName === "" ? " border border-danger" : ""
           }
         />
 
@@ -68,12 +65,10 @@ const AddNewShippingInputSection = ({
           type="text"
           name="phoneNumber"
           placeholder="017*******"
-          value={newAddress.phoneNumber}
+          value={newAddress?.phoneNumber}
           onChange={handleInputChange}
           inputStyle={
-            orderData?.shippingAddress?.phoneNumber === ""
-              ? " border border-danger"
-              : ""
+            shippintAddress?.phoneNumber === "" ? " border border-danger" : ""
           }
         />
 
@@ -83,7 +78,7 @@ const AddNewShippingInputSection = ({
             name="country"
             id="country"
             className="w-full border border-black-10 text-black-80 px-3.5 py-2.5 mt-2 focus:outline-none focus:border-fuchsia-800 rounded-md"
-            value={newAddress.country}
+            value={newAddress?.country}
             onChange={handleInputChange}
           >
             {countryNames?.map((country) => (
@@ -99,12 +94,10 @@ const AddNewShippingInputSection = ({
           type="text"
           name="state"
           placeholder="California"
-          value={newAddress.state}
+          value={newAddress?.state}
           onChange={handleInputChange}
           inputStyle={
-            orderData?.shippingAddress?.state === ""
-              ? " border border-danger"
-              : ""
+            shippintAddress?.state === "" ? " border border-danger" : ""
           }
         />
 
@@ -113,12 +106,10 @@ const AddNewShippingInputSection = ({
           type="text"
           name="zipCode"
           placeholder="00108"
-          value={newAddress.zipCode}
+          value={newAddress?.zipCode}
           onChange={handleInputChange}
           inputStyle={
-            orderData?.shippingAddress?.zipCode === ""
-              ? " border border-danger"
-              : ""
+            shippintAddress?.zipCode === "" ? " border border-danger" : ""
           }
         />
 
@@ -127,7 +118,7 @@ const AddNewShippingInputSection = ({
           type="text"
           name="companyName"
           placeholder="Company Name"
-          value={newAddress.companyName}
+          value={newAddress?.companyName}
           onChange={handleInputChange}
         />
         <CustomInput
@@ -135,12 +126,10 @@ const AddNewShippingInputSection = ({
           type="text"
           name="streetAddress"
           placeholder="1234 Main St"
-          value={newAddress.streetAddress}
+          value={newAddress?.streetAddress}
           onChange={handleInputChange}
           inputStyle={
-            orderData?.shippingAddress?.streetAddress === ""
-              ? " border border-danger"
-              : ""
+            shippintAddress?.streetAddress === "" ? " border border-danger" : ""
           }
         />
       </div>
@@ -154,7 +143,7 @@ const AddNewShippingInputSection = ({
             className="h-4 w-4"
             type="checkbox"
             name="isDefault"
-            checked={newAddress.isDefault}
+            checked={newAddress?.isDefault}
             onChange={handleInputChange}
           />
           Save as default shipping address
