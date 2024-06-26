@@ -2,9 +2,10 @@
 import React, { Fragment, useState } from "react";
 import QuickOrderModal from "../../_components/QuickOrder/QuickOrderModal";
 import { IProduct } from "@/interfaces/product.interface";
+import { ICartProduct } from "@/interfaces/cart.interface";
 
 interface IQuickOrderButtonProps {
-  product: IProduct;
+  product: IProduct | ICartProduct | IProduct[] | ICartProduct[];
   buttonText?: string;
   buttonStyle?: string;
   buttonIcon?: any;
@@ -16,7 +17,6 @@ const QuickOrderButton = ({
   buttonStyle,
   buttonText,
 }: IQuickOrderButtonProps) => {
-  console.log(product);
   const [show, setShow] = useState(false);
 
   const handleQuickOrderButton = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -24,7 +24,7 @@ const QuickOrderButton = ({
     e.preventDefault();
     setShow(true);
   };
-
+  const productsArray = Array.isArray(product) ? product : [product];
   return (
     <Fragment>
       <button
@@ -35,7 +35,11 @@ const QuickOrderButton = ({
         {buttonText}
       </button>
       {show && (
-        <QuickOrderModal show={show} setShow={setShow} products={[product]} />
+        <QuickOrderModal
+          show={show}
+          setShow={setShow}
+          products={productsArray}
+        />
       )}
     </Fragment>
   );

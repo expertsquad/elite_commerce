@@ -1,14 +1,13 @@
 import StarRating from "@/Components/StarRating";
-import { IconX } from "@tabler/icons-react";
 import Image from "next/image";
-import IncreaseDecrease from "../../brands/_components/IncreaseDecrease";
 import { IProduct } from "@/interfaces/product.interface";
 import { server_url } from "@/constants";
+import { IconMinus, IconPlus, IconX } from "@tabler/icons-react";
 
 export const QuickOrderItem = ({ product }: { product: IProduct }) => {
   return (
-    <div className="flex  justify-between gap-3.5">
-      <div className="flex md:items-center gap-3.5">
+    <div className="flex justify-between gap-3.5 ">
+      <div className="flex md:items-center gap-3.5 w-full">
         <div>
           <div className="bg-gradient-primary-light md:p-3.5 p-1.5 rounded-[10px]">
             <div className="relative shrink-0 md:w-[55px] md:h-[55px] w-[50px] h-[50px]">
@@ -26,11 +25,16 @@ export const QuickOrderItem = ({ product }: { product: IProduct }) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-between gap-4">
-          <div className="flex flex-col justify-between">
-            <span className="line-clamp-1 md:text-base text-sm text-black-80">
-              {product?.productName}
-            </span>
+        <div className="flex flex-col justify-between w-full">
+          <div className="flex flex-col justify-between w-full">
+            <div className="flex items-center justify-between gap-x-2 w-full">
+              <span className="line-clamp-1 md:text-base text-sm text-black-80">
+                {product?.productName}
+              </span>
+              <button className="text-danger">
+                <IconX stroke={2} height={18} width={18} />
+              </button>
+            </div>
             <div className="flex items-center gap-2">
               <span className="text-positive text-[10px] md:text-xs">
                 {product?.brand?.brandName}
@@ -40,32 +44,38 @@ export const QuickOrderItem = ({ product }: { product: IProduct }) => {
             </div>
             <div className="flex items-center justify-between gap-5"></div>
           </div>
-          <div className="flex items-center gap-1.5">
-            <span className="text-black-80 text-xs">
+
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <span className="text-black-80 text-sm">
+                $
+                {product?.variant.discountedPrice
+                  ? product?.variant.discountedPrice
+                  : product?.variant.sellingPrice}
+              </span>
+              <span>
+                <IconX stroke={1} height={16} width={16} />
+              </span>
+              <div className="flex items-center gap-x-1.5 bg-gradient-primary-light rounded-2xl px-1">
+                <span className="bg-gradient-primary text-white rounded-full font-bold">
+                  <IconMinus stroke={1} height={16} width={16} />
+                </span>
+                <span className="text-black-80 text-sm">
+                  {product?.orderQuantity}
+                </span>
+                <span className="bg-gradient-primary text-white rounded-full font-bold">
+                  <IconPlus stroke={1} height={16} width={16} />
+                </span>
+              </div>
+            </div>
+            <strong className="font-semibold text-gradient-primary text-base">
               $
               {product?.variant.discountedPrice
-                ? product?.variant.discountedPrice
-                : product?.variant.sellingPrice}
-            </span>
-            <span>
-              <IconX stroke={1} height={12} width={12} />
-            </span>
-            {/* we will add here refetch  */}
-
-            {/* <IncreaseDecrease product={product} /> */}
+                ? product?.variant.discountedPrice * product?.orderQuantity
+                : product?.variant.sellingPrice * product?.orderQuantity}
+            </strong>
           </div>
         </div>
-      </div>
-      <div className="flex flex-col items-end justify-between">
-        <button>
-          <IconX stroke={1} color="red" height={16} width={16} />
-        </button>
-        <strong className="font-semibold text-gradient-primary text-base">
-          $
-          {product?.variant.discountedPrice
-            ? product?.variant.discountedPrice
-            : product?.variant.sellingPrice * product?.orderQuantity}
-        </strong>
       </div>
     </div>
   );

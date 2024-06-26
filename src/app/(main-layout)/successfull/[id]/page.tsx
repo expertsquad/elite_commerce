@@ -8,7 +8,8 @@ import TotalSubTotalShippingFee from "./_components/TotalSubTotalShippingFee";
 import { IconX } from "@tabler/icons-react";
 
 const OrderSuccessfull = async ({ params }: { params: { id: string } }) => {
-  const response = await fetchData({ route: `/online-order/${params?.id}` });
+  console.log("params", params);
+  const response = await fetchData({ route: `/quick-order/${params?.id}` });
   return (
     <div className="max-w-7xl mx-auto md:px-0 flex flex-col-reverse md:flex-row md:items-center md:gap-x-6 mb-6 md:mb-16">
       <div className="flex-1 md:w-1/2 bg-[#333333] text-white px-2 md:px-[30px] md:py-[30px] py-5 md:rounded-lg relative">
