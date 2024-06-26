@@ -1,13 +1,11 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { ShippingInfoOrderItems } from "./ShippingInfoOrderItems";
 import RightSideTotalAmountCard from "./RightSideTotalAmountCard";
-import { getLocalStorageData } from "@/helpers/localStorage.helper";
-import { storages } from "@/constants";
-import { ICartProduct } from "@/interfaces/cart.interface";
 import { usePathname } from "next/navigation";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import { CartContext } from "@/Provider/CartProvider";
 
 const OrderItemsRightSection = ({
   buttonText,
@@ -16,20 +14,10 @@ const OrderItemsRightSection = ({
   buttonText: string;
   buttonLink: string;
 }) => {
-  const [cartProducts, setCartProducts] = useState<ICartProduct[]>([]);
-  const [refetch, setRefetch] = useState(0);
   const pathName = usePathname();
 
   const { orderData, setOrderData } = useContext(OrderInitContext);
-
-  useEffect(() => {
-    const products = getLocalStorageData(storages.cartProducts) || [];
-    setCartProducts(products);
-    setOrderData((prevData) => ({
-      ...prevData,
-      orderItems: products,
-    }));
-  }, [refetch]);
+  const { cartProducts, setRefetch } = useContext(CartContext);
 
   console.log(orderData);
 
