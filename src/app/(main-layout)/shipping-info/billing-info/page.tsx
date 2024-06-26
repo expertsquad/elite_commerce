@@ -14,34 +14,42 @@ const page = async () => {
 
     console.log(formData);
 
-    // Transforming the formData to the required format
+    const dataObj: Record<string, any> = {};
+    for (const [key, value] of Array.from(formData.entries())) {
+      dataObj[key] = value;
+    }
+    console.log(dataObj);
+
+    // Transforming the data to the required format
     const transformedData = {
-      orderItems: formData.orderItems.map((item) => ({
+      orderItems: JSON.parse(dataObj.orderItems).map((item: any) => ({
         productId: item.productId,
         variantName: item.variantName,
         orderQuantity: item.orderQuantity,
       })),
       shippingAddress: {
-        firstName: formData.shippingAddress.firstName,
-        lastName: formData.shippingAddress.lastName,
-        streetAddress: formData.shippingAddress.streetAddress,
-        state: formData.shippingAddress.state,
-        country: formData.shippingAddress.country,
-        zipCode: Number(formData.shippingAddress.zipCode), // Ensuring zipCode is a number
-        phoneNumber: formData.shippingAddress.phoneNumber,
+        firstName: dataObj.firstName,
+        lastName: dataObj.lastName,
+        streetAddress: dataObj.streetAddress,
+        state: dataObj.state,
+        country: dataObj.country,
+        zipCode: Number(dataObj.zipCode),
+        phoneNumber: dataObj.phoneNumber,
       },
       payment: {
-        paymentStatus: formData.payment.paymentStatus,
-        paymentMethod: formData.payment.paymentMethod,
+        paymentStatus: dataObj.paymentStatus,
+        paymentMethod: dataObj.paymentMethod,
       },
     };
 
+    // Sending the transformed data
     const result = await updateDataMutation({
       route: "/online-order/add",
-      data: transformedData,
+      data: JSON.stringify(transformedData),
       method: "POST",
       formatted: true,
     });
+
     console.log(result);
   };
 
