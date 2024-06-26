@@ -18,7 +18,7 @@ type IDealsOfThedayCardProps = {
 const DealsOfTheDayCard = ({ deal, index }: IDealsOfThedayCardProps) => {
   return (
     <div
-      className={`w-[clamp(300px,25vw,350px)]  rounded-[10px]  mx-auto ${
+      className={`w-[clamp(300px,25vw,350px)] rounded-[10px] ${
         index % 2 === 0
           ? deal?.discount
             ? style?.cornerGold

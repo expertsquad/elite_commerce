@@ -19,6 +19,13 @@ const Pagination = ({
     }
   };
 
+  const handlePrevClick = () => {
+    console.log("prev clicked");
+
+    if (currentPage > 1) {
+      handlePageClick(currentPage - 1);
+    }
+  };
   const handleNextClick = () => {
     if (currentPage < totalPages) {
       handlePageClick(currentPage + 1);
@@ -69,15 +76,25 @@ const Pagination = ({
 
   return (
     <div className="flex items-center justify-center gap-3">
+      {currentPage > 1 && (
+        <button
+          className="cursor-pointer px-5 h-10 rounded-full border border-black-10 flex items-center justify-center hover:text-white hover:bg-gradient-primary transition-all"
+          onClick={handlePrevClick}
+          aria-label="Next Page"
+        >
+          Prev
+        </button>
+      )}
       {renderPageNumbers()}
-      <button
-        className="cursor-pointer px-5 h-10 rounded-full border border-black-10 flex items-center justify-center hover:text-white hover:bg-gradient-primary transition-all"
-        onClick={handleNextClick}
-        disabled={currentPage >= totalPages}
-        aria-label="Next Page"
-      >
-        Next
-      </button>
+      {currentPage < totalPages && (
+        <button
+          className="cursor-pointer px-5 h-10 rounded-full border border-black-10 flex items-center justify-center hover:text-white hover:bg-gradient-primary transition-all"
+          onClick={handleNextClick}
+          aria-label="Next Page"
+        >
+          Next
+        </button>
+      )}
     </div>
   );
 };
