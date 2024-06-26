@@ -11,7 +11,6 @@ const BuyNowSingleProduct = ({ product }: { product: IProduct }) => {
   const router = useRouter();
 
   const { orderData, setOrderData } = useContext(OrderInitContext);
-  console.log(orderData);
 
   //handling single product to direct order
   const handleSingleProductClick = (product: IProduct) => {
