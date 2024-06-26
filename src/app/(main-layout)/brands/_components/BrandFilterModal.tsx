@@ -11,10 +11,12 @@ const BrandFilterModal = ({
   categories,
   products,
   brands,
+  params,
 }: {
   categories: ICategory[];
   products: IProduct[];
   brands: IBrand[];
+  params: { slug: string };
 }) => {
   const [show, setShow] = useState(false);
   return (
@@ -39,6 +41,7 @@ const BrandFilterModal = ({
             brands={brands}
             products={products}
             categories={categories}
+            params={params}
           />
         </Modal>
       )}

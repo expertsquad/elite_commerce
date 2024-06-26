@@ -9,7 +9,7 @@ const Layout = async ({
   params,
 }: {
   children: React.ReactNode;
-  params: {};
+  params: { slug: string };
 }) => {
   const categories = await fetchData({ route: "/category", limit: 10 });
   const products = await fetchData({
@@ -25,6 +25,7 @@ const Layout = async ({
         <div className="flex items-center justify-between md:hidden">
           {/* <SortingSection /> */}
           <BrandFilterModal
+            params={params}
             products={products?.data}
             categories={categories?.data}
             brands={brands?.data}
