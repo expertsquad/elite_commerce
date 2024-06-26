@@ -3,6 +3,7 @@ import { server_url } from "@/constants";
 import { IBrand } from "@/interfaces/brand.interface";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const FavouriteBrandSection = ({
@@ -19,25 +20,28 @@ const FavouriteBrandSection = ({
           <h1 className="text-md md:text-2xl font-bold text-gradient-primary">
             Explore your Favorite Brand
           </h1>
-          <div className="flex justify-end">
-            <button className="flex items-center gap-3 text-primary">
+          <Link
+            href="/brands"
+            className="flex justify-end text-gradient-primary"
+          >
+            <button className="flex items-center">
               See all
-              <IconArrowNarrowRight className="text-primary" />
+              <b className="px-2">&rarr;</b>
             </button>
-          </div>
+          </Link>
         </div>
         {/* <div className="flex flex-wrap gap-5 mx-auto my-10"> */}
-        <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-5 my-10">
+        <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-10 my-10">
           {favouriteBrands?.map((brand) => (
             <div
               key={brand?._id}
-              className="border border-black-10 w-32 h-16 relative"
+              className="border border-black-10 w-32 h-16 relative rounded-2xl"
             >
               <Image
                 src={server_url + brand?.brandPhoto}
-                alt="brand photo"
+                alt={brand?.brandName}
                 fill
-                className="object-cover"
+                className="object-contain"
               />
             </div>
           ))}
