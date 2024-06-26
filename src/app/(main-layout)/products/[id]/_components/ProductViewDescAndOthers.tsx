@@ -1,6 +1,6 @@
 import SocialMediaAndOthers from "./SocialMediaAndOthers";
 import ProductVariantColor from "./ProductVariantColor";
-import { IProduct } from "@/interfaces/product.interface";
+import { IProduct, IProductVariant } from "@/interfaces/product.interface";
 import CategoryAndBrandSmallComponent from "./CategoryAndBrandSmallComponent";
 import RatingWishlistStockAndSold from "./RatingWishlistStockAndSold";
 import {
@@ -15,6 +15,7 @@ import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import ProductVariantPrice from "./ProductVariantPrice";
 import { Button } from "@/Components/Buttons";
 import PercentageSlider from "./PercentageSlider";
+import { useState } from "react";
 
 const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
   return (

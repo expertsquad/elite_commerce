@@ -7,12 +7,12 @@ import {
   IconUser,
 } from "@tabler/icons-react";
 import React from "react";
-import ButtonPrimary from "./ButtonPrimary";
+import ButtonPrimary from "../../brands/_components/ButtonPrimary";
 import Link from "next/link";
 import { IProduct } from "@/interfaces/product.interface";
 
-import { QuickOrderItem } from "./QuickOrderItems";
-import { OrderSummery } from "./OrderSummery";
+import { QuickOrderItem } from "../../brands/_components/QuickOrderItems";
+import { OrderSummery } from "../../brands/_components/OrderSummery";
 
 const QuickOrderModal = ({
   show,
@@ -28,7 +28,7 @@ const QuickOrderModal = ({
       show={show}
       setShow={setShow}
       alignment="center"
-      className="max-h-screen md:w-3/4 w-full overflow-hidden"
+      className="max-h-screen md:w-2/4 w-full"
       showCancelBtnINSmallDevice={true}
     >
       <div className="">

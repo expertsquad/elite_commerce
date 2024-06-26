@@ -5,7 +5,6 @@ import IncreaseDecrease from "./IncreaseDecrease";
 import { IProduct } from "@/interfaces/product.interface";
 
 export const QuickOrderItem = ({ product }: { product: IProduct }) => {
-  console.log(product);
   return (
     <div className="flex  justify-between gap-3.5">
       <div className="flex md:items-center gap-3.5">
