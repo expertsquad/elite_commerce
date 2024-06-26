@@ -28,7 +28,7 @@ const QuickOrderModal = ({
       show={show}
       setShow={setShow}
       alignment="center"
-      className="max-h-screen md:w-3/4 w-full overflow-hidden"
+      className="max-h-screen md:w-2/4 w-full"
       showCancelBtnINSmallDevice={true}
     >
       <div className="">
