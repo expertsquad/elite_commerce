@@ -1,7 +1,17 @@
+import Loading from "@/app/loading";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct } from "@/interfaces/product.interface";
 
-const FilteredProductsGridView = ({ products }: { products: IProduct[] }) => {
+const FilteredProductsGridView = ({
+  products,
+  isLoading,
+}: {
+  products: IProduct[];
+  isLoading: boolean;
+}) => {
+  if (isLoading) {
+    return <Loading />;
+  }
   if (products?.length === 0) {
     return (
       <div className="flex text-center mt-20 justify-center items-center">

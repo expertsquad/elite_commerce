@@ -11,6 +11,7 @@ const FilterByColor = ({ redirectPath }: { redirectPath: string }) => {
   const router = useRouter();
   const pathname = usePathname();
   const { filter, setFilter } = useContext(FilterContext);
+  console.log(filter);
 
   const getColorName = (color: string) => {
     setFilter({
