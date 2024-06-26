@@ -13,6 +13,7 @@ import ProgressBar from "../../_components/SliderComponents/ProgressBar";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
 import { storages } from "@/constants";
+import QuickOrderButton from "../../brands/_components/QuickOrderButton";
 
 const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
   const {
@@ -106,10 +107,16 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
                   Proceed To Checkout &rarr;
                 </Link>
               </ButtonPrimary>
-              <ButtonPrimaryLight className="!text-black !rounded-full">
+              {/* <ButtonPrimaryLight className="!text-black !rounded-full">
                 <IconBolt />
                 Quick Order
-              </ButtonPrimaryLight>
+              </ButtonPrimaryLight> */}
+              <QuickOrderButton
+                product={cartProducts}
+                buttonStyle="!uppercase !text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] flex items-center justify-center gap-2.5 px-5 w-full py-3.5 bg-gradient-primary-light  text-white rounded-full"
+                buttonIcon={<IconBolt size={20} fill="#fff" />}
+                buttonText="QUICK ORDER"
+              />
             </div>
             <div className="mt-5">
               <Link

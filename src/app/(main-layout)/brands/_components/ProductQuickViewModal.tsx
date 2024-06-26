@@ -13,13 +13,13 @@ import Image from "next/image";
 import React, { useContext } from "react";
 import ProductVariantColor from "../../products/[id]/_components/ProductVariantColor";
 import Link from "next/link";
-import { Button } from "@/Components/Buttons";
 import { IProduct } from "@/interfaces/product.interface";
 import { server_url, storages } from "@/constants";
 import ProgressBar from "../../_components/SliderComponents/ProgressBar";
 import { formatProductForCart } from "@/utils/formatProductForCart.utils";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import QuickOrderButton from "./QuickOrderButton";
 
 const ProductQuickViewModal = ({
   show,
@@ -171,10 +171,16 @@ const ProductQuickViewModal = ({
                     BUY NOW
                   </Link>
                 </div>
-                <Button className="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2 rounded-md w-full uppercase">
-                  <IconBolt fill="#fff" size={20} />
-                  QUICK ORDER
-                </Button>
+                <QuickOrderButton
+                  product={{
+                    ...product,
+                    orderQuantity: 1,
+                    variant: product?.variants[0],
+                  }}
+                  buttonStyle="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2 rounded-md w-full text-base"
+                  buttonIcon={<IconBolt size={20} fill="#fff" />}
+                  buttonText="QUICK ORDER"
+                />
               </div>
             </div>
             {product?.description ? (

@@ -16,6 +16,7 @@ import ProductVariantPrice from "./ProductVariantPrice";
 import { Button } from "@/Components/Buttons";
 import ProgressBar from "@/app/(main-layout)/_components/SliderComponents/ProgressBar";
 import BuyNowSingleProduct from "./BuyNowSingleProduct";
+import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
 
 const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
   return (
@@ -91,10 +92,16 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
         </div>
         <div className="flex items-center justify-between gap-x-2.5">
           <BuyNowSingleProduct product={product} />
-          <Button className="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2 rounded-md w-full">
-            <IconBolt fill="#fff" size={20} />
-            QUICK ORDER
-          </Button>
+          <QuickOrderButton
+            product={{
+              ...product,
+              orderQuantity: 1,
+              variant: product?.variants[0],
+            }}
+            buttonStyle="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2 rounded-md w-full text-base"
+            buttonIcon={<IconBolt size={20} fill="#fff" />}
+            buttonText="QUICK ORDER"
+          />
         </div>
       </div>
     </div>

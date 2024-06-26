@@ -6,12 +6,33 @@ import Image from "next/image";
 import { server_url } from "@/constants";
 import TotalSubTotalShippingFee from "./_components/TotalSubTotalShippingFee";
 import { IconX } from "@tabler/icons-react";
+import { orderPlacedDesign } from "@/assets";
 
-const OrderSuccessfull = async ({ params }: { params: { id: string } }) => {
-  const response = await fetchData({ route: `/online-order/${params?.id}` });
+interface Params {
+  id: string;
+}
+
+interface SearchParams {
+  [key: string]: any;
+}
+
+const OrderSuccessfull = async ({
+  params,
+  searchParams,
+}: {
+  params: Params;
+  searchParams: SearchParams;
+}) => {
+  const quickOrder = searchParams["quick-order"] === "true";
+  console.log(quickOrder);
+  const response = await fetchData({
+    route: `${
+      quickOrder ? `/quick-order/${params?.id}` : `/online-order/${params?.id}`
+    }`,
+  });
   return (
     <div className="max-w-7xl mx-auto md:px-0 flex flex-col-reverse md:flex-row md:items-center md:gap-x-6 mb-6 md:mb-16">
-      <div className="flex-1 md:w-1/2 bg-[#333333] text-white px-2 md:px-[30px] md:py-[30px] py-5 md:rounded-lg relative">
+      <div className="flex-1 md:w-1/2 md:h-[700px] bg-[#333333] text-white px-2 md:px-[30px] md:py-[30px] py-5 md:rounded-lg relative">
         <div className="flex items-center justify-between">
           <span>Order Details</span>
           <span className="font-light">
@@ -26,7 +47,7 @@ const OrderSuccessfull = async ({ params }: { params: { id: string } }) => {
             Payment: {response?.data?.payment?.paymentMethod}
           </span>
         </div>
-        <div className="mt-[30px]">
+        <div className="mt-[30px] max-h-[400px] overflow-y-scroll scrollbar-y-remove">
           {response?.data?.orderItems?.map((item: OrderItemsTypes) => (
             <div
               key={item?._id}
@@ -69,8 +90,15 @@ const OrderSuccessfull = async ({ params }: { params: { id: string } }) => {
           discount={response?.data?.totalDiscount}
         />
       </div>
-      <div className="md:w-1/2">
-        <OrderPlacedThankYou id={params?.id} />
+      <div className="md:w-1/2 bg-[#2943931A] bg-opacity-10 md:rounded-lg">
+        <div className="flex items-center">
+          {[...Array(3)].map((_, index) => (
+            <div key={index} className="flex justify-center items-center">
+              <Image src={orderPlacedDesign} alt="order placed design" />
+            </div>
+          ))}
+        </div>
+        <OrderPlacedThankYou isQuickOrder={quickOrder} id={params?.id} />
       </div>
     </div>
   );

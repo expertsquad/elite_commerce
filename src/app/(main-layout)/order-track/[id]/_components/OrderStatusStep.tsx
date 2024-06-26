@@ -28,7 +28,7 @@ const OrderStatusStep = ({ orderStatus }: { orderStatus: any[] }) => {
   return (
     <div className="bg-gradient-primary-light p-5 flex flex-col gap-y-5 md:gap-y-5 md:flex-row md:items-center justify-between">
       {statuses.map((step, index) => {
-        const statusMatch = orderStatus.find(
+        const statusMatch = orderStatus?.find(
           (status) => status.status === step.title
         );
         const isCompleted = !!statusMatch;

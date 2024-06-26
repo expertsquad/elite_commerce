@@ -20,6 +20,7 @@ import { WishlistContext } from "@/Provider/WishlistProvider";
 import { getWishlistRemoteAndLocalDataAndMerge } from "@/helpers/getWishlistRemoteAndLocalDataAndMerge";
 import { CartContext } from "@/Provider/CartProvider";
 import { updateCart } from "@/utils/updateCart.utils";
+import QuickOrderButton from "../brands/_components/QuickOrderButton";
 
 const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
   const { setRefetch } = useContext(WishlistContext);
@@ -102,10 +103,16 @@ const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
         </div>
       </td>
       <td className="border border-black-10 border-collapse px-5">
-        <button className="bg-gradient-primary whitespace-nowrap text-white rounded-full px-3.5 uppercase flex items-center justify-center gap-2.5 text-sm py-2">
-          <IconBolt width={20} />
-          Quick order
-        </button>
+        <QuickOrderButton
+          product={{
+            ...product,
+            orderQuantity: 1,
+            variant: product?.variants[0],
+          }}
+          buttonStyle="bg-gradient-primary whitespace-nowrap text-white rounded-full px-3.5 uppercase flex items-center justify-center gap-2.5 text-sm py-2"
+          buttonIcon={<IconBolt size={20} fill="#fff" />}
+          buttonText="QUICK ORDER"
+        />
       </td>
     </tr>
   );

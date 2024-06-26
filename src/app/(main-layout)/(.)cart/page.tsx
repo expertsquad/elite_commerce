@@ -15,6 +15,7 @@ import { updateCart } from "@/utils/updateCart.utils";
 import ProgressBar from "../_components/SliderComponents/ProgressBar";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
+import QuickOrderButton from "../brands/_components/QuickOrderButton";
 
 const QuickOrderItem = ({
   product,
@@ -138,17 +139,19 @@ const OrderSummery = ({
         </strong>
       </div>
       <div className="flex items-center justify-center gap-5 md:px-5">
-        <ButtonPrimaryLight className="!uppercase !text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)]">
-          <IconShoppingCart />
-          Order Now
-        </ButtonPrimaryLight>
+        <QuickOrderButton
+          product={products}
+          buttonStyle="!uppercase !text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] flex items-center justify-center gap-2.5 px-5 w-full py-3.5 bg-gradient-primary-light  text-white rounded-lg"
+          buttonIcon={<IconBolt size={20} fill="#fff" />}
+          buttonText="QUICK ORDER"
+        />
         <Link
           href="/shipping-info"
           className="w-full"
           onClick={handleAddToInitOrder}
         >
           <ButtonPrimary className="!uppercase !whitespace-nowrap py-[clamp(2px,1.2vh,20px)]">
-            <IconBolt height={18} width={18} />
+            <IconShoppingCart height={18} width={18} />
             Check Out
           </ButtonPrimary>
         </Link>
