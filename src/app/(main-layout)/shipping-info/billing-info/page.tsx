@@ -14,38 +14,10 @@ const page = async () => {
 
     console.log(formData);
 
-    const dataObj: Record<string, any> = {};
-    for (const [key, value] of Array.from(formData.entries())) {
-      dataObj[key] = value;
-    }
-    console.log(dataObj);
-
-    // Transforming the data to the required format
-    const transformedData = {
-      orderItems: JSON.parse(dataObj.orderItems).map((item: any) => ({
-        productId: item.productId,
-        variantName: item.variantName,
-        orderQuantity: item.orderQuantity,
-      })),
-      shippingAddress: {
-        firstName: dataObj.firstName,
-        lastName: dataObj.lastName,
-        streetAddress: dataObj.streetAddress,
-        state: dataObj.state,
-        country: dataObj.country,
-        zipCode: Number(dataObj.zipCode),
-        phoneNumber: dataObj.phoneNumber,
-      },
-      payment: {
-        paymentStatus: dataObj.paymentStatus,
-        paymentMethod: dataObj.paymentMethod,
-      },
-    };
-
     // Sending the transformed data
     const result = await updateDataMutation({
       route: "/online-order/add",
-      data: JSON.stringify(transformedData),
+      data: JSON.stringify(formData),
       method: "POST",
       formatted: true,
     });
