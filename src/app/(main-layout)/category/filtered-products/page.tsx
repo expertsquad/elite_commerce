@@ -1,12 +1,17 @@
+"use client";
 import { fetchData } from "@/actions/fetchData";
 import FilteredProductsGridView from "./_components/FilteredProductsGridView";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
+import { FilterContext } from "@/Provider/FilteringProvider";
 
-const FilteredProductsPage = async ({
+const FilteredProductsPage = ({
   searchParams,
 }: {
   searchParams: { [key: string]: string };
 }) => {
+  const { filter, setFilter } = useContext(FilterContext);
+  console.log("filter-----", filter);
+
   let query = "";
 
   if (searchParams.categoryName) {
@@ -19,15 +24,16 @@ const FilteredProductsPage = async ({
     query = ``;
   }
 
-  const response = await fetchData({
-    route: "/product",
-    limit: 40,
-    query: query,
-  });
+  // const response = await fetchData({
+  //   route: "/product",
+  //   limit: 40,
+  //   query: query,
+  // });
 
   return (
     <Fragment>
-      <FilteredProductsGridView products={response} />
+      <FilteredProductsGridView products={{ data: [] }} />
+      {/* <FilteredProductsGridView products={response} /> */}
     </Fragment>
   );
 };
