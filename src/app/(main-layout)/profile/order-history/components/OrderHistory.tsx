@@ -1,7 +1,14 @@
 import React from "react";
 
-const OrderHistory = () => {
-  return <div>Your Order History</div>;
+const OrderHistory = ({
+  orderPlacedData,
+  orderPackagingData,
+  orderShippingData,
+  orderDeliveredData,
+}: any) => {
+  console.log(orderPlacedData);
+
+  return <div></div>;
 };
 
 export default OrderHistory;
