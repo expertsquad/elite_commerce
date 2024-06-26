@@ -30,7 +30,7 @@ const RightSideTotalAmountCard = ({
   // getting data from order item context
   const { orderData } = useContext(OrderInitContext);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (submitAction) {
       submitAction(orderData);
     }
@@ -62,10 +62,10 @@ const RightSideTotalAmountCard = ({
       {submitAction ? (
         <Form handleSubmit={handleSubmit}>
           <Button
-            className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2   "
+            className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2"
             disabled={disabled}
           >
-            {buttonText} <IconArrowRight />{" "}
+            {buttonText} <IconArrowRight />
           </Button>
         </Form>
       ) : (
@@ -74,7 +74,7 @@ const RightSideTotalAmountCard = ({
             className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2"
             disabled={disabled}
           >
-            {buttonText} <IconArrowRight />{" "}
+            {buttonText} <IconArrowRight />
           </Button>
         </Link>
       )}
