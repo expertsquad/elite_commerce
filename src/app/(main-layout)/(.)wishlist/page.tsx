@@ -77,9 +77,12 @@ const WishlistInterceptingPage = () => {
                         </span>
 
                         <div className="flex flex-col gap-2">
-                          <span className="text-positive text-[10px] md:text-xs">
-                            {product?.brand?.brandName}
-                          </span>
+                          <p className="text-positive text-[10px] md:text-xs">
+                            {product?.variant?.inStock
+                              ? product?.variant?.inStock
+                              : 0}{" "}
+                            In Stock
+                          </p>
 
                           <div className="flex items-center gap-1.5">
                             <strong className="font-semibold text-gradient-primary text-base">
@@ -121,6 +124,7 @@ const WishlistInterceptingPage = () => {
               <Link
                 href={"/wishlist"}
                 className="flex items-center justify-center gap-2.5 px-5 w-full py-3.5  bg-gradient-primary  text-white rounded-full "
+                onClick={() => window.location.reload()}
               >
                 View All Wishlist
               </Link>

@@ -8,7 +8,7 @@ export interface IAddress {
   state: string;
   country: string;
   companyName?: string;
-  zipCode: number;
+  zipCode: number | string;
   phoneNumber: string;
   userId: string;
 }

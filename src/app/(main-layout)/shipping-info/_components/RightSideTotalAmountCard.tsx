@@ -9,10 +9,12 @@ const RightSideTotalAmountCard = ({
   cartProducts,
   buttonLink,
   buttonText,
+  disabled,
 }: {
   cartProducts: ICartProduct[];
   buttonText: string;
   buttonLink: string;
+  disabled?: string;
 }) => {
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(cartProducts);
@@ -27,7 +29,7 @@ const RightSideTotalAmountCard = ({
       <div className="flex flex-col  gap-4 py-4 border-b border-black-10">
         <div className="flex items-center justify-between">
           <p>Sub Total</p>
-          <strong> ${totalPrice}</strong>
+          <strong> ${totalPrice.toFixed(2)}</strong>
         </div>
         <div className="flex items-center justify-between">
           <p>Shipping</p>
@@ -41,13 +43,19 @@ const RightSideTotalAmountCard = ({
       {/* Total */}
       <div className="flex items-center justify-between [font-size:_clamp(1.4em,40vw,1.7em)] font-bold my-2">
         <h2 className="">Total</h2>
-        <h2 className="text-gradient-primary"> ${totalPayable}</h2>
+        <h2 className="text-gradient-primary"> ${totalPayable.toFixed(2)}</h2>
       </div>
       {/* Button Link */}
       <div>
-        <Button className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2">
-          <Link href={buttonLink}> {buttonText} </Link> <IconArrowRight />{" "}
-        </Button>
+        {" "}
+        <Link href={buttonLink}>
+          <Button
+            className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2   "
+            disabled={disabled}
+          >
+            {buttonText} <IconArrowRight />{" "}
+          </Button>
+        </Link>
       </div>
     </>
   );

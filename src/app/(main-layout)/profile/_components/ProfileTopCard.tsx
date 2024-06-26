@@ -7,9 +7,13 @@ import Image from "next/image";
 import { fetchProtectedData } from "@/actions/fetchData";
 
 const ProfileTopCard = async () => {
+  const getMe = await fetchProtectedData({
+    route: "/user/me",
+  });
+
   const orderItems = await fetchProtectedData({
     route: "/online-order",
-    query: "buyer.userId=6609a866652afd6056cdc5d8",
+    query: "buyer.userId=" + getMe?.data?._id,
   });
 
   return (
@@ -35,6 +39,7 @@ const ProfileTopCard = async () => {
       <div className="flex items-center justify-center flex-col gap-4 bg-gradient-secondary-light rounded-lg p-7 w-full">
         <Image src={starIcon} alt="total order" width={40} height={40} />
         <h3 className="text-lg whitespace-nowrap">Pending Review</h3>
+        {/* i will add here pending review count */}
         <p className="text-lg font-bold">12</p>
       </div>
     </section>
