@@ -29,7 +29,7 @@ const BuyNowSingleProduct = ({ product }: { product: IProduct }) => {
 
   return (
     <button
-      className="bg-gradient-primary-light rounded-md w-full"
+      className="bg-gradient-primary-light rounded-md w-full flex items-center justify-center gap-x-1.5  py-2 "
       onClick={() => handleSingleProductClick(product)}
     >
       <GenerateGradientIcon
