@@ -1,3 +1,4 @@
+import { IOrderApiResponse } from "@/interfaces/orderApiResponse";
 import React from "react";
 
 const OrderHistory = ({
@@ -5,10 +6,13 @@ const OrderHistory = ({
   orderPackagingData,
   orderShippingData,
   orderDeliveredData,
-}: any) => {
-  console.log(orderPlacedData);
-
-  return <div></div>;
+}: {
+  orderPlacedData: IOrderApiResponse;
+  orderPackagingData: IOrderApiResponse;
+  orderShippingData: IOrderApiResponse;
+  orderDeliveredData: IOrderApiResponse;
+}) => {
+  return <div>here comes the order history sorting</div>;
 };
 
 export default OrderHistory;

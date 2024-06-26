@@ -28,8 +28,6 @@ const page = async () => {
     query: "orderStatus.status=Shipping&buyer.userId=" + getMe?.data?._id,
   });
 
-  console.log(orderPlacedData);
-
   return (
     <div>
       <OrderHistory
