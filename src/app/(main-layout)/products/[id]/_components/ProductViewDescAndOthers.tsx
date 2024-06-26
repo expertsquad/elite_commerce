@@ -15,6 +15,7 @@ import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import ProductVariantPrice from "./ProductVariantPrice";
 import { Button } from "@/Components/Buttons";
 import ProgressBar from "@/app/(main-layout)/_components/SliderComponents/ProgressBar";
+import BuyNowSingleProduct from "./BuyNowSingleProduct";
 
 const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
   return (
@@ -89,19 +90,7 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
           </div>
         </div>
         <div className="flex items-center justify-between gap-x-2.5">
-          <div className="bg-gradient-primary-light rounded-md w-full">
-            <Link
-              href={"/"}
-              className="flex items-center justify-center gap-x-1.5 text-gradient-primary py-2"
-            >
-              <GenerateGradientIcon
-                IconComponent={IconShoppingBag}
-                stroke={2}
-                size={20}
-              />
-              BUY NOW
-            </Link>
-          </div>
+          <BuyNowSingleProduct product={product} />
           <Button className="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2 rounded-md w-full">
             <IconBolt fill="#fff" size={20} />
             QUICK ORDER
