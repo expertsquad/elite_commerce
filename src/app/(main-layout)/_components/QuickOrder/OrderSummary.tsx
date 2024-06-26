@@ -55,10 +55,17 @@ export const OrderSummary = ({ products, loading }: IOrderSummaryProps) => {
         </strong>
       </div>
       <div className="md:block hidden">
-        <ButtonPrimary buttonType={"submit"}>
-          <IconBolt height={20} width={20} />
-          <span className="uppercase">
-            {loading ? "Order Processing..." : ` Confirm Order - ${total}`}
+        <ButtonPrimary
+          buttonType={"submit"}
+          className={`${loading && "cursor-wait opacity-60"}`}
+        >
+          {!loading && <IconBolt height={20} width={20} />}
+          <span>
+            {loading ? (
+              "Order Processing..."
+            ) : (
+              <span className="uppercase">{`Confirm Order - ${total}`}</span>
+            )}
           </span>
         </ButtonPrimary>
       </div>

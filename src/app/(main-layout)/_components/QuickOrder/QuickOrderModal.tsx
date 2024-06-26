@@ -10,7 +10,6 @@ import { OrderSummary } from "./OrderSummary";
 import CustomInput from "@/Components/CustomInput";
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { postDataMutation } from "@/actions/postDataMutation";
-import Loading from "@/app/loading";
 import { useRouter } from "next/navigation";
 
 const QuickOrderModal = ({
@@ -61,8 +60,19 @@ const QuickOrderModal = ({
         formatted: true,
       });
       if ("data" in response) {
-        router.push(`/successfull/${response?.data?._id}?${"quick-order"}`);
+        const orderId = response?.data?._id;
+        const isQuickOrder = "true";
+
+        router.push(`/successfull/${orderId}?quick-order=${isQuickOrder}`);
+
+        setFormValues({
+          fullName: "",
+          phoneNumber: "",
+          address: "",
+        });
       }
+
+      console.log(response);
     } catch (error) {
       console.error("Order failed:", error);
     } finally {
@@ -143,8 +153,12 @@ const QuickOrderModal = ({
                     onChange={handleInputChange}
                   />
                   <div className="md:hidden block ">
-                    <ButtonPrimary buttonType="submit">
-                      <IconBolt height={18} width={18} />
+                    <ButtonPrimary
+                      buttonType="submit"
+                      className={`${loading && "cursor-wait opacity-60"}`}
+                    >
+                      {!loading && <IconBolt height={20} width={20} />}
+
                       <span className="uppercase text-sm">
                         {loading
                           ? "Order Processing"
