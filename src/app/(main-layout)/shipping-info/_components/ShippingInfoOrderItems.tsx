@@ -1,23 +1,38 @@
 import StarRating from "@/Components/StarRating";
 import { IconX } from "@tabler/icons-react";
 import Image from "next/image";
-import IncreaseDecrease from "../../brands/_components/IncreaseDecrease";
 import { ICartProduct } from "@/interfaces/cart.interface";
-import { updateCart } from "@/utils/updateCart.utils";
-import { server_url } from "@/constants";
+import { server_url, storages } from "@/constants";
+import IncreaseDecreaseOrderItems from "../../brands/_components/IncreaseDecreaseOrderItems";
+import { useContext } from "react";
+import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import { setLocalStorageData } from "@/helpers/localStorage.helper";
 
 export const ShippingInfoOrderItems = ({
   product,
-  setRefetch,
 }: {
   product: ICartProduct;
-  setRefetch: React.Dispatch<React.SetStateAction<number>>;
 }) => {
+  const { orderData, setRefetch } = useContext(OrderInitContext);
   const handleRemoveItem = () => {
-    updateCart({ actionType: "remove", product });
+    let updateOrderItems = orderData?.orderItems;
+    const productIndex = orderData?.orderItems?.findIndex(
+      (item) => item.productId === product.productId
+    );
+    const existProduct = orderData?.orderItems?.find(
+      (item) => item.productId === product.productId
+    );
+    updateOrderItems = [
+      ...updateOrderItems.slice(0, productIndex),
+      ...updateOrderItems.slice(productIndex + 1),
+    ] as ICartProduct[];
+
+    setLocalStorageData(storages.orderInit, {
+      ...orderData,
+      orderItems: updateOrderItems,
+    });
     setRefetch((prev) => prev + 1);
   };
-
   // product price
   const price =
     product?.variant?.discountedPrice || product?.variant?.sellingPrice;
@@ -47,22 +62,27 @@ export const ShippingInfoOrderItems = ({
                 {product?.brandName}
               </span>
               <span className="text-black-10">|</span>
-              <StarRating rating={4} />
+              <StarRating rating={product?.averageRating || 0} />
             </div>
-            <div className="flex items-center justify-between gap-5"></div>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="text-black-80 text-xs">${price}</span>
             <span>
               <IconX stroke={1} height={12} width={12} />
             </span>
-            <IncreaseDecrease product={product} setRefetch={setRefetch} />
+            <IncreaseDecreaseOrderItems product={product} />
           </div>
         </div>
       </div>
       <div className="flex flex-col items-end justify-between">
         <button onClick={handleRemoveItem}>
-          <IconX stroke={1} color="red" height={16} width={16} />
+          <IconX
+            stroke={1}
+            color="red"
+            height={16}
+            width={16}
+            onClick={handleRemoveItem}
+          />
         </button>
         <strong className="font-semibold text-gradient-primary text-base">
           ${price * product?.orderQuantity}

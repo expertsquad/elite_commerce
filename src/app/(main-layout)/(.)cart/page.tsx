@@ -1,11 +1,11 @@
 "use client";
 import Modal from "@/Components/Modal";
 import StarRating from "@/Components/StarRating";
-import { server_url } from "@/constants";
+import { server_url, storages } from "@/constants";
 import { ICartProduct } from "@/interfaces/cart.interface";
 import Image from "next/image";
 import React, { useContext } from "react";
-import IncreaseDecrease from "../brands/_components/IncreaseDecrease";
+import IncreaseDecreaseCartItems from "../brands/_components/IncreaseDecreaseCartItems";
 import { IconBolt, IconShoppingCart, IconX } from "@tabler/icons-react";
 import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
 import ButtonPrimary from "../brands/_components/ButtonPrimary";
@@ -13,6 +13,8 @@ import Link from "next/link";
 import { CartContext } from "@/Provider/CartProvider";
 import { updateCart } from "@/utils/updateCart.utils";
 import ProgressBar from "../_components/SliderComponents/ProgressBar";
+import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import { setLocalStorageData } from "@/helpers/localStorage.helper";
 
 const QuickOrderItem = ({
   product,
@@ -60,7 +62,10 @@ const QuickOrderItem = ({
               {product?.variant?.sellingPrice}
             </span>
             <span className="text-xs">X</span>
-            <IncreaseDecrease product={product} setRefetch={setRefetch} />
+            <IncreaseDecreaseCartItems
+              product={product}
+              setRefetch={setRefetch}
+            />
           </div>
         </div>
       </div>
@@ -88,10 +93,20 @@ const OrderSummery = ({
     totalPrice: number;
   };
 }) => {
+  const { orderData, setRefetch } = useContext(OrderInitContext);
+
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
   const calculateTotalWithShipping = totalPrice + shippingFee;
   const totalPayable = calculateTotalWithShipping - totalDiscount;
+
+  const handleAddToInitOrder = () => {
+    setLocalStorageData(storages.orderInit, {
+      ...orderData,
+      orderItems: products,
+    });
+    setRefetch((prev) => prev + 1);
+  };
 
   return (
     <div className="md:border border-black-10 rounded-[10px] md:px-5 py-[clamp(2px,1.5vh,20px)] space-y-[clamp(2px,.5vh,20px)] bg-white">
@@ -127,7 +142,11 @@ const OrderSummery = ({
           <IconShoppingCart />
           Order Now
         </ButtonPrimaryLight>
-        <Link href="/shipping-info" className="w-full">
+        <Link
+          href="/shipping-info"
+          className="w-full"
+          onClick={handleAddToInitOrder}
+        >
           <ButtonPrimary className="!uppercase !whitespace-nowrap py-[clamp(2px,1.2vh,20px)]">
             <IconBolt height={18} width={18} />
             Check Out

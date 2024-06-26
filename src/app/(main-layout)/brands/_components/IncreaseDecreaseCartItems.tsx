@@ -2,7 +2,7 @@ import { ICartProduct } from "@/interfaces/cart.interface";
 import { updateCart } from "@/utils/updateCart.utils";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
 
-const IncreaseDecrease = ({
+const IncreaseDecreaseCartItems = ({
   product,
   setRefetch,
 }: {
@@ -36,4 +36,4 @@ const IncreaseDecrease = ({
   );
 };
 
-export default IncreaseDecrease;
+export default IncreaseDecreaseCartItems;

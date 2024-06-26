@@ -4,4 +4,5 @@ export const server_api = process.env.NEXT_PUBLIC_server_url + "api/v1";
 export const storages = {
   cartProducts: "cartProducts",
   wishlistProducts: "wishlistProducts",
+  orderInit: "orderInit",
 };

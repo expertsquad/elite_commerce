@@ -10,6 +10,9 @@ import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct } from "@/interfaces/product.interface";
 import { CartContext } from "@/Provider/CartProvider";
 import ProgressBar from "../../_components/SliderComponents/ProgressBar";
+import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import { setLocalStorageData } from "@/helpers/localStorage.helper";
+import { storages } from "@/constants";
 
 const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
   const {
@@ -18,6 +21,8 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
     shippingFee,
     setRefetch,
   } = useContext(CartContext);
+  const { orderData, setRefetch: setRefetchOrderInit } =
+    useContext(OrderInitContext);
 
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(cartProducts);
@@ -25,7 +30,14 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
   //   console.log(totalPrice, totalDiscount);
   const calculateTotalWithShipping = totalPrice + shippingFee;
   const totalPayable = calculateTotalWithShipping - totalDiscount;
-
+  // handle add to init order to add all cart items to the context
+  const handleAddToInitOrder = () => {
+    setLocalStorageData(storages.orderInit, {
+      ...orderData,
+      orderItems: cartProducts,
+    });
+    setRefetchOrderInit((prev) => prev + 1);
+  };
   return (
     <Fragment>
       <div className="md:flex hidden items-center justify-center bg-gradient-primary-light py-3 my-5">
@@ -90,7 +102,9 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
             </div>
             <div className="flex flex-col gap-2.5 mt-12">
               <ButtonPrimary className="!rounded-full">
-                <Link href="/shipping-info">Proceed To Checkout &rarr;</Link>
+                <Link href="/shipping-info" onClick={handleAddToInitOrder}>
+                  Proceed To Checkout &rarr;
+                </Link>
               </ButtonPrimary>
               <ButtonPrimaryLight className="!text-black !rounded-full">
                 <IconBolt />

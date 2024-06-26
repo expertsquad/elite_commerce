@@ -6,18 +6,18 @@ import Link from "next/link";
 import calculateTotalPriceAndDiscountOfCart from "@/helpers/calculateTotalPriceAndDiscountOfCart";
 
 const RightSideTotalAmountCard = ({
-  cartProducts,
+  products,
   buttonLink,
   buttonText,
   disabled,
 }: {
-  cartProducts: ICartProduct[];
+  products: ICartProduct[];
   buttonText: string;
   buttonLink: string;
   disabled?: string;
 }) => {
   const { totalDiscount, totalPrice } =
-    calculateTotalPriceAndDiscountOfCart(cartProducts);
+    calculateTotalPriceAndDiscountOfCart(products);
 
   const shippingFee = 100;
   const calculateTotalWithShipping = totalPrice + shippingFee;

@@ -1,6 +1,8 @@
 "use client";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import { storages } from "@/constants";
+import { setLocalStorageData } from "@/helpers/localStorage.helper";
 import { IProduct } from "@/interfaces/product.interface";
 import { formatProductForCart } from "@/utils/formatProductForCart.utils";
 import { IconShoppingBag } from "@tabler/icons-react";
@@ -10,20 +12,21 @@ import React, { useContext } from "react";
 const BuyNowSingleProduct = ({ product }: { product: IProduct }) => {
   const router = useRouter();
 
-  const { orderData, setOrderData } = useContext(OrderInitContext);
+  const { orderData, setRefetch } = useContext(OrderInitContext);
 
   //handling single product to direct order
   const handleSingleProductClick = (product: IProduct) => {
     const formattedProduct = formatProductForCart({
       product: product,
-      selectedVariant: product?.variants?.[0],
     });
 
     // Update the orderItems with the formatted product
-    setOrderData((prevOrderData) => ({
-      ...prevOrderData,
-      orderItems: [...prevOrderData.orderItems, formattedProduct],
-    }));
+    setLocalStorageData(storages.orderInit, {
+      ...orderData,
+      orderItems: [formattedProduct],
+    });
+    setRefetch((prev) => prev + 1);
+
     router.push("/shipping-info");
   };
 

@@ -6,8 +6,6 @@ import { IApiResponse } from "@/interfaces/apiResponse.interface";
 import { IUserMe } from "@/interfaces/getMe.interface";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { AddressData } from "@/interfaces/defaultShippingAddress.interface";
-import { usePathname, useRouter } from "next/navigation";
-import { IAddress } from "@/interfaces/address.interface";
 
 const ShipToAndBillingSection = ({
   getMe,
@@ -15,36 +13,7 @@ const ShipToAndBillingSection = ({
   getMe: IApiResponse<IUserMe>;
 }) => {
   const [selectedOption, setSelectedOption] = useState("sameAsShipping");
-  const [billingAddress, setBillingAddress] = useState<AddressData | {}>({});
-  const pathName = usePathname();
-  const router = useRouter();
   const { orderData, setOrderData } = useContext(OrderInitContext);
-
-  useEffect(() => {
-    const isShippingInfoIncomplete = () => {
-      const { shippingAddress } = orderData || {};
-      const requiredFields = [
-        "firstName",
-        "lastName",
-        "phoneNumber",
-        "country",
-        "state",
-        "zipCode",
-        "streetAddress",
-      ];
-
-      return requiredFields.some(
-        (field) => shippingAddress?.[field as keyof IAddress] === undefined
-      );
-    };
-
-    if (
-      pathName === "/shipping-info/billing-info" &&
-      isShippingInfoIncomplete()
-    ) {
-      router.push("/shipping-info");
-    }
-  }, [orderData, pathName, router]);
 
   useEffect(() => {
     if (selectedOption === "sameAsShipping") {
@@ -60,7 +29,6 @@ const ShipToAndBillingSection = ({
     setSelectedOption(value);
 
     if (value === "sameAsShipping") {
-      setBillingAddress(orderData?.shippingAddress || {});
       setOrderData((prevData) => ({
         ...prevData,
         billingAddress: orderData?.shippingAddress,
@@ -69,7 +37,6 @@ const ShipToAndBillingSection = ({
   };
 
   const handleNewAddressChange = (newAddress: AddressData) => {
-    setBillingAddress(newAddress);
     if (selectedOption === "addNewBillingAddress") {
       setOrderData((prevData) => ({
         ...prevData,

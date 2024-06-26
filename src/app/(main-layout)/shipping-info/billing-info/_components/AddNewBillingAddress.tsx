@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { countryNames } from "@/constants/countryNames.constant";
 import CustomInput from "@/Components/CustomInput";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import { IAddress } from "@/interfaces/address.interface";
 
 const AddNewBillingAddress = ({
   onNewAddressChange,
@@ -32,6 +33,7 @@ const AddNewBillingAddress = ({
 
   // order init context
   const { orderData, setOrderData } = useContext(OrderInitContext);
+  const billingAddress = orderData?.billingAddress as IAddress;
   return (
     <form>
       <div className="grid grid-cols-1 gap-4 md:gap-6 lg:grid-cols-2">
@@ -43,9 +45,7 @@ const AddNewBillingAddress = ({
           value={newAddress.firstName}
           onChange={handleInputChange}
           inputStyle={
-            orderData?.billingAddress?.firstName === ""
-              ? " border border-danger"
-              : ""
+            billingAddress?.firstName === "" ? " border border-danger" : ""
           }
         />
         <CustomInput
@@ -56,9 +56,7 @@ const AddNewBillingAddress = ({
           value={newAddress.lastName}
           onChange={handleInputChange}
           inputStyle={
-            orderData?.billingAddress?.lastName === ""
-              ? " border border-danger"
-              : ""
+            billingAddress?.lastName === "" ? " border border-danger" : ""
           }
         />
 
@@ -70,9 +68,7 @@ const AddNewBillingAddress = ({
           value={newAddress.phoneNumber}
           onChange={handleInputChange}
           inputStyle={
-            orderData?.billingAddress?.phoneNumber === ""
-              ? " border border-danger"
-              : ""
+            billingAddress?.phoneNumber === "" ? " border border-danger" : ""
           }
         />
 
@@ -82,7 +78,7 @@ const AddNewBillingAddress = ({
             name="country"
             id="country"
             className="w-full border border-black-10 text-black-80 px-3.5 py-2.5 mt-2 focus:outline-none focus:border-fuchsia-800 rounded-md"
-            value={newAddress.country}
+            value={newAddress?.country}
             onChange={handleInputChange}
           >
             {countryNames?.map((country) => (
@@ -101,9 +97,7 @@ const AddNewBillingAddress = ({
           value={newAddress.state}
           onChange={handleInputChange}
           inputStyle={
-            orderData?.billingAddress?.state === ""
-              ? " border border-danger"
-              : ""
+            billingAddress?.state === "" ? " border border-danger" : ""
           }
         />
 
@@ -115,9 +109,7 @@ const AddNewBillingAddress = ({
           value={newAddress.zipCode}
           onChange={handleInputChange}
           inputStyle={
-            orderData?.billingAddress?.zipCode === ""
-              ? " border border-danger"
-              : ""
+            billingAddress?.zipCode === "" ? " border border-danger" : ""
           }
         />
 
@@ -137,9 +129,7 @@ const AddNewBillingAddress = ({
           value={newAddress.streetAddress}
           onChange={handleInputChange}
           inputStyle={
-            orderData?.billingAddress?.streetAddress === ""
-              ? " border border-danger"
-              : ""
+            billingAddress?.streetAddress === "" ? " border border-danger" : ""
           }
         />
       </div>
