@@ -1,7 +1,7 @@
 "use client";
 
 import { ICategory } from "@/interfaces/category.interface";
-import { FilterContext } from "@/Provider/CategoryProductFilteringProvider";
+import { FilterContext } from "@/Provider/BrandProductFilteringProvider";
 import { usePathname, useRouter } from "next/navigation";
 
 import React, { useContext, useState } from "react";
@@ -12,7 +12,7 @@ type ICategoryCardProps = {
   redirectPath: string;
 };
 
-const CategoryCard = ({
+const CategoryFilterForBrand = ({
   title,
   categories,
   redirectPath,
@@ -77,4 +77,4 @@ const CategoryCard = ({
   );
 };
 
-export default CategoryCard;
+export default CategoryFilterForBrand;

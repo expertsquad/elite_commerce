@@ -1,6 +1,7 @@
 "use client";
-import { FilterContext } from "@/Provider/FilteringProvider";
+
 import { categoryColor } from "@/constants/categorycolor.constants";
+import { FilterContext } from "@/Provider/CategoryProductFilteringProvider";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 type ColorTypes = {
@@ -13,9 +14,16 @@ const FilterByColor = ({ redirectPath }: { redirectPath: string }) => {
   const { filter, setFilter } = useContext(FilterContext);
 
   const getColorName = (color: string) => {
+    const isSelected = filter?.["variant.variantName"] === color;
+    let updateFilteredColor;
+    if (isSelected) {
+      updateFilteredColor = "";
+    } else {
+      updateFilteredColor = color;
+    }
     setFilter({
       ...filter,
-      "variant.variantName": color,
+      "variant.variantName": updateFilteredColor,
     });
     if (pathname !== redirectPath) {
       router.push(redirectPath);

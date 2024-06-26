@@ -2,9 +2,11 @@
 import { fetchData } from "@/actions/fetchData";
 import FilteredProductsGridView from "./_components/FilteredProductsGridView";
 import { Fragment, useContext, useEffect, useState } from "react";
-import { FilterContext } from "@/Provider/FilteringProvider";
+import { FilterContext } from "@/Provider/CategoryProductFilteringProvider";
 
 const FilteredProductsPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const [products, setProducts] = useState([]);
   const { filter } = useContext(FilterContext);
 
@@ -21,21 +23,21 @@ const FilteredProductsPage = () => {
       }
     });
     const getDataByFetching = async () => {
+      setIsLoading(true);
       const response = await fetchData({
         route: "/product",
         limit: 40,
         query: query,
       });
       setProducts(response?.data);
+      setIsLoading(false);
     };
     getDataByFetching();
   }, [filter]);
 
-  console.log(filter);
-
   return (
     <Fragment>
-      <FilteredProductsGridView products={products} />
+      <FilteredProductsGridView products={products} isLoading={isLoading} />
     </Fragment>
   );
 };
