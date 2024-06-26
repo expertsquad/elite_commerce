@@ -3,6 +3,7 @@ import ShippingAddess from "./_components/ShippingAddess";
 import { fetchProtectedData } from "@/actions/fetchData";
 import AddNewShippingAddress from "./_components/AddNewShippingAddress";
 import OrderItemsRightSection from "./_components/OrderItemsRightSection";
+import { updateDataMutation } from "@/actions/updateDataMutation";
 
 const page = async () => {
   const defaultAddress = await fetchProtectedData({

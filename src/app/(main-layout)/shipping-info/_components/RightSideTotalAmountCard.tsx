@@ -1,20 +1,23 @@
 import { Button } from "@/Components/Buttons";
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { IconArrowRight } from "@tabler/icons-react";
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import calculateTotalPriceAndDiscountOfCart from "@/helpers/calculateTotalPriceAndDiscountOfCart";
+import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 
 const RightSideTotalAmountCard = ({
   products,
   buttonLink,
   buttonText,
   disabled,
+  submitAction,
 }: {
   products: ICartProduct[];
   buttonText: string;
   buttonLink: string;
   disabled?: string;
+  submitAction: (formData: FormData) => Promise<void>;
 }) => {
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
@@ -22,6 +25,15 @@ const RightSideTotalAmountCard = ({
   const shippingFee = 100;
   const calculateTotalWithShipping = totalPrice + shippingFee;
   const totalPayable = calculateTotalWithShipping - totalDiscount;
+
+  // getting data from order item context
+
+  // const { orderData } = useContext(OrderInitContext);
+  // console.log(orderData);
+
+  // const handleSubmit = (formData: FormData) => {
+  //   submitAction(orderData);
+  // };
 
   return (
     <>
@@ -46,17 +58,16 @@ const RightSideTotalAmountCard = ({
         <h2 className="text-gradient-primary"> ${totalPayable.toFixed(2)}</h2>
       </div>
       {/* Button Link */}
-      <div>
-        {" "}
-        <Link href={buttonLink}>
-          <Button
-            className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2   "
-            disabled={disabled}
-          >
-            {buttonText} <IconArrowRight />{" "}
-          </Button>
-        </Link>
-      </div>
+      {/* <form onSubmit={handleSubmit}> */}
+      <Link href={buttonLink}>
+        <Button
+          className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2   "
+          disabled={disabled}
+        >
+          {buttonText} <IconArrowRight />{" "}
+        </Button>
+      </Link>
+      {/* </form> */}
     </>
   );
 };

@@ -5,14 +5,16 @@ import { ShippingInfoOrderItems } from "./ShippingInfoOrderItems";
 import RightSideTotalAmountCard from "./RightSideTotalAmountCard";
 import { usePathname } from "next/navigation";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
-import { CartContext } from "@/Provider/CartProvider";
 
 const OrderItemsRightSection = ({
   buttonText,
   buttonLink,
-}: {
+  submitAction,
+}: // ,
+{
   buttonText: string;
   buttonLink: string;
+  submitAction: (formData: FormData) => Promise<void>;
 }) => {
   const pathName = usePathname();
 
@@ -57,6 +59,7 @@ const OrderItemsRightSection = ({
         buttonLink={buttonLink}
         buttonText={buttonText}
         disabled={disableButton ? "disabled" : ""}
+        submitAction={submitAction}
       />
     </div>
   );
