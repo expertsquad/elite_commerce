@@ -68,7 +68,8 @@
 // export default PriceRange;
 
 "use client";
-import { FilterContext } from "@/Provider/FilteringProvider";
+
+import { FilterContext } from "@/Provider/CategoryProductFilteringProvider";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import Slider from "react-slider";

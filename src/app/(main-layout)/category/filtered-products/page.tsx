@@ -2,7 +2,7 @@
 import { fetchData } from "@/actions/fetchData";
 import FilteredProductsGridView from "./_components/FilteredProductsGridView";
 import { Fragment, useContext, useEffect, useState } from "react";
-import { FilterContext } from "@/Provider/FilteringProvider";
+import { FilterContext } from "@/Provider/CategoryProductFilteringProvider";
 
 const FilteredProductsPage = () => {
   const [isLoading, setIsLoading] = useState(false);

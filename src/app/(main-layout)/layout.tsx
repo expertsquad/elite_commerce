@@ -4,7 +4,8 @@ import Footer from "./_components/Footer";
 import CartProvider from "@/Provider/CartProvider";
 import WishlistProvider from "@/Provider/WishlistProvider";
 import OrderInitProvider from "@/Provider/OrderInitDataProvider";
-import FilterProvider from "@/Provider/FilteringProvider";
+import CategoryProductFilteringProvider from "@/Provider/CategoryProductFilteringProvider";
+import BrandProductFilteringProvider from "@/Provider/BrandProductFilteringProvider";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -12,13 +13,15 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       <CartProvider>
         <WishlistProvider>
           <OrderInitProvider>
-            <FilterProvider>
+            <CategoryProductFilteringProvider>
               {/* main sections */}
-              <Header />
-              <section>{children}</section>
-              <Footer />
+              <BrandProductFilteringProvider>
+                <Header />
+                <section>{children}</section>
+                <Footer />
+              </BrandProductFilteringProvider>
               {/* main sections */}
-            </FilterProvider>
+            </CategoryProductFilteringProvider>
           </OrderInitProvider>
         </WishlistProvider>
       </CartProvider>

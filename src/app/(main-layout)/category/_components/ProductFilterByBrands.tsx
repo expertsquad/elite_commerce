@@ -1,7 +1,7 @@
 "use client";
-import { FilterContext } from "@/Provider/FilteringProvider";
 import { server_url } from "@/constants";
 import { IBrand } from "@/interfaces/brand.interface";
+import { FilterContext } from "@/Provider/CategoryProductFilteringProvider";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";

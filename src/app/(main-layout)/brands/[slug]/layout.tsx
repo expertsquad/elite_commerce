@@ -4,7 +4,13 @@ import BrandFilterSection from "../_components/BrandFilterSection";
 import BrandFilterModal from "../_components/BrandFilterModal";
 import { fetchData } from "@/actions/fetchData";
 
-const Layout = async ({ children }: { children: React.ReactNode }) => {
+const Layout = async ({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: {};
+}) => {
   const categories = await fetchData({ route: "/category", limit: 10 });
   const products = await fetchData({
     route: "/product",
@@ -30,6 +36,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
               brands={brands?.data}
               products={products?.data}
               categories={categories?.data}
+              params={params}
             />
           </div>
           <div className="lg:col-span-3 md:grid-cols-2 md:col-span-2">

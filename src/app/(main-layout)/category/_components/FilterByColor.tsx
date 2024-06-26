@@ -1,6 +1,7 @@
 "use client";
-import { FilterContext } from "@/Provider/FilteringProvider";
+
 import { categoryColor } from "@/constants/categorycolor.constants";
+import { FilterContext } from "@/Provider/CategoryProductFilteringProvider";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 type ColorTypes = {

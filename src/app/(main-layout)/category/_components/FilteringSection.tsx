@@ -3,11 +3,11 @@ import PriceRange from "./PriceRange";
 import CategoryCard from "./CategoryCard/CategoryCard";
 import FilterByColor from "./FilterByColor";
 import TopRatingProductCard from "./TopRatingProductCard";
-import ProductFilterByBrandsSection from "./ProductFilterByBrands";
 import WidgetCard from "@/Components/WidgetCard";
 import { ICategory } from "@/interfaces/category.interface";
 import { IProduct } from "@/interfaces/product.interface";
 import { IBrand } from "@/interfaces/brand.interface";
+import ProductFilterByBrandsSection from "./ProductFilterByBrands";
 
 export interface IFilteringSectionProps {
   categories: ICategory[];

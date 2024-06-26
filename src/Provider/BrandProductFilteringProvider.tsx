@@ -6,8 +6,7 @@ interface IFilterFields {
   "variants.sellingPrice[gte]"?: number;
   "variants.sellingPrice[lte]"?: number;
   "category.categoryName"?: string[];
-  "brand.brandName"?: string[];
-  "variant.variantName"?: string;
+  // "brand.brandName"?: string[];
 }
 // props interface
 interface IFilteringProviderProps {
@@ -24,7 +23,11 @@ export const FilterContext =
   createContext<IFilteringProviderProps>(initialState);
 
 // Provider
-const FilterProvider = ({ children }: { children: React.ReactNode }) => {
+const BrandProductFilteringProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [filter, setFilter] = useState<IFilterFields>(initialState.filter);
 
   return (
@@ -39,4 +42,4 @@ const FilterProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default FilterProvider;
+export default BrandProductFilteringProvider;
