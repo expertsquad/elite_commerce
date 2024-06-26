@@ -19,7 +19,7 @@ const InfiniteSlider = async () => {
     >
       <div className="h-16 w-16 md:h-28 md:w-28 relative border border-black-10 rounded-full overflow-hidden">
         <Image
-          src={server_url + category.categoryPhoto}
+          src={server_url + category?.categoryPhoto}
           fill
           alt="category photo"
           className="z-0 object-contain"
