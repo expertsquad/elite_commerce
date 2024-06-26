@@ -25,7 +25,7 @@ const HeroItemSlide = ({ sliderArray }: any) => {
   }, [curr]);
 
   return (
-    <div className="overflow-hidden relative group w-full">
+    <div className="overflow-hidden w-full relative group/slider">
       <div
         className="h-[280px] md:h-[450px] w-full flex transition-transform ease-out duration-500"
         style={{ transform: `translateX(-${curr * 100}%)` }}
@@ -37,20 +37,18 @@ const HeroItemSlide = ({ sliderArray }: any) => {
         ))}
       </div>
 
-      <div className="absolute inset-0 top-0 bottom-0 flex items-center justify-between p-4 invisible group-hover:visible group-hover:duration-200">
-        <button
-          onClick={prev}
-          className="p-1 rounded-full shadow bg-white/80 hover:text-white duration-150 -ml-11 group-hover:-ml-3 delay-100 flex items-center justify-center"
-        >
-          <IconChevronLeft stroke={2} />
-        </button>
-        <button
-          onClick={next}
-          className="p-1 rounded-full shadow bg-white/80 hover:text-white duration-150 -mr-11 group-hover:-mr-3 delay-100 flex items-center justify-center"
-        >
-          <IconChevronRight stroke={2} />
-        </button>
-      </div>
+      <button
+        onClick={prev}
+        className="p-2 rounded-full shadow bg-white/80 hover:text-white duration-150 group-hover:-ml-3 delay-100 absolute top-1/2 opacity-0 -left-4 hover:bg-gradient-primary-light group-hover/slider:opacity-100 group-hover/slider:left-1"
+      >
+        <IconChevronLeft stroke={2} />
+      </button>
+      <button
+        onClick={next}
+        className="p-2 rounded-full shadow bg-white/80 hover:text-white duration-150 group-hover:-ml-3 delay-100 absolute top-1/2 opacity-0 -right-4 hover:bg-gradient-primary-light group-hover/slider:opacity-100 group-hover/slider:right-1"
+      >
+        <IconChevronRight stroke={2} />
+      </button>
 
       <div className="absolute bottom-2 md:bottom-10 right-0 left-0">
         <div className="flex items-center justify-center gap-2">
