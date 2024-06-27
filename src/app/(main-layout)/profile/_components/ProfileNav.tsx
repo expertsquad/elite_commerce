@@ -25,7 +25,7 @@ const ProfileNav = async () => {
   };
 
   return (
-    <div className="bg-gradient-primary-light p-5 rounded-xl w-full h-fit static md:sticky md:top-5 top-0 ">
+    <div className="bg-gradient-primary-light p-5 rounded-xl w-full h-fit static md:sticky md:top-20 top-0 ">
       {/* profile image and name start */}
       <div className="md:overflow-auto scrollbar-y-remove h-fit md:h-[calc(100vh-200px)]">
         <div className="flex md:items-center items-start justify-center gap-2 md:flex-col flex-row border-b-2 border-black-10 mb-4 py-2 ">
