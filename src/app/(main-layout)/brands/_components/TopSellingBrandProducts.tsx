@@ -16,8 +16,8 @@ const TopSellingBrandProducts = async () => {
         Top Selling Brands Product
       </span>
       <div className="flex flex-col gap-7">
-        {topSellProducts?.data?.map((product: IProduct, index: number) => {
-          return <SmallProductCard product={product} key={index} />;
+        {topSellProducts?.data?.map((product: IProduct) => {
+          return <SmallProductCard product={product} key={product?._id} />;
         })}
       </div>
     </div>
