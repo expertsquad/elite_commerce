@@ -8,6 +8,7 @@ import { updateWishlist } from "@/utils/updateWishlist.utils";
 import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { WishlistContext } from "@/Provider/WishlistProvider";
 import { IWishlistProduct } from "@/interfaces/wishlist.interface";
+import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
 
 type ProductImageSliderProps = {
   product: IProduct;
@@ -128,9 +129,17 @@ const ProductImageSlider = ({
                 <IconHeart stroke={2} height={18} width={18} />
               )}
             </button>
-            <button className="cursor-pointer md:text-[12px] border border-black-10 bg-white md:h-8 md:w-8 h-6 w-6 rounded-full flex justify-center items-center md:hidden">
-              <IconBolt stroke={2} height={16} width={16} />
-            </button>
+            <QuickOrderButton
+              product={{
+                ...product,
+                orderQuantity: 1,
+                variant: product?.variants[0],
+              }}
+              buttonStyle="cursor-pointer md:text-[12px] border border-black-10 bg-white md:h-8 md:w-8 h-6 w-6 rounded-full flex justify-center items-center md:hidden"
+              buttonIcon={
+                <IconBolt stroke={2} color="#FB8E48" height={18} width={18} />
+              }
+            />
           </div>
         </div>
       </div>
