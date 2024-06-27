@@ -20,14 +20,13 @@ const page = async () => {
   // order Shipping data
   const orderShippingData = await fetchProtectedData({
     route: "/online-order",
-    query: "orderStatus.status=Order placed&buyer.userId=" + getMe?.data?._id,
+    query: "orderStatus.status=Shipping&buyer.userId=" + getMe?.data?._id,
   });
   //order delivered data
   const orderDeliveredData = await fetchProtectedData({
     route: "/online-order",
-    query: "orderStatus.status=Shipping&buyer.userId=" + getMe?.data?._id,
+    query: "orderStatus.status=Delivered&buyer.userId=" + getMe?.data?._id,
   });
-  // console.log(orderDeliveredData);
 
   return (
     <div>

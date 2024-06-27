@@ -12,7 +12,7 @@ export const orderHistoryMenus = [
     href: "packaging",
   },
   {
-    label: "Shipped",
+    label: "Shipping",
     href: "shipped",
   },
   {
