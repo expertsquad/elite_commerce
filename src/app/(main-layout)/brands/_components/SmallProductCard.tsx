@@ -6,7 +6,6 @@ import Link from "next/link";
 import React from "react";
 
 const SmallProductCard = ({ product }: { product: IProduct }) => {
-  console.log(product);
   return (
     <Link
       href={`/products/${product?._id}`}
