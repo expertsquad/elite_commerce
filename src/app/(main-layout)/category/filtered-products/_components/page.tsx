@@ -1,6 +1,6 @@
 import React from "react";
 import { fetchData } from "@/actions/fetchData";
-import SortingSection from "./_components/FilterBySelection";
+import SortingSection from "../../_components/FilterBySelection";
 
 export async function generateMetadata() {
   return {
