@@ -66,7 +66,7 @@ const ProductImageSlider = ({
   return (
     <section>
       <div className="w-full flex justify-between gap-x-0.5 relative">
-        <div className="absolute top-2.5 left-2.5 z-10">
+        <div className="z-10">
           <span className="bg-gradient-secondary py-1 px-2 rounded-lg text-white md:text-xs text-[10px] cursor-default">
             {product?.variants?.[0]?.discountPercentage}%
           </span>
@@ -111,7 +111,7 @@ const ProductImageSlider = ({
           </div>
         ))}
 
-        <div className="absolute top-2.5 right-2.5 z-10">
+        <div className="z-10">
           <div className="flex flex-col gap-y-1.5">
             <button
               onClick={(e) => {
