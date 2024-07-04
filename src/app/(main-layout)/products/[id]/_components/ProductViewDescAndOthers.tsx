@@ -17,6 +17,7 @@ import { Button } from "@/Components/Buttons";
 import ProgressBar from "@/app/(main-layout)/_components/SliderComponents/ProgressBar";
 import BuyNowSingleProduct from "./BuyNowSingleProduct";
 import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
+import ProductCartBtn from "@/Components/ProductCard/ProductCartBtn";
 
 const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
   return (
@@ -36,6 +37,7 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
           averageRating={product?.averageRating}
           instock={product?.variants[0].inStock}
           soldQuantity={product?.variants[0].soldQuantity}
+          products={product}
         />
       </div>
       <div className="my-5">
@@ -79,15 +81,16 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
               <IconPlus width={20} height={18} />
             </button>
           </div>
-          <div className="border-gradient-primary p-[1px] rounded-md w-full">
-            <button className="text-gradient-primary flex items-center justify-center gap-x-1.5 w-full py-2">
+          <div className="border-gradient-primary p-[1px] rounded-md w-full flex items-center justify-center">
+            {/* <button className="text-gradient-primary flex items-center justify-center gap-x-1.5 w-full py-2">
               <GenerateGradientIcon
                 IconComponent={IconShoppingCart}
                 stroke={2}
                 size={20}
               />
               ADD TO CART
-            </button>
+            </button> */}
+            <ProductCartBtn product={product} />
           </div>
         </div>
         <div className="flex items-center justify-between gap-x-2.5">

@@ -90,7 +90,7 @@ const WishlistInterceptingPage = () => {
                             </strong>
                             <span className="text-black-10">|</span>
                             <strong className="font-normal line-through text-black-50 text-xs">
-                              ${product?.variant.sellingPrice}
+                              ${product?.variant?.sellingPrice}
                             </strong>
                           </div>
                         </div>

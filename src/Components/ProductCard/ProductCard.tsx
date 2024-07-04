@@ -7,8 +7,9 @@ import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderB
 import ProductCartBtn from "./ProductCartBtn";
 export interface IProductCardProps {
   product: IProduct;
+  productCart?: IProduct;
 }
-const ProductCard = ({ product }: IProductCardProps) => {
+const ProductCard = ({ product, productCart }: IProductCardProps) => {
   return (
     <Link
       href={`/products/${product?._id}`}
@@ -46,7 +47,8 @@ const ProductCard = ({ product }: IProductCardProps) => {
               ${product?.variants[0]?.sellingPrice}
             </del>
           </div>
-          <ProductCartBtn product={product} />
+
+          <ProductCartBtn product={product} productCart={productCart} />
         </div>
       </div>
       <div className="absolute flex gap-3 items-center top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 opacity-0 md:group-hover:opacity-100 transition-all duration-300">

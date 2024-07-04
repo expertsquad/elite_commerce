@@ -1,17 +1,19 @@
-import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
-import { IconHeart, IconStarFilled } from "@tabler/icons-react";
 import React from "react";
+import AddToWishlistBtn from "./AddToWishlistBtn";
+import { IconStarFilled } from "@tabler/icons-react";
 
 type RatingWishlistStockAndSoldProps = {
   averageRating: any;
   instock: any;
   soldQuantity: any;
+  products: any;
 };
 
 const RatingWishlistStockAndSold = ({
   averageRating,
   instock,
   soldQuantity,
+  products,
 }: RatingWishlistStockAndSoldProps) => {
   return (
     <div className="flex items-center gap-x-1 md:gap-x-2.5">
@@ -24,11 +26,7 @@ const RatingWishlistStockAndSold = ({
       <span className="text-black-10">|</span>
       <div className="flex items-center gap-x-1">
         <div className="border border-black-10 rounded-full flex items-center justify-center p-0.5">
-          <GenerateGradientIcon
-            IconComponent={IconHeart}
-            stroke={2}
-            size={18}
-          />
+          <AddToWishlistBtn products={products} />
         </div>
         <span className="text-xs md:text-base whitespace-nowrap">
           Add To Wishlist
