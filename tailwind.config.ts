@@ -67,6 +67,9 @@ const config: Config = {
     },
   },
   plugins: [],
-  purge: false,
+  purge: ["./src/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  variants: {
+    extend: {},
+  },
 };
 export default config;
