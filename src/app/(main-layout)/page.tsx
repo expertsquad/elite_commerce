@@ -41,7 +41,7 @@ const Page = async () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto p-3">
+      <div className="max-w-7xl mx-auto px-3 lg:px-10 2xl:px-0 pb-10">
         {/* Hero section added */}
         <Hero />
 
@@ -74,7 +74,7 @@ const Page = async () => {
       {/* best deals */}
       <BestDealsSection />
       {/* extra services section */}
-      <div className="max-w-7xl mx-auto p-3">
+      <div className="max-w-7xl mx-auto px-3 lg:px-10 2xl:px-0 pb-10">
         <div className="flex flex-col md:flex-row items-center justify-between py-10 lg:py-16 text-center md:text-left gap-10">
           {extraServices.map((service) => (
             <div

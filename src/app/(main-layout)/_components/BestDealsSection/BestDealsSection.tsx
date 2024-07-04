@@ -31,7 +31,7 @@ const BestDealsSection = async () => {
           bestDeals?.data?.backgroundColor || bestDeals?.data?.backgroundPhoto,
       }}
     >
-      <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 p-10">
+      <div className="max-w-7xl mx-auto md:flex gap-16 p-10">
         <div className="relative h-60 w-60 md:h-40 md:w-40 lg:h-60 lg:w-60 mx-auto my-auto">
           {" "}
           <Image
