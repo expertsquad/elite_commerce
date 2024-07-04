@@ -14,7 +14,7 @@ import Loading from "../loading";
 import Pagination from "@/Components/Pagination";
 import DealsOfTheDaySection from "./_components/DealsOfTheDaySection/DealsOfTheDaySection";
 
-const page = async () => {
+const Page = async () => {
   const newestProducts = await fetchData({ route: "/product", limit: 8 });
   const allProducts = await fetchData({ route: "/product", limit: 12 });
 
@@ -142,4 +142,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default Page;
