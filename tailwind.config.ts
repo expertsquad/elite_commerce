@@ -8,63 +8,63 @@ const config: Config = {
   ],
   theme: {
     // use color variables please
-    extend: {
-      // colors
-      colors: {
-        primary: {
-          light: "var(--primary-light)",
-          DEFAULT: "var(--primary)",
-        },
-        secondary: {
-          light: "var(--secondary-light)",
-          DEFAULT: "var(--secondary)",
-        },
-        positive: "var(--positive)",
-        danger: "var(--danger)",
-        transparent: "var(--transparent)",
-        white: {
-          transparent: "var(--white-transparent)",
-          15: "var(--white-15)",
-          DEFAULT: "var(--white)",
-        },
-        black: {
-          transparent: "var(--black-transparent)",
-          10: "var(--black-10)",
-          50: "var(--black-50)",
-          80: "var(--black-80)",
-          DEFAULT: "var(--black)",
-        },
+    // colors
+    colors: {
+      primary: {
+        light: "var(--primary-light)",
+        DEFAULT: "var(--primary)",
       },
-      // gradient colors
-      backgroundImage: {
-        "gradient-primary": "var(--gradient-primary)",
-        "gradient-primary-light": "var(--gradient-primary-light)",
-        "gradient-secondary": "var(--gradient-secondary)",
-        "gradient-secondary-light": "var(--gradient-secondary-light)",
-        "gradient-positive": "var(--gradient-positive)",
+      secondary: {
+        light: "var(--secondary-light)",
+        DEFAULT: "var(--secondary)",
       },
-      // z index
-      zIndex: {
-        "-1": "-1",
-        0: "0",
-        1: "1",
-        10: "10",
-        20: "20",
-        50: "50",
+      positive: "var(--positive)",
+      danger: "var(--danger)",
+      transparent: "var(--transparent)",
+      white: {
+        transparent: "var(--white-transparent)",
+        15: "var(--white-15)",
+        DEFAULT: "var(--white)",
       },
-      aspectRatio: {
-        "3/4": "3/4",
-        "4/5": "4/5",
-        "3/7": "3/7",
-      },
-      gridTemplateColumns: {
-        "product-grid": "repeat(auto-fill, minmax(240px,1fr))",
-        "brand-card-grid": "repeat(auto-fill, minmax(250px,1fr))",
-      },
-      gridTemplateRows: {
-        "product-grid": "repeat(auto-fill, minmax(405px,1fr))",
+      black: {
+        transparent: "var(--black-transparent)",
+        10: "var(--black-10)",
+        50: "var(--black-50)",
+        80: "var(--black-80)",
+        DEFAULT: "var(--black)",
       },
     },
+    // gradient colors
+    backgroundImage: {
+      "gradient-primary": "var(--gradient-primary)",
+      "gradient-primary-light": "var(--gradient-primary-light)",
+      "gradient-secondary": "var(--gradient-secondary)",
+      "gradient-secondary-light": "var(--gradient-secondary-light)",
+      "gradient-positive": "var(--gradient-positive)",
+    },
+    // z index
+    zIndex: {
+      "-1": "-1",
+      0: "0",
+      1: "1",
+      10: "10",
+      20: "20",
+      50: "50",
+    },
+    aspectRatio: {
+      "3/4": "3/4",
+      "4/5": "4/5",
+      "3/7": "3/7",
+    },
+    gridTemplateColumns: {
+      "product-grid": "repeat(auto-fill, minmax(240px,1fr))",
+      "brand-card-grid": "repeat(auto-fill, minmax(250px,1fr))",
+      "fav-brand-grid": "repeat(auto-fill, minmax(100px,1fr))",
+    },
+    gridTemplateRows: {
+      "product-grid": "repeat(auto-fill, minmax(405px,1fr))",
+    },
+    extend: {},
   },
   plugins: [],
   purge: ["./src/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],

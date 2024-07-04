@@ -30,11 +30,11 @@ const FavouriteBrandSection = ({
           </Link>
         </div>
         {/* <div className="flex flex-wrap gap-5 mx-auto my-10"> */}
-        <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-10 my-10">
+        <div className="grid grid-cols-fav-brand-grid gap-8 my-10">
           {favouriteBrands?.map((brand) => (
             <div
               key={brand?._id}
-              className="border border-black-10 w-32 h-16 relative rounded-2xl"
+              className="border border-black-10 h-16 relative rounded-2xl"
             >
               <Image
                 src={server_url + brand?.brandPhoto}
