@@ -67,5 +67,6 @@ const config: Config = {
     },
   },
   plugins: [],
+  purge: false,
 };
 export default config;
