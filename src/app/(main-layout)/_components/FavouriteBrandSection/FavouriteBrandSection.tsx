@@ -1,7 +1,6 @@
 import WidgetCard from "@/Components/WidgetCard";
 import { server_url } from "@/constants";
 import { IBrand } from "@/interfaces/brand.interface";
-import { IconArrowNarrowRight } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -31,7 +30,7 @@ const FavouriteBrandSection = ({
           </Link>
         </div>
         {/* <div className="flex flex-wrap gap-5 mx-auto my-10"> */}
-        <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-10 my-10">
+        <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-10 my-10">
           {favouriteBrands?.map((brand) => (
             <div
               key={brand?._id}
