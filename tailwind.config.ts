@@ -56,15 +56,16 @@ const config: Config = {
       "4/5": "4/5",
       "3/7": "3/7",
     },
-    gridTemplateColumns: {
-      "product-grid": "repeat(auto-fill, minmax(240px,1fr))",
-      "brand-card-grid": "repeat(auto-fill, minmax(250px,1fr))",
-      "fav-brand-grid": "repeat(auto-fill, minmax(120px,1fr))",
+    extend: {
+      gridTemplateColumns: {
+        "product-grid": "repeat(auto-fill, minmax(240px,1fr))",
+        "brand-card-grid": "repeat(auto-fill, minmax(250px,1fr))",
+        "fav-brand-grid": "repeat(auto-fill, minmax(120px,1fr))",
+      },
+      gridTemplateRows: {
+        "product-grid": "repeat(auto-fill, minmax(405px,1fr))",
+      },
     },
-    gridTemplateRows: {
-      "product-grid": "repeat(auto-fill, minmax(405px,1fr))",
-    },
-    extend: {},
   },
   plugins: [],
   purge: ["./src/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
