@@ -34,7 +34,7 @@ const FavouriteBrandSection = ({
           {favouriteBrands?.map((brand) => (
             <div
               key={brand?._id}
-              className="border border-black-10 h-16 relative rounded-2xl"
+              className="border border-black-10 h-20 relative rounded-2xl"
             >
               <Image
                 src={server_url + brand?.brandPhoto}
