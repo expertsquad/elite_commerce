@@ -16,7 +16,7 @@ const ProductCartBtn = ({ product }: IProductCardProps) => {
     <button
       className="group-hover/productcard:bg-gradient-primary group-hover/productcard:text-white text-black-50 rounded-full transition-all duration-300 p-2 "
       onClick={(e) => {
-        e.preventDefault();
+        e.stopPropagation();
         handleAddToCart();
       }}
     >
