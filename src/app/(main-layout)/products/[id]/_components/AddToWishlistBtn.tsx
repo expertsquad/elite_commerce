@@ -16,7 +16,7 @@ const AddToWishlistBtn = ({ products }: any) => {
   return (
     <button
       onClick={(e) => {
-        e.preventDefault();
+        e.stopPropagation();
         handleAddToFavourite();
       }}
       className={`cursor-pointer  p-0.5  rounded-full flex justify-center items-center bg-white`}
