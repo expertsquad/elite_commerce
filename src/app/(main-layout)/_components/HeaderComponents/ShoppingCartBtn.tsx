@@ -187,7 +187,6 @@ const ShoppingCartBtn = () => {
           className="w-[600px] overflow-y-auto  scrollbar-y-remove"
           alignment="right"
           showCancelBtnINSmallDevice={show}
-          isIntercepting={true}
         >
           <div className="p-2">
             <span className="font-semibold [font-size:clamp(14px,5vw,18px)]">
