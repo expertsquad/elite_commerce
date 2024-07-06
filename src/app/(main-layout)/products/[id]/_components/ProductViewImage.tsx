@@ -18,17 +18,19 @@ const ProductViewImage = ({ product }: { product: IProduct }) => {
 
   const slicedProducts = product?.productPhotos.slice(0, 4);
   return (
-    <div className="flex flex-col-reverse md:flex-row items-center gap-5 md:flex-1">
-      <div className=" flex md:flex-col gap-3">
+    <div className="flex flex-col-reverse md:flex-row gap-5 md:flex-1">
+      <div className="flex md:flex-col gap-4">
         {slicedProducts?.map((image: any) => (
           <div
             key={image._id}
-            className={`cursor-pointer flex items-center justify-center hover:shadow-md overflow-hidden p-[1px] rounded-md ${
-              selectedImage === image ? "border-gradient-primary" : ""
+            className={`cursor-pointer flex items-center justify-center hover:shadow-md overflow-hidden p-[1px] bg-[#F8F8F8] rounded-md ${
+              selectedImage === image
+                ? "border-gradient-primary "
+                : "border border-black-10"
             }`}
             onClick={() => handleChangePhoto(image)}
           >
-            <div className="w-10 h-10 md:w-20 md:h-20 relative overflow-hidden">
+            <div className="w-10 h-10 md:w-20 md:h-[100px] relative overflow-hidden">
               <Image
                 src={`${server_url + image}`}
                 alt="Product Photo"
@@ -40,7 +42,7 @@ const ProductViewImage = ({ product }: { product: IProduct }) => {
           </div>
         ))}
       </div>
-      <div className="flex items-center justify-center rounded-lg w-full border border-black-10">
+      <div className="flex items-center justify-center rounded-lg w-full border border-black-10 bg-[#F8F8F8]">
         {selectedImage && (
           <div className="relative shrink-0 flex-1 h-[515px]">
             <Image

@@ -20,14 +20,17 @@ import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderB
 import ProductCartBtn from "@/Components/ProductCard/ProductCartBtn";
 import ProductViewCartBtn from "./ProductViewCartBtn";
 import ProdViewCartIncreamentDecreamentBtn from "./ProdViewCartIncreamentDecreamentBtn";
+import { cookies } from "next/headers";
 
 const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
+  const accessToken = cookies().get("accessToken")?.value;
+
   return (
     <div>
       <div className="hidden md:block">
         <SocialMediaAndOthers />
       </div>
-      <span className="font-semibold text-lg md:text-2xl line-clamp-2 my-5">
+      <span className="font-semibold text-lg md:text-2xl line-clamp-2 my-6">
         {product?.productName}
       </span>
       <CategoryAndBrandSmallComponent
@@ -43,19 +46,19 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
         />
       </div>
       <div className="my-5">
-        <ProgressBar progressValue={50} />
+        <ProgressBar progressValue={30} />
         <div>
           {product?.bulk &&
             (product?.bulk?.minOrder > 1 ||
               (product.bulk && typeof product.bulk !== "boolean")) && (
-              <div className="whitespace-nowrap text-black-opacity-60">
+              <div className="whitespace-nowrap text-black-80">
                 <p>
-                  Buy{" "}
-                  <span className="font-semibold main-text-color">
+                  Buy
+                  <span className="font-semibold text-gradient-primary mx-1.5">
                     {product?.bulk?.minOrder}
-                  </span>{" "}
-                  item to get more{" "}
-                  <span className="font-semibold text-black">
+                  </span>
+                  item to get more
+                  <span className="font-semibold text-gradient-primary ml-1.5">
                     {product?.bulk?.discount} extra!
                   </span>
                 </p>
@@ -80,7 +83,10 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
           </div>
         </div>
         <div className="flex items-center justify-between gap-x-2.5">
-          <BuyNowSingleProduct product={product} />
+          <BuyNowSingleProduct
+            accessToken={accessToken || ""}
+            product={product}
+          />
           <QuickOrderButton
             product={{
               ...product,
