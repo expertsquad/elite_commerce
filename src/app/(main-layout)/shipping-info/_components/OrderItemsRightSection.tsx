@@ -1,20 +1,31 @@
 "use client";
-
 import React, { useContext, useState } from "react";
 import { ShippingInfoOrderItems } from "./ShippingInfoOrderItems";
 import RightSideTotalAmountCard from "./RightSideTotalAmountCard";
 import { usePathname } from "next/navigation";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import { ResponseShippingAddress } from "@/interfaces/defaultShippingAddress.interface";
+
+export type IShippingChargeProps = {
+  state: string;
+  inside: number;
+  outside: number;
+  freeShippingMinOrderAmount: number | undefined | any;
+};
 
 const OrderItemsRightSection = ({
   buttonText,
   buttonLink,
   submitAction,
+  shippingCharge,
+  defaultAddress,
 }: // ,
 {
   buttonText: string;
   buttonLink?: string;
   submitAction?: (e: React.FormEvent) => Promise<void>;
+  shippingCharge?: IShippingChargeProps;
+  defaultAddress: ResponseShippingAddress;
 }) => {
   const pathName = usePathname();
 
@@ -60,6 +71,8 @@ const OrderItemsRightSection = ({
         buttonText={buttonText}
         disabled={disableButton ? "disabled" : ""}
         submitAction={submitAction}
+        shippingCharge={shippingCharge}
+        defaultAddress={defaultAddress?.data?.[0]}
       />
     </div>
   );

@@ -19,8 +19,11 @@ import BuyNowSingleProduct from "./BuyNowSingleProduct";
 import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
 import ProductCartBtn from "@/Components/ProductCard/ProductCartBtn";
 import ProductViewCartBtn from "./ProductViewCartBtn";
+import { cookies } from "next/headers";
 
 const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
+  const accessToken = cookies().get("accessToken")?.value;
+
   return (
     <div>
       <div className="hidden md:block">
@@ -95,7 +98,10 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
           </div>
         </div>
         <div className="flex items-center justify-between gap-x-2.5">
-          <BuyNowSingleProduct product={product} />
+          <BuyNowSingleProduct
+            accessToken={accessToken || ""}
+            product={product}
+          />
           <QuickOrderButton
             product={{
               ...product,
