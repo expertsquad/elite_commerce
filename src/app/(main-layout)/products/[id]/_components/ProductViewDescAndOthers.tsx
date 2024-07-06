@@ -20,6 +20,7 @@ import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderB
 import ProductCartBtn from "@/Components/ProductCard/ProductCartBtn";
 import ProductViewCartBtn from "./ProductViewCartBtn";
 import ProdViewCartIncreamentDecreamentBtn from "./ProdViewCartIncreamentDecreamentBtn";
+import ProductPriceBasedOnVariants from "./ProductPriceBasedOnVariants";
 
 const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
   return (
@@ -63,14 +64,8 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
             )}
         </div>
       </div>
-      <ProductVariantPrice product={product} />
-      <div className="flex items-center gap-x-5 my-5">
-        <div>
-          <span className="text-sm text-black-80">Color</span>
-          <div className="flex items-center gap-x-2 mt-1">
-            <ProductVariantColor variants={product?.variants} />
-          </div>
-        </div>
+      <div>
+        <ProductPriceBasedOnVariants product={product} />
       </div>
       <div>
         <div className="flex items-center gap-x-3 mb-5">
