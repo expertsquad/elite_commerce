@@ -46,6 +46,7 @@ const ProductCard = ({ product }: IProductCardProps) => {
               ${product?.variants[0]?.sellingPrice}
             </del>
           </div>
+
           <ProductCartBtn product={product} />
         </div>
       </div>

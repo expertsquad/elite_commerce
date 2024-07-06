@@ -8,6 +8,7 @@ import { updateWishlist } from "@/utils/updateWishlist.utils";
 import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { WishlistContext } from "@/Provider/WishlistProvider";
 import { IWishlistProduct } from "@/interfaces/wishlist.interface";
+import AddToWishlistBtn from "@/app/(main-layout)/products/[id]/_components/AddToWishlistBtn";
 
 type ProductImageSliderProps = {
   product: IProduct;
@@ -113,21 +114,7 @@ const ProductImageSlider = ({
 
         <div className="absolute top-2.5 right-2.5 z-10">
           <div className="flex flex-col gap-y-1.5">
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                handleAddToFavourite();
-              }}
-              className={`cursor-pointer md:text-[12px] border border-black-10  md:h-8 md:w-8 h-6 w-6 rounded-full flex justify-center items-center bg-white`}
-            >
-              {wishlistProducts?.find(
-                (item: IWishlistProduct) => item?.productId === product?._id
-              ) ? (
-                <IconHeartFilled stroke={2} height={18} width={18} />
-              ) : (
-                <IconHeart stroke={2} height={18} width={18} />
-              )}
-            </button>
+            <AddToWishlistBtn products={product} />
             <button className="cursor-pointer md:text-[12px] border border-black-10 bg-white md:h-8 md:w-8 h-6 w-6 rounded-full flex justify-center items-center md:hidden">
               <IconBolt stroke={2} height={16} width={16} />
             </button>

@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 import { IProductCardProps } from "./ProductCard";
 import { IconShoppingCart } from "@tabler/icons-react";
 import { CartContext } from "@/Provider/CartProvider";
+import GenerateGradientIcon from "../GenerateGradientIcon";
 
 const ProductCartBtn = ({ product }: IProductCardProps) => {
   const { setRefetch } = useContext(CartContext);
@@ -13,7 +14,7 @@ const ProductCartBtn = ({ product }: IProductCardProps) => {
   };
   return (
     <button
-      className="group-hover/productcard:bg-gradient-primary group-hover/productcard:text-white text-black-50 rounded-full p-1.5 md:p-2.5 transition-all duration-300"
+      className="group-hover/productcard:bg-gradient-primary group-hover/productcard:text-white text-black-50 rounded-full transition-all duration-300 p-2 "
       onClick={(e) => {
         e.preventDefault();
         handleAddToCart();
