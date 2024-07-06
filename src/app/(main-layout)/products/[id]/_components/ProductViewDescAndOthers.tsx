@@ -45,7 +45,7 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
         />
       </div>
       <div className="my-5">
-        <ProgressBar progressValue={50} />
+        <ProgressBar progressValue={10} />
         <div>
           {product?.bulk &&
             (product?.bulk?.minOrder > 1 ||
