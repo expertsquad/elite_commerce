@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
@@ -34,6 +35,7 @@ export default function RootLayout({
           </defs>
         </svg>
         {/* children */}
+        <NextTopLoader height={4} showSpinner={false} speed={800} />
         {children}
       </body>
     </html>
