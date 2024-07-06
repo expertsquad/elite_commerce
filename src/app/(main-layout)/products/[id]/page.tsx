@@ -19,7 +19,7 @@ const ProductViewPage = async ({ params }: { params: { id: string } }) => {
       <div className="block md:hidden mb-5">
         <SocialMediaAndOthers />
       </div>
-      <div className="grid lg:grid-cols-2 grid-cols-1 mb-16 md:gap-3 gap-5">
+      <div className="grid lg:grid-cols-2 grid-cols-1 mb-16 md:gap-10 gap-5">
         <div>
           <ProductViewImage product={response?.data} />
         </div>
