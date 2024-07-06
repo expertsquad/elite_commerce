@@ -14,12 +14,13 @@ import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
 import { storages } from "@/constants";
 import QuickOrderButton from "../../brands/_components/QuickOrderButton";
+import { useGetShippingFee } from "@/utils/shppingCharge/getShippingFee";
 
 const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
   const {
     cartProducts,
     calculateTotalPriceAndDiscountOfCart,
-    shippingFee,
+
     setRefetch,
   } = useContext(CartContext);
   const { orderData, setRefetch: setRefetchOrderInit } =
@@ -28,7 +29,7 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(cartProducts);
 
-  //   console.log(totalPrice, totalDiscount);
+  const shippingFee = useGetShippingFee({ soldAmount: totalPrice }) || 0;
   const calculateTotalWithShipping = totalPrice + shippingFee;
   const totalPayable = calculateTotalWithShipping - totalDiscount;
   // handle add to init order to add all cart items to the context

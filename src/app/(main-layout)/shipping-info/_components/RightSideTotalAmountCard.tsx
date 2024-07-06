@@ -6,6 +6,10 @@ import Link from "next/link";
 import calculateTotalPriceAndDiscountOfCart from "@/helpers/calculateTotalPriceAndDiscountOfCart";
 import Form from "@/Components/Form";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import { fetchData } from "@/actions/fetchData";
+import { IShippingChargeProps } from "./OrderItemsRightSection";
+import { AddressData } from "@/interfaces/defaultShippingAddress.interface";
+import { useGetShippingFee } from "@/utils/shppingCharge/getShippingFee";
 
 const RightSideTotalAmountCard = ({
   products,
@@ -13,17 +17,22 @@ const RightSideTotalAmountCard = ({
   buttonText,
   disabled,
   submitAction,
+  shippingCharge,
+  defaultAddress,
 }: {
   products: ICartProduct[];
   buttonText: string;
   buttonLink?: string;
   disabled?: string;
   submitAction?: (e: React.FormEvent) => Promise<void>;
+  shippingCharge?: IShippingChargeProps;
+  defaultAddress: AddressData;
 }) => {
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
 
-  const shippingFee = 100;
+  const shippingFee = useGetShippingFee({ soldAmount: totalPrice }) || 0;
+
   const calculateTotalWithShipping = totalPrice + shippingFee;
   const totalPayable = calculateTotalWithShipping - totalDiscount;
 
