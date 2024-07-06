@@ -1,18 +1,18 @@
 import ProductImageSlider from "./ProductImageSlider";
 import { IProduct } from "@/interfaces/product.interface";
 import StarRating from "../StarRating";
-import Link from "next/link";
 import QuickViewButton from "@/app/(main-layout)/brands/_components/QuickViewButton";
 import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
 import ProductCartBtn from "./ProductCartBtn";
+import ProductPreviewRedirect from "./ProductPreviewRedirect";
 export interface IProductCardProps {
   product: IProduct;
 }
 const ProductCard = ({ product }: IProductCardProps) => {
   return (
-    <Link
-      href={`/products/${product?._id}`}
+    <ProductPreviewRedirect
       className="border border-black-10 rounded-lg group relative w-full max-w-[280px] cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg mx-auto"
+      product={product}
     >
       <div className="bg-gradient-primary-light">
         <ProductImageSlider
@@ -46,7 +46,6 @@ const ProductCard = ({ product }: IProductCardProps) => {
               ${product?.variants[0]?.sellingPrice}
             </del>
           </div>
-
           <ProductCartBtn product={product} />
         </div>
       </div>
@@ -62,7 +61,7 @@ const ProductCard = ({ product }: IProductCardProps) => {
           buttonText="Quick Order"
         />
       </div>
-    </Link>
+    </ProductPreviewRedirect>
   );
 };
 

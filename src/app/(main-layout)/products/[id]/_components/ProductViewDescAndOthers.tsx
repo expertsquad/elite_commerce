@@ -21,8 +21,11 @@ import ProductCartBtn from "@/Components/ProductCard/ProductCartBtn";
 import ProductViewCartBtn from "./ProductViewCartBtn";
 import ProdViewCartIncreamentDecreamentBtn from "./ProdViewCartIncreamentDecreamentBtn";
 import ProductPriceBasedOnVariants from "./ProductPriceBasedOnVariants";
+import { cookies } from "next/headers";
 
 const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
+  const accessToken = cookies().get("accessToken")?.value;
+
   return (
     <div>
       <div className="hidden md:block">
@@ -44,7 +47,7 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
         />
       </div>
       <div className="my-5">
-        <ProgressBar progressValue={50} />
+        <ProgressBar progressValue={30} />
         <div>
           {product?.bulk &&
             (product?.bulk?.minOrder > 1 ||
@@ -75,7 +78,10 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
           </div>
         </div>
         <div className="flex items-center justify-between gap-x-2.5">
-          <BuyNowSingleProduct product={product} />
+          <BuyNowSingleProduct
+            accessToken={accessToken || ""}
+            product={product}
+          />
           <QuickOrderButton
             product={{
               ...product,

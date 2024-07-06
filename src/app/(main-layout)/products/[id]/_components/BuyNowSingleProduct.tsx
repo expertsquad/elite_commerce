@@ -9,7 +9,13 @@ import { IconShoppingBag } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 
-const BuyNowSingleProduct = ({ product }: { product: IProduct }) => {
+const BuyNowSingleProduct = ({
+  product,
+  accessToken,
+}: {
+  product: IProduct;
+  accessToken: string;
+}) => {
   const router = useRouter();
 
   const { orderData, setRefetch } = useContext(OrderInitContext);
@@ -27,7 +33,11 @@ const BuyNowSingleProduct = ({ product }: { product: IProduct }) => {
     });
     setRefetch((prev) => prev + 1);
 
-    router.push("/shipping-info");
+    if (!accessToken) {
+      router.push("/login");
+    } else {
+      router.push("/shipping-info");
+    }
   };
 
   return (

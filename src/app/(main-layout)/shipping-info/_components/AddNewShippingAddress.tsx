@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import AddNewShippingInputSection from "./AddNewShippingInputSection";
 import { AddressData } from "@/interfaces/defaultShippingAddress.interface";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import { cookies } from "next/headers";
 const AddNewShippingAddress = () => {
   const { orderData, setOrderData } = useContext(OrderInitContext);
   const handleNewAddressChange = (newAddress: AddressData) => {

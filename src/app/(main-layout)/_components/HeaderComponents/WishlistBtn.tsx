@@ -134,13 +134,14 @@ const WishlistBtn = () => {
               <Link
                 href={"/wishlist"}
                 className="flex items-center justify-center gap-2.5 px-5 w-full py-3.5  bg-gradient-primary  text-white rounded-full "
-                onClick={() => window.location.reload()}
+                onClick={() => setShow(false)}
               >
                 View All Wishlist
               </Link>
 
               <Link
                 href={"/"}
+                onClick={() => setShow(false)}
                 className="uppercase text-black-80 flex items-center justify-center gap-2  "
               >
                 <IconArrowLeft />
