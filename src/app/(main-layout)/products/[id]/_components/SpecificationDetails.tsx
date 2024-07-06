@@ -6,8 +6,8 @@ const SpecificationDetails = ({ specificationDetails }: any) => {
       <div className="rounded-lg w-full">
         {specificationDetails?.map((data: any) => (
           <div key={data._id} className="w-full">
-            <div className="bg-gradient-primary-light">
-              <h2 className="text-gradient-primary [font-size:_clamp(16px,4vw,20px)] py-2 pl-4">
+            <div className="">
+              <h2 className="font-semibold [font-size:_clamp(16px,4vw,20px)] py-2 pl-4 bg-[#F8F8F8]">
                 {data.sectionName}
               </h2>
             </div>
@@ -15,7 +15,7 @@ const SpecificationDetails = ({ specificationDetails }: any) => {
               {data?.blocks?.map((block: any) => (
                 <div
                   key={block._id}
-                  className="flex justify-between w-full items-center bg-[#F8F8F8]"
+                  className="flex justify-between w-full items-center"
                 >
                   <p className="py-2 pl-4 [font-size:_clamp(12px,5vw,14px)] w-36 md:w-60 h-10 md:h-16 flex items-center justify-start">
                     {block?.title}

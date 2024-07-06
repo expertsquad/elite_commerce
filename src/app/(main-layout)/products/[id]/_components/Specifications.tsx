@@ -17,10 +17,9 @@ const Specifications = ({ product }: { product: IProduct }) => {
       </div>
       {/* == Description == */}
       <div id="description" className="description my-16">
-        <h2 className="text-[18px] md:text-[24px] font-semibold">
+        <h2 className="text-[18px] md:text-[22px] font-semibold pb-3 border-b border-black-10">
           Description
         </h2>
-        <Image src={gradientLine} alt="underline" />
         {product?.description ? (
           <div
             className="mt-3 md:mt-7"

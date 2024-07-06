@@ -14,33 +14,29 @@ import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderB
 
 const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
   return (
-    <div className="max-w-[370px] min-w-80 px-5 py-7 shadow-lg rounded-md hidden md:block sticky top-20">
+    <div className="max-w-[370px] min-w-80 p-5 shadow-lg rounded-md hidden md:block sticky top-20">
       <div className="flex items-center gap-x-4 mb-3">
         {productdata?.productPhotos?.map((photo, index) => (
           <div
             key={index}
-            className="relative shrink-0 w-[60px] h-[70px] bg-gradient-primary-light rounded-sm"
+            className="relative shrink-0 w-[60px] h-[70px] bg-[#F8F8F8] rounded-md border border-black-10"
           >
             <Image
               src={`${server_url + photo}`}
               alt="product image"
-              style={{
-                objectFit: "cover",
-              }}
               fill
-              className="w-full h-full top-0 left-0 object-cover py-3 px-2"
+              className="inset-0 object-contain py-3 px-2"
             />
           </div>
         ))}
       </div>
       <span className="">{productdata?.productName}</span>
-      <div className="relative shrink-0 h-5 w-10 mt-3   ">
+      <div className="relative shrink-0 h-6 w-10 mt-3   ">
         <Image
           src={`${server_url + productdata?.brand?.brandPhoto}`}
           alt="brand photo"
           fill
-          style={{ objectFit: "cover" }}
-          className="w-full h-full top-0 left-0 object-cover"
+          className="inset-0 object-contain"
         />
       </div>
       <span className="bg-black-10 h-0.5 w-full hidden md:flex my-4"></span>
@@ -52,7 +48,7 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
             <ProductVariantColor variants={productdata?.variants} />
           </div>
         </div>
-        <div>
+        {/* <div>
           <span className="text-sm text-black-80">Storage</span>
           <div className="flex items-center gap-x-2">
             <span className="text-xs px-1.5 py-1 rounded-sm bg-gradient-primary text-white">
@@ -65,7 +61,7 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
               {120}GB
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
       {/* == Price == */}
       <div className="flex items-center gap-x-2 mb-10">
@@ -77,9 +73,11 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
           ${productdata?.variants[0]?.sellingPrice}
         </del>
         <span className="text-black-50">|</span>
-        <span className="text-sm text-gradient-secondary px-2 py-0.5 border border-black-10 rounded-full">
-          ${productdata?.variants[0]?.discountPercentage}% OFF
-        </span>
+        <div className="bg-gradient-secondary-light rounded-full py-0.5">
+          <span className="text-sm text-gradient-secondary px-3 font-semibold">
+            ${productdata?.variants[0].discountPercentage}% OFF
+          </span>
+        </div>
       </div>
       {/* == Buy now, quick order and add to cart == */}
       <div>
@@ -87,12 +85,12 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
           <div className="bg-gradient-primary-light rounded-md w-full">
             <Link
               href={"/"}
-              className="flex items-center justify-center gap-x-1.5 text-gradient-primary py-2"
+              className="flex items-center justify-center gap-x-1.5 text-gradient-primary py-2 text-sm"
             >
               <GenerateGradientIcon
                 IconComponent={IconShoppingBag}
                 stroke={2}
-                size={20}
+                size={16}
               />
               BUY NOW
             </Link>
@@ -103,16 +101,16 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
               orderQuantity: 1,
               variant: productdata?.variants[0],
             }}
-            buttonStyle="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2 rounded-md w-full text-base"
-            buttonIcon={<IconBolt size={20} fill="#fff" />}
+            buttonStyle="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2 rounded-md w-full text-[13px]"
+            buttonIcon={<IconBolt size={16} fill="#fff" />}
             buttonText="QUICK ORDER"
           />
         </div>
-        <div className="border border-black-10 rounded-md mt-8">
+        <div className="border border-black-10 rounded-md mt-5">
           <button className="text-gradient-primary flex items-center justify-center gap-x-1.5 w-full py-2">
             <GenerateGradientIcon
               IconComponent={IconShoppingCart}
-              stroke={2}
+              stroke={1}
               size={20}
             />
             ADD TO CART

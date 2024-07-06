@@ -20,29 +20,29 @@ const CustomerReview = async ({
   });
   return (
     <div>
-      <h2 className="text-gradient-primary text-[18px] md:text-[24px] font-semibold">
+      <h2 className="text-[18px] md:text-[22px] font-semibold pb-3 border-b border-black-10">
         Customer Reivew
       </h2>
-      <Image src={gradientLine} alt="underline" />
+
       <div className="flex flex-col md:flex-row md:items-center gap-x-4 mt-5">
         <span className="mb-3 md:mb-0">Sort By- </span>
         <div className="flex items-center gap-x-3 flex-wrap gap-y-3">
-          <button className="text-sm md:text-base border border-black-10 rounded-full px-2 py-1 whitespace-nowrap text-gradient-primary">
+          <button className="text-sm md:text-base border border-black-10 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white">
             Newest
           </button>
-          <button className="text-sm md:text-base border border-black-10 rounded-full px-2 py-1 whitespace-nowrap text-gradient-primary">
+          <button className="text-sm md:text-base border border-black-10 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white">
             5 Star
           </button>
-          <button className="text-sm md:text-base border border-black-10 rounded-full px-2 py-1 whitespace-nowrap text-gradient-primary">
+          <button className="text-sm md:text-base border border-black-10 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white">
             4 Star
           </button>
-          <button className="text-sm md:text-base border border-black-10 rounded-full px-2 py-1 whitespace-nowrap text-gradient-primary">
+          <button className="text-sm md:text-base border border-black-10 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white">
             3 Star
           </button>
-          <button className="text-sm md:text-base border border-black-10 rounded-full px-2 py-1 whitespace-nowrap text-gradient-primary">
+          <button className="text-sm md:text-base border border-black-10 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white">
             2 Star
           </button>
-          <button className="text-sm md:text-base border border-black-10 rounded-full px-2 py-1 whitespace-nowrap text-gradient-primary">
+          <button className="text-sm md:text-base border border-black-10 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white">
             1 Star
           </button>
         </div>
