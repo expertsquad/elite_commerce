@@ -32,17 +32,21 @@ const FavouriteBrandSection = ({
         {/* <div className="flex flex-wrap gap-5 mx-auto my-10"> */}
         <div className="grid grid-cols-fav-brand-grid 2xl:grid-cols-fav-brand-grid-xl gap-8 my-10">
           {favouriteBrands?.map((brand) => (
-            <div
-              key={brand?._id}
-              className="border border-black-10 h-[60px] 2xl:h-[70px] relative rounded-lg"
-            >
-              <Image
-                src={server_url + brand?.brandPhoto}
-                alt={brand?.brandName}
-                fill
-                className="object-contain p-2"
-              />
-            </div>
+            <>
+              <Link href={`brands/${brand?.brandName}`}>
+                <div
+                  key={brand?._id}
+                  className="border border-black-10 h-[60px] 2xl:h-[70px] relative rounded-lg"
+                >
+                  <Image
+                    src={server_url + brand?.brandPhoto}
+                    alt={brand?.brandName}
+                    fill
+                    className="object-contain p-2"
+                  />
+                </div>
+              </Link>
+            </>
           ))}
         </div>
       </div>
