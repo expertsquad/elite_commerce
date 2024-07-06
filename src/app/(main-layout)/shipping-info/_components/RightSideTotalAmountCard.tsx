@@ -9,6 +9,7 @@ import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { fetchData } from "@/actions/fetchData";
 import { IShippingChargeProps } from "./OrderItemsRightSection";
 import { AddressData } from "@/interfaces/defaultShippingAddress.interface";
+import { useGetShippingFee } from "@/utils/shppingCharge/getShippingFee";
 
 const RightSideTotalAmountCard = ({
   products,
@@ -27,18 +28,10 @@ const RightSideTotalAmountCard = ({
   shippingCharge?: IShippingChargeProps;
   defaultAddress: AddressData;
 }) => {
-  console.log(shippingCharge);
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
 
-  let shippingFee = 0;
-  if (totalPrice > shippingCharge?.freeShippingMinOrderAmount) {
-    shippingFee = 0;
-  } else if (defaultAddress?.state === shippingCharge?.state) {
-    shippingFee = shippingCharge?.inside;
-  } else {
-    shippingFee = shippingCharge?.outside || 0;
-  }
+  const shippingFee = useGetShippingFee({ soldAmount: totalPrice }) || 0;
 
   const calculateTotalWithShipping = totalPrice + shippingFee;
   const totalPayable = calculateTotalWithShipping - totalDiscount;

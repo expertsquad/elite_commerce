@@ -7,11 +7,12 @@ import { useContext } from "react";
 import QuickOrderButton from "../../brands/_components/QuickOrderButton";
 import { IconBolt, IconShoppingCart } from "@tabler/icons-react";
 import ButtonPrimary from "../../brands/_components/ButtonPrimary";
+import { useGetShippingFee } from "@/utils/shppingCharge/getShippingFee";
 
 const OrderSummery = ({
   setshow,
   products,
-  shippingFee,
+  // shippingFee,
   calculateTotalPriceAndDiscountOfCart,
 }: {
   setshow: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,6 +27,7 @@ const OrderSummery = ({
 
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
+  const shippingFee = useGetShippingFee({ soldAmount: totalPrice }) || 0;
   const calculateTotalWithShipping = totalPrice + shippingFee;
   const totalPayable = calculateTotalWithShipping - totalDiscount;
 
