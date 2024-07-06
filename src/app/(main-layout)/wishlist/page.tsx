@@ -107,7 +107,7 @@ const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
           product={{
             ...product,
             orderQuantity: 1,
-            variant: product?.variants[0],
+            variant: product?.variants?.[0],
           }}
           buttonStyle="bg-gradient-primary whitespace-nowrap text-white rounded-full px-3.5 uppercase flex items-center justify-center gap-2.5 text-sm py-2"
           buttonIcon={<IconBolt size={20} fill="#fff" />}
