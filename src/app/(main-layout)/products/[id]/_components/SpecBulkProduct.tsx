@@ -1,5 +1,6 @@
+"use client";
 import { IProduct } from "@/interfaces/product.interface";
-import React from "react";
+import React, { useContext } from "react";
 import ProductVariantColor from "./ProductVariantColor";
 import Image from "next/image";
 import { server_url } from "@/constants";
@@ -11,8 +12,18 @@ import {
   IconShoppingCart,
 } from "@tabler/icons-react";
 import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
+import { CartContext } from "@/Provider/CartProvider";
+import { updateCart } from "@/utils/updateCart.utils";
 
 const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
+  const [variant, setVariant] = React.useState<IProduct["variants"][0]>(
+    productdata?.variants[0]
+  );
+  const { setRefetch } = useContext(CartContext);
+  const handleAddToCart = () => {
+    updateCart({ actionType: "add", product: productdata, variant: variant });
+    setRefetch && setRefetch((prev) => prev + 1);
+  };
   return (
     <div className="max-w-[370px] min-w-80 p-5 shadow-lg rounded-md hidden md:block sticky top-20">
       <div className="flex items-center gap-x-4 mb-3">
@@ -45,37 +56,24 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
         <div>
           <span className="text-sm text-black-80">Color</span>
           <div className="flex items-center gap-x-2">
-            <ProductVariantColor variants={productdata?.variants} />
+            <ProductVariantColor
+              onSelectVariant={setVariant}
+              variants={productdata?.variants}
+            />
           </div>
         </div>
-        {/* <div>
-          <span className="text-sm text-black-80">Storage</span>
-          <div className="flex items-center gap-x-2">
-            <span className="text-xs px-1.5 py-1 rounded-sm bg-gradient-primary text-white">
-              {120}GB
-            </span>
-            <span className="text-xs px-1.5 py-1 rounded-sm bg-gradient-primary text-white">
-              {120}GB
-            </span>
-            <span className="text-xs px-1.5 py-1 rounded-sm bg-gradient-primary text-white">
-              {120}GB
-            </span>
-          </div>
-        </div> */}
       </div>
       {/* == Price == */}
       <div className="flex items-center gap-x-2 mb-10">
         <span className="text-2xl font-bold text-gradient-primary">
-          ${productdata?.variants[0]?.discountPercentage}
+          ${variant?.discountedPrice}
         </span>
         <span className="text-black-50">|</span>
-        <del className="text-base text-black-50">
-          ${productdata?.variants[0]?.sellingPrice}
-        </del>
+        <del className="text-base text-black-50">${variant?.sellingPrice}</del>
         <span className="text-black-50">|</span>
         <div className="bg-gradient-secondary-light rounded-full py-0.5">
           <span className="text-sm text-gradient-secondary px-3 font-semibold">
-            ${productdata?.variants[0].discountPercentage}% OFF
+            ${variant.discountPercentage}% OFF
           </span>
         </div>
       </div>
@@ -99,7 +97,7 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
             product={{
               ...productdata,
               orderQuantity: 1,
-              variant: productdata?.variants[0],
+              variant: variant,
             }}
             buttonStyle="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2 rounded-md w-full text-[13px]"
             buttonIcon={<IconBolt size={16} fill="#fff" />}
@@ -107,10 +105,13 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
           />
         </div>
         <div className="border border-black-10 rounded-md mt-5">
-          <button className="text-gradient-primary flex items-center justify-center gap-x-1.5 w-full py-2">
+          <button
+            onClick={handleAddToCart}
+            className="text-gradient-primary flex items-center justify-center gap-x-1.5 w-full py-2"
+          >
             <GenerateGradientIcon
               IconComponent={IconShoppingCart}
-              stroke={1}
+              stroke={1.5}
               size={20}
             />
             ADD TO CART

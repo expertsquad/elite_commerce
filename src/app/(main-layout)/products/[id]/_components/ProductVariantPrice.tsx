@@ -10,7 +10,6 @@ const ProductVariantPrice = ({
   product,
   variant,
 }: IProductVariantPriceProps) => {
-  console.log(variant);
   return (
     <div className="flex items-center gap-x-2">
       <span className="text-3xl font-bold text-gradient-primary">

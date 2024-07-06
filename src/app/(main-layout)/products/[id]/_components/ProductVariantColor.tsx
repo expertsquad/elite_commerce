@@ -36,7 +36,7 @@ const ProductVariantColor = ({
           style={{
             borderColor: isSelected
               ? color?.variantName || "#000000"
-              : `transparent`,
+              : `#F8F8F8`,
           }}
         >
           <div
