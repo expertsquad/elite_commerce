@@ -6,24 +6,24 @@ import React from "react";
 import OrderCardHeader from "./OrderCardHeader";
 
 const OrderItemsCard = ({ orderItem }: { orderItem: OrderItem }) => {
+  console.log(orderItem);
   return (
     <div className="text-black-50 flex gap-5 py-5 w-full border-b border-black-10">
       {/* flex first div */}
-      <div className="flex gap-3 w-full lg:w-1/2">
+      <div className="flex items-center gap-3 w-full lg:w-1/2">
         {/* image part */}
-        <div className="bg-gradient-primary-light rounded-lg flex items-center justify-center">
+        <div className="bg-gradient-primary-light rounded-lg flex items-center justify-center relative w-14 h-14 shrink-0">
           <Image
             alt="Product Image"
-            height={60}
+            fill
             src={server_url! + orderItem?.productPhotos}
-            width={60}
-            className="rounded-lg"
+            className="inset-0 object-contain p-1.5"
           />
         </div>
 
         {/* Title, brand , star part */}
 
-        <div className="">
+        <div className="w-full">
           <p className="line-clamp-1">{orderItem?.productName}</p>
           <div className="flex items-center gap-2">
             <small className="text-positive">

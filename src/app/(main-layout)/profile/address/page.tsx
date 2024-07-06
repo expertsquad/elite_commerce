@@ -40,11 +40,11 @@ const page = async () => {
       {/* Tab to toggle section */}
 
       <div className="flex gap-5 border-b border-black-10 items-center justify-start">
-        <div className="py-2 text-lg">
+        <div className="text-lg">
           <Link href="/profile/shipping-address">Shipping Address</Link>
         </div>
 
-        <div className="pb-[2px] border-gradient-primary">
+        <div className="pb-[1px] border-gradient-primary">
           <Link
             className="text-gradient-primary font-bold text-lg"
             href="/profile/address"

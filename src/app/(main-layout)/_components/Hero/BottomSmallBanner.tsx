@@ -12,7 +12,7 @@ const BottomSmallBanner = ({
 }) => {
   return (
     <div
-      className={`flex justify-center md:justify-between items-center gap-4 p-5 rounded-lg flex-1 w-full h-full text-white`}
+      className={`flex justify-center md:justify-between items-center p-5 rounded-lg flex-1 w-full h-full text-white`}
       style={{
         backgroundColor: `${
           bottomOffer?.backgroundColor && `${bottomOffer?.backgroundColor}`
@@ -26,22 +26,22 @@ const BottomSmallBanner = ({
         backgroundSize: "cover",
       }}
     >
-      <div className="flex flex-col gap-5">
-        <h2 className="[font-size:_clamp(1.2em,2.60vw,1.6em)] line-clamp-1">
+      <div className="flex flex-col">
+        <h2 className="[font-size:_clamp(1.2em,2.60vw,1.6em)] line-clamp-2 mb-2.5">
           {bottomOffer?.offerTag}
         </h2>
-        <h2 className="  line-clamp-1 [font-size:_clamp(0.8em,60vw,1em)]">
+        <h2 className="line-clamp-1 [font-size:_clamp(0.8em,60vw,1em)]">
           {bottomOffer?.title}
         </h2>
 
-        <Link href={bottomOffer?.link}>
-          <Button className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-full py-2 px-4 md:px-6[font-size:_clamp(0.5em,60vw,0.9em)] ">
-            {bottomOffer?.buttonText} <IconArrowRight />{" "}
+        <Link href={bottomOffer?.link} target="_blank">
+          <Button className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-xl py-2 px-4 md:px-6[font-size:_clamp(0.5em,60vw,0.9em)] mt-9">
+            {bottomOffer?.buttonText} <IconArrowRight size={20} />
           </Button>
         </Link>
       </div>
 
-      <div className=" relative w-36 h-36">
+      <div className=" relative w-36 h-full">
         <div className="absolute w-full h-full top-0 left-0 object-cover">
           <Image
             src={`${server_url + bottomOffer?.productPhoto}`}

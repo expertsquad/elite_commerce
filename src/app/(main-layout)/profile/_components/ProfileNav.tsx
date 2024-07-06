@@ -25,17 +25,16 @@ const ProfileNav = async () => {
   };
 
   return (
-    <div className="bg-gradient-primary-light p-5 rounded-xl w-full h-fit static md:sticky md:top-20 top-0 ">
-      {/* profile image and name start */}
-      <div className="md:overflow-auto scrollbar-y-remove h-fit md:h-[calc(100vh-200px)]">
-        <div className="flex md:items-center items-start justify-center gap-2 md:flex-col flex-row border-b-2 border-black-10 mb-4 py-2 ">
+    <div className="bg-gradient-primary-light p-5 rounded-xl w-full h-fit static md:sticky md:top-20 top-0">
+      <div className="md:overflow-auto scrollbar-y-remove h-fit md:h-[calc(100vh-180px)]">
+        <div className="flex md:items-center md:justify-center gap-2 md:flex-col flex-row border-b-2 border-black-10 mb-4 py-2 ">
           <div className="relative">
             <AddProfilePhoto
               profilePhotoUrl={server_url + getMe?.data?.profilePhoto}
               handleAction={handleAction}
             />
           </div>
-          <div className="flex flex-col gap-2 items-center justify-center mb-4">
+          <div className="flex flex-col gap-2 md:items-center md:justify-center md:mb-4">
             <small className="text-sm text-black-50">Hello</small>
             <h3 className="text-lg font-bold">{getMe?.data?.fullName}</h3>
           </div>

@@ -15,7 +15,7 @@ const OrderSection = async () => {
 
   return (
     <section className="w-full">
-      <h3 className="font-bold text-lg my-5">Recent Order</h3>
+      <h3 className="font-bold text-lg mt-5">Recent Order</h3>
       {orderItems?.data?.map((order: Order) => (
         <OrderItems key={order._id} order={order} />
       ))}

@@ -27,7 +27,7 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
       <div className="hidden md:block">
         <SocialMediaAndOthers />
       </div>
-      <span className="font-semibold text-lg md:text-2xl line-clamp-2 my-5">
+      <span className="font-semibold text-lg md:text-2xl line-clamp-2 my-6">
         {product?.productName}
       </span>
       <CategoryAndBrandSmallComponent
@@ -48,14 +48,14 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
           {product?.bulk &&
             (product?.bulk?.minOrder > 1 ||
               (product.bulk && typeof product.bulk !== "boolean")) && (
-              <div className="whitespace-nowrap text-black-opacity-60">
+              <div className="whitespace-nowrap text-black-80">
                 <p>
-                  Buy{" "}
-                  <span className="font-semibold main-text-color">
+                  Buy
+                  <span className="font-semibold text-gradient-primary mx-1.5">
                     {product?.bulk?.minOrder}
-                  </span>{" "}
-                  item to get more{" "}
-                  <span className="font-semibold text-black">
+                  </span>
+                  item to get more
+                  <span className="font-semibold text-gradient-primary ml-1.5">
                     {product?.bulk?.discount} extra!
                   </span>
                 </p>

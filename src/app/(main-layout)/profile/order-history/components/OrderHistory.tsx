@@ -55,7 +55,7 @@ const OrderHistory = ({
           <button
             onClick={() => setSelectedOrderHistoryType(label?.label || " ")}
             key={i}
-            className={`outline-none border border-black-10 [font-size:_clamp(10px,50vw,16px)] hover:bg-gradient-primary transition-all rounded-full hover:text-white text-black-80 px-5 py-2.5 whitespace-nowrap ${
+            className={`outline-none border border-black-10 [font-size:_clamp(10px,50vw,16px)] hover:bg-gradient-primary transition-all rounded-full hover:text-white text-black-80 px-5 py-2 whitespace-nowrap ${
               selectedOrderHistoryType === label?.label
                 ? "bg-gradient-primary text-white"
                 : ""

@@ -51,13 +51,13 @@ const ReviewCard = async ({
       >
         {/* Image and titile */}
         <div className="w-full lg:w-1/2 flex  justify-start items-center gap-4">
-          <div className="flex justify-center items-center bg-gradient-primary-light rounded-lg w-16 h-16">
+          <div className="flex justify-center items-center bg-gradient-primary-light rounded-lg relative shrink-0 w-16 h-16">
             <Image
               alt="Product Image"
               src={`${server_url + orderItem.productPhotos[0]}
             `}
-              width={60}
-              height={60}
+              fill
+              className="inset-0 object-contain p-1"
             />
           </div>{" "}
           <p className="line-clamp-2">{orderItem.productName}</p>

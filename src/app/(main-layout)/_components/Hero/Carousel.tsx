@@ -6,10 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Carousel = ({ item }: { item: HeroSliderProps }) => {
-  const discountedPrice = (
-    item?.price -
-    item?.price * (item?.discountPercentage / 100)
-  ).toFixed(2);
+  const discountedPrice =
+    item?.price - item?.price * (item?.discountPercentage / 100);
 
   return (
     <div
@@ -29,7 +27,7 @@ const Carousel = ({ item }: { item: HeroSliderProps }) => {
       id={item._id}
     >
       <div className="flex items-center md:gap-5 gap-3.5 justify-between lg:px-9 md:px-6 px-4 py-4 h-full w-full">
-        <div className="flex flex-col w-6/12">
+        <div className="flex flex-col gap-y-3 w-6/12">
           <h3 className="font-bold text-gradient-secondary [font-size:_clamp(0.5em,60vw,0.9em)] animate-bounce">
             {item?.sliderTag}
           </h3>
@@ -44,20 +42,19 @@ const Carousel = ({ item }: { item: HeroSliderProps }) => {
             {item.description}
           </p>
 
-          <div className="flex items-center font-bold  [font-size:_clamp(0.5em,60vw,0.9em)]">
-            <span className="text-lg">
-              {item?.price.toFixed(2)}
-              <small className="ml-0.5">USD</small>
+          <div className="flex items-center gap-x-2 mt-5 [font-size:_clamp(0.5em,60vw,0.9em)]">
+            <span className="text-2xl font-bold">
+              ${discountedPrice.toFixed(2)}
             </span>
-            <del>
-              {discountedPrice}
-              <small className="ml-0.5">USD</small>
-            </del>
-            <span>{item?.discountPercentage.toFixed(2)}%</span>
+
+            <del className="text-lg text-black-50">${item?.price}.00</del>
+            <span className="text-lg ml-2.5 text-danger">
+              {item?.discountPercentage.toFixed(2)}%
+            </span>
           </div>
-          <div className="mt-4 hover:text-positive">
+          <div className="mt-6 hover:text-positive">
             <Link href={item?.link}>
-              <Button className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-full py-2 px-4 md:px-7  [font-size:_clamp(0.5em,60vw,0.9em)] ">
+              <Button className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-xl py-3 px-4 md:px-7  [font-size:_clamp(0.5em,60vw,0.9em)] ">
                 Shop Now <IconArrowRight />{" "}
               </Button>
             </Link>
