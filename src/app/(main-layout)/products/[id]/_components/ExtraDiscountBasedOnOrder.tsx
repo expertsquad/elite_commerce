@@ -9,9 +9,9 @@ const ExtraDiscountBasedOnOrder = ({ product }: { product: IProduct }) => {
 
   const isCarted = cartProducts.find((item) => item._id === product._id);
 
-  const productOrderQuantity = isCarted?.orderQuantity || 1;
+  const productOrderQuantity = isCarted?.orderQuantity || 0;
 
-  const bulkItems = product?.bulk?.minOrder || 1;
+  const bulkItems = product?.bulk?.minOrder || 0;
   // const bulkItems = 15;
 
   const percentage = Math.min(

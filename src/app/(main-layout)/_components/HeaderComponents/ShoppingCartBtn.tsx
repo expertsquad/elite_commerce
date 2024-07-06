@@ -21,6 +21,7 @@ const ShoppingCartBtn = () => {
     setRefetch,
   } = useContext(CartContext);
   const [show, setShow] = React.useState(false);
+
   return (
     <Fragment>
       <button onClick={() => setShow(!show)} className="relative">
@@ -47,7 +48,7 @@ const ShoppingCartBtn = () => {
               Shopping Cart
             </span>
             <div className="flex flex-col gap-2 mt-2">
-              <ProgressBar progressValue={20} />
+              {/* <ProgressBar progressValue={20} /> */}
               <span className="block text-base">
                 Buy <span className="text-gradient-primary">$900</span> more to
                 get{" "}
@@ -111,6 +112,11 @@ export const QuickOrderItem = ({
     setRefetch((prev) => prev + 1);
   };
 
+  const totalPrice =
+    (product?.variant?.discountedPrice
+      ? product?.variant?.discountedPrice
+      : product?.variant?.sellingPrice) * product?.orderQuantity;
+
   return (
     <div className="flex  justify-between gap-3.5">
       <div className="flex md:items-center gap-3.5">
@@ -142,7 +148,7 @@ export const QuickOrderItem = ({
           </div>
           <div className="flex items-center gap-1.5">
             <span className="text-black-80 text-xs">
-              {product?.variant?.sellingPrice}
+              {product?.variant?.discountedPrice}
             </span>
             <span className="text-xs">X</span>
             <IncreaseDecreaseCartItems
@@ -157,7 +163,7 @@ export const QuickOrderItem = ({
           <IconX stroke={1} color="red" height={16} width={16} />
         </button>
         <strong className="font-semibold text-gradient-primary text-base">
-          $1500.66
+          ${totalPrice}
         </strong>
       </div>
     </div>
