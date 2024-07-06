@@ -41,7 +41,7 @@ const CustomerReviewStatistic = ({
             <span className="">
               <IconStarFilled className="text-[#E73C17] w-4 h-4" />
             </span>
-            <div className="relative w-[230px] h-1 bg-black-10 rounded-full">
+            <div className="relative w-[230px] h-1 bg-black-10 rounded-full ">
               <span
                 style={{ width: `${percentage}%` }}
                 className="h-1 w-[230px] flex bg-gradient-secondary rounded-full "
