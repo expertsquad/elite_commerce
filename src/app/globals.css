@@ -67,6 +67,9 @@ main {
 
 /* components */
 @layer components {
+  .main-container {
+    @apply max-w-7xl mx-auto px-3 lg:px-10 2xl:px-0;
+  }
   .text-gradient-primary {
     @apply bg-gradient-primary bg-clip-text text-transparent;
   }

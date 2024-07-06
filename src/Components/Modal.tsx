@@ -46,7 +46,8 @@ const Modal = ({
     }
   }, [show]);
 
-  const handleClose = () => {
+  const handleClose = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setAnimate(false);
     if (isIntercepting) {
       redirect.back();

@@ -18,7 +18,7 @@ const ProductViewImage = ({ product }: { product: IProduct }) => {
 
   const slicedProducts = product?.productPhotos.slice(0, 4);
   return (
-    <div className="flex lg:flex-row md:flex-col-reverse flex-col-reverse items-center gap-5 md:flex-1">
+    <div className="flex flex-col-reverse md:flex-row items-center gap-5 md:flex-1">
       <div className=" flex md:flex-col gap-3">
         {slicedProducts?.map((image: any) => (
           <div
@@ -28,16 +28,13 @@ const ProductViewImage = ({ product }: { product: IProduct }) => {
             }`}
             onClick={() => handleChangePhoto(image)}
           >
-            <div className="w-10 h-10 md:w-24 md:h-24 shrink-0 relative rounded-full bg-gradient-primary-light">
+            <div className="w-10 h-10 md:w-24 md:h-24 relative overflow-hidden rounded-full bg-gradient-primary-light">
               <Image
                 src={`${server_url + image}`}
-                alt="demo Printer"
+                alt="Product Photo"
                 fill
-                style={{
-                  objectFit: "cover",
-                }}
                 sizes="(max-width: 80px) 10vw, (max-width: 100px) 10vw, 15vw"
-                className="w-full h-full top-0 left-0 object-cover rounded-full"
+                className="inset-0 object-contain p-2"
               />
             </div>
           </div>
@@ -45,14 +42,16 @@ const ProductViewImage = ({ product }: { product: IProduct }) => {
       </div>
       <div className="flex items-center justify-center border-black-10 rounded-lg w-full bg-gradient-primary-light">
         {selectedImage && (
-          <div className="relative shrink-0 min-h-80 min-w-80 md:h-[485px] max-w-[400px] ">
+          <div className="relative shrink-0 flex-1 h-[clamp(300px,70vw,400px)]">
             <Image
               src={`${server_url + selectedImage}`}
               alt="Product Photo"
               fill
-              objectFit="cover"
+              placeholder="blur"
+              blurDataURL={`${server_url + selectedImage}`}
               sizes="(max-width: 350px) 50vw, (max-width: 350px) 60vw, 65vw"
-              className="w-full h-full top-0 left-0 object-cover rounded-lg py-10 px-5 md:px-0"
+              className="inset-0 object-contain rounded-lg py-10 px-5 md:px-0"
+              priority
             />
           </div>
         )}

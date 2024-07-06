@@ -3,6 +3,7 @@ import SmallProductCard from "./_components/SmallProductCard";
 import BrandCard from "@/Components/BrandCard";
 import { fetchData } from "@/actions/fetchData";
 import Pagination from "@/Components/Pagination";
+import TopSellingBrandProducts from "./_components/TopSellingBrandProducts";
 
 const Brand = async ({ params }: { params: { page: number } }) => {
   const currentPage = 1 || Number(params.page);
@@ -47,16 +48,7 @@ const Brand = async ({ params }: { params: { page: number } }) => {
       <div className="">
         <div className="hidden lg:flex flex-col gap-7 ">
           {/* To Selling Brands Product */}
-          <div className="flex flex-col gap-7 ">
-            <span className="uppercase text-lg font-semibold">
-              Top Selling Brands Product
-            </span>
-            <div className="flex flex-col gap-7">
-              {[...Array(5)].map((_, index) => {
-                return <SmallProductCard key={index} />;
-              })}
-            </div>
-          </div>
+          <TopSellingBrandProducts />
           <hr className="border-black-10 hidden md:block" />
 
           {/* Widget Promotion card */}

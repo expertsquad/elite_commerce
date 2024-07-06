@@ -27,7 +27,7 @@ const OrderItems = ({ order }: { order: Order }) => {
         <div className="flex items-center gap-3">
           <Link
             href={`/order-track/${order?._id}`}
-            className="border-gradient-primary p-[2px] rounded-full "
+            className="border-gradient-primary p-[1px] rounded-md "
           >
             <Button className="text-gradient-primary   px-5  py-1 ">
               {" "}
@@ -36,18 +36,18 @@ const OrderItems = ({ order }: { order: Order }) => {
           </Link>
           <p
             className={`${
-              order?.orderStatus?.status === "Order Place"
-                ? "bg-black-10  px-5 rounded-lg py-2"
+              order?.orderStatus?.status === "Order placed"
+                ? "bg-black-10  px-5 rounded-md py-2"
                 : order?.orderStatus?.status === "Packaging"
-                ? "bg-gradient-positive text-positive  px-5 rounded-lg py-2"
+                ? "bg-gradient-secondary-light text-secondary  px-5 rounded-md py-2"
                 : order?.orderStatus?.status === "Shipping"
-                ? "bg-gradient-primary-light  px-5 rounded-lg py-2"
+                ? "bg-gradient-primary-light text-primary  px-5 rounded-md py-2"
                 : order?.orderStatus?.status === "Delivered"
-                ? "bg-gradient-secondary-light    px-5 rounded-lg py-2"
+                ? "bg-gradient-positive text-positive    px-5 rounded-md py-2"
                 : order?.orderStatus?.status === "Rejected"
-                ? "bg-danger px-5 rounded-lg py-2 "
+                ? "bg-danger px-5 rounded-md py-2 "
                 : ""
-            } " px-5 rounded-lg py-2"`}
+            } " px-5 rounded-md py-2"`}
           >
             {order?.orderStatus?.status}
           </p>

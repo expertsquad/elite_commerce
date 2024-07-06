@@ -33,7 +33,7 @@ const InfiniteSlider = async () => {
 
   return (
     <div className={style.container}>
-      <div className={style.slider} id="infinite-slider">
+      <div className={style.slider}>
         {element}
         {element}
       </div>

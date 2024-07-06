@@ -14,7 +14,7 @@ import Loading from "../loading";
 import Pagination from "@/Components/Pagination";
 import DealsOfTheDaySection from "./_components/DealsOfTheDaySection/DealsOfTheDaySection";
 
-const page = async () => {
+const Page = async () => {
   const newestProducts = await fetchData({ route: "/product", limit: 8 });
   const allProducts = await fetchData({ route: "/product", limit: 12 });
 
@@ -41,7 +41,7 @@ const page = async () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto p-3">
+      <div className="main-container pb-10">
         {/* Hero section added */}
         <Hero />
 
@@ -74,7 +74,7 @@ const page = async () => {
       {/* best deals */}
       <BestDealsSection />
       {/* extra services section */}
-      <div className="max-w-7xl mx-auto p-3">
+      <div className="main-container pb-10">
         <div className="flex flex-col md:flex-row items-center justify-between py-10 lg:py-16 text-center md:text-left gap-10">
           {extraServices.map((service) => (
             <div
@@ -142,4 +142,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default Page;

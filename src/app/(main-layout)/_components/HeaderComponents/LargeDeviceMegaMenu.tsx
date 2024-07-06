@@ -1,4 +1,3 @@
-import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import {
   IconChevronDown,
   IconChevronRight,
