@@ -19,6 +19,7 @@ import BuyNowSingleProduct from "./BuyNowSingleProduct";
 import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
 import ProductCartBtn from "@/Components/ProductCard/ProductCartBtn";
 import ProductViewCartBtn from "./ProductViewCartBtn";
+import ProdViewCartIncreamentDecreamentBtn from "./ProdViewCartIncreamentDecreamentBtn";
 
 const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
   return (
@@ -73,24 +74,8 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
       </div>
       <div>
         <div className="flex items-center gap-x-3 mb-5">
-          <div className="flex items-center justify-center gap-x-2 py-2 px-3 border border-black-10 rounded-full">
-            <button className="text-black-50 bg-black-10 p-0.5 rounded-full">
-              <IconMinus width={20} height={18} />
-            </button>
-            <span className="text-black-50">{0}</span>
-            <button className="text-black-50 bg-black-10 p-0.5 rounded-full">
-              <IconPlus width={20} height={18} />
-            </button>
-          </div>
+          <ProdViewCartIncreamentDecreamentBtn product={product} />
           <div className=" w-full">
-            {/* <button className="text-gradient-primary flex items-center justify-center gap-x-1.5 w-full py-2">
-              <GenerateGradientIcon
-                IconComponent={IconShoppingCart}
-                stroke={2}
-                size={20}
-              />
-              ADD TO CART
-            </button> */}
             <ProductViewCartBtn product={product} />
           </div>
         </div>
