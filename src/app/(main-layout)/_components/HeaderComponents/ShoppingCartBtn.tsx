@@ -48,7 +48,9 @@ const ShoppingCartBtn = () => {
               Shopping Cart
             </span>
             <div className="flex flex-col gap-2 mt-2">
-              {/* <ProgressBar progressValue={20} /> */}
+              <div className="mt-5">
+                <ProgressBar progressValue={20} />
+              </div>
               <span className="block text-base">
                 Buy <span className="text-gradient-primary">$900</span> more to
                 get{" "}
