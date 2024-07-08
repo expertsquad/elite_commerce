@@ -25,7 +25,7 @@ const OrderItemsRightSection = ({
   buttonLink?: string;
   submitAction?: (e: React.FormEvent) => Promise<void>;
   shippingCharge?: IShippingChargeProps;
-  defaultAddress: ResponseShippingAddress;
+  defaultAddress?: ResponseShippingAddress;
 }) => {
   const pathName = usePathname();
 

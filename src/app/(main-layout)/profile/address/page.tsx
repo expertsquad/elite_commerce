@@ -18,17 +18,23 @@ const page = async () => {
     for (const [key, value] of Array.from(formData.entries())) {
       dataObj[key] = value;
     }
+    //zipCode string to number
+    if (typeof dataObj.zipCode === "string") {
+      dataObj.zipCode = parseInt(dataObj.zipCode);
+    }
+    // Add isBilling = true
+    dataObj.isBilling = true;
 
     if (!billingAddress?.data.length) {
       const result = await postDataMutation({
         route: "/user-address/add",
-        data: JSON.stringify({ zipCode: Number(dataObj["zipCode"]) }),
+        data: JSON.stringify(dataObj),
         formatted: true,
       });
     } else {
       const result = await updateDataMutation({
         route: "/user-address" + "/" + addressId,
-        data: JSON.stringify({ zipCode: Number(dataObj["zipCode"]) }),
+        data: JSON.stringify(dataObj),
         method: "PUT",
         formatted: true,
       });

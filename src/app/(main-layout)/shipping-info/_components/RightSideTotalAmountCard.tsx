@@ -26,7 +26,7 @@ const RightSideTotalAmountCard = ({
   disabled?: string;
   submitAction?: (e: React.FormEvent) => Promise<void>;
   shippingCharge?: IShippingChargeProps;
-  defaultAddress: AddressData;
+  defaultAddress?: AddressData;
 }) => {
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
