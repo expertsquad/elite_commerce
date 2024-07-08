@@ -40,7 +40,6 @@ const ReviewCard = async ({
       route: "/review/add",
       data: formData,
     });
-    console.log(result);
   };
 
   return (

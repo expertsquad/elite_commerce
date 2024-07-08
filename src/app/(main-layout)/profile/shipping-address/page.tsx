@@ -14,24 +14,28 @@ const page = async () => {
 
   const submitAction = async (addressId: string, formData: FormData) => {
     "use server";
-
     const dataObj: Record<string, any> = {};
 
     for (const [key, value] of Array.from(formData.entries())) {
       dataObj[key] = value;
     }
+    //zipCode string to number
+    if (typeof dataObj.zipCode === "string") {
+      dataObj.zipCode = parseInt(dataObj.zipCode);
+    }
+    // Add isDefault = true
+    dataObj.isDefault = true;
 
     if (!shippingAddress?.data.length) {
       const result = await postDataMutation({
-        //having problem with api we will have to add here billing address api
         route: "/user-address/add",
-        data: JSON.stringify({ zipCode: Number(dataObj["zipCode"]) }),
+        data: JSON.stringify(dataObj),
         formatted: true,
       });
     } else {
       const result = await updateDataMutation({
         route: "/user-address" + "/" + addressId,
-        data: JSON.stringify({ zipCode: Number(dataObj["zipCode"]) }),
+        data: JSON.stringify(dataObj),
         formatted: true,
         method: "PUT",
       });
