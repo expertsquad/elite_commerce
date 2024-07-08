@@ -1,4 +1,5 @@
 import { fetchProtectedData } from "@/actions/fetchData";
+import { revalidateTagAction } from "@/actions/revalidateTag";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import { Button } from "@/Components/Buttons";
 import CustomInput from "@/Components/CustomInput";
@@ -17,6 +18,9 @@ const PersonalInformation = async () => {
       data: formData,
       method: "PUT",
     });
+    if (result) {
+      revalidateTagAction("/user/me");
+    }
   };
 
   return (

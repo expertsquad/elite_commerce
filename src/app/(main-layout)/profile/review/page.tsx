@@ -3,7 +3,7 @@ import ReviewSection from "./_components/ReviewSection";
 import Link from "next/link";
 import { Button } from "@/Components/Buttons";
 
-const page = () => {
+const Page = () => {
   return (
     <div>
       <div className="flex gap-4 items-center justify-start">
@@ -24,4 +24,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
