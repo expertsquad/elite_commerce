@@ -1,4 +1,3 @@
-// src/actions/shipping.ts
 import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 
 export const getShippingCharge = async ({

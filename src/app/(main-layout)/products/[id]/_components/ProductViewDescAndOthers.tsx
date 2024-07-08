@@ -22,6 +22,7 @@ import ProductViewCartBtn from "./ProductViewCartBtn";
 import ProdViewCartIncreamentDecreamentBtn from "./ProdViewCartIncreamentDecreamentBtn";
 import ProductPriceBasedOnVariants from "./ProductPriceBasedOnVariants";
 import { cookies } from "next/headers";
+import ExtraDiscountBasedOnOrder from "./ExtraDiscountBasedOnOrder";
 
 const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
   const accessToken = cookies().get("accessToken")?.value;
@@ -46,8 +47,8 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
           products={product}
         />
       </div>
-      <div className="my-5">
-        <ProgressBar progressValue={30} />
+      {/* <div className="my-5">
+        <ProgressBar progressValue={100} />
         <div>
           {product?.bulk &&
             (product?.bulk?.minOrder > 1 ||
@@ -66,7 +67,8 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
               </div>
             )}
         </div>
-      </div>
+      </div> */}
+      <ExtraDiscountBasedOnOrder product={product} />
       <div>
         <ProductPriceBasedOnVariants product={product} />
       </div>

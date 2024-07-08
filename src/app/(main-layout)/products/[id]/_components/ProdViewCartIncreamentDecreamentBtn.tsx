@@ -11,6 +11,7 @@ const ProdViewCartIncreamentDecreamentBtn = ({
   product: IProduct;
 }) => {
   const { cartProducts, setRefetch } = useContext(CartContext);
+
   const isCarted = cartProducts.find((item) => item._id === product._id);
 
   return (
