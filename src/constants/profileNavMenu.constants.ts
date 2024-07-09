@@ -10,7 +10,7 @@ import {
 export const profileNavMenu = [
   {
     name: "Dashboard",
-    link: "/profile",
+    link: "/profile/dashboard",
     icon: IconLayoutDashboard,
   },
   {

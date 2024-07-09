@@ -106,7 +106,7 @@ const LargeDeviceMegaMenu = async () => {
         {/* cart */}
         <ShoppingCartBtn />
         {/* profile */}
-        <Link href="/profile" className="mt-2">
+        <Link href="/profile/dashboard" className="mt-2">
           <ProfilePhotoOrIcon />
         </Link>
       </div>
