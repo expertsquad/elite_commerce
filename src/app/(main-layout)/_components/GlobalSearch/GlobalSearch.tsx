@@ -7,12 +7,12 @@ import { IProduct } from "@/interfaces/product.interface";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import SearchingProducts from "./SearchingProducts";
 
-interface IGlobalSearchProps {
-  category: ICategory[];
-  products: IProduct[];
+export interface IGlobalSearchProps {
+  categories: ICategory[];
+  products?: IProduct[];
 }
 
-const GlobalSearch = ({ category, products }: IGlobalSearchProps) => {
+const GlobalSearch = ({ categories, products }: IGlobalSearchProps) => {
   const [show, setShow] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [isMounted, setIsMounted] = useState(false);
@@ -45,11 +45,11 @@ const GlobalSearch = ({ category, products }: IGlobalSearchProps) => {
         <Modal
           show={show}
           setShow={setShow}
-          className="w-[900px] h-[600px] overflow-y-scroll scrollbar-x-remove scrollbar-y-remove"
+          className="w-[clamp(450px,70vw,900px)] h-[clamp(450px,70vh,600px)] overflow-y-scroll scrollbar-x-remove scrollbar-y-remove"
           alignment="center"
-          //   showCancelBtnINSmallDevice={show}
+          isOnlyLargeDevice={true}
         >
-          <div className="mb-[30px] relative">
+          <div className="mb-[30px] sticky -top-4 z-50">
             <input
               type="text"
               placeholder="Searching..."
@@ -76,7 +76,7 @@ const GlobalSearch = ({ category, products }: IGlobalSearchProps) => {
                   Feature Keywords Today
                 </span>
                 <div className="flex items-center flex-wrap gap-3.5 mt-5 mb-8">
-                  {category?.map((item: ICategory) => (
+                  {categories?.map((item: ICategory) => (
                     <span
                       key={item?._id}
                       onClick={() => setSearchValue(item?.categoryName)}
@@ -92,7 +92,11 @@ const GlobalSearch = ({ category, products }: IGlobalSearchProps) => {
                   </span>
                   <div className="grid grid-cols-product-grid gap-5 mt-5">
                     {products?.map((item: IProduct) => (
-                      <ProductCard key={item?._id} product={item} />
+                      <ProductCard
+                        key={item?._id}
+                        product={item}
+                        onClick={() => setShow(false)}
+                      />
                     ))}
                   </div>
                 </div>

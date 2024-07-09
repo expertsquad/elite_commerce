@@ -100,7 +100,7 @@ const LargeDeviceMegaMenu = async () => {
 
       {/* Right section of the navigation */}
       <div className="flex items-center gap-4">
-        <GlobalSearch products={products?.data} category={categories?.data} />
+        <GlobalSearch products={products?.data} categories={categories?.data} />
         {/* wishlist */}
         <WishlistBtn />
         {/* cart */}

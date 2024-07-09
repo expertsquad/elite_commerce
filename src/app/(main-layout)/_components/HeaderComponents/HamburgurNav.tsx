@@ -104,7 +104,11 @@ const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
   const menusNode = (
     <div className="h-full w-full overflow-auto flex flex-col">
       <div className="p-2">
-        <Logo />
+        <Logo
+          onClick={() => {
+            setShowMenu(false);
+          }}
+        />
       </div>
       <button
         className="flex items-center gap-2 py-3 px-2 bg-gradient-primary w-full text-white"
@@ -167,9 +171,10 @@ const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
       {showMenu && (
         <Modal
           alignment="left"
-          className="w-60 md:hidden"
+          className="w-60"
           setShow={setShowMenu}
           show={showMenu}
+          isOnlySmallDevice={true}
         >
           {content}
         </Modal>

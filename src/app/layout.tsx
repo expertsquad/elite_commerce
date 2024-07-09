@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Elite Commerce",
   description:
     "Elite Commerce is a e-commerce website developed by Team ExpertSquad.net",
+  icons: {
+    icon: "/small-logo.svg",
+  },
 };
 
 export default function RootLayout({
