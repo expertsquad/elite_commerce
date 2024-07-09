@@ -1,5 +1,6 @@
 "use client";
 import { postDataMutation } from "@/actions/postDataMutation";
+import { revalidateTagAction } from "@/actions/revalidateTag";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import FileUploader from "@/Components/FileUploder";
 import Form from "@/Components/Form";
@@ -54,7 +55,8 @@ const AddCommentModalContent = ({
       if (result.success) {
         console.log("API Response: ", result);
         // router.push("/profile/review/allReviewHistory");
-        redirect("/profile/review/allReviewHistory");
+        revalidateTagAction(`/review/${id}`);
+        redirect("/profile/review/all-reviewj-history");
       } else {
         console.error("Error updating review: ", result.error);
       }
