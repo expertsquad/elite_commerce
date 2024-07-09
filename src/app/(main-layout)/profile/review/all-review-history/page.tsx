@@ -17,8 +17,6 @@ const AllReviewHistory = async () => {
     query: `reviewer.userId=${me?.data?._id}&reviewStatus=Reviewed`,
   });
 
-  console.log(allReviews?.meta);
-
   return (
     <div className="space-y-3">
       {allReviews?.data?.length ? (

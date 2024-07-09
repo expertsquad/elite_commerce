@@ -9,7 +9,7 @@ export const fetchData = async ({
   query = "",
   page = 1,
   limit = 10,
-  revalidate,
+  revalidate = 60,
 }: {
   route: string;
   query?: string;
