@@ -11,7 +11,6 @@ import { redirect } from "next/navigation";
 import React, { useRef, useState, useEffect } from "react";
 
 const EditCommentModalContent = ({ comment }: any) => {
-  console.log(comment);
   const [rating, setRating] = useState(comment?.rating || 0);
   const [comments, setComment] = useState(comment?.comment || "");
   const fileInputRef = useRef(null);
@@ -47,13 +46,14 @@ const EditCommentModalContent = ({ comment }: any) => {
       if (result.success) {
         console.log("API Response: ", result);
         revalidateTagAction(`/review/${comment?._id}`);
-        redirect("/profile/review/allReviewHistory");
+        redirect("/profile/review/all-review-history");
       } else {
         console.error("Error updating review: ", result.error);
       }
     } catch (error) {
       console.error("Error updating review: ", error);
     }
+    // redirect("/profile/review/all-review-history");
   };
 
   return (
