@@ -20,7 +20,7 @@ const BottomNavSmallDevice = () => {
         </Link>
       ))}
       <Link
-        href="/profile"
+        href="/profile/dashboard"
         className={`"h-16 w-16 rounded-full flex justify-center items-center`}
       >
         <ProfilePhotoOrIcon />

@@ -1,26 +1,44 @@
+"use client";
 import React from "react";
 import { profileNavMenu } from "@/constants/profileNavMenu.constants";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import Link from "next/link";
 import Logout from "./Logout";
+import { usePathname } from "next/navigation";
 
 const ProfileNavMenu = () => {
+  const pathName = usePathname();
   return (
     <div className="transition-all">
       {profileNavMenu.slice(0, -1).map((item, index) => (
         <div className="flex gap-5 w-full " key={index}>
           <Link
             href={item?.link}
-            className="flex items-center gap-2 py-4 px-7 my-2 rounded-full group w-full hover:bg-gradient-primary-light transition-all"
+            className={`flex items-center gap-2 py-4 px-7 my-2 rounded-full group w-full hover:bg-gradient-primary-light transition-all ${
+              pathName === item?.link ? "bg-gradient-primary-light" : ""
+            }`}
           >
             <div className="w-6 h-6">
-              <item.icon stroke={1} className="group-hover:hidden" />
+              <item.icon
+                stroke={1}
+                className={`${
+                  pathName === item?.link
+                    ? "hidden"
+                    : "block group-hover:hidden"
+                }`}
+              />
               <GenerateGradientIcon
                 IconComponent={item.icon}
-                className="hidden group-hover:block"
+                className={`${
+                  pathName === item?.link ? "block" : "hidden group-hover:block"
+                }`}
               />
             </div>
-            <span className="text-base group-hover:text-gradient-primary group-hover:font-bold  ml-3">
+            <span
+              className={`text-base ml-3 ${
+                pathName === item?.link ? "text-gradient-primary font-bold" : ""
+              } group-hover:text-gradient-primary group-hover:font-bold`}
+            >
               {item.name}
             </span>
           </Link>
