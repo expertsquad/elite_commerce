@@ -29,8 +29,8 @@ const Page = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen w-7xl relative login-signup-container-background">
-      <div className="absolute top-0 max-w-7xl w-full h-full md:block hidden ">
+    <div className="flex items-center justify-center h-screen relative login-signup-container-background">
+      <div className="absolute top-0 w-full h-full md:block hidden main-container">
         <Image
           src={loginSignupTopShapeBg}
           alt="logintopshape"
@@ -50,8 +50,8 @@ const Page = () => {
               </span>
             </div>
             <Form handleSubmit={handleSubmit} className="w-full">
-              <fieldset className="w-4/4 flex flex-col gap-3 border-t border-black-10">
-                <legend className="mx-auto md:mb-10 mb-7 font-medium md:text-xl text-lg text-black-80">
+              <fieldset className="w-4/4 flex flex-col gap-1.5 border-t border-black-10">
+                <legend className="mx-auto md:mb-3 font-medium md:text-xl text-lg text-black-80">
                   Sign up
                 </legend>
 
@@ -79,7 +79,7 @@ const Page = () => {
                 <div className="mt-5">
                   <SubmitButton
                     className={
-                      "bg-gradient-primary w-full mx-auto py-2.5 text-white rounded-md"
+                      "bg-gradient-primary w-full mx-auto py-1.5 text-white rounded-md"
                     }
                   >
                     Sign Up

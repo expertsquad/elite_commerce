@@ -20,29 +20,27 @@ const Layout = async ({
   const brands = await fetchData({ route: "/brand", limit: 10 });
 
   return (
-    <div>
-      <div className="mx-auto max-w-7xl px-5">
-        <div className="flex items-center justify-between md:hidden">
-          {/* <SortingSection /> */}
-          <BrandFilterModal
-            params={params}
+    <div className="my-10">
+      <div className="flex items-center justify-between md:hidden">
+        {/* <SortingSection /> */}
+        <BrandFilterModal
+          params={params}
+          products={products?.data}
+          categories={categories?.data}
+          brands={brands?.data}
+        />
+      </div>
+      <div className="gap-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3">
+        <div className="hidden md:block lg:block">
+          <BrandFilterSection
+            brands={brands?.data}
             products={products?.data}
             categories={categories?.data}
-            brands={brands?.data}
+            params={params}
           />
         </div>
-        <div className=" gap-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 mx-auto max-w-7xl">
-          <div className="hidden md:block lg:block">
-            <BrandFilterSection
-              brands={brands?.data}
-              products={products?.data}
-              categories={categories?.data}
-              params={params}
-            />
-          </div>
-          <div className="lg:col-span-3 md:grid-cols-2 md:col-span-2">
-            {children}
-          </div>
+        <div className="lg:col-span-3 md:grid-cols-2 md:col-span-2">
+          {children}
         </div>
       </div>
     </div>

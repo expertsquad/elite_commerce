@@ -49,7 +49,7 @@ const Page = () => {
   };
 
   return (
-    <section className="p-5 lg:p-0 max-w-7xl mx-auto flex w-full gap-5 flex-col md:flex-row mb-10">
+    <section className="p-5 lg:p-0 main-container flex w-full gap-5 flex-col md:flex-row mb-10">
       <div className="w-full">
         <ShipToAndBillingSection />
         <PaymentOption />

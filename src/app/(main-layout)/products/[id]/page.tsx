@@ -15,7 +15,7 @@ const ProductViewPage = async ({ params }: { params: { id: string } }) => {
     route: `/product/${params?.id}`,
   });
   return (
-    <div className="max-w-7xl mx-auto px-5 mt-6">
+    <div className="main-container px-5 mt-6">
       <div className="block md:hidden mb-5">
         <SocialMediaAndOthers />
       </div>

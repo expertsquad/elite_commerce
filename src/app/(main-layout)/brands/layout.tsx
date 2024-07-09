@@ -7,7 +7,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
       <div>
         <Breadcrumb title="All Brands" />
       </div>
-      <div className="max-w-7xl mx-auto mt-[30px]">{children}</div>
+      <div className="main-container mt-[30px]">{children}</div>
     </div>
   );
 };

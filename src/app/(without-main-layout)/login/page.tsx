@@ -22,7 +22,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex items-center justify-center h-full w-full relative login-signup-container-background">
-      <div className="absolute top-0 max-w-7xl w-full h-full md:block hidden ">
+      <div className="absolute top-0 w-full h-full md:block hidden main-container">
         <Image
           src={loginSignupTopShapeBg}
           alt="logintopshape"
