@@ -18,15 +18,8 @@ const ReviewLayout = ({ children }: { children: React.ReactNode }) => {
           </Button>
         </ReviewCustomLink>
       </div>
-      <Suspense
-        fallback={
-          <div className="h-full w-full flex items-center justify-center">
-            Loading...
-          </div>
-        }
-      >
-        {children}
-      </Suspense>
+
+      {children}
     </div>
   );
 };
