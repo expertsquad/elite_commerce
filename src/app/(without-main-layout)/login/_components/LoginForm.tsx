@@ -4,7 +4,6 @@ import SubmitButton from "@/Components/SubmitButton";
 import React, { useContext, useState } from "react";
 import { loginServerAction } from "./loginServerAction";
 import { useRouter } from "next/navigation";
-import Loading from "@/app/loading";
 import { fetchProtectedData } from "@/actions/fetchData";
 import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { storages } from "@/constants";
@@ -13,10 +12,14 @@ import { updatedCartMutation } from "@/utils/updateCart.utils";
 import PasswordInput from "@/app/(main-layout)/profile/_components/PasswordInput";
 import MergingIndicator from "./MergingIndicator";
 import { CartContext } from "@/Provider/CartProvider";
+import Loading from "@/app/loading";
+import { IErrorMessages } from "@/interfaces/error.interface";
 
 const LoginForm = () => {
   const { setRefetch } = useContext(CartContext);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [error, setError] = useState<IErrorMessages[] | null>(null);
 
   const [merging, setMerging] = useState(false);
 
@@ -44,12 +47,15 @@ const LoginForm = () => {
       setRefetch((prev) => prev + 1);
       router.back();
       setMerging(false);
+    } else {
+      setError(result?.errorMessages);
+      setIsLoading(false);
     }
   };
 
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
+  if (isLoading) {
+    return <Loading />;
+  }
   if (merging) {
     return <MergingIndicator />;
   }
@@ -64,6 +70,16 @@ const LoginForm = () => {
         <CustomInput placeholder="Email or Phone" name="email" />
         <PasswordInput placeholder="Type your password" name="password" />
         <small className="ml-auto">Forgot password</small>
+
+        {error &&
+          error.map((err, index) => (
+            <div
+              key={index}
+              className="text-red-500 text-xs text-danger text-center"
+            >
+              {err.message}
+            </div>
+          ))}
         <SubmitButton
           className={"bg-gradient-primary w-full py-3 text-white rounded-md"}
         >

@@ -58,7 +58,7 @@ export const bottomNavMenus = [
   },
   {
     label: "Products",
-    href: "/products",
+    href: "/category",
     icon: IconCategory,
   },
 ];

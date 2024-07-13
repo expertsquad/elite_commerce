@@ -9,7 +9,7 @@ const SubmitButton = ({ children, ...props }: IButtonProps) => {
 
   return (
     <Button {...props} disabled={pending}>
-      {children}
+      {pending ? "Submitting..." : children}
     </Button>
   );
 };

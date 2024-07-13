@@ -77,11 +77,7 @@ const Page = () => {
                 />
 
                 <div className="mt-5">
-                  <SubmitButton
-                    className={
-                      "bg-gradient-primary w-full mx-auto py-1.5 text-white rounded-md"
-                    }
-                  >
+                  <SubmitButton className="bg-gradient-primary w-full mx-auto py-1.5 text-white rounded-md">
                     Sign Up
                   </SubmitButton>
                 </div>
