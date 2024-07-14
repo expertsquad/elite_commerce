@@ -1,3 +1,5 @@
+import { IErrorMessages } from "./error.interface";
+
 export interface PasswordInputProps {
   placeholder?: string;
   className?: string;
@@ -5,5 +7,5 @@ export interface PasswordInputProps {
   onChange?: (e: any) => void;
   value?: string | number;
   name?: string;
-  type?: string;
+  errors?: IErrorMessages[] | null;
 }

@@ -10,7 +10,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
   inputStyle,
   value,
   name,
-  type,
+  errors,
 }) => {
   const [showPassword, setShowPassword] = useState(true);
 
@@ -18,6 +18,9 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
+  console.log(errors);
+
+  const error = errors?.find((e) => e.path === name);
   return (
     <div className={`relative ${className}`}>
       <input
@@ -40,6 +43,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
           <IconEye width={20} stroke={2} height={20} />
         )}
       </button>
+      <small className="text-xs text-danger">{error?.message}</small>
     </div>
   );
 };

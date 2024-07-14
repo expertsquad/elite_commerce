@@ -59,6 +59,10 @@ const LoginForm = () => {
   if (merging) {
     return <MergingIndicator />;
   }
+
+  const globalError = error?.find(
+    (err) => !err.path || err.path.includes("/login")
+  );
   return (
     <form
       onSubmit={handleSubmit}
@@ -67,19 +71,19 @@ const LoginForm = () => {
       <fieldset className="w-3/4 flex flex-col gap-3 border-t border-black-10">
         <legend className="mx-auto">Log in</legend>
 
-        <CustomInput placeholder="Email or Phone" name="email" />
-        <PasswordInput placeholder="Type your password" name="password" />
+        <CustomInput placeholder="Email or Phone" name="email" errors={error} />
+        <PasswordInput
+          placeholder="Type your password"
+          name="password"
+          errors={error}
+        />
         <small className="ml-auto">Forgot password</small>
 
-        {error &&
-          error.map((err, index) => (
-            <div
-              key={index}
-              className="text-red-500 text-xs text-danger text-center"
-            >
-              {err.message}
-            </div>
-          ))}
+        {globalError && (
+          <small className="text-danger text-xs text-center">
+            {globalError.message}
+          </small>
+        )}
         <SubmitButton
           className={"bg-gradient-primary w-full py-3 text-white rounded-md"}
         >
