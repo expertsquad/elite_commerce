@@ -1,14 +1,15 @@
-import React from "react";
-import ProfileTopCard from "./_components/ProfileTopCard";
-import OrderSection from "./_components/OrderSection";
+"use client";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-const page = () => {
-  return (
-    <div className="">
-      <ProfileTopCard />
-      <OrderSection />
-    </div>
-  );
+const Page = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/profile/dashboard");
+  }, [router]);
+
+  return null;
 };
 
-export default page;
+export default Page;

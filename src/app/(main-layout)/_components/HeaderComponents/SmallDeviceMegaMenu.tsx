@@ -3,6 +3,7 @@ import React from "react";
 import { fetchData } from "@/actions/fetchData";
 import HamburgurNav from "./HamburgurNav";
 import Logo from "@/utils/Logo";
+import Link from "next/link";
 
 const SmallDeviceMegaMenu = async () => {
   const categories = await fetchData({
@@ -19,9 +20,12 @@ const SmallDeviceMegaMenu = async () => {
         <HamburgurNav categories={categories?.data} />
 
         <Logo />
-        <button className="border rounded-full p-2 border-black-50">
+        <Link
+          href="/search"
+          className="border rounded-full p-2 border-black-50"
+        >
           <IconSearch className="text-black-50" size={14} />
-        </button>
+        </Link>
       </div>
     </nav>
   );

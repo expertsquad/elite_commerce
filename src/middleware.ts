@@ -31,6 +31,7 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     "/profile",
+    "/profile/dashboard",
     "/profile/order-history",
     "/profile/account-details",
     "/profile/account-details/change-password",

@@ -8,10 +8,14 @@ export const useGetShippingFee = ({ soldAmount }: { soldAmount: number }) => {
   useEffect(() => {
     const fetchShippingFee = async () => {
       try {
-        const fee = await getShippingCharge({ soldAmount });
-        setShippingFee(fee);
+        if (soldAmount) {
+          const fee = await getShippingCharge({ soldAmount });
+          setShippingFee(fee);
+        } else {
+          setShippingFee(0);
+        }
       } catch (error) {
-        console.error("Failed to fetch shipping fee", error);
+        console.error(error);
       }
     };
 

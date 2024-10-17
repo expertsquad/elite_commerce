@@ -1,4 +1,4 @@
-import { demoIphone, logo } from "@/assets";
+import { demoIphone } from "@/assets";
 import StarRating from "@/Components/StarRating";
 import { server_url, store_name } from "@/constants";
 import { formatDateShorting } from "@/constants/formateDate.constants";
@@ -54,7 +54,7 @@ const ProductReviewdCustomer = ({
               <div className="flex items-center gap-3 mb-1 md:mb-3">
                 <div className="h-[45px] w-[45px] relative shrink-0">
                   <Image
-                    src={logo}
+                    src="/small-logo.svg"
                     alt="AUTHOR"
                     fill
                     style={{ objectFit: "cover" }}

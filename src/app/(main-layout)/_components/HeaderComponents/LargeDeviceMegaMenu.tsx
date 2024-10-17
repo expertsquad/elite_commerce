@@ -62,7 +62,7 @@ const LargeDeviceMegaMenu = async () => {
   const products = await fetchData({ route: "/product", limit: 1 });
 
   return (
-    <nav className="hidden md:flex max-w-7xl mx-auto py-[clamp(8px,2vh,20px)] md:px-3 text-md items-center justify-between">
+    <nav className="hidden md:flex main-container py-[clamp(8px,2vh,20px)] text-md items-center justify-between">
       {/* Left section of the navigation */}
       <div className="flex gap-5 items-center">
         <Logo />
@@ -100,13 +100,13 @@ const LargeDeviceMegaMenu = async () => {
 
       {/* Right section of the navigation */}
       <div className="flex items-center gap-4">
-        <GlobalSearch products={products?.data} category={categories?.data} />
+        <GlobalSearch products={products?.data} categories={categories?.data} />
         {/* wishlist */}
         <WishlistBtn />
         {/* cart */}
         <ShoppingCartBtn />
         {/* profile */}
-        <Link href="/profile" className="mt-2">
+        <Link href="/profile/dashboard" className="mt-2">
           <ProfilePhotoOrIcon />
         </Link>
       </div>

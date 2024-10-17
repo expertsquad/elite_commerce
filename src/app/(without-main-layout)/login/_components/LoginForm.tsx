@@ -4,7 +4,6 @@ import SubmitButton from "@/Components/SubmitButton";
 import React, { useContext, useState } from "react";
 import { loginServerAction } from "./loginServerAction";
 import { useRouter } from "next/navigation";
-import Loading from "@/app/loading";
 import { fetchProtectedData } from "@/actions/fetchData";
 import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { storages } from "@/constants";
@@ -13,10 +12,14 @@ import { updatedCartMutation } from "@/utils/updateCart.utils";
 import PasswordInput from "@/app/(main-layout)/profile/_components/PasswordInput";
 import MergingIndicator from "./MergingIndicator";
 import { CartContext } from "@/Provider/CartProvider";
+import Loading from "@/app/loading";
+import { IErrorMessages } from "@/interfaces/error.interface";
 
 const LoginForm = () => {
   const { setRefetch } = useContext(CartContext);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [error, setError] = useState<IErrorMessages[] | null>(null);
 
   const [merging, setMerging] = useState(false);
 
@@ -44,15 +47,22 @@ const LoginForm = () => {
       setRefetch((prev) => prev + 1);
       router.back();
       setMerging(false);
+    } else {
+      setError(result?.errorMessages);
+      setIsLoading(false);
     }
   };
 
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
+  if (isLoading) {
+    return <Loading />;
+  }
   if (merging) {
     return <MergingIndicator />;
   }
+
+  const globalError = error?.find(
+    (err) => !err.path || err.path.includes("/login")
+  );
   return (
     <form
       onSubmit={handleSubmit}
@@ -61,9 +71,19 @@ const LoginForm = () => {
       <fieldset className="w-3/4 flex flex-col gap-3 border-t border-black-10">
         <legend className="mx-auto">Log in</legend>
 
-        <CustomInput placeholder="Email or Phone" name="email" />
-        <PasswordInput placeholder="Type your password" name="password" />
+        <CustomInput placeholder="Email or Phone" name="email" errors={error} />
+        <PasswordInput
+          placeholder="Type your password"
+          name="password"
+          errors={error}
+        />
         <small className="ml-auto">Forgot password</small>
+
+        {globalError && (
+          <small className="text-danger text-xs text-center">
+            {globalError.message}
+          </small>
+        )}
         <SubmitButton
           className={"bg-gradient-primary w-full py-3 text-white rounded-md"}
         >

@@ -20,6 +20,7 @@ import { formatProductForCart } from "@/utils/formatProductForCart.utils";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import QuickOrderButton from "./QuickOrderButton";
+import { CartContext } from "@/Provider/CartProvider";
 
 const ProductQuickViewModal = ({
   show,
@@ -31,6 +32,20 @@ const ProductQuickViewModal = ({
   product: IProduct;
 }) => {
   const { orderData, setRefetch } = useContext(OrderInitContext);
+
+  const { cartProducts } = useContext(CartContext);
+
+  const isCarted = cartProducts.find((item) => item._id === product._id);
+
+  const productOrderQuantity = isCarted?.orderQuantity || 0;
+
+  const bulkItems = product?.bulk?.minOrder || 0;
+  // const bulkItems = 15;
+
+  const percentage = Math.min(
+    (productOrderQuantity / bulkItems) * 100,
+    100
+  ).toFixed(0);
 
   //handling single product to direct order
   const handleSingleProductClick = (product: IProduct) => {
@@ -109,7 +124,7 @@ const ProductQuickViewModal = ({
               </div>
             </div>
             <div className="flex flex-col gap-2.5">
-              <ProgressBar progressValue={10} />
+              <ProgressBar progressValue={Number(percentage)} />
               <span className="text-base text-black-80">
                 Buy <span className="text-gradient-primary">8</span> item more
                 to get off <span className="text-black">15% Extra!</span>

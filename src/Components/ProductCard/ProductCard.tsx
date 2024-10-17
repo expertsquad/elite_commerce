@@ -7,12 +7,14 @@ import ProductCartBtn from "./ProductCartBtn";
 import ProductPreviewRedirect from "./ProductPreviewRedirect";
 export interface IProductCardProps {
   product: IProduct;
+  onClick?: () => void;
 }
-const ProductCard = ({ product }: IProductCardProps) => {
+const ProductCard = ({ product, onClick }: IProductCardProps) => {
   return (
     <ProductPreviewRedirect
       className="border border-black-10 rounded-lg group relative w-full max-w-[280px] cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg mx-auto"
       product={product}
+      onClick={onClick}
     >
       <div className="bg-gradient-primary-light">
         <ProductImageSlider

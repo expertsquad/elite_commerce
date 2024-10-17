@@ -1,6 +1,5 @@
-// shariful
-// brand test image
-import logo from "./Images/logo.svg";
+// import smallLogo from "/small-logo.svg";
+// import fullLogo from "../../public/fullLogo.svg";
 import brandTestImage from "./Images/brandTest.svg";
 import demoProductPhoto from "./Images/demoslkdf.svg";
 import testWidget from "./Images/demoProduct.svg";
@@ -36,6 +35,8 @@ import demoBrand from "./Images/demoBrandImg.svg";
 import loginSignupBackground from "./Images/login&signupBackground.svg";
 import loginSignupTopShapeBg from "./Images/login&signupTopShapeBackground.svg";
 export {
+  // smallLogo,
+  // fullLogo,
   brandTestImage,
   demoProductPhoto,
   testWidget,
@@ -62,7 +63,6 @@ export {
   cornerGolden,
   cornerBlue,
   demoIphone,
-  logo,
   orderPlacedDesign,
   orderPlacedDesign2,
   orderPlacedDesignTemplate,
@@ -70,4 +70,3 @@ export {
   loginSignupBackground,
   loginSignupTopShapeBg,
 };
-// add all the assets here

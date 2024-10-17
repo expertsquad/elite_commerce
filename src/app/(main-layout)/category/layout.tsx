@@ -21,7 +21,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
       <div className="mb-5 md:mb-10">
         <Breadcrumb title="Smart Devices" />
       </div>
-      <div className="mx-auto max-w-7xl px-5">
+      <div className="main-container my-10">
         <div className="flex items-center justify-end md:hidden mb-5">
           {/* <SortingSection /> */}
           <FilterModal
@@ -30,7 +30,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
             brands={brands?.data}
           />
         </div>
-        <div className=" gap-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 mx-auto max-w-7xl">
+        <div className=" gap-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3">
           <div className="lg:col-span-3 md:grid-cols-2 md:col-span-2">
             {children}
           </div>

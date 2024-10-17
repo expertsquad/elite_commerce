@@ -54,7 +54,7 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
           <span className="text-gradient-primary font-semibold">Freeship</span>{" "}
           🔥
         </span>
-        <ProgressBar progressValue={50} />
+        {/* <ProgressBar progressValue={50} /> */}
       </div>
       <div className="flex md:flex-row flex-col gap-5 mt-7">
         <div className=" flex flex-col gap-5 md:border border-black-10 md:p-[30px] md:basis-4/6 rounded-[10px]">

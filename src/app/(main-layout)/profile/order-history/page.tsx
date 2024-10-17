@@ -1,5 +1,4 @@
 import { fetchProtectedData } from "@/actions/fetchData";
-import OrderSection from "../_components/OrderSection";
 import OrderHistory from "./components/OrderHistory";
 
 const page = async () => {

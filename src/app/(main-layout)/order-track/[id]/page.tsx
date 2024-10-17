@@ -15,7 +15,7 @@ const OrderTrackPage = async ({ params }: { params: { id: string } }) => {
   const response = await fetchData({ route: `/online-order/${params?.id}` });
 
   return (
-    <div className="max-w-7xl mx-auto mb-10 md:mb-28">
+    <div className="main-container mb-10 md:mb-28">
       <OrderStatusStep orderStatus={response?.data?.orderStatus} />
 
       <div className="flex flex-col md:flex-row md:justify-between md:gap-x-7 mt-[30px]">

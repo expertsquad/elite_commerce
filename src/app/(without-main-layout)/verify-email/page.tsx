@@ -41,8 +41,8 @@ const VerifyEmail = async ({
   };
 
   return (
-    <div className="flex items-center justify-center h-screen w-7xl relative login-signup-container-background ">
-      <div className="absolute top-0 max-w-7xl w-full h-full md:block hidden ">
+    <div className="flex items-center justify-center h-screen relative login-signup-container-background ">
+      <div className="absolute top-0 w-full h-full md:block hidden main-container">
         <Image
           src={loginSignupTopShapeBg}
           alt="logintopshape"

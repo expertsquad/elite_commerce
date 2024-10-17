@@ -1,38 +1,68 @@
 "use client";
+import { postDataMutation } from "@/actions/postDataMutation";
+import { revalidateTagAction } from "@/actions/revalidateTag";
+import { updateDataMutation } from "@/actions/updateDataMutation";
 import FileUploader from "@/Components/FileUploder";
 import Form from "@/Components/Form";
 import SubmitButton from "@/Components/SubmitButton";
 import { server_url } from "@/constants";
-import { OrderItem } from "@/interfaces/OrderItem.interface";
 import { IconStarFilled } from "@tabler/icons-react";
+
 import Image from "next/image";
-import React, { useState } from "react";
+import { redirect } from "next/navigation";
+import { Router, useRouter } from "next/router";
+import React, { useRef, useState } from "react";
 
 const AddCommentModalContent = ({
-  orderItem,
-  orderId,
-  addCommentSubmitAction,
+  reviewNow,
+  id,
 }: {
-  orderItem: OrderItem;
-  orderId: string;
-  addCommentSubmitAction: (
-    productId: string,
-    orderId: string,
-    rating: number,
-    formData: FormData
-  ) => Promise<void>;
+  reviewNow: any;
+  id: string;
 }) => {
   const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+  const fileInputRef = useRef(null);
 
   const handleStarClick = (index: number, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-
     setRating(index + 1);
   };
 
-  const addCommentAction = async (formData: FormData) => {
-    addCommentSubmitAction(orderItem?.productId, orderId, rating, formData);
+  const handleAddCommentSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.set("reviewStatus", "Reviewed");
+    formData.set("comment", comment);
+    formData.set("rating", rating.toString());
+    const files = fileInputRef.current
+      ? (fileInputRef.current as HTMLInputElement).files
+      : null;
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        formData.append("reviewPhotos", files[i]);
+      }
+    }
+
+    try {
+      const result = await updateDataMutation({
+        route: `/review/${id}`,
+        method: "PUT",
+        data: formData,
+      });
+
+      if (result.success) {
+        console.log("API Response: ", result);
+        // router.push("/profile/review/allReviewHistory");
+        revalidateTagAction(`/review/${id}`);
+        redirect("/profile/review/all-reviewj-history");
+      } else {
+        console.error("Error updating review: ", result.error);
+      }
+    } catch (error) {
+      console.error("Error updating review: ", error);
+    }
   };
 
   return (
@@ -42,16 +72,16 @@ const AddCommentModalContent = ({
         <div className="py-6 flex items-center justify-center flex-col gap-2 border-b border-black-10">
           <div className="bg-gradient-primary-light p-8 rounded-full h-40 w-40">
             <Image
-              src={`${server_url + orderItem?.productPhotos[0]}`}
+              src={`${server_url + reviewNow?.product?.productPhoto}`}
               height={100}
               width={100}
               alt="Product Photo"
             />
           </div>
-          <p>{orderItem?.productName}</p>
+          <p>{reviewNow?.product?.productName}</p>
         </div>
       </div>
-      <Form handleSubmit={addCommentAction}>
+      <form onSubmit={handleAddCommentSubmit}>
         <div className="my-6 flex-grow">
           <div className="flex items-center justify-between">
             <small>Rate your satisfaction</small>
@@ -75,6 +105,8 @@ const AddCommentModalContent = ({
             maxLength={100}
             placeholder="Write Here"
             name="comment"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
           ></textarea>
 
           <FileUploader name="reviewPhotos" />
@@ -85,7 +117,7 @@ const AddCommentModalContent = ({
             Submit Review
           </SubmitButton>
         </div>
-      </Form>
+      </form>
     </div>
   );
 };

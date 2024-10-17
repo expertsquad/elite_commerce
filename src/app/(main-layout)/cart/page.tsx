@@ -14,7 +14,7 @@ const CartView = async () => {
       <div>
         <Breadcrumb title="Shopping Cart" />
       </div>
-      <div className="max-w-7xl mx-auto px-5">
+      <div className="main-container px-5">
         <CartItems suggestions={productsData?.data} />
       </div>
     </div>

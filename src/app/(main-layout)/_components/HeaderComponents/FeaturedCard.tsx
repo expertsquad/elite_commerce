@@ -18,7 +18,7 @@ const FeaturedCard = () => {
           ))}
         </div>
       </div>
-      <div className="hidden xl:block h-full overflow-auto">
+      <div className="hidden 2xl:block h-full overflow-auto">
         <MegaDiscountCard />
       </div>
     </div>

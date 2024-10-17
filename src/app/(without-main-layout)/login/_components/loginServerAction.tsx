@@ -1,6 +1,7 @@
 "use server";
 
 import { postDataUnauthenticatedMutation } from "@/actions/postDataMutation";
+import { IErrorMessages } from "@/interfaces/error.interface";
 import { cookies } from "next/headers";
 
 export const loginServerAction = async (formData: FormData) => {
@@ -13,6 +14,6 @@ export const loginServerAction = async (formData: FormData) => {
     cookies().set("accessToken", result?.data?.accessToken);
     return result;
   } else {
-    return { success: false, error: result?.error };
+    return result as IErrorMessages;
   }
 };
