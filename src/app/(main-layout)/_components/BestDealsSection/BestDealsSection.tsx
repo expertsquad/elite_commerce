@@ -13,17 +13,18 @@ const BestDealsSection = async () => {
     revalidate: 0,
   });
 
-  const backgroundPhoto = bestDeals?.data?.backgroundPhoto
-    ? bestDeals.data.backgroundPhoto
-    : null;
-  const backgroundColor = bestDeals?.data?.backgroundColor || "";
-
   return (
     <div
       className="w-full"
       style={{
-        backgroundImage: backgroundPhoto && `url(${backgroundPhoto})`,
-        backgroundColor: backgroundColor,
+        backgroundColor: `${
+          bestDeals?.data?.backgroundColor &&
+          `${bestDeals?.data?.backgroundColor}`
+        }`,
+        backgroundImage: `url(${
+          bestDeals?.data?.backgroundPhoto &&
+          `${server_url + bestDeals?.data?.backgroundPhoto}`
+        })`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center",

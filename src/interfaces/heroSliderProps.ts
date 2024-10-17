@@ -1,6 +1,6 @@
 export interface HeroSliderProps {
   backgroundPhoto: string;
-  backgroundColor?: string;
+  backgroundColor: string;
   productPhoto: string;
   sliderTag: string;
   title: string;

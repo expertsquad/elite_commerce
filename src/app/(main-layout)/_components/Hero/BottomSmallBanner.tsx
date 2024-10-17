@@ -22,7 +22,7 @@ const BottomSmallBanner = ({
           `${server_url + bottomOffer?.backgroundPhoto}`
         })`,
         backgroundPosition: "center",
-        backgroundRepeat: "no - repeat",
+        backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
     >
@@ -30,26 +30,29 @@ const BottomSmallBanner = ({
         <h2 className="[font-size:_clamp(1.2em,2.60vw,1.6em)] line-clamp-2 mb-2.5">
           {bottomOffer?.offerTag}
         </h2>
-        <h2 className="line-clamp-1 [font-size:_clamp(0.8em,60vw,1em)]">
+        <h2 className="line-clamp-2 [font-size:_clamp(0.8em,60vw,1em)]">
           {bottomOffer?.title}
         </h2>
 
-        <Link href={bottomOffer?.link} target="_blank">
-          <Button className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-xl py-2 px-4 md:px-6[font-size:_clamp(0.5em,60vw,0.9em)] mt-9">
-            {bottomOffer?.buttonText} <IconArrowRight size={20} />
-          </Button>
+        <Link
+          href={bottomOffer?.link}
+          target="_blank"
+          className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-md py-2 [font-size:_clamp(0.5em,60vw,0.9em)] mt-9 max-w-[130px] whitespace-nowrap"
+        >
+          {bottomOffer?.buttonText} <IconArrowRight size={20} />
         </Link>
       </div>
 
-      <div className=" relative w-36 h-full">
-        <div className="absolute w-full h-full top-0 left-0 object-cover">
-          <Image
-            src={`${server_url + bottomOffer?.productPhoto}`}
-            alt="Hero discount item"
-            fill
-            sizes="200px"
-          />
-        </div>
+      <div className="relative w-36 h-36">
+        <Image
+          src={`${server_url + bottomOffer?.productPhoto}`}
+          alt="Hero discount item"
+          fill
+          style={{
+            objectFit: "cover",
+          }}
+          className="inset-0 top-0 left-0 object-cover"
+        />
       </div>
     </div>
   );
