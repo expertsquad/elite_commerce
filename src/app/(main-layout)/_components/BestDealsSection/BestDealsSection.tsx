@@ -2,91 +2,82 @@ import { fetchData } from "@/actions/fetchData";
 import { server_url } from "@/constants";
 import Image from "next/image";
 import React from "react";
-import StarRating from "@/Components/StarRating";
 import BestDealsSectionProduct from "./BestDealsSectionProduct";
-
-export interface IBestDealsProduct {
-  _id: string;
-  productPhoto: string;
-  productName: string;
-  averageRating: number;
-  sellingPrice: number;
-  discountedPrice: number;
-}
+import { IBestDealsProductData } from "@/interfaces/bestDeals.interface";
+import CountdownTimer from "./CountDownTimer";
+import { bestDealsBG } from "@/assets";
 
 const BestDealsSection = async () => {
-  const bestDeals = await fetchData({ route: "/promotions/best-deals" });
+  const bestDeals = await fetchData({
+    route: "/promotions/best-deals",
+    revalidate: 0,
+  });
 
-  const endDate = new Date(bestDeals?.data?.endDate);
-  //   const days=new Date(endDate) - new Date()
-  const days = 4;
-  const hours = 10;
-  const minutes = 10;
-  const seconds = 10;
+  const backgroundPhoto = bestDeals?.data?.backgroundPhoto
+    ? bestDeals.data.backgroundPhoto
+    : null;
+  const backgroundColor = bestDeals?.data?.backgroundColor || "";
 
   return (
     <div
       className="w-full"
       style={{
-        background:
-          bestDeals?.data?.backgroundColor || bestDeals?.data?.backgroundPhoto,
+        backgroundImage: backgroundPhoto && `url(${backgroundPhoto})`,
+        backgroundColor: backgroundColor,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <div className="main-container py-10">
-        <div className="md:flex md:items-center gap-16 pb-10">
-          <div className="relative h-60 w-60 md:h-40 md:w-40 lg:h-60 lg:w-60 mx-auto my-auto md:ml-0">
-            {" "}
+        <div className="flex flex-col items-center justify-center gap-y-7 md:flex-row md:items-center md:justify-between pb-10">
+          <div className="relative w-[clamp(250px,10vw,350px)] min-h-[250px] max-h-[350px] shrink-0">
             <Image
               src={server_url + bestDeals?.data?.firstProductPhoto}
               alt="product photo"
-              className="object-cover"
+              style={{
+                objectFit: "cover",
+              }}
               fill
-            />{" "}
+              className="inset-0 top-0 left-0 object-cover"
+            />
           </div>
           <div className="flex flex-col justify-center items-center">
-            <h3 className="text-gradient-primary uppercase font-semibold text-lg">
-              {bestDeals?.data?.title}
+            <h3 className="text-gradient-primary uppercase text-sm">
+              Best Deals
             </h3>
-            <h1 className="text-2xl font-semibold text-center mt-2">
+            <span className="text-gradient-primary uppercase text-center [font-size:clamp(18px,2.5vw,25px)] font-bold line-clamp-2">
+              {bestDeals?.data?.title}
+            </span>
+            <h1 className="text-center mt-2 text-black-80 [font-size:clamp(14px,2vw,18)] md:line-clamp-3 line-clamp-2">
               {bestDeals?.data?.description}
             </h1>
-            <div className="flex gap-[clamp(10px,2vw,20px)] text-gradient-primary items-center text-xl text-center mt-9">
-              <div className="bg-white h-16 md:h-12 lg:h-16 w-16 md:w-12 lg:w-16 flex flex-col items-center justify-center rounded-xl">
-                <p className="text-gradient-primary font-semibold">{days}</p>
-                <p className="text-gradient-primary text-xs">Days</p>
-              </div>{" "}
-              :
-              <div className="bg-white h-16 md:h-12 lg:h-16 w-16 md:w-12 lg:w-16 flex flex-col items-center justify-center rounded-xl">
-                <p className="text-gradient-primary font-semibold">{hours}</p>
-                <p className="text-gradient-primary text-xs">Hours</p>
-              </div>{" "}
-              :
-              <div className="bg-white h-16 md:h-12 lg:h-16 w-16 md:w-12 lg:w-16 flex flex-col items-center justify-center rounded-xl">
-                <p className="text-gradient-primary font-semibold">{minutes}</p>
-                <p className="text-gradient-primary text-xs">Mins</p>
-              </div>{" "}
-              :
-              <div className="bg-white h-16 md:h-12 lg:h-16 w-16 md:w-12 lg:w-16 flex flex-col items-center justify-center rounded-xl">
-                <p className="text-gradient-primary font-semibold">{seconds}</p>
-                <p className="text-gradient-primary text-xs">Secs</p>
-              </div>{" "}
+            <div className="mt-9">
+              <CountdownTimer
+                startDate={bestDeals?.data?.startDate}
+                endDate={bestDeals?.data?.endDate}
+              />
             </div>
-            {/* <CountdownTimer endDate={endDate} /> */}
           </div>
-          <div className="relative hidden md:block md:h-40 md:w-40 lg:h-60 lg:w-60 mx-auto my-auto md:mr-0">
+          <div className="relative w-[clamp(250px,10vw,350px)] min-h-[250px] max-h-[350px] shrink-0">
             <Image
               src={server_url + bestDeals?.data?.secondProductPhoto}
               alt="product photo"
-              className="object-cover"
+              style={{
+                objectFit: "cover",
+              }}
               fill
-            />{" "}
+              className="inset-0 top-0 left-0 object-cover"
+            />
           </div>
         </div>
-        <div className="flex w-full overflow-auto scrollbar-x-remove">
-          <div className="flex justify-between gap-2 w-full">
-            {bestDeals?.data?.products?.map((product: IBestDealsProduct) => (
-              <BestDealsSectionProduct key={product?._id} product={product} />
-            ))}
+        <div className="flex w-full overflow-x-scroll scrollbar-x-remove">
+          <div className="flex items-center justify-center gap-x-5 w-full">
+            {bestDeals?.data?.products?.map(
+              (product: IBestDealsProductData) => (
+                <BestDealsSectionProduct key={product?._id} product={product} />
+              )
+            )}
           </div>
         </div>
       </div>

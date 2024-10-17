@@ -1,34 +1,33 @@
-"use client";
 import StarRating from "@/Components/StarRating";
 import Image from "next/image";
 import React from "react";
-import { IBestDealsProduct } from "./BestDealsSection";
 import { server_url } from "@/constants";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { fetchData } from "@/actions/fetchData";
+import { IBestDealsProductData } from "@/interfaces/bestDeals.interface";
 
-const BestDealsSectionProduct = ({
+const BestDealsSectionProduct = async ({
   product,
 }: {
-  product: IBestDealsProduct;
+  product: IBestDealsProductData;
 }) => {
-  const router = useRouter();
-  const handleViewProduct = () => {
-    router.push(`/products/${product?._id}`);
-  };
+  const currencyIcon = await fetchData({
+    route: "/settings/shop",
+  });
   return (
-    <div
-      onClick={handleViewProduct}
-      key={product?._id}
-      className="flex items-center min-w-[200px] py-2 rounded-xl bg-white hover:drop-shadow-lg hover:duration-500 cursor-pointer"
+    <Link
+      href={`products/${product?.productId}`}
+      className="flex items-center min-w-[200px] md:min-w-[220px] xl:min-w-[250px] max-w-[290px] py-2 px-2 rounded-xl bg-white hover:drop-shadow-lg hover:duration-500 cursor-pointer"
     >
-      <div className="w-[60px] h-[60px] relative mr-2">
+      <div className="relative w-[60px] h-[60px] shrink-0 mr-2">
         <Image
           src={server_url + product?.productPhoto}
-          fill
-          sizes="500px"
           alt="Product Photo"
-          priority={true}
-          className="object-cover"
+          fill
+          style={{
+            objectFit: "cover",
+          }}
+          className="inset-0 top-0 left-0 object-cover rounded-md"
         />
       </div>
       <div className="flex justify-center flex-col gap-1">
@@ -37,20 +36,24 @@ const BestDealsSectionProduct = ({
         </span>
 
         <StarRating
-          rating={Math.round(product?.averageRating || 0)}
+          rating={Math.round(product?.averageRating || 1)}
           className="w-2 h-2 md:w-2.5 md:h-2.5"
         />
 
-        <div className="flex items-center gap-2.5">
-          <span className="text-black flex items-baseline gap-1 main-text-color text-xs md:text-base font-semibold">
-            {product?.discountedPrice} <small>$</small>
+        <div className="flex items-center">
+          <span className="flex items-center text-xs md:text-base font-medium text-gradient-primary">
+            {currencyIcon?.data?.currencySymbol}
+            {product?.sellingPrice}
           </span>
-          <del className="flex items-baseline gap-1 text-[10px] md:text-sm">
-            {product?.sellingPrice} <small>$</small>
-          </del>
+          {product?.discountedPrice && (
+            <del className="flex items-center text-[10px] md:text-sm">
+              {currencyIcon?.data?.currencySymbol}
+              {product?.discountedPrice}
+            </del>
+          )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
