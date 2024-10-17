@@ -10,37 +10,6 @@ const page = async () => {
     route: "/user-address/me",
     query: "isBilling=true",
   });
-
-  const submitAction = async (addressId: string, formData: FormData) => {
-    "use server";
-    const dataObj: Record<string, any> = {};
-
-    for (const [key, value] of Array.from(formData.entries())) {
-      dataObj[key] = value;
-    }
-    //zipCode string to number
-    if (typeof dataObj.zipCode === "string") {
-      dataObj.zipCode = parseInt(dataObj.zipCode);
-    }
-    // Add isBilling = true
-    dataObj.isBilling = true;
-
-    if (!billingAddress?.data.length) {
-      const result = await postDataMutation({
-        route: "/user-address/add",
-        data: JSON.stringify(dataObj),
-        formatted: true,
-      });
-    } else {
-      const result = await updateDataMutation({
-        route: "/user-address" + "/" + addressId,
-        data: JSON.stringify(dataObj),
-        method: "PUT",
-        formatted: true,
-      });
-    }
-  };
-
   return (
     <div className="">
       {/* Tab to toggle section */}
@@ -60,10 +29,7 @@ const page = async () => {
         </div>
       </div>
 
-      <BillingAddress
-        submitAction={submitAction}
-        billingAddress={billingAddress?.data[0]}
-      />
+      <BillingAddress billingAddress={billingAddress?.data[0]} />
     </div>
   );
 };

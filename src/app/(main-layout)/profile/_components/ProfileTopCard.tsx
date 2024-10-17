@@ -27,7 +27,7 @@ const ProfileTopCard = async () => {
         <GenerateGradientIcon size={36} IconComponent={IconUser} />
         <h3 className="text-lg whitespace-nowrap mt-5">Account Details</h3>
         <Link
-          className="underline text-lg text-black-50"
+          className="underline text-lg text-black-50 hover:text-primary-light"
           href="/profile/account-details"
         >
           View

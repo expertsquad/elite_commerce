@@ -1,7 +1,6 @@
 import { fetchProtectedData } from "@/actions/fetchData";
 import { revalidateTagAction } from "@/actions/revalidateTag";
 import { updateDataMutation } from "@/actions/updateDataMutation";
-import { Button } from "@/Components/Buttons";
 import CustomInput from "@/Components/CustomInput";
 import Form from "@/Components/Form";
 import SubmitButton from "@/Components/SubmitButton";
