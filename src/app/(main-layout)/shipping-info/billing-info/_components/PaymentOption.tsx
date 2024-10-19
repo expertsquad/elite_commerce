@@ -14,8 +14,8 @@ const PaymentOption = () => {
       ...orderData,
       payment: {
         ...orderData.payment,
-        paymentStatus: "Unpaid",
-        paymentMethod: "COD",
+        paymentStatus: "Paid",
+        paymentGateway: "stripe",
       },
     });
   };
