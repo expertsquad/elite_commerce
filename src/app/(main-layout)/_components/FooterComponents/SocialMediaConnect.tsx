@@ -20,7 +20,7 @@ const SocialMediaConnect = async () => {
               target="_blank"
               href={`${socialMedia?.link}` || ""}
               key={socialMedia?._position}
-              className="relative md:w-[26px] md:h-[26px] w-[24px] h-[24px] rounded-full overflow-hidden border border-black-50"
+              className="relative md:w-[26px] md:h-[26px] w-[24px] h-[24px] rounded-full overflow-hidden border border-black-50 transition-all duration-700 hover:rotate-[360deg]"
             >
               <Image
                 src={`${server_url}${socialMedia?.icon}`}

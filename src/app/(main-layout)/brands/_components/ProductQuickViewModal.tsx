@@ -21,6 +21,10 @@ import { setLocalStorageData } from "@/helpers/localStorage.helper";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import QuickOrderButton from "./QuickOrderButton";
 import { CartContext } from "@/Provider/CartProvider";
+import ProdViewCartIncreamentDecreamentBtn from "../../products/[id]/_components/ProdViewCartIncreamentDecreamentBtn";
+import ProductViewCartBtn from "../../products/[id]/_components/ProductViewCartBtn";
+import BuyNowSingleProduct from "../../products/[id]/_components/BuyNowSingleProduct";
+import { cookies } from "next/headers";
 
 const ProductQuickViewModal = ({
   show,
@@ -151,24 +155,9 @@ const ProductQuickViewModal = ({
             <hr className="border border-black-10 my-5" />
             <div>
               <div className="flex items-center gap-x-3 mb-5">
-                <div className="flex items-center justify-center gap-x-2 py-2 px-3 border border-black-10 rounded-full">
-                  <button className="text-black-50 bg-black-10 p-0.5 rounded-full">
-                    <IconMinus width={20} height={18} color="black" />
-                  </button>
-                  <span className="text-black">{0}</span>
-                  <button className="text-black-50 bg-black-10 p-0.5 rounded-full">
-                    <IconPlus width={20} height={18} color="black" />
-                  </button>
-                </div>
-                <div className="border-gradient-primary p-[1px] rounded-md w-full">
-                  <button className="text-gradient-primary flex items-center justify-center gap-x-1.5 w-full py-2">
-                    <GenerateGradientIcon
-                      IconComponent={IconShoppingCart}
-                      stroke={2}
-                      size={20}
-                    />
-                    ADD TO CART
-                  </button>
+                <ProdViewCartIncreamentDecreamentBtn product={product} />
+                <div className=" w-full">
+                  <ProductViewCartBtn product={product} />
                 </div>
               </div>
               <div className="flex items-center justify-between gap-x-2.5">

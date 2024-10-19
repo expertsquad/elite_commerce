@@ -87,7 +87,11 @@ const ShoppingCartBtn = () => {
                 <Link
                   onClick={() => setShow(!show)}
                   href={"/cart"}
-                  className="text-positive text-sm uppercase "
+                  className={`text-positive text-sm uppercase select-none ${
+                    cartProducts?.length === 0
+                      ? "pointer-events-none cursor-not-allowed opacity-50"
+                      : ""
+                  }`}
                 >
                   View Cart &rarr;
                 </Link>
