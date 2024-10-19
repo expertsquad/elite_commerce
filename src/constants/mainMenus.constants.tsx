@@ -38,6 +38,10 @@ export const topMenus = [
     label: "Track order",
     href: "/track-order",
   },
+  {
+    label: "Wishlist",
+    href: "/wishlist",
+  },
 ];
 
 export const bottomNavMenus = [
