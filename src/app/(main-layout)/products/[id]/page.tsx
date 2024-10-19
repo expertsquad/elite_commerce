@@ -10,10 +10,15 @@ import SocialMediaAndOthers from "./_components/SocialMediaAndOthers";
 import SpecBulkProduct from "./_components/SpecBulkProduct";
 import SpecificationsMenu from "./_components/SpecificationsMenu";
 
-const ProductViewPage = async ({ params }: { params: { id: string } }) => {
+const ProductViewPage = async ({
+  params,
+}: {
+  params: { id: string; slug: string };
+}) => {
   const response = await fetchData({
     route: `/product/${params?.id}`,
   });
+
   return (
     <div className="main-container px-5 mt-6">
       <div className="block md:hidden mb-5">
