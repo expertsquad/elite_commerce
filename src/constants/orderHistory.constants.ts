@@ -1,22 +1,22 @@
 export const orderHistoryMenus = [
   {
     label: "All Order",
-    value: "all order",
+    href: "all-orders",
   },
   {
     label: "Order Placed",
-    href: "order-placed",
+    href: "placed-orders",
   },
   {
     label: "Packaging",
-    href: "packaging",
+    href: "packaging-orders",
   },
   {
     label: "Shipping",
-    href: "shipped",
+    href: "shipped-orders",
   },
   {
     label: "Order Received",
-    href: "order received",
+    href: "delivered-orders",
   },
 ];

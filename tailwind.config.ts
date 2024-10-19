@@ -66,6 +66,9 @@ const config: Config = {
       gridTemplateRows: {
         "product-grid": "repeat(auto-fill, minmax(405px,1fr))",
       },
+      boxShadow: {
+        "order-history-card-shadow": "0px 4px 16px rgba(0, 0, 0, 0.06)",
+      },
     },
   },
   plugins: [],
