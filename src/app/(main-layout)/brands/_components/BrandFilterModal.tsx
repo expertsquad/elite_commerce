@@ -6,17 +6,20 @@ import BrandFilterSection from "./BrandFilterSection";
 import { ICategory } from "@/interfaces/category.interface";
 import { IProduct } from "@/interfaces/product.interface";
 import { IBrand } from "@/interfaces/brand.interface";
+import { IWidgetCard } from "@/interfaces/widget.interface";
 
 const BrandFilterModal = ({
   categories,
   products,
   brands,
   params,
+  widget,
 }: {
   categories: ICategory[];
   products: IProduct[];
   brands: IBrand[];
   params: { slug: string };
+  widget: IWidgetCard;
 }) => {
   const [show, setShow] = useState(false);
   return (
@@ -42,6 +45,7 @@ const BrandFilterModal = ({
             products={products}
             categories={categories}
             params={params}
+            widget={widget}
           />
         </Modal>
       )}
