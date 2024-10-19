@@ -42,7 +42,7 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
         ))}
       </div>
       <span className="">{productdata?.productName}</span>
-      <div className="relative shrink-0 h-6 w-10 mt-3   ">
+      <div className="relative shrink-0 h-6 w-10 mt-3">
         <Image
           src={`${server_url + productdata?.brand?.brandPhoto}`}
           alt="brand photo"

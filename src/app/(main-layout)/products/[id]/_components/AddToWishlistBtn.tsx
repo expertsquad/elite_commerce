@@ -19,14 +19,14 @@ const AddToWishlistBtn = ({ products }: any) => {
         e.stopPropagation();
         handleAddToFavourite();
       }}
-      className={`cursor-pointer  p-0.5  rounded-full flex justify-center items-center bg-white`}
+      className={`cursor-pointer p-[1px] rounded-full flex justify-center items-center bg-white`}
     >
       {wishlistProducts?.find(
         (item: IWishlistProduct) => item?.productId === products._id
       ) ? (
-        <IconHeartFilled stroke={2} height={18} width={18} />
+        <IconHeartFilled stroke={1} size={16} className="fill-primary" />
       ) : (
-        <GenerateGradientIcon IconComponent={IconHeart} stroke={2} size={18} />
+        <GenerateGradientIcon IconComponent={IconHeart} stroke={1} size={16} />
       )}
     </button>
   );
