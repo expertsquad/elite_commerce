@@ -19,6 +19,10 @@ const ProductViewPage = async ({
     route: `/product/${params?.id}`,
   });
 
+  const currencyIcon = await fetchData({
+    route: `/settings/shop`,
+  });
+  console.log(currencyIcon?.data?.currencySymbol);
   return (
     <div className="main-container px-5 mt-6">
       <div className="block md:hidden mb-5">
@@ -29,7 +33,10 @@ const ProductViewPage = async ({
           <ProductViewImage product={response?.data} />
         </div>
         <div className="md:flex-1">
-          <ProductViewDescAndOthers product={response?.data} />
+          <ProductViewDescAndOthers
+            product={response?.data}
+            currencyIcon={currencyIcon?.data?.currencySymbol}
+          />
         </div>
       </div>
       <ProductViewServices />

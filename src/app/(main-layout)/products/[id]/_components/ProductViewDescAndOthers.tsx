@@ -24,7 +24,13 @@ import ProductPriceBasedOnVariants from "./ProductPriceBasedOnVariants";
 import { cookies } from "next/headers";
 import ExtraDiscountBasedOnOrder from "./ExtraDiscountBasedOnOrder";
 
-const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
+const ProductViewDescAndOthers = ({
+  product,
+  currencyIcon,
+}: {
+  product: IProduct;
+  currencyIcon: string;
+}) => {
   const accessToken = cookies().get("accessToken")?.value;
 
   return (
@@ -70,7 +76,10 @@ const ProductViewDescAndOthers = ({ product }: { product: IProduct }) => {
       </div> */}
       <ExtraDiscountBasedOnOrder product={product} />
       <div>
-        <ProductPriceBasedOnVariants product={product} />
+        <ProductPriceBasedOnVariants
+          currencyIcon={currencyIcon}
+          product={product}
+        />
       </div>
       <div>
         <div className="flex items-center gap-x-3 mb-5">

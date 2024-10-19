@@ -4,17 +4,23 @@ import {
   IconBrandInstagram,
   IconBrandPinterest,
   IconBrandTwitter,
+  IconCopy,
 } from "@tabler/icons-react";
 import { whatsapp } from "@/assets";
 import { messenger } from "@/assets";
 import Image from "next/image";
+import { fetchData } from "@/actions/fetchData";
 
-const SocialMediaAndOthers = () => {
+const SocialMediaAndOthers = async () => {
+  const socialMedia = await fetchData({
+    route: "/settings/social-media",
+  });
+  console.log(socialMedia?.data?.socialMedias);
   return (
     <div className="flex items-center justify-between">
-      <div className="flex items-center">
+      <div className="flex items-center whitespace-nowrap">
         <span className="text-black-80 hidden md:block [font-size:_clamp(14px,10vw,16px)] mr-2.5">
-          Message Now:{" "}
+          Message Now:
         </span>
         <div className="flex items-center gap-x-2 md:gap-x-2.5">
           <div className="flex items-center gap-x-1.5 border border-black-10 rounded-full py-1 px-2">
@@ -27,11 +33,11 @@ const SocialMediaAndOthers = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center whitespace-nowrap">
         <span className="text-black-80 hidden md:block mr-2.5">
-          Share Items:{" "}
+          Share Items:
         </span>
-        <div className="flex items-center gap-x-2 md:gap-x-2.5">
+        <div className="flex items-center gap-x-2 md:gap-x-2.5 cursor-pointer">
           <GenerateGradientIcon
             IconComponent={IconBrandFacebook}
             stroke={1}
@@ -52,6 +58,7 @@ const SocialMediaAndOthers = () => {
             stroke={1}
             size={20}
           />
+          <GenerateGradientIcon IconComponent={IconCopy} stroke={1} size={20} />
         </div>
       </div>
     </div>
