@@ -1,33 +1,26 @@
+"use client";
 import { Button } from "@/Components/Buttons";
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { IconArrowRight } from "@tabler/icons-react";
-import React, { useContext } from "react";
 import Link from "next/link";
 import calculateTotalPriceAndDiscountOfCart from "@/helpers/calculateTotalPriceAndDiscountOfCart";
-import Form from "@/Components/Form";
-import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
-import { fetchData } from "@/actions/fetchData";
 import { IShippingChargeProps } from "./OrderItemsRightSection";
 import { AddressData } from "@/interfaces/defaultShippingAddress.interface";
 import { useGetShippingFee } from "@/utils/shppingCharge/getShippingFee";
+import { useContext } from "react";
+import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 
-const RightSideTotalAmountCard = ({
-  products,
-  buttonLink = "#",
-  buttonText,
-  disabled,
-  submitAction,
+const ShippinInfoTotalAmountCard = ({
   shippingCharge,
   defaultAddress,
 }: {
-  products: ICartProduct[];
-  buttonText: string;
-  buttonLink?: string;
-  disabled?: string;
-  submitAction?: (e: React.FormEvent) => Promise<void>;
   shippingCharge?: IShippingChargeProps;
   defaultAddress?: AddressData;
 }) => {
+  const { orderData } = useContext(OrderInitContext);
+  console.log(orderData.orderItems);
+  const products = orderData?.orderItems;
+
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
 
@@ -59,28 +52,17 @@ const RightSideTotalAmountCard = ({
         <h2 className="text-gradient-primary"> ${totalPayable.toFixed(2)}</h2>
       </div>
       {/* Button Link */}
-      {submitAction ? (
-        <>
-          <Button
-            onClick={(e) => submitAction(e)}
-            className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2"
-            disabled={disabled}
-          >
-            {buttonText} <IconArrowRight />
-          </Button>
-        </>
-      ) : (
-        <Link href={buttonLink}>
-          <Button
-            className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2"
-            disabled={disabled}
-          >
-            {buttonText} <IconArrowRight />
-          </Button>
-        </Link>
-      )}
+      <Link href={""}>
+        <Button
+          className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2"
+          disabled={false}
+        >
+          Hello
+          <IconArrowRight />
+        </Button>
+      </Link>
     </>
   );
 };
 
-export default RightSideTotalAmountCard;
+export default ShippinInfoTotalAmountCard;

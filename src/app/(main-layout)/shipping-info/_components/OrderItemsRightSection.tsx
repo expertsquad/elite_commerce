@@ -1,10 +1,7 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { ShippingInfoOrderItems } from "./ShippingInfoOrderItems";
-import RightSideTotalAmountCard from "./RightSideTotalAmountCard";
-import { usePathname } from "next/navigation";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
-import { ResponseShippingAddress } from "@/interfaces/defaultShippingAddress.interface";
 
 export type IShippingChargeProps = {
   state: string;
@@ -13,46 +10,31 @@ export type IShippingChargeProps = {
   freeShippingMinOrderAmount: number | undefined | any;
 };
 
-const OrderItemsRightSection = ({
-  buttonText,
-  buttonLink,
-  submitAction,
-  shippingCharge,
-  defaultAddress,
-}: // ,
-{
-  buttonText: string;
-  buttonLink?: string;
-  submitAction?: (e: React.FormEvent) => Promise<void>;
-  shippingCharge?: IShippingChargeProps;
-  defaultAddress?: ResponseShippingAddress;
-}) => {
-  const pathName = usePathname();
-
+const OrderItemsRightSection = () => {
   const { orderData } = useContext(OrderInitContext);
 
   // disabled button condition
 
-  const isAddressIncomplete = (address: any) =>
-    [
-      address?.firstName,
-      address?.lastName,
-      address?.phoneNumber,
-      address?.country,
-      address?.state,
-      address?.zipCode,
-      address?.streetAddress,
-    ].some((field) => !field);
+  // const isAddressIncomplete = (address: any) =>
+  //   [
+  //     address?.firstName,
+  //     address?.lastName,
+  //     address?.phoneNumber,
+  //     address?.country,
+  //     address?.state,
+  //     address?.zipCode,
+  //     address?.streetAddress,
+  //   ].some((field) => !field);
 
-  const isPaymentEmpty = (payment: any) =>
-    !payment || Object.keys(payment).length === 0;
+  // const isPaymentEmpty = (payment: any) =>
+  //   !payment || Object.keys(payment).length === 0;
 
-  const disableButton =
-    (pathName === "/shipping-info" &&
-      isAddressIncomplete(orderData?.shippingAddress)) ||
-    (pathName === "/shipping-info/billing-info" &&
-      (isAddressIncomplete(orderData?.billingAddress) ||
-        isPaymentEmpty(orderData?.payment)));
+  // const disableButton =
+  //   (pathName === "/shipping-info" &&
+  //     isAddressIncomplete(orderData?.shippingAddress)) ||
+  //   (pathName === "/shipping-info/billing-info" &&
+  //     (isAddressIncomplete(orderData?.billingAddress) ||
+  //       isPaymentEmpty(orderData?.payment)));
 
   return (
     <div className="w-full md:w-[clamp(350px,40vw,450px)]">
@@ -64,16 +46,6 @@ const OrderItemsRightSection = ({
           ))}
         </div>
       </div>
-
-      <RightSideTotalAmountCard
-        products={orderData?.orderItems}
-        buttonLink={buttonLink}
-        buttonText={buttonText}
-        disabled={disableButton ? "disabled" : ""}
-        submitAction={submitAction}
-        shippingCharge={shippingCharge}
-        defaultAddress={defaultAddress?.data?.[0]}
-      />
     </div>
   );
 };
