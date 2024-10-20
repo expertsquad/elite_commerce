@@ -17,11 +17,7 @@ const ProductCard = ({ product, onClick }: IProductCardProps) => {
       onClick={onClick}
     >
       <div className="bg-gradient-primary-light">
-        <ProductImageSlider
-          // loading={loading}
-          product={product}
-          // defaultVariant={defaultVariant}
-        />
+        <ProductImageSlider product={product} />
       </div>
 
       <div className="p-4">
@@ -40,12 +36,21 @@ const ProductCard = ({ product, onClick }: IProductCardProps) => {
 
         <div className="flex items-center justify-between mt-5">
           <div className="flex items-center whitespace-nowrap">
-            <span className="[font-size:_clamp(0.6em,4vw,1.1em)] text-gradient-primary font-bold">
-              ${product?.variants[0]?.discountedPrice}
+            <span className="[font-size:_clamp(16px,2vw,22px)] text-gradient-primary font-bold">
+              $
+              {product?.variants[0]?.discountedPrice
+                ? product?.variants[0]?.discountedPrice
+                : product?.variants[0]?.sellingPrice}
             </span>
             <span className="mx-0.5 text-black-10">|</span>
-            <del className="text-base text-black-50 [font-size:_clamp(0.5em,4vw,0.8em)] ">
-              ${product?.variants[0]?.sellingPrice}
+            <del
+              className={`text-black-50 [font-size:_clamp(14px,2vw,18px)] ${
+                product?.variants[0]?.discountedPrice ? "block" : "hidden"
+              }`}
+            >
+              $
+              {product?.variants[0]?.discountedPrice &&
+                product?.variants[0]?.sellingPrice}
             </del>
           </div>
           <ProductCartBtn product={product} />

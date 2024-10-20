@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const OrderCancelModal = ({ id }: { id: string }) => {
-  // console.log(id);
   const [show, setShow] = useState(false);
   const [reason, setReason] = useState("");
   const [comment, setComment] = useState("");

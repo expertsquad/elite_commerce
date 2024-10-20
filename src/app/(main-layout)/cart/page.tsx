@@ -10,7 +10,6 @@ const CartView = async () => {
     limit: 4,
   });
   const currency = await fetchData({ route: "/settings/shop" });
-  console.log(currency);
   return (
     <div>
       <div>

@@ -9,6 +9,7 @@ import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { WishlistContext } from "@/Provider/WishlistProvider";
 import { IWishlistProduct } from "@/interfaces/wishlist.interface";
 import AddToWishlistBtn from "@/app/(main-layout)/products/[id]/_components/AddToWishlistBtn";
+import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
 
 type ProductImageSliderProps = {
   product: IProduct;
@@ -67,11 +68,13 @@ const ProductImageSlider = ({
   return (
     <section>
       <div className="w-full flex justify-between gap-x-0.5 relative">
-        <div className="absolute top-2.5 left-2.5 z-10">
-          <span className="bg-gradient-secondary py-1 px-2 rounded-lg text-white md:text-xs text-[10px] cursor-default">
-            {product?.variants?.[0]?.discountPercentage}%
-          </span>
-        </div>
+        {product?.variants?.[0]?.discountPercentage && (
+          <div className="absolute top-2.5 left-2.5 z-10">
+            <span className="bg-gradient-secondary py-1 px-2 rounded-lg text-white md:text-xs text-[10px] cursor-default">
+              {product?.variants?.[0]?.discountPercentage}%
+            </span>
+          </div>
+        )}
 
         {product?.productPhotos?.map((productImg: string, index: number) => (
           <div
@@ -115,9 +118,12 @@ const ProductImageSlider = ({
         <div className="absolute top-2.5 right-2.5 z-10">
           <div className="flex flex-col gap-y-1.5">
             <AddToWishlistBtn products={product} />
-            <button className="cursor-pointer md:text-[12px] border border-black-10 bg-white md:h-8 md:w-8 h-6 w-6 rounded-full flex justify-center items-center md:hidden">
-              <IconBolt stroke={2} height={16} width={16} />
-            </button>
+
+            <QuickOrderButton
+              product={product}
+              buttonIcon={<IconBolt size={18} stroke={1} />}
+              buttonStyle="cursor-pointer rounded-full flex justify-center items-center bg-white h-[30px] w-[30px] border border-black-10 md:hidden"
+            />
           </div>
         </div>
       </div>

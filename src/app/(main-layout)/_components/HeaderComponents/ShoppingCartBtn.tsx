@@ -21,7 +21,6 @@ const ShoppingCartBtn = ({ currencyIcon }: { currencyIcon?: string }) => {
     setRefetch,
   } = useContext(CartContext);
   const [show, setShow] = React.useState(false);
-  console.log(currencyIcon);
 
   return (
     <Fragment>

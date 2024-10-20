@@ -62,8 +62,6 @@ const QuickOrderModal = ({
         formatted: true,
       });
 
-      console.log(response);
-
       if (response?.success) {
         const orderId = response?.data?._id;
         const isQuickOrder = "true";
