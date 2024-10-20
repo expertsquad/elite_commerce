@@ -10,6 +10,7 @@ import SocialMediaAndOthers from "./_components/SocialMediaAndOthers";
 import SpecBulkProduct from "./_components/SpecBulkProduct";
 import SpecificationsMenu from "./_components/SpecificationsMenu";
 import SpecificationsAndBulkProductSection from "./_components/SpecificationsAndBulkProductSection";
+import { cookies } from "next/headers";
 
 const ProductViewPage = async ({
   params,
@@ -26,6 +27,9 @@ const ProductViewPage = async ({
   const socialMedia = await fetchData({
     route: "/settings/social-media",
   });
+
+  const accessToken = cookies().get("accessToken")?.value;
+
   return (
     <div className="main-container px-5 mt-6">
       <div className="block md:hidden mb-5">
@@ -58,7 +62,11 @@ const ProductViewPage = async ({
             </div>
           </div>
           <div>
-            <SpecBulkProduct productdata={product?.data} />
+            <SpecBulkProduct
+              productdata={product?.data}
+              currencyIcon={currencyIcon?.data?.currencySymbol}
+              accessToken={accessToken!}
+            />
           </div>
         </div>
       </section>

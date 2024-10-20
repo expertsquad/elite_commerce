@@ -1,23 +1,11 @@
 import SocialMediaAndOthers from "./SocialMediaAndOthers";
-import ProductVariantColor from "./ProductVariantColor";
 import { IProduct } from "@/interfaces/product.interface";
 import CategoryAndBrandSmallComponent from "./CategoryAndBrandSmallComponent";
 import RatingWishlistStockAndSold from "./RatingWishlistStockAndSold";
-import {
-  IconBolt,
-  IconMinus,
-  IconPlus,
-  IconShoppingBag,
-  IconShoppingCart,
-} from "@tabler/icons-react";
-import Link from "next/link";
-import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
-import ProductVariantPrice from "./ProductVariantPrice";
-import { Button } from "@/Components/Buttons";
-import ProgressBar from "@/app/(main-layout)/_components/SliderComponents/ProgressBar";
+import { IconBolt } from "@tabler/icons-react";
+
 import BuyNowSingleProduct from "./BuyNowSingleProduct";
 import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
-import ProductCartBtn from "@/Components/ProductCard/ProductCartBtn";
 import ProductViewCartBtn from "./ProductViewCartBtn";
 import ProdViewCartIncreamentDecreamentBtn from "./ProdViewCartIncreamentDecreamentBtn";
 import ProductPriceBasedOnVariants from "./ProductPriceBasedOnVariants";

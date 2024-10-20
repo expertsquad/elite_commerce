@@ -14,8 +14,17 @@ import {
 import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
 import { CartContext } from "@/Provider/CartProvider";
 import { updateCart } from "@/utils/updateCart.utils";
+import BuyNowSingleProduct from "./BuyNowSingleProduct";
 
-const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
+const SpecBulkProduct = ({
+  productdata,
+  currencyIcon,
+  accessToken,
+}: {
+  productdata: IProduct;
+  currencyIcon?: string;
+  accessToken: string;
+}) => {
   const [variant, setVariant] = React.useState<IProduct["variants"][0]>(
     productdata?.variants[0]
   );
@@ -24,6 +33,7 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
     updateCart({ actionType: "add", product: productdata, variant: variant });
     setRefetch && setRefetch((prev) => prev + 1);
   };
+
   return (
     <div className="max-w-[370px] min-w-80 p-5 shadow-lg rounded-md hidden md:block sticky top-20">
       <div className="flex items-center gap-x-4 mb-3">
@@ -66,14 +76,19 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
       {/* == Price == */}
       <div className="flex items-center gap-x-2 mb-10">
         <span className="text-2xl font-bold text-gradient-primary">
-          ${variant?.discountedPrice}
+          {currencyIcon}
+          {variant?.discountedPrice}
         </span>
         <span className="text-black-50">|</span>
-        <del className="text-base text-black-50">${variant?.sellingPrice}</del>
+        <del className="text-base text-black-50">
+          {currencyIcon}
+          {variant?.sellingPrice}
+        </del>
         <span className="text-black-50">|</span>
         <div className="bg-gradient-secondary-light rounded-full py-0.5">
           <span className="text-sm text-gradient-secondary px-3 font-semibold">
-            ${variant.discountPercentage}% OFF
+            {currencyIcon}
+            {variant.discountPercentage}% OFF
           </span>
         </div>
       </div>
@@ -81,17 +96,12 @@ const SpecBulkProduct = ({ productdata }: { productdata: IProduct }) => {
       <div>
         <div className="flex items-center justify-between gap-x-2.5">
           <div className="bg-gradient-primary-light rounded-md w-full">
-            <Link
-              href={"/"}
-              className="flex items-center justify-center gap-x-1.5 text-gradient-primary py-2 text-sm"
-            >
-              <GenerateGradientIcon
-                IconComponent={IconShoppingBag}
-                stroke={2}
-                size={16}
-              />
-              BUY NOW
-            </Link>
+            <BuyNowSingleProduct
+              product={productdata}
+              accessToken={accessToken!}
+              className="!py-2 !text-[13px]"
+              iconStyle="size-4"
+            />
           </div>
           <QuickOrderButton
             product={{

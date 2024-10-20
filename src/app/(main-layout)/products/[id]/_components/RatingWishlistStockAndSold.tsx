@@ -25,7 +25,7 @@ const RatingWishlistStockAndSold = ({
       </div>
       <span className="text-black-10">|</span>
       <div className="flex items-center gap-x-1">
-        <div className="border border-black-10 rounded-full flex items-center justify-center p-0.5">
+        <div className="">
           <AddToWishlistBtn products={products} />
         </div>
         <span className="text-xs md:text-base whitespace-nowrap">

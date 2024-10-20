@@ -12,9 +12,13 @@ import React, { useContext } from "react";
 const BuyNowSingleProduct = ({
   product,
   accessToken,
+  className,
+  iconStyle,
 }: {
   product: IProduct;
   accessToken: string;
+  className?: string;
+  iconStyle?: string;
 }) => {
   const router = useRouter();
 
@@ -42,10 +46,10 @@ const BuyNowSingleProduct = ({
 
   return (
     <button
-      className="bg-gradient-primary rounded-md w-full flex items-center justify-center gap-x-1.5 py-2.5 text-white"
+      className={`bg-gradient-primary rounded-md w-full flex items-center justify-center gap-x-1.5 py-2.5 text-white ${className}`}
       onClick={() => handleSingleProductClick(product)}
     >
-      <IconShoppingBag stroke={2} size={20} />
+      <IconShoppingBag stroke={2} className={`size-5 ${iconStyle}`} />
       BUY NOW
     </button>
   );
