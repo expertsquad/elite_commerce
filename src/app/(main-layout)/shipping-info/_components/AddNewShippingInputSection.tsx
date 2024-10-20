@@ -3,7 +3,6 @@ import CustomInput from "../../../../Components/CustomInput";
 import { countryNames } from "@/constants/countryNames.constant";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { IAddress } from "@/interfaces/address.interface";
-import CustomDropdown from "@/Components/CustomDropdown";
 
 const AddNewShippingInputSection = ({
   onNewAddressChange,
@@ -72,23 +71,14 @@ const AddNewShippingInputSection = ({
             shippintAddress?.phoneNumber === "" ? " border border-danger" : ""
           }
         />
-
-        <label htmlFor="country" className="text-black-50">
-          Select Country
-          <select
-            name="country"
-            id="country"
-            className="w-full border border-black-10 text-black-80 px-3.5 py-2.5 mt-2 focus:outline-none focus:border-fuchsia-800 rounded-md"
-            value={newAddress?.country}
-            onChange={handleInputChange}
-          >
-            {countryNames?.map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
-        </label>
+        <CustomInput
+          label="Phone Number"
+          type="text"
+          name="country"
+          placeholder="017*******"
+          value={newAddress?.country}
+          onChange={handleInputChange}
+        />
 
         {/* <CustomDropdown
           data={countryNames}

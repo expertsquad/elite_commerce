@@ -11,18 +11,18 @@ const page = async () => {
     route: "/user-address/me",
     query: "isDefault=true",
   });
-
-  // const countryData = await fetchCountryData({
-  //   route: "/countries",
-  // });
-  // console.log(countryData);
-
   const getMe = await fetchProtectedData({
     route: "/user/me",
   });
   const shippingCharge = await fetchData({
     route: "/settings/shipping-charge",
   });
+  // fetch shop data to get country and currency symbol
+  const shopSetting = await fetchData({
+    route: "/settings/shop",
+  });
+
+  console.log(shopSetting);
 
   return (
     <section className=" p-5 lg:p-0 main-container flex w-full gap-5 flex-col md:flex-row mb-10">
@@ -41,8 +41,11 @@ const page = async () => {
 
       <div className="">
         {/* We will add here link to go to next page */}
-        <OrderItemsRightSection />
+        <OrderItemsRightSection
+          currencySymbol={shopSetting?.data?.currencySymbol}
+        />
         <ShippinInfoTotalAmountCard
+          currencySymbol={shopSetting?.data?.currencySymbol}
           shippingCharge={shippingCharge?.data}
           defaultAddress={defaultAddress}
         />

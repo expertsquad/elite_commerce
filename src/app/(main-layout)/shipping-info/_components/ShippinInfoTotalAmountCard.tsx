@@ -13,9 +13,11 @@ import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 const ShippinInfoTotalAmountCard = ({
   shippingCharge,
   defaultAddress,
+  currencySymbol,
 }: {
   shippingCharge?: IShippingChargeProps;
   defaultAddress?: AddressData;
+  currencySymbol?: string;
 }) => {
   const { orderData } = useContext(OrderInitContext);
   console.log(orderData.orderItems);
@@ -35,21 +37,32 @@ const ShippinInfoTotalAmountCard = ({
       <div className="flex flex-col  gap-4 py-4 border-b border-black-10">
         <div className="flex items-center justify-between">
           <p>Sub Total</p>
-          <strong> ${totalPrice.toFixed(2)}</strong>
+          <strong>
+            {currencySymbol} {totalPrice.toFixed(2)}
+          </strong>
         </div>
         <div className="flex items-center justify-between">
           <p>Shipping</p>
-          <p> ${shippingFee}</p>
+          <p>
+            {currencySymbol} {shippingFee}
+          </p>
         </div>
         <div className="flex items-center justify-between">
           <p>Discount</p>
-          <p> -${totalDiscount}</p>
+          <p>
+            {" "}
+            -{currencySymbol}
+            {totalDiscount}
+          </p>
         </div>
       </div>
       {/* Total */}
       <div className="flex items-center justify-between [font-size:_clamp(1.4em,40vw,1.7em)] font-bold my-2">
         <h2 className="">Total</h2>
-        <h2 className="text-gradient-primary"> ${totalPayable.toFixed(2)}</h2>
+        <h2 className="text-gradient-primary">
+          {" "}
+          {currencySymbol} {totalPayable.toFixed(2)}
+        </h2>
       </div>
       {/* Button Link */}
       <Link href={""}>
@@ -57,7 +70,7 @@ const ShippinInfoTotalAmountCard = ({
           className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2"
           disabled={false}
         >
-          Hello
+          Continue To Payment
           <IconArrowRight />
         </Button>
       </Link>
