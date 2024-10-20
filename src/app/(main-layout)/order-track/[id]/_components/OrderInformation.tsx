@@ -36,7 +36,7 @@ const OrderInformation = ({
       </h1>
       <div className="flex flex-col gap-y-1 mb-3.5">
         <label
-          className="text-black-50 text-sm md:text-base font-light"
+          className="text-black-70 text-sm md:text-base font-light"
           htmlFor=""
         >
           Name
@@ -45,7 +45,7 @@ const OrderInformation = ({
       </div>
       <div className="flex flex-col gap-y-1 mb-3.5">
         <label
-          className="text-black-50 text-sm md:text-base font-light"
+          className="text-black-70 text-sm md:text-base font-light"
           htmlFor=""
         >
           Email
@@ -54,7 +54,7 @@ const OrderInformation = ({
       </div>
       <div className="flex flex-col gap-y-1 mb-3.5">
         <label
-          className="text-black-50 text-sm md:text-base font-light"
+          className="text-black-70 text-sm md:text-base font-light"
           htmlFor=""
         >
           Phone
@@ -63,7 +63,7 @@ const OrderInformation = ({
       </div>
       <div className="flex flex-col gap-y-1 mb-3.5">
         <label
-          className="text-black-50 text-sm md:text-base font-light"
+          className="text-black-70 text-sm md:text-base font-light"
           htmlFor=""
         >
           Country
@@ -72,7 +72,7 @@ const OrderInformation = ({
       </div>
       <div className="flex flex-col gap-y-1 mb-3.5">
         <label
-          className="text-black-50 text-sm md:text-base font-light"
+          className="text-black-70 text-sm md:text-base font-light"
           htmlFor=""
         >
           Shipping Address
@@ -83,7 +83,7 @@ const OrderInformation = ({
       </div>
       <div className="flex flex-col gap-y-1 mb-3.5">
         <label
-          className="text-black-50 text-sm md:text-base font-light"
+          className="text-black-70 text-sm md:text-base font-light"
           htmlFor=""
         >
           Payment
@@ -94,7 +94,7 @@ const OrderInformation = ({
         href={"/"}
         className="flex items-center justify-center gap-x-1 bg-gradient-primary text-white rounded-full py-1.5 text-base mt-10"
       >
-        <IconArrowLeft stroke={2} size={18} />
+        <IconArrowLeft stroke={2} size={20} />
         Go To Home
       </Link>
     </div>

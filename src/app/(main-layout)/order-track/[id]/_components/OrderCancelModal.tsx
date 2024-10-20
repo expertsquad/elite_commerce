@@ -1,21 +1,55 @@
 "use client";
+import { updateDataMutation } from "@/actions/updateDataMutation";
 import Modal from "@/Components/Modal";
 import { IconX } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const OrderCancelModal = ({ id }: { id: string }) => {
-  console.log(id);
+  // console.log(id);
   const [show, setShow] = useState(false);
   const [reason, setReason] = useState("");
   const [comment, setComment] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  console.log(reason, comment);
+  const handleCancelOrder = async () => {
+    setLoading(true);
+
+    const data = {
+      status: "Cancelled",
+      reasonOfCancellation: reason,
+      comment: comment,
+    };
+    try {
+      const response = await updateDataMutation({
+        route: `/online-order/${id}`,
+        dataType: "json",
+        data: JSON.stringify(data),
+        formatted: true,
+      });
+
+      if (response?.success) {
+        router.push("/profile/order-history/all-orders");
+        // window.location.reload();
+        setShow(false);
+      }
+    } catch (error) {
+      console.error("Error cancelling the order:", error);
+    } finally {
+      setLoading(false);
+      setShow(false);
+    }
+  };
 
   return (
     <div>
-      <button onClick={() => setShow(true)} className="">
+      <button
+        onClick={() => setShow(true)}
+        className="flex items-center justify-center"
+      >
         <span className="text-danger">
-          <IconX size={18} className="" />
+          <IconX size={18} stroke={1} className="" />
         </span>
       </button>
       {show && (
@@ -30,7 +64,7 @@ const OrderCancelModal = ({ id }: { id: string }) => {
             <h4 className="text-black-80 text-[18px] font-semibold mb-7 md:mb-11 text-center">
               Cancellation Request
             </h4>
-            <form action={""}>
+            <div>
               <label
                 htmlFor="cancelation reason"
                 className="text-black-opacity-70"
@@ -85,13 +119,17 @@ const OrderCancelModal = ({ id }: { id: string }) => {
               <span className="text-right text-sm text-black text-opacity-80">
                 {comment.length}/200
               </span>
-              <button
-                type="submit"
-                className="text-white bg-gradient-primary w-full py-2 rounded-3xl mt-7 md:mt-11"
-              >
-                Submit
-              </button>
-            </form>
+              <div className="flex items-center justify-center ">
+                <button
+                  onClick={handleCancelOrder}
+                  className={`text-white bg-gradient-primary py-2 rounded-3xl fixed bottom-5 w-[95%] mx-auto ${
+                    loading ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                >
+                  {loading ? "Loading..." : "Submit Now"}
+                </button>
+              </div>
+            </div>
           </div>
         </Modal>
       )}
