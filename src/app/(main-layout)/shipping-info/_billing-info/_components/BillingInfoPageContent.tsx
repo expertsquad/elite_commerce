@@ -1,14 +1,15 @@
 "use client";
-import OrderItemsRightSection from "../_components/OrderItemsRightSection";
-import ShipToAndBillingSection from "./_components/ShipToAndBillingSection";
-import PaymentOption from "./_components/PaymentOption";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { IAddress } from "@/interfaces/address.interface";
+import OrderItemsRightSection from "../../_components/OrderItemsRightSection";
+import PaymentOption from "./PaymentOption";
+import ShipToAndBillingSection from "./ShipToAndBillingSection";
+import RightSideTotalAmountCard from "../../_components/RightSideTotalAmountCard";
 
-const Page = () => {
+const BillingInfoPageContent = () => {
   const router = useRouter();
   const { orderData } = useContext(OrderInitContext);
   const submitAction = async (e: React.FormEvent) => {
@@ -60,9 +61,18 @@ const Page = () => {
           buttonText="Place Order"
           submitAction={submitAction}
         />
+        <RightSideTotalAmountCard
+          products={orderData?.orderItems}
+          buttonLink={buttonLink}
+          buttonText={buttonText}
+          disabled={disableButton ? "disabled" : ""}
+          submitAction={submitAction}
+          shippingCharge={shippingCharge}
+          defaultAddress={defaultAddress?.data?.[0]}
+        />
       </div>
     </section>
   );
 };
 
-export default Page;
+export default BillingInfoPageContent;

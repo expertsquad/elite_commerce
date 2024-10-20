@@ -3,7 +3,7 @@ import ShippingAddess from "./_components/ShippingAddess";
 import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import AddNewShippingAddress from "./_components/AddNewShippingAddress";
 import OrderItemsRightSection from "./_components/OrderItemsRightSection";
-import { updateDataMutation } from "@/actions/updateDataMutation";
+import ShippinInfoTotalAmountCard from "./_components/ShippinInfoTotalAmountCard";
 
 const page = async () => {
   const defaultAddress = await fetchProtectedData({
@@ -17,7 +17,7 @@ const page = async () => {
   const shippingCharge = await fetchData({
     route: "/settings/shipping-charge",
   });
-  // console.log(shippingCharge?.data);
+
   return (
     <section className=" p-5 lg:p-0 main-container flex w-full gap-5 flex-col md:flex-row mb-10">
       <div className="w-full">
@@ -35,9 +35,8 @@ const page = async () => {
 
       <div className="">
         {/* We will add here link to go to next page */}
-        <OrderItemsRightSection
-          buttonText="Continue To Payment"
-          buttonLink="/shipping-info/billing-info"
+        <OrderItemsRightSection />
+        <ShippinInfoTotalAmountCard
           shippingCharge={shippingCharge?.data}
           defaultAddress={defaultAddress}
         />
