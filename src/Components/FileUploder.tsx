@@ -42,35 +42,30 @@ const FileUploader = ({
       >
         {/* check if data exist or children exist, if so, render the corresponding content */}
         {newPhoto ? (
-          <Image
-            src={newPhoto}
-            alt={name}
-            fill
-            className="inset-0 object-cover"
-          />
+          <div className="h-[70px] w-[70px] md:w-[80px] relative border border-black-10 rounded-md">
+            <Image
+              src={newPhoto}
+              alt={name}
+              fill
+              className="inset-0 object-cover p-1.5"
+            />
+          </div>
         ) : url ? (
-          <Image
-            src={server_url + url}
-            alt={name}
-            fill
-            className="inset-0 object-cover"
-          />
+          <div className="h-[70px] w-[70px] md:w-[80px] relative border border-black-10 rounded-md">
+            <Image
+              src={server_url + url}
+              alt={name}
+              fill
+              className="inset-0 object-cover"
+            />
+          </div>
         ) : (
-          <>
-            <IconPhotoPlus width={30} height={30} stroke={1} />
-            <span className="flex flex-col text-center text-sm">
-              <span>Select Your Image</span>
-              {maxSize && (
-                <small className="text-gray-500">
-                  Max size:{" "}
-                  <span className="text-orange-700"> {maxSize} MB</span>
-                </small>
-              )}
-              <span className="text-fuchsia-800 underline font-medium">
-                Click to browse
-              </span>
-            </span>
-          </>
+          <div className="h-[70px] w-[90px] relative border border-black-10 rounded-md flex items-center justify-center">
+            <div className="flex flex-col items-center justify-center">
+              <IconPhotoPlus width={30} height={30} stroke={1} />
+              <span className="text-[10px] text-black-80">Photo & Video</span>
+            </div>
+          </div>
         )}
         <input
           className="hidden"

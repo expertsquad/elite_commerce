@@ -103,8 +103,8 @@ const EditCommentModalContent = ({ comment }: any) => {
           {/* <FileUploader name="reviewPhotos" inputRef={fileInputRef} /> */}
         </div>
 
-        <div>
-          <Button className="py-2 w-full bg-gradient-primary rounded-full text-white">
+        <div className="flex items-center justify-center">
+          <Button className="py-2 w-[90%] bg-gradient-primary rounded-full text-white fixed bottom-5">
             Submit Review
           </Button>
         </div>

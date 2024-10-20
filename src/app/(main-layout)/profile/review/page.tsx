@@ -17,6 +17,8 @@ const ProductReviewComponents = async () => {
     query: `reviewer.userId=${me?.data?._id}&reviewStatus=Pending`,
   });
 
+  console.log(reviewPending);
+
   return (
     <div>
       {reviewPending?.data?.length ? (
@@ -31,10 +33,7 @@ const ProductReviewComponents = async () => {
               <div className="flex justify-center items-center bg-gradient-primary-light rounded-lg relative shrink-0 w-16 h-16">
                 <Image
                   alt="Product Image"
-                  // src={`${server_url}${reviewNow.product.productPhoto}}
-                  // `}
                   src={`${server_url}${reviewNow?.product?.productPhoto}`}
-                  // src={imageUrl}
                   fill
                   className="inset-0 object-contain p-1"
                 />
@@ -52,6 +51,8 @@ const ProductReviewComponents = async () => {
                 reviewStatus={reviewNow?.reviewStatus}
                 reviewNow={reviewNow}
                 id={reviewNow?._id}
+                productId={reviewNow?.product?.productId}
+                orderId={reviewNow?.orderId}
               />
             </div>
           </div>

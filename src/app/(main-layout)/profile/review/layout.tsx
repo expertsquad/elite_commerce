@@ -6,7 +6,7 @@ import { Suspense } from "react";
 const ReviewLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
-      <div className="flex gap-4 items-center justify-start">
+      <div className="flex gap-4 items-center justify-start mb-5">
         <ReviewCustomLink path="/profile/review">
           <Button className="px-5 py-2 rounded-full border border-black-10">
             To Review

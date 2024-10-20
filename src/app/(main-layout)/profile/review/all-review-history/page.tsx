@@ -1,9 +1,7 @@
 import { dateFormat } from "@/utils/dateFormat";
 import Image from "next/image";
 import React from "react";
-
 import { server_url } from "@/constants";
-
 import { fetchProtectedData } from "@/actions/fetchData";
 import EditReviewBtn from "../_components/EditReviewBtn";
 import Pagination from "@/Components/Pagination";
@@ -31,10 +29,7 @@ const AllReviewHistory = async () => {
               <div className="flex justify-center items-center bg-gradient-primary-light rounded-lg relative shrink-0 w-16 h-16">
                 <Image
                   alt="Product Image"
-                  // src={`${server_url}${allReview.product.productPhoto}}
-                  // `}
                   src={`${server_url}${allReview?.product?.productPhoto}`}
-                  // src={imageUrl}
                   fill
                   className="inset-0 object-contain p-1"
                 />
