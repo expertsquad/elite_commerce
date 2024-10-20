@@ -1,8 +1,6 @@
 import { fetchProtectedData } from "@/actions/fetchData";
 import BillingAddress from "./_components/BillingAddress";
 import Link from "next/link";
-import { updateDataMutation } from "@/actions/updateDataMutation";
-import { postDataMutation } from "@/actions/postDataMutation";
 
 const page = async () => {
   // Get data
@@ -22,7 +20,7 @@ const page = async () => {
         <div className="pb-[1px] border-gradient-primary">
           <Link
             className="text-gradient-primary font-bold text-lg"
-            href="/profile/address"
+            href="/profile/billing-address"
           >
             Billing Address
           </Link>

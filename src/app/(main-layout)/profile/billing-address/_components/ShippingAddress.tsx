@@ -4,13 +4,16 @@ import { countryNames } from "@/constants/countryNames.constant";
 import Form from "@/Components/Form";
 import SubmitButton from "@/Components/SubmitButton";
 import { IAddress } from "@/interfaces/address.interface";
+import CustomDropdown from "@/Components/CustomDropdown";
 
 const ShippingAddress = ({
   submitAction,
   shippingAddress,
+  country,
 }: {
   submitAction: (addressId: string, formData: FormData) => Promise<void>;
   shippingAddress: IAddress;
+  country: string;
 }) => {
   const handleSubmitWithId = (formData: FormData) =>
     submitAction(shippingAddress?._id || "", formData);
@@ -45,31 +48,33 @@ const ShippingAddress = ({
           defaultValue={shippingAddress?.phoneNumber}
         />
 
-        {/* all country name */}
-        <label htmlFor="country" className="text-black-50">
-          Select Country
-          <select
-            name="country"
-            id="country"
-            className="w-full border border-black-10 text-black-80 px-3.5 py-2.5 mt-2 focus:outline-none focus:border-fuchsia-800 rounded-md"
-            defaultValue={shippingAddress?.country}
-          >
-            {countryNames?.map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <CustomInput
-          label="State"
-          type="text"
-          name="state"
-          placeholder="California"
+        <div className="opacity-50 pointer-events-none">
+          <CustomInput
+            label="Country"
+            type="text"
+            name="state"
+            placeholder="California"
+            defaultValue={country}
+          />
+        </div>
+        <CustomDropdown
+          data={countryNames}
+          onClick={(value) => console.log(value)}
+          className="w-full border border-black-10 py-2 rounded-lg px-3 "
+          itemClassName="py-1 hover:bg-black-10"
           defaultValue={shippingAddress?.state}
+          label="State"
+          searchInput={true}
         />
-
+        <CustomDropdown
+          data={countryNames}
+          onClick={(value) => console.log(value)}
+          className="w-full border border-black-10 py-2 rounded-lg px-3 "
+          itemClassName="py-1 hover:bg-black-10"
+          defaultValue={shippingAddress?.state}
+          label="City"
+          searchInput={true}
+        />
         <CustomInput
           label="Zip Code"
           type="text"

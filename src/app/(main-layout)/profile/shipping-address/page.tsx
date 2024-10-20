@@ -3,7 +3,7 @@ import Link from "next/link";
 import { fetchProtectedData } from "@/actions/fetchData";
 import { postDataMutation } from "@/actions/postDataMutation";
 import { updateDataMutation } from "@/actions/updateDataMutation";
-import ShippingAddress from "../address/_components/ShippingAddress";
+import ShippingAddress from "../billing-address/_components/ShippingAddress";
 
 const page = async () => {
   // Get data
@@ -11,6 +11,12 @@ const page = async () => {
     route: "/user-address/me",
     query: "isDefault=true",
   });
+
+  const country = await fetchProtectedData({
+    route: "/settings/shop",
+  });
+
+  console.log(country);
 
   const submitAction = async (addressId: string, formData: FormData) => {
     "use server";
@@ -56,11 +62,12 @@ const page = async () => {
         </div>
 
         <div className="text-lg">
-          <Link href="/profile/address">Billing Address</Link>
+          <Link href="/profile/billing-address">Billing Address</Link>
         </div>
       </div>
 
       <ShippingAddress
+        country={country?.data?.country}
         submitAction={submitAction}
         shippingAddress={shippingAddress?.data[0]}
       />
