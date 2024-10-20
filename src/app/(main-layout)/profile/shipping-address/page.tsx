@@ -16,8 +16,6 @@ const page = async () => {
     route: "/settings/shop",
   });
 
-  console.log(country);
-
   const submitAction = async (addressId: string, formData: FormData) => {
     "use server";
     const dataObj: Record<string, any> = {};

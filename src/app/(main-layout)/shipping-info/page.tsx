@@ -5,7 +5,6 @@ import AddNewShippingAddress from "./_components/AddNewShippingAddress";
 import OrderItemsRightSection from "./_components/OrderItemsRightSection";
 import ShippinInfoTotalAmountCard from "./_components/ShippinInfoTotalAmountCard";
 import { fetchCountryData } from "@/actions/fetchCountryData";
-import { country_data_url } from "@/constants";
 
 const page = async () => {
   const defaultAddress = await fetchProtectedData({
@@ -13,10 +12,11 @@ const page = async () => {
     query: "isDefault=true",
   });
 
-  const countryData = await fetchCountryData({
-    route: "/countries",
-  });
-  console.log(countryData);
+  // const countryData = await fetchCountryData({
+  //   route: "/countries",
+  // });
+  // console.log(countryData);
+
   const getMe = await fetchProtectedData({
     route: "/user/me",
   });

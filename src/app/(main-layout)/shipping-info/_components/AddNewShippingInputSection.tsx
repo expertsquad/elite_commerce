@@ -3,6 +3,7 @@ import CustomInput from "../../../../Components/CustomInput";
 import { countryNames } from "@/constants/countryNames.constant";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { IAddress } from "@/interfaces/address.interface";
+import CustomDropdown from "@/Components/CustomDropdown";
 
 const AddNewShippingInputSection = ({
   onNewAddressChange,
@@ -89,6 +90,16 @@ const AddNewShippingInputSection = ({
           </select>
         </label>
 
+        {/* <CustomDropdown
+          data={countryNames}
+          onClick={(value) => console.log(value)}
+          className="w-full border border-black-10 py-2 rounded-lg px-3 "
+          itemClassName="py-1 hover:bg-black-10"
+          defaultValue={""}
+          label="Country"
+          searchInput={true}
+        /> */}
+
         <CustomInput
           label="State"
           type="text"
@@ -112,7 +123,6 @@ const AddNewShippingInputSection = ({
             shippintAddress?.zipCode === "" ? " border border-danger" : ""
           }
         />
-
         <CustomInput
           label="Company Name (Optional)"
           type="text"
