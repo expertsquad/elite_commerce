@@ -1,15 +1,20 @@
 import { fetchData } from "@/actions/fetchData";
 import React from "react";
-import SortingSection from "../../category/_components/FilterBySelection";
 import { IProduct } from "@/interfaces/product.interface";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import Pagination from "@/Components/Pagination";
 
-const BrandPage = async ({ params }: { params: { slug: string } }) => {
+const BrandProductViewDynamicPage = async ({
+  params,
+}: {
+  params: { slug: string; page: number };
+}) => {
+  console.log(params?.page);
   const response = await fetchData({
     route: "/product",
     query: `brand.brandName=${params.slug}`,
     limit: 20,
+    page: Number(params?.page),
   });
   const totalPages = Math.ceil(response?.meta?.total / response?.meta?.limit);
   return (
@@ -28,7 +33,7 @@ const BrandPage = async ({ params }: { params: { slug: string } }) => {
       {totalPages > 1 ? (
         <Pagination
           redirectTo={`/brands/${params.slug}/page`}
-          currentPage={1}
+          currentPage={Number(params?.page)}
           totalPages={totalPages}
         />
       ) : (
@@ -38,4 +43,4 @@ const BrandPage = async ({ params }: { params: { slug: string } }) => {
   );
 };
 
-export default BrandPage;
+export default BrandProductViewDynamicPage;

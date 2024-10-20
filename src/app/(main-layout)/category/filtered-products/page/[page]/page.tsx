@@ -3,15 +3,14 @@ import { fetchData } from "@/actions/fetchData";
 import Pagination from "@/Components/Pagination";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct, IProductApiResponse } from "@/interfaces/product.interface";
-import { FilterContext } from "@/Provider/BrandProductFilteringProvider";
+import { FilterContext } from "@/Provider/CategoryProductFilteringProvider";
 import { buildQueryString } from "@/utils/buildQueryString";
+import React, { useContext, useEffect, useState } from "react";
 
-import { useContext, useEffect, useState } from "react";
-
-const FilteredBrandProductsPage = ({
+const FilteredProductDynamicPage = ({
   params,
 }: {
-  params: { slug: string };
+  params: { page: number };
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState<IProductApiResponse | null>(null);
@@ -22,23 +21,20 @@ const FilteredBrandProductsPage = ({
   );
 
   useEffect(() => {
-    let query: string = `brand.brandName=${params.slug}`;
-    const filterQuery = buildQueryString(
-      filter as Record<string, string | string[]>
-    );
+    const query = buildQueryString(filter as Record<string, string | string[]>);
     const getDataByFetching = async () => {
       setIsLoading(true);
       const response = await fetchData({
         route: "/product",
         limit: 20,
-        query: `${query}&${filterQuery}`,
+        query: query,
+        page: Number(params.page),
       });
       setProducts(response);
       setIsLoading(false);
     };
-
     getDataByFetching();
-  }, [filter, params]);
+  }, [filter, params.page]);
 
   if (isLoading) {
     return (
@@ -58,27 +54,26 @@ const FilteredBrandProductsPage = ({
       </div>
     );
   }
-
   return (
-    <div className="flex flex-col gap-5">
-      <span>{products?.data?.length} items found</span>
-      <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5  justify-around">
-        {products?.data?.map((product: IProduct) => (
-          <ProductCard key={product?._id} product={product} />
-        ))}
+    <div className="space-y-5">
+      <div className="flex flex-col gap-5 mb-10">
+        <span className="text-lg">
+          {products?.data?.length} Items result found
+        </span>
+        <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5  justify-around">
+          {products?.data?.map((product: IProduct) => (
+            <ProductCard key={product?._id} product={product} />
+          ))}
+        </div>
       </div>
       <div>
-        {totalPages > 1 ? (
-          <Pagination
-            currentPage={1}
-            totalPages={totalPages}
-            redirectTo={`/brands/${params.slug}/filtered-brand-products/page`}
-          />
-        ) : (
-          ""
-        )}
+        <Pagination
+          redirectTo="/category/filtered-products/page/"
+          currentPage={Number(params.page)}
+          totalPages={totalPages || 0}
+        />
       </div>
     </div>
   );
 };
-export default FilteredBrandProductsPage;
+export default FilteredProductDynamicPage;
