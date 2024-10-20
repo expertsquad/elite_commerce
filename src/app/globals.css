@@ -36,6 +36,11 @@ main {
     var(--primary),
     var(--primary-light)
   );
+  --gradient-primary-reverse: linear-gradient(
+    90.37deg,
+    var(--primary-light),
+    var(--primary)
+  );
   --gradient-primary-light: linear-gradient(
     90.37deg,
     rgba(41, 67, 147, 0.1) 0.32%,

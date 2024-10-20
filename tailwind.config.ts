@@ -37,6 +37,7 @@ const config: Config = {
     // gradient colors
     backgroundImage: {
       "gradient-primary": "var(--gradient-primary)",
+      "gradient-primary-reverse": "var(--gradient-primary-reverse)",
       "gradient-primary-light": "var(--gradient-primary-light)",
       "gradient-secondary": "var(--gradient-secondary)",
       "gradient-secondary-light": "var(--gradient-secondary-light)",
