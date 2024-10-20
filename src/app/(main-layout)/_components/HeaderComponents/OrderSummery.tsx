@@ -14,6 +14,7 @@ const OrderSummery = ({
   products,
   // shippingFee,
   calculateTotalPriceAndDiscountOfCart,
+  currencyIcon,
 }: {
   setshow: React.Dispatch<React.SetStateAction<boolean>>;
   products: ICartProduct[];
@@ -22,6 +23,7 @@ const OrderSummery = ({
     totalDiscount: number;
     totalPrice: number;
   };
+  currencyIcon?: string;
 }) => {
   const { orderData, setRefetch } = useContext(OrderInitContext);
 
@@ -44,35 +46,39 @@ const OrderSummery = ({
       <div className="flex items-center justify-between ">
         <span className="text-black-80 md:text-base text-sm">Subtotal</span>
         <strong className="text-black-80 md:text-base text-sm font-semibold">
-          $<span>{totalPrice}</span>
+          {currencyIcon}
+          <span>{totalPrice}</span>
         </strong>
       </div>
-      <div className="flex items-center justify-between ">
+      <div className="flex items-center justify-between !my-2">
         <span className="text-black-80 md:text-base text-sm">Shipping</span>
         <strong className="text-black-80 md:text-base text-sm font-semibold">
-          $<span>{shippingFee}</span>
+          {currencyIcon}
+          <span>{shippingFee}</span>
         </strong>
       </div>
       <div className="flex items-center justify-between ">
         <span className="text-black-80 md:text-base text-sm">Discount</span>
         <strong className="text-gradient-secondary md:text-base text-sm font-semibold">
-          -$<span>{totalDiscount}</span>
+          -{currencyIcon}
+          <span>{totalDiscount}</span>
         </strong>
       </div>
       <hr className="border-black-10 border my-3.5" />
-      <div className="flex items-center justify-between ">
+      <div className="flex items-center justify-between !py-2">
         <span className="text-black-80 md:text-lg text-base font-semibold">
           Total
         </span>
         <strong className="text-black-80 md:text-lg text-base font-semibold">
-          $<span>{totalPayable}</span>
+          {currencyIcon}
+          <span>{totalPayable}</span>
         </strong>
       </div>
       <div className="flex items-center justify-center gap-5 md:px-5">
         <QuickOrderButton
           product={products}
           buttonStyle="!uppercase !text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] flex items-center justify-center gap-2.5 px-5 w-full py-3.5 bg-gradient-primary-light  text-white rounded-lg"
-          buttonIcon={<IconBolt size={20} fill="#fff" />}
+          buttonIcon={<IconBolt size={18} />}
           buttonText="QUICK ORDER"
         />
         <Link
@@ -84,7 +90,7 @@ const OrderSummery = ({
             onClick={() => setshow(false)}
             className="!uppercase !whitespace-nowrap py-[clamp(2px,1.2vh,20px)]"
           >
-            <IconShoppingCart height={18} width={18} />
+            <IconShoppingCart size={18} />
             Check Out
           </ButtonPrimary>
         </Link>

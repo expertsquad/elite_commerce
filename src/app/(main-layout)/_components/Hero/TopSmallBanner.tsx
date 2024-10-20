@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const TopSmallBanner = ({ topOffer }: { topOffer: heroTopSmallBanner }) => {
-  console.log(topOffer);
   return (
     <div
       className={`flex items-center gap-x-5 p-5 md:justify-start justify-center rounded-lg flex-1 w-full h-full`}

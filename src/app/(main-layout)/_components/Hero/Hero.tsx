@@ -7,7 +7,6 @@ const Hero = async () => {
   const data = await fetchData({ route: "/promotions/slider" });
 
   const sliderArray = Object.values(data?.data?.slider || {});
-  console.log(sliderArray);
 
   return (
     <section className="flex flex-col lg:flex-row gap-5 w-full">

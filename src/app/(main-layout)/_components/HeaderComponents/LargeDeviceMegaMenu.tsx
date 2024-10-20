@@ -60,6 +60,9 @@ const CategoriesAndSubcategories = async () => {
 const LargeDeviceMegaMenu = async () => {
   const categories = await fetchData({ route: "/category", limit: 5 });
   const products = await fetchData({ route: "/product", limit: 1 });
+  const currencyIcon = await fetchData({
+    route: "/settings/shop",
+  });
 
   return (
     <nav className="hidden md:flex main-container py-[clamp(8px,2vh,20px)] text-md items-center justify-between">
@@ -104,7 +107,7 @@ const LargeDeviceMegaMenu = async () => {
         {/* wishlist */}
         <WishlistBtn />
         {/* cart */}
-        <ShoppingCartBtn />
+        <ShoppingCartBtn currencyIcon={currencyIcon?.data?.currencySymbol} />
         {/* profile */}
         <Link href="/profile/dashboard" className="mt-2">
           <ProfilePhotoOrIcon />

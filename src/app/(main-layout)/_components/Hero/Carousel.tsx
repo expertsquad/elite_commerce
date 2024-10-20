@@ -8,8 +8,6 @@ const Carousel = ({ item }: { item: HeroSliderProps }) => {
   const discountedPrice =
     item?.price - item?.price * (item?.discountPercentage / 100);
 
-  console.log(item, "cehcking");
-
   return (
     <div
       key={item?._id}

@@ -16,7 +16,13 @@ import { storages } from "@/constants";
 import QuickOrderButton from "../../brands/_components/QuickOrderButton";
 import { useGetShippingFee } from "@/utils/shppingCharge/getShippingFee";
 
-const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
+const CartItems = ({
+  suggestions,
+  currencyIcon,
+}: {
+  suggestions: IProduct[];
+  currencyIcon?: string;
+}) => {
   const {
     cartProducts,
     calculateTotalPriceAndDiscountOfCart,
@@ -50,7 +56,8 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
 
       <div className="flex flex-col gap-5">
         <span className="block text-base">
-          Buy <span className="text-gradient-primary">$900</span> more to get{" "}
+          Buy <span className="text-gradient-primary">{currencyIcon}900</span>{" "}
+          more to get{" "}
           <span className="text-gradient-primary font-semibold">Freeship</span>{" "}
           🔥
         </span>
@@ -64,12 +71,13 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
                 key={product?._id}
                 product={product}
                 setRefetch={setRefetch}
+                currencyIcon={currencyIcon}
               />
             );
           })}
         </div>
         <div className="md:basis-1/3">
-          <div className="bg-white p-5 md:shadow-2xl rounded-[10px] md:border-none border border-black-10">
+          <div className="bg-white p-5 shadow-md rounded-[10px] md:border-none border border-black-10">
             <span className="text-gradient-primary font-semibold text-xl ">
               Cart Total
             </span>
@@ -77,13 +85,15 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
               <div className="flex items-center justify-between gap-5">
                 <span className="text-base text-black-80">Sub Total</span>
                 <strong className="text-base font-semibold">
-                  ${totalPrice}
+                  {currencyIcon}
+                  {totalPrice}
                 </strong>
               </div>
               <div className="flex items-center justify-between gap-5">
                 <span className="text-base text-black-80">Shipping Fee</span>
                 <strong className="text-base font-semibold">
-                  ${shippingFee}
+                  {currencyIcon}
+                  {shippingFee}
                 </strong>
               </div>
               <div className="flex items-center justify-between gap-5">
@@ -91,7 +101,8 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
                   discount
                 </span>
                 <strong className="text-base font-semibold text-danger">
-                  -${totalDiscount}
+                  -{currencyIcon}
+                  {totalDiscount}
                 </strong>
               </div>
               <hr className="border border-black-10" />
@@ -99,7 +110,8 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
             <div className="flex items-center justify-between mt-5 gap-5">
               <span className="font-semibold text-2xl">Total</span>
               <span className="text-gradient-primary font-semibold text-2xl">
-                ${totalPayable}
+                {currencyIcon}
+                {totalPayable}
               </span>
             </div>
             <div className="flex flex-col gap-2.5 mt-12">
@@ -108,14 +120,11 @@ const CartItems = ({ suggestions }: { suggestions: IProduct[] }) => {
                   Proceed To Checkout &rarr;
                 </Link>
               </ButtonPrimary>
-              {/* <ButtonPrimaryLight className="!text-black !rounded-full">
-                <IconBolt />
-                Quick Order
-              </ButtonPrimaryLight> */}
+
               <QuickOrderButton
                 product={cartProducts}
-                buttonStyle="!uppercase !text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] flex items-center justify-center gap-2.5 px-5 w-full py-3.5 bg-gradient-primary-light  text-white rounded-full"
-                buttonIcon={<IconBolt size={20} fill="#fff" />}
+                buttonStyle="!uppercase !text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] flex items-center justify-center gap-x-1 px-5 w-full py-3.5 bg-gradient-primary-light text-white rounded-full font-semibold"
+                buttonIcon={<IconBolt size={20} className="fill-primary" />}
                 buttonText="QUICK ORDER"
               />
             </div>
