@@ -1,14 +1,13 @@
 "use client";
 import { Button } from "@/Components/Buttons";
-import { ICartProduct } from "@/interfaces/cart.interface";
 import { IconArrowRight } from "@tabler/icons-react";
 import Link from "next/link";
 import calculateTotalPriceAndDiscountOfCart from "@/helpers/calculateTotalPriceAndDiscountOfCart";
 import { IShippingChargeProps } from "./OrderItemsRightSection";
 import { AddressData } from "@/interfaces/defaultShippingAddress.interface";
-import { useGetShippingFee } from "@/utils/shppingCharge/getShippingFee";
 import { useContext } from "react";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import { getShippingFee } from "@/utils/getShippingFee";
 
 const ShippinInfoTotalAmountCard = ({
   shippingCharge,
@@ -20,16 +19,16 @@ const ShippinInfoTotalAmountCard = ({
   currencySymbol?: string;
 }) => {
   const { orderData } = useContext(OrderInitContext);
-  console.log(orderData.orderItems);
+  // console.log(shippingCharge, defaultAddress);
   const products = orderData?.orderItems;
+  const city = defaultAddress?.city ? defaultAddress?.city : "";
 
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
+  console.log(totalPrice, totalDiscount);
+  console.log(products);
 
-  const shippingFee = useGetShippingFee({ soldAmount: totalPrice }) || 0;
-
-  const calculateTotalWithShipping = totalPrice + shippingFee;
-  const totalPayable = calculateTotalWithShipping - totalDiscount;
+  const shippingFee = getShippingFee(shippingCharge, city, totalPrice);
 
   return (
     <>
@@ -43,8 +42,10 @@ const ShippinInfoTotalAmountCard = ({
         </div>
         <div className="flex items-center justify-between">
           <p>Shipping</p>
-          <p>
-            {currencySymbol} {shippingFee}
+          <p className={`${shippingFee ? "" : "text-primary-light"}`}>
+            {shippingFee
+              ? currencySymbol + shippingFee
+              : "You Got Free Shipping"}
           </p>
         </div>
         <div className="flex items-center justify-between">
@@ -61,7 +62,7 @@ const ShippinInfoTotalAmountCard = ({
         <h2 className="">Total</h2>
         <h2 className="text-gradient-primary">
           {" "}
-          {currencySymbol} {totalPayable.toFixed(2)}
+          {currencySymbol} {totalPrice + shippingFee}
         </h2>
       </div>
       {/* Button Link */}

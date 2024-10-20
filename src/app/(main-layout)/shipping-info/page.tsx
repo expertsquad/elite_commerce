@@ -4,7 +4,6 @@ import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import AddNewShippingAddress from "./_components/AddNewShippingAddress";
 import OrderItemsRightSection from "./_components/OrderItemsRightSection";
 import ShippinInfoTotalAmountCard from "./_components/ShippinInfoTotalAmountCard";
-import { fetchCountryData } from "@/actions/fetchCountryData";
 
 const page = async () => {
   const defaultAddress = await fetchProtectedData({

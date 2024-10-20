@@ -8,6 +8,10 @@ const page = async () => {
     route: "/user-address/me",
     query: "isBilling=true",
   });
+  const country = await fetchProtectedData({
+    route: "/settings/shop",
+  });
+
   return (
     <div className="">
       {/* Tab to toggle section */}
@@ -27,7 +31,10 @@ const page = async () => {
         </div>
       </div>
 
-      <BillingAddress billingAddress={billingAddress?.data[0]} />
+      <BillingAddress
+        country={country?.data?.country}
+        billingAddress={billingAddress?.data[0]}
+      />
     </div>
   );
 };

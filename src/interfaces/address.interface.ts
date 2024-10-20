@@ -11,4 +11,5 @@ export interface IAddress {
   zipCode: number | string;
   phoneNumber: string;
   userId: string;
+  city?: string;
 }

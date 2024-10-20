@@ -19,6 +19,7 @@ export interface AddressData {
   userId: string;
   createdAt: string;
   updatedAt: string;
+  city?: string;
   __v: number;
 }
 

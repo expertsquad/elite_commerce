@@ -1,7 +1,7 @@
 import { IconBolt } from "@tabler/icons-react";
 import ButtonPrimary from "../../brands/_components/ButtonPrimary";
 import { IProduct } from "@/interfaces/product.interface";
-import { useGetShippingFee } from "@/utils/shppingCharge/getShippingFee";
+// import { useGetShippingFee } from "@/utils/shppingCharge/getShippingFee";
 
 interface IOrderSummaryProps {
   products: IProduct[];
@@ -20,7 +20,8 @@ export const OrderSummary = ({ products, loading }: IOrderSummaryProps) => {
     return acc + productTotal;
   }, 0);
 
-  const shipping = useGetShippingFee({ soldAmount: subtotal }) || 0;
+  // const shipping = useGetShippingFee({ soldAmount: subtotal }) || 0;
+  const shipping = 0;
 
   const discount = 0;
 

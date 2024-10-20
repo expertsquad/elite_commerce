@@ -8,9 +8,18 @@ import { postDataMutation } from "@/actions/postDataMutation";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import { useState } from "react";
 
-const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
-  const [selectedCountry, setSelectedCountry] = useState(
-    billingAddress.country ? billingAddress.country : ""
+const BillingAddress = ({
+  billingAddress,
+  country,
+}: {
+  billingAddress: IAddress;
+  country: string;
+}) => {
+  const [state, setState] = useState(
+    billingAddress?.state ? billingAddress?.state : ""
+  );
+  const [city, setCity] = useState(
+    billingAddress?.city ? billingAddress?.city : ""
   );
   const [loading, setLoading] = useState(false);
 
@@ -19,8 +28,14 @@ const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData(e.target);
-    formData.append("country", selectedCountry);
+    // state appended
+    formData.append("state", state);
+    // city appended
+    formData.append("city", city);
+    // country appended
+    formData.append("country", country);
     const dataObj: Record<string, any> = {};
+
     for (const [key, value] of Array.from(formData.entries())) {
       dataObj[key] = value;
     }
@@ -41,8 +56,8 @@ const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
       const result = await updateDataMutation({
         route: "/user-address" + "/" + billingAddress?._id,
         data: JSON.stringify(dataObj),
-        method: "PUT",
         formatted: true,
+        method: "PUT",
       });
     }
     setLoading(false);
@@ -54,7 +69,7 @@ const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
       className={`${loading ? "opacity-50 pointer-events-none" : ""}`}
     >
       <h3 className="[font-size:_clamp(1em,5vw,1.5em)] font-semibold text-gradient-primary my-7 ">
-        Billing Address
+        Shipping Address
       </h3>
 
       <div className="grid grid-cols-1 gap-4 md:gap-6 lg:grid-cols-2">
@@ -80,24 +95,34 @@ const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
           placeholder="017*******"
           defaultValue={billingAddress?.phoneNumber}
         />
+
+        <div className="opacity-50 pointer-events-none">
+          <CustomInput
+            label="Country"
+            type="text"
+            name="state"
+            placeholder="Bangladesh"
+            defaultValue={country}
+          />
+        </div>
         <CustomDropdown
           data={countryNames}
-          onClick={(value) => setSelectedCountry(value)}
+          onClick={(value) => setState(value)}
           className="w-full border border-black-10 py-2 rounded-lg px-3 "
           itemClassName="py-1 hover:bg-black-10"
-          defaultValue={billingAddress?.country}
-          label="Country"
+          defaultValue={state}
+          label="State"
           searchInput={true}
         />
-
-        <CustomInput
-          label="State"
-          type="text"
-          name="state"
-          placeholder="California"
-          defaultValue={billingAddress?.state}
+        <CustomDropdown
+          data={countryNames}
+          onClick={(value) => setCity(value)}
+          className="w-full border border-black-10 py-2 rounded-lg px-3 "
+          itemClassName="py-1 hover:bg-black-10"
+          defaultValue={city}
+          label="City"
+          searchInput={true}
         />
-
         <CustomInput
           label="Zip Code"
           type="text"
