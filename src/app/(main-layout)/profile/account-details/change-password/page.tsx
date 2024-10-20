@@ -1,22 +1,46 @@
+"use client";
 import Link from "next/link";
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import PasswordInput from "../../_components/PasswordInput";
-import { Button } from "@/Components/Buttons";
 import { updateDataMutation } from "@/actions/updateDataMutation";
-import Form from "@/Components/Form";
 import SubmitButton from "@/Components/SubmitButton";
 
-const page = () => {
-  const handleSubmit = async (formData: FormData) => {
-    "use server";
+const Page = () => {
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData(e.target);
+    const newPassword = formData.get("newPassword");
+    const confirmPassword = formData.get("confirmPassword");
+    const oldPassword = formData.get("oldPassword");
+
+    if (newPassword !== confirmPassword) {
+      return setErr("Password Not Matched"), setLoading(false);
+    } else if (
+      newPassword == "" ||
+      confirmPassword == "" ||
+      oldPassword == ""
+    ) {
+      return setErr("Field Required"), setLoading(false);
+    }
+
     const result = await updateDataMutation({
       route: "/user/change-password",
       data: formData,
       method: "PUT",
     });
+    if (result?.success) {
+      e.target.reset();
+    } else {
+      setErr(result.message);
+    }
+    setLoading(false);
   };
   return (
-    <div>
+    <div className={`${loading ? "pointer-events-none opacity-50" : ""}`}>
       {/* tab to toggle section */}
       <div className="flex gap-5 items-center border-b border-black-10 justify-start">
         <div className="text-lg">
@@ -40,20 +64,29 @@ const page = () => {
         Change Password
       </h3>
 
-      <Form handleSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div>
           <label className="text-black-50">Current Password</label>
-          <PasswordInput name="oldPassword" />
+          <PasswordInput
+            name="oldPassword"
+            error={err == "Password Not Matched" ? "" : err}
+          />
         </div>
 
         <div className="my-5">
           <label className="text-black-50">New Password</label>
-          <PasswordInput name="newPassword" />
+          <PasswordInput
+            name="newPassword"
+            error={err == "Old password is wrong!" ? "" : err}
+          />
         </div>
 
         <div>
           <label className="text-black-50">Confirm Password</label>
-          <PasswordInput name="confirmPassword" />
+          <PasswordInput
+            name="confirmPassword"
+            error={err == "Old password is wrong!" ? "" : err}
+          />
         </div>
 
         <div className="flex justify-end items-center mt-10">
@@ -61,9 +94,9 @@ const page = () => {
             Update Account Details
           </SubmitButton>
         </div>
-      </Form>
+      </form>
     </div>
   );
 };
 
-export default page;
+export default Page;

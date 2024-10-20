@@ -6,6 +6,7 @@ import { Order } from "@/interfaces/oreder.interface";
 const OrderSection = async () => {
   const getMe = await fetchProtectedData({
     route: "/user/me",
+    limit: 20,
   });
 
   const orderItems = await fetchProtectedData({

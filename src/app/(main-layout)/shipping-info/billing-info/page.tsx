@@ -23,7 +23,7 @@ const Page = () => {
 
     const billingAddress = orderData?.billingAddress as IAddress;
 
-    let billingZipCOde = billingAddress.zipCode;
+    let billingZipCOde = billingAddress?.zipCode;
 
     if (typeof billingZipCOde === "string") {
       billingZipCOde = Number(billingZipCOde);

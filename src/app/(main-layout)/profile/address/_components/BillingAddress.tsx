@@ -1,22 +1,58 @@
 "use client";
 import CustomInput from "../../../../../Components/CustomInput";
 import { countryNames } from "@/constants/countryNames.constant";
-import Form from "@/Components/Form";
 import SubmitButton from "@/Components/SubmitButton";
 import { IAddress } from "@/interfaces/address.interface";
+import CustomDropdown from "@/Components/CustomDropdown";
+import { postDataMutation } from "@/actions/postDataMutation";
+import { updateDataMutation } from "@/actions/updateDataMutation";
+import { useState } from "react";
 
-const BillingAddress = ({
-  submitAction,
-  billingAddress,
-}: {
-  submitAction: (addressId: string, formData: FormData) => Promise<void>;
-  billingAddress: IAddress;
-}) => {
-  const handleSubmitWithId = (formData: FormData) =>
-    submitAction(billingAddress?._id || "", formData);
+const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
+  const [selectedCountry, setSelectedCountry] = useState(
+    billingAddress.country ? billingAddress.country : ""
+  );
+  const [loading, setLoading] = useState(false);
+
+  // handle submit
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData(e.target);
+    formData.append("country", selectedCountry);
+    const dataObj: Record<string, any> = {};
+    for (const [key, value] of Array.from(formData.entries())) {
+      dataObj[key] = value;
+    }
+    //zipCode string to number
+    if (typeof dataObj.zipCode === "string") {
+      dataObj.zipCode = parseInt(dataObj.zipCode);
+    }
+    // Add isBilling = true
+    dataObj.isBilling = true;
+
+    if (!billingAddress) {
+      const result = await postDataMutation({
+        route: "/user-address/add",
+        data: JSON.stringify(dataObj),
+        formatted: true,
+      });
+    } else {
+      const result = await updateDataMutation({
+        route: "/user-address" + "/" + billingAddress?._id,
+        data: JSON.stringify(dataObj),
+        method: "PUT",
+        formatted: true,
+      });
+    }
+    setLoading(false);
+  };
 
   return (
-    <Form handleSubmit={handleSubmitWithId}>
+    <form
+      onSubmit={handleSubmit}
+      className={`${loading ? "opacity-50 pointer-events-none" : ""}`}
+    >
       <h3 className="[font-size:_clamp(1em,5vw,1.5em)] font-semibold text-gradient-primary my-7 ">
         Billing Address
       </h3>
@@ -44,23 +80,15 @@ const BillingAddress = ({
           placeholder="017*******"
           defaultValue={billingAddress?.phoneNumber}
         />
-
-        {/* all country name */}
-        <label htmlFor="country" className="text-black-50">
-          Select Country
-          <select
-            name="country"
-            id="country"
-            className="w-full border border-black-10 text-black-80 px-3.5 py-2.5 mt-2 focus:outline-none focus:border-fuchsia-800 rounded-md"
-            defaultValue={billingAddress?.country}
-          >
-            {countryNames?.map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
-        </label>
+        <CustomDropdown
+          data={countryNames}
+          onClick={(value) => setSelectedCountry(value)}
+          className="w-full border border-black-10 py-2 rounded-lg px-3 "
+          itemClassName="py-1 hover:bg-black-10"
+          defaultValue={billingAddress?.country}
+          label="Country"
+          searchInput={true}
+        />
 
         <CustomInput
           label="State"
@@ -100,7 +128,7 @@ const BillingAddress = ({
           Update Account Details
         </SubmitButton>
       </div>
-    </Form>
+    </form>
   );
 };
 

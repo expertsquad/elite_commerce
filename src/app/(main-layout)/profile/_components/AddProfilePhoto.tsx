@@ -31,7 +31,7 @@ const AddProfilePhoto = ({
   else
     return (
       <Fragment>
-        <div className="h-28 w-28 text-center">
+        <div className="h-28 w-28 text-center border border-primary rounded-full">
           <Image
             alt="Profile Photo"
             height={120}
@@ -43,7 +43,7 @@ const AddProfilePhoto = ({
         <Form handleSubmit={(e: any) => e.preventDefault()}>
           <label
             htmlFor="profilePhoto"
-            className="bg-white h-7 w-7 flex items-center justify-center rounded-full absolute bottom-0 right-0 cursor-pointer"
+            className="bg-white hover:bg-gradient-primary-light h-7 w-7 flex items-center justify-center rounded-full absolute bottom-0 right-0 cursor-pointer"
           >
             <IconPhotoEdit stroke={1} size={20} />
             <input

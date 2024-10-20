@@ -7,5 +7,5 @@ export interface PasswordInputProps {
   onChange?: (e: any) => void;
   value?: string | number;
   name?: string;
-  errors?: IErrorMessages[] | null;
+  error?: string;
 }
