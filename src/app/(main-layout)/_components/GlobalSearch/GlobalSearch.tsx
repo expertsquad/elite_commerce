@@ -13,7 +13,7 @@ export interface IGlobalSearchProps {
 }
 
 const GlobalSearch = ({ categories, products }: IGlobalSearchProps) => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [isMounted, setIsMounted] = useState(false);
 
