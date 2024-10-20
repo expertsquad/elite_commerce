@@ -3,6 +3,7 @@ import OrderItems from "../../_components/OrderItems";
 import { fetchProtectedData } from "@/actions/fetchData";
 import Pagination from "@/Components/Pagination";
 import { Order } from "@/interfaces/oreder.interface";
+import { getCurrency } from "@/utils/getCurrency";
 
 const AllOrderHistory = async () => {
   const getMe = await fetchProtectedData({
@@ -17,11 +18,13 @@ const AllOrderHistory = async () => {
     allOrderData?.meta?.total / allOrderData?.meta?.limit
   );
 
+  const currency = await getCurrency();
+
   return (
     <div className="space-y-5">
       <div>
         {allOrderData?.data?.map((order: Order) => (
-          <OrderItems key={order._id} order={order} />
+          <OrderItems currency={currency} key={order._id} order={order} />
         ))}
       </div>
       <div>

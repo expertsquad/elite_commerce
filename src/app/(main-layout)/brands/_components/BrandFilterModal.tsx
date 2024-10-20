@@ -14,12 +14,14 @@ const BrandFilterModal = ({
   brands,
   params,
   widget,
+  currency,
 }: {
   categories: ICategory[];
   products: IProduct[];
   brands: IBrand[];
   params: { slug: string };
   widget: IWidgetCard;
+  currency?: string;
 }) => {
   const [show, setShow] = useState(false);
   return (
@@ -46,6 +48,7 @@ const BrandFilterModal = ({
             categories={categories}
             params={params}
             widget={widget}
+            currency={currency}
           />
         </Modal>
       )}

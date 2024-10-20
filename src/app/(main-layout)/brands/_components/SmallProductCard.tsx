@@ -5,7 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const SmallProductCard = ({ product }: { product: IProduct }) => {
+const SmallProductCard = ({
+  product,
+  currency,
+}: {
+  product: IProduct;
+  currency: string;
+}) => {
   return (
     <Link
       href={`/products/${product?._id}`}
@@ -31,10 +37,12 @@ const SmallProductCard = ({ product }: { product: IProduct }) => {
         </span>
         <div className="flex items-center gap-1.5">
           <span className="text-black font-semibold text-sm">
-            ${product?.variants[0]?.discountedPrice || 0}
+            {currency}
+            {product?.variants[0]?.discountedPrice || 0}
           </span>
           <del className="text-xs text-black text-opacity-70">
-            ${product?.variants[0]?.sellingPrice || 0}
+            {currency}
+            {product?.variants[0]?.sellingPrice || 0}
           </del>
         </div>
       </div>

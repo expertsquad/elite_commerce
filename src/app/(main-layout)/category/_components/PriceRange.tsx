@@ -1,11 +1,16 @@
 "use client";
-
 import { FilterContext } from "@/Provider/CategoryProductFilteringProvider";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import Slider from "react-slider";
 
-const PriceRange = ({ redirectPath }: { redirectPath: string }) => {
+const PriceRange = ({
+  redirectPath,
+  currency,
+}: {
+  redirectPath: string;
+  currency?: string;
+}) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -71,8 +76,14 @@ const PriceRange = ({ redirectPath }: { redirectPath: string }) => {
         />
       </div>
       <div className="flex items-center justify-between mt-3.5">
-        <span className="text-base">Min Price: ${values[0]}</span>
-        <span className="text-base">Max Price: ${values[1]}</span>
+        <span className="text-base">
+          Min Price: {currency}
+          {values[0]}
+        </span>
+        <span className="text-base">
+          Max Price: {currency}
+          {values[1]}
+        </span>
       </div>
     </div>
   );

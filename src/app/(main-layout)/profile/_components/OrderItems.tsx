@@ -7,7 +7,13 @@ import OrderItemsCard from "./OrderItemsCard";
 import { Order } from "@/interfaces/oreder.interface";
 import { dateFormat } from "@/utils/dateFormat";
 
-const OrderItems = ({ order }: { order: Order }) => {
+const OrderItems = ({
+  order,
+  currency,
+}: {
+  order: Order;
+  currency: string;
+}) => {
   return (
     <div className=" md:shadow-order-history-card-shadow shadow-none  border border-black-10 md:border-transparent mt-5 p-5 rounded-lg">
       {/* Order top section start */}
@@ -43,10 +49,14 @@ const OrderItems = ({ order }: { order: Order }) => {
                 ? "bg-gradient-primary-light text-primary  px-5 rounded-md py-2"
                 : order?.existOrderStatus?.status === "Delivered"
                 ? "bg-gradient-positive text-positive    px-5 rounded-md py-2"
-                : order?.existOrderStatus?.status === "Rejected" || "Returned"
-                ? "bg-danger px-5 rounded-md py-2 "
+                : order?.existOrderStatus?.status === "Rejected"
+                ? "bg-[#BF17221A] px-5 text-[#BF1722] rounded-md py-2"
                 : order?.existOrderStatus?.status === "Pending"
-                ? "bg-secondary-light px-5 rounded-md py-2"
+                ? "bg-[#4114851A] text-[#411485] px-5 rounded-md py-2"
+                : order?.existOrderStatus?.status === "Returned"
+                ? "text-[#A33B3B] bg-[#F8EEEE] rounded-md py-2 px-5"
+                : order?.existOrderStatus?.status === "Cancelled"
+                ? "bg-[#FFE5E5] text-[#FF3838] rounded-md py-2 px-5"
                 : ""
             } " px-5 rounded-md py-2"`}
           >
@@ -57,7 +67,11 @@ const OrderItems = ({ order }: { order: Order }) => {
       {/* Order top section finish */}
       {/* Order items card */}
       {order?.orderItems?.map((orderItem) => (
-        <OrderItemsCard key={orderItem._id} orderItem={orderItem} />
+        <OrderItemsCard
+          currency={currency}
+          key={orderItem._id}
+          orderItem={orderItem}
+        />
       ))}
 
       {/* bottom section total order  */}
@@ -73,7 +87,8 @@ const OrderItems = ({ order }: { order: Order }) => {
           </p>{" "}
         </div>
         <h3 className="[font-size:_clamp(0.8em,5vw,1.5em)] text-gradient-primary font-bold">
-          ${order?.totalPayable}
+          {currency}
+          {order?.totalPayable}
         </h3>
       </div>
     </div>
