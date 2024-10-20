@@ -8,16 +8,19 @@ import { ICategory } from "@/interfaces/category.interface";
 import { IProduct } from "@/interfaces/product.interface";
 import { IBrand } from "@/interfaces/brand.interface";
 import ProductFilterByBrandsSection from "./ProductFilterByBrands";
+import { IWidgetCard } from "@/interfaces/widget.interface";
 
 export interface IFilteringSectionProps {
   categories: ICategory[];
   products: IProduct[];
   brands: IBrand[];
+  widget: IWidgetCard;
 }
 const FilteringSection = ({
   categories,
   products,
   brands,
+  widget,
 }: IFilteringSectionProps) => {
   const redirectPath = "/category/filtered-products";
   return (
@@ -46,7 +49,7 @@ const FilteringSection = ({
       />
       <span className="bg-black-10 h-0.5 w-full my-5 md:my-[30px] hidden md:flex"></span>
       <div className="hidden md:block">
-        <WidgetCard />
+        <WidgetCard widget={widget} />
       </div>
     </div>
   );

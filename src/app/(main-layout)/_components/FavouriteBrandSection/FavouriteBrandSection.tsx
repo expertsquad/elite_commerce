@@ -1,19 +1,22 @@
 import WidgetCard from "@/Components/WidgetCard";
 import { server_url } from "@/constants";
 import { IBrand } from "@/interfaces/brand.interface";
+import { IWidgetCard } from "@/interfaces/widget.interface";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const FavouriteBrandSection = ({
   favouriteBrands,
+  widget,
 }: {
   favouriteBrands: IBrand[];
+  widget?: IWidgetCard;
 }) => {
   return (
     <div className="md:flex items-start gap-5">
       {/* wiget card */}
-      <WidgetCard className="w-[350px] mx-auto" />
+      <WidgetCard widget={widget} className="w-[350px] mx-auto" />
       <div className="w-full mt-5 md:mt-0">
         <div className="relative w-full after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-36 after:h-[2px] md:after:h-1 after:bg-gradient-primary">
           <h1 className="text-md md:text-2xl font-bold text-gradient-primary">

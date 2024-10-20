@@ -14,7 +14,6 @@ const Pagination: React.FC<PaginationProps> = ({
   redirectTo,
 }) => {
   const router = useRouter();
-
   const handlePageClick = (pageNumber: number) => {
     if (pageNumber !== currentPage) {
       router.push(`${redirectTo}/${pageNumber}`);

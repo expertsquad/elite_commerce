@@ -9,7 +9,7 @@ const ProductsPage = async ({ params }: { params: { page: number } }) => {
   const products = await fetchData({
     route: "/product",
     page: params?.page,
-    limit: 12,
+    limit: 20,
   });
 
   const totalPages = Math.ceil(products?.meta?.total / products?.meta?.limit);

@@ -13,23 +13,23 @@ const CategoryPage = async () => {
   const mostPopularProducts = await fetchData({
     route: "/product",
     query: "sortBy=averageRating&sortOrder=desc",
-    limit: 12,
+    limit: 20,
   });
 
   const newProducts = await fetchData({
     route: "/product",
     query: "sortBy=createdAt&sortOrder=desc",
-    limit: 12,
+    limit: 20,
   });
   const lowPriceProducts = await fetchData({
     route: "/product",
     query: "sortBy=variants.sellingPrice&sortOrder=asc",
-    limit: 12,
+    limit: 20,
   });
   const highPriceProducts = await fetchData({
     route: "/product",
     query: "sortBy=variants.sellingPrice&sortOrder=desc",
-    limit: 12,
+    limit: 20,
   });
 
   return (

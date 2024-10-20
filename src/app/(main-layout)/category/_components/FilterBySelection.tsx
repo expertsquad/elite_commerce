@@ -100,7 +100,6 @@ const SortingSection = ({
           <></>
         )}
       </div>
-
       <div className="my-5">
         <Pagination
           totalPages={toatalPages}

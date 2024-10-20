@@ -4,16 +4,19 @@ import SortingSection from "./_components/FilterBySelection";
 import FilterModal from "./_components/FilterModal";
 import { fetchData } from "@/actions/fetchData";
 import FilteringSection from "./_components/FilteringSection";
+import { getWidget } from "@/utils/getWidget";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
-  const categories = await fetchData({ route: "/category", limit: 10 });
+  const categories = await fetchData({ route: "/category", limit: 100 });
 
   const products = await fetchData({
     route: "/product",
     limit: 5,
     query: "sortBy=averageRating",
   });
-  const brands = await fetchData({ route: "/brand", limit: 10 });
+  const brands = await fetchData({ route: "/brand", limit: 100 });
+
+  const widgetData = await getWidget();
 
   return (
     <div>
@@ -28,6 +31,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
             categories={categories?.data}
             products={products?.data}
             brands={brands?.data}
+            widget={widgetData}
           />
         </div>
         <div className=" gap-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3">
@@ -39,6 +43,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
               categories={categories?.data}
               products={products?.data}
               brands={brands?.data}
+              widget={widgetData}
             />
           </div>
         </div>

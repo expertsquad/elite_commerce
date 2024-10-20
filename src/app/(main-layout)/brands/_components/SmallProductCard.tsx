@@ -9,7 +9,7 @@ const SmallProductCard = ({ product }: { product: IProduct }) => {
   return (
     <Link
       href={`/products/${product?._id}`}
-      className="flex items-center gap-2.5 transition-all hover:bg-gradient-primary-light rounded-md"
+      className="flex items-center gap-2.5 transition-all hover:bg-gradient-primary-light rounded-md px-3.5 py-2.5"
     >
       <div className="relative shrink-0 w-[65px] h-[65px]  rounded-md bg-gradient-primary-light overflow-hidden">
         {product?.productPhotos?.length > 0 && (

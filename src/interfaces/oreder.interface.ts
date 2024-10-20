@@ -16,6 +16,10 @@ export interface Order {
     // Define the structure of the orderStatus object here
     [key: string]: any; // Replace with specific fields
   };
+  existOrderStatus?: {
+    // Define the structure of the orderStatus object here
+    [key: string]: any; // Replace with specific fields
+  };
   createdAt: string;
   updatedAt: string;
   orderId: string;

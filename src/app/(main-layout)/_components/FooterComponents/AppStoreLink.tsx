@@ -1,12 +1,15 @@
-import { appStore, googlePlay } from "@/assets";
+import appStore from "@/assets/Images/appStore.svg";
+import googlePlay from "@/assets/Images/GooglePlay.svg";
+import { IFooter } from "@/interfaces/footer.interface";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
-const AppStoreLink = () => {
+const AppStoreLink = ({ footer }: { footer: IFooter }) => {
   return (
     <div className="flex md:items-end items-center justify-center md:justify-end md:flex-col gap-5 w-full">
-      <div className="bg-black text-white rounded-lg px-3.5 py-2.5 flex items-center gap-3.5">
-        <div className="relative md:w-[30px] md:h-[34px] w-[20px] h-[24px]  overflow-hidden flex items-center justify-center">
+      <Link target="_blank" href={`${footer?.playstoreLink}`}>
+        <div className="md:w-[168px] w-[140px] h-[50px] relative">
           <Image
             src={googlePlay}
             alt="google play"
@@ -14,13 +17,9 @@ const AppStoreLink = () => {
             className="object-contain"
           />
         </div>
-        <div className="flex flex-col">
-          <span className="md:text-xs text-[10px] text-white">GET IT ON</span>
-          <span className="font-bold md:text-lg text-sm">Google Play</span>
-        </div>
-      </div>
-      <div className="bg-black text-white rounded-lg px-4 py-2.5 flex items-center gap-3.5">
-        <div className="relative md:w-[30px] md:h-[34px] w-[20px] h-[24px]  overflow-hidden flex items-center justify-center">
+      </Link>
+      <Link target="_blank" href={`${footer?.appstoreLink}`}>
+        <div className="md:w-[168px] w-[140px] h-[50px] relative">
           <Image
             src={appStore}
             alt="google play"
@@ -28,13 +27,7 @@ const AppStoreLink = () => {
             className="object-contain"
           />
         </div>
-        <div className="flex flex-col">
-          <span className="md:text-xs text-[10px] text-white">
-            Download on the{" "}
-          </span>
-          <span className="font-bold md:text-lg text-sm">App Store</span>
-        </div>
-      </div>
+      </Link>
     </div>
   );
 };

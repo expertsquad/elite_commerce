@@ -9,7 +9,7 @@ import { dateFormat } from "@/utils/dateFormat";
 
 const OrderItems = ({ order }: { order: Order }) => {
   return (
-    <div className="md:shadow-lg shadow-none border border-black-10 md:border-transparent mt-5 p-5 rounded-lg">
+    <div className=" md:shadow-order-history-card-shadow shadow-none  border border-black-10 md:border-transparent mt-5 p-5 rounded-lg">
       {/* Order top section start */}
       <div className="flex items-start lg:items-center md:justify-between flex-col lg:flex-row  border border-transparent lg:border lg:border-black-10 px-0 lg:px-4 py-3 rounded-lg gap-5">
         <div className="flex justify-between lg:justify-start gap-5 border border-black-10 rounded-lg lg:border-transparent w-full lg:w-7/12 p-3">
@@ -35,20 +35,22 @@ const OrderItems = ({ order }: { order: Order }) => {
           </Link>
           <span
             className={`whitespace-nowrap text-xs md:text-base ${
-              order?.orderStatus?.status === "Order placed"
+              order?.existOrderStatus?.status === "Order placed"
                 ? "bg-black-10  px-5 rounded-md py-2"
-                : order?.orderStatus?.status === "Packaging"
+                : order?.existOrderStatus?.status === "Packaging"
                 ? "bg-gradient-secondary-light text-secondary  px-5 rounded-md py-2"
-                : order?.orderStatus?.status === "Shipping"
+                : order?.existOrderStatus?.status === "Shipping"
                 ? "bg-gradient-primary-light text-primary  px-5 rounded-md py-2"
-                : order?.orderStatus?.status === "Delivered"
+                : order?.existOrderStatus?.status === "Delivered"
                 ? "bg-gradient-positive text-positive    px-5 rounded-md py-2"
-                : order?.orderStatus?.status === "Rejected"
+                : order?.existOrderStatus?.status === "Rejected" || "Returned"
                 ? "bg-danger px-5 rounded-md py-2 "
+                : order?.existOrderStatus?.status === "Pending"
+                ? "bg-secondary-light px-5 rounded-md py-2"
                 : ""
             } " px-5 rounded-md py-2"`}
           >
-            {order?.orderStatus?.status}
+            {order?.existOrderStatus?.status}
           </span>
         </div>
       </div>
