@@ -59,7 +59,7 @@ const CategoriesAndSubcategories = async () => {
 
 const LargeDeviceMegaMenu = async () => {
   const categories = await fetchData({ route: "/category", limit: 5 });
-  const products = await fetchData({ route: "/product", limit: 1 });
+  const products = await fetchData({ route: "/product", limit: 4, query: "" });
 
   return (
     <nav className="hidden md:flex main-container py-[clamp(8px,2vh,20px)] text-md items-center justify-between">

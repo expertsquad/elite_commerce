@@ -1,3 +1,4 @@
+import AnimatedLoading from "@/Components/AnimatedLoading";
 import Pagination from "@/Components/Pagination";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct, IProductApiResponse } from "@/interfaces/product.interface";
@@ -14,11 +15,7 @@ const FilteredProductsGridView = ({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="flex gap-2">
-          <div className="w-5 h-5 rounded-full animate-bounce bg-gradient-primary [animation-delay:-0.3s]"></div>
-          <div className="w-5 h-5 rounded-full animate-bounce bg-gradient-primary [animation-delay:-0.15s]"></div>
-          <div className="w-5 h-5 rounded-full animate-bounce bg-gradient-primary"></div>
-        </div>
+        <AnimatedLoading />
       </div>
     );
   }
