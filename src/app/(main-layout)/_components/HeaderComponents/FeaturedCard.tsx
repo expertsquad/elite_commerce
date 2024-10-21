@@ -4,8 +4,9 @@ import React from "react";
 import FeaturedProducts from "../FeaturedProducts/FeaturedProducts";
 import { FeaturedProduct } from "./FeaturedProduct";
 import MegaDiscountCard from "./MegaDiscountCard";
+import { IWidgetCard } from "@/interfaces/widget.interface";
 
-const FeaturedCard = () => {
+const FeaturedCard = ({ widget }: { widget: IWidgetCard }) => {
   return (
     <div className="hidden lg:flex px-5 gap-5 min-w-max">
       <div className=" flex flex-col gap-5">
@@ -19,7 +20,7 @@ const FeaturedCard = () => {
         </div>
       </div>
       <div className="hidden 2xl:block h-full overflow-auto">
-        <MegaDiscountCard />
+        <MegaDiscountCard widget={widget} />
       </div>
     </div>
   );

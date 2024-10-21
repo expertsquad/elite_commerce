@@ -4,6 +4,7 @@ import { OrderItem } from "@/interfaces/OrderItem.interface";
 import Image from "next/image";
 import React from "react";
 import OrderCardHeader from "./OrderCardHeader";
+import AddOrEditReview from "./AddOrEditReview";
 
 const OrderItemsCard = ({
   orderItem,
@@ -61,7 +62,7 @@ const OrderItemsCard = ({
       <div className="hidden lg:block w-1/2">
         <div className="flex text-center justify-between   ">
           <OrderCardHeader
-            title="QYT"
+            title="QTY"
             value={orderItem?.orderQuantity.toString()}
             className="text-lg text-black"
           />
@@ -79,6 +80,9 @@ const OrderItemsCard = ({
             value={`$${orderItem?.subTotalPayable?.toString()}`}
             className="text-lg font-bold text-gradient-primary"
           />
+          {orderItem?.isReviewed && (
+            <AddOrEditReview value={orderItem?.isReviewed} />
+          )}
         </div>
       </div>
     </div>

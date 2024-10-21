@@ -12,7 +12,7 @@ const OrderItems = ({
   currency,
 }: {
   order: Order;
-  currency: string;
+  currency?: string;
 }) => {
   return (
     <div className=" md:shadow-order-history-card-shadow shadow-none  border border-black-10 md:border-transparent mt-5 p-5 rounded-lg">

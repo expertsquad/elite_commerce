@@ -14,6 +14,7 @@ import MergingIndicator from "./MergingIndicator";
 import { CartContext } from "@/Provider/CartProvider";
 import Loading from "@/app/loading";
 import { IErrorMessages } from "@/interfaces/error.interface";
+import CustomLoader from "@/Components/CustomLoader";
 
 const LoginForm = () => {
   const { setRefetch } = useContext(CartContext);
@@ -53,9 +54,6 @@ const LoginForm = () => {
     }
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
   if (merging) {
     return <MergingIndicator />;
   }
@@ -66,8 +64,9 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full flex items-start justify-center"
+      className="w-full flex items-start justify-center relative"
     >
+      {isLoading && <CustomLoader />}
       <fieldset className="w-3/4 flex flex-col gap-3 border-t border-black-10">
         <legend className="mx-auto">Log in</legend>
 
@@ -75,7 +74,7 @@ const LoginForm = () => {
         <PasswordInput
           placeholder="Type your password"
           name="password"
-          errors={error}
+          error={error?.find((err) => err.path === "password")?.message}
         />
         <small className="ml-auto">Forgot password</small>
 
@@ -97,5 +96,4 @@ const LoginForm = () => {
     </form>
   );
 };
-
 export default LoginForm;
