@@ -18,7 +18,6 @@ const CategoriesAndSubcategories = async () => {
     limit: 1000,
     revalidate: 600,
   });
-
   const featureProduct = await fetchData({
     route: "/product",
     query: "sortBy=totalSoldQuantity",
