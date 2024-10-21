@@ -9,11 +9,27 @@ import CustomerReview from "./_components/CustomerReview";
 import SocialMediaAndOthers from "./_components/SocialMediaAndOthers";
 import SpecBulkProduct from "./_components/SpecBulkProduct";
 import SpecificationsMenu from "./_components/SpecificationsMenu";
+import SpecificationsAndBulkProductSection from "./_components/SpecificationsAndBulkProductSection";
+import { cookies } from "next/headers";
 
-const ProductViewPage = async ({ params }: { params: { id: string } }) => {
-  const response = await fetchData({
+const ProductViewPage = async ({
+  params,
+}: {
+  params: { id: string; slug: string };
+}) => {
+  const product = await fetchData({
     route: `/product/${params?.id}`,
   });
+
+  const currencyIcon = await fetchData({
+    route: `/settings/shop`,
+  });
+  const socialMedia = await fetchData({
+    route: "/settings/social-media",
+  });
+
+  const accessToken = cookies().get("accessToken")?.value;
+
   return (
     <div className="main-container px-5 mt-6">
       <div className="block md:hidden mb-5">
@@ -21,32 +37,46 @@ const ProductViewPage = async ({ params }: { params: { id: string } }) => {
       </div>
       <div className="grid lg:grid-cols-2 grid-cols-1 mb-16 md:gap-10 gap-5">
         <div>
-          <ProductViewImage product={response?.data} />
+          <ProductViewImage product={product?.data} />
         </div>
         <div className="md:flex-1">
-          <ProductViewDescAndOthers product={response?.data} />
+          <ProductViewDescAndOthers
+            product={product?.data}
+            currencyIcon={currencyIcon?.data?.currencySymbol}
+          />
         </div>
       </div>
       <ProductViewServices />
-      <SpecificationsMenu />
-      <div className="flex justify-between md:gap-7 gap-0 w-full">
-        <div className="w-full">
-          <div>
-            <Specifications product={response?.data} />
+      <section>
+        <SpecificationsMenu />
+        <div className="flex justify-between md:gap-7 gap-0 w-full">
+          <div className="w-full">
+            <div>
+              <Specifications product={product?.data} />
+            </div>
+            <div id="customerreview">
+              <CustomerReview
+                productId={params?.id}
+                averageRating={product?.data?.averageRating}
+              />
+            </div>
           </div>
-          <div id="customerreview">
-            <CustomerReview
-              productId={params?.id}
-              averageRating={response?.data?.averageRating}
+          <div>
+            <SpecBulkProduct
+              productdata={product?.data}
+              currencyIcon={currencyIcon?.data?.currencySymbol}
+              accessToken={accessToken!}
             />
           </div>
         </div>
-        <div>
-          <SpecBulkProduct productdata={response?.data} />
-        </div>
-      </div>
+      </section>
+      {/* <SpecificationsAndBulkProductSection
+        averageRating={response?.data?.averageRating}
+        productId={params?.id}
+        product={response?.data}
+      /> */}
       <RelatedProductsByCategory
-        categoryName={response?.data?.category?.categoryName}
+        categoryName={product?.data?.category?.categoryName}
       />
     </div>
   );

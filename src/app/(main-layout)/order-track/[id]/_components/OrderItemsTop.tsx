@@ -32,7 +32,7 @@ const OrderItemsTop = ({
           Date: {formatDate(createdAt)}
         </span>
         <div className="flex items-center text-black-50 text-xs md:text-sm whitespace-nowrap">
-          <IconTruckDelivery size={18} />
+          <IconTruckDelivery stroke={1} size={18} />
           <span>Estimated Delivery : {formatDate(updatedAt)}</span>
         </div>
       </div>

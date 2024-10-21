@@ -4,7 +4,7 @@ const MergingIndicator = () => {
   return (
     <div className="absolute bg-white-transparent z-50 h-dvh w-dvw flex items-center justify-center">
       <div className="flex items-center">
-        <span className="text-3xl mr-4">Your cart is merging...</span>
+        <span className="text-2xl mr-4">Syncing cart...</span>
         <svg
           className="animate-spin h-8 w-8 text-gray-800"
           xmlns="http://www.w3.org/2000/svg"

@@ -3,6 +3,8 @@ import SortingSection from "../../category/_components/FilterBySelection";
 import BrandFilterSection from "../_components/BrandFilterSection";
 import BrandFilterModal from "../_components/BrandFilterModal";
 import { fetchData } from "@/actions/fetchData";
+import { getWidget } from "@/utils/getWidget";
+import { getCurrency } from "@/utils/getCurrency";
 
 const Layout = async ({
   children,
@@ -18,6 +20,8 @@ const Layout = async ({
     query: "sortBy=averageRating",
   });
   const brands = await fetchData({ route: "/brand", limit: 10 });
+  const widgetData = await getWidget();
+  const currency = await getCurrency();
 
   return (
     <div className="my-10">
@@ -28,6 +32,8 @@ const Layout = async ({
           products={products?.data}
           categories={categories?.data}
           brands={brands?.data}
+          widget={widgetData}
+          currency={currency}
         />
       </div>
       <div className="gap-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3">
@@ -37,6 +43,8 @@ const Layout = async ({
             products={products?.data}
             categories={categories?.data}
             params={params}
+            widget={widgetData}
+            currency={currency}
           />
         </div>
         <div className="lg:col-span-3 md:grid-cols-2 md:col-span-2">

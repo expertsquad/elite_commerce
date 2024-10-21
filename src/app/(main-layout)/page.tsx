@@ -13,6 +13,7 @@ import ProductCard from "@/Components/ProductCard/ProductCard";
 import Loading from "../loading";
 import Pagination from "@/Components/Pagination";
 import DealsOfTheDaySection from "./_components/DealsOfTheDaySection/DealsOfTheDaySection";
+import { getWidget } from "@/utils/getWidget";
 
 const Page = async () => {
   const newestProducts = await fetchData({ route: "/product", limit: 8 });
@@ -38,6 +39,8 @@ const Page = async () => {
     limit: 20,
     // query: "sortBy=",
   });
+
+  const widget = await getWidget();
 
   return (
     <>
@@ -98,7 +101,10 @@ const Page = async () => {
           ))}
         </div>
         {/* favourite brand section */}
-        <FavouriteBrandSection favouriteBrands={favouriteBrands?.data} />
+        <FavouriteBrandSection
+          widget={widget}
+          favouriteBrands={favouriteBrands?.data}
+        />
 
         {/* Deals of the day */}
         <div className="flex justify-center items-center uppercase flex-col mt-16">

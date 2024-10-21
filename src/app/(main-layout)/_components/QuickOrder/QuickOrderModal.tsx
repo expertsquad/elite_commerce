@@ -39,7 +39,9 @@ const QuickOrderModal = ({
 
     const orderItems = products?.map((product: IProduct | ICartProduct) => ({
       productId: product?._id,
-      variantName: product?.variant?.variantName,
+      variantName: product?.variant?.variantName
+        ? product?.variant?.variantName
+        : "Not specified",
       orderQuantity: product?.orderQuantity,
     }));
 
@@ -59,10 +61,10 @@ const QuickOrderModal = ({
         data: JSON.stringify(value),
         formatted: true,
       });
-      if ("data" in response) {
+
+      if (response?.success) {
         const orderId = response?.data?._id;
         const isQuickOrder = "true";
-
         router.push(`/successfull/${orderId}?quick-order=${isQuickOrder}`);
 
         setFormValues({
@@ -70,13 +72,13 @@ const QuickOrderModal = ({
           phoneNumber: "",
           address: "",
         });
+        setShow(false);
       }
-
-      console.log(response);
     } catch (error) {
       console.error("Order failed:", error);
     } finally {
       setLoading(false);
+      setShow(false);
     }
   };
 

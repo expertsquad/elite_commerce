@@ -5,9 +5,13 @@ import { IconMinus, IconPlus } from "@tabler/icons-react";
 const IncreaseDecreaseCartItems = ({
   product,
   setRefetch,
+  className,
+  btnStyle,
 }: {
   product: ICartProduct;
   setRefetch: React.Dispatch<React.SetStateAction<number>>;
+  className?: string;
+  btnStyle?: string;
 }) => {
   const handleIncreaseQuantity = () => {
     updateCart({ actionType: "add", product: product });
@@ -18,19 +22,23 @@ const IncreaseDecreaseCartItems = ({
     setRefetch((prev) => prev + 1);
   };
   return (
-    <div className="bg-gradient-primary-light rounded-full px-1 py-[3px] flex items-center gap-2">
+    <div
+      className={`bg-gradient-primary-light rounded-full py-2 px-3 flex items-center justify-center gap-x-2 ${className}`}
+    >
       <button
-        className="bg-gradient-primary rounded-full p-1"
+        className={`bg-gradient-primary rounded-full p-0.5 ${btnStyle}`}
         onClick={handleDecreaseQuantity}
       >
-        <IconMinus className="text-white" stroke={1.5} width={13} height={13} />
+        <IconMinus className="text-white" stroke={1.5} />
       </button>
-      <strong className="text-xs font-normal">{product?.orderQuantity}</strong>
+      <strong className="text-base font-normal">
+        {product?.orderQuantity}
+      </strong>
       <button
-        className="bg-gradient-primary rounded-full p-1"
+        className={`bg-gradient-primary rounded-full p-0.5 ${btnStyle}`}
         onClick={handleIncreaseQuantity}
       >
-        <IconPlus className="text-white" stroke={1.5} width={13} height={13} />
+        <IconPlus className="text-white" stroke={1.5} />
       </button>
     </div>
   );

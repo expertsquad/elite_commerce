@@ -15,7 +15,7 @@ export const profileNavMenu = [
   },
   {
     name: "Order History",
-    link: "/profile/order-history",
+    link: "/profile/order-history/all-orders",
     icon: IconHistory,
   },
   {
@@ -25,7 +25,7 @@ export const profileNavMenu = [
   },
   {
     name: "Address",
-    link: "/profile/address",
+    link: "/profile/shipping-address",
     icon: IconMapPin,
   },
   {

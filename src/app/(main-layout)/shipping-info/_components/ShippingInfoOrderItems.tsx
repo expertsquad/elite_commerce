@@ -10,9 +10,12 @@ import { setLocalStorageData } from "@/helpers/localStorage.helper";
 
 export const ShippingInfoOrderItems = ({
   product,
+  currencySymbol,
 }: {
   product: ICartProduct;
+  currencySymbol: string;
 }) => {
+  console.log(currencySymbol);
   const { orderData, setRefetch } = useContext(OrderInitContext);
   const handleRemoveItem = () => {
     let updateOrderItems = orderData?.orderItems;
@@ -66,7 +69,9 @@ export const ShippingInfoOrderItems = ({
             </div>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="text-black-80 text-xs">${price}</span>
+            <span className="text-black-80 text-xs">
+              {currencySymbol} {price}
+            </span>
             <span>
               <IconX stroke={1} height={12} width={12} />
             </span>
@@ -85,7 +90,7 @@ export const ShippingInfoOrderItems = ({
           />
         </button>
         <strong className="font-semibold text-gradient-primary text-base">
-          ${price * product?.orderQuantity}
+          {currencySymbol} {price * product?.orderQuantity}
         </strong>
       </div>
     </div>

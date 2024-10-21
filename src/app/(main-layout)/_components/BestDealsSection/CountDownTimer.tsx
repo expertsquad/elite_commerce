@@ -1,57 +1,103 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-interface CountdownProps {
-  endDate?: Date;
+interface CountdownTimerProps {
+  startDate: string;
+  endDate: string;
 }
 
-const CountdownTimer: React.FC<CountdownProps> = ({ endDate }) => {
-  const calculateTimeLeft = useCallback(() => {
-    let now = new Date().getTime();
-    let distance = 0;
-
-    if (endDate instanceof Date) {
-      now = new Date().getTime();
-      distance = endDate.getTime() - now;
-    }
-
-    const days = Math.max(Math.floor(distance / (1000 * 60 * 60 * 24)), 0);
-    const hours = Math.max(
-      Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-      0
-    );
-    const minutes = Math.max(
-      Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-      0
-    );
-    const seconds = Math.max(Math.floor((distance % (1000 * 60)) / 1000), 0);
-
-    return { days, hours, minutes, seconds };
-  }, [endDate]);
-
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+const CountdownTimer: React.FC<CountdownTimerProps> = ({
+  startDate,
+  endDate,
+}) => {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
+    const calculateTimeLeft = () => {
+      const now = new Date().getTime();
+      const start = new Date(startDate).getTime();
+      const end = new Date(endDate).getTime();
+      const distance = end - now;
 
-    return () => clearInterval(timer);
-  }, [endDate, calculateTimeLeft]);
+      if (distance <= 0) {
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+        });
+        return;
+      }
+
+      if (now < start) {
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+        });
+        return;
+      }
+
+      setTimeLeft({
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hours: Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        ),
+        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((distance % (1000 * 60)) / 1000),
+      });
+    };
+
+    const intervalId = setInterval(calculateTimeLeft, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [startDate, endDate]);
 
   return (
-    <div className="flex items-center gap-5 ">
-      {Object.entries(timeLeft).map(([unit, value]) => (
-        <div
-          key={unit}
-          className="flex flex-col border p-1 md:p-2 rounded md:rounded-md items-center justify-center bg-white"
-        >
-          <span className="countdown text-sm md:text-base">{value}</span>
-          <span className="text-[10px] font-bold bg-gradient-to-r from-[#C83B62]  to-[#7F35CD]  text-transparent bg-clip-text">
-            {unit.toUpperCase()}
-          </span>
+    <div className="container mx-auto text-center p-4">
+      <div id="countdown" className="flex items-center justify-center gap-x-2">
+        <div className="bg-white w-[65px] h-[65px] flex flex-col items-center justify-center rounded-md">
+          <p className="text-gradient-primary font-bold text-xl">
+            {timeLeft?.days}
+          </p>
+          <p className="text-gradient-primary text-xs uppercase font-semibold">
+            Days
+          </p>
         </div>
-      ))}
+        :
+        <div className="bg-white w-[65px] h-[65px] flex flex-col items-center justify-center rounded-md">
+          <p className="text-gradient-primary font-bold text-xl">
+            {timeLeft?.hours}
+          </p>
+          <p className="text-gradient-primary text-xs uppercase font-semibold">
+            Hours
+          </p>
+        </div>
+        :
+        <div className="bg-white w-[65px] h-[65px] flex flex-col items-center justify-center rounded-md">
+          <p className="text-gradient-primary font-bold text-xl">
+            {timeLeft?.minutes}
+          </p>
+          <p className="text-gradient-primary text-xs uppercase font-semibold">
+            Mins
+          </p>
+        </div>
+        :
+        <div className="bg-white w-[65px] h-[65px] flex flex-col items-center justify-center rounded-md">
+          <p className="text-gradient-primary font-bold text-xl">
+            {timeLeft?.seconds}
+          </p>
+          <p className="text-gradient-primary text-xs uppercase font-semibold">
+            Secs
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

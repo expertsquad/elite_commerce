@@ -24,7 +24,7 @@ export const Button = ({
   } else {
     return (
       <button
-        className={`${classes} ${disabled && "opacity-50"}`}
+        className={`${classes} ${disabled && "opacity-50 pointer-events-none"}`}
         type="submit"
         disabled={disabled}
       >

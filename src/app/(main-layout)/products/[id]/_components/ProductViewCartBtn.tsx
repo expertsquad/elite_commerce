@@ -15,19 +15,15 @@ const ProductViewCartBtn = ({ product }: IProductCardProps) => {
   return (
     <button
       title="Add To Cart Button"
-      className="border-gradient-primary p-[1px] rounded-md w-full flex items-center justify-center "
+      className="border-gradient-primary p-[1px] rounded-md w-full flex items-center justify-center hover:bg-gradient-primary hover:text-white  transition duration-300"
       onClick={(e) => {
         e.preventDefault();
         handleAddToCart();
       }}
     >
       <span className="flex items-center justify-center gap-2">
-        <GenerateGradientIcon
-          IconComponent={IconShoppingCart}
-          stroke={2}
-          size={20}
-        />
-        <p className="text-gradient-primary py-2">ADD TO CART</p>
+        <IconShoppingCart stroke={2} size={20} />
+        <p className="font-bold py-2">ADD TO CART</p>
       </span>
     </button>
   );

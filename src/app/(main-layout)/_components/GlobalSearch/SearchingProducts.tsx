@@ -1,11 +1,14 @@
 "use client";
 import { fetchData } from "@/actions/fetchData";
+import Loading from "@/app/loading";
+import AnimatedLoading from "@/Components/AnimatedLoading";
 import StarRating from "@/Components/StarRating";
 import { server_url } from "@/constants";
 import { IProduct } from "@/interfaces/product.interface";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import emptyState from "@/assets/Images/empty_item.svg";
 
 const SearchingProducts = ({
   searchValue,
@@ -51,10 +54,10 @@ const SearchingProducts = ({
   };
 
   return (
-    <div className="mb-5">
+    <div className="mb-5 flex flex-col overflow-y-auto h-[500px] scrollbar-y-remove  ">
       {loading ? (
-        <div className="flex items-center justify-center h-full">
-          Loading...
+        <div className="flex items-center justify-center h-full ">
+          <AnimatedLoading />
         </div>
       ) : searchValue ? (
         products?.length > 0 ? (
@@ -62,7 +65,7 @@ const SearchingProducts = ({
             <div
               key={product?._id}
               onClick={() => handleProductView(product)}
-              className="flex items-center gap-x-5 mb-5 cursor-pointer"
+              className="flex items-center gap-x-5 mb-5 cursor-pointer border-b border-black-10 pb-5"
             >
               <div className="bg-gradient-primary-light w-[70px] h-[70px] shrink-0 relative rounded-md">
                 <Image
@@ -99,7 +102,14 @@ const SearchingProducts = ({
           ))
         ) : (
           <div className="flex items-center justify-center h-full">
-            No Product Found!!!
+            <div className="relative w-52 h-52">
+              <Image
+                src={emptyState}
+                alt="No Products Found"
+                fill
+                className="object-cover inset-0 w-full h-full"
+              />
+            </div>
           </div>
         )
       ) : (

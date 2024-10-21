@@ -1,28 +1,53 @@
 import Image from "next/image";
-import React from "react";
+import CODIcon from "@/assets/Images/CODIcon.svg";
+import CardIcon from "@/assets/Images/card.png";
 
 const PaymentOptionCard = ({
   name,
-  cardIcon,
   title,
   onSelect,
+  selected,
 }: {
   name: string;
-  cardIcon: string;
   title: string;
-  onSelect: () => void; // Add this line
+  onSelect: () => void;
+  selected: boolean; // Update type to boolean
 }) => {
   return (
-    <div className="flex items-center justify-start gap-4 bg-gradient-primary-light p-5 rounded-lg ">
+    <div
+      className="w-full flex items-center justify-start gap-4 bg-gradient-primary-light p-5 rounded-lg cursor-pointer"
+      onClick={onSelect}
+    >
       <input
         type="radio"
         className="h-5 w-5"
-        name="paymentOption"
-        onChange={onSelect}
-      />{" "}
-      {/* Update this line */}
-      <Image alt="Card Image" src={cardIcon} height={30} width={30} />
-      <p>{title}</p>
+        name={name}
+        checked={selected}
+        readOnly
+      />
+      <Image
+        alt="Card Image"
+        src={
+          title === "sslcommerz"
+            ? CardIcon
+            : title === "COD"
+            ? CODIcon
+            : title === "stripe"
+            ? CardIcon
+            : ""
+        }
+        height={30}
+        width={30}
+      />
+      <p>
+        {title === "sslcommerz"
+          ? "Debit / Credit Card"
+          : title === "COD"
+          ? "Cash On Delivery"
+          : title === "stripe"
+          ? "Debit / Credit Card"
+          : ""}
+      </p>
     </div>
   );
 };

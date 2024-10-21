@@ -1,20 +1,14 @@
 import { dateFormat } from "@/utils/dateFormat";
 import Image from "next/image";
 import React from "react";
-
 import { server_url } from "@/constants";
-
-import { fetchData, fetchProtectedData } from "@/actions/fetchData";
+import { fetchData } from "@/actions/fetchData";
 import ReviewNewBtn from "./_components/ReviewNewBtn";
 
 const ProductReviewComponents = async () => {
-  const me = await fetchProtectedData({
-    route: "/user/me",
-  });
-
   const reviewPending = await fetchData({
     route: "/review",
-    query: `reviewer.userId=${me?.data?._id}&reviewStatus=Pending`,
+    query: `reviewStatus=Pending`,
   });
 
   return (
@@ -31,10 +25,7 @@ const ProductReviewComponents = async () => {
               <div className="flex justify-center items-center bg-gradient-primary-light rounded-lg relative shrink-0 w-16 h-16">
                 <Image
                   alt="Product Image"
-                  // src={`${server_url}${reviewNow.product.productPhoto}}
-                  // `}
                   src={`${server_url}${reviewNow?.product?.productPhoto}`}
-                  // src={imageUrl}
                   fill
                   className="inset-0 object-contain p-1"
                 />
@@ -52,6 +43,8 @@ const ProductReviewComponents = async () => {
                 reviewStatus={reviewNow?.reviewStatus}
                 reviewNow={reviewNow}
                 id={reviewNow?._id}
+                productId={reviewNow?.product?.productId}
+                orderId={reviewNow?.orderId}
               />
             </div>
           </div>

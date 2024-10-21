@@ -5,8 +5,9 @@ import { IconX } from "@tabler/icons-react";
 import Image from "next/image";
 import React from "react";
 import OrderCancelModal from "./OrderCancelModal";
+import { fetchData } from "@/actions/fetchData";
 
-const OrderedItemsTableData = ({
+const OrderedItemsTableData = async ({
   orderItems,
   id,
   orderStatusLength,
@@ -15,31 +16,32 @@ const OrderedItemsTableData = ({
   id: string;
   orderStatusLength: number;
 }) => {
-  console.log(orderStatusLength);
+  const currencyIcon = await fetchData({
+    route: "/settings/shop",
+  });
+
   return (
     <section>
-      <div className="hidden md:order-item-data bg-[#F7F7F7] px-3 py-2 text-sm font-medium mb-5">
-        <span>Product Name</span>
-        <span>Un Price</span>
-        <span>Qty</span>
-        <span>Total</span>
+      <div className="hidden md:flex bg-[#F7F7F7] px-3 py-2 text-sm font-medium mb-5 w-full">
+        <span className="w-[56%]">Product Name</span>
+        <span className="w-[15%]">Un Price</span>
+        <span className="w-[7%]">Qty</span>
+        <span className="w-[15%]">Total</span>
+        <span className="w-[7%]"></span>
       </div>
       <div>
         {orderItems?.map((item: OrderItemsTypes) => (
-          <div
-            key={item?._id}
-            className="mb-5 flex items-center md:order-item-data"
-          >
-            <div className="flex items-center w-full">
-              <div className="w-[50px] h-[50px] shrink-0 relative bg-gradient-primary-light rounded-md mr-2.5">
+          <div key={item?._id} className="mb-5 flex items-center">
+            <div className="flex items-center w-full md:w-[56%]">
+              <div className="w-[50px] h-[60px] md:h-[50px] shrink-0 relative bg-gradient-primary-light rounded-md mr-2.5">
                 <Image
                   src={`${server_url + item?.productPhotos[0]}`}
                   alt="product photo"
                   fill
                   style={{
-                    objectFit: "cover",
+                    objectFit: "contain",
                   }}
-                  className="w-full h-full top-0 left-0 object-cover p-2"
+                  className="inset-0 top-0 left-0 object-contain p-1.5"
                 />
               </div>
               <div className="w-full">
@@ -65,7 +67,8 @@ const OrderedItemsTableData = ({
                 <div className="md:hidden flex items-center justify-between">
                   <div className="flex items-center gap-x-1 text-black-80">
                     <span className="text-sm">
-                      ${item?.variant?.discountedPrice}
+                      {currencyIcon?.data?.currencySymbol}
+                      {item?.variant?.discountedPrice}
                     </span>
                     <span className="text-sm">
                       <IconX size={16} />
@@ -73,34 +76,40 @@ const OrderedItemsTableData = ({
                     <span className="text-sm">{item?.orderQuantity}</span>
                   </div>
                   <span className="text-sm font-bold text-gradient-primary">
-                    ${item?.variant?.sellingPrice * item?.orderQuantity}
+                    {currencyIcon?.data?.currencySymbol}
+                    {item?.variant?.sellingPrice * item?.orderQuantity}
                   </span>
                 </div>
               </div>
             </div>
-            <div className="hidden md:block">
+            <div className="hidden md:block md:w-[15%]">
               {item?.variant?.discountedPrice ? (
                 <span className="text-sm md:text-base">
-                  ${item?.variant?.discountedPrice}
+                  {currencyIcon?.data?.currencySymbol}
+                  {item?.variant?.discountedPrice}
                 </span>
               ) : (
                 <span className="text-sm md:text-base">
-                  ${item?.variant?.sellingPrice}
+                  {currencyIcon?.data?.currencySymbol}
+                  {item?.variant?.sellingPrice}
                 </span>
               )}
             </div>
-            <div className="hidden md:flex items-center">
-              <IconX size={16} className="text-black-80" />
+            <div className="hidden md:flex items-center md:w-[7%]">
+              <IconX size={16} stroke={1} className="text-black-80" />
               <span>{item?.orderQuantity}</span>
             </div>
-            <div className="hidden md:block font-bold text-gradient-primary">
-              ${item?.subTotalPayable?.toFixed(2)}
+            <div className="hidden md:block font-bold text-gradient-primary md:w-[15%]">
+              {currencyIcon?.data?.currencySymbol}
+              {item?.subTotalPayable?.toFixed(2)}
             </div>
-            {orderStatusLength <= 2 && (
-              <div className="md:block hidden">
-                <OrderCancelModal id={id} />
-              </div>
-            )}
+            <div className="hidden md:w-[7%] md:flex items-center justify-center">
+              {orderStatusLength <= 2 && (
+                <div>
+                  <OrderCancelModal id={id} />
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </div>

@@ -8,10 +8,14 @@ const ReviewNewBtn = ({
   reviewStatus,
   reviewNow,
   id,
+  orderId,
+  productId,
 }: {
   reviewStatus: "Pending" | "Reviewed" | "Deleted";
   reviewNow: any;
   id: any;
+  productId: string;
+  orderId: string;
 }) => {
   const [addComments, setAddComments] = useState(false);
 
@@ -34,7 +38,11 @@ const ReviewNewBtn = ({
           className="overflow-y-scroll p-3 w-[clamp(350px,80vw,450px)]"
           showCancelBtnINSmallDevice={true}
         >
-          <AddCommentModalContent reviewNow={reviewNow} id={id} />
+          <AddCommentModalContent
+            reviewNow={reviewNow}
+            id={id}
+            setAddComments={setAddComments}
+          />
         </Modal>
       )}
     </div>

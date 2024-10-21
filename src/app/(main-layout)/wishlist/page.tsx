@@ -8,7 +8,6 @@ import {
   IconShoppingCart,
   IconX,
 } from "@tabler/icons-react";
-
 import Image from "next/image";
 import StarRating from "@/Components/StarRating";
 import ButtonPrimaryLight from "../brands/_components/ButtonPrimaryLight";
@@ -21,6 +20,8 @@ import { getWishlistRemoteAndLocalDataAndMerge } from "@/helpers/getWishlistRemo
 import { CartContext } from "@/Provider/CartProvider";
 import { updateCart } from "@/utils/updateCart.utils";
 import QuickOrderButton from "../brands/_components/QuickOrderButton";
+import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
+import WishlishedProducts from "../_(.)wishlist/_components/WishlishedProducts";
 
 const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
   const { setRefetch } = useContext(WishlistContext);
@@ -50,13 +51,16 @@ const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
       </td>
       <td className="border border-black-10 border-collapse px-5 py-6">
         <div className="flex gap-5">
-          <div className="bg-gradient-primary-light md:p-3.5 p-1.5 rounded-[10px]">
-            <div className="relative  md:w-[60px] md:h-[60px]  w-[50px] h-[50px]">
+          <div className="bg-gradient-primary-light md:p-3.5 p-1.5 rounded-[10px] flex items-center justify-center">
+            <div className="relative md:w-[60px] md:h-[60px] w-[50px] h-[50px]">
               <Image
                 alt="product"
                 src={server_url + product?.productPhoto}
                 fill
-                objectFit="cover"
+                style={{
+                  objectFit: "contain",
+                }}
+                className="inset-0 top-0 left-0 object-contain"
               />
             </div>
           </div>
@@ -74,13 +78,13 @@ const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
           </div>
         </div>
       </td>
-      <td className=" border border-black-10 border-collapse px-5">
-        <span className="text-gradient-primary text-lg font-semibold">
+      <td className="border border-black-10 border-collapse px-5 text-center">
+        <span className="text-gradient-primary text-lg font-semibold text-center">
           {product?.variant?.discountedPrice || product?.variant?.sellingPrice}
         </span>
       </td>
       <td className="border border-black-10 border-collapse px-5">
-        <span className="text-positive text-lg font-semibold whitespace-nowrap">
+        <span className="[font-size:_clamp(14px,2.5vw,18px)] text-positive whitespace-nowrap">
           {product?.variant?.inStock} In Stock
         </span>
       </td>
@@ -93,11 +97,15 @@ const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
             <small className="text-sm">Already in the cart</small>
           ) : (
             <ButtonPrimaryLight
-              className="!rounded-full !text-black-80 !whitespace-nowrap !py-2 !px-3.5"
+              className="!rounded-full !text-black-80 !whitespace-nowrap !py-2 !px-3.5 !gap-x-2"
               onClick={() => handleAddToCart({ product })}
             >
-              <IconShoppingCart color="#24509E" />
-              Add To Cart
+              <GenerateGradientIcon
+                size={20}
+                stroke={1}
+                IconComponent={IconShoppingCart}
+              />
+              <span className="text-gradient-primary">Add To Cart</span>
             </ButtonPrimaryLight>
           )}
         </div>
@@ -109,7 +117,7 @@ const WishlistItem = ({ product }: { product: IWishlistProduct }) => {
             orderQuantity: 1,
             variant: product?.variants?.[0],
           }}
-          buttonStyle="bg-gradient-primary whitespace-nowrap text-white rounded-full px-3.5 uppercase flex items-center justify-center gap-2.5 text-sm py-2"
+          buttonStyle="bg-gradient-primary whitespace-nowrap text-white rounded-full px-3.5 uppercase flex items-center justify-center gap-x-2 text-sm py-2"
           buttonIcon={<IconBolt size={20} fill="#fff" />}
           buttonText="QUICK ORDER"
         />
@@ -132,7 +140,7 @@ const Wishlist = () => {
         <Breadcrumb title="My Wishlist" />
       </div>
       <div className="max-w-[1320px] mx-auto px-5 mt-12  ">
-        <div className="relative table-auto overflow-x-auto scrollbar-x-remove">
+        <div className="relative table-auto overflow-x-auto scrollbar-x-remove hidden md:block">
           {wishlistProducts?.length ? (
             <table className=" border border-black-10 border-collapse w-full">
               <thead>
@@ -163,19 +171,34 @@ const Wishlist = () => {
             </p>
           )}
         </div>
+        <div className="block md:hidden">
+          {wishlistProducts?.map((product: IWishlistProduct, index: number) => (
+            <WishlishedProducts
+              key={index}
+              product={product}
+              setRefetch={setRefetch}
+            />
+          ))}
+        </div>
         <div className="flex items-center justify-center gap-3.5 my-12">
           <Link
             href={"/"}
-            className="py-4 bg-gradient-secondary-light px-5 rounded flex items-center justify-center text-base whitespace-nowrap"
+            className="py-2 px-2 md:py-4 md:px-5 bg-gradient-secondary-light rounded flex items-center justify-center text-sm md:text-base whitespace-nowrap"
           >
-            ← BACK TO SHOPPING
+            <span className="text-gradient-secondary">← BACK TO SHOPPING</span>
           </Link>
           <Link
             href={"/cart"}
-            className="py-4 bg-gradient-primary-light px-5 rounded flex items-center justify-center text-base gap-[5px] whitespace-nowrap"
+            className="px-2 py-2 md:py-4 md:px-5 bg-gradient-primary-light text-sm md:text-base rounded flex items-center justify-center gap-[5px] whitespace-nowrap"
           >
-            <IconShoppingCart color="#24509E" width={20} height={20} /> GO TO
-            CART →
+            <span className="text-gradient-primary flex items-center gap-x-1">
+              <GenerateGradientIcon
+                size={20}
+                stroke={1}
+                IconComponent={IconShoppingCart}
+              />
+              GO TO CART →
+            </span>
           </Link>
         </div>
       </div>

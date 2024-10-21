@@ -4,11 +4,21 @@ import React from "react";
 import ProductVariantPrice from "./ProductVariantPrice";
 import ProductVariantColor from "./ProductVariantColor";
 
-const ProductPriceBasedOnVariants = ({ product }: { product: IProduct }) => {
+const ProductPriceBasedOnVariants = ({
+  product,
+  currencyIcon,
+}: {
+  product: IProduct;
+  currencyIcon: string;
+}) => {
   const [variant, setVariant] = React.useState(0);
   return (
     <div>
-      <ProductVariantPrice variant={variant} product={product} />
+      <ProductVariantPrice
+        variant={variant}
+        product={product}
+        currencyIcon={currencyIcon}
+      />
       <div className="flex items-center gap-x-5 my-5">
         <div>
           <span className="text-sm text-black-80">Color</span>

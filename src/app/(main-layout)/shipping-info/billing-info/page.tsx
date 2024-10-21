@@ -1,11 +1,24 @@
-import React from "react";
-import BillingAdressPageContent from "./_components/BillingAdressPageContent";
+import { fetchProtectedData } from "@/actions/fetchData";
+import BillingInfoPageContent from "./_components/BillingInfoPageContent";
 
-const page = () => {
+const page = async () => {
+  const shopSetting = await fetchProtectedData({
+    route: "/settings/shop",
+  });
+  const paymentMethodData = await fetchProtectedData({
+    route: "/settings/payment-method/active",
+  });
+  const shippingCharge = await fetchProtectedData({
+    route: "/settings/shipping-charge",
+  });
+
   return (
-    <>
-      <BillingAdressPageContent />
-    </>
+    <BillingInfoPageContent
+      currencySymbol={shopSetting?.data?.currencySymbol}
+      country={shopSetting?.data?.country}
+      paymentMethod={paymentMethodData?.data}
+      shippingCharge={shippingCharge?.data}
+    />
   );
 };
 

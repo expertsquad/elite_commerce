@@ -67,13 +67,13 @@ const SignupForm = ({
           <PasswordInput
             placeholder="Passoword"
             name="password"
-            errors={error}
+            error={error as any}
           />
 
           <PasswordInput
             placeholder="Confirm Passoword"
             name="confirmPassword"
-            errors={error}
+            error={error as any}
           />
         </div>
         <small className="text-xs text-danger text-center my-3">

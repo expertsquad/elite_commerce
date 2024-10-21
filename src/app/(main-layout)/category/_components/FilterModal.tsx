@@ -8,6 +8,8 @@ const FilterModal = ({
   categories,
   products,
   brands,
+  widget,
+  currency,
 }: IFilteringSectionProps) => {
   const [show, setShow] = useState(false);
   return (
@@ -29,9 +31,11 @@ const FilterModal = ({
           className="overflow-y-scroll scrollbar-y-remove p-3 w-[clamp(250px,80vw,350px)] md:hidden"
         >
           <FilteringSection
+            widget={widget}
             categories={categories}
             products={products}
             brands={brands}
+            currency={currency}
           />
         </Modal>
       )}

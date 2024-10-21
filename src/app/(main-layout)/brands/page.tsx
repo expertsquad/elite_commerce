@@ -4,17 +4,26 @@ import BrandCard from "@/Components/BrandCard";
 import { fetchData } from "@/actions/fetchData";
 import Pagination from "@/Components/Pagination";
 import TopSellingBrandProducts from "./_components/TopSellingBrandProducts";
+import { getWidget } from "@/utils/getWidget";
+import { getCurrency } from "@/utils/getCurrency";
 
 const Brand = async ({ params }: { params: { page: number } }) => {
   const currentPage = 1 || Number(params.page);
   const brandData = await fetchData({
     route: "/brand",
     page: params.page,
+    limit: 20,
   });
-
+  const topSellProducts = await fetchData({
+    route: "/product",
+    query: "sortBy=totalSoldQuantity",
+    limit: 5,
+  });
+  const widgetData = await getWidget();
+  const currency = await getCurrency();
   const totalPages = Math.ceil(brandData?.meta?.total / brandData?.meta?.limit);
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-5 px-5 ">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-5 md:px-5 ">
       <div className="md:col-span-3">
         <div className="flex flex-col gap-5 md:gap-7 md:col-span-3 ">
           <div className="flex items-center justify-between">
@@ -43,18 +52,24 @@ const Brand = async ({ params }: { params: { page: number } }) => {
               />
             )}
           </div>
+          <div className="md:hidden flex items-center justify-center">
+            <WidgetCard widget={widgetData} />
+          </div>
         </div>
       </div>
       <div className="">
         <div className="hidden lg:flex flex-col gap-7 ">
           {/* To Selling Brands Product */}
-          <TopSellingBrandProducts />
+          <TopSellingBrandProducts
+            currency={currency}
+            topSellingBrandProducts={topSellProducts?.data}
+          />
           <hr className="border-black-10 hidden md:block" />
 
           {/* Widget Promotion card */}
 
           <div className="">
-            <WidgetCard />
+            <WidgetCard widget={widgetData} />
           </div>
         </div>
       </div>

@@ -9,17 +9,22 @@ import { IProduct } from "@/interfaces/product.interface";
 import { IBrand } from "@/interfaces/brand.interface";
 import CategoryFilterForBrand from "./CategoryFilterForBrand";
 import PriceRangeFilterForBrand from "./PriceRangeFilterForBrand";
+import { IWidgetCard } from "@/interfaces/widget.interface";
 
 const BrandFilterSection = ({
   categories,
   products,
   brands,
   params,
+  widget,
+  currency,
 }: {
   categories: ICategory[];
   products: IProduct[];
   brands: IBrand[];
   params: { slug?: string };
+  widget: IWidgetCard;
+  currency?: string;
 }) => {
   const redirectPath = `/brands/${params?.slug || ""}/filtered-brand-products`;
   return (
@@ -33,9 +38,9 @@ const BrandFilterSection = ({
 
       <PriceRangeFilterForBrand redirectPath={redirectPath} />
       <span className="bg-black-10 h-0.5 w-full flex my-5 md:my-[30px]"></span>
-      <TopRatingProductCard products={products} />
+      <TopRatingProductCard products={products} currency={currency} />
       <span className="bg-black-10 h-0.5 w-full flex my-5 md:my-[30px]"></span>
-      <WidgetCard />
+      <WidgetCard widget={widget} />
     </div>
   );
 };

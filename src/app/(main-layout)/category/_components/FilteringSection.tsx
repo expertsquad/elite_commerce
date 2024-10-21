@@ -8,21 +8,26 @@ import { ICategory } from "@/interfaces/category.interface";
 import { IProduct } from "@/interfaces/product.interface";
 import { IBrand } from "@/interfaces/brand.interface";
 import ProductFilterByBrandsSection from "./ProductFilterByBrands";
+import { IWidgetCard } from "@/interfaces/widget.interface";
 
 export interface IFilteringSectionProps {
   categories: ICategory[];
   products: IProduct[];
   brands: IBrand[];
+  widget: IWidgetCard;
+  currency?: string;
 }
 const FilteringSection = ({
   categories,
   products,
   brands,
+  widget,
+  currency,
 }: IFilteringSectionProps) => {
   const redirectPath = "/category/filtered-products";
   return (
     <div className="">
-      <PriceRange redirectPath={redirectPath} />
+      <PriceRange currency={currency} redirectPath={redirectPath} />
       <span className="bg-black-10 h-0.5 w-full flex my-5 md:my-[30px]"></span>
       <div>
         <CategoryCard
@@ -35,7 +40,7 @@ const FilteringSection = ({
       <FilterByColor redirectPath={redirectPath} />
       <span className="bg-black-10 h-0.5 w-full hidden md:flex my-5 md:my-[30px]"></span>
       <div className="hidden md:block">
-        <TopRatingProductCard products={products} />
+        <TopRatingProductCard products={products} currency={currency} />
       </div>
       {/* <span className="bg-black-10 h-0.5 w-full flex my-5 md:my-[30px]"></span>
       <FilterByAvailableProducts  /> */}
@@ -46,7 +51,7 @@ const FilteringSection = ({
       />
       <span className="bg-black-10 h-0.5 w-full my-5 md:my-[30px] hidden md:flex"></span>
       <div className="hidden md:block">
-        <WidgetCard />
+        <WidgetCard widget={widget} />
       </div>
     </div>
   );

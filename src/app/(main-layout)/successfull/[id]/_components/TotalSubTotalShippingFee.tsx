@@ -5,6 +5,7 @@ type TotalSubTotalShippingFeeProps = {
   discount: number;
   shipping: number;
   total: number;
+  currencySymbol: string;
 };
 
 const TotalSubTotalShippingFee = ({
@@ -12,29 +13,42 @@ const TotalSubTotalShippingFee = ({
   shipping,
   subTotal,
   total,
+  currencySymbol,
 }: TotalSubTotalShippingFeeProps) => {
   return (
     <div className="flex flex-col gap-y-2.5">
       <div className="flex items-center justify-between">
         <span>Sub Total</span>
-        <span>${subTotal}</span>
+        <span>
+          {currencySymbol}
+          {subTotal}
+        </span>
       </div>
       <span className="h-[1px] w-full flex bg-[#4C4C4C]"></span>
       <div className="flex items-center justify-between font-light">
         <span>Discount</span>
-        <span className="text-danger">-${discount}</span>
+        <span className="text-danger">
+          -{currencySymbol}
+          {discount}
+        </span>
       </div>
       <span className="h-[1px] w-full flex bg-[#4C4C4C]"></span>
 
       <div className="flex items-center justify-between font-light">
         <span>Shipping</span>
-        <span>{shipping}</span>
+        <span>
+          {currencySymbol}
+          {shipping}
+        </span>
       </div>
       <span className="h-[1px] w-full flex bg-[#4C4C4C]"></span>
 
       <div className="flex items-center justify-between">
         <span>Total</span>
-        <span>${total?.toFixed(2)}</span>
+        <span>
+          {currencySymbol}
+          {total?.toFixed(2)}
+        </span>
       </div>
     </div>
   );

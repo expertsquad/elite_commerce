@@ -1,14 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomInput from "../../../../Components/CustomInput";
 import { countryNames } from "@/constants/countryNames.constant";
-import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { IAddress } from "@/interfaces/address.interface";
+import CustomDropdown from "@/Components/CustomDropdown";
 
 const AddNewShippingInputSection = ({
   onNewAddressChange,
+  country,
 }: {
   onNewAddressChange: (newAddress: IAddress | any) => void;
+  country: string;
 }) => {
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
   const [newAddress, setNewAddress] = useState({
     firstName: "",
     lastName: "",
@@ -20,7 +24,18 @@ const AddNewShippingInputSection = ({
     country: "",
     isDefault: false,
     selectedShippingAddress: "newAddress",
+    city: "",
   });
+
+  // used useEffect to set city and state
+  useEffect(() => {
+    setNewAddress((prevAddress) => ({
+      ...prevAddress,
+      city: city,
+      state: state,
+      country: country,
+    }));
+  }, [city, state, country]);
 
   const handleInputChange = (event: any) => {
     const { name, value, type, checked } = event.target;
@@ -31,8 +46,6 @@ const AddNewShippingInputSection = ({
     setNewAddress(updatedAddress);
     onNewAddressChange(updatedAddress);
   };
-  const { orderData } = useContext(OrderInitContext);
-  const shippintAddress = orderData?.shippingAddress as IAddress;
 
   return (
     <form>
@@ -45,7 +58,7 @@ const AddNewShippingInputSection = ({
           value={newAddress?.firstName}
           onChange={handleInputChange}
           inputStyle={
-            shippintAddress?.firstName === "" ? " border border-danger" : ""
+            newAddress?.firstName === "" ? " border border-danger" : ""
           }
         />
         <CustomInput
@@ -56,7 +69,7 @@ const AddNewShippingInputSection = ({
           value={newAddress?.lastName}
           onChange={handleInputChange}
           inputStyle={
-            shippintAddress?.lastName === "" ? " border border-danger" : ""
+            newAddress?.lastName === "" ? " border border-danger" : ""
           }
         />
 
@@ -68,37 +81,40 @@ const AddNewShippingInputSection = ({
           value={newAddress?.phoneNumber}
           onChange={handleInputChange}
           inputStyle={
-            shippintAddress?.phoneNumber === "" ? " border border-danger" : ""
+            newAddress?.phoneNumber === "" ? " border border-danger" : ""
           }
         />
-
-        <label htmlFor="country" className="text-black-50">
-          Select Country
-          <select
+        <div className="opacity-50 pointer-events-none">
+          <CustomInput
+            label="Country"
+            type="text"
             name="country"
-            id="country"
-            className="w-full border border-black-10 text-black-80 px-3.5 py-2.5 mt-2 focus:outline-none focus:border-fuchsia-800 rounded-md"
-            value={newAddress?.country}
+            placeholder="Bangladesh"
+            value={country}
             onChange={handleInputChange}
-          >
-            {countryNames?.map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <CustomInput
+          />
+        </div>
+        <CustomDropdown
+          data={countryNames}
+          onClick={(value) => setState(value)}
+          className={`w-full py-2 rounded-lg px-3 ${
+            state == "" ? "border border-danger" : "border border-black-10"
+          }`}
+          itemClassName="py-1 hover:bg-black-10"
+          defaultValue={newAddress?.state}
           label="State"
-          type="text"
-          name="state"
-          placeholder="California"
-          value={newAddress?.state}
-          onChange={handleInputChange}
-          inputStyle={
-            shippintAddress?.state === "" ? " border border-danger" : ""
-          }
+          searchInput={true}
+        />
+        <CustomDropdown
+          data={countryNames}
+          onClick={(value) => setCity(value)}
+          className={`w-full py-2 rounded-lg px-3 ${
+            city == "" ? "border border-danger" : "border border-black-10"
+          }`}
+          itemClassName="py-1 hover:bg-black-10"
+          defaultValue={newAddress?.city}
+          label="City"
+          searchInput={true}
         />
 
         <CustomInput
@@ -108,11 +124,8 @@ const AddNewShippingInputSection = ({
           placeholder="00108"
           value={newAddress?.zipCode}
           onChange={handleInputChange}
-          inputStyle={
-            shippintAddress?.zipCode === "" ? " border border-danger" : ""
-          }
+          inputStyle={newAddress?.zipCode === "" ? " border border-danger" : ""}
         />
-
         <CustomInput
           label="Company Name (Optional)"
           type="text"
@@ -121,17 +134,19 @@ const AddNewShippingInputSection = ({
           value={newAddress?.companyName}
           onChange={handleInputChange}
         />
-        <CustomInput
-          label="Street Address"
-          type="text"
-          name="streetAddress"
-          placeholder="1234 Main St"
-          value={newAddress?.streetAddress}
-          onChange={handleInputChange}
-          inputStyle={
-            shippintAddress?.streetAddress === "" ? " border border-danger" : ""
-          }
-        />
+        <div className="row-span-1">
+          <CustomInput
+            label="Street Address"
+            type="text"
+            name="streetAddress"
+            placeholder="1234 Main St"
+            value={newAddress?.streetAddress}
+            onChange={handleInputChange}
+            inputStyle={
+              newAddress?.streetAddress == "" ? " border border-danger" : ""
+            }
+          />
+        </div>
       </div>
 
       <div className="my-2">

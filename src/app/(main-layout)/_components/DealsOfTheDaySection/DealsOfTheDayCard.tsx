@@ -39,10 +39,10 @@ const DealsOfTheDayCard = ({ deal, index }: IDealsOfThedayCardProps) => {
           index % 2 === 0
             ? "bg-gradient-primary-light"
             : "bg-gradient-secondary-light"
-        }`}
+        } md:h-[500px] h-[450px] pt-[clamp(10px,2.5vw,20px)]`}
       >
-        <div className="flex items-center justify-center ">
-          <div className="relative  w-[200px] h-[200px] mx-auto -z-1">
+        <div className="flex items-center justify-center">
+          <div className="relative  md:w-[200px] w-[180px] md:h-[200px] h-[200px] mx-auto -z-1">
             <Image
               src={`${server_url}${deal?.productPhoto}`}
               alt="deals photo"
@@ -51,9 +51,9 @@ const DealsOfTheDayCard = ({ deal, index }: IDealsOfThedayCardProps) => {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-3 items-center text-center md:pb-10 pb-5 px-5">
+        <div className="flex flex-col gap-3.5 items-center text-center px-5 mt-5">
           <h3
-            className={`text-2xl md:text-3xl font-semibold capitalize ${
+            className={`text-2xl md:text-3xl font-semibold capitalize line-clamp-2 ${
               index % 2 === 0
                 ? "text-gradient-primary"
                 : "text-gradient-secondary"
@@ -61,12 +61,16 @@ const DealsOfTheDayCard = ({ deal, index }: IDealsOfThedayCardProps) => {
           >
             {deal?.title}
           </h3>
-          <p className="text-base text-black-80">{deal?.description}</p>
+          <p className="text-base text-black-80 line-clamp-2">
+            {deal?.description}
+          </p>
+        </div>
+        <div className="flex items-center justify-center  mt-3 md:mt-5">
           <Link
             href={`${deal?.link}`}
             className={`${
               index % 2 === 0 ? "bg-gradient-primary" : "bg-gradient-secondary"
-            } rounded-full flex items-center justify-center text-white py-3 px-5 uppercase`}
+            } rounded-full flex items-center justify-center text-white py-3 px-5 uppercase transition-all duration-300 hover:scale-105`}
           >
             {deal?.buttonText} &rarr;
           </Link>

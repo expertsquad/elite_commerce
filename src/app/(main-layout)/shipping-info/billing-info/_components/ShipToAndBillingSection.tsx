@@ -7,7 +7,7 @@ import { IUserMe } from "@/interfaces/getMe.interface";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { AddressData } from "@/interfaces/defaultShippingAddress.interface";
 
-const ShipToAndBillingSection = () => {
+const ShipToAndBillingSection = ({ country }: { country: string }) => {
   const [selectedOption, setSelectedOption] = useState("sameAsShipping");
   const { orderData, setOrderData } = useContext(OrderInitContext);
 
@@ -94,7 +94,10 @@ const ShipToAndBillingSection = () => {
       </div>
 
       {selectedOption === "addNewBillingAddress" && (
-        <AddNewBillingAddress onNewAddressChange={handleNewAddressChange} />
+        <AddNewBillingAddress
+          onNewAddressChange={handleNewAddressChange}
+          country={country}
+        />
       )}
     </div>
   );

@@ -7,7 +7,11 @@ const CartView = async () => {
   const productsData = await fetchData({
     route: "/product",
     query: "sortBy=averageRating",
-    limit: 3,
+    limit: 4,
+  });
+  const currency = await fetchData({ route: "/settings/shop" });
+  const shippingCharge = await fetchData({
+    route: "/settings/shipping-charge",
   });
   return (
     <div>
@@ -15,7 +19,11 @@ const CartView = async () => {
         <Breadcrumb title="Shopping Cart" />
       </div>
       <div className="main-container px-5">
-        <CartItems suggestions={productsData?.data} />
+        <CartItems
+          suggestions={productsData?.data}
+          currencyIcon={currency?.data?.currencySymbol}
+          freeShipping={shippingCharge?.data?.freeShippingMinOrderAmount}
+        />
       </div>
     </div>
   );

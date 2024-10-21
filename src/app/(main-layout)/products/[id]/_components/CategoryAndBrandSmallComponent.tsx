@@ -18,12 +18,14 @@ const CategoryAndBrandSmallComponent = ({
           src={`${server_url + brandPhoto}`}
           alt="Prand Photo"
           fill
-          sizes="(max-width: 80px) 10vw, (max-width: 100px) 10vw, 15vw"
-          className="inset-0 object-contain"
+          style={{ objectFit: "cover" }}
+          className="inset-0 object-cover"
         />
       </div>
       <span className="text-black-10">|</span>
-      <span className="text-black-80">Category: {categoryName}</span>
+      <span className="text-black-80 [font-size:_clamp(13px,2.5vw,16px)]">
+        Category: {categoryName}
+      </span>
     </div>
   );
 };

@@ -36,6 +36,11 @@ main {
     var(--primary),
     var(--primary-light)
   );
+  --gradient-primary-reverse: linear-gradient(
+    90.37deg,
+    var(--primary-light),
+    var(--primary)
+  );
   --gradient-primary-light: linear-gradient(
     90.37deg,
     rgba(41, 67, 147, 0.1) 0.32%,
@@ -151,19 +156,6 @@ main {
   @apply bg-gradient-primary;
 }
 
-/* ==Order item data responsive== */
-.order-item-data {
-  display: flex;
-}
-
-@media (min-width: 768px) {
-  .md\:order-item-data {
-    display: grid;
-    grid-template-columns: 2.5fr 0.7fr 0.5fr 0.7fr 0.2fr;
-    grid-gap: 5px;
-    align-items: center;
-  }
-}
 /* ==Cart item data responsive== */
 .cart-item-data {
   display: flex;

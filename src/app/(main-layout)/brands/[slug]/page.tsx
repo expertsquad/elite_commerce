@@ -3,12 +3,15 @@ import React from "react";
 import SortingSection from "../../category/_components/FilterBySelection";
 import { IProduct } from "@/interfaces/product.interface";
 import ProductCard from "@/Components/ProductCard/ProductCard";
+import Pagination from "@/Components/Pagination";
 
 const BrandPage = async ({ params }: { params: { slug: string } }) => {
   const response = await fetchData({
     route: "/product",
     query: `brand.brandName=${params.slug}`,
+    limit: 20,
   });
+  const totalPages = Math.ceil(response?.meta?.total / response?.meta?.limit);
   return (
     <div className="">
       <div className="flex items-center justify-between mb-6">
@@ -22,6 +25,15 @@ const BrandPage = async ({ params }: { params: { slug: string } }) => {
           <ProductCard key={product?._id} product={product} />
         ))}
       </div>
+      {totalPages > 1 ? (
+        <Pagination
+          redirectTo={`/brands/${params.slug}/page`}
+          currentPage={1}
+          totalPages={totalPages}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

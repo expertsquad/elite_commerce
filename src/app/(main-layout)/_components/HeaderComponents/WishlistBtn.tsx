@@ -133,10 +133,14 @@ const WishlistBtn = () => {
             <div className="flex flex-col gap-5 bg-white fixed bottom-5 w-[92%] mx-auto">
               <Link
                 href={"/wishlist"}
-                className="flex items-center justify-center gap-2.5 px-5 w-full py-3.5  bg-gradient-primary  text-white rounded-full "
+                className={`flex items-center justify-center gap-2.5 px-5 w-full py-3.5  bg-gradient-primary  text-white rounded-full uppercase ${
+                  wishlistProducts?.length === 0
+                    ? "pointer-events-none cursor-not-allowed opacity-50 select-none"
+                    : ""
+                }`}
                 onClick={() => setShow(false)}
               >
-                View All Wishlist
+                View Wishlist
               </Link>
 
               <Link

@@ -36,7 +36,7 @@ export const config = {
     "/profile/account-details",
     "/profile/account-details/change-password",
     "/profile/address",
-    "/profile/address/billing-address",
+    // "/profile/address/billing-address",
     "/profile/review",
     "/profile/review/review-history",
   ],
