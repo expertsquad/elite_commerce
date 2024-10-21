@@ -24,14 +24,16 @@ const OrderSuccessfull = async ({
   searchParams: SearchParams;
 }) => {
   const quickOrder = searchParams["quick-order"] === "true";
-  console.log(quickOrder);
   const response = await fetchData({
     route: `${
       quickOrder ? `/quick-order/${params?.id}` : `/online-order/${params?.id}`
     }`,
   });
+  const currencyIcon = await fetchData({
+    route: "/settings/shop",
+  });
   return (
-    <div className="main-container md:px-0 flex flex-col-reverse md:flex-row md:items-center md:gap-x-6 mb-6 md:mb-16">
+    <div className="max-w-7xl mx-auto md:px-0 flex flex-col-reverse md:flex-row md:items-center md:gap-x-6 mb-6 md:mb-16">
       <div className="flex-1 md:w-1/2 md:h-[700px] bg-[#333333] text-white px-2 md:px-[30px] md:py-[30px] py-5 md:rounded-lg relative">
         <div className="flex items-center justify-between">
           <span>Order Details</span>
@@ -44,7 +46,9 @@ const OrderSuccessfull = async ({
             Order Id: #{response?.data?.orderId}
           </span>
           <span className="text-sm md:text-base">
-            Payment: {response?.data?.payment?.paymentMethod}
+            Payment:{" "}
+            {response?.data?.payment?.paymentMethod ||
+              response?.data?.payment?.paymentGateway}
           </span>
         </div>
         <div className="mt-[30px] max-h-[400px] overflow-y-scroll scrollbar-y-remove">
@@ -70,10 +74,13 @@ const OrderSuccessfull = async ({
                   <div className="flex items-center gap-x-1">
                     <span>{item?.orderQuantity}</span>
                     <IconX size={18} />
-                    <span>${item?.variant?.discountedPrice}</span>
+                    <span>
+                      {currencyIcon?.data?.currencySymbol}
+                      {item?.variant?.discountedPrice}
+                    </span>
                   </div>
                   <span>
-                    $
+                    {currencyIcon?.data?.currencySymbol}
                     {(
                       item?.variant?.discountedPrice * item?.orderQuantity
                     ).toFixed(2)}
@@ -88,6 +95,7 @@ const OrderSuccessfull = async ({
           total={response?.data?.totalPayable}
           subTotal={response?.data?.totalPrice}
           discount={response?.data?.totalDiscount}
+          currencySymbol={currencyIcon?.data?.currencySymbol}
         />
       </div>
       <div className="md:w-1/2 bg-[#2943931A] bg-opacity-10 md:rounded-lg">

@@ -35,6 +35,7 @@ import demoBrand from "./Images/demoBrandImg.svg";
 import loginSignupBackground from "./Images/login&signupBackground.svg";
 import loginSignupTopShapeBg from "./Images/login&signupTopShapeBackground.svg";
 import bestDealsBG from "./Images/best-deals-bg.png";
+import arrowLeftCustom from "./Images/arrow-left.png";
 export {
   // smallLogo,
   // fullLogo,
@@ -71,4 +72,5 @@ export {
   loginSignupBackground,
   loginSignupTopShapeBg,
   bestDealsBG,
+  arrowLeftCustom,
 };
