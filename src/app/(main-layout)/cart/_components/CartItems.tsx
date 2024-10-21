@@ -14,7 +14,7 @@ import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
 import { storages } from "@/constants";
 import QuickOrderButton from "../../brands/_components/QuickOrderButton";
-import { useGetShippingFee } from "@/utils/shppingCharge/getShippingFee";
+// import { useGetShippingFee } from "@/utils/shppingCharge/getShippingFee";
 
 const CartItems = ({
   suggestions,
@@ -35,7 +35,8 @@ const CartItems = ({
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(cartProducts);
 
-  const shippingFee = useGetShippingFee({ soldAmount: totalPrice }) || 0;
+  // const shippingFee = useGetShippingFee({ soldAmount: totalPrice }) || 0;
+  const shippingFee = 0;
   const calculateTotalWithShipping = totalPrice + shippingFee;
   const totalPayable = calculateTotalWithShipping - totalDiscount;
   // handle add to init order to add all cart items to the context

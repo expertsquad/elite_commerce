@@ -1,10 +1,7 @@
-import { fetchProtectedData } from "@/actions/fetchData";
 import Link from "next/link";
 import React, { useContext } from "react";
 import { IconEdit } from "@tabler/icons-react";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
-import { IApiResponse } from "@/interfaces/apiResponse.interface";
-import { IUserMe } from "@/interfaces/getMe.interface";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { IAddress } from "@/interfaces/address.interface";
 import { UserContext } from "@/Provider/UserProvider";
@@ -13,7 +10,7 @@ const ShipToCard = () => {
   const { user } = useContext(UserContext);
 
   const { orderData } = useContext(OrderInitContext);
-  const shippingAddress = orderData.shippingAddress as IAddress;
+  const shippingAddress = orderData?.shippingAddress as IAddress;
   return (
     <div className="">
       <h3 className="uppercase text-lg font-semibold text-gradient-primary my-3 ">
@@ -30,7 +27,7 @@ const ShipToCard = () => {
               </small>
               <small className="flex items-center justify-center text-sm  gap-2">
                 Phone:{" "}
-                <p className="text-base text-black-80"> {user.phoneNumber}</p>
+                <p className="text-base text-black-80"> {user?.phoneNumber}</p>
               </small>
             </div>
             <Link
@@ -46,17 +43,17 @@ const ShipToCard = () => {
           <div className="flex items-start justify-start gap-3 flex-col ">
             <h4 className="text-black-50">Ship to</h4>
             <strong>
-              {shippingAddress.firstName + " " + shippingAddress.lastName}
+              {shippingAddress?.firstName + " " + shippingAddress?.lastName}
             </strong>
-            <p>{shippingAddress.streetAddress}</p>
+            <p>{shippingAddress?.streetAddress}</p>
             <p>
-              {shippingAddress.country +
+              {shippingAddress?.country +
                 " " +
-                shippingAddress.state +
+                shippingAddress?.state +
                 " " +
-                shippingAddress.zipCode}
+                shippingAddress?.zipCode}
             </p>
-            <p>{shippingAddress.phoneNumber}</p>
+            <p>{shippingAddress?.phoneNumber}</p>
           </div>
 
           <div className="flex items-center justify-center ">

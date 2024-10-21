@@ -8,9 +8,18 @@ import { postDataMutation } from "@/actions/postDataMutation";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import { useState } from "react";
 
-const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
-  const [selectedCountry, setSelectedCountry] = useState(
-    billingAddress.country ? billingAddress.country : ""
+const ShippingAddress = ({
+  shippingAddress,
+  country,
+}: {
+  shippingAddress: IAddress;
+  country: string;
+}) => {
+  const [state, setState] = useState(
+    shippingAddress?.state ? shippingAddress?.state : ""
+  );
+  const [city, setCity] = useState(
+    shippingAddress?.city ? shippingAddress?.city : ""
   );
   const [loading, setLoading] = useState(false);
 
@@ -19,8 +28,14 @@ const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData(e.target);
-    formData.append("country", selectedCountry);
+    // state appended
+    formData.append("state", state);
+    // city appended
+    formData.append("city", city);
+    // country appended
+    formData.append("country", country);
     const dataObj: Record<string, any> = {};
+
     for (const [key, value] of Array.from(formData.entries())) {
       dataObj[key] = value;
     }
@@ -28,10 +43,10 @@ const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
     if (typeof dataObj.zipCode === "string") {
       dataObj.zipCode = parseInt(dataObj.zipCode);
     }
-    // Add isBilling = true
-    dataObj.isBilling = true;
+    // Add isDefault = true
+    dataObj.isDefault = true;
 
-    if (!billingAddress) {
+    if (!shippingAddress) {
       const result = await postDataMutation({
         route: "/user-address/add",
         data: JSON.stringify(dataObj),
@@ -39,10 +54,10 @@ const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
       });
     } else {
       const result = await updateDataMutation({
-        route: "/user-address" + "/" + billingAddress?._id,
+        route: "/user-address" + "/" + shippingAddress?._id,
         data: JSON.stringify(dataObj),
-        method: "PUT",
         formatted: true,
+        method: "PUT",
       });
     }
     setLoading(false);
@@ -54,7 +69,7 @@ const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
       className={`${loading ? "opacity-50 pointer-events-none" : ""}`}
     >
       <h3 className="[font-size:_clamp(1em,5vw,1.5em)] font-semibold text-gradient-primary my-7 ">
-        Billing Address
+        Shipping Address
       </h3>
 
       <div className="grid grid-cols-1 gap-4 md:gap-6 lg:grid-cols-2">
@@ -63,14 +78,14 @@ const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
           type="text"
           name="firstName"
           placeholder="Zayed"
-          defaultValue={billingAddress?.firstName}
+          defaultValue={shippingAddress?.firstName}
         />
         <CustomInput
           label="Last Name"
           type="text"
           name="lastName"
           placeholder="Hossain"
-          defaultValue={billingAddress?.lastName}
+          defaultValue={shippingAddress?.lastName}
         />
 
         <CustomInput
@@ -78,32 +93,42 @@ const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
           type="text"
           name="phoneNumber"
           placeholder="017*******"
-          defaultValue={billingAddress?.phoneNumber}
+          defaultValue={shippingAddress?.phoneNumber}
+        />
+
+        <div className="opacity-50 pointer-events-none">
+          <CustomInput
+            label="Country"
+            type="text"
+            name="state"
+            placeholder="Bangladesh"
+            defaultValue={country}
+          />
+        </div>
+        <CustomDropdown
+          data={countryNames}
+          onClick={(value) => setState(value)}
+          className="w-full border border-black-10 py-2 rounded-lg px-3 "
+          itemClassName="py-1 hover:bg-black-10"
+          defaultValue={state}
+          label="State"
+          searchInput={true}
         />
         <CustomDropdown
           data={countryNames}
-          onClick={(value) => setSelectedCountry(value)}
+          onClick={(value) => setCity(value)}
           className="w-full border border-black-10 py-2 rounded-lg px-3 "
           itemClassName="py-1 hover:bg-black-10"
-          defaultValue={billingAddress?.country}
-          label="Country"
+          defaultValue={city}
+          label="City"
           searchInput={true}
         />
-
-        <CustomInput
-          label="State"
-          type="text"
-          name="state"
-          placeholder="California"
-          defaultValue={billingAddress?.state}
-        />
-
         <CustomInput
           label="Zip Code"
           type="text"
           name="zipCode"
           placeholder="00108"
-          defaultValue={billingAddress?.zipCode}
+          defaultValue={shippingAddress?.zipCode}
         />
 
         <CustomInput
@@ -111,7 +136,7 @@ const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
           type="text"
           name="companyName"
           placeholder="Company Name"
-          defaultValue={billingAddress?.companyName}
+          defaultValue={shippingAddress?.companyName}
         />
       </div>
       <div className="mt-2.5">
@@ -120,7 +145,7 @@ const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
           type="text"
           name="streetAddress"
           placeholder="1234 Main St"
-          defaultValue={billingAddress?.streetAddress}
+          defaultValue={shippingAddress?.streetAddress}
         />
       </div>
       <div className="flex justify-end items-center mt-5">
@@ -132,4 +157,4 @@ const BillingAddress = ({ billingAddress }: { billingAddress: IAddress }) => {
   );
 };
 
-export default BillingAddress;
+export default ShippingAddress;

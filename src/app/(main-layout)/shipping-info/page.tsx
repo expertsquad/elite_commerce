@@ -10,12 +10,15 @@ const page = async () => {
     route: "/user-address/me",
     query: "isDefault=true",
   });
-
   const getMe = await fetchProtectedData({
     route: "/user/me",
   });
-  const shippingCharge = await fetchData({
+  const shippingCharge = await fetchProtectedData({
     route: "/settings/shipping-charge",
+  });
+  // fetch shop data to get country and currency symbol
+  const shopSetting = await fetchProtectedData({
+    route: "/settings/shop",
   });
 
   return (
@@ -26,17 +29,23 @@ const page = async () => {
           <ShippingInfoContent getMe={getMe} />
           {/* shipping and shipping input section */}
           {defaultAddress?.data?.length ? (
-            <ShippingAddess defaultAddress={defaultAddress} />
+            <ShippingAddess
+              defaultAddress={defaultAddress}
+              country={shopSetting?.data?.country}
+            />
           ) : (
-            <AddNewShippingAddress />
+            <AddNewShippingAddress country={shopSetting?.data?.country} />
           )}
         </div>
       </div>
 
       <div className="">
         {/* We will add here link to go to next page */}
-        <OrderItemsRightSection />
+        <OrderItemsRightSection
+          currencySymbol={shopSetting?.data?.currencySymbol}
+        />
         <ShippinInfoTotalAmountCard
+          currencySymbol={shopSetting?.data?.currencySymbol}
           shippingCharge={shippingCharge?.data}
           defaultAddress={defaultAddress}
         />

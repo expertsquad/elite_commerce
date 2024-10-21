@@ -15,15 +15,16 @@ import { storages } from "@/constants";
 
 const ShippingAddess = ({
   defaultAddress,
+  country,
 }: {
   defaultAddress: ResponseShippingAddress;
+  country?: string;
 }) => {
   const [selectedOption, setSelectedOption] = useState("defaultAddress");
   const [shippingAddress, setShippingAddress] = useState(
     defaultAddress?.data[0] || {}
   );
   const { orderData, setRefetch } = useContext(OrderInitContext);
-
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSelectedOption(value);
@@ -94,7 +95,7 @@ const ShippingAddess = ({
             }`}
           >
             {selectedOption === "addNewAddress" && (
-              <div className="h-3 w-3 bg-gradient-primary rounded-full"></div>
+              <div className=" h-3 w-3 bg-gradient-primary rounded-full"></div>
             )}
           </div>
           <span className="ml-2">Use Different Shipping Address</span>
@@ -111,6 +112,7 @@ const ShippingAddess = ({
 
       {selectedOption === "addNewAddress" && (
         <AddNewShippingInputSection
+          country={country ? country : ""}
           onNewAddressChange={handleNewAddressChange}
         />
       )}

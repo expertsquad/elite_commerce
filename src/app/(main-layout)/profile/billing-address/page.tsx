@@ -1,8 +1,6 @@
 import { fetchProtectedData } from "@/actions/fetchData";
 import BillingAddress from "./_components/BillingAddress";
 import Link from "next/link";
-import { updateDataMutation } from "@/actions/updateDataMutation";
-import { postDataMutation } from "@/actions/postDataMutation";
 
 const page = async () => {
   // Get data
@@ -10,6 +8,10 @@ const page = async () => {
     route: "/user-address/me",
     query: "isBilling=true",
   });
+  const country = await fetchProtectedData({
+    route: "/settings/shop",
+  });
+
   return (
     <div className="">
       {/* Tab to toggle section */}
@@ -22,14 +24,17 @@ const page = async () => {
         <div className="pb-[1px] border-gradient-primary">
           <Link
             className="text-gradient-primary font-bold text-lg"
-            href="/profile/address"
+            href="/profile/billing-address"
           >
             Billing Address
           </Link>
         </div>
       </div>
 
-      <BillingAddress billingAddress={billingAddress?.data[0]} />
+      <BillingAddress
+        country={country?.data?.country}
+        billingAddress={billingAddress?.data[0]}
+      />
     </div>
   );
 };

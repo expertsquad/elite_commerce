@@ -25,7 +25,7 @@ export const profileNavMenu = [
   },
   {
     name: "Address",
-    link: "/profile/address",
+    link: "/profile/shipping-address",
     icon: IconMapPin,
   },
   {

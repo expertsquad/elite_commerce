@@ -18,9 +18,9 @@ import {
 // props interface
 export interface IOrderData {
   orderItems: ICartProduct[];
-  shippingAddress: IAddress | {};
-  billingAddress: IAddress | {};
-  payment: IPayment | {};
+  shippingAddress: IAddress | {} | any;
+  billingAddress: IAddress | {} | any;
+  payment: IPayment | {} | any;
 }
 interface IOrderProviderProps {
   orderData: IOrderData;
