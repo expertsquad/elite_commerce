@@ -12,6 +12,7 @@ import IncreaseDecreaseCartItems from "../../brands/_components/IncreaseDecrease
 import Modal from "@/Components/Modal";
 import ProgressBar from "../SliderComponents/ProgressBar";
 import OrderSummery from "./OrderSummery";
+import { calculatePercentageToFreeShipping } from "@/utils/calculatePercentageToFreeShipping";
 
 const ShoppingCartBtn = ({
   currencyIcon,
@@ -28,29 +29,12 @@ const ShoppingCartBtn = ({
   } = useContext(CartContext);
   const [show, setShow] = React.useState(false);
 
-  const productOrderQuantity = cartProducts.reduce(
-    (acc, product) => acc + product.orderQuantity,
-    0
+  const { totalPrice } = calculateTotalPriceAndDiscountOfCart(cartProducts);
+
+  const progressValue = calculatePercentageToFreeShipping(
+    totalPrice,
+    shippingCharge
   );
-
-  const { totalDiscount, totalPrice } =
-    calculateTotalPriceAndDiscountOfCart(cartProducts);
-
-  const bulkItems = cartProducts.filter((product) => product.bulk);
-
-  // If you want to calculate the total bulk order quantity
-  const totalBulkOrderQuantity = bulkItems.reduce((acc, product) => {
-    const bulkOrderQuantity =
-      product?.orderQuantity >= product?.bulk?.minOrder!
-        ? product?.orderQuantity
-        : 0;
-    return acc + bulkOrderQuantity;
-  }, 0);
-  const percentage = Math.min(
-    (productOrderQuantity / totalBulkOrderQuantity) * 100,
-    100
-  ).toFixed(0);
-
   return (
     <Fragment>
       <button onClick={() => setShow(!show)} className="relative">
@@ -77,8 +61,8 @@ const ShoppingCartBtn = ({
               Shopping Cart
             </span>
             <div className="flex flex-col gap-2 mt-2">
-              <div className="mt-5 overflow-hidden">
-                <ProgressBar progressValue={Number(20)} />
+              <div className="mt-5 ">
+                <ProgressBar progressValue={progressValue} />
               </div>
               <span className="text-base flex items-center gap-x-1">
                 Buy
