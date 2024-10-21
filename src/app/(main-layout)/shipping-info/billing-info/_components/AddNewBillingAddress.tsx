@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import CustomInput from "../../../../Components/CustomInput";
 import { countryNames } from "@/constants/countryNames.constant";
-import { IAddress } from "@/interfaces/address.interface";
+import CustomInput from "@/Components/CustomInput";
 import CustomDropdown from "@/Components/CustomDropdown";
 
-const AddNewShippingInputSection = ({
+const AddNewBillingAddress = ({
   onNewAddressChange,
   country,
 }: {
-  onNewAddressChange: (newAddress: IAddress | any) => void;
+  onNewAddressChange: (newAddress: any) => void;
   country: string;
 }) => {
   const [city, setCity] = useState("");
@@ -148,24 +147,8 @@ const AddNewShippingInputSection = ({
           />
         </div>
       </div>
-
-      <div className="my-2">
-        <label
-          htmlFor="saveAsDefault"
-          className="flex items-center justify-start gap-2"
-        >
-          <input
-            className="h-4 w-4"
-            type="checkbox"
-            name="isDefault"
-            checked={newAddress?.isDefault}
-            onChange={handleInputChange}
-          />
-          Save as default shipping address
-        </label>
-      </div>
     </form>
   );
 };
 
-export default AddNewShippingInputSection;
+export default AddNewBillingAddress;

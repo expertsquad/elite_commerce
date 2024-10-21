@@ -13,11 +13,11 @@ const page = async () => {
   const getMe = await fetchProtectedData({
     route: "/user/me",
   });
-  const shippingCharge = await fetchData({
+  const shippingCharge = await fetchProtectedData({
     route: "/settings/shipping-charge",
   });
   // fetch shop data to get country and currency symbol
-  const shopSetting = await fetchData({
+  const shopSetting = await fetchProtectedData({
     route: "/settings/shop",
   });
 

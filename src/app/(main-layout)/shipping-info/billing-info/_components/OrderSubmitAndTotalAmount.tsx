@@ -3,19 +3,17 @@ import { Button } from "@/Components/Buttons";
 import { IconArrowRight } from "@tabler/icons-react";
 import Link from "next/link";
 import calculateTotalPriceAndDiscountOfCart from "@/helpers/calculateTotalPriceAndDiscountOfCart";
-import { IShippingChargeProps } from "./OrderItemsRightSection";
 import { AddressData } from "@/interfaces/defaultShippingAddress.interface";
 import { useContext } from "react";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { getShippingFee } from "@/utils/getShippingFee";
+import { IShippingChargeProps } from "../../_components/OrderItemsRightSection";
 
-const ShippinInfoTotalAmountCard = ({
+const OrderSubmitAndTotalAmount = ({
   shippingCharge,
-  defaultAddress,
   currencySymbol,
 }: {
   shippingCharge?: IShippingChargeProps;
-  defaultAddress?: AddressData;
   currencySymbol?: string;
 }) => {
   const { orderData } = useContext(OrderInitContext);
@@ -24,7 +22,7 @@ const ShippinInfoTotalAmountCard = ({
   // city if it's available in order data context otherwise from default address
   const city = orderData?.shippingAddress?.city
     ? orderData?.shippingAddress?.city
-    : defaultAddress?.city;
+    : "";
 
   // getting total and discount by using custom function
   const { totalDiscount, totalPrice } =
@@ -34,7 +32,8 @@ const ShippinInfoTotalAmountCard = ({
 
   // Function to check if the shipping address is complete
   const isAddressComplete = () => {
-    const address = orderData?.shippingAddress || defaultAddress;
+    const address = orderData?.billingAddress;
+    const payment = orderData?.payment;
     return (
       address &&
       address.firstName &&
@@ -104,4 +103,4 @@ const ShippinInfoTotalAmountCard = ({
   );
 };
 
-export default ShippinInfoTotalAmountCard;
+export default OrderSubmitAndTotalAmount;

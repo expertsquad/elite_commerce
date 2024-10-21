@@ -1,26 +1,30 @@
 import Image from "next/image";
-import React from "react";
 
 const PaymentOptionCard = ({
   name,
   cardIcon,
   title,
   onSelect,
+  selected,
 }: {
   name: string;
   cardIcon: string;
   title: string;
-  onSelect: () => void; // Add this line
+  onSelect: () => void;
+  selected: boolean; // Update type to boolean
 }) => {
   return (
-    <div className="flex items-center justify-start gap-4 bg-gradient-primary-light p-5 rounded-lg ">
+    <div
+      className="w-full flex items-center justify-start gap-4 bg-gradient-primary-light p-5 rounded-lg cursor-pointer"
+      onClick={onSelect}
+    >
       <input
         type="radio"
         className="h-5 w-5"
-        name="paymentOption"
-        onChange={onSelect}
-      />{" "}
-      {/* Update this line */}
+        name={name}
+        checked={selected}
+        readOnly
+      />
       <Image alt="Card Image" src={cardIcon} height={30} width={30} />
       <p>{title}</p>
     </div>

@@ -7,9 +7,17 @@ import { IAddress } from "@/interfaces/address.interface";
 import OrderItemsRightSection from "../../_components/OrderItemsRightSection";
 import PaymentOption from "./PaymentOption";
 import ShipToAndBillingSection from "./ShipToAndBillingSection";
-import RightSideTotalAmountCard from "../../_components/RightSideTotalAmountCard";
+import OrderSubmitAndTotalAmount from "./OrderSubmitAndTotalAmount";
 
-const BillingInfoPageContent = () => {
+const BillingInfoPageContent = ({
+  currencySymbol,
+  country,
+  paymentMethod,
+}: {
+  currencySymbol: string;
+  country?: string;
+  paymentMethod: any;
+}) => {
   const router = useRouter();
   const { orderData } = useContext(OrderInitContext);
   const submitAction = async (e: React.FormEvent) => {
@@ -52,24 +60,13 @@ const BillingInfoPageContent = () => {
   return (
     <section className="p-5 lg:p-0 main-container flex w-full gap-5 flex-col md:flex-row mb-10">
       <div className="w-full">
-        <ShipToAndBillingSection />
-        <PaymentOption />
+        <ShipToAndBillingSection country={country ? country : ""} />
+        <PaymentOption paymentMethod={paymentMethod} />
       </div>
 
       <div>
-        <OrderItemsRightSection
-          buttonText="Place Order"
-          submitAction={submitAction}
-        />
-        <RightSideTotalAmountCard
-          products={orderData?.orderItems}
-          buttonLink={buttonLink}
-          buttonText={buttonText}
-          disabled={disableButton ? "disabled" : ""}
-          submitAction={submitAction}
-          shippingCharge={shippingCharge}
-          defaultAddress={defaultAddress?.data?.[0]}
-        />
+        <OrderItemsRightSection currencySymbol={currencySymbol} />
+        <OrderSubmitAndTotalAmount currencySymbol={currencySymbol} />
       </div>
     </section>
   );

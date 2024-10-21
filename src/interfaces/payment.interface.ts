@@ -1,4 +1,4 @@
 export interface IPayment {
-  paymentStatus: "Paid" | "Unpaid";
+  paymentStatus: "Paid" | "Unpaid" | any;
   paymentMethod: "Card" | "COD";
 }
