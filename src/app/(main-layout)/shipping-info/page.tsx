@@ -21,8 +21,6 @@ const page = async () => {
     route: "/settings/shop",
   });
 
-  console.log(shopSetting);
-
   return (
     <section className=" p-5 lg:p-0 main-container flex w-full gap-5 flex-col md:flex-row mb-10">
       <div className="w-full">
@@ -31,9 +29,12 @@ const page = async () => {
           <ShippingInfoContent getMe={getMe} />
           {/* shipping and shipping input section */}
           {defaultAddress?.data?.length ? (
-            <ShippingAddess defaultAddress={defaultAddress} />
+            <ShippingAddess
+              defaultAddress={defaultAddress}
+              country={shopSetting?.data?.country}
+            />
           ) : (
-            <AddNewShippingAddress />
+            <AddNewShippingAddress country={shopSetting?.data?.country} />
           )}
         </div>
       </div>

@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import AddNewShippingInputSection from "./AddNewShippingInputSection";
 import { AddressData } from "@/interfaces/defaultShippingAddress.interface";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
-const AddNewShippingAddress = () => {
+const AddNewShippingAddress = ({ country }: { country: string }) => {
   const { orderData, setOrderData } = useContext(OrderInitContext);
   const handleNewAddressChange = (newAddress: AddressData) => {
     updateShippingAddressInContext(newAddress);
@@ -22,7 +22,10 @@ const AddNewShippingAddress = () => {
         Contact Information
       </h3>
 
-      <AddNewShippingInputSection onNewAddressChange={handleNewAddressChange} />
+      <AddNewShippingInputSection
+        onNewAddressChange={handleNewAddressChange}
+        country={country}
+      />
     </div>
   );
 };

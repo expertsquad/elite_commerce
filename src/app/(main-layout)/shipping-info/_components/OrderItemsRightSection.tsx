@@ -11,6 +11,7 @@ export type IShippingChargeProps = {
   inside: number;
   outside: number;
   freeShippingMinOrderAmount: number | undefined | any;
+  city?: string;
 };
 
 const OrderItemsRightSection = ({
