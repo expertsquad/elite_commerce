@@ -23,6 +23,10 @@ const BillingInfoPageContent = ({
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { orderData } = useContext(OrderInitContext);
+
+  //demo.elitecommerce.app/transaction/success?orderId=6716632d8a754c9e034c23bf
+  //demo.elitecommerce.app/transaction/success?orderId=671662cc8a754c9e034c223f
+
   // handle submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
