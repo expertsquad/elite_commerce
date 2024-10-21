@@ -20,7 +20,7 @@ export interface IOrderData {
   orderItems: ICartProduct[];
   shippingAddress: IAddress | {} | any;
   billingAddress: IAddress | {} | any;
-  payment: IPayment | {};
+  payment: IPayment | {} | any;
 }
 interface IOrderProviderProps {
   orderData: IOrderData;

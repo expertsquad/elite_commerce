@@ -1,14 +1,14 @@
 import Image from "next/image";
+import CODIcon from "@/assets/Images/CODIcon.svg";
+import CardIcon from "@/assets/Images/card.png";
 
 const PaymentOptionCard = ({
   name,
-  cardIcon,
   title,
   onSelect,
   selected,
 }: {
   name: string;
-  cardIcon: string;
   title: string;
   onSelect: () => void;
   selected: boolean; // Update type to boolean
@@ -25,8 +25,29 @@ const PaymentOptionCard = ({
         checked={selected}
         readOnly
       />
-      <Image alt="Card Image" src={cardIcon} height={30} width={30} />
-      <p>{title}</p>
+      <Image
+        alt="Card Image"
+        src={
+          title === "sslcommerz"
+            ? CardIcon
+            : title === "COD"
+            ? CODIcon
+            : title === "stripe"
+            ? CardIcon
+            : ""
+        }
+        height={30}
+        width={30}
+      />
+      <p>
+        {title === "sslcommerz"
+          ? "Debit / Credit Card"
+          : title === "COD"
+          ? "Cash On Delivery"
+          : title === "stripe"
+          ? "Debit / Credit Card"
+          : ""}
+      </p>
     </div>
   );
 };

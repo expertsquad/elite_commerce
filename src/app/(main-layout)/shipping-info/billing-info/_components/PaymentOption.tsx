@@ -1,14 +1,15 @@
 "use client";
 import React, { useContext, useState } from "react";
 import PaymentOptionCard from "./PaymentOptionCard";
-import CODIcon from "@/assets/Images/CODIcon.svg";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 
 const PaymentOption = ({ paymentMethod }: { paymentMethod: any }) => {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  // order init context
   const { orderData, setOrderData } = useContext(OrderInitContext);
-  console.log(orderData.payment);
+  const [selectedOption, setSelectedOption] = useState(
+    orderData?.payment?.paymentMethodName
+      ? orderData?.payment?.paymentMethodName
+      : ""
+  );
 
   // Handler for selecting a payment option
   const handleSelectCOD = (option: string) => {
@@ -20,6 +21,7 @@ const PaymentOption = ({ paymentMethod }: { paymentMethod: any }) => {
         payment: {
           paymentStatus: "Unpaid",
           paymentMethod: option,
+          paymentMethodName: option,
         },
       });
     } else if (option == "sslcommerz") {
@@ -28,6 +30,7 @@ const PaymentOption = ({ paymentMethod }: { paymentMethod: any }) => {
         payment: {
           paymentStatus: "Paid",
           paymentGateway: option,
+          paymentMethodName: option,
         },
       });
     } else if (option == "stripe") {
@@ -36,6 +39,7 @@ const PaymentOption = ({ paymentMethod }: { paymentMethod: any }) => {
         payment: {
           paymentStatus: "Paid",
           paymentGateway: option,
+          paymentMethodName: option,
         },
       });
     }
@@ -52,7 +56,6 @@ const PaymentOption = ({ paymentMethod }: { paymentMethod: any }) => {
             key={payment?._id}
             name={payment?.paymentMethodName}
             title={payment?.paymentMethodName}
-            cardIcon={CODIcon}
             onSelect={() => handleSelectCOD(payment?.paymentMethodName)}
             selected={selectedOption === payment?.paymentMethodName}
           />

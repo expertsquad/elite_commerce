@@ -1,7 +1,7 @@
 "use client";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { IAddress } from "@/interfaces/address.interface";
 import OrderItemsRightSection from "../../_components/OrderItemsRightSection";
@@ -13,16 +13,23 @@ const BillingInfoPageContent = ({
   currencySymbol,
   country,
   paymentMethod,
+  shippingCharge,
 }: {
   currencySymbol: string;
   country?: string;
   paymentMethod: any;
+  shippingCharge: any;
 }) => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { orderData } = useContext(OrderInitContext);
-  const submitAction = async (e: React.FormEvent) => {
+  console.log(orderData);
+
+  // handle submit
+  const handleSubmit = async (e: React.FormEvent) => {
+    console.log(e);
     e.preventDefault();
-    e.stopPropagation();
+    setLoading(true);
     const shippingAddress = orderData?.shippingAddress as IAddress;
     let shippingZipCode = shippingAddress?.zipCode;
 
@@ -45,20 +52,28 @@ const BillingInfoPageContent = ({
         method: "POST",
         formatted: true,
       });
-
-      const orderId = result?.data?._id;
-
       if (result?.success === true) {
         localStorage.removeItem("orderInit");
-        router.push(`/successfull/${orderId}`);
+        if (orderData?.payment?.paymentMethod === "COD") {
+          router.push(`/successfull/${result?.data?._id}`);
+        } else {
+          router.push(result?.data);
+        }
       }
     } catch (error) {
       console.error(error);
     }
+    setLoading(false);
   };
 
   return (
-    <section className="p-5 lg:p-0 main-container flex w-full gap-5 flex-col md:flex-row mb-10">
+    <section
+      className={`${
+        loading
+          ? "opacity-50 pointer-events-none"
+          : "p-5 lg:p-0 main-container flex w-full gap-5 flex-col md:flex-row mb-10"
+      }`}
+    >
       <div className="w-full">
         <ShipToAndBillingSection country={country ? country : ""} />
         <PaymentOption paymentMethod={paymentMethod} />
@@ -66,7 +81,11 @@ const BillingInfoPageContent = ({
 
       <div>
         <OrderItemsRightSection currencySymbol={currencySymbol} />
-        <OrderSubmitAndTotalAmount currencySymbol={currencySymbol} />
+        <OrderSubmitAndTotalAmount
+          currencySymbol={currencySymbol}
+          shippingCharge={shippingCharge}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </section>
   );

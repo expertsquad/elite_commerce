@@ -29,6 +29,8 @@ const ShippinInfoTotalAmountCard = ({
   // getting total and discount by using custom function
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
+  console.log(totalDiscount, totalPrice);
+
   // getting expected shipping fee by using custom function
   const shippingFee = getShippingFee(shippingCharge, city, totalPrice);
 
@@ -50,7 +52,7 @@ const ShippinInfoTotalAmountCard = ({
 
   return (
     <>
-      {orderData?.orderItems.length ? (
+      {orderData?.orderItems?.length ? (
         <>
           {/* Sub total, shipping, and discount  */}
           <div className="flex flex-col  gap-4 py-4 border-b border-black-10">
