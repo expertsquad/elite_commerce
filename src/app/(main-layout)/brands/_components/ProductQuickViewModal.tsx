@@ -20,7 +20,7 @@ import QuickOrderButton from "./QuickOrderButton";
 import { CartContext } from "@/Provider/CartProvider";
 import ProdViewCartIncreamentDecreamentBtn from "../../products/[id]/_components/ProdViewCartIncreamentDecreamentBtn";
 import ProductViewCartBtn from "../../products/[id]/_components/ProductViewCartBtn";
-import calculateTotalPriceAndDiscountOfCart from "@/helpers/calculateTotalPriceAndDiscountOfCart";
+import useGetSingleProduct from "@/utils/useGetSingleProduct";
 
 const ProductQuickViewModal = ({
   show,
@@ -31,13 +31,14 @@ const ProductQuickViewModal = ({
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   product: IProduct;
 }) => {
+  const { singleProduct } = useGetSingleProduct(product?._id);
+
   const { orderData, setRefetch } = useContext(OrderInitContext);
   const { cartProducts } = useContext(CartContext);
   const isCarted = cartProducts.find((item) => item._id === product._id);
   const productOrderQuantity = isCarted?.orderQuantity || 0;
-  const bulkItems = product?.bulk?.minOrder || 0;
-  const bulkDiscount = product?.bulk?.discount || 0;
-  // const bulkItems = 15;
+  const bulkItems = singleProduct?.bulk?.minOrder || 0;
+  const bulkDiscount = singleProduct?.bulk?.discount || 0;
 
   const percentage = Math.min(
     (productOrderQuantity / bulkItems) * 100,
