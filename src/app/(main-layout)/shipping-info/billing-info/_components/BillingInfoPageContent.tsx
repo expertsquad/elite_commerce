@@ -23,8 +23,6 @@ const BillingInfoPageContent = ({
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { orderData } = useContext(OrderInitContext);
-  console.log(orderData);
-
   // handle submit
   const handleSubmit = async (e: React.FormEvent) => {
     console.log(e);
@@ -69,10 +67,8 @@ const BillingInfoPageContent = ({
   return (
     <section
       className={`${
-        loading
-          ? "opacity-50 pointer-events-none"
-          : "p-5 lg:p-0 main-container flex w-full gap-5 flex-col md:flex-row mb-10"
-      }`}
+        loading ? "opacity-50 pointer-events-none" : ""
+      } "p-5 lg:p-0 main-container flex w-full gap-5 flex-col md:flex-row mb-10" `}
     >
       <div className="w-full">
         <ShipToAndBillingSection country={country ? country : ""} />
