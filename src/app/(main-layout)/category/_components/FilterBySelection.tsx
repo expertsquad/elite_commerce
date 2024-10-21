@@ -3,7 +3,7 @@ import Loading from "@/app/loading";
 import Pagination from "@/Components/Pagination";
 import { IProduct } from "@/interfaces/product.interface";
 import dynamic from "next/dynamic";
-import React, { Fragment, Suspense, useState } from "react";
+import React, { Suspense, useState } from "react";
 
 const MostPopularProducts = dynamic(
   () => import("./SortedProducts/MostPopularProducts")

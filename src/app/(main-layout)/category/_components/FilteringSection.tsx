@@ -15,17 +15,19 @@ export interface IFilteringSectionProps {
   products: IProduct[];
   brands: IBrand[];
   widget: IWidgetCard;
+  currency?: string;
 }
 const FilteringSection = ({
   categories,
   products,
   brands,
   widget,
+  currency,
 }: IFilteringSectionProps) => {
   const redirectPath = "/category/filtered-products";
   return (
     <div className="">
-      <PriceRange redirectPath={redirectPath} />
+      <PriceRange currency={currency} redirectPath={redirectPath} />
       <span className="bg-black-10 h-0.5 w-full flex my-5 md:my-[30px]"></span>
       <div>
         <CategoryCard
@@ -38,7 +40,7 @@ const FilteringSection = ({
       <FilterByColor redirectPath={redirectPath} />
       <span className="bg-black-10 h-0.5 w-full hidden md:flex my-5 md:my-[30px]"></span>
       <div className="hidden md:block">
-        <TopRatingProductCard products={products} />
+        <TopRatingProductCard products={products} currency={currency} />
       </div>
       {/* <span className="bg-black-10 h-0.5 w-full flex my-5 md:my-[30px]"></span>
       <FilterByAvailableProducts  /> */}

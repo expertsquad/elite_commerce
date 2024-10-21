@@ -12,7 +12,7 @@ import { useContext, useEffect, useState } from "react";
 const FilteredBrandProductsPage = ({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string; page: number };
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState<IProductApiResponse | null>(null);
@@ -32,6 +32,7 @@ const FilteredBrandProductsPage = ({
       const response = await fetchData({
         route: "/product",
         limit: 20,
+        page: Number(params.page),
         query: `${query}&${filterQuery}`,
       });
       setProducts(response);
@@ -67,7 +68,7 @@ const FilteredBrandProductsPage = ({
       <div>
         {totalPages > 1 ? (
           <Pagination
-            currentPage={1}
+            currentPage={Number(params.page)}
             totalPages={totalPages}
             redirectTo={`/brands/${params.slug}/filtered-brand-products/page`}
           />

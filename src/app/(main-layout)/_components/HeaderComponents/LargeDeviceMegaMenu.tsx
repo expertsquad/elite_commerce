@@ -14,6 +14,7 @@ import ShoppingCartBtn from "./ShoppingCartBtn";
 import WishlistBtn from "./WishlistBtn";
 import GlobalSearch from "../GlobalSearch/GlobalSearch";
 import ProfilePhotoOrIcon from "./ProfilePhotoOrIcon";
+import { getWidget } from "@/utils/getWidget";
 
 const CategoriesAndSubcategories = async () => {
   const categories = await fetchData({
@@ -22,9 +23,11 @@ const CategoriesAndSubcategories = async () => {
     revalidate: 600,
   });
 
+  const widget = await getWidget();
+
   return (
-    <div className="absolute bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover/categorybtn:visible group-hover/categorybtn:opacity-100 group-hover/categorybtn:h-[clamp(100px,70vh,500px)] backdrop-blur-xl shadow-2xl  py-2">
-      <ul className="w-44 h-full overflow-auto ">
+    <div className="absolute bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover/categorybtn:visible group-hover/categorybtn:opacity-100 group-hover/categorybtn:h-[clamp(100px,70vh,500px)] backdrop-blur-xl shadow-2xl py-2 rounded-tl-md rounded-bl-md">
+      <ul className="w-[180px] h-full overflow-auto ">
         {categories?.data?.map((category: ICategory) => (
           <li key={category?._id} className="group/category">
             <Link
@@ -35,7 +38,7 @@ const CategoriesAndSubcategories = async () => {
               <IconChevronRight className="text-black-50 hidden group-hover/category:block" />
             </Link>
             {/* ================= sub categories ================== */}
-            <div className="fixed top-0 left-[180px] bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover/category:visible group-hover/category:opacity-100 group-hover/category:h-[clamp(100px,70vh,500px)] backdrop-blur-xl py-2 shadow-2xl rounded-lg  flex ">
+            <div className="fixed top-0 left-[180px] bg-white opacity-0 h-0 invisible transition-all rounded-none duration-300 group-hover/category:visible group-hover/category:opacity-100 group-hover/category:h-[clamp(100px,70vh,500px)] backdrop-blur-xl py-2 shadow-2xl rounded-tr-md rounded-br-md  flex ">
               <ul className="w-48 h-full flex flex-col overflow-auto">
                 {category?.subcategories?.map((subcategory) => (
                   <li key={subcategory?.subcategoryId}>
@@ -48,7 +51,7 @@ const CategoriesAndSubcategories = async () => {
                   </li>
                 ))}
               </ul>
-              <FeaturedCard />
+              <FeaturedCard widget={widget} />
             </div>
           </li>
         ))}
@@ -59,7 +62,7 @@ const CategoriesAndSubcategories = async () => {
 
 const LargeDeviceMegaMenu = async () => {
   const categories = await fetchData({ route: "/category", limit: 5 });
-  const products = await fetchData({ route: "/product", limit: 1 });
+  const products = await fetchData({ route: "/product", limit: 4 });
   const currencyIcon = await fetchData({
     route: "/settings/shop",
   });
@@ -76,8 +79,8 @@ const LargeDeviceMegaMenu = async () => {
               className="flex items-center py-2 px-3 rounded-full group-hover/categorybtn:bg-gradient-primary-light"
             >
               All Categories{" "}
-              <IconChevronDown className="text-black-50 group-hover/categorybtn:hidden" />
-              <IconChevronUp className="text-black-50 hidden group-hover/categorybtn:block" />
+              <IconChevronDown className="text-black-50 group-hover/categorybtn:rotate-180 transition-all duration-700" />
+              {/* <IconChevronUp className="text-black-50 hidden group-hover/categorybtn:block" /> */}
             </Link>
 
             {/* ========================================================== */}

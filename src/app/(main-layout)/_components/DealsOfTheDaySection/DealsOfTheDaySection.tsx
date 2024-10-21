@@ -8,10 +8,11 @@ const DealsOfTheDaySection = async () => {
   });
   const firstDeal = dealsOfTheDay?.data?.firstDeal;
   const secondDeal = dealsOfTheDay?.data?.secondDeal;
-  const deals = [firstDeal, secondDeal];
+  const thirdDeal = dealsOfTheDay?.data?.thirdDeal;
+  const deals = [firstDeal, secondDeal, thirdDeal];
 
   return (
-    <div className="flex items-center flex-col md:flex-row justify-center gap-10 mt-5">
+    <div className="flex items-center flex-col md:flex-row justify-center  gap-[clamp(20px,2.5vw,40px)] mt-5">
       {deals?.map((deal, index) => {
         return <DealsOfTheDayCard key={index} index={index} deal={deal} />;
       })}

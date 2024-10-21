@@ -45,7 +45,7 @@ const GlobalSearch = ({ categories, products }: IGlobalSearchProps) => {
         <Modal
           show={show}
           setShow={setShow}
-          className="w-[clamp(450px,70vw,900px)] h-[clamp(450px,70vh,600px)] overflow-y-scroll scrollbar-x-remove scrollbar-y-remove"
+          className="w-[clamp(450px,70vw,1000px)] min-h-[650px] overflow-hidden"
           alignment="center"
           isOnlyLargeDevice={true}
         >
@@ -71,26 +71,28 @@ const GlobalSearch = ({ categories, products }: IGlobalSearchProps) => {
                 />
               </div>
             ) : (
-              <div>
-                <span className="text-gradient-primary font-bold text-xl">
-                  Feature Keywords Today
-                </span>
-                <div className="flex items-center flex-wrap gap-3.5 mt-5 mb-8">
-                  {categories?.map((item: ICategory) => (
-                    <span
-                      key={item?._id}
-                      onClick={() => setSearchValue(item?.categoryName)}
-                      className="text-xs md:text-base text-black-50 border border-black-10 px-2 py-1 rounded-md cursor-pointer"
-                    >
-                      {item?.categoryName}
-                    </span>
-                  ))}
+              <div className="space-y-6">
+                <div className="space-y-5">
+                  <span className="text-gradient-primary font-bold text-xl">
+                    Feature Keywords Today
+                  </span>
+                  <div className="flex items-center flex-wrap gap-3.5 ">
+                    {categories?.map((item: ICategory) => (
+                      <div
+                        key={item?._id}
+                        onClick={() => setSearchValue(item?.categoryName)}
+                        className="text-xs transition-all duration-300 hover:bg-gradient-primary hover:text-white  md:text-base text-black-50 border border-black-10 px-3 py-2.5 rounded-full cursor-pointer"
+                      >
+                        {item?.categoryName}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div>
+                <div className="space-y-5">
                   <span className="text-sm md:text-base font-semibold">
                     Recently Viewed Product
                   </span>
-                  <div className="grid grid-cols-product-grid gap-5 mt-5">
+                  <div className="flex items-center justify-start gap-5 overflow-x-auto scrollbar-x-remove ">
                     {products?.map((item: IProduct) => (
                       <ProductCard
                         key={item?._id}

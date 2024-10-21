@@ -1,16 +1,41 @@
+"use client";
+import { fetchData } from "@/actions/fetchData";
 import AnimatedLoading from "@/Components/AnimatedLoading";
 import Pagination from "@/Components/Pagination";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct, IProductApiResponse } from "@/interfaces/product.interface";
+import { FilterContext } from "@/Provider/CategoryProductFilteringProvider";
+import { buildQueryString } from "@/utils/buildQueryString";
+import React, { useContext, useEffect, useState } from "react";
 
-const FilteredProductsGridView = ({
-  products,
-  isLoading,
+const FilteredProductDynamicPage = ({
+  params,
 }: {
-  products: IProductApiResponse;
-  isLoading: boolean;
+  params: { page: number };
 }) => {
-  const totalPages = Math.ceil(products?.meta?.total / products?.meta?.limit);
+  const [isLoading, setIsLoading] = useState(false);
+  const [products, setProducts] = useState<IProductApiResponse | null>(null);
+  const { filter } = useContext(FilterContext);
+
+  const totalPages = Math.ceil(
+    (products?.meta?.total ?? 0) / (products?.meta?.limit ?? 1)
+  );
+
+  useEffect(() => {
+    const query = buildQueryString(filter as Record<string, string | string[]>);
+    const getDataByFetching = async () => {
+      setIsLoading(true);
+      const response = await fetchData({
+        route: "/product",
+        limit: 20,
+        query: query,
+        page: Number(params.page),
+      });
+      setProducts(response);
+      setIsLoading(false);
+    };
+    getDataByFetching();
+  }, [filter, params.page]);
 
   if (isLoading) {
     return (
@@ -26,7 +51,6 @@ const FilteredProductsGridView = ({
       </div>
     );
   }
-
   return (
     <div className="space-y-5">
       <div className="flex flex-col gap-5 mb-10">
@@ -42,12 +66,11 @@ const FilteredProductsGridView = ({
       <div>
         <Pagination
           redirectTo="/category/filtered-products/page/"
-          currentPage={1}
+          currentPage={Number(params.page)}
           totalPages={totalPages || 0}
         />
       </div>
     </div>
   );
 };
-
-export default FilteredProductsGridView;
+export default FilteredProductDynamicPage;

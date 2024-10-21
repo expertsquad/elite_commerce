@@ -1,3 +1,12 @@
+import { Meta } from "./defaultShippingAddress.interface";
+
+export interface IProductApiResponse {
+  success: boolean;
+  message: string;
+  meta: Meta;
+  data: IProduct[];
+}
+
 export interface IProductVariant {
   isDefault: boolean;
   variantName: string;

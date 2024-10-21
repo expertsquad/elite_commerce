@@ -3,21 +3,27 @@ import SmallProductCard from "./SmallProductCard";
 import { fetchData } from "@/actions/fetchData";
 import { IProduct } from "@/interfaces/product.interface";
 
-const TopSellingBrandProducts = async () => {
-  const topSellProducts = await fetchData({
-    route: "/product",
-    query: "sortBy=totalSoldQuantity",
-    limit: 5,
-  });
-
+const TopSellingBrandProducts = async ({
+  topSellingBrandProducts,
+  currency,
+}: {
+  topSellingBrandProducts: IProduct[];
+  currency: string;
+}) => {
   return (
     <div className="flex flex-col gap-7 ">
       <span className="uppercase text-lg font-semibold">
         Top Selling Brands Product
       </span>
       <div className="flex flex-col gap-7">
-        {topSellProducts?.data?.map((product: IProduct) => {
-          return <SmallProductCard product={product} key={product?._id} />;
+        {topSellingBrandProducts?.map((product: IProduct) => {
+          return (
+            <SmallProductCard
+              currency={currency}
+              product={product}
+              key={product?._id}
+            />
+          );
         })}
       </div>
     </div>

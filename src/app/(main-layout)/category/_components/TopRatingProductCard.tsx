@@ -1,4 +1,3 @@
-import { fetchData } from "@/actions/fetchData";
 import StarRating from "@/Components/StarRating";
 import { server_url } from "@/constants";
 import { IProduct } from "@/interfaces/product.interface";
@@ -7,9 +6,13 @@ import React from "react";
 
 type ITopRatingProductProps = {
   products: IProduct[];
+  currency?: string;
 };
 
-const TopRatingProductCard = ({ products }: ITopRatingProductProps) => {
+const TopRatingProductCard = ({
+  products,
+  currency,
+}: ITopRatingProductProps) => {
   return (
     <div>
       <h2 className="mb-5 md:mb-[30px] font-bold text-lg uppercase whitespace-nowrap">
@@ -38,11 +41,13 @@ const TopRatingProductCard = ({ products }: ITopRatingProductProps) => {
               </span>
               <div className="flex items-baseline gap-x-1 text-sm">
                 <span className="text-gradient-primary font-medium">
-                  ${product?.variants[0].discountPercentage}
+                  {currency}
+                  {product?.variants[0].discountPercentage}
                 </span>
                 <small>
                   <del className="text-black-50">
-                    ${product?.variants[0].sellingPrice}
+                    {currency}
+                    {product?.variants[0].sellingPrice}
                   </del>
                 </small>
               </div>
