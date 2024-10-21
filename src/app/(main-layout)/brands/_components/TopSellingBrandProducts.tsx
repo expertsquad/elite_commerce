@@ -1,14 +1,13 @@
 import React from "react";
 import SmallProductCard from "./SmallProductCard";
-import { fetchData } from "@/actions/fetchData";
 import { IProduct } from "@/interfaces/product.interface";
 
 const TopSellingBrandProducts = async ({
   topSellingBrandProducts,
   currency,
 }: {
-  topSellingBrandProducts: IProduct[];
-  currency: string;
+  topSellingBrandProducts?: IProduct[];
+  currency?: string;
 }) => {
   return (
     <div className="flex flex-col gap-7 ">
@@ -19,7 +18,7 @@ const TopSellingBrandProducts = async ({
         {topSellingBrandProducts?.map((product: IProduct) => {
           return (
             <SmallProductCard
-              currency={currency}
+              currency={currency ? currency : ""}
               product={product}
               key={product?._id}
             />

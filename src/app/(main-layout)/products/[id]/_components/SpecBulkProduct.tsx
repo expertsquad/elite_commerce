@@ -4,7 +4,6 @@ import React, { useContext } from "react";
 import ProductVariantColor from "./ProductVariantColor";
 import Image from "next/image";
 import { server_url } from "@/constants";
-import Link from "next/link";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import {
   IconBolt,
@@ -23,7 +22,7 @@ const SpecBulkProduct = ({
 }: {
   productdata: IProduct;
   currencyIcon?: string;
-  accessToken: string;
+  accessToken?: string;
 }) => {
   const [variant, setVariant] = React.useState<IProduct["variants"][0]>(
     productdata?.variants[0]
