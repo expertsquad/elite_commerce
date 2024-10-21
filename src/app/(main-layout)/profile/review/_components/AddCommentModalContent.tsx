@@ -5,25 +5,21 @@ import FileUploader from "@/Components/FileUploder";
 import { server_url } from "@/constants";
 import { IconStarFilled } from "@tabler/icons-react";
 import Image from "next/image";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const AddCommentModalContent = ({
   reviewNow,
   id,
+  setAddComments,
 }: {
   reviewNow: any;
   id: string;
+  setAddComments: any;
 }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-  const [photos, setPhotos] = useState<(File | null)[]>([
-    null,
-    null,
-    null,
-    null,
-  ]);
-  console.log(photos);
+  const [photos, setPhotos] = useState<File[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -38,13 +34,10 @@ const AddCommentModalContent = ({
   const handleFilesChange = (index: number, files: FileList) => {
     if (files[0]) {
       const updatedPhotos = [...photos];
-      updatedPhotos[index] = files[0]; // Store the File object directly
+      updatedPhotos[index] = files[0];
       setPhotos(updatedPhotos);
     }
-
-    console.log(photos);
   };
-  console.log(photos);
 
   const handleAddCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,10 +48,9 @@ const AddCommentModalContent = ({
     formData.append("comment", comment);
     formData.append("rating", rating.toString());
 
-    // Append photos directly to FormData with the server's expected key 'reviewPhotos'
     photos.forEach((photo) => {
       if (photo) {
-        formData.append("reviewPhotos", photo); // Append file object directly
+        formData.append("reviewPhotos", photo);
       }
     });
 
@@ -69,17 +61,17 @@ const AddCommentModalContent = ({
         dataType: "formData",
         method: "PUT",
       });
-      console.log(response);
-
       if (response.success) {
         revalidateTagAction("/review");
         revalidateTagAction(`/review/${id}`);
         router.push("/profile/review/all-review-history");
+        setAddComments(false);
       } else {
         console.error(response.message);
       }
     } catch (error) {
       console.error(error);
+      setError("An error occurred while submitting your review.");
     } finally {
       setLoading(false);
     }
@@ -133,9 +125,11 @@ const AddCommentModalContent = ({
             {[...Array(4)].map((_, index) => (
               <FileUploader
                 key={index}
-                name={`reviewPhotos`}
+                name={`reviewPhotos${index}`}
                 multiple={true}
                 onChange={(e) => handleFilesChange(index, e.target.files!)}
+                maxSize={5}
+                accept="image/*"
               />
             ))}
           </div>

@@ -1,7 +1,7 @@
 "use client";
 import { server_url } from "@/constants";
 import { IFileUploaderProps } from "@/interfaces/fileUploader.interface";
-import { IconPhotoPlus } from "@tabler/icons-react";
+import { IconPhotoPlus, IconX } from "@tabler/icons-react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -18,50 +18,78 @@ const FileUploader = ({
   uid = 1,
   onChange,
 }: IFileUploaderProps) => {
-  const [newPhoto, setNewPhoto] = useState("");
+  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
+
+  // Handle file change, check size, and set the preview
   const checkSizeAndHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (
-      maxSize &&
-      e?.target?.files &&
-      e?.target?.files[0]?.size > maxSize * 1024 * 1024
-    ) {
-      alert(`File size should be less than ${maxSize} MB`);
-      return;
+    const files = e.target.files;
+
+    if (files) {
+      const newPreviewUrls: string[] = [];
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+
+        // Check file size
+        if (maxSize && file.size > maxSize * 1024 * 1024) {
+          alert(`File size should be less than ${maxSize} MB`);
+          return;
+        }
+
+        newPreviewUrls.push(URL.createObjectURL(file));
+      }
+
+      setPreviewUrls((prev) => [...prev, ...newPreviewUrls]);
+      if (onChange) {
+        onChange(e);
+      }
     }
-    if (e.target.files?.length) {
-      const newUrl = URL.createObjectURL(e.target.files[0]);
-      setNewPhoto(newUrl);
-    }
+  };
+
+  // Handle file removal and reset the preview
+  const handleRemoveClick = (index: number) => {
+    setPreviewUrls((prev) => prev.filter((_, i) => i !== index));
   };
 
   return (
     <div
-      className={`w-full h-full flex flex-col items-center justify-center relative ${className}`}
+      className={`relative w-full h-full flex flex-col items-center justify-center ${className}`}
     >
-      <label
-        className={`flex flex-col justify-center items-center h-full w-full`}
-      >
-        {/* check if data exist or children exist, if so, render the corresponding content */}
-        {newPhoto ? (
-          <div className="h-[70px] w-[70px] md:w-[80px] relative border border-black-10 rounded-md cursor-pointer">
-            <Image
-              src={newPhoto}
-              alt={name}
-              fill
-              className="inset-0 object-cover p-1.5"
-            />
-          </div>
+      <label className="flex flex-col justify-center items-center h-full w-full">
+        {previewUrls.length > 0 ? (
+          previewUrls.map((url, index) => (
+            <div key={index} className="relative w-full h-full">
+              <div className="h-[70px] w-[90px] relative border border-black-10 rounded-md cursor-pointer">
+                <Image
+                  src={url}
+                  alt={name}
+                  fill
+                  className="inset-0 object-contain"
+                />
+                <button
+                  type="button"
+                  className="absolute top-0 right-0 text-danger border rounded-bl-lg bg-white border-black-10 p-1"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleRemoveClick(index);
+                  }}
+                >
+                  <IconX size={12} stroke={1} />
+                </button>
+              </div>
+            </div>
+          ))
         ) : url ? (
-          <div className="h-[70px] w-[70px] md:w-[80px] relative border border-black-10 rounded-md">
+          <div className="h-[70px] w-[90px] relative border border-black-10 rounded-md cursor-pointer">
             <Image
               src={server_url + url}
               alt={name}
               fill
-              className="inset-0 object-cover"
+              className="inset-0 object-contain"
             />
           </div>
         ) : (
-          <div className="h-[70px] w-[90px] relative border border-black-10 rounded-md flex items-center justify-center">
+          <div className="h-[70px] w-[90px] relative border border-black-10 rounded-md flex items-center justify-center cursor-pointer">
             <div className="flex flex-col items-center justify-center">
               <IconPhotoPlus width={30} height={30} stroke={1} />
               <span className="text-[10px] text-black-80">Photo & Video</span>
@@ -79,7 +107,8 @@ const FileUploader = ({
           disabled={disabled}
         />
       </label>
-      <p className="mt-2 text-gray-500 ">{bottomText}</p>
+      {bottomText && <p className="mt-2 text-gray-500">{bottomText}</p>}
+      {error && <p className="mt-2 text-danger">{error}</p>}
     </div>
   );
 };
