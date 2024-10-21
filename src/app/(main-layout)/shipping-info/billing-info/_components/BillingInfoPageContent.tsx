@@ -49,8 +49,6 @@ const BillingInfoPageContent = ({
         method: "POST",
         formatted: true,
       });
-      console.log(result);
-
       if (result?.success === true) {
         localStorage.removeItem("orderInit");
         if (orderData?.payment?.paymentMethod === "COD") {
