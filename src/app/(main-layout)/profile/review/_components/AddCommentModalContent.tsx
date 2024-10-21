@@ -22,7 +22,6 @@ const AddCommentModalContent = ({
   const [photos, setPhotos] = useState<File[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-
   const router = useRouter();
 
   const handleStarClick = (index: number, e: React.MouseEvent) => {
@@ -97,7 +96,7 @@ const AddCommentModalContent = ({
         <div className="my-6 flex-grow">
           <div className="flex items-center justify-between">
             <small>How Much Ratings This Product</small>
-            <div className="flex">
+            <div className="flex cursor-pointer">
               {[...Array(5)].map((_, index) => (
                 <IconStarFilled
                   key={index}
@@ -120,6 +119,9 @@ const AddCommentModalContent = ({
             onChange={(e) => setComment(e.target.value)}
             rows={3}
           ></textarea>
+          <small className="flex items-end justify-end text-xs text-positive">
+            {comment?.length}/100
+          </small>
 
           <div className="flex items-center space-x-2">
             {[...Array(4)].map((_, index) => (

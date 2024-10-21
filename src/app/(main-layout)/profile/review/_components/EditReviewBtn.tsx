@@ -15,10 +15,6 @@ const EditReviewBtn = ({ allReview }: { allReview: any }) => {
       >
         Edit Review
       </Button>
-
-      {/* Add comment modal start here */}
-
-      {/* edit  modal start here */}
       {editComment && (
         <Modal
           show={editComment}
@@ -27,7 +23,10 @@ const EditReviewBtn = ({ allReview }: { allReview: any }) => {
           className="overflow-y-scroll p-3 w-[clamp(350px,80vw,450px)]"
           showCancelBtnINSmallDevice={true}
         >
-          <EditCommentModalContent comment={allReview} />
+          <EditCommentModalContent
+            reviewData={allReview}
+            setEditComment={setEditComment}
+          />
         </Modal>
       )}
     </div>
