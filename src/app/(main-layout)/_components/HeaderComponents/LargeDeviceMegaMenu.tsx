@@ -27,7 +27,7 @@ const CategoriesAndSubcategories = async () => {
 
   return (
     <div className="absolute bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover/categorybtn:visible group-hover/categorybtn:opacity-100 group-hover/categorybtn:h-[clamp(100px,70vh,500px)] backdrop-blur-xl shadow-2xl py-2 rounded-tl-md rounded-bl-md">
-      <ul className="w-[180px] h-full overflow-auto ">
+      <ul className="w-44 h-full overflow-auto">
         {categories?.data?.map((category: ICategory) => (
           <li key={category?._id} className="group/category">
             <Link
