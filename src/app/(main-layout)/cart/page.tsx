@@ -10,6 +10,9 @@ const CartView = async () => {
     limit: 4,
   });
   const currency = await fetchData({ route: "/settings/shop" });
+  const shippingCharge = await fetchData({
+    route: "/settings/shipping-charge",
+  });
   return (
     <div>
       <div>
@@ -19,6 +22,7 @@ const CartView = async () => {
         <CartItems
           suggestions={productsData?.data}
           currencyIcon={currency?.data?.currencySymbol}
+          freeShipping={shippingCharge?.data?.freeShippingMinOrderAmount}
         />
       </div>
     </div>

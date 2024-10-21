@@ -19,9 +19,11 @@ import QuickOrderButton from "../../brands/_components/QuickOrderButton";
 const CartItems = ({
   suggestions,
   currencyIcon,
+  freeShipping,
 }: {
   suggestions: IProduct[];
   currencyIcon?: string;
+  freeShipping: number;
 }) => {
   const {
     cartProducts,
@@ -57,7 +59,11 @@ const CartItems = ({
 
       <div className="flex flex-col gap-5">
         <span className="block text-base">
-          Buy <span className="text-gradient-primary">{currencyIcon}900</span>{" "}
+          Buy{" "}
+          <span className="text-gradient-primary">
+            {currencyIcon}
+            {freeShipping}
+          </span>{" "}
           more to get{" "}
           <span className="text-gradient-primary font-semibold">Freeship</span>{" "}
           🔥
