@@ -1,23 +1,15 @@
 import { dateFormat } from "@/utils/dateFormat";
 import Image from "next/image";
 import React from "react";
-
 import { server_url } from "@/constants";
-
-import { fetchData, fetchProtectedData } from "@/actions/fetchData";
+import { fetchData } from "@/actions/fetchData";
 import ReviewNewBtn from "./_components/ReviewNewBtn";
 
 const ProductReviewComponents = async () => {
-  const me = await fetchProtectedData({
-    route: "/user/me",
-  });
-
   const reviewPending = await fetchData({
     route: "/review",
     query: `reviewStatus=Pending`,
   });
-
-  console.log(reviewPending);
 
   return (
     <div>

@@ -7,12 +7,10 @@ import EditReviewBtn from "../_components/EditReviewBtn";
 import Pagination from "@/Components/Pagination";
 
 const AllReviewHistory = async () => {
-  const me = await fetchProtectedData({
-    route: "/user/me",
-  });
   const allReviews = await fetchProtectedData({
     route: "/review",
-    query: `reviewer.userId=${me?.data?._id}&reviewStatus=Reviewed`,
+    query: `reviewStatus=Reviewed`,
+    limit: 20,
   });
 
   return (
@@ -21,23 +19,24 @@ const AllReviewHistory = async () => {
         allReviews?.data?.map((allReview: any) => (
           <div
             key={allReview?._id}
-            className="flex w-full lg:flex-row flex-col  border-b border-black-10 py-5
-     "
+            className="flex w-full lg:flex-row flex-col  border-b border-black-10 py-5"
           >
-            {/* Image and titile */}
             <div className="w-full lg:w-1/2 flex  justify-start items-center gap-4">
-              <div className="flex justify-center items-center bg-gradient-primary-light rounded-lg relative shrink-0 w-16 h-16">
+              <div className="flex justify-center items-center bg-gradient-primary-light rounded-lg relative shrink-0 w-[70px] h-[70px]">
                 <Image
                   alt="Product Image"
                   src={`${server_url}${allReview?.product?.productPhoto}`}
                   fill
+                  style={{
+                    objectFit: "contain",
+                  }}
                   className="inset-0 object-contain p-1"
                 />
-              </div>{" "}
+              </div>
               <p className="line-clamp-2">{allReview?.product?.productName}</p>
             </div>
-            {/* Purchase on and review */}
-            <div className="flex w-full lg:w-1/2  justify-between items-center">
+
+            <div className="flex w-full lg:w-1/2  justify-between items-center mt-3 md:mt-0">
               <div className="flex justify-start flex-col">
                 <p className="text-black-50 text-sm">Purchase on</p>
                 <p>{dateFormat(allReview?.createdAt)}</p>
