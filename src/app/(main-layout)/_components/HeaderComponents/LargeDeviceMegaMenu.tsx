@@ -1,12 +1,8 @@
-import {
-  IconChevronDown,
-  IconChevronRight,
-  IconChevronUp,
-} from "@tabler/icons-react";
+import { IconChevronDown, IconChevronRight } from "@tabler/icons-react";
 import Link from "next/link";
 import React from "react";
 import FeaturedCard from "./FeaturedCard";
-import { fetchData } from "@/actions/fetchData";
+import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import { ICategory } from "@/interfaces/category.interface";
 import Logo from "@/utils/Logo";
 import { mainMenus } from "@/constants/mainMenus.constants";
@@ -23,6 +19,15 @@ const CategoriesAndSubcategories = async () => {
     revalidate: 600,
   });
 
+  const featureProduct = await fetchData({
+    route: "/product",
+    query: "sortBy=totalSoldQuantity",
+    limit: 4,
+    revalidate: 3600,
+  });
+  const currencySymbol = await fetchProtectedData({
+    route: "/settings/shop",
+  });
   const widget = await getWidget();
 
   return (
@@ -51,7 +56,11 @@ const CategoriesAndSubcategories = async () => {
                   </li>
                 ))}
               </ul>
-              <FeaturedCard widget={widget} />
+              <FeaturedCard
+                widget={widget}
+                products={featureProduct?.data}
+                currencySymbol={currencySymbol?.data?.currencySymbol}
+              />
             </div>
           </li>
         ))}
