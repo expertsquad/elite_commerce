@@ -1,76 +1,87 @@
 "use client";
-import { postDataMutation } from "@/actions/postDataMutation";
 import { revalidateTagAction } from "@/actions/revalidateTag";
+import { updateDataMutation } from "@/actions/updateDataMutation";
 import FileUploader from "@/Components/FileUploder";
-import SubmitButton from "@/Components/SubmitButton";
 import { server_url } from "@/constants";
 import { IconStarFilled } from "@tabler/icons-react";
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const AddCommentModalContent = ({
   reviewNow,
   id,
-  orderId,
-  productId,
 }: {
   reviewNow: any;
   id: string;
-  productId: string;
-  orderId: string;
 }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-  const [photos, setPhotos] = useState<File[]>([]);
+  const [photos, setPhotos] = useState<(File | null)[]>([
+    null,
+    null,
+    null,
+    null,
+  ]);
+  console.log(photos);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const handleStarClick = (index: number, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (rating === index + 1) {
-      setRating(0);
-    } else {
-      setRating(index + 1);
-    }
+    setRating((prev) => (prev === index + 1 ? 0 : index + 1));
   };
 
-  // Update photos array when new files are selected
-  const handleFilesChange = (files: FileList) => {
-    setPhotos(Array.from(files)); // Convert FileList to an array
+  const handleFilesChange = (index: number, files: FileList) => {
+    if (files[0]) {
+      const updatedPhotos = [...photos];
+      updatedPhotos[index] = files[0]; // Store the File object directly
+      setPhotos(updatedPhotos);
+    }
+
+    console.log(photos);
   };
   console.log(photos);
 
-  // Handle form submission
   const handleAddCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.set("orderId", orderId);
-    formData.set("productId", productId);
-    formData.set("reviewStatus", "Reviewed");
-    formData.set("comment", comment);
-    formData.set("rating", rating.toString());
+    setLoading(true);
+    setError(null);
 
-    // Append each photo in the array to the formData
+    const formData = new FormData();
+    formData.append("comment", comment);
+    formData.append("rating", rating.toString());
+
+    // Append photos directly to FormData with the server's expected key 'reviewPhotos'
     photos.forEach((photo) => {
-      formData.append("reviewPhotos", photo);
+      if (photo) {
+        formData.append("reviewPhotos", photo); // Append file object directly
+      }
     });
 
     try {
-      const result = await postDataMutation({
-        route: `/review/add`,
+      const response = await updateDataMutation({
+        route: `/review/${id}`,
         data: formData,
         dataType: "formData",
+        method: "PUT",
       });
+      console.log(response);
 
-      if (result.success) {
-        console.log("API Response: ", result);
+      if (response.success) {
+        revalidateTagAction("/review");
         revalidateTagAction(`/review/${id}`);
-        redirect("/profile/review/all-review-history");
+        router.push("/profile/review/all-review-history");
       } else {
-        console.error("Error updating review: ", result.error);
+        console.error(response.message);
       }
     } catch (error) {
-      console.error("Error updating review: ", error);
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -109,7 +120,7 @@ const AddCommentModalContent = ({
           </div>
 
           <textarea
-            className="w-full border border-black-10 rounded-lg  my-5 resize-none outline-none p-2 md:p-4"
+            className="w-full border border-black-10 rounded-lg my-5 resize-none outline-none p-2 md:p-4"
             maxLength={100}
             placeholder="Write Here"
             name="comment"
@@ -118,34 +129,28 @@ const AddCommentModalContent = ({
             rows={3}
           ></textarea>
 
-          <div className="flex items-center">
-            <FileUploader
-              name="reviewPhotos"
-              multiple={true}
-              onChange={(e) => handleFilesChange(e.target.files!)}
-            />
-            <FileUploader
-              name="reviewPhotos"
-              multiple={true}
-              onChange={(e) => handleFilesChange(e.target.files!)}
-            />
-            <FileUploader
-              name="reviewPhotos"
-              multiple={true}
-              onChange={(e) => handleFilesChange(e.target.files!)}
-            />
-            <FileUploader
-              name="reviewPhotos"
-              multiple={true}
-              onChange={(e) => handleFilesChange(e.target.files!)}
-            />
+          <div className="flex items-center space-x-2">
+            {[...Array(4)].map((_, index) => (
+              <FileUploader
+                key={index}
+                name={`reviewPhotos`}
+                multiple={true}
+                onChange={(e) => handleFilesChange(index, e.target.files!)}
+              />
+            ))}
           </div>
         </div>
 
-        <div className="flex items-center justify-center ">
-          <SubmitButton className="py-2 w-[90%] bg-gradient-primary rounded-full text-white fixed bottom-5">
-            Submit Review
-          </SubmitButton>
+        {error && <p className="text-danger text-xs">{error}</p>}
+
+        <div className="flex items-center justify-center">
+          <button
+            type="submit"
+            className="py-2 w-[90%] bg-gradient-primary rounded-full text-white fixed bottom-5"
+            disabled={loading}
+          >
+            {loading ? "LOADING..." : "Submit Now"}
+          </button>
         </div>
       </form>
     </div>

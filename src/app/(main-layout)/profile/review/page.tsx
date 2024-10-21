@@ -14,7 +14,7 @@ const ProductReviewComponents = async () => {
 
   const reviewPending = await fetchData({
     route: "/review",
-    query: `reviewer.userId=${me?.data?._id}&reviewStatus=Pending`,
+    query: `reviewStatus=Pending`,
   });
 
   console.log(reviewPending);

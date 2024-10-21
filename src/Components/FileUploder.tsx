@@ -16,6 +16,7 @@ const FileUploader = ({
   disabled,
   bottomText,
   uid = 1,
+  onChange,
 }: IFileUploaderProps) => {
   const [newPhoto, setNewPhoto] = useState("");
   const checkSizeAndHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +43,7 @@ const FileUploader = ({
       >
         {/* check if data exist or children exist, if so, render the corresponding content */}
         {newPhoto ? (
-          <div className="h-[70px] w-[70px] md:w-[80px] relative border border-black-10 rounded-md">
+          <div className="h-[70px] w-[70px] md:w-[80px] relative border border-black-10 rounded-md cursor-pointer">
             <Image
               src={newPhoto}
               alt={name}

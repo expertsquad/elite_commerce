@@ -38,12 +38,7 @@ const ReviewNewBtn = ({
           className="overflow-y-scroll p-3 w-[clamp(350px,80vw,450px)]"
           showCancelBtnINSmallDevice={true}
         >
-          <AddCommentModalContent
-            reviewNow={reviewNow}
-            id={id}
-            orderId={orderId}
-            productId={productId}
-          />
+          <AddCommentModalContent reviewNow={reviewNow} id={id} />
         </Modal>
       )}
     </div>
