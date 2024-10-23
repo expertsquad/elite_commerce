@@ -21,7 +21,7 @@ const AllOrderHistory = async () => {
   const curr = await fetchData({
     route: "/settings/shop",
   });
-  console.log(curr);
+
   const currency = await getCurrency();
 
   // console.log(currency);

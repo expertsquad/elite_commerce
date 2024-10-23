@@ -1,5 +1,3 @@
-import { fetchProtectedData } from "@/actions/fetchData";
-import React from "react";
 import OrderCardHeader from "./OrderCardHeader";
 import { Button } from "@/Components/Buttons";
 import Link from "next/link";
@@ -14,8 +12,6 @@ const OrderItems = ({
   order: Order;
   currency?: string;
 }) => {
-  console.log(currency);
-
   return (
     <div className=" md:shadow-order-history-card-shadow shadow-none  border border-black-10 md:border-transparent mt-5 p-5 rounded-lg">
       {/* Order top section start */}

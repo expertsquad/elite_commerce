@@ -74,8 +74,8 @@ const BillingInfoPageContent = ({
       } "p-5 lg:p-0 main-container flex w-full gap-5 flex-col md:flex-row mb-10" `}
     >
       <div className="w-full">
-        <ShipToAndBillingSection country={country ? country : ""} />
         <PaymentOption paymentMethod={paymentMethod} />
+        <ShipToAndBillingSection country={country ? country : ""} />
       </div>
 
       <div>
