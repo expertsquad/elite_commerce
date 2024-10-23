@@ -42,15 +42,15 @@ const Page = () => {
   return (
     <div className={`${loading ? "pointer-events-none opacity-50" : ""}`}>
       {/* tab to toggle section */}
-      <div className="flex gap-5 items-center border-b border-black-10 justify-start">
-        <div className="text-lg">
+      <div className="flex gap-6 items-center border-b border-black-10 justify-start">
+        <div className="text-base">
           <Link className=" " href="/profile/account-details">
             Personal Information
           </Link>
         </div>
         <div className="pb-[1px]  border-gradient-primary">
           <Link
-            className=" text-gradient-primary font-bold text-lg "
+            className=" text-gradient-primary font-semibold text-base "
             href="/profile/account-details/change-password"
           >
             Change Password

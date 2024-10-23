@@ -1,6 +1,6 @@
 import React from "react";
 import OrderItems from "../../_components/OrderItems";
-import { fetchProtectedData } from "@/actions/fetchData";
+import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import Pagination from "@/Components/Pagination";
 import { Order } from "@/interfaces/oreder.interface";
 import { getCurrency } from "@/utils/getCurrency";
@@ -18,7 +18,13 @@ const AllOrderHistory = async () => {
     allOrderData?.meta?.total / allOrderData?.meta?.limit
   );
 
+  const curr = await fetchData({
+    route: "/settings/shop",
+  });
+  console.log(curr);
   const currency = await getCurrency();
+
+  // console.log(currency);
 
   return (
     <div className="space-y-5">
