@@ -3,7 +3,13 @@ import { useEffect, useState } from "react";
 import Carousel from "./Carousel";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
-const HeroItemSlide = ({ sliderArray }: any) => {
+const HeroItemSlide = ({
+  sliderArray,
+  currencyIcon,
+}: {
+  sliderArray: any;
+  currencyIcon: string;
+}) => {
   const [curr, setCurr] = useState(0);
   const [autoSlideInterval, setAutoSlideInterval] =
     useState<NodeJS.Timeout | null>(null);
@@ -32,7 +38,7 @@ const HeroItemSlide = ({ sliderArray }: any) => {
       >
         {sliderArray?.map((item: any, index: any) => (
           <div key={index} className="w-full flex-shrink-0">
-            <Carousel item={item} />
+            <Carousel item={item} currencyIcon={currencyIcon} />
           </div>
         ))}
       </div>

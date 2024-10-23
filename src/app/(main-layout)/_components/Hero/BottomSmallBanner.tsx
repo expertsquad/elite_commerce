@@ -7,8 +7,10 @@ import Link from "next/link";
 
 const BottomSmallBanner = ({
   bottomOffer,
+  currencyIcon,
 }: {
   bottomOffer: heroBottomSmallBanner;
+  currencyIcon: string;
 }) => {
   return (
     <div
@@ -37,9 +39,9 @@ const BottomSmallBanner = ({
         <Link
           href={bottomOffer?.link}
           target="_blank"
-          className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-md py-2 [font-size:_clamp(0.5em,60vw,0.9em)] mt-9 max-w-[130px] whitespace-nowrap"
+          className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-md py-2 mt-9 max-w-[110px] whitespace-nowrap text-xs"
         >
-          {bottomOffer?.buttonText} <IconArrowRight size={20} />
+          {bottomOffer?.buttonText} <IconArrowRight size={16} />
         </Link>
       </div>
 

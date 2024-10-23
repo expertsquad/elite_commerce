@@ -41,12 +41,15 @@ const Page = async () => {
   });
 
   const widget = await getWidget();
+  const currencyIcon = await fetchData({
+    route: "/settings/shop",
+  });
 
   return (
     <>
       <div className="main-container pb-10">
         {/* Hero section added */}
-        <Hero />
+        <Hero currencyIcon={currencyIcon?.data?.currencySymbol} />
 
         {/* hottest categories */}
         <p className="text-sm text-gradient-secondary mt-10">

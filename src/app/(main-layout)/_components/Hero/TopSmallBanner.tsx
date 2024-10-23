@@ -5,7 +5,13 @@ import { IconArrowRight } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const TopSmallBanner = ({ topOffer }: { topOffer: heroTopSmallBanner }) => {
+const TopSmallBanner = ({
+  topOffer,
+  currencyIcon,
+}: {
+  topOffer: heroTopSmallBanner;
+  currencyIcon: string;
+}) => {
   return (
     <div
       className={`flex items-center gap-x-5 p-5 md:justify-start justify-center rounded-lg flex-1 w-full h-full`}
@@ -35,20 +41,21 @@ const TopSmallBanner = ({ topOffer }: { topOffer: heroTopSmallBanner }) => {
       </div>
 
       <div className="flex flex-col">
-        <h2 className="text-2xl line-clamp-2 text-right">{topOffer?.title}</h2>
+        <h2 className="text-2xl line-clamp-2 text-start">{topOffer?.title}</h2>
         <div className="flex items-baseline gap-1 main-text-color font-bold mt-2.5">
-          <span className="text-lg flex items-end justify-end w-full">
-            ${topOffer?.price || 200}
+          <span className="text-lg flex items-start justify-start w-full">
+            {currencyIcon}
+            {topOffer?.price || 200}
           </span>
         </div>
 
-        <div className="flex items-end justify-end ">
+        <div className="flex items-start justify-start ">
           <Link
             href={topOffer?.link || ""}
             target="_blank"
-            className="mt-10 flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-md py-2 [font-size:_clamp(0.5em,60vw,0.9em)] max-w-[130px] whitespace-nowrap w-full"
+            className="mt-10 flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-md py-2 max-w-[110px] whitespace-nowrap w-full text-xs"
           >
-            {topOffer?.buttonText} <IconArrowRight size={20} />
+            {topOffer?.buttonText} <IconArrowRight size={16} />
           </Link>
         </div>
       </div>
