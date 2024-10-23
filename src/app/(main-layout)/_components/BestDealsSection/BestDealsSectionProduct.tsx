@@ -17,7 +17,7 @@ const BestDealsSectionProduct = async ({
   return (
     <Link
       href={`products/${product?.productId}`}
-      className="flex items-center min-w-[200px] md:min-w-[220px] xl:min-w-[250px] max-w-[290px] py-2 px-2 rounded-xl bg-white hover:drop-shadow-lg hover:duration-500 cursor-pointer"
+      className="flex items-center min-w-[200px] md:min-w-[220px] xl:min-w-[250px] max-w-[350px] p-2.5 rounded-md bg-white hover:drop-shadow-lg hover:duration-500 cursor-pointer"
     >
       <div className="relative w-[60px] h-[60px] shrink-0 mr-2">
         <Image
@@ -27,7 +27,7 @@ const BestDealsSectionProduct = async ({
           style={{
             objectFit: "cover",
           }}
-          className="inset-0 top-0 left-0 object-cover rounded-md"
+          className="inset-0 top-0 left-0 object-cover rounded-sm"
         />
       </div>
       <div className="flex justify-center flex-col gap-1">
