@@ -24,7 +24,6 @@ const SuccessPage = async ({
   params: Params;
   searchParams: SearchParams;
 }) => {
-  const quickOrder = searchParams["quick-order"] === "true";
   const response = await fetchData({
     route: `/online-order/${searchParams?.orderId}`,
   });
@@ -107,7 +106,7 @@ const SuccessPage = async ({
             </div>
           ))}
         </div>
-        <OrderPlacedThankYou isQuickOrder={quickOrder} id={params?.id} />
+        <OrderPlacedThankYou id={searchParams?.orderId} />
       </div>
     </div>
   );

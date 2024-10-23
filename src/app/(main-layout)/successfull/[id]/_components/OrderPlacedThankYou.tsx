@@ -8,8 +8,9 @@ const OrderPlacedThankYou = ({
   isQuickOrder,
 }: {
   id: string;
-  isQuickOrder: boolean;
+  isQuickOrder?: boolean;
 }) => {
+  console.log(id);
   return (
     <div className="flex-1 md:h-[670px] flex flex-col justify-center items-center pb-5 md:pb-0">
       <div className="flex items-center justify-center">
@@ -26,35 +27,32 @@ const OrderPlacedThankYou = ({
             journey ahead. Stay tuned for updates as we prepare your package.
             Thank you for choosing us!
           </p>
-          {isQuickOrder ? (
-            ""
-          ) : (
-            <Link
-              href={`/order-track/${id}`}
-              className="relative inline-flex items-center justify-center p-4 px-6 py-2 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border border-secondary rounded-full shadow-md group mt-5"
-            >
-              <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-secondary group-hover:translate-x-0 ease">
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  ></path>
-                </svg>
-              </span>
-              <span className="absolute flex items-center justify-center w-full h-full text-secondary transition-all duration-300 transform group-hover:translate-x-full ease">
-                Track Order
-              </span>
-              <span className="relative invisible">Track Order</span>
-            </Link>
-          )}
+          <Link href={`/order-track/${id}`}>
+            {!isQuickOrder && (
+              <div className="relative inline-flex items-center justify-center p-4 px-6 py-2 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border border-secondary rounded-full shadow-md group mt-5">
+                <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-secondary group-hover:translate-x-0 ease">
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path>
+                  </svg>
+                </span>
+                <span className="absolute flex items-center justify-center w-full h-full text-secondary transition-all duration-300 transform group-hover:translate-x-full ease">
+                  Track Order
+                </span>
+                <span className="relative invisible">Track Order</span>
+              </div>
+            )}
+          </Link>
         </div>
       </div>
 
