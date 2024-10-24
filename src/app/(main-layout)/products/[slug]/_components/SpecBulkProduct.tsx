@@ -50,7 +50,7 @@ const SpecBulkProduct = ({
           </div>
         ))}
       </div>
-      <span className="">{productdata?.productName}</span>
+      <span className="text-black-80">{productdata?.productName}</span>
       <div className="relative shrink-0 h-6 w-10 mt-3">
         <Image
           src={`${server_url + productdata?.brand?.brandPhoto}`}
@@ -83,13 +83,16 @@ const SpecBulkProduct = ({
           {currencyIcon}
           {variant?.sellingPrice}
         </del>
-        <span className="text-black-50">|</span>
-        <div className="bg-gradient-secondary-light rounded-full py-0.5">
-          <span className="text-sm text-gradient-secondary px-3 font-semibold">
-            {currencyIcon}
-            {variant.discountPercentage}% OFF
-          </span>
-        </div>
+        {variant?.discountPercentage && (
+          <span className="text-black-50">|</span>
+        )}
+        {variant?.discountPercentage && (
+          <div className="bg-gradient-secondary-light rounded-full py-0.5">
+            <span className="text-sm text-gradient-secondary px-3 font-semibold">
+              {variant?.discountPercentage}% OFF
+            </span>
+          </div>
+        )}
       </div>
       {/* == Buy now, quick order and add to cart == */}
       <div>
@@ -98,8 +101,8 @@ const SpecBulkProduct = ({
             <BuyNowSingleProduct
               product={productdata}
               accessToken={accessToken ? accessToken : ""}
-              className="!py-2 !text-[13px]"
-              iconStyle="size-4"
+              className="!py-2.5 !text-[13px]"
+              iconStyle="!size-4"
             />
           </div>
           <QuickOrderButton
@@ -108,7 +111,7 @@ const SpecBulkProduct = ({
               orderQuantity: 1,
               variant: variant,
             }}
-            buttonStyle="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2 rounded-md w-full text-[13px]"
+            buttonStyle="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2.5 rounded-md w-full text-[13px]"
             buttonIcon={<IconBolt size={16} fill="#fff" />}
             buttonText="QUICK ORDER"
           />
@@ -116,12 +119,12 @@ const SpecBulkProduct = ({
         <div className="border border-black-10 rounded-md mt-5">
           <button
             onClick={handleAddToCart}
-            className="text-gradient-primary flex items-center justify-center gap-x-1.5 w-full py-2"
+            className="text-gradient-primary flex items-center justify-center gap-x-1.5 w-full py-2 text-[13px]"
           >
             <GenerateGradientIcon
               IconComponent={IconShoppingCart}
-              stroke={1.5}
-              size={20}
+              stroke={1.2}
+              size={15}
             />
             ADD TO CART
           </button>
