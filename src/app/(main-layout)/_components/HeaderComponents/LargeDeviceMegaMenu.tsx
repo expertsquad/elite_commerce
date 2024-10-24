@@ -93,7 +93,7 @@ const LargeDeviceMegaMenu = async () => {
       </div>
 
       {/* Right section of the navigation */}
-      <div className="flex items-center gap-4">
+      <div className="flex  items-center gap-4">
         <GlobalSearch products={products?.data} categories={categories?.data} />
         {/* wishlist */}
         <WishlistBtn />
@@ -103,7 +103,10 @@ const LargeDeviceMegaMenu = async () => {
           shippingCharge={shippingCharge?.data}
         />
         {/* profile */}
-        <Link href="/profile/dashboard" className="mt-2">
+        <Link
+          href="/profile/dashboard"
+          className="flex items-center justify-center"
+        >
           <ProfilePhotoOrIcon />
         </Link>
       </div>
