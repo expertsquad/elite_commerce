@@ -68,7 +68,7 @@ const OrderItemsCard = ({
           />
           <OrderCardHeader
             title="Unit Price"
-            value={`$${
+            value={`${currency}${
               orderItem?.variant?.discountedPrice
                 ? orderItem?.variant?.discountedPrice?.toString()
                 : orderItem?.variant?.sellingPrice?.toString()
@@ -77,7 +77,7 @@ const OrderItemsCard = ({
           />
           <OrderCardHeader
             title="Sub Total"
-            value={`$${orderItem?.subTotalPayable?.toString()}`}
+            value={`${currency}${orderItem?.subTotalPayable?.toString()}`}
             className="text-lg font-bold text-gradient-primary"
           />
           {orderItem?.isReviewed && (

@@ -24,11 +24,9 @@ const AllOrderHistory = async () => {
 
   const currency = await getCurrency();
 
-  // console.log(currency);
-
   return (
     <div className="space-y-5">
-      <div>
+      <div className=" p-3">
         {allOrderData?.data?.map((order: Order) => (
           <OrderItems currency={currency} key={order._id} order={order} />
         ))}

@@ -61,7 +61,7 @@ const CartItems = ({
           </span>{" "}
           more to get
           <span className="text-gradient-primary font-semibold">
-            Freeship
+            {" " + "Freeship"}
           </span>{" "}
           🔥
         </span>

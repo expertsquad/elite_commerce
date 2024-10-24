@@ -13,7 +13,7 @@ const OrderItems = ({
   currency?: string;
 }) => {
   return (
-    <div className=" md:shadow-order-history-card-shadow shadow-none  border border-black-10 md:border-transparent mt-5 p-5 rounded-lg">
+    <div className=" md:shadow-order-history-card-shadow shadow-none border border-black-10 md:border-transparent mt-5 p-5 rounded-lg">
       {/* Order top section start */}
       <div className="flex items-start lg:items-center md:justify-between flex-col lg:flex-row  border border-transparent lg:border lg:border-black-10 px-0 lg:px-4 py-3 rounded-lg gap-5">
         <div className="flex justify-between lg:justify-start gap-5 border border-black-10 rounded-lg lg:border-transparent w-full lg:w-7/12 p-3">
