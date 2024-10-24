@@ -8,8 +8,9 @@ import ProductPreviewRedirect from "./ProductPreviewRedirect";
 export interface IProductCardProps {
   product: IProduct;
   onClick?: () => void;
+  currencyIcon?: string;
 }
-const ProductCard = ({ product, onClick }: IProductCardProps) => {
+const ProductCard = ({ product, onClick, currencyIcon }: IProductCardProps) => {
   return (
     <ProductPreviewRedirect
       className="border border-black-10 rounded-lg group relative w-full max-w-[280px] cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg mx-auto"
@@ -37,7 +38,7 @@ const ProductCard = ({ product, onClick }: IProductCardProps) => {
         <div className="flex items-center justify-between mt-5">
           <div className="flex items-center whitespace-nowrap">
             <span className="[font-size:_clamp(16px,2vw,22px)] text-gradient-primary font-bold">
-              $
+              {currencyIcon}
               {product?.variants[0]?.discountedPrice
                 ? product?.variants[0]?.discountedPrice
                 : product?.variants[0]?.sellingPrice}
@@ -48,7 +49,7 @@ const ProductCard = ({ product, onClick }: IProductCardProps) => {
                 product?.variants[0]?.discountedPrice ? "block" : "hidden"
               }`}
             >
-              $
+              {currencyIcon}
               {product?.variants[0]?.discountedPrice &&
                 product?.variants[0]?.sellingPrice}
             </del>
@@ -64,7 +65,7 @@ const ProductCard = ({ product, onClick }: IProductCardProps) => {
             orderQuantity: 1,
             variant: product?.variants[0],
           }}
-          buttonStyle="text-base bg-white py-1.5 whitespace-nowrap px-5 rounded-full"
+          buttonStyle="text-base bg-white py-1.5 whitespace-nowrap px-5 rounded-full text-sm hover:font-bold transition-all duration-300"
           buttonText="Quick Order"
         />
       </div>

@@ -142,7 +142,13 @@ const Page = async () => {
         <div className="grid grid-cols-product-grid grid-rows-product-grid gap-10 min-h-96 justify-around my-5">
           <Suspense fallback={<Loading />}>
             {allProducts?.data?.map((product: IProduct) => {
-              return <ProductCard key={product?._id} product={product} />;
+              return (
+                <ProductCard
+                  key={product?._id}
+                  product={product}
+                  currencyIcon={currencyIcon?.data?.currencySymbol}
+                />
+              );
             })}
           </Suspense>
         </div>
