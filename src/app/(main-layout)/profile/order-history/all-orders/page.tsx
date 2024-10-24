@@ -18,10 +18,6 @@ const AllOrderHistory = async () => {
     allOrderData?.meta?.total / allOrderData?.meta?.limit
   );
 
-  const curr = await fetchData({
-    route: "/settings/shop",
-  });
-
   const currency = await getCurrency();
 
   return (
