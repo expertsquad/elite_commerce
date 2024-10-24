@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 type TBreadCrumbProps = {
-  homeElement: ReactNode;
-  separator: ReactNode;
+  homeElement: React.ReactNode;
+  separator: React.ReactNode;
   containerClasses?: string;
   listClasses?: string;
   activeClasses?: string;
@@ -28,7 +28,12 @@ const NextBreadcrumb = ({
     <div>
       <ul className={containerClasses}>
         <li className={listClasses}>
-          <Link href={"/"}>{homeElement}</Link>
+          <Link
+            href={"/"}
+            className="[font-size:_clamp(14px,2.5vw,18px)] text-black-50 "
+          >
+            {homeElement}
+          </Link>
         </li>
         {pathNames.length > 0 && separator}
         {pathNames.map((link, index) => {
