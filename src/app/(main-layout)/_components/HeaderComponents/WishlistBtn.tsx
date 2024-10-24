@@ -5,6 +5,7 @@ import { IWishlistProduct } from "@/interfaces/wishlist.interface";
 import { WishlistContext } from "@/Provider/WishlistProvider";
 import {
   IconArrowLeft,
+  IconCheck,
   IconHeart,
   IconShoppingCart,
   IconX,
@@ -18,7 +19,7 @@ import { CartContext } from "@/Provider/CartProvider";
 import { updateWishlist } from "@/utils/updateWishlist.utils";
 import { updateCart } from "@/utils/updateCart.utils";
 
-const WishlistBtn = () => {
+const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
   const [show, setShow] = React.useState(false);
   const { wishlistProducts, setRefetch } = useContext(WishlistContext);
   const { cartProducts, setRefetch: setRefetchCart } = useContext(CartContext);
@@ -90,17 +91,19 @@ const WishlistBtn = () => {
                           <p className="text-positive text-[10px] md:text-xs">
                             {product?.variant?.inStock
                               ? product?.variant?.inStock
-                              : 0}{" "}
+                              : 0}
                             In Stock
                           </p>
 
-                          <div className="flex items-center gap-1.5">
+                          <div className="flex items-baseline gap-1.5">
                             <strong className="font-semibold text-gradient-primary text-base">
-                              ${product?.variant?.discountedPrice}
+                              {currencyIcon}
+                              {product?.variant?.discountedPrice}
                             </strong>
                             <span className="text-black-10">|</span>
-                            <strong className="font-normal line-through text-black-50 text-xs">
-                              ${product?.variant?.sellingPrice}
+                            <strong className="font-normal line-through text-black-50 text-sm">
+                              {currencyIcon}
+                              {product?.variant?.sellingPrice}
                             </strong>
                           </div>
                         </div>
@@ -115,42 +118,74 @@ const WishlistBtn = () => {
                       {cartProducts?.some(
                         (p) => p?.productId === product?._id
                       ) ? (
-                        <small className="text-sm">Carted</small>
+                        <div className="text-positive text-sm flex items-center justify-center gap-x-1">
+                          <IconCheck size={18} />
+                          <span>Carted</span>
+                        </div>
                       ) : (
-                        <ButtonPrimary
-                          className="!rounded !py-1.5 !px-2.5 !hover:scale-100"
+                        <button
+                          className="flex items-center justify-center gap-x-1 bg-gradient-primary px-2 py-1 rounded-md text-white hover:text-black"
                           onClick={() => handleAddToCart({ product })}
                         >
-                          <IconShoppingCart height={16} width={16} />
+                          <IconShoppingCart size={17} stroke={2} />
                           Add
-                        </ButtonPrimary>
+                        </button>
                       )}
                     </div>
                   </div>
                 )
               )}
             </div>
-            <div className="flex flex-col gap-5 bg-white fixed bottom-5 w-[92%] mx-auto">
-              <Link
-                href={"/wishlist"}
-                className={`flex items-center justify-center gap-2.5 px-5 w-full py-3.5  bg-gradient-primary  text-white rounded-full uppercase ${
-                  wishlistProducts?.length === 0
-                    ? "pointer-events-none cursor-not-allowed opacity-50 select-none"
-                    : ""
-                }`}
-                onClick={() => setShow(false)}
-              >
-                View Wishlist
-              </Link>
+            <div className="flex items-center justify-center">
+              <div className="flex flex-col gap-5 bg-white fixed bottom-5 w-[92%] mx-auto">
+                <Link
+                  href={"/wishlist"}
+                  onClick={() => setShow(false)}
+                  className={`relative inline-flex items-center justify-center py-3.5 overflow-hidden font-bold rounded-full group w-full bg-gradient-primary ${
+                    wishlistProducts?.length === 0
+                      ? "pointer-events-none cursor-not-allowed opacity-50 select-none"
+                      : ""
+                  }`}
+                >
+                  <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-white opacity-[3%]"></span>
+                  <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-black group-hover:-translate-x-8"></span>
+                  <span className="relative w-full text-white transition-colors duration-200 ease-in-out group-hover:text-black text-center">
+                    VIEW WISHLIST
+                  </span>
+                  <span className="absolute inset-0 border border-white rounded-full"></span>
+                </Link>
 
-              <Link
-                href={"/"}
-                onClick={() => setShow(false)}
-                className="uppercase text-black-80 flex items-center justify-center gap-2  "
-              >
-                <IconArrowLeft />
-                <span>Continue Shopping</span>
-              </Link>
+                <Link
+                  href="/"
+                  onClick={() => setShow(false)}
+                  className="relative inline-flex items-center justify-center py-3 overflow-hidden font-medium text-gradient-secondary transition duration-300 ease-out border border-secondary rounded-full shadow-md group"
+                >
+                  <span className="absolute inset-0 flex items-center justify-center gap-x-1 w-full h-full text-white duration-300 -translate-x-full bg-gradient-secondary group-hover:translate-x-0 ease">
+                    <svg
+                      className="w-5 h-5 rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      ></path>
+                    </svg>
+                    <span className="uppercase">Continue Shopping</span>
+                  </span>
+                  <span className="absolute flex items-center justify-center gap-x-1 w-full h-full text-gradient-secondary transition-all duration-300 transform group-hover:translate-x-full ease uppercase">
+                    <IconArrowLeft size={20} className="text-secondary" />
+                    Continue Shopping
+                  </span>
+                  <span className="relative invisible uppercase">
+                    Continue Shopping
+                  </span>
+                </Link>
+              </div>
             </div>
           </div>
         </Modal>

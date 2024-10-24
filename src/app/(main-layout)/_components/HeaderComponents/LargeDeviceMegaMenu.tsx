@@ -96,7 +96,7 @@ const LargeDeviceMegaMenu = async () => {
       <div className="flex  items-center gap-4">
         <GlobalSearch products={products?.data} categories={categories?.data} />
         {/* wishlist */}
-        <WishlistBtn />
+        <WishlistBtn currencyIcon={currencyIcon?.data?.currencySymbol} />
         {/* cart */}
         <ShoppingCartBtn
           currencyIcon={currencyIcon?.data?.currencySymbol}
