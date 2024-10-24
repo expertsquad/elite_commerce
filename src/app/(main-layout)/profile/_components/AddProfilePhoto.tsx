@@ -27,37 +27,39 @@ const AddProfilePhoto = ({
     setLoading(false);
   };
 
-  if (loading) return <p>Loading...</p>;
-  else
-    return (
-      <Fragment>
-        <div className="h-28 w-28 text-center border border-primary rounded-full">
-          <Image
-            alt="Profile Photo"
-            height={120}
-            src={profilePhotoUrl}
-            className="h-full w-full rounded-full object-cover"
-            width={120}
+  return (
+    <Fragment>
+      <div
+        className={`${
+          loading ? "opacity-50 pointer-events-none" : ""
+        } h-28 w-28 text-center border border-primary rounded-full`}
+      >
+        <Image
+          alt="Profile Photo"
+          height={120}
+          src={profilePhotoUrl}
+          className="h-full w-full rounded-full object-cover"
+          width={120}
+        />
+      </div>
+      <Form handleSubmit={(e: any) => e.preventDefault()}>
+        <label
+          htmlFor="profilePhoto"
+          className="bg-white hover:bg-gradient-primary-light h-7 w-7 flex items-center justify-center rounded-full absolute bottom-0 right-0 cursor-pointer"
+        >
+          <IconPhotoEdit stroke={1} size={20} />
+          <input
+            type="file"
+            className="hidden"
+            id="profilePhoto"
+            name="profilePhoto"
+            ref={fileInputRef}
+            onChange={handleFileInputChange}
           />
-        </div>
-        <Form handleSubmit={(e: any) => e.preventDefault()}>
-          <label
-            htmlFor="profilePhoto"
-            className="bg-white hover:bg-gradient-primary-light h-7 w-7 flex items-center justify-center rounded-full absolute bottom-0 right-0 cursor-pointer"
-          >
-            <IconPhotoEdit stroke={1} size={20} />
-            <input
-              type="file"
-              className="hidden"
-              id="profilePhoto"
-              name="profilePhoto"
-              ref={fileInputRef}
-              onChange={handleFileInputChange}
-            />
-          </label>
-        </Form>
-      </Fragment>
-    );
+        </label>
+      </Form>
+    </Fragment>
+  );
 };
 
 export default AddProfilePhoto;

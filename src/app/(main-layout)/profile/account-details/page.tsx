@@ -7,16 +7,16 @@ const page = () => {
     <div>
       {/* tab to toggle section */}
 
-      <div className="flex gap-5 items-center border-b border-black-10 justify-start">
+      <div className="flex gap-6 items-center border-b border-black-10 justify-start">
         <div className="pb-[1px]  border-gradient-primary">
           <Link
-            className=" text-gradient-primary font-bold text-lg "
+            className=" text-gradient-primary font-semibold text-base "
             href="/profile/account-details"
           >
             Personal Information
           </Link>
         </div>
-        <div className="text-lg">
+        <div className="text-base">
           <Link className=" " href="/profile/account-details/change-password">
             Change Password
           </Link>

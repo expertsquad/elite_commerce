@@ -18,13 +18,13 @@ export const getShippingFee = (
   }
 
   // Find the shipping charge for the specified city (case-insensitive)
-  const cityCharge = shippingCharge?.insideCities.find(
-    (item: any) => item.city.toLowerCase() === city.toLowerCase()
+  const cityCharge = shippingCharge?.insideCities?.find(
+    (item: any) => item?.city?.toLowerCase() === city?.toLowerCase()
   );
 
   // If the city is found, return the corresponding charge
   if (cityCharge) {
-    return cityCharge.charge;
+    return cityCharge?.charge;
   }
 
   // If soldAmount is not provided, return the 'outside' charge

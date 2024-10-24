@@ -13,28 +13,40 @@ import Modal from "@/Components/Modal";
 import ProgressBar from "../SliderComponents/ProgressBar";
 import OrderSummery from "./OrderSummery";
 import { calculatePercentageToFreeShipping } from "@/utils/calculatePercentageToFreeShipping";
+import { getShippingFee } from "@/utils/getShippingFee";
+import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 
 const ShoppingCartBtn = ({
   currencyIcon,
   shippingCharge,
 }: {
   currencyIcon?: string;
-  shippingCharge: number;
+  shippingCharge: any;
 }) => {
-  const {
-    cartProducts,
-    shippingFee,
-    calculateTotalPriceAndDiscountOfCart,
-    setRefetch,
-  } = useContext(CartContext);
   const [show, setShow] = React.useState(false);
+  // cart contex
+  const { cartProducts, calculateTotalPriceAndDiscountOfCart, setRefetch } =
+    useContext(CartContext);
 
   const { totalPrice } = calculateTotalPriceAndDiscountOfCart(cartProducts);
-
+  // getting progress bar value percentage as number like : 76
   const progressValue = calculatePercentageToFreeShipping(
     totalPrice,
-    shippingCharge
+    shippingCharge?.freeShippingMinOrderAmount
   );
+
+  const { orderData } = useContext(OrderInitContext);
+
+  const products = orderData?.orderItems;
+  // city if it's available in order data context otherwise from default address
+  const city = orderData?.shippingAddress?.city
+    ? orderData?.shippingAddress?.city
+    : "";
+
+  // culculating shipping fee
+
+  const shippingFee = getShippingFee(shippingCharge, city, totalPrice);
+
   return (
     <Fragment>
       <button onClick={() => setShow(!show)} className="relative">
@@ -64,11 +76,11 @@ const ShoppingCartBtn = ({
               <div className="mt-5 ">
                 <ProgressBar progressValue={progressValue} />
               </div>
-              <span className="text-base flex items-center gap-x-1">
+              <span className="text-sm flex items-center gap-x-1">
                 Buy
                 <span className="text-gradient-primary">
                   {currencyIcon}
-                  {shippingCharge}
+                  {shippingCharge?.freeShippingMinOrderAmount}
                 </span>
                 more to get
                 <span className="text-gradient-primary font-semibold">

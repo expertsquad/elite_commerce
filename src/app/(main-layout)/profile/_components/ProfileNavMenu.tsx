@@ -15,7 +15,7 @@ const ProfileNavMenu = () => {
           <Link
             href={item?.link}
             className={`flex items-center gap-2 py-4 px-7 my-2 rounded-full group w-full hover:bg-gradient-primary-light transition-all ${
-              pathName === item?.link ? "bg-gradient-primary-light" : ""
+              pathName == item?.link ? "bg-gradient-primary-light" : ""
             }`}
           >
             <div className="w-6 h-6">
