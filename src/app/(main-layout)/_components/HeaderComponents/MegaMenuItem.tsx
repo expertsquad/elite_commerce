@@ -7,13 +7,18 @@ import { IWidgetCard } from "@/interfaces/widget.interface";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { FilterContext } from "@/Provider/BrandProductFilteringProvider";
+import { IProduct } from "@/interfaces/product.interface";
 
 const MegaMenuItem = ({
   category,
   widget,
+  featureProduct,
+  currencySymbol,
 }: {
   category?: ICategory;
   widget: IWidgetCard;
+  currencySymbol?: string;
+  featureProduct?: IProduct[];
 }) => {
   const redirectPath = "/category/filtered-products";
   const router = useRouter();
@@ -67,7 +72,11 @@ const MegaMenuItem = ({
             </li>
           ))}
         </ul>
-        <FeaturedCard widget={widget} />
+        <FeaturedCard
+          products={featureProduct}
+          currencySymbol={currencySymbol}
+          widget={widget}
+        />
       </div>
     </li>
   );

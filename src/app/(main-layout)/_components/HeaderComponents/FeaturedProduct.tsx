@@ -10,13 +10,13 @@ export const FeaturedProduct = async ({
   currencySymbol: string;
 }) => {
   return (
-    <div className="flex items-center border rounded border-black-10 p-3 gap-3">
+    <div className="flex items-center border rounded border-black-10 p-3 gap-3 max-w-[350px]">
       <div className="w-20 h-20 relative ">
         <Image
           src={server_url + product?.productPhotos[0]}
           alt="featured-products"
           fill
-          className="object-cover"
+          className="object-contain h-full w-full inset-0"
         />
       </div>
       <div className="flex flex-col gap-2">
