@@ -12,7 +12,7 @@ const DealsOfTheDaySection = async () => {
   const deals = [firstDeal, secondDeal, thirdDeal];
 
   return (
-    <div className="flex items-center flex-col md:flex-row justify-between  gap-[clamp(20px,2.5vw,40px)] mt-5">
+    <div className="grid grid-cols-1 md:grid-cols-3  gap-[clamp(20px,2.5vw,40px)] mt-5">
       {deals?.map((deal, index) => {
         return <DealsOfTheDayCard key={index} index={index} deal={deal} />;
       })}

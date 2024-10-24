@@ -25,7 +25,7 @@ const ProductVariantColor = ({
       return (
         <div
           key={index}
-          className={`w-7 h-7 cursor-pointer flex items-center justify-center rounded-md ${
+          className={`w-7 h-7 cursor-pointer flex items-center  justify-center rounded-md ${
             isSelected ? "border-2" : "border"
           } ${
             isNotSpecified || color?.variantName === "white"

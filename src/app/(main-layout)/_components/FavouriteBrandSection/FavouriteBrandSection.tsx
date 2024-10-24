@@ -18,10 +18,13 @@ const FavouriteBrandSection = ({
       {/* wiget card */}
       <WidgetCard widget={widget} className="w-[350px] mx-auto" />
       <div className="w-full mt-5 md:mt-0">
-        <div className="relative w-full after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-36 after:h-[2px] md:after:h-1 after:bg-gradient-primary">
-          <h1 className="text-md md:text-2xl font-bold text-gradient-primary">
-            Explore your Favorite Brand
-          </h1>
+        <div className="relative w-full flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <h1 className="text-md md:text-2xl font-bold text-gradient-primary">
+              Explore your Favorite Brand
+            </h1>
+            <span>😍</span>
+          </div>
           <Link
             href="/brands"
             className="flex justify-end text-gradient-primary"

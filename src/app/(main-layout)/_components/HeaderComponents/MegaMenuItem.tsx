@@ -4,7 +4,7 @@ import FeaturedCard from "./FeaturedCard";
 import { IconChevronRight } from "@tabler/icons-react";
 import { ICategory } from "@/interfaces/category.interface";
 import { IWidgetCard } from "@/interfaces/widget.interface";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { FilterContext } from "@/Provider/BrandProductFilteringProvider";
 
@@ -50,7 +50,7 @@ const MegaMenuItem = ({
       onClick={() =>
         category?.categoryName && handleCategoryClick(category.categoryName)
       }
-      className="group/category"
+      className="group/category cursor-pointer"
     >
       <span className="flex w-full px-4 py-2 group-hover/category:bg-gradient-primary-light justify-between group-hover/category:font-semibold">
         {category?.categoryName}

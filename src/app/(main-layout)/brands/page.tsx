@@ -31,7 +31,7 @@ const Brand = async ({ params }: { params: { page: number } }) => {
               {brandData?.meta?.total} Brands Found Here
             </span>
           </div>
-          <div className="grid grid-cols-brand-card-grid gap-5">
+          <div className="grid md:grid-cols-brand-card-grid grid-cols-2 gap-[clamp(10px,2.5vw,20px)]">
             {brandData?.data?.map(
               (brand: {
                 _id: string;

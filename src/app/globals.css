@@ -52,6 +52,12 @@ main {
     var(--secondary),
     var(--secondary-light)
   );
+
+  --gradient-secondary-reverse: linear-gradient(
+    90.37deg,
+    var(--secondary-light),
+    var(--secondary)
+  );
   --gradient-secondary-light: linear-gradient(
     180deg,
     rgba(251, 142, 72, 0.1) 0%,

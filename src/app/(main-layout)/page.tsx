@@ -107,28 +107,34 @@ const Page = async () => {
         />
 
         {/* Deals of the day */}
-        <div className="flex justify-center items-center uppercase flex-col mt-16">
-          <p className="text-[clamp(20px,5vw,25px)] text-gradient-primary">
-            Deals Of The Day
+        <div className="flex justify-center items-center  flex-col gap-3.5 my-16">
+          <div className="flex justify-center items-center gap-5">
+            <div className="border-b w-[100px] border-black-50"></div>
+            <span className="text-[clamp(20px,5vw,30px)] text-gradient-primary font-bold">
+              Deals Of The Day
+            </span>
+            <div className="border-b w-[100px] border-black-50"></div>
+          </div>
+          <p className="text-black-80 [font-size:_clamp(14px,2.5vw,16px)]">
+            Grab today&apos;s best deals with limited-time discounts. Shop now
+            before they&apos;re gone!
           </p>
-          <Image
-            src={wave}
-            alt="gradient line"
-            className="w-[clamp(200px,70vw,300px)]"
-          />
         </div>
         <DealsOfTheDaySection />
 
         {/* All products */}
-        <div className="flex justify-center items-center uppercase flex-col mt-16">
-          <p className="text-[clamp(18px,5vw,25px)] text-gradient-primary">
-            Explore Our All Products
+        <div className="flex justify-center items-center capitalize flex-col gap-3.5 my-16">
+          <div className="flex justify-center items-center gap-5">
+            <div className="border-b w-[100px] border-black-50"></div>
+            <span className="text-[clamp(20px,5vw,30px)] text-gradient-primary font-bold">
+              Explore Our Product
+            </span>
+            <div className="border-b w-[100px] border-black-50"></div>
+          </div>
+          <p className="text-black-80 [font-size:_clamp(14px,2.5vw,16px)]">
+            Browse through our diverse range of high-quality products. Find
+            everything you need in one place!
           </p>
-          <Image
-            src={wave}
-            alt="gradient line"
-            className="w-[clamp(250px,80vw,400px)]"
-          />
         </div>
         <div className="grid grid-cols-product-grid grid-rows-product-grid gap-10 min-h-96 justify-around my-5">
           <Suspense fallback={<Loading />}>
@@ -137,12 +143,15 @@ const Page = async () => {
             })}
           </Suspense>
         </div>
-
-        <Pagination
-          totalPages={totalPages}
-          currentPage={1}
-          redirectTo="/category/page"
-        />
+        {totalPages > 1 ? (
+          <Pagination
+            totalPages={totalPages}
+            currentPage={1}
+            redirectTo="/category/page"
+          />
+        ) : (
+          ""
+        )}
       </div>{" "}
     </>
   );
