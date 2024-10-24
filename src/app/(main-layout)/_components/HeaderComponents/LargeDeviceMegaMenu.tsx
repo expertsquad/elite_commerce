@@ -1,8 +1,7 @@
 import { IconChevronDown, IconChevronRight } from "@tabler/icons-react";
 import Link from "next/link";
 import React from "react";
-import FeaturedCard from "./FeaturedCard";
-import { fetchData, fetchProtectedData } from "@/actions/fetchData";
+import { fetchData } from "@/actions/fetchData";
 import { ICategory } from "@/interfaces/category.interface";
 import Logo from "@/utils/Logo";
 import { mainMenus } from "@/constants/mainMenus.constants";

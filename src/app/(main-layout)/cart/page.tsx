@@ -22,7 +22,7 @@ const CartView = async () => {
         <CartItems
           suggestions={productsData?.data}
           currencyIcon={currency?.data?.currencySymbol}
-          freeShipping={shippingCharge?.data?.freeShippingMinOrderAmount}
+          shippingCharge={shippingCharge?.data}
         />
       </div>
     </div>

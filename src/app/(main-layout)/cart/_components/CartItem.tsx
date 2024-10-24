@@ -77,8 +77,11 @@ export const CartItem = ({
 
       {/* medium device */}
       <div className="hidden md:flex flex-col items-center justify-between">
-        <span className="text-sm text-black-80">U Price</span>
-        <strong className="text-gradient-primary">${price}</strong>
+        <span className="text-sm text-black-80">Price</span>
+        <strong className="text-gradient-primary">
+          {currencyIcon}
+          {price}
+        </strong>
       </div>
       <div className="md:flex flex-col gap-y-1 items-center justify-between hidden">
         <span className="text-sm text-black-80">Qty</span>
