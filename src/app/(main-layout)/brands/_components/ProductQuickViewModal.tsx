@@ -144,7 +144,7 @@ const ProductQuickViewModal = ({
               </div>
             </div>
             {/* price section */}
-            <div className="my-6">
+            <div className="my-6 flex items-center gap-2.5">
               <ProductVariantColor variants={product?.variants} />
             </div>
             <hr className="border border-black-10 my-5" />

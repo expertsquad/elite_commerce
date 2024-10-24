@@ -1,4 +1,3 @@
-import { fetchData } from "@/actions/fetchData";
 import { server_url } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,13 +29,13 @@ const BrandCard = ({ brand }: IBrandCardProps) => {
             sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
-        <span className="text-lg font-semibold text-gradient-primary">
+        <span className="[font-size:_clamp(16px,2.5vw,18px)] font-semibold text-gradient-primary">
           {brand?.brandName}
         </span>
       </div>
       <hr className="h-[1px] border-black-10" />
       <div className="flex flex-col items-center gap-4">
-        <span className="text-lg text-center text-black-80">
+        <span className="[font-size:_clamp(14px,2.5vw,18px)] text-center text-black-80">
           {brand?.productCount} product available
         </span>
       </div>

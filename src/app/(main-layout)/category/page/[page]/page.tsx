@@ -28,13 +28,17 @@ const ProductsPage = async ({ params }: { params: { page: number } }) => {
         ))}
       </div>
 
-      <div className="my-10">
-        <Pagination
-          totalPages={totalPages}
-          currentPage={Number(params?.page)}
-          redirectTo="/category/page"
-        />
-      </div>
+      {totalPages > 1 ? (
+        <div className="my-10">
+          <Pagination
+            totalPages={totalPages}
+            currentPage={Number(params?.page)}
+            redirectTo="/category/page"
+          />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

@@ -40,11 +40,15 @@ const FilteredProductsGridView = ({
         </div>
       </div>
       <div>
-        <Pagination
-          redirectTo="/category/filtered-products/page/"
-          currentPage={1}
-          totalPages={totalPages || 0}
-        />
+        {totalPages > 1 ? (
+          <Pagination
+            redirectTo="/category/filtered-products/page/"
+            currentPage={1}
+            totalPages={totalPages || 0}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

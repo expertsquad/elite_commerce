@@ -2,6 +2,7 @@ import StarRating from "@/Components/StarRating";
 import { server_url } from "@/constants";
 import { IProduct } from "@/interfaces/product.interface";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 type ITopRatingProductProps = {
@@ -20,8 +21,9 @@ const TopRatingProductCard = ({
       </h2>
       <div className="flex flex-col gap-y-3">
         {products?.map((product: IProduct) => (
-          <div
-            className="flex items-center hover:bg-gradient-primary-light"
+          <Link
+            href={`/products/${product?._id}`}
+            className="flex items-center hover:bg-gradient-primary-light cursor-pointer"
             key={product?._id}
           >
             <div className="relative shrink-0 h-[70px] w-[70px]">
@@ -55,7 +57,7 @@ const TopRatingProductCard = ({
                 <StarRating rating={product?.averageRating || 0} />
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

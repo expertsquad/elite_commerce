@@ -100,13 +100,17 @@ const SortingSection = ({
           <></>
         )}
       </div>
-      <div className="my-5">
-        <Pagination
-          totalPages={toatalPages}
-          currentPage={1}
-          redirectTo="/category/page"
-        />
-      </div>
+      {toatalPages > 1 ? (
+        <div className="my-5">
+          <Pagination
+            totalPages={toatalPages}
+            currentPage={1}
+            redirectTo="/category/page"
+          />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

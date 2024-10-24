@@ -18,7 +18,7 @@ const MegaDiscountCard = ({ widget }: { widget: IWidgetCard }) => {
       <div className="flex flex-col gap-6 items-center">
         <Link
           href={`${widget?.link}`}
-          className="flex py-2.5 px-10 rounded items-center justify-center gap-3 text-white bg-gradient-secondary uppercase"
+          className="flex transition-all duration-300 hover:bg-gradient-secondary-reverse py-2.5 px-10 rounded items-center justify-center gap-3 text-white bg-gradient-secondary uppercase"
         >
           {widget?.buttonText} &rarr;
         </Link>

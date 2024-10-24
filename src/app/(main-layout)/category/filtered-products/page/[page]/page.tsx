@@ -64,11 +64,15 @@ const FilteredProductDynamicPage = ({
         </div>
       </div>
       <div>
-        <Pagination
-          redirectTo="/category/filtered-products/page/"
-          currentPage={Number(params.page)}
-          totalPages={totalPages || 0}
-        />
+        {totalPages > 1 ? (
+          <Pagination
+            redirectTo="/category/filtered-products/page/"
+            currentPage={Number(params.page)}
+            totalPages={totalPages || 0}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
