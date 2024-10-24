@@ -67,7 +67,10 @@ const CategoryCard = ({
               }
               onChange={() => handleRadioChange(category.categoryName)}
             />
-            <label htmlFor={category?.categoryName} className="text-black-80">
+            <label
+              htmlFor={category?.categoryName}
+              className="text-black-80 cursor-pointer"
+            >
               {category?.categoryName}
             </label>
           </div>

@@ -40,7 +40,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
           <div className="lg:col-span-3 md:grid-cols-2 md:col-span-2">
             {children}
           </div>
-          <div className="hidden md:block lg:block">
+          <div className="hidden md:block lg:block ">
             <FilteringSection
               categories={categories?.data}
               products={products?.data}

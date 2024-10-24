@@ -4,6 +4,7 @@ import SortingSection from "../../category/_components/FilterBySelection";
 import { IProduct } from "@/interfaces/product.interface";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import Pagination from "@/Components/Pagination";
+import ProductEmptyState from "../../_components/ProductEmptyState";
 
 const BrandPage = async ({ params }: { params: { slug: string } }) => {
   const response = await fetchData({
@@ -20,11 +21,15 @@ const BrandPage = async ({ params }: { params: { slug: string } }) => {
         </div>
         <div className="hidden md:block">{/* <SortingSection /> */}</div>
       </div>
-      <div className="grid grid-cols-product-grid gap-5 place-items-center">
-        {response?.data?.map((product: IProduct) => (
-          <ProductCard key={product?._id} product={product} />
-        ))}
-      </div>
+      {response?.data?.length > 0 ? (
+        <div className="grid grid-cols-product-grid gap-5 place-items-center">
+          {response?.data?.map((product: IProduct) => (
+            <ProductCard key={product?._id} product={product} />
+          ))}
+        </div>
+      ) : (
+        <ProductEmptyState message="No Product Found!!" />
+      )}
       {totalPages > 1 ? (
         <Pagination
           redirectTo={`/brands/${params.slug}/page`}
