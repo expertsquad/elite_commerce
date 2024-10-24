@@ -9,12 +9,10 @@ import { ICartProduct } from "@/interfaces/cart.interface";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct } from "@/interfaces/product.interface";
 import { CartContext } from "@/Provider/CartProvider";
-import ProgressBar from "../../_components/SliderComponents/ProgressBar";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
 import { storages } from "@/constants";
 import QuickOrderButton from "../../brands/_components/QuickOrderButton";
-// import { useGetShippingFee } from "@/utils/shppingCharge/getShippingFee";
 
 const CartItems = ({
   suggestions,

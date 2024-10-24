@@ -64,7 +64,7 @@ const ShoppingCartBtn = ({
               <div className="mt-5 ">
                 <ProgressBar progressValue={progressValue} />
               </div>
-              <span className="text-base flex items-center gap-x-1">
+              <span className="text-sm flex items-center gap-x-1">
                 Buy
                 <span className="text-gradient-primary">
                   {currencyIcon}

@@ -15,7 +15,6 @@ export const ShippingInfoOrderItems = ({
   product: ICartProduct;
   currencySymbol: string;
 }) => {
-  console.log(currencySymbol);
   const { orderData, setRefetch } = useContext(OrderInitContext);
   const handleRemoveItem = () => {
     let updateOrderItems = orderData?.orderItems;
