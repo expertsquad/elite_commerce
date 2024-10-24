@@ -17,6 +17,7 @@ import { WishlistContext } from "@/Provider/WishlistProvider";
 import { CartContext } from "@/Provider/CartProvider";
 import { updateWishlist } from "@/utils/updateWishlist.utils";
 import { updateCart } from "@/utils/updateCart.utils";
+import QuickViewButton from "../../brands/_components/QuickViewButton";
 
 const WishlistedItems = ({
   product,
@@ -95,10 +96,12 @@ const WishlistedItems = ({
         </span>
       </td>
       <td className="border border-black-10 border-collapse px-5">
-        <div className=" flex items-center justify-center gap-5">
-          <button className="border border-black-10 rounded-full p-2">
-            <IconEye size={18} stroke={1} />
-          </button>
+        <div className=" flex items-center justify-center">
+          <QuickViewButton product={product}>
+            <span className="border border-black-10 flex items-center justify-center p-2.5 rounded-full hover:bg-gradient-primary hover:text-white transition duration-300">
+              <IconEye size={18} stroke={1.7} />
+            </span>
+          </QuickViewButton>
 
           {isProductInCart ? (
             <div className="text-positive flex items-center justify-center gap-x-1">
