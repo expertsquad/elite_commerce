@@ -1,12 +1,16 @@
 import React from "react";
 import ProfileTopCard from "../_components/ProfileTopCard";
 import OrderSection from "../_components/OrderSection";
+import { fetchProtectedData } from "@/actions/fetchData";
 
-const page = () => {
+const page = async () => {
+  const getMe = await fetchProtectedData({
+    route: "/user/me",
+  });
   return (
     <div className="">
-      <ProfileTopCard />
-      <OrderSection />
+      <ProfileTopCard getMe={getMe} />
+      <OrderSection getMe={getMe} />
     </div>
   );
 };

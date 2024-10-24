@@ -6,11 +6,7 @@ import starIcon from "@/assets/Images/starIcon.svg";
 import Image from "next/image";
 import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 
-const ProfileTopCard = async () => {
-  const getMe = await fetchProtectedData({
-    route: "/user/me",
-  });
-
+const ProfileTopCard = async ({ getMe }: { getMe: any }) => {
   const orderItems = await fetchProtectedData({
     route: "/online-order",
     query: "buyer.userId=" + getMe?.data?._id,

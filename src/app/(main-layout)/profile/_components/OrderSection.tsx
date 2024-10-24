@@ -4,12 +4,7 @@ import { fetchProtectedData } from "@/actions/fetchData";
 import { Order } from "@/interfaces/oreder.interface";
 import { getCurrency } from "@/utils/getCurrency";
 
-const OrderSection = async () => {
-  const getMe = await fetchProtectedData({
-    route: "/user/me",
-    limit: 20,
-  });
-
+const OrderSection = async ({ getMe }: { getMe: any }) => {
   const orderItems = await fetchProtectedData({
     route: "/online-order",
     query: "buyer.userId=" + getMe?.data?._id,

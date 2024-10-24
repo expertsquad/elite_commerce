@@ -24,28 +24,22 @@ const BillingInfoPageContent = ({
   const router = useRouter();
   const { orderData } = useContext(OrderInitContext);
 
-  //demo.elitecommerce.app/transaction/success?orderId=6716632d8a754c9e034c23bf
-  //demo.elitecommerce.app/transaction/success?orderId=671662cc8a754c9e034c223f
-
   // handle submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    // Convert zip code strings to numbers
     const shippingAddress = orderData?.shippingAddress as IAddress;
-    let shippingZipCode = shippingAddress?.zipCode;
-
-    if (typeof shippingZipCode === "string") {
-      shippingZipCode = Number(shippingZipCode);
+    if (typeof shippingAddress?.zipCode === "string") {
+      shippingAddress.zipCode = Number(shippingAddress.zipCode);
     }
 
     const billingAddress = orderData?.billingAddress as IAddress;
-
-    let billingZipCOde = billingAddress?.zipCode;
-
-    if (typeof billingZipCOde === "string") {
-      billingZipCOde = Number(billingZipCOde);
+    if (typeof billingAddress?.zipCode === "string") {
+      billingAddress.zipCode = Number(billingAddress.zipCode);
     }
 
+    // Now submit the modified orderData
     try {
       const result = await updateDataMutation({
         route: "/online-order/add",
@@ -53,6 +47,7 @@ const BillingInfoPageContent = ({
         method: "POST",
         formatted: true,
       });
+
       if (result?.success === true) {
         localStorage.removeItem("orderInit");
         if (orderData?.payment?.paymentMethod === "COD") {
@@ -64,6 +59,7 @@ const BillingInfoPageContent = ({
     } catch (error) {
       console.error(error);
     }
+
     setLoading(false);
   };
 
