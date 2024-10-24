@@ -8,7 +8,7 @@ import { updateWishlist } from "@/utils/updateWishlist.utils";
 import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { WishlistContext } from "@/Provider/WishlistProvider";
 import { IWishlistProduct } from "@/interfaces/wishlist.interface";
-import AddToWishlistBtn from "@/app/(main-layout)/products/[id]/_components/AddToWishlistBtn";
+import AddToWishlistBtn from "@/app/(main-layout)/products/[slug]/_components/AddToWishlistBtn";
 import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
 
 type ProductImageSliderProps = {
