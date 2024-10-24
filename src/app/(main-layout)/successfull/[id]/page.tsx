@@ -97,7 +97,9 @@ const OrderSuccessfull = async ({
           shipping={response?.data?.shippingCharge}
           total={response?.data?.totalPayable}
           subTotal={response?.data?.totalPrice}
-          discount={response?.data?.totalDiscount}
+          discount={
+            response?.data?.totalDiscount || response?.data?.additionalDiscount
+          }
           currencySymbol={currencyIcon?.data?.currencySymbol}
         />
       </div>

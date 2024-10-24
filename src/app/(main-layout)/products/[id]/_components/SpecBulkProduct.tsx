@@ -36,7 +36,7 @@ const SpecBulkProduct = ({
   return (
     <div className="max-w-[370px] min-w-80 p-5 shadow-lg rounded-md hidden md:block sticky top-20">
       <div className="flex items-center gap-x-4 mb-3">
-        {productdata?.productPhotos?.map((photo, index) => (
+        {productdata?.productPhotos?.slice(0, 4)?.map((photo, index) => (
           <div
             key={index}
             className="relative shrink-0 w-[60px] h-[70px] bg-[#F8F8F8] rounded-md border border-black-10"

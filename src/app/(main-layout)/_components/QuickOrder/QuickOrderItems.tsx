@@ -9,8 +9,8 @@ export const QuickOrderItem = ({ product }: { product: IProduct }) => {
     <div className="flex justify-between gap-3.5 ">
       <div className="flex md:items-center gap-3.5 w-full">
         <div>
-          <div className="bg-gradient-primary-light md:p-3.5 p-1.5 rounded-[10px]">
-            <div className="relative shrink-0 md:w-[55px] md:h-[55px] w-[50px] h-[50px]">
+          <div className="bg-gradient-primary-light p-1.5 rounded-[10px]">
+            <div className="relative shrink-0 w-[55px] h-[55px]">
               {product?.productPhotos?.length > 0 && (
                 <Image
                   src={`${server_url + product?.productPhotos[0]}`}
@@ -32,7 +32,7 @@ export const QuickOrderItem = ({ product }: { product: IProduct }) => {
                 {product?.productName}
               </span>
               <button className="text-danger">
-                <IconX stroke={2} height={18} width={18} />
+                <IconX stroke={2} size={18} />
               </button>
             </div>
             <div className="flex items-center gap-2">

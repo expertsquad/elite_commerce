@@ -1,4 +1,4 @@
-import { orderPlacedDesign2 } from "@/assets";
+import { orderPlacedDesign2, successGif } from "@/assets";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -15,14 +15,14 @@ const OrderPlacedThankYou = ({
     <div className="flex-1 md:h-[670px] flex flex-col justify-center items-center pb-5 md:pb-0">
       <div className="flex items-center justify-center">
         <div className="flex flex-col items-center text-center">
-          <Image src={orderPlacedDesign2} alt="order placed design" />
+          <Image src={successGif} alt="order placed design" />
           <h2 className="font-semibold text-gradient-secondary text-2xl">
             Thank You!
           </h2>
           <span className="my-2.5 font-semibold">
             Your order is successfully placed
           </span>
-          <p>
+          <p className="text-sm">
             Your order is successfully confirmed! Get ready for an exciting
             journey ahead. Stay tuned for updates as we prepare your package.
             Thank you for choosing us!
