@@ -15,6 +15,7 @@ import OrderSummery from "./OrderSummery";
 import { calculatePercentageToFreeShipping } from "@/utils/calculatePercentageToFreeShipping";
 import { getShippingFee } from "@/utils/getShippingFee";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
+import { Button } from "@/Components/Buttons";
 
 const ShoppingCartBtn = ({
   currencyIcon,
@@ -37,12 +38,10 @@ const ShoppingCartBtn = ({
 
   const { orderData } = useContext(OrderInitContext);
 
-  const products = orderData?.orderItems;
   // city if it's available in order data context otherwise from default address
   const city = orderData?.shippingAddress?.city
     ? orderData?.shippingAddress?.city
     : "";
-
   // culculating shipping fee
 
   const shippingFee = getShippingFee(shippingCharge, city, totalPrice);
@@ -103,31 +102,46 @@ const ShoppingCartBtn = ({
                 );
               })}
             </div>
-            <div className="fixed bottom-0 right-1 md:w-[95%]  mx-auto bg-white w-full px-2">
-              <OrderSummery
-                setshow={setShow}
-                products={cartProducts}
-                shippingFee={shippingFee}
-                calculateTotalPriceAndDiscountOfCart={
-                  calculateTotalPriceAndDiscountOfCart
-                }
-                currencyIcon={currencyIcon}
-              />
-              <div className="my-5 flex items-center justify-center">
-                {" "}
-                <Link
-                  onClick={() => setShow(!show)}
-                  href={"/cart"}
-                  className={`text-positive text-sm uppercase select-none flex items-center gap-x-1 ${
-                    cartProducts?.length === 0
-                      ? "pointer-events-none cursor-not-allowed opacity-50"
-                      : ""
-                  }`}
-                >
-                  View Cart <IconArrowRight stroke={2} size={18} />
+            {!cartProducts.length ? (
+              <div className="w-full flex items-center justify-center flex-col gap-5">
+                <p className="text-center py-2"> Cart is empty </p>
+                <Link href={"/"} className="w-full">
+                  <Button className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2">
+                    Continue Shopping
+                    <IconArrowRight />
+                  </Button>
                 </Link>
               </div>
-            </div>
+            ) : null}
+
+            {/* if dont have anything in cart it will not show */}
+            {cartProducts.length ? (
+              <div className="fixed bottom-0 right-1 md:w-[95%]  mx-auto bg-white w-full ">
+                <OrderSummery
+                  setshow={setShow}
+                  products={cartProducts}
+                  shippingFee={shippingFee}
+                  calculateTotalPriceAndDiscountOfCart={
+                    calculateTotalPriceAndDiscountOfCart
+                  }
+                  currencyIcon={currencyIcon ? currencyIcon : ""}
+                />
+                <div className="my-5 flex items-center justify-center">
+                  {" "}
+                  <Link
+                    onClick={() => setShow(!show)}
+                    href={"/cart"}
+                    className={`text-positive text-sm uppercase select-none flex items-center gap-x-1 ${
+                      cartProducts?.length === 0
+                        ? "pointer-events-none cursor-not-allowed opacity-50"
+                        : ""
+                    }`}
+                  >
+                    View Cart <IconArrowRight stroke={2} size={18} />
+                  </Link>
+                </div>
+              </div>
+            ) : null}
           </div>
         </Modal>
       )}
