@@ -11,19 +11,6 @@ const ProfileNav = async () => {
   const getMe = await fetchProtectedData({
     route: "/user/me",
   });
-
-  const handleAction = async (formData: FormData) => {
-    "use server";
-    await updateDataMutation({
-      route: "/user/update",
-      dataType: "formData",
-      data: formData,
-      method: "PUT",
-      formatted: true,
-    });
-    revalidateTagAction("/user/update");
-  };
-
   return (
     <div className="bg-gradient-primary-light p-5 rounded-xl w-full h-fit static md:sticky md:top-20 top-0">
       <div className="md:overflow-auto scrollbar-y-remove h-fit md:h-[calc(100vh-180px)]">
@@ -31,7 +18,6 @@ const ProfileNav = async () => {
           <div className="relative">
             <AddProfilePhoto
               profilePhotoUrl={server_url + getMe?.data?.profilePhoto}
-              handleAction={handleAction}
             />
           </div>
           <div className="flex flex-col gap-2 md:items-center md:justify-center md:mb-4">

@@ -28,6 +28,8 @@ const OrderSummery = ({
 
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
+  console.log(totalDiscount);
+
   // handle init order
   const handleAddToInitOrder = () => {
     setLocalStorageData(storages.orderInit, {
@@ -54,7 +56,10 @@ const OrderSummery = ({
       </div>
       <div className="flex items-center justify-between ">
         <span className="text-black-80 md:text-base text-sm">Discount</span>
-        <p>{currencyIcon ? currencyIcon : "" + totalDiscount}</p>
+        <p>
+          -{currencyIcon}
+          {totalDiscount}
+        </p>
       </div>
       <hr className="border-black-10 border my-3.5" />
       <div className="flex items-center justify-between !py-2">
