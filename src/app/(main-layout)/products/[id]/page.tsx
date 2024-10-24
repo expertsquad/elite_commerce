@@ -9,7 +9,6 @@ import CustomerReview from "./_components/CustomerReview";
 import SocialMediaAndOthers from "./_components/SocialMediaAndOthers";
 import SpecBulkProduct from "./_components/SpecBulkProduct";
 import SpecificationsMenu from "./_components/SpecificationsMenu";
-import SpecificationsAndBulkProductSection from "./_components/SpecificationsAndBulkProductSection";
 import { cookies } from "next/headers";
 
 const ProductViewPage = async ({
@@ -70,11 +69,6 @@ const ProductViewPage = async ({
           </div>
         </div>
       </section>
-      {/* <SpecificationsAndBulkProductSection
-        averageRating={response?.data?.averageRating}
-        productId={params?.id}
-        product={response?.data}
-      /> */}
       <RelatedProductsByCategory
         categoryName={product?.data?.category?.categoryName}
       />

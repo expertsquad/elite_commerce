@@ -6,6 +6,7 @@ import OrderedItems from "./_components/OrderedItems";
 
 const OrderTrackPage = async ({ params }: { params: { id: string } }) => {
   const response = await fetchData({ route: `/online-order/${params?.id}` });
+  console.log(response);
 
   const currencyIcon = await fetchData({
     route: "/settings/shop",
@@ -29,7 +30,10 @@ const OrderTrackPage = async ({ params }: { params: { id: string } }) => {
             shipping={response?.data?.shippingCharge}
             total={response?.data?.totalPayable}
             subTotal={response?.data?.totalPrice}
-            discount={response?.data?.totalDiscount}
+            discount={
+              response?.data?.totalDiscount ||
+              response?.data?.additionalDiscount
+            }
             orderQuanity={response?.data?.totalQuantity}
             orderItemsLength={response?.data?.orderItems?.length}
             currencyIcon={currencyIcon?.data?.currencySymbol}

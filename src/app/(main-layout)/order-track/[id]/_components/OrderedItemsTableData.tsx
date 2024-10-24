@@ -23,16 +23,16 @@ const OrderedItemsTableData = async ({
   return (
     <section>
       <div className="hidden md:flex bg-[#F7F7F7] px-3 py-2 text-sm font-medium mb-5 w-full">
-        <span className="w-[56%]">Product Name</span>
+        <span className="w-[45%]">Product Name</span>
         <span className="w-[15%]">Un Price</span>
-        <span className="w-[7%]">Qty</span>
+        <span className="w-[15%]">Qty</span>
         <span className="w-[15%]">Total</span>
-        <span className="w-[7%]"></span>
+        <span className="w-[10%]"></span>
       </div>
       <div>
         {orderItems?.map((item: OrderItemsTypes) => (
           <div key={item?._id} className="mb-5 flex items-center">
-            <div className="flex items-center w-full md:w-[56%]">
+            <div className="flex items-center w-full md:w-[45%]">
               <div className="w-[50px] h-[60px] md:h-[50px] shrink-0 relative bg-gradient-primary-light rounded-md mr-2.5">
                 <Image
                   src={`${server_url + item?.productPhotos[0]}`}
@@ -82,7 +82,7 @@ const OrderedItemsTableData = async ({
                 </div>
               </div>
             </div>
-            <div className="hidden md:block md:w-[15%]">
+            <div className="hidden md:block md:w-[14%]">
               {item?.variant?.discountedPrice ? (
                 <span className="text-sm md:text-base">
                   {currencyIcon?.data?.currencySymbol}
@@ -95,7 +95,7 @@ const OrderedItemsTableData = async ({
                 </span>
               )}
             </div>
-            <div className="hidden md:flex items-center md:w-[7%]">
+            <div className="hidden md:flex items-center md:w-[15%]">
               <IconX size={16} stroke={1} className="text-black-80" />
               <span>{item?.orderQuantity}</span>
             </div>
@@ -103,7 +103,7 @@ const OrderedItemsTableData = async ({
               {currencyIcon?.data?.currencySymbol}
               {item?.subTotalPayable?.toFixed(2)}
             </div>
-            <div className="hidden md:w-[7%] md:flex items-center justify-center">
+            <div className="hidden md:w-[10%] md:flex items-center justify-center">
               {orderStatusLength <= 2 && (
                 <div>
                   <OrderCancelModal id={id} />

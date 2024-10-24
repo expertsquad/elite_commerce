@@ -68,7 +68,7 @@ const ProductViewDescAndOthers = ({
             buttonText="QUICK ORDER"
           />
           <BuyNowSingleProduct
-            accessToken={accessToken || ""}
+            accessToken={accessToken ? accessToken : ""}
             product={product}
           />
         </div>

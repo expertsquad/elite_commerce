@@ -97,7 +97,7 @@ const SpecBulkProduct = ({
           <div className="bg-gradient-primary-light rounded-md w-full">
             <BuyNowSingleProduct
               product={productdata}
-              accessToken={accessToken!}
+              accessToken={accessToken ? accessToken : ""}
               className="!py-2 !text-[13px]"
               iconStyle="size-4"
             />

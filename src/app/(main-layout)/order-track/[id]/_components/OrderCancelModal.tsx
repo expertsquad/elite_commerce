@@ -1,4 +1,5 @@
 "use client";
+import { revalidateTagAction } from "@/actions/revalidateTag";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import Modal from "@/Components/Modal";
 import { IconX } from "@tabler/icons-react";
@@ -30,7 +31,7 @@ const OrderCancelModal = ({ id }: { id: string }) => {
 
       if (response?.success) {
         router.push("/profile/order-history/all-orders");
-        // window.location.reload();
+        revalidateTagAction("/profile/order-history/all-orders");
         setShow(false);
       }
     } catch (error) {
@@ -70,34 +71,38 @@ const OrderCancelModal = ({ id }: { id: string }) => {
               >
                 Cancellation Reason
               </label>
-              <select
+              <div
                 className={`group w-full border border-black-10 mt-2 py-3 px-3 rounded-lg outline-none mb-7`}
-                name="reason"
-                id="cancelation reason"
-                value={reason}
-                onChange={(e) => setReason(e.target.value)}
               >
-                {[
-                  "Select Reason",
-                  "Change of Mind",
-                  "Duplicate Order",
-                  "Change my location",
-                  "Change / Combine Order",
-                  "Delivery time is too long",
-                  "Shipping fees",
-                  "Change Payment method",
-                ].map((opt, index) => (
-                  <option
-                    key={opt}
-                    value={opt}
-                    selected={index === 0}
-                    hidden={index === 0}
-                    className=""
-                  >
-                    {opt}
-                  </option>
-                ))}
-              </select>
+                <select
+                  className={`w-full outline-none`}
+                  name="reason"
+                  id="cancelation reason"
+                  value={reason}
+                  onChange={(e) => setReason(e.target.value)}
+                >
+                  {[
+                    "Select Reason",
+                    "Change of Mind",
+                    "Duplicate Order",
+                    "Change my location",
+                    "Change / Combine Order",
+                    "Delivery time is too long",
+                    "Shipping fees",
+                    "Change Payment method",
+                  ].map((opt, index) => (
+                    <option
+                      key={opt}
+                      value={opt}
+                      selected={index === 0}
+                      hidden={index === 0}
+                      className="py-5"
+                    >
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <p>
                 {" "}
                 <label htmlFor="comments" className="text-black-80">
