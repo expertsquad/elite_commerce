@@ -13,10 +13,12 @@ const FeaturedProducts = ({
   newestProducts,
   topSellProducts,
   popularProducts,
+  currencyIcon,
 }: {
   newestProducts: IProduct[];
   topSellProducts: IProduct[];
   popularProducts: IProduct[];
+  currencyIcon: string;
 }) => {
   const [filter, setFilter] = React.useState("Newest");
   return (
@@ -59,11 +61,20 @@ const FeaturedProducts = ({
       {/* layout */}
       <div className="grid grid-cols-product-grid grid-rows-product-grid gap-10 min-h-96 justify-around">
         {filter === "Newest" ? (
-          <NewestProducts products={newestProducts} />
+          <NewestProducts
+            products={newestProducts}
+            currencyIcon={currencyIcon}
+          />
         ) : filter === "TopSell" ? (
-          <TopSellProducts products={topSellProducts} />
+          <TopSellProducts
+            products={topSellProducts}
+            currencyIcon={currencyIcon}
+          />
         ) : (
-          <PopularProducts products={popularProducts} />
+          <PopularProducts
+            products={popularProducts}
+            currencyIcon={currencyIcon}
+          />
         )}
       </div>
     </div>

@@ -72,6 +72,7 @@ const Page = async () => {
           />
         </div>
         <FeaturedProducts
+          currencyIcon={currencyIcon?.data?.currencySymbol}
           newestProducts={newestProducts?.data}
           topSellProducts={topSellProducts?.data}
           popularProducts={popularProducts?.data}
