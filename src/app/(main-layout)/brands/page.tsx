@@ -1,19 +1,19 @@
 import WidgetCard from "@/Components/WidgetCard";
-import SmallProductCard from "./_components/SmallProductCard";
 import BrandCard from "@/Components/BrandCard";
 import { fetchData } from "@/actions/fetchData";
 import Pagination from "@/Components/Pagination";
 import TopSellingBrandProducts from "./_components/TopSellingBrandProducts";
 import { getWidget } from "@/utils/getWidget";
 import { getCurrency } from "@/utils/getCurrency";
+import { IBrand } from "@/interfaces/brand.interface";
+import ProductEmptyState from "../_components/ProductEmptyState";
 
-const Brand = async ({ params }: { params: { page: number } }) => {
-  const currentPage = 1 || Number(params.page);
+const Brand = async () => {
   const brandData = await fetchData({
     route: "/brand",
-    page: params.page,
     limit: 20,
   });
+
   const topSellProducts = await fetchData({
     route: "/product",
     query: "sortBy=totalSoldQuantity",
@@ -31,23 +31,20 @@ const Brand = async ({ params }: { params: { page: number } }) => {
               {brandData?.meta?.total} Brands Found Here
             </span>
           </div>
-          <div className="grid md:grid-cols-brand-card-grid grid-cols-2 gap-[clamp(10px,2.5vw,20px)]">
-            {brandData?.data?.map(
-              (brand: {
-                _id: string;
-                brandName: string;
-                brandPhoto: string;
-                productCount: number;
-              }) => {
+          {brandData?.data?.length > 0 ? (
+            <div className="grid md:grid-cols-brand-card-grid grid-cols-2 gap-[clamp(10px,2.5vw,20px)]">
+              {brandData?.data?.map((brand: IBrand) => {
                 return <BrandCard brand={brand} key={brand?._id} />;
-              }
-            )}
-          </div>
+              })}
+            </div>
+          ) : (
+            <ProductEmptyState message="No Brand Found!!" />
+          )}
           <div className="my-10">
             {totalPages > 1 && (
               <Pagination
                 totalPages={totalPages}
-                currentPage={Number(currentPage)}
+                currentPage={1}
                 redirectTo="/brands/page"
               />
             )}

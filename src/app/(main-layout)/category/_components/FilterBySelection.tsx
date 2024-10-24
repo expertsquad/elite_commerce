@@ -4,6 +4,7 @@ import Pagination from "@/Components/Pagination";
 import { IProduct } from "@/interfaces/product.interface";
 import dynamic from "next/dynamic";
 import React, { Suspense, useState } from "react";
+import ProductEmptyState from "../../_components/ProductEmptyState";
 
 const MostPopularProducts = dynamic(
   () => import("./SortedProducts/MostPopularProducts")
@@ -82,24 +83,41 @@ const SortingSection = ({
       <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5  justify-around">
         {selected === "MostPopular" ? (
           <Suspense fallback={<Loading />}>
-            <MostPopularProducts products={mostPopularProducts?.data} />
+            {mostPopularProducts?.data?.length > 0 ? (
+              <MostPopularProducts products={mostPopularProducts?.data} />
+            ) : (
+              <ProductEmptyState />
+            )}
           </Suspense>
         ) : selected === "New" ? (
           <Suspense fallback={<Loading />}>
-            <NewProducts products={newProducts?.data} />
+            {newProducts?.data?.length > 0 ? (
+              <NewProducts products={newProducts?.data} />
+            ) : (
+              <ProductEmptyState />
+            )}
           </Suspense>
         ) : selected === "HighPrice" ? (
           <Suspense fallback={<Loading />}>
-            <HighPriceProducts products={highPriceProducts?.data} />
+            {highPriceProducts?.data?.length > 0 ? (
+              <HighPriceProducts products={highPriceProducts?.data} />
+            ) : (
+              <ProductEmptyState />
+            )}
           </Suspense>
         ) : selected === "LowPrice" ? (
           <Suspense fallback={<Loading />}>
-            <LowPriceProducts products={lowPriceProducts?.data} />
+            {lowPriceProducts?.data?.length > 0 ? (
+              <LowPriceProducts products={lowPriceProducts?.data} />
+            ) : (
+              <ProductEmptyState />
+            )}
           </Suspense>
         ) : (
           <></>
         )}
       </div>
+
       {toatalPages > 1 ? (
         <div className="my-5">
           <Pagination

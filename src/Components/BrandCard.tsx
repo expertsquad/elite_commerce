@@ -1,17 +1,9 @@
 import { server_url } from "@/constants";
+import { IBrand } from "@/interfaces/brand.interface";
 import Image from "next/image";
 import Link from "next/link";
 
-export type IBrandCardProps = {
-  brand: {
-    _id: string;
-    brandName: string;
-    brandPhoto: string;
-    productCount: number;
-  };
-};
-
-const BrandCard = ({ brand }: IBrandCardProps) => {
+const BrandCard = ({ brand }: { brand: IBrand }) => {
   return (
     <Link
       href={`brands/${brand?.brandName}`}

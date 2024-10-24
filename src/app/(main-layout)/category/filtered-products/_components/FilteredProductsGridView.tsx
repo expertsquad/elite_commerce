@@ -1,3 +1,4 @@
+import ProductEmptyState from "@/app/(main-layout)/_components/ProductEmptyState";
 import AnimatedLoading from "@/Components/AnimatedLoading";
 import Pagination from "@/Components/Pagination";
 import ProductCard from "@/Components/ProductCard/ProductCard";
@@ -19,13 +20,6 @@ const FilteredProductsGridView = ({
       </div>
     );
   }
-  if (products?.data?.length === 0) {
-    return (
-      <div className="flex text-center mt-20 justify-center items-center">
-        <span className="text-lg">No products found</span>
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-5">
@@ -33,11 +27,15 @@ const FilteredProductsGridView = ({
         <span className="text-lg">
           {products?.data?.length} Items result found
         </span>
-        <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5  justify-around">
-          {products?.data?.map((product: IProduct) => (
-            <ProductCard key={product?._id} product={product} />
-          ))}
-        </div>
+        {products?.data?.length > 0 ? (
+          <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5  justify-around">
+            {products?.data?.map((product: IProduct) => (
+              <ProductCard key={product?._id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <ProductEmptyState />
+        )}
       </div>
       <div>
         {totalPages > 1 ? (
