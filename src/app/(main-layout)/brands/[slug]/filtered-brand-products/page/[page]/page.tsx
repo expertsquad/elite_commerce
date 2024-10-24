@@ -1,5 +1,6 @@
 "use client";
 import { fetchData } from "@/actions/fetchData";
+import ProductEmptyState from "@/app/(main-layout)/_components/ProductEmptyState";
 import AnimatedLoading from "@/Components/AnimatedLoading";
 import Pagination from "@/Components/Pagination";
 import ProductCard from "@/Components/ProductCard/ProductCard";
@@ -49,22 +50,19 @@ const FilteredBrandProductsPage = ({
       </div>
     );
   }
-  if (products?.data?.length === 0) {
-    return (
-      <div className="flex text-center mt-20 justify-center items-center">
-        <span className="text-lg">No products found</span>
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col gap-5">
       <span>{products?.data?.length} items found</span>
-      <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5  justify-around">
-        {products?.data?.map((product: IProduct) => (
-          <ProductCard key={product?._id} product={product} />
-        ))}
-      </div>
+      {products && products?.data?.length > 0 ? (
+        <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5  justify-around">
+          {products?.data?.map((product: IProduct) => (
+            <ProductCard key={product?._id} product={product} />
+          ))}
+        </div>
+      ) : (
+        <ProductEmptyState message="No Product Found!!" />
+      )}
       <div>
         {totalPages > 1 ? (
           <Pagination
