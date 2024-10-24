@@ -123,7 +123,7 @@ const LargeDeviceMegaMenu = async () => {
         {/* cart */}
         <ShoppingCartBtn
           currencyIcon={currencyIcon?.data?.currencySymbol}
-          shippingCharge={shippingCharge?.data?.freeShippingMinOrderAmount}
+          shippingCharge={shippingCharge?.data}
         />
         {/* profile */}
         <Link href="/profile/dashboard" className="mt-2">

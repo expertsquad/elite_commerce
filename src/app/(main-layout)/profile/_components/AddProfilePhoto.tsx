@@ -32,7 +32,7 @@ const AddProfilePhoto = ({
       <div
         className={`${
           loading ? "opacity-50 pointer-events-none" : ""
-        }  h-28 w-28 text-center border border-primary rounded-full`}
+        } h-28 w-28 text-center border border-primary rounded-full`}
       >
         <Image
           alt="Profile Photo"
