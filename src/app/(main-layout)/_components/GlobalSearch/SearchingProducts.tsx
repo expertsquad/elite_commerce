@@ -14,10 +14,12 @@ const SearchingProducts = ({
   searchValue,
   setShow,
   setSearchValue,
+  currencyIcon,
 }: {
   searchValue: string;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+  currencyIcon: string;
 }) => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -84,7 +86,8 @@ const SearchingProducts = ({
                 </span>
                 <div className="flex items-center gap-x-0.5">
                   <span className="font-semibold text-gradient-primary">
-                    ${product.variants[0]?.sellingPrice}
+                    {currencyIcon}
+                    {product.variants[0]?.sellingPrice}
                   </span>
                   <span className="text-black-10 mx-0.5">|</span>
                   <span className="text-positive [font-size:_clamp(0.5em,4vw,0.8em)]">

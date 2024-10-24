@@ -157,7 +157,13 @@ const CartItems = ({
         </span>
         <div className="grid grid-cols-product-grid gap-5 overflow-y-auto scrollbar-x-remove">
           {suggestions?.map((product: IProduct) => {
-            return <ProductCard key={product?._id} product={product} />;
+            return (
+              <ProductCard
+                key={product?._id}
+                product={product}
+                currencyIcon={currencyIcon}
+              />
+            );
           })}
         </div>
       </div>

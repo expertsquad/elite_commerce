@@ -76,14 +76,14 @@ export const CartItem = ({
       </div>
 
       {/* medium device */}
-      <div className="hidden md:flex flex-col items-center justify-between">
+      <div className="hidden md:flex flex-col items-center md:gap-y-2 justify-between">
         <span className="text-sm text-black-80">Price</span>
         <strong className="text-gradient-primary">
           {currencyIcon}
           {price}
         </strong>
       </div>
-      <div className="md:flex flex-col gap-y-1 items-center justify-between hidden">
+      <div className="md:flex flex-col gap-y-1 items-center md:gap-y-2 justify-between hidden">
         <span className="text-sm text-black-80">Qty</span>
         <IncreaseDecreaseCartItems
           product={product}
@@ -92,7 +92,7 @@ export const CartItem = ({
           btnStyle="!size-4 !flex !items-center !justify-center"
         />
       </div>
-      <div className="md:flex flex-col gap-y-0.5 items-center justify-between hidden">
+      <div className="md:flex flex-col gap-y-0.5 items-center md:gap-y-2 justify-between hidden">
         <span className="text-sm text-black-80">Sub Total</span>
         <strong className="text-gradient-primary">
           {currencyIcon}

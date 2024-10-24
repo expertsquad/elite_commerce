@@ -10,9 +10,14 @@ import SearchingProducts from "./SearchingProducts";
 export interface IGlobalSearchProps {
   categories: ICategory[];
   products?: IProduct[];
+  currencyIcon: string;
 }
 
-const GlobalSearch = ({ categories, products }: IGlobalSearchProps) => {
+const GlobalSearch = ({
+  categories,
+  products,
+  currencyIcon,
+}: IGlobalSearchProps) => {
   const [show, setShow] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [isMounted, setIsMounted] = useState(false);
@@ -68,6 +73,7 @@ const GlobalSearch = ({ categories, products }: IGlobalSearchProps) => {
                   setShow={setShow}
                   searchValue={searchValue}
                   setSearchValue={setSearchValue}
+                  currencyIcon={currencyIcon}
                 />
               </div>
             ) : (
@@ -98,6 +104,8 @@ const GlobalSearch = ({ categories, products }: IGlobalSearchProps) => {
                         key={item?._id}
                         product={item}
                         onClick={() => setShow(false)}
+                        currencyIcon={currencyIcon}
+                        quickAction={true}
                       />
                     ))}
                   </div>
