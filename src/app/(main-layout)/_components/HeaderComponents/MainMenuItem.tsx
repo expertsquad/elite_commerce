@@ -3,16 +3,29 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 
-const MainMenuItem = ({ menu }: { menu: { label: string; href: string } }) => {
+const MainMenuItem = ({
+  menu,
+  className,
+  parentClassName,
+  onClick,
+}: {
+  menu: { label: string; href: string };
+  className?: string;
+  parentClassName?: string;
+  onClick?: () => void;
+}) => {
   const pathName = usePathname();
   const isActive =
     menu.href === "/" ? pathName === menu.href : pathName.startsWith(menu.href);
 
   return (
-    <li>
+    <li
+      className={`${parentClassName}`}
+      onClick={onClick ? () => onClick() : undefined}
+    >
       <Link
         href={menu.href}
-        className={`block w-full py-2 px-3 hover:text-gradient-primary font-normal text-base ${
+        className={`${className} block w-full py-2 px-3 hover:text-gradient-primary font-normal text-base ${
           isActive ? "text-gradient-primary font-semibold" : ""
         }`}
       >

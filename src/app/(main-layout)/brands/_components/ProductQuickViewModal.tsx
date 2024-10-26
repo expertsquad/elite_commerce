@@ -64,7 +64,7 @@ const ProductQuickViewModal = ({
       show={show}
       setShow={setShow}
       alignment="right"
-      className="w-full md:w-2/4 scrollbar-y-remove md:overflow-auto overflow-y-auto"
+      className="w-full md:w-[900px] scrollbar-y-remove md:overflow-auto overflow-y-auto"
       showCancelBtnINSmallDevice={show}
     >
       <div className="grid grid-cols-1 md:grid-cols-5 gap-7 md:p-3.5 p-2.5">

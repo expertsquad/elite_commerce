@@ -15,7 +15,8 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
     query: "sortBy=averageRating",
   });
   const brands = await fetchData({ route: "/brand", limit: 100 });
-
+  const colors = await fetchData({ route: "/product/colors" });
+  console.log(colors);
   const widgetData = await getWidget();
   const currency = await getCurrency();
 
@@ -47,6 +48,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
               brands={brands?.data}
               widget={widgetData}
               currency={currency}
+              colors={colors?.data}
             />
           </div>
         </div>

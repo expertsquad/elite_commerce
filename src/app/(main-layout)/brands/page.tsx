@@ -11,6 +11,7 @@ import ProductEmptyState from "../_components/ProductEmptyState";
 const Brand = async () => {
   const brandData = await fetchData({
     route: "/brand",
+    query: `sortBy=productCount`,
     limit: 20,
   });
 

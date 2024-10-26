@@ -2,7 +2,6 @@ import React, { Suspense } from "react";
 import Hero from "./_components/Hero/Hero";
 import InfiniteSlider from "./_components/InfiniteSlider/InfiniteSlider";
 import Image from "next/image";
-import { wave } from "@/assets";
 import FeaturedProducts from "./_components/FeaturedProducts/FeaturedProducts";
 import { fetchData } from "@/actions/fetchData";
 import BestDealsSection from "./_components/BestDealsSection/BestDealsSection";
