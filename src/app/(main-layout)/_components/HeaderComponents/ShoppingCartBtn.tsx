@@ -203,7 +203,7 @@ export const QuickOrderItem = ({
             <div className="flex items-center justify-between gap-5"></div>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="text-black-80 font-medium text-xs md:text-sm">
+            <span className="text-black-80 font-medium text-base">
               {currencyIcon}
               {product?.variant?.discountedPrice}
             </span>

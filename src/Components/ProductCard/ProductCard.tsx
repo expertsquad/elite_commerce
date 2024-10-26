@@ -5,6 +5,7 @@ import QuickViewButton from "@/app/(main-layout)/brands/_components/QuickViewBut
 import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
 import ProductCartBtn from "./ProductCartBtn";
 import ProductPreviewRedirect from "./ProductPreviewRedirect";
+import { getPricingDetails } from "./getPricingDetails";
 export interface IProductCardProps {
   product: IProduct;
   onClick?: () => void;
@@ -17,6 +18,9 @@ const ProductCard = ({
   currencyIcon,
   quickAction,
 }: IProductCardProps) => {
+  const productDetails = getPricingDetails(product);
+  const { sellingPrice, discountedPrice } = productDetails;
+
   return (
     <ProductPreviewRedirect
       className="border border-black-10 rounded-lg group relative w-full max-w-[280px] cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg mx-auto"
@@ -45,19 +49,18 @@ const ProductCard = ({
           <div className="flex items-center whitespace-nowrap">
             <span className="[font-size:_clamp(16px,2vw,22px)] text-gradient-primary font-bold">
               {currencyIcon}
-              {product?.variants[0]?.discountedPrice
-                ? product?.variants[0]?.discountedPrice
-                : product?.variants[0]?.sellingPrice}
+              {discountedPrice && discountedPrice}
             </span>
-            <span className="mx-0.5 text-black-10">|</span>
+            {sellingPrice && (
+              <span className={`mx-0.5 text-black-10 text-xl`}>|</span>
+            )}
             <del
               className={`text-black-50 [font-size:_clamp(14px,2vw,18px)] ${
                 product?.variants[0]?.discountedPrice ? "block" : "hidden"
               }`}
             >
               {currencyIcon}
-              {product?.variants[0]?.discountedPrice &&
-                product?.variants[0]?.sellingPrice}
+              {sellingPrice && sellingPrice}
             </del>
           </div>
           <ProductCartBtn product={product} />

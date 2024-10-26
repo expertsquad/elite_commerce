@@ -1,15 +1,13 @@
 "use client";
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
-import { IconBolt, IconHeart, IconHeartFilled } from "@tabler/icons-react";
-import { server_url, storages } from "@/constants";
+import { IconBolt } from "@tabler/icons-react";
+import { server_url } from "@/constants";
 import { IProduct } from "@/interfaces/product.interface";
-import { updateWishlist } from "@/utils/updateWishlist.utils";
-import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { WishlistContext } from "@/Provider/WishlistProvider";
-import { IWishlistProduct } from "@/interfaces/wishlist.interface";
 import AddToWishlistBtn from "@/app/(main-layout)/products/[slug]/_components/AddToWishlistBtn";
 import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
+import { getPricingDetails } from "./getPricingDetails";
 
 type ProductImageSliderProps = {
   product: IProduct;
@@ -60,18 +58,16 @@ const ProductImageSlider = ({
     setCurrentSlide(index);
   };
 
-  const handleAddToFavourite = () => {
-    updateWishlist({ product: product });
-    setRefetch && setRefetch((prev) => prev + 1);
-  };
+  const productDetails = getPricingDetails(product);
+  const { discountPercentage } = productDetails;
 
   return (
     <section>
       <div className="w-full flex justify-between gap-x-0.5 relative">
-        {product?.variants?.[0]?.discountPercentage && (
+        {discountPercentage && (
           <div className="absolute top-2.5 left-2.5 z-10 ">
-            <span className="bg-gradient-secondary py-1 px-2 rounded-lg text-white md:text-xs text-[10px] cursor-default">
-              -{product?.variants?.[0]?.discountPercentage}%
+            <span className="bg-gradient-secondary py-1 px-2 rounded-md text-white md:text-xs text-[10px] cursor-default">
+              -{discountPercentage && discountPercentage.toFixed(0)}%
             </span>
           </div>
         )}
