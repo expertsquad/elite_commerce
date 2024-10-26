@@ -36,7 +36,6 @@ const FilteringSection = ({
           redirectPath={redirectPath}
         />
       </div>
-      <span className="bg-black-10 h-0.5 w-full flex my-5 md:my-[30px]"></span>
       <FilterByColor redirectPath={redirectPath} />
       <span className="bg-black-10 h-0.5 w-full hidden md:flex my-5 md:my-[30px]"></span>
       <div className="hidden md:block">

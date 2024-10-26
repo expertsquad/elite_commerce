@@ -12,8 +12,8 @@ const MainMenuItem = ({ menu }: { menu: { label: string; href: string } }) => {
     <li>
       <Link
         href={menu.href}
-        className={`block w-full py-2 px-3 hover:text-gradient-primary ${
-          isActive ? "text-gradient-primary" : ""
+        className={`block w-full py-2 px-3 hover:text-gradient-primary font-normal text-base ${
+          isActive ? "text-gradient-primary font-semibold" : ""
         }`}
       >
         {menu.label}
