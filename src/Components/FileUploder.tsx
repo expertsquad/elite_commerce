@@ -9,7 +9,7 @@ const FileUploader = ({
   name,
   url,
   multiple = false,
-  accept,
+  accept = "image/*",
   maxSize,
   error,
   className,

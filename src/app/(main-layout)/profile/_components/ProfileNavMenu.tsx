@@ -36,8 +36,10 @@ const ProfileNavMenu = () => {
             </div>
             <span
               className={`text-base ml-3 ${
-                pathName === item?.link ? "text-gradient-primary font-bold" : ""
-              } group-hover:text-gradient-primary group-hover:font-bold`}
+                pathName === item?.link
+                  ? "text-gradient-primary font-semibold"
+                  : ""
+              } group-hover:text-gradient-primary group-hover:font-semibold`}
             >
               {item.name}
             </span>

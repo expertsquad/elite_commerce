@@ -2,17 +2,42 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
+import { server_url } from "@/constants";
+import { fetchData } from "@/actions/fetchData";
+import { favicon } from "@/assets";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Elite Commerce",
-  description:
-    "Elite Commerce is a e-commerce website developed by Team ExpertSquad.net",
-  icons: {
-    icon: "/small-logo.svg",
-  },
-};
+// Fetch metadata from the backend
+async function fetchMetadata(): Promise<Metadata> {
+  try {
+    // custom fetcher
+    const response = await fetchData({
+      route: "/settings/home-page-meta",
+    });
+    const data = response?.data;
+    return {
+      title: data?.metaTitle || "Home",
+      description: data?.metaDescription || "Home",
+      icons: {
+        icon: `${server_url + data?.metaPhoto}` || `${favicon}`,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching metadata:", error);
+    // Fallback metadata
+    return {
+      title: "Home",
+      description: "Home",
+      icons: {
+        icon: `${favicon}`,
+      },
+    };
+  }
+}
+export async function generateMetadata(): Promise<Metadata> {
+  return await fetchMetadata();
+}
 
 export default function RootLayout({
   children,

@@ -1,11 +1,8 @@
-import Image from "next/image";
 import React from "react";
 import ProfileNavMenu from "./ProfileNavMenu";
 import { fetchProtectedData } from "@/actions/fetchData";
 import { server_url } from "@/constants";
 import AddProfilePhoto from "./AddProfilePhoto";
-import { updateDataMutation } from "@/actions/updateDataMutation";
-import { revalidateTagAction } from "@/actions/revalidateTag";
 
 const ProfileNav = async () => {
   const getMe = await fetchProtectedData({
