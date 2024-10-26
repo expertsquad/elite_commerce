@@ -52,16 +52,16 @@ const Page = async () => {
         <Hero currencyIcon={currencyIcon?.data?.currencySymbol} />
 
         {/* hottest categories */}
-        <p className="text-sm text-gradient-secondary mt-10">
-          Shop by Category
-        </p>
-        <p className="text-xl text-gradient-primary font-semibold mt-3 mb-10">
-          Browse Our Hottest Categories
-        </p>
-        <InfiniteSlider />
+        <div className="my-20">
+          <p className="text-sm text-gradient-secondary">Shop by Category</p>
+          <p className="text-xl text-gradient-primary font-semibold mt-3 my-10">
+            Browse Our Hottest Categories
+          </p>
+          <InfiniteSlider />
+        </div>
 
         {/* feature section  */}
-        <div className="flex justify-center items-center uppercase flex-col mt-10">
+        <div className="flex justify-center items-center uppercase flex-col">
           <p className="text-[clamp(20px,5vw,25px)] text-gradient-primary">
             Featured Products
           </p>
