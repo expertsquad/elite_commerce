@@ -72,7 +72,7 @@ const ProductCard = ({
       >
         <QuickViewButton
           product={product}
-          btnClassName="text-sm hover:font-bold transition-all duration-300 hover:bg-black hover:text-white hover:w-full !px-4 py-2"
+          btnClassName="text-sm transition-all duration-300 hover:bg-black hover:text-white hover:w-full !px-4 py-2"
         />
         <QuickOrderButton
           product={{
@@ -80,7 +80,7 @@ const ProductCard = ({
             orderQuantity: 1,
             variant: product?.variants[0],
           }}
-          buttonStyle="text-base bg-white hover:bg-black hover:text-white py-2 whitespace-nowrap px-4 rounded-full text-sm hover:font-bold transition-all duration-300"
+          buttonStyle="text-base bg-white hover:bg-black hover:text-white py-2 whitespace-nowrap px-4 rounded-full text-sm transition-all duration-300"
           buttonText="Quick Order"
         />
       </div>

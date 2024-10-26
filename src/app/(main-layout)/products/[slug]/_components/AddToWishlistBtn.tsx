@@ -19,7 +19,7 @@ const AddToWishlistBtn = ({ products }: any) => {
         e.stopPropagation();
         handleAddToFavourite();
       }}
-      className={`cursor-pointer rounded-full flex justify-center items-center bg-white h-[30px] w-[30px] border border-black-10`}
+      className={`cursor-pointer rounded-full flex justify-center items-center bg-white hover:bg-gradient-primary-light h-[30px] w-[30px] border border-black-10`}
     >
       {wishlistProducts?.find(
         (item: IWishlistProduct) => item?.productId === products._id

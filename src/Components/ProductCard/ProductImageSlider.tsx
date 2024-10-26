@@ -91,25 +91,27 @@ const ProductImageSlider = ({
                 fill
                 src={`${server_url}${productImg}`}
                 sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 33vw"
-                className="w-full h-full top-0 left-0 object-contain"
+                className="w-full h-full top-0 left-0 object-contain p-2"
               />
             </div>
-            <div className="absolute bottom-5 right-[50%] z-10">
-              <div className="indicators gap-2 flex justify-center items-center ">
-                {product?.productPhotos?.map((_: any, dotIndex: number) => (
-                  <div
-                    key={dotIndex}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDotClick(dotIndex);
-                    }}
-                    className={`indicator w-[6px] h-[6px] rounded-full cursor-pointer ${
-                      dotIndex === currentSlide
-                        ? "bg-gradient-primary"
-                        : "bg-black-50"
-                    }`}
-                  />
-                ))}
+            <div className="flex items-center justify-center">
+              <div className="absolute bottom-5 z-10">
+                <div className="indicators gap-2 flex justify-center items-center ">
+                  {product?.productPhotos?.map((_: any, dotIndex: number) => (
+                    <div
+                      key={dotIndex}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDotClick(dotIndex);
+                      }}
+                      className={`indicator w-[6px] h-[6px] rounded-full cursor-pointer ${
+                        dotIndex === currentSlide
+                          ? "bg-gradient-primary"
+                          : "bg-black-50"
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
