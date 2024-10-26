@@ -1,50 +1,15 @@
-import { IconChevronDown, IconChevronRight } from "@tabler/icons-react";
+import { IconChevronDown } from "@tabler/icons-react";
 import Link from "next/link";
 import React from "react";
-import { fetchData, fetchProtectedData } from "@/actions/fetchData";
-import { ICategory } from "@/interfaces/category.interface";
+import { fetchData } from "@/actions/fetchData";
 import Logo from "@/utils/Logo";
 import { mainMenus } from "@/constants/mainMenus.constants";
 import ShoppingCartBtn from "./ShoppingCartBtn";
 import WishlistBtn from "./WishlistBtn";
 import GlobalSearch from "../GlobalSearch/GlobalSearch";
 import ProfilePhotoOrIcon from "./ProfilePhotoOrIcon";
-import { getWidget } from "@/utils/getWidget";
-import MegaMenuItem from "./MegaMenuItem";
-
-const CategoriesAndSubcategories = async () => {
-  const categories = await fetchData({
-    route: "/category",
-    limit: 1000,
-    revalidate: 600,
-  });
-  const widget = await getWidget();
-  const featureProduct = await fetchData({
-    route: "/product",
-    query: "sortBy=totalSoldQuantity",
-    limit: 4,
-    revalidate: 3600,
-  });
-  const currencySymbol = await fetchProtectedData({
-    route: "/settings/shop",
-  });
-
-  return (
-    <div className="absolute  bg-white opacity-0 h-0 invisible transition-all duration-300 group-hover/categorybtn:visible group-hover/categorybtn:opacity-100 group-hover/categorybtn:h-[clamp(100px,70vh,500px)] backdrop-blur-xl shadow-2xl py-2 gap-10 rounded-md">
-      <ul className="w-[240px] h-full overflow-auto ">
-        {categories?.data?.map((category: ICategory) => (
-          <MegaMenuItem
-            key={category?._id}
-            widget={widget}
-            category={category}
-            featureProduct={featureProduct?.data}
-            currencySymbol={currencySymbol?.data?.currencySymbol}
-          />
-        ))}
-      </ul>
-    </div>
-  );
-};
+import CategoriesAndSubcategories from "./CategoriesAndSubcategories";
+import MainMenuItem from "./MainMenuItem";
 
 const LargeDeviceMegaMenu = async () => {
   const categories = await fetchData({ route: "/category", limit: 5 });
@@ -79,15 +44,8 @@ const LargeDeviceMegaMenu = async () => {
 
           {/* ======================== menus ========================== */}
 
-          {mainMenus.map((menu) => (
-            <li key={menu.label}>
-              <Link
-                href={menu.href}
-                className="block w-full py-2 px-3 rounded-md hover:bg-gradient-primary-light"
-              >
-                {menu.label}
-              </Link>
-            </li>
+          {mainMenus.map((menu, index) => (
+            <MainMenuItem menu={menu} key={index} />
           ))}
         </ul>
       </div>
