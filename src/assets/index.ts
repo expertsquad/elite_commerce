@@ -36,6 +36,7 @@ import bestDealsBG from "./Images/best-deals-bg.png";
 import arrowLeftCustom from "./Images/arrow-left.png";
 import successGif from "./Images/success.gif";
 import favicon from "./Images/favicon.svg";
+import maintenanceMode from "./Images/maintenancemode.png";
 export {
   // smallLogo,
   // fullLogo,
@@ -75,4 +76,5 @@ export {
   arrowLeftCustom,
   successGif,
   favicon,
+  maintenanceMode,
 };
