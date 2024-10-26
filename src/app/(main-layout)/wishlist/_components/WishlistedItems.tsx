@@ -5,7 +5,7 @@ import {
   IconShoppingCart,
   IconX,
 } from "@tabler/icons-react";
-import QuickOrderButton from "../../brands/_components/QuickOrderButton";
+import QuickOrderButton from "../../_components/QuickOrder/QuickOrderButton";
 import ButtonPrimaryLight from "../../brands/_components/ButtonPrimaryLight";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import StarRating from "@/Components/StarRating";

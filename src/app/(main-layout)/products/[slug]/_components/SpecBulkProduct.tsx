@@ -10,7 +10,7 @@ import {
   IconShoppingBag,
   IconShoppingCart,
 } from "@tabler/icons-react";
-import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
+import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
 import { CartContext } from "@/Provider/CartProvider";
 import { updateCart } from "@/utils/updateCart.utils";
 import BuyNowSingleProduct from "./BuyNowSingleProduct";

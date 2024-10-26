@@ -2,7 +2,7 @@ import ProductImageSlider from "./ProductImageSlider";
 import { IProduct } from "@/interfaces/product.interface";
 import StarRating from "../StarRating";
 import QuickViewButton from "@/app/(main-layout)/brands/_components/QuickViewButton";
-import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
+import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
 import ProductCartBtn from "./ProductCartBtn";
 import ProductPreviewRedirect from "./ProductPreviewRedirect";
 export interface IProductCardProps {

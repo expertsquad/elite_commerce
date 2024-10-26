@@ -5,7 +5,7 @@ import RatingWishlistStockAndSold from "./RatingWishlistStockAndSold";
 import { IconBolt } from "@tabler/icons-react";
 
 import BuyNowSingleProduct from "./BuyNowSingleProduct";
-import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
+import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
 import ProductViewCartBtn from "./ProductViewCartBtn";
 import ProdViewCartIncreamentDecreamentBtn from "./ProdViewCartIncreamentDecreamentBtn";
 import ProductPriceBasedOnVariants from "./ProductPriceBasedOnVariants";

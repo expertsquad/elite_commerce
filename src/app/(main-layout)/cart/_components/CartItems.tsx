@@ -12,7 +12,7 @@ import { CartContext } from "@/Provider/CartProvider";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
 import { storages } from "@/constants";
-import QuickOrderButton from "../../brands/_components/QuickOrderButton";
+import QuickOrderButton from "../../_components/QuickOrder/QuickOrderButton";
 import { getShippingFee } from "@/utils/getShippingFee";
 
 const CartItems = ({
@@ -124,7 +124,7 @@ const CartItems = ({
                 </span>
               </div>
               <div className="flex flex-col gap-2.5 mt-12">
-                <ButtonPrimary className="!rounded-full hover:bg-gradient-primary-reverse">
+                <ButtonPrimary className="!rounded-full hover:bg-gradient-primary-reverse !py-3 !uppercase !text-sm">
                   <Link href="/shipping-info" onClick={handleAddToInitOrder}>
                     Proceed To Checkout &rarr;
                   </Link>
@@ -132,9 +132,11 @@ const CartItems = ({
 
                 <QuickOrderButton
                   product={cartProducts}
-                  buttonStyle="!uppercase text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] flex items-center justify-center gap-x-1 px-5 w-full py-3.5 bg-gradient-primary-light hover:bg-gradient-primary rounded-full hover:text-white  "
-                  buttonIcon={<IconBolt size={20} className="fill-primary" />}
-                  buttonText="QUICK ORDER"
+                  buttonStyle="text-black-80 !uppercase !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] flex items-center justify-center gap-x-1 px-5 w-full py-3.5 bg-gradient-primary-light hover:bg-gradient-primary rounded-full hover:text-white !text-sm"
+                  buttonIcon={
+                    <IconBolt size={17} stroke={1.5} className="fill-white" />
+                  }
+                  buttonText="Quick Order"
                 />
               </div>
               <div className="mt-5">

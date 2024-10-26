@@ -16,10 +16,12 @@ const QuickOrderModal = ({
   show,
   setShow,
   products,
+  currencyIcon,
 }: {
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   products: IProduct[] | ICartProduct[];
+  currencyIcon?: string;
 }) => {
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
@@ -105,7 +107,11 @@ const QuickOrderModal = ({
               </span>
               <div className="flex flex-col gap-5 md:max-h-[540px] md:overflow-y-scroll scrollbar-y-remove">
                 {products?.map((product, index) => (
-                  <QuickOrderItem key={index} product={product} />
+                  <QuickOrderItem
+                    key={index}
+                    product={product}
+                    currencyIcon={currencyIcon}
+                  />
                 ))}
               </div>
             </div>

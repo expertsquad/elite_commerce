@@ -4,7 +4,13 @@ import { IProduct } from "@/interfaces/product.interface";
 import { server_url } from "@/constants";
 import { IconMinus, IconPlus, IconX } from "@tabler/icons-react";
 
-export const QuickOrderItem = ({ product }: { product: IProduct }) => {
+export const QuickOrderItem = ({
+  product,
+  currencyIcon,
+}: {
+  product: IProduct;
+  currencyIcon?: string;
+}) => {
   return (
     <div className="flex justify-between gap-3.5 ">
       <div className="flex md:items-center gap-3.5 w-full">

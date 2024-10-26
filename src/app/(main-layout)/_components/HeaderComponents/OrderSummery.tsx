@@ -4,7 +4,7 @@ import { ICartProduct } from "@/interfaces/cart.interface";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import Link from "next/link";
 import { useContext } from "react";
-import QuickOrderButton from "../../brands/_components/QuickOrderButton";
+import QuickOrderButton from "../QuickOrder/QuickOrderButton";
 import { IconBolt, IconShoppingCart } from "@tabler/icons-react";
 import ButtonPrimary from "../../brands/_components/ButtonPrimary";
 
