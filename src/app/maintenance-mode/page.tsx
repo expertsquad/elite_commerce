@@ -1,7 +1,8 @@
 import React from "react";
+import MiantenanceModePageContent from "./_components/MiantenanceModePageContent";
 
 const page = () => {
-  return <div>Hello maintenance mode</div>;
+  return <MiantenanceModePageContent />;
 };
 
 export default page;
