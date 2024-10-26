@@ -14,9 +14,11 @@ import ExtraDiscountBasedOnOrder from "./ExtraDiscountBasedOnOrder";
 const ProductViewDescAndOthers = ({
   product,
   currencyIcon,
+  shippingAmount,
 }: {
   product: IProduct;
   currencyIcon: string;
+  shippingAmount: number;
 }) => {
   const accessToken = cookies().get("accessToken")?.value;
 
@@ -66,6 +68,7 @@ const ProductViewDescAndOthers = ({
             buttonIcon={<IconBolt size={20} fill="#fff" stroke={1} />}
             buttonText="QUICK ORDER"
             currencyIcon={currencyIcon}
+            shippingAmount={shippingAmount}
           />
           <BuyNowSingleProduct
             accessToken={accessToken ? accessToken : ""}

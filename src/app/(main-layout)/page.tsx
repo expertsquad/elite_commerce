@@ -41,9 +41,17 @@ const Page = async () => {
   });
 
   const widget = await getWidget();
+
+  // <== Get Currency ==>
   const currencyIcon = await fetchData({
     route: "/settings/shop",
   });
+
+  // <== Quick Order Services ==>
+  const quickOrderServices = await fetchData({
+    route: "/settings/quick-order-setting",
+  });
+  console.log(quickOrderServices?.data?.isQuickOrderServiceActive);
 
   return (
     <>
@@ -76,6 +84,7 @@ const Page = async () => {
           newestProducts={newestProducts?.data}
           topSellProducts={topSellProducts?.data}
           popularProducts={popularProducts?.data}
+          shippingAmount={quickOrderServices?.data?.deliveryCharge}
         />
       </div>
       {/* best deals */}
@@ -148,6 +157,7 @@ const Page = async () => {
                   key={product?._id}
                   product={product}
                   currencyIcon={currencyIcon?.data?.currencySymbol}
+                  shippingAmount={quickOrderServices?.data?.deliveryCharge}
                 />
               );
             })}

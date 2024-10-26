@@ -14,6 +14,7 @@ const OrderSummery = ({
   shippingFee,
   calculateTotalPriceAndDiscountOfCart,
   currencyIcon,
+  shippingAmount,
 }: {
   setshow: React.Dispatch<React.SetStateAction<boolean>>;
   products: ICartProduct[];
@@ -23,12 +24,12 @@ const OrderSummery = ({
     totalPrice: number;
   };
   currencyIcon?: string;
+  shippingAmount: number;
 }) => {
   const { orderData, setRefetch } = useContext(OrderInitContext);
 
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
-  console.log(totalDiscount);
 
   // handle init order
   const handleAddToInitOrder = () => {
@@ -78,6 +79,7 @@ const OrderSummery = ({
           buttonIcon={<IconBolt size={18} />}
           buttonText="QUICK ORDER"
           currencyIcon={currencyIcon}
+          shippingAmount={shippingAmount}
         />
         <Link
           href="/shipping-info"

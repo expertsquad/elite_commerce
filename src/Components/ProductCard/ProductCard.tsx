@@ -11,12 +11,14 @@ export interface IProductCardProps {
   onClick?: () => void;
   currencyIcon?: string;
   quickAction?: boolean;
+  shippingAmount?: number;
 }
 const ProductCard = ({
   product,
   onClick,
   currencyIcon,
   quickAction,
+  shippingAmount,
 }: IProductCardProps) => {
   const productDetails = getPricingDetails(product);
   const { sellingPrice, discountedPrice } = productDetails;
@@ -28,7 +30,11 @@ const ProductCard = ({
       onClick={onClick}
     >
       <div className="bg-gradient-primary-light">
-        <ProductImageSlider product={product} />
+        <ProductImageSlider
+          product={product}
+          shippingAmount={shippingAmount}
+          currencyIcon={currencyIcon}
+        />
       </div>
 
       <div className="p-4">
@@ -86,6 +92,7 @@ const ProductCard = ({
           buttonStyle="text-base bg-white hover:bg-black hover:text-white py-2 whitespace-nowrap px-4 rounded-full text-sm transition-all duration-300"
           buttonText="Quick Order"
           currencyIcon={currencyIcon}
+          shippingAmount={shippingAmount ? shippingAmount : 0}
         />
       </div>
     </ProductPreviewRedirect>

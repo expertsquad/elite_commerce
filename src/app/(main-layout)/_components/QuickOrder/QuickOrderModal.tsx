@@ -18,11 +18,13 @@ const QuickOrderModal = ({
   setShow,
   products,
   currencyIcon,
+  shippingAmount,
 }: {
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   products: IProduct[] | ICartProduct[];
   currencyIcon?: string;
+  shippingAmount: number;
 }) => {
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
@@ -159,7 +161,7 @@ const QuickOrderModal = ({
                     value={formValues.address}
                     onChange={handleInputChange}
                   />
-                  <div className="md:hidden block ">
+                  <div className="md:hidden block">
                     <ButtonPrimary
                       buttonType="submit"
                       className={`${
@@ -171,9 +173,7 @@ const QuickOrderModal = ({
                       {!loading && <IconBolt height={20} width={20} />}
 
                       <span className="uppercase text-sm">
-                        {loading
-                          ? "Order Processing"
-                          : "   Confirm Order - $1264.00"}
+                        {loading ? "Order Processing" : `Confirm Order - ${0}`}
                       </span>
                     </ButtonPrimary>
                   </div>
@@ -184,6 +184,7 @@ const QuickOrderModal = ({
                     loading={loading}
                     products={products}
                     currencyIcon={currencyIcon}
+                    shippingAmount={shippingAmount}
                   />
                 </div>
               </form>
@@ -196,11 +197,12 @@ const QuickOrderModal = ({
               </Link>
             </div>
           </div>
-          <div className="md:hidden mx-auto">
+          <div className="block md:hidden mx-auto">
             <OrderSummary
               loading={loading}
               products={products}
               currencyIcon={currencyIcon}
+              shippingAmount={shippingAmount}
             />
           </div>
         </div>

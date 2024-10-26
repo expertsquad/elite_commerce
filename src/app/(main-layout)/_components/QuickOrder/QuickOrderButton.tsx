@@ -10,6 +10,7 @@ interface IQuickOrderButtonProps {
   buttonStyle?: string;
   buttonIcon?: any;
   currencyIcon?: string;
+  shippingAmount?: number;
 }
 
 const QuickOrderButton = ({
@@ -18,6 +19,7 @@ const QuickOrderButton = ({
   buttonStyle,
   buttonText,
   currencyIcon,
+  shippingAmount,
 }: IQuickOrderButtonProps) => {
   const [show, setShow] = useState(false);
 
@@ -42,6 +44,7 @@ const QuickOrderButton = ({
           setShow={setShow}
           products={productsArray}
           currencyIcon={currencyIcon}
+          shippingAmount={shippingAmount ? shippingAmount : 0}
         />
       )}
     </Fragment>

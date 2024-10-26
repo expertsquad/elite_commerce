@@ -20,9 +20,11 @@ import { Button } from "@/Components/Buttons";
 const ShoppingCartBtn = ({
   currencyIcon,
   shippingCharge,
+  shippingAmount,
 }: {
   currencyIcon?: string;
   shippingCharge: any;
+  shippingAmount: number;
 }) => {
   const [show, setShow] = React.useState(false);
   // cart contex
@@ -121,6 +123,7 @@ const ShoppingCartBtn = ({
                   setshow={setShow}
                   products={cartProducts}
                   shippingFee={shippingFee}
+                  shippingAmount={shippingAmount}
                   calculateTotalPriceAndDiscountOfCart={
                     calculateTotalPriceAndDiscountOfCart
                   }

@@ -27,6 +27,11 @@ const ProductViewPage = async ({
     route: "/settings/social-media",
   });
 
+  // <== Quick Order Services ==>
+  const quickOrderServices = await fetchData({
+    route: "/settings/quick-order-setting",
+  });
+
   const accessToken = cookies().get("accessToken")?.value;
 
   return (
@@ -42,6 +47,7 @@ const ProductViewPage = async ({
           <ProductViewDescAndOthers
             product={product?.data}
             currencyIcon={currencyIcon?.data?.currencySymbol}
+            shippingAmount={quickOrderServices?.data?.deliveryCharge}
           />
         </div>
       </div>
@@ -64,6 +70,7 @@ const ProductViewPage = async ({
             <SpecBulkProduct
               productdata={product?.data}
               currencyIcon={currencyIcon?.data?.currencySymbol}
+              shippingAmount={quickOrderServices?.data?.deliveryCharge}
               accessToken={accessToken!}
             />
           </div>

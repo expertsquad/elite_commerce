@@ -5,9 +5,11 @@ import React, { Fragment } from "react";
 const NewestProducts = ({
   products,
   currencyIcon,
+  shippingAmount,
 }: {
   products: IProduct[];
   currencyIcon: string;
+  shippingAmount: number;
 }) => {
   return (
     <Fragment>
@@ -16,6 +18,7 @@ const NewestProducts = ({
           key={product?._id}
           product={product}
           currencyIcon={currencyIcon}
+          shippingAmount={shippingAmount}
         />
       ))}
     </Fragment>

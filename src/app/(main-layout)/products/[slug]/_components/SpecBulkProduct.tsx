@@ -19,10 +19,12 @@ const SpecBulkProduct = ({
   productdata,
   currencyIcon,
   accessToken,
+  shippingAmount,
 }: {
   productdata: IProduct;
   currencyIcon?: string;
   accessToken?: string;
+  shippingAmount: number;
 }) => {
   const [variant, setVariant] = React.useState<IProduct["variants"][0]>(
     productdata?.variants[0]
@@ -115,6 +117,7 @@ const SpecBulkProduct = ({
             buttonIcon={<IconBolt size={16} fill="#fff" />}
             buttonText="QUICK ORDER"
             currencyIcon={currencyIcon}
+            shippingAmount={shippingAmount}
           />
         </div>
         <div className="border border-black-10 rounded-md mt-5">
