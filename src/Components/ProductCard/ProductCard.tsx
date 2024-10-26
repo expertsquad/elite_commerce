@@ -85,6 +85,7 @@ const ProductCard = ({
           }}
           buttonStyle="text-base bg-white hover:bg-black hover:text-white py-2 whitespace-nowrap px-4 rounded-full text-sm transition-all duration-300"
           buttonText="Quick Order"
+          currencyIcon={currencyIcon}
         />
       </div>
     </ProductPreviewRedirect>

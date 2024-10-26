@@ -11,6 +11,7 @@ import CustomInput from "@/Components/CustomInput";
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { postDataMutation } from "@/actions/postDataMutation";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const QuickOrderModal = ({
   show,
@@ -65,18 +66,16 @@ const QuickOrderModal = ({
       });
 
       if (response?.success) {
+        toast.success(response?.message);
         const orderId = response?.data?._id;
         const isQuickOrder = "true";
         router.push(`/successfull/${orderId}?quick-order=${isQuickOrder}`);
 
-        setFormValues({
-          fullName: "",
-          phoneNumber: "",
-          address: "",
-        });
+        setFormValues(formValues);
         setShow(false);
       }
     } catch (error) {
+      toast.error("Quick order failed, Try again!!");
       console.error("Order failed:", error);
     } finally {
       setLoading(false);
@@ -163,7 +162,11 @@ const QuickOrderModal = ({
                   <div className="md:hidden block ">
                     <ButtonPrimary
                       buttonType="submit"
-                      className={`${loading && "cursor-wait opacity-60"}`}
+                      className={`${
+                        loading
+                          ? "cursor-wait opacity-60"
+                          : "hover:bg-gradient-primary-reverse"
+                      }`}
                     >
                       {!loading && <IconBolt height={20} width={20} />}
 
@@ -177,20 +180,28 @@ const QuickOrderModal = ({
                 </div>
 
                 <div className="md:block hidden mt-5">
-                  <OrderSummary loading={loading} products={products} />
+                  <OrderSummary
+                    loading={loading}
+                    products={products}
+                    currencyIcon={currencyIcon}
+                  />
                 </div>
               </form>
               <Link
                 href={"/"}
-                className="uppercase text-black-80 md:flex items-center justify-center mt-5 gap-2  hidden"
+                className="uppercase text-black-80 md:flex items-center justify-center mt-5 gap-x-1 hidden"
               >
-                <IconArrowLeft />
+                <IconArrowLeft size={20} />
                 <span>Continue Shopping</span>
               </Link>
             </div>
           </div>
           <div className="md:hidden mx-auto">
-            <OrderSummary loading={loading} products={products} />
+            <OrderSummary
+              loading={loading}
+              products={products}
+              currencyIcon={currencyIcon}
+            />
           </div>
         </div>
       </Modal>

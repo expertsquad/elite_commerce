@@ -3,7 +3,6 @@ import { IProduct } from "@/interfaces/product.interface";
 import CategoryAndBrandSmallComponent from "./CategoryAndBrandSmallComponent";
 import RatingWishlistStockAndSold from "./RatingWishlistStockAndSold";
 import { IconBolt } from "@tabler/icons-react";
-
 import BuyNowSingleProduct from "./BuyNowSingleProduct";
 import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
 import ProductViewCartBtn from "./ProductViewCartBtn";
@@ -66,6 +65,7 @@ const ProductViewDescAndOthers = ({
             buttonStyle="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2.5 rounded-md w-full text-base"
             buttonIcon={<IconBolt size={20} fill="#fff" stroke={1} />}
             buttonText="QUICK ORDER"
+            currencyIcon={currencyIcon}
           />
           <BuyNowSingleProduct
             accessToken={accessToken ? accessToken : ""}

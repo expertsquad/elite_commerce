@@ -114,6 +114,7 @@ const SpecBulkProduct = ({
             buttonStyle="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2.5 rounded-md w-full text-[13px]"
             buttonIcon={<IconBolt size={16} fill="#fff" />}
             buttonText="QUICK ORDER"
+            currencyIcon={currencyIcon}
           />
         </div>
         <div className="border border-black-10 rounded-md mt-5">
