@@ -14,10 +14,16 @@ const BestDealsSectionProduct = async ({
   const currencyIcon = await fetchData({
     route: "/settings/shop",
   });
+
+  const discountedPrice = product?.discountPercentage
+    ? product.sellingPrice -
+      (product.sellingPrice * product.discountPercentage) / 100
+    : null;
+
   return (
     <Link
       href={`products/${product?.productId}`}
-      className="flex items-center min-w-[200px] md:min-w-[220px] xl:min-w-[250px] max-w-[350px] p-2.5 rounded-md bg-white hover:drop-shadow-lg hover:duration-500 cursor-pointer"
+      className="flex items-center min-w-[200px] md:min-w-[220px] xl:min-w-[290px] max-w-[300px] p-2.5 rounded-md bg-white hover:drop-shadow-lg hover:duration-500 cursor-pointer"
     >
       <div className="relative w-[60px] h-[60px] shrink-0 mr-2">
         <Image
@@ -36,19 +42,19 @@ const BestDealsSectionProduct = async ({
         </span>
 
         <StarRating
-          rating={Math.round(product?.averageRating || 1)}
+          rating={Math.round(product?.averageRating || 0)}
           className="w-2 h-2 md:w-2.5 md:h-2.5"
         />
 
-        <div className="flex items-center">
+        <div className="flex items-baseline gap-x-1.5">
           <span className="flex items-center text-xs md:text-base font-medium text-gradient-primary">
             {currencyIcon?.data?.currencySymbol}
             {product?.sellingPrice}
           </span>
-          {product?.discountedPrice && (
-            <del className="flex items-center text-[10px] md:text-sm">
+          {product?.discountPercentage && (
+            <del className="flex items-center text-[10px] md:text-sm text-gradient-primary line-through">
               {currencyIcon?.data?.currencySymbol}
-              {product?.discountedPrice}
+              {discountedPrice}
             </del>
           )}
         </div>
