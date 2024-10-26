@@ -130,7 +130,7 @@ const WishlistedItems = ({
             orderQuantity: 1,
             variant: product?.variants?.[0],
           }}
-          buttonStyle="bg-gradient-primary whitespace-nowrap text-white rounded-full hover:rounded-md transition-transform duration-300 px-3.5 uppercase flex items-center justify-center gap-x-1.5 text-sm py-2 group"
+          buttonStyle="bg-gradient-primary hover:bg-gradient-primary-reverse whitespace-nowrap text-white rounded-full transition-transform duration-300 px-3.5 uppercase flex items-center justify-center gap-x-1.5 text-sm py-2 group"
           buttonIcon={
             <IconBolt size={19} stroke={1.5} className="fill-white" />
           }
