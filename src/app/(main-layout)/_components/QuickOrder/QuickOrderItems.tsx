@@ -75,7 +75,7 @@ export const QuickOrderItem = ({
               <span>
                 <IconX stroke={1} height={16} width={16} />
               </span>
-              <div className="flex items-center gap-x-1.5 bg-gradient-primary-light rounded-2xl px-1">
+              <div className="flex items-center gap-x-1.5 bg-gradient-primary-light rounded-2xl px-1 py-0.5">
                 <span className="bg-gradient-primary text-white rounded-full font-bold">
                   <IconMinus stroke={1} height={16} width={16} />
                 </span>
