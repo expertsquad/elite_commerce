@@ -10,7 +10,7 @@ import SearchingProducts from "./SearchingProducts";
 export interface IGlobalSearchProps {
   categories: ICategory[];
   products?: IProduct[];
-  currencyIcon: string;
+  currencyIcon?: string;
 }
 
 const GlobalSearch = ({
