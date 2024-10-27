@@ -15,12 +15,14 @@ const FeaturedProducts = ({
   popularProducts,
   currencyIcon,
   shippingAmount,
+  isQuickOrderActive,
 }: {
   newestProducts: IProduct[];
   topSellProducts: IProduct[];
   popularProducts: IProduct[];
   currencyIcon: string;
   shippingAmount: number;
+  isQuickOrderActive?: boolean;
 }) => {
   const [filter, setFilter] = React.useState("Newest");
   return (
@@ -67,18 +69,21 @@ const FeaturedProducts = ({
             products={newestProducts}
             currencyIcon={currencyIcon}
             shippingAmount={shippingAmount}
+            isQuickOrderActive={isQuickOrderActive}
           />
         ) : filter === "TopSell" ? (
           <TopSellProducts
             products={topSellProducts}
             currencyIcon={currencyIcon}
             shippingAmount={shippingAmount}
+            isQuickOrderActive={isQuickOrderActive}
           />
         ) : (
           <PopularProducts
             products={popularProducts}
             currencyIcon={currencyIcon}
             shippingAmount={shippingAmount}
+            isQuickOrderActive={isQuickOrderActive}
           />
         )}
       </div>

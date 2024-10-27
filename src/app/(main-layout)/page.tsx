@@ -84,6 +84,9 @@ const Page = async () => {
           topSellProducts={topSellProducts?.data}
           popularProducts={popularProducts?.data}
           shippingAmount={quickOrderServices?.data?.deliveryCharge}
+          isQuickOrderActive={
+            quickOrderServices?.data?.isQuickOrderServiceActive
+          }
         />
       </div>
       {/* best deals */}
@@ -157,6 +160,9 @@ const Page = async () => {
                   product={product}
                   currencyIcon={currencyIcon?.data?.currencySymbol}
                   shippingAmount={quickOrderServices?.data?.deliveryCharge}
+                  isQuickOrderActive={
+                    quickOrderServices?.data?.isQuickOrderServiceActive
+                  }
                 />
               );
             })}

@@ -21,10 +21,12 @@ const ShoppingCartBtn = ({
   currencyIcon,
   shippingCharge,
   shippingAmount,
+  isQuickOrderActive,
 }: {
   currencyIcon?: string;
   shippingCharge: any;
   shippingAmount: number;
+  isQuickOrderActive?: boolean;
 }) => {
   const [show, setShow] = React.useState(false);
   // cart contex
@@ -128,6 +130,7 @@ const ShoppingCartBtn = ({
                     calculateTotalPriceAndDiscountOfCart
                   }
                   currencyIcon={currencyIcon ? currencyIcon : ""}
+                  isQuickOrderActive={isQuickOrderActive}
                 />
                 <div className="my-5 flex items-center justify-center">
                   {" "}

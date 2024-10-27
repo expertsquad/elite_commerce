@@ -15,6 +15,7 @@ const OrderSummery = ({
   calculateTotalPriceAndDiscountOfCart,
   currencyIcon,
   shippingAmount,
+  isQuickOrderActive,
 }: {
   setshow: React.Dispatch<React.SetStateAction<boolean>>;
   products: ICartProduct[];
@@ -25,6 +26,7 @@ const OrderSummery = ({
   };
   currencyIcon?: string;
   shippingAmount: number;
+  isQuickOrderActive?: boolean;
 }) => {
   const { orderData, setRefetch } = useContext(OrderInitContext);
 
@@ -72,15 +74,17 @@ const OrderSummery = ({
           <span>{totalPrice + shippingFee} </span>
         </strong>
       </div>
-      <div className="flex items-center justify-center gap-5 md:px-5">
-        <QuickOrderButton
-          product={products}
-          buttonStyle="!uppercase text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] flex items-center justify-center gap-2.5 px-5 w-full py-3.5 bg-gradient-primary-light hover:bg-gradient-primary hover:text-white rounded-lg "
-          buttonIcon={<IconBolt size={18} />}
-          buttonText="QUICK ORDER"
-          currencyIcon={currencyIcon}
-          shippingAmount={shippingAmount}
-        />
+      <div className="flex items-center justify-center gap-5 ">
+        {isQuickOrderActive && (
+          <QuickOrderButton
+            product={products}
+            buttonStyle="!uppercase text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] flex items-center justify-center gap-2.5 px-5 w-full py-3.5 bg-gradient-primary-light hover:bg-gradient-primary hover:text-white rounded-lg "
+            buttonIcon={<IconBolt size={18} />}
+            buttonText="QUICK ORDER"
+            currencyIcon={currencyIcon}
+            shippingAmount={shippingAmount}
+          />
+        )}
         <Link
           href="/shipping-info"
           className="w-full"

@@ -12,6 +12,7 @@ export interface IProductCardProps {
   currencyIcon?: string;
   quickAction?: boolean;
   shippingAmount?: number;
+  isQuickOrderActive?: boolean;
 }
 const ProductCard = ({
   product,
@@ -19,6 +20,7 @@ const ProductCard = ({
   currencyIcon,
   quickAction,
   shippingAmount,
+  isQuickOrderActive,
 }: IProductCardProps) => {
   const productDetails = getPricingDetails(product);
   const { sellingPrice, discountedPrice } = productDetails;
@@ -83,17 +85,19 @@ const ProductCard = ({
           product={product}
           btnClassName="text-sm transition-all duration-300 hover:bg-black hover:text-white hover:w-full !px-4 py-2"
         />
-        <QuickOrderButton
-          product={{
-            ...product,
-            orderQuantity: 1,
-            variant: product?.variants[0],
-          }}
-          buttonStyle="text-base bg-white hover:bg-black hover:text-white py-2 whitespace-nowrap px-4 rounded-full text-sm transition-all duration-300"
-          buttonText="Quick Order"
-          currencyIcon={currencyIcon}
-          shippingAmount={shippingAmount ? shippingAmount : 0}
-        />
+        {isQuickOrderActive && (
+          <QuickOrderButton
+            product={{
+              ...product,
+              orderQuantity: 1,
+              variant: product?.variants[0],
+            }}
+            buttonStyle="text-base bg-white hover:bg-black hover:text-white py-2 whitespace-nowrap px-4 rounded-full text-sm transition-all duration-300"
+            buttonText="Quick Order"
+            currencyIcon={currencyIcon}
+            shippingAmount={shippingAmount ? shippingAmount : 0}
+          />
+        )}
       </div>
     </ProductPreviewRedirect>
   );

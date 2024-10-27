@@ -110,6 +110,9 @@ const LargeDeviceMegaMenu = async () => {
           currencyIcon={currencyIcon?.data?.currencySymbol}
           shippingCharge={shippingCharge?.data}
           shippingAmount={quickOrderServices?.data?.deliveryCharge}
+          isQuickOrderActive={
+            quickOrderServices?.data?.isQuickOrderServiceActive
+          }
         />
         {/* profile */}
         <Link

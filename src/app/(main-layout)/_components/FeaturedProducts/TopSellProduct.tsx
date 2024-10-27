@@ -6,10 +6,12 @@ const TopSellProducts = ({
   products,
   currencyIcon,
   shippingAmount,
+  isQuickOrderActive,
 }: {
   products: IProduct[];
   currencyIcon: string;
   shippingAmount: number;
+  isQuickOrderActive?: boolean;
 }) => {
   return (
     <Fragment>
@@ -19,6 +21,7 @@ const TopSellProducts = ({
           product={product}
           currencyIcon={currencyIcon}
           shippingAmount={shippingAmount}
+          isQuickOrderActive={isQuickOrderActive}
         />
       ))}
     </Fragment>
