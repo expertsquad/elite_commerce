@@ -23,6 +23,7 @@ export interface IProductVariant {
 export interface IProduct {
   _id: string;
   productName: string;
+  productUrlSlug: string;
   productCart: any;
   brand: {
     brandName: string;

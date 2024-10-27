@@ -8,7 +8,7 @@ import { updateWishlist } from "@/utils/updateWishlist.utils";
 import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { WishlistContext } from "@/Provider/WishlistProvider";
 import { IWishlistProduct } from "@/interfaces/wishlist.interface";
-import AddToWishlistBtn from "@/app/(main-layout)/products/[id]/_components/AddToWishlistBtn";
+import AddToWishlistBtn from "@/app/(main-layout)/products/[slug]/_components/AddToWishlistBtn";
 import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
 
 type ProductImageSliderProps = {
@@ -69,9 +69,9 @@ const ProductImageSlider = ({
     <section>
       <div className="w-full flex justify-between gap-x-0.5 relative">
         {product?.variants?.[0]?.discountPercentage && (
-          <div className="absolute top-2.5 left-2.5 z-10">
+          <div className="absolute top-2.5 left-2.5 z-10 ">
             <span className="bg-gradient-secondary py-1 px-2 rounded-lg text-white md:text-xs text-[10px] cursor-default">
-              {product?.variants?.[0]?.discountPercentage}%
+              -{product?.variants?.[0]?.discountPercentage}%
             </span>
           </div>
         )}

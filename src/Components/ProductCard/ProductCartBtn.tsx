@@ -2,12 +2,15 @@
 import { updateCart } from "@/utils/updateCart.utils";
 import React, { useContext } from "react";
 import { IProductCardProps } from "./ProductCard";
-import { IconShoppingCart } from "@tabler/icons-react";
+import { IconCheck, IconShoppingCart } from "@tabler/icons-react";
 import { CartContext } from "@/Provider/CartProvider";
-import GenerateGradientIcon from "../GenerateGradientIcon";
 
 const ProductCartBtn = ({ product }: IProductCardProps) => {
-  const { setRefetch } = useContext(CartContext);
+  const { setRefetch, cartProducts } = useContext(CartContext);
+
+  const isProductInCart = cartProducts.some(
+    (cartProduct) => cartProduct._id === product._id
+  );
   const handleAddToCart = () => {
     updateCart({ actionType: "add", product: product });
     setRefetch && setRefetch((prev) => prev + 1);
@@ -20,7 +23,11 @@ const ProductCartBtn = ({ product }: IProductCardProps) => {
         handleAddToCart();
       }}
     >
-      <IconShoppingCart stroke={1.5} height={20} width={20} />
+      {isProductInCart ? (
+        <IconCheck stroke={2} height={20} width={20} />
+      ) : (
+        <IconShoppingCart stroke={1.5} height={20} width={20} />
+      )}
     </button>
   );
 };

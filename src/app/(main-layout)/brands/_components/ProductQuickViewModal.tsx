@@ -8,7 +8,7 @@ import {
 } from "@tabler/icons-react";
 import Image from "next/image";
 import React, { useContext } from "react";
-import ProductVariantColor from "../../products/[id]/_components/ProductVariantColor";
+import ProductVariantColor from "../../products/[slug]/_components/ProductVariantColor";
 import Link from "next/link";
 import { IProduct } from "@/interfaces/product.interface";
 import { server_url, storages } from "@/constants";
@@ -18,8 +18,8 @@ import { setLocalStorageData } from "@/helpers/localStorage.helper";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import QuickOrderButton from "./QuickOrderButton";
 import { CartContext } from "@/Provider/CartProvider";
-import ProdViewCartIncreamentDecreamentBtn from "../../products/[id]/_components/ProdViewCartIncreamentDecreamentBtn";
-import ProductViewCartBtn from "../../products/[id]/_components/ProductViewCartBtn";
+import ProdViewCartIncreamentDecreamentBtn from "../../products/[slug]/_components/ProdViewCartIncreamentDecreamentBtn";
+import ProductViewCartBtn from "../../products/[slug]/_components/ProductViewCartBtn";
 import useGetSingleProduct from "@/utils/useGetSingleProduct";
 
 const ProductQuickViewModal = ({
@@ -64,7 +64,7 @@ const ProductQuickViewModal = ({
       show={show}
       setShow={setShow}
       alignment="right"
-      className="w-full md:w-2/4 scrollbar-y-remove md:overflow-auto overflow-y-auto"
+      className="w-full md:w-[900px] scrollbar-y-remove md:overflow-auto overflow-y-auto"
       showCancelBtnINSmallDevice={show}
     >
       <div className="grid grid-cols-1 md:grid-cols-5 gap-7 md:p-3.5 p-2.5">

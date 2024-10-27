@@ -14,12 +14,19 @@ const RelatedProductsByCategory = async ({
     route: `/product`,
     query: `category.categoryName=${categoryName}`,
   });
+  const isDataArrayEmpty =
+    response?.data && Array.isArray(response.data) && response.data.length === 0
+      ? false
+      : true;
+
   return (
     <div className="my-10 md:my-[70px]">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg md:text-2xl font-semibold">
-          You’ll love this too
-        </h2>
+        {isDataArrayEmpty && (
+          <h2 className="text-lg md:text-2xl font-semibold">
+            You’ll love this too
+          </h2>
+        )}
         <Link
           className="text-gradient-primary block md:hidden font-bold"
           href={"/"}

@@ -33,6 +33,7 @@ const config: Config = {
         80: "var(--black-80)",
         DEFAULT: "var(--black)",
       },
+      warning: "var(--warning)",
     },
     // gradient colors
     backgroundImage: {
@@ -70,6 +71,9 @@ const config: Config = {
       },
       boxShadow: {
         "order-history-card-shadow": "0px 4px 16px rgba(0, 0, 0, 0.06)",
+        "circle-shadow": "0px 4px 64px rgba(0, 0, 0, 0.25)",
+        "messege-card-shadow": "0px 4px 30px rgba(0, 0, 0, 0.1)",
+        "maintainance-shadow": " 0px 4px 30px rgba(0, 0, 0, 0.14)",
       },
     },
   },

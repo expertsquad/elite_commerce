@@ -17,7 +17,7 @@ const ProductViewImage = ({ product }: { product: IProduct }) => {
     localStorage.setItem("selectedImage", item);
   };
 
-  const slicedProducts = product?.productPhotos.slice(0, 4);
+  const slicedProducts = product?.productPhotos.slice(0, 5);
   return (
     <div className="flex flex-col-reverse md:flex-row gap-5 md:flex-1">
       <div className="flex md:flex-col gap-4">
@@ -31,13 +31,13 @@ const ProductViewImage = ({ product }: { product: IProduct }) => {
             }`}
             onClick={() => handleChangePhoto(image)}
           >
-            <div className="w-[50px] h-[50px] md:w-20 md:h-[100px] relative overflow-hidden">
+            <div className="w-[50px] h-[50px] md:w-[70px] md:h-[80px] relative overflow-hidden">
               <Image
                 src={`${server_url + image}`}
                 alt="Product Photo"
                 fill
                 sizes="(max-width: 80px) 10vw, (max-width: 100px) 10vw, 15vw"
-                className="inset-0 object-contain p-1 md:p-3"
+                className="inset-0 object-contain p-1 md:p-2"
               />
             </div>
           </div>

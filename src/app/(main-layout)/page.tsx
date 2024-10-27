@@ -2,7 +2,6 @@ import React, { Suspense } from "react";
 import Hero from "./_components/Hero/Hero";
 import InfiniteSlider from "./_components/InfiniteSlider/InfiniteSlider";
 import Image from "next/image";
-import { wave } from "@/assets";
 import FeaturedProducts from "./_components/FeaturedProducts/FeaturedProducts";
 import { fetchData } from "@/actions/fetchData";
 import BestDealsSection from "./_components/BestDealsSection/BestDealsSection";
@@ -50,7 +49,6 @@ const Page = async () => {
       <div className="main-container pb-10">
         {/* Hero section added */}
         <Hero currencyIcon={currencyIcon?.data?.currencySymbol} />
-
         {/* hottest categories */}
         <p className="text-sm text-gradient-secondary mt-10">
           Shop by Category
@@ -59,19 +57,23 @@ const Page = async () => {
           Browse Our Hottest Categories
         </p>
         <InfiniteSlider />
-
         {/* feature section  */}
-        <div className="flex justify-center items-center uppercase flex-col mt-10">
-          <p className="text-[clamp(20px,5vw,25px)] text-gradient-primary">
-            Featured Products
+
+        <div className="flex justify-center items-center  flex-col gap-3.5 my-16">
+          <div className="flex justify-center items-center gap-5">
+            <div className="border-b w-[100px] border-black-50"></div>
+            <span className="text-[clamp(20px,5vw,30px)] text-gradient-primary font-bold">
+              Featured Products
+            </span>
+            <div className="border-b w-[100px] border-black-50"></div>
+          </div>
+          <p className="text-black-80 [font-size:_clamp(14px,2.5vw,16px)]">
+            Discover our featured products top picks, trending items, and
+            must-have deals, all in one place!
           </p>
-          <Image
-            src={wave}
-            alt="gradient line"
-            className="w-[clamp(200px,70vw,300px)]"
-          />
         </div>
         <FeaturedProducts
+          currencyIcon={currencyIcon?.data?.currencySymbol}
           newestProducts={newestProducts?.data}
           topSellProducts={topSellProducts?.data}
           popularProducts={popularProducts?.data}
@@ -142,7 +144,13 @@ const Page = async () => {
         <div className="grid grid-cols-product-grid grid-rows-product-grid gap-10 min-h-96 justify-around my-5">
           <Suspense fallback={<Loading />}>
             {allProducts?.data?.map((product: IProduct) => {
-              return <ProductCard key={product?._id} product={product} />;
+              return (
+                <ProductCard
+                  key={product?._id}
+                  product={product}
+                  currencyIcon={currencyIcon?.data?.currencySymbol}
+                />
+              );
             })}
           </Suspense>
         </div>

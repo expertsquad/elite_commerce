@@ -46,7 +46,11 @@ const CategoryCard = ({
     }
   };
   return (
-    <div>
+    <div
+      className={`${
+        pathname === "/category/single-category" ? "hidden" : "block"
+      }`}
+    >
       <h2 className="mb-5 md:mb-[30px] font-semibold text-lg ">{title}</h2>
       <div className="flex flex-col gap-y-3">
         {categories?.map((category: ICategory) => (
@@ -67,12 +71,16 @@ const CategoryCard = ({
               }
               onChange={() => handleRadioChange(category.categoryName)}
             />
-            <label htmlFor={category?.categoryName} className="text-black-80">
+            <label
+              htmlFor={category?.categoryName}
+              className="text-black-80 cursor-pointer"
+            >
               {category?.categoryName}
             </label>
           </div>
         ))}
       </div>
+      <span className="bg-black-10 h-0.5 w-full flex my-5 md:my-[30px]"></span>
     </div>
   );
 };

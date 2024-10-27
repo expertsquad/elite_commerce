@@ -1,10 +1,13 @@
 export interface ISocialMedia {
+  id: string;
+  _id: string;
+  userName?: string;
+  phoneNumber?: number;
+  mediaName: string;
   _position: number;
   icon: string;
   link: string;
   isActive: boolean;
-  _id: string;
-  id: string;
 }
 
 export interface IFooterMenu {

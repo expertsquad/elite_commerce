@@ -17,12 +17,12 @@ const TopRatingProductCard = ({
   return (
     <div>
       <h2 className="mb-5 md:mb-[30px] font-bold text-lg uppercase whitespace-nowrap">
-        Top 05 Ratings Product
+        Top 5 Ratings Product
       </h2>
       <div className="flex flex-col gap-y-3">
         {products?.map((product: IProduct) => (
           <Link
-            href={`/products/${product?._id}`}
+            href={`/products/${product?.productUrlSlug}`}
             className="flex items-center hover:bg-gradient-primary-light cursor-pointer"
             key={product?._id}
           >

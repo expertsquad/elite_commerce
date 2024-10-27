@@ -15,7 +15,8 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
     query: "sortBy=averageRating",
   });
   const brands = await fetchData({ route: "/brand", limit: 100 });
-
+  const colors = await fetchData({ route: "/product/colors" });
+  console.log(colors);
   const widgetData = await getWidget();
   const currency = await getCurrency();
 
@@ -40,13 +41,14 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
           <div className="lg:col-span-3 md:grid-cols-2 md:col-span-2">
             {children}
           </div>
-          <div className="hidden md:block lg:block">
+          <div className="hidden md:block lg:block ">
             <FilteringSection
               categories={categories?.data}
               products={products?.data}
               brands={brands?.data}
               widget={widgetData}
               currency={currency}
+              colors={colors?.data}
             />
           </div>
         </div>

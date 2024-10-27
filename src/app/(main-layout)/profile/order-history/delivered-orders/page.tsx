@@ -3,6 +3,7 @@ import React from "react";
 import OrderItems from "../../_components/OrderItems";
 import Pagination from "@/Components/Pagination";
 import { Order } from "@/interfaces/oreder.interface";
+import { getCurrency } from "@/utils/getCurrency";
 
 const DeliveredOrders = async () => {
   const getMe = await fetchProtectedData({
@@ -18,12 +19,13 @@ const DeliveredOrders = async () => {
   const totalPages = Math.ceil(
     orderDeliveredData?.meta?.total / orderDeliveredData?.meta?.limit
   );
+  const currency = await getCurrency();
 
   return (
     <div className="space-y-5">
       <div>
         {orderDeliveredData?.data?.map((order: Order) => (
-          <OrderItems key={order._id} order={order} />
+          <OrderItems key={order._id} order={order} currency={currency} />
         ))}
       </div>
 

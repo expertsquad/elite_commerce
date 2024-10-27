@@ -1,6 +1,6 @@
 import React from "react";
 import OrderItems from "../../_components/OrderItems";
-import { fetchData, fetchProtectedData } from "@/actions/fetchData";
+import { fetchProtectedData } from "@/actions/fetchData";
 import Pagination from "@/Components/Pagination";
 import { Order } from "@/interfaces/oreder.interface";
 import { getCurrency } from "@/utils/getCurrency";
@@ -22,7 +22,7 @@ const AllOrderHistory = async () => {
 
   return (
     <div className="space-y-5">
-      <div className=" p-3">
+      <div className="p-3">
         {allOrderData?.data?.map((order: Order) => (
           <OrderItems currency={currency} key={order._id} order={order} />
         ))}

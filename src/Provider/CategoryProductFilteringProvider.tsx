@@ -7,7 +7,7 @@ interface IFilterFields {
   "variants.sellingPrice[lte]"?: number;
   "category.categoryName"?: string[];
   "brand.brandName"?: string[];
-  "variant.variantName"?: string;
+  "variants.variantName"?: string;
 }
 // props interface
 interface IFilteringProviderProps {

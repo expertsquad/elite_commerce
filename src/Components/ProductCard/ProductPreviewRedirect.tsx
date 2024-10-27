@@ -19,7 +19,7 @@ const ProductPreviewRedirect = ({
   const handleRedirect = (e: React.MouseEvent) => {
     e.stopPropagation();
     onClick && onClick();
-    router.push(`/products/${product?._id}`);
+    router.push(`/products/${product?.productUrlSlug}`);
   };
 
   return (

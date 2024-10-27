@@ -25,11 +25,12 @@ const ProductVariantColor = ({
       return (
         <div
           key={index}
+          title={color?.variantName}
           className={`w-7 h-7 cursor-pointer flex items-center  justify-center rounded-md ${
             isSelected ? "border-2" : "border"
           } ${
             isNotSpecified || color?.variantName === "white"
-              ? "border-black-10 border-2"
+              ? "border-black border-2"
               : ""
           }`}
           onClick={() => handleClick(index)}
