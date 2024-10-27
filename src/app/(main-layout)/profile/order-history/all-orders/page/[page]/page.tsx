@@ -5,6 +5,21 @@ import OrderItems from "@/app/(main-layout)/profile/_components/OrderItems";
 import { Order } from "@/interfaces/oreder.interface";
 import { getCurrency } from "@/utils/getCurrency";
 
+export const generateStaticParams = async () => {
+  const getMe = await fetchProtectedData({
+    route: "/user/me",
+  });
+  const { meta } = await fetchData({
+    route: "/online-order",
+    query: `buyer.userId=${getMe?.data?._id}`,
+    limit: 20,
+  });
+  const totalPages = Math.ceil(meta?.total / meta?.limit);
+  return [...Array(totalPages)].map((_, i) => ({
+    params: { page: i + 1 },
+  }));
+};
+
 const AllOrderHistory = async ({ params }: { params: { page: number } }) => {
   const getMe = await fetchProtectedData({
     route: "/user/me",
@@ -39,18 +54,3 @@ const AllOrderHistory = async ({ params }: { params: { page: number } }) => {
 };
 
 export default AllOrderHistory;
-
-export const generateStaticParams = async () => {
-  const getMe = await fetchProtectedData({
-    route: "/user/me",
-  });
-  const { meta } = await fetchData({
-    route: "/online-order",
-    query: `buyer.userId=${getMe?.data?._id}`,
-    limit: 20,
-  });
-  const totalPages = Math.ceil(meta?.total / meta?.limit);
-  return [...Array(totalPages)].map((_, i) => ({
-    params: { page: i + 1 },
-  }));
-};
