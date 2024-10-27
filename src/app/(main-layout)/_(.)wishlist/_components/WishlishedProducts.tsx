@@ -16,7 +16,7 @@ const WishlishedProducts = ({
 }: {
   product: IWishlistProduct;
   setRefetch: React.Dispatch<React.SetStateAction<number>>;
-  currencyIcon: string;
+  currencyIcon?: string;
 }) => {
   const { cartProducts, setRefetch: setRefetchCart } = useContext(CartContext);
 

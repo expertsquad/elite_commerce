@@ -7,12 +7,18 @@ const SearchPage = async () => {
     limit: 1000,
     revalidate: 600,
   });
+
+  const currencyIcon = await fetchData({
+    route: `/settings/shop`,
+  });
+
   const products = await fetchData({ route: "/product", limit: 1 });
 
   return (
     <SmallDeviceGlobalSearch
       categories={categories?.data}
       products={products?.data}
+      currencyIcon={currencyIcon?.data?.currencySymbol}
     />
   );
 };
