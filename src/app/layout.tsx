@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
+import ScrollToTopBtn from "./(main-layout)/_components/FixedMenu/ScrollToTopBtn";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
@@ -20,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
         {/* gradient icon layer */}
         <svg width="0" height="0">

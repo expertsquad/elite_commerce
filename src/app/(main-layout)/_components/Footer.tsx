@@ -1,11 +1,6 @@
 import React from "react";
 import ContactInfo from "./FooterComponents/ContactInfo";
 import SocialMediaConnect from "./FooterComponents/SocialMediaConnect";
-import {
-  Categories,
-  Helps,
-  myAccount,
-} from "@/constants/footerMenus.constants";
 import AppStoreLink from "./FooterComponents/AppStoreLink";
 import PaymentMethods from "./FooterComponents/PaymentMethods";
 import Logo from "@/utils/Logo";

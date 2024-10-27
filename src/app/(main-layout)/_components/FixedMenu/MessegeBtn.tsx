@@ -16,7 +16,7 @@ const MessegeBtn = ({ data }: { data: any }) => {
     <div className="">
       <button
         onClick={() => setShow(!show)}
-        className="bg-gradient-primary rounded-full flex items-center justify-center p-[clamp(10px,2.5vw,14px)] cursor-pointer shadow-circle-shadow"
+        className="bg-gradient-primary rounded-full flex items-center justify-center p-[clamp(10px,2.5vw,14px)] cursor-pointer shadow-circle-shadow outline-none"
       >
         {show ? (
           <IconX className="text-white" />
@@ -25,7 +25,7 @@ const MessegeBtn = ({ data }: { data: any }) => {
         )}
       </button>
       {show && (
-        <div className="bg-white rounded-[10px] p-5 fixed md:right-10 right-5 md:bottom-[120px] bottom-[150px]  max-w-[350px]  z-[1000] shadow-messege-card-shadow">
+        <div className="bg-white rounded-[10px] p-5 fixed md:right-10 right-5 md:bottom-[120px] bottom-[150px]  max-w-[350px]  z-50 shadow-messege-card-shadow">
           <div className="flex items-end justify-end">
             <button className="self-end" onClick={() => setShow(!show)}>
               <IconX className="text-black-50" />
