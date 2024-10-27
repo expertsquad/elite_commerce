@@ -36,6 +36,7 @@ const ProductCard = ({
           product={product}
           shippingAmount={shippingAmount}
           currencyIcon={currencyIcon}
+          isQuickOrderActive={isQuickOrderActive}
         />
       </div>
 

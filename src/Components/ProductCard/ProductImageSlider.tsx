@@ -15,12 +15,14 @@ type ProductImageSliderProps = {
   loading?: any;
   currencyIcon?: string;
   shippingAmount?: number;
+  isQuickOrderActive?: boolean;
 };
 
 const ProductImageSlider = ({
   product,
   currencyIcon,
   shippingAmount,
+  isQuickOrderActive,
 }: ProductImageSliderProps) => {
   const { wishlistProducts, setRefetch } = useContext(WishlistContext);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -119,17 +121,19 @@ const ProductImageSlider = ({
           <div className="flex flex-col gap-y-1.5">
             <AddToWishlistBtn products={product} />
 
-            <QuickOrderButton
-              product={{
-                ...product,
-                orderQuantity: 1,
-                variant: product?.variants[0],
-              }}
-              buttonIcon={<IconBolt size={18} stroke={1} />}
-              buttonStyle="cursor-pointer rounded-full flex justify-center items-center bg-white h-[30px] w-[30px] border border-black-10 md:hidden"
-              currencyIcon={currencyIcon}
-              shippingAmount={shippingAmount ? shippingAmount : 0}
-            />
+            {isQuickOrderActive && (
+              <QuickOrderButton
+                product={{
+                  ...product,
+                  orderQuantity: 1,
+                  variant: product?.variants[0],
+                }}
+                buttonIcon={<IconBolt size={18} stroke={1} />}
+                buttonStyle="cursor-pointer rounded-full flex justify-center items-center bg-white h-[30px] w-[30px] border border-black-10 md:hidden"
+                currencyIcon={currencyIcon}
+                shippingAmount={shippingAmount ? shippingAmount : 0}
+              />
+            )}
           </div>
         </div>
       </div>

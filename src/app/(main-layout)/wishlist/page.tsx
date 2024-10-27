@@ -15,6 +15,7 @@ const Wishlist = async () => {
       <WishlistPageContent
         currencyIcon={currency?.data?.currencySymbol}
         shippingAmount={quickOrderServices?.data?.deliveryCharge}
+        isQuickOrderActive={quickOrderServices?.data?.isQuickOrderServiceActive}
       />
     </div>
   );

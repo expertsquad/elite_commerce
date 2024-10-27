@@ -48,6 +48,9 @@ const ProductViewPage = async ({
             product={product?.data}
             currencyIcon={currencyIcon?.data?.currencySymbol}
             shippingAmount={quickOrderServices?.data?.deliveryCharge}
+            isQuickOrderActive={
+              quickOrderServices?.data?.isQuickOrderServiceActive
+            }
           />
         </div>
       </div>
@@ -72,6 +75,9 @@ const ProductViewPage = async ({
               currencyIcon={currencyIcon?.data?.currencySymbol}
               shippingAmount={quickOrderServices?.data?.deliveryCharge}
               accessToken={accessToken!}
+              isQuickOrderActive={
+                quickOrderServices?.data?.isQuickOrderServiceActive
+              }
             />
           </div>
         </div>
