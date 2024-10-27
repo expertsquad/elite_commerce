@@ -84,6 +84,9 @@ const ProductViewPage = async ({
       </section>
       <RelatedProductsByCategory
         categoryName={product?.data?.category?.categoryName}
+        currencyIcon={currencyIcon?.data?.currencySymbol}
+        shippingAmount={quickOrderServices?.data?.deliveryCharge}
+        isQuickOrderActive={quickOrderServices?.data?.isQuickOrderServiceActive}
       />
     </div>
   );
