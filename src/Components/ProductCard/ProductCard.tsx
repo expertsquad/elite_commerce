@@ -2,21 +2,29 @@ import ProductImageSlider from "./ProductImageSlider";
 import { IProduct } from "@/interfaces/product.interface";
 import StarRating from "../StarRating";
 import QuickViewButton from "@/app/(main-layout)/brands/_components/QuickViewButton";
-import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
+import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
 import ProductCartBtn from "./ProductCartBtn";
 import ProductPreviewRedirect from "./ProductPreviewRedirect";
+import { getPricingDetails } from "./getPricingDetails";
 export interface IProductCardProps {
   product: IProduct;
   onClick?: () => void;
   currencyIcon?: string;
   quickAction?: boolean;
+  shippingAmount?: number;
+  isQuickOrderActive?: boolean;
 }
 const ProductCard = ({
   product,
   onClick,
   currencyIcon,
   quickAction,
+  shippingAmount,
+  isQuickOrderActive,
 }: IProductCardProps) => {
+  const productDetails = getPricingDetails(product);
+  const { sellingPrice, discountedPrice } = productDetails;
+
   return (
     <ProductPreviewRedirect
       className="border border-black-10 rounded-lg group relative w-full max-w-[280px] cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg mx-auto"
@@ -24,7 +32,12 @@ const ProductCard = ({
       onClick={onClick}
     >
       <div className="bg-gradient-primary-light">
-        <ProductImageSlider product={product} />
+        <ProductImageSlider
+          product={product}
+          shippingAmount={shippingAmount}
+          currencyIcon={currencyIcon}
+          isQuickOrderActive={isQuickOrderActive}
+        />
       </div>
 
       <div className="p-4">
@@ -45,19 +58,18 @@ const ProductCard = ({
           <div className="flex items-center whitespace-nowrap">
             <span className="[font-size:_clamp(16px,2vw,22px)] text-gradient-primary font-bold">
               {currencyIcon}
-              {product?.variants[0]?.discountedPrice
-                ? product?.variants[0]?.discountedPrice
-                : product?.variants[0]?.sellingPrice}
+              {discountedPrice && discountedPrice}
             </span>
-            <span className="mx-0.5 text-black-10">|</span>
+            {sellingPrice && (
+              <span className={`mx-0.5 text-black-10 text-xl`}>|</span>
+            )}
             <del
               className={`text-black-50 [font-size:_clamp(14px,2vw,18px)] ${
                 product?.variants[0]?.discountedPrice ? "block" : "hidden"
               }`}
             >
               {currencyIcon}
-              {product?.variants[0]?.discountedPrice &&
-                product?.variants[0]?.sellingPrice}
+              {sellingPrice && sellingPrice}
             </del>
           </div>
           <ProductCartBtn product={product} />
@@ -72,17 +84,21 @@ const ProductCard = ({
       >
         <QuickViewButton
           product={product}
-          btnClassName="text-sm hover:font-bold transition-all duration-300 hover:bg-black hover:text-white hover:w-full !px-4 py-2"
+          btnClassName="text-sm transition-all duration-300 hover:bg-black hover:text-white hover:w-full !px-4 py-2"
         />
-        <QuickOrderButton
-          product={{
-            ...product,
-            orderQuantity: 1,
-            variant: product?.variants[0],
-          }}
-          buttonStyle="text-base bg-white hover:bg-black hover:text-white py-2 whitespace-nowrap px-4 rounded-full text-sm hover:font-bold transition-all duration-300"
-          buttonText="Quick Order"
-        />
+        {isQuickOrderActive && (
+          <QuickOrderButton
+            product={{
+              ...product,
+              orderQuantity: 1,
+              variant: product?.variants[0],
+            }}
+            buttonStyle="text-base bg-white hover:bg-black hover:text-white py-2 whitespace-nowrap px-4 rounded-full text-sm transition-all duration-300"
+            buttonText="Quick Order"
+            currencyIcon={currencyIcon}
+            shippingAmount={shippingAmount ? shippingAmount : 0}
+          />
+        )}
       </div>
     </ProductPreviewRedirect>
   );

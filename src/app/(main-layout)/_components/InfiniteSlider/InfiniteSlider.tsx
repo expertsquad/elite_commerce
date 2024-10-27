@@ -8,7 +8,6 @@ import Link from "next/link";
 const InfiniteSlider = async () => {
   const cateogriesData: { data: ICategory[] } = await fetchData({
     route: "/category",
-    revalidate: 86400,
   });
 
   const element = cateogriesData?.data?.map((category) => (
@@ -17,17 +16,18 @@ const InfiniteSlider = async () => {
       key={category?._id}
       className="flex flex-col items-center gap-2"
     >
-      <div className="h-16 w-16 md:h-28 md:w-28 relative border border-black-10 rounded-full overflow-hidden">
+      <div className="h-16 w-16 md:h-28 md:w-28 relative rounded-full border border-black-10 overflow-hidden">
         <Image
           src={server_url + category?.categoryPhoto}
           fill
           alt="category photo"
-          className="z-0 object-contain"
+          style={{
+            objectFit: "contain",
+          }}
+          className="inset-0 top-0 left-0 object-contain p-2 md:p-5"
         />
       </div>
-      <p className="text-gradient-primary font-semibold">
-        {category?.categoryName}
-      </p>
+      <p className="text-black font-semibold">{category?.categoryName}</p>
     </Link>
   ));
 

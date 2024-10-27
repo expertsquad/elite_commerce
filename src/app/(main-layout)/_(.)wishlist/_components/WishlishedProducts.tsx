@@ -12,9 +12,11 @@ import { getWishlistRemoteAndLocalDataAndMerge } from "@/helpers/getWishlistRemo
 const WishlishedProducts = ({
   product,
   setRefetch,
+  currencyIcon,
 }: {
   product: IWishlistProduct;
   setRefetch: React.Dispatch<React.SetStateAction<number>>;
+  currencyIcon: string;
 }) => {
   const { cartProducts, setRefetch: setRefetchCart } = useContext(CartContext);
 
@@ -67,11 +69,13 @@ const WishlishedProducts = ({
 
             <div className="flex items-center gap-1.5">
               <strong className="font-semibold text-gradient-primary text-base">
-                ${product?.variant?.discountedPrice}
+                {currencyIcon}
+                {product?.variant?.discountedPrice}
               </strong>
               <span className="text-black-10">|</span>
               <strong className="font-normal line-through text-black-50 text-xs">
-                ${product?.variant?.sellingPrice}
+                {currencyIcon}
+                {product?.variant?.sellingPrice}
               </strong>
             </div>
           </div>

@@ -12,6 +12,8 @@ const BestDealsSection = async () => {
     revalidate: 0,
   });
 
+  console.log(bestDeals?.data);
+
   return (
     <div
       className="w-full"
@@ -31,7 +33,7 @@ const BestDealsSection = async () => {
     >
       <div className="main-container py-10">
         <div className="flex flex-col items-center justify-center gap-y-7 md:flex-row md:items-center md:justify-between pb-10">
-          <div className="relative w-[clamp(250px,15vw,350px)] min-h-[250px] max-h-[350px] shrink-0">
+          <div className="relative w-[clamp(250px,10vw,350px)] min-h-[250px] max-h-[350px] shrink-0">
             <Image
               src={server_url + bestDeals?.data?.firstProductPhoto}
               alt="product photo"
@@ -59,7 +61,7 @@ const BestDealsSection = async () => {
               />
             </div>
           </div>
-          <div className="relative w-[clamp(250px,15vw,350px)] min-h-[250px] max-h-[350px] shrink-0">
+          <div className="relative w-[clamp(250px,10vw,350px)] min-h-[250px] max-h-[350px] shrink-0">
             <Image
               src={server_url + bestDeals?.data?.secondProductPhoto}
               alt="product photo"
@@ -72,7 +74,7 @@ const BestDealsSection = async () => {
           </div>
         </div>
         <div className="flex w-full overflow-x-scroll scrollbar-x-remove">
-          <div className="flex items-center justify-center gap-x-5 w-[300%] md:w-full">
+          <div className="flex items-center md:justify-center gap-x-5 md:gap-x-5 xl:justify-between w-[300%] md:w-full">
             {bestDeals?.data?.products?.map(
               (product: IBestDealsProductData) => (
                 <BestDealsSectionProduct key={product?._id} product={product} />

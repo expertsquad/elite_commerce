@@ -4,7 +4,7 @@ import { ICartProduct } from "@/interfaces/cart.interface";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import Link from "next/link";
 import { useContext } from "react";
-import QuickOrderButton from "../../brands/_components/QuickOrderButton";
+import QuickOrderButton from "../QuickOrder/QuickOrderButton";
 import { IconBolt, IconShoppingCart } from "@tabler/icons-react";
 import ButtonPrimary from "../../brands/_components/ButtonPrimary";
 
@@ -14,6 +14,8 @@ const OrderSummery = ({
   shippingFee,
   calculateTotalPriceAndDiscountOfCart,
   currencyIcon,
+  shippingAmount,
+  isQuickOrderActive,
 }: {
   setshow: React.Dispatch<React.SetStateAction<boolean>>;
   products: ICartProduct[];
@@ -23,12 +25,13 @@ const OrderSummery = ({
     totalPrice: number;
   };
   currencyIcon?: string;
+  shippingAmount: number;
+  isQuickOrderActive?: boolean;
 }) => {
   const { orderData, setRefetch } = useContext(OrderInitContext);
 
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
-  console.log(totalDiscount);
 
   // handle init order
   const handleAddToInitOrder = () => {
@@ -71,13 +74,17 @@ const OrderSummery = ({
           <span>{totalPrice + shippingFee} </span>
         </strong>
       </div>
-      <div className="flex items-center justify-center gap-5 md:px-5">
-        <QuickOrderButton
-          product={products}
-          buttonStyle="!uppercase text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] flex items-center justify-center gap-2.5 px-5 w-full py-3.5 bg-gradient-primary-light hover:bg-gradient-primary hover:text-white rounded-lg "
-          buttonIcon={<IconBolt size={18} />}
-          buttonText="QUICK ORDER "
-        />
+      <div className="flex items-center justify-center gap-5 ">
+        {isQuickOrderActive && (
+          <QuickOrderButton
+            product={products}
+            buttonStyle="!uppercase text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] flex items-center justify-center gap-2.5 px-5 w-full py-3.5 bg-gradient-primary-light hover:bg-gradient-primary hover:text-white rounded-lg "
+            buttonIcon={<IconBolt size={18} />}
+            buttonText="QUICK ORDER"
+            currencyIcon={currencyIcon}
+            shippingAmount={shippingAmount}
+          />
+        )}
         <Link
           href="/shipping-info"
           className="w-full"

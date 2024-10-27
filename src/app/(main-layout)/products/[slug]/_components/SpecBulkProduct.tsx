@@ -5,12 +5,8 @@ import ProductVariantColor from "./ProductVariantColor";
 import Image from "next/image";
 import { server_url } from "@/constants";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
-import {
-  IconBolt,
-  IconShoppingBag,
-  IconShoppingCart,
-} from "@tabler/icons-react";
-import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
+import { IconBolt, IconShoppingCart } from "@tabler/icons-react";
+import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
 import { CartContext } from "@/Provider/CartProvider";
 import { updateCart } from "@/utils/updateCart.utils";
 import BuyNowSingleProduct from "./BuyNowSingleProduct";
@@ -19,10 +15,14 @@ const SpecBulkProduct = ({
   productdata,
   currencyIcon,
   accessToken,
+  shippingAmount,
+  isQuickOrderActive,
 }: {
   productdata: IProduct;
   currencyIcon?: string;
   accessToken?: string;
+  shippingAmount: number;
+  isQuickOrderActive?: boolean;
 }) => {
   const [variant, setVariant] = React.useState<IProduct["variants"][0]>(
     productdata?.variants[0]
@@ -87,8 +87,8 @@ const SpecBulkProduct = ({
           <span className="text-black-50">|</span>
         )}
         {variant?.discountPercentage && (
-          <div className="bg-gradient-secondary-light rounded-full py-0.5">
-            <span className="text-sm text-gradient-secondary px-3 font-semibold">
+          <div className="bg-gradient-secondary-light rounded-full">
+            <span className="text-xs text-gradient-secondary px-2 font-semibold">
               {variant?.discountPercentage}% OFF
             </span>
           </div>
@@ -105,16 +105,20 @@ const SpecBulkProduct = ({
               iconStyle="!size-4"
             />
           </div>
-          <QuickOrderButton
-            product={{
-              ...productdata,
-              orderQuantity: 1,
-              variant: variant,
-            }}
-            buttonStyle="text-white bg-gradient-primary flex items-center justify-center gap-x-1.5 py-2.5 rounded-md w-full text-[13px]"
-            buttonIcon={<IconBolt size={16} fill="#fff" />}
-            buttonText="QUICK ORDER"
-          />
+          {isQuickOrderActive && (
+            <QuickOrderButton
+              product={{
+                ...productdata,
+                orderQuantity: 1,
+                variant: variant,
+              }}
+              buttonStyle="text-white bg-gradient-primary hover:bg-gradient-primary-reverse flex items-center justify-center gap-x-1.5 py-2.5 rounded-md w-full text-[13px]"
+              buttonIcon={<IconBolt size={16} fill="#fff" />}
+              buttonText="QUICK ORDER"
+              currencyIcon={currencyIcon}
+              shippingAmount={shippingAmount}
+            />
+          )}
         </div>
         <div className="border border-black-10 rounded-md mt-5">
           <button

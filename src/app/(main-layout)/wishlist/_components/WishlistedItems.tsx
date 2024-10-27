@@ -5,7 +5,7 @@ import {
   IconShoppingCart,
   IconX,
 } from "@tabler/icons-react";
-import QuickOrderButton from "../../brands/_components/QuickOrderButton";
+import QuickOrderButton from "../../_components/QuickOrder/QuickOrderButton";
 import ButtonPrimaryLight from "../../brands/_components/ButtonPrimaryLight";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import StarRating from "@/Components/StarRating";
@@ -22,9 +22,13 @@ import QuickViewButton from "../../brands/_components/QuickViewButton";
 const WishlistedItems = ({
   product,
   currencyIcon,
+  shippingAmount,
+  isQuickOrderActive,
 }: {
   product: IWishlistProduct;
   currencyIcon: string;
+  shippingAmount: number;
+  isQuickOrderActive?: boolean;
 }) => {
   const { setRefetch } = useContext(WishlistContext);
   const { cartProducts, setRefetch: setRefetchCart } = useContext(CartContext);
@@ -123,19 +127,27 @@ const WishlistedItems = ({
           )}
         </div>
       </td>
-      <td className="border border-black-10 border-collapse px-5 transition duration-300">
-        <QuickOrderButton
-          product={{
-            ...product,
-            orderQuantity: 1,
-            variant: product?.variants?.[0],
-          }}
-          buttonStyle="bg-gradient-primary whitespace-nowrap text-white rounded-full hover:rounded-md transition-transform duration-300 px-3.5 uppercase flex items-center justify-center gap-x-1.5 text-sm py-2 group"
-          buttonIcon={
-            <IconBolt size={19} stroke={1.5} className="fill-white" />
-          }
-          buttonText="QUICK ORDER"
-        />
+      <td
+        className={`border border-black-10 border-collapse px-5 transition duration-300 ${
+          isQuickOrderActive === false && "hidden"
+        }`}
+      >
+        {isQuickOrderActive && (
+          <QuickOrderButton
+            product={{
+              ...product,
+              orderQuantity: 1,
+              variant: product?.variants?.[0],
+            }}
+            buttonStyle="bg-gradient-primary hover:bg-gradient-primary-reverse whitespace-nowrap text-white rounded-full transition-transform duration-300 px-3.5 uppercase flex items-center justify-center gap-x-1.5 text-sm py-2 group"
+            buttonIcon={
+              <IconBolt size={19} stroke={1.5} className="fill-white" />
+            }
+            buttonText="QUICK ORDER"
+            currencyIcon={currencyIcon}
+            shippingAmount={shippingAmount}
+          />
+        )}
       </td>
     </tr>
   );

@@ -1,6 +1,6 @@
 "use client";
 import React, { Fragment, useState } from "react";
-import QuickOrderModal from "../../_components/QuickOrder/QuickOrderModal";
+import QuickOrderModal from "./QuickOrderModal";
 import { IProduct } from "@/interfaces/product.interface";
 import { ICartProduct } from "@/interfaces/cart.interface";
 
@@ -9,6 +9,8 @@ interface IQuickOrderButtonProps {
   buttonText?: string;
   buttonStyle?: string;
   buttonIcon?: any;
+  currencyIcon?: string;
+  shippingAmount?: number;
 }
 
 const QuickOrderButton = ({
@@ -16,6 +18,8 @@ const QuickOrderButton = ({
   buttonIcon,
   buttonStyle,
   buttonText,
+  currencyIcon,
+  shippingAmount,
 }: IQuickOrderButtonProps) => {
   const [show, setShow] = useState(false);
 
@@ -39,6 +43,8 @@ const QuickOrderButton = ({
           show={show}
           setShow={setShow}
           products={productsArray}
+          currencyIcon={currencyIcon}
+          shippingAmount={shippingAmount ? shippingAmount : 0}
         />
       )}
     </Fragment>

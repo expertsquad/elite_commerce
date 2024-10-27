@@ -14,13 +14,26 @@ import { wishlistTableHeader } from "@/constants/tablesHeaders.constants";
 import WishlistedItems from "./WishlistedItems";
 import Breadcrumb from "@/Components/BreadCrumb/Breadcrumb";
 
-const WishlistPageContent = ({ currencyIcon }: { currencyIcon: string }) => {
+const WishlistPageContent = ({
+  currencyIcon,
+  shippingAmount,
+  isQuickOrderActive,
+}: {
+  currencyIcon: string;
+  shippingAmount: number;
+  isQuickOrderActive?: boolean;
+}) => {
   const { wishlistProducts, setRefetch } = useContext(WishlistContext);
 
   useEffect(() => {
     getWishlistRemoteAndLocalDataAndMerge();
     setRefetch((prev) => prev + 1);
   }, [setRefetch]);
+
+  const filteredHeaders = isQuickOrderActive
+    ? wishlistTableHeader
+    : wishlistTableHeader.filter((header) => header !== "Quick Order");
+
   return (
     <div>
       <div>
@@ -32,7 +45,7 @@ const WishlistPageContent = ({ currencyIcon }: { currencyIcon: string }) => {
             <table className=" border border-black-10 border-collapse w-full">
               <thead>
                 <tr className="border-black-10 border border-collapse">
-                  {wishlistTableHeader.map((th, i) => {
+                  {filteredHeaders.map((th, i) => {
                     return (
                       <th
                         className={`font-semibold text-black-80 border border-black-10 text-center py-4 ${
@@ -53,6 +66,8 @@ const WishlistPageContent = ({ currencyIcon }: { currencyIcon: string }) => {
                       key={index}
                       product={product}
                       currencyIcon={currencyIcon}
+                      shippingAmount={shippingAmount}
+                      isQuickOrderActive={isQuickOrderActive}
                     />
                   );
                 })}
@@ -70,6 +85,7 @@ const WishlistPageContent = ({ currencyIcon }: { currencyIcon: string }) => {
               key={index}
               product={product}
               setRefetch={setRefetch}
+              currencyIcon={currencyIcon}
             />
           ))}
         </div>

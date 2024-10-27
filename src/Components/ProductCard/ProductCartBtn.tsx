@@ -17,7 +17,11 @@ const ProductCartBtn = ({ product }: IProductCardProps) => {
   };
   return (
     <button
-      className="group-hover/productcard:bg-gradient-primary group-hover/productcard:text-white text-black-50 rounded-full transition-all duration-300 p-2 "
+      className={`${
+        isProductInCart
+          ? "bg-gradient-primary text-white rounded-full transition-all duration-300 p-2"
+          : "group-hover/productcard:bg-gradient-primary group-hover/productcard:text-white text-black-50 rounded-full transition-all duration-300 p-2"
+      }`}
       onClick={(e) => {
         e.stopPropagation();
         handleAddToCart();

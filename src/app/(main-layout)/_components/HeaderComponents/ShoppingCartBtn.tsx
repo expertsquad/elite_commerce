@@ -20,9 +20,13 @@ import { Button } from "@/Components/Buttons";
 const ShoppingCartBtn = ({
   currencyIcon,
   shippingCharge,
+  shippingAmount,
+  isQuickOrderActive,
 }: {
   currencyIcon?: string;
   shippingCharge: any;
+  shippingAmount: number;
+  isQuickOrderActive?: boolean;
 }) => {
   const [show, setShow] = React.useState(false);
   // cart contex
@@ -121,10 +125,12 @@ const ShoppingCartBtn = ({
                   setshow={setShow}
                   products={cartProducts}
                   shippingFee={shippingFee}
+                  shippingAmount={shippingAmount}
                   calculateTotalPriceAndDiscountOfCart={
                     calculateTotalPriceAndDiscountOfCart
                   }
                   currencyIcon={currencyIcon ? currencyIcon : ""}
+                  isQuickOrderActive={isQuickOrderActive}
                 />
                 <div className="my-5 flex items-center justify-center">
                   {" "}
@@ -203,7 +209,7 @@ export const QuickOrderItem = ({
             <div className="flex items-center justify-between gap-5"></div>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="text-black-80 font-medium text-xs md:text-sm">
+            <span className="text-black-80 font-medium text-base">
               {currencyIcon}
               {product?.variant?.discountedPrice}
             </span>

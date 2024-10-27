@@ -4,7 +4,13 @@ import { IProduct } from "@/interfaces/product.interface";
 import { server_url } from "@/constants";
 import { IconMinus, IconPlus, IconX } from "@tabler/icons-react";
 
-export const QuickOrderItem = ({ product }: { product: IProduct }) => {
+export const QuickOrderItem = ({
+  product,
+  currencyIcon,
+}: {
+  product: IProduct;
+  currencyIcon?: string;
+}) => {
   return (
     <div className="flex justify-between gap-3.5 ">
       <div className="flex md:items-center gap-3.5 w-full">
@@ -39,19 +45,33 @@ export const QuickOrderItem = ({ product }: { product: IProduct }) => {
               <span className="text-positive text-[10px] md:text-xs">
                 {product?.brand?.brandName}
               </span>
-              <span className="text-black-10">|</span>
-              <StarRating rating={product?.averageRating!} />
+              {product?.variant?.variantName !== "Not specified" && (
+                <span className="text-black-10">|</span>
+              )}
+              {product?.variant?.variantName !== "Not specified" && (
+                <div className="flex items-center gap-x-1">
+                  <div
+                    className="h-3 w-3 rounded-full"
+                    style={{
+                      backgroundColor: product?.variant?.variantName,
+                    }}
+                  ></div>
+                  <span className="text-[10px] md:text-xs">
+                    {product?.variant?.variantName}
+                  </span>
+                </div>
+              )}
             </div>
             <div className="flex items-center justify-between gap-5"></div>
           </div>
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5">
-              <span className="text-black-80 text-sm">
-                $
-                {product?.variant.discountedPrice
-                  ? product?.variant.discountedPrice
-                  : product?.variant.sellingPrice}
+              <span className="text-black-80 text-base">
+                {currencyIcon}
+                {product?.variant?.discountedPrice
+                  ? product?.variant?.discountedPrice
+                  : product?.variant?.sellingPrice}
               </span>
               <span>
                 <IconX stroke={1} height={16} width={16} />
@@ -69,10 +89,10 @@ export const QuickOrderItem = ({ product }: { product: IProduct }) => {
               </div>
             </div>
             <strong className="font-semibold text-gradient-primary text-base">
-              $
-              {product?.variant.discountedPrice
-                ? product?.variant.discountedPrice * product?.orderQuantity
-                : product?.variant.sellingPrice * product?.orderQuantity}
+              {currencyIcon}
+              {product?.variant?.discountedPrice
+                ? product?.variant?.discountedPrice * product?.orderQuantity
+                : product?.variant?.sellingPrice * product?.orderQuantity}
             </strong>
           </div>
         </div>

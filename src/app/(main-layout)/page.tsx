@@ -40,8 +40,15 @@ const Page = async () => {
   });
 
   const widget = await getWidget();
+
+  // <== Get Currency ==>
   const currencyIcon = await fetchData({
     route: "/settings/shop",
+  });
+
+  // <== Quick Order Services ==>
+  const quickOrderServices = await fetchData({
+    route: "/settings/quick-order-setting",
   });
 
   return (
@@ -77,13 +84,17 @@ const Page = async () => {
           newestProducts={newestProducts?.data}
           topSellProducts={topSellProducts?.data}
           popularProducts={popularProducts?.data}
+          shippingAmount={quickOrderServices?.data?.deliveryCharge}
+          isQuickOrderActive={
+            quickOrderServices?.data?.isQuickOrderServiceActive
+          }
         />
       </div>
       {/* best deals */}
       <BestDealsSection />
       {/* extra services section */}
-      <div className="main-container pb-10">
-        <div className="flex flex-col md:flex-row items-center justify-between py-10 lg:py-16 text-center md:text-left gap-10">
+      <div className="main-container">
+        <div className="flex flex-col md:flex-row items-center justify-between  text-center md:text-left gap-10 my-20 xl:my-28">
           {extraServices.map((service) => (
             <div
               className="flex flex-col md:flex-row md:gap-2 items-center"
@@ -95,10 +106,10 @@ const Page = async () => {
                 className="w-12 h-12 md:w-8 md:h-8 lg:w-12 lg:h-12"
               />
               <div>
-                <h5 className="font-bold text-sm lg:text-sm">
+                <h5 className="font-bold text-sm md:text-sm whitespace-nowrap">
                   {service.title}
                 </h5>
-                <p className="text-black-50 text-xs lg:text-sm">
+                <p className="text-black-50 text-xs md:text-sm">
                   {service.tagline}
                 </p>
               </div>
@@ -149,6 +160,10 @@ const Page = async () => {
                   key={product?._id}
                   product={product}
                   currencyIcon={currencyIcon?.data?.currencySymbol}
+                  shippingAmount={quickOrderServices?.data?.deliveryCharge}
+                  isQuickOrderActive={
+                    quickOrderServices?.data?.isQuickOrderServiceActive
+                  }
                 />
               );
             })}

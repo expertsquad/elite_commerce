@@ -16,7 +16,7 @@ import ProgressBar from "../../_components/SliderComponents/ProgressBar";
 import { formatProductForCart } from "@/utils/formatProductForCart.utils";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
-import QuickOrderButton from "./QuickOrderButton";
+import QuickOrderButton from "../../_components/QuickOrder/QuickOrderButton";
 import { CartContext } from "@/Provider/CartProvider";
 import ProdViewCartIncreamentDecreamentBtn from "../../products/[slug]/_components/ProdViewCartIncreamentDecreamentBtn";
 import ProductViewCartBtn from "../../products/[slug]/_components/ProductViewCartBtn";

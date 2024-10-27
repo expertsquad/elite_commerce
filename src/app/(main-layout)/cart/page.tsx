@@ -6,7 +6,7 @@ import CartItems from "./_components/CartItems";
 const CartView = async () => {
   const productsData = await fetchData({
     route: "/product",
-    query: "sortBy=averageRating",
+    query: "sortBy=totalSoldQuantity",
     limit: 4,
   });
   const currency = await fetchData({ route: "/settings/shop" });

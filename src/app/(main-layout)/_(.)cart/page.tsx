@@ -15,7 +15,7 @@ import { updateCart } from "@/utils/updateCart.utils";
 import ProgressBar from "../_components/SliderComponents/ProgressBar";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
-import QuickOrderButton from "../brands/_components/QuickOrderButton";
+import QuickOrderButton from "../_components/QuickOrder/QuickOrderButton";
 
 const QuickOrderItem = ({
   product,

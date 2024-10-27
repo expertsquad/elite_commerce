@@ -37,6 +37,7 @@ import arrowLeftCustom from "./Images/arrow-left.png";
 import successGif from "./Images/success.gif";
 import favicon from "./Images/favicon.svg";
 import maintenanceMode from "./Images/maintenancemode.png";
+import productEmptyState from "./Images/ProductEmptyState.svg";
 export {
   // smallLogo,
   // fullLogo,
@@ -77,4 +78,5 @@ export {
   successGif,
   favicon,
   maintenanceMode,
+  productEmptyState,
 };

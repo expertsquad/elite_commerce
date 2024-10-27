@@ -20,6 +20,10 @@ const LargeDeviceMegaMenu = async () => {
   const shippingCharge = await fetchData({
     route: "/settings/shipping-charge",
   });
+  // <== Quick Order Services ==>
+  const quickOrderServices = await fetchData({
+    route: "/settings/quick-order-setting",
+  });
 
   return (
     <nav className="hidden md:flex main-container py-[clamp(8px,2vh,20px)] text-md items-center justify-between">
@@ -66,6 +70,10 @@ const LargeDeviceMegaMenu = async () => {
         <ShoppingCartBtn
           currencyIcon={currencyIcon?.data?.currencySymbol}
           shippingCharge={shippingCharge?.data}
+          shippingAmount={quickOrderServices?.data?.deliveryCharge}
+          isQuickOrderActive={
+            quickOrderServices?.data?.isQuickOrderServiceActive
+          }
         />
         {/* profile */}
         <Link

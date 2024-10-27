@@ -5,9 +5,13 @@ import React, { Fragment } from "react";
 const PopularProducts = ({
   products,
   currencyIcon,
+  shippingAmount,
+  isQuickOrderActive,
 }: {
   products: IProduct[];
   currencyIcon: string;
+  shippingAmount: number;
+  isQuickOrderActive?: boolean;
 }) => {
   return (
     <Fragment>
@@ -16,6 +20,8 @@ const PopularProducts = ({
           key={product?._id}
           product={product}
           currencyIcon={currencyIcon}
+          shippingAmount={shippingAmount}
+          isQuickOrderActive={isQuickOrderActive}
         />
       ))}
     </Fragment>
