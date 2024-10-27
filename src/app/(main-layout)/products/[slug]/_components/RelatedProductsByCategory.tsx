@@ -7,8 +7,14 @@ import React, { Suspense } from "react";
 
 const RelatedProductsByCategory = async ({
   categoryName,
+  currencyIcon,
+  shippingAmount,
+  isQuickOrderActive,
 }: {
   categoryName: string;
+  currencyIcon: string;
+  shippingAmount: number;
+  isQuickOrderActive?: boolean;
 }) => {
   const response = await fetchData({
     route: `/product`,
@@ -43,7 +49,12 @@ const RelatedProductsByCategory = async ({
                 className="grid grid-cols-product-grid grid-rows-product-grid gap-5 justify-around mb-5"
                 key={product?._id}
               >
-                <ProductCard product={product} />
+                <ProductCard
+                  product={product}
+                  currencyIcon={currencyIcon}
+                  shippingAmount={shippingAmount}
+                  isQuickOrderActive={isQuickOrderActive}
+                />
               </div>
             );
           })}

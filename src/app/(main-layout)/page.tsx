@@ -64,17 +64,17 @@ const Page = async () => {
           Browse Our Hottest Categories
         </p>
         <InfiniteSlider />
-        {/* feature section  */}
 
-        <div className="flex justify-center items-center  flex-col gap-3.5 my-16">
+        {/* <== Featured Products ==> */}
+        <div className="flex justify-center items-center  flex-col gap-3.5 mt-16 mb-10">
           <div className="flex justify-center items-center gap-5">
-            <div className="border-b w-[100px] border-black-50"></div>
+            <div className="border-b w-[100px] border-black-50 hidden md:block"></div>
             <span className="text-[clamp(20px,5vw,30px)] text-gradient-primary font-bold">
               Featured Products
             </span>
-            <div className="border-b w-[100px] border-black-50"></div>
+            <div className="border-b w-[100px] border-black-50 hidden md:block"></div>
           </div>
-          <p className="text-black-80 [font-size:_clamp(14px,2.5vw,16px)]">
+          <p className="text-black-80 [font-size:_clamp(14px,2.5vw,16px)] text-center">
             Discover our featured products top picks, trending items, and
             must-have deals, all in one place!
           </p>
@@ -90,9 +90,9 @@ const Page = async () => {
           }
         />
       </div>
-      {/* best deals */}
+      {/* <== Best Deals Section ==>  */}
       <BestDealsSection />
-      {/* extra services section */}
+      {/* <== Deals of the day section ==> */}
       <div className="main-container">
         <div className="flex flex-col md:flex-row items-center justify-between  text-center md:text-left gap-10 my-20 xl:my-28">
           {extraServices.map((service) => (
@@ -178,7 +178,7 @@ const Page = async () => {
         ) : (
           ""
         )}
-      </div>{" "}
+      </div>
     </>
   );
 };

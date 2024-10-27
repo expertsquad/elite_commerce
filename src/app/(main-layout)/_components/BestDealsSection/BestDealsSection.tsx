@@ -12,8 +12,6 @@ const BestDealsSection = async () => {
     revalidate: 0,
   });
 
-  console.log(bestDeals?.data);
-
   return (
     <div
       className="w-full"
