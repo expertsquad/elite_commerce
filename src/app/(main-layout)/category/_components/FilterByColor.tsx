@@ -1,9 +1,7 @@
 "use client";
-
-import { categoryColor } from "@/constants/categorycolor.constants";
 import { FilterContext } from "@/Provider/CategoryProductFilteringProvider";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 const FilterByColor = ({
   redirectPath,
@@ -19,7 +17,7 @@ const FilterByColor = ({
   const { filter, setFilter } = useContext(FilterContext);
 
   const getColorName = (color: string) => {
-    const isSelected = filter?.["variant.variantName"] === color;
+    const isSelected = filter?.["variants.variantName"] === color;
     let updateFilteredColor;
     if (isSelected) {
       updateFilteredColor = "";
@@ -28,7 +26,7 @@ const FilterByColor = ({
     }
     setFilter({
       ...filter,
-      "variant.variantName": updateFilteredColor,
+      "variants.variantName": updateFilteredColor,
     });
     if (pathname !== redirectPath) {
       router.push(redirectPath);
@@ -44,7 +42,7 @@ const FilterByColor = ({
             onClick={() => getColorName(color)}
             key={index}
             className={`border border-black-10 rounded-full px-2.5 py-1 flex items-center gap-x-2.5 cursor-pointer ${
-              filter?.["variant.variantName"] === color
+              filter?.["variants.variantName"] === color
                 ? "bg-gradient-primary-light"
                 : ""
             }`}
