@@ -10,12 +10,17 @@ const page = async () => {
   const socialMedia = await fetchData({
     route: "/settings/footer",
   });
+
+  const maintenanceData = await fetchData({
+    route: "/settings/maintenance",
+  });
+
   return (
     <MiantenanceModePageContent
       logo={logo?.data?.shopLogo}
       socialMedia={socialMedia?.data?.socialMedias}
+      maintainance={maintenanceData?.data}
     />
   );
 };
-
 export default page;
