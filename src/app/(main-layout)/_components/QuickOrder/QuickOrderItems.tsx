@@ -6,12 +6,18 @@ import { IconMinus, IconPlus, IconX } from "@tabler/icons-react";
 export const QuickOrderItem = ({
   product,
   currencyIcon,
+  onIncreaseQuantity,
+  onDecreaseQuantity,
+  onRemoveProduct,
 }: {
   product: IProduct;
   currencyIcon?: string;
+  onIncreaseQuantity: () => void;
+  onDecreaseQuantity: () => void;
+  onRemoveProduct: () => void;
 }) => {
   return (
-    <div className="flex justify-between gap-3.5 ">
+    <div className="flex justify-between gap-3.5">
       <div className="flex md:items-center gap-3.5 w-full">
         <div>
           <div className="bg-gradient-primary-light p-1.5 rounded-lg">
@@ -36,7 +42,7 @@ export const QuickOrderItem = ({
               <span className="line-clamp-1 md:text-base text-sm text-black-80">
                 {product?.productName}
               </span>
-              <button className="text-danger">
+              <button className="text-danger" onClick={onRemoveProduct}>
                 <IconX stroke={1} size={18} />
               </button>
             </div>
@@ -61,28 +67,35 @@ export const QuickOrderItem = ({
                 </div>
               )}
             </div>
-            <div className="flex items-center justify-between gap-5"></div>
           </div>
 
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-x-1.5">
               <span className="text-black-80 text-base">
                 {currencyIcon}
                 {product?.variant?.discountedPrice
                   ? product?.variant?.discountedPrice
                   : product?.variant?.sellingPrice}
               </span>
-              <span>
-                <IconX stroke={1} height={16} width={16} />
-              </span>
               <div className="flex items-center gap-x-1.5 bg-gradient-primary-light rounded-2xl px-1 py-0.5">
-                <span className="bg-gradient-primary text-white rounded-full font-bold">
-                  <IconMinus stroke={1} height={16} width={16} />
+                <span
+                  className="bg-gradient-primary text-white rounded-full font-bold cursor-pointer"
+                  onClick={onDecreaseQuantity}
+                >
+                  <IconMinus
+                    stroke={1}
+                    height={16}
+                    width={16}
+                    className="hover:fill-white"
+                  />
                 </span>
                 <span className="text-black-80 text-sm">
                   {product?.orderQuantity}
                 </span>
-                <span className="bg-gradient-primary text-white rounded-full font-bold">
+                <span
+                  className="bg-gradient-primary text-white rounded-full font-bold cursor-pointer"
+                  onClick={onIncreaseQuantity}
+                >
                   <IconPlus stroke={1} height={16} width={16} />
                 </span>
               </div>

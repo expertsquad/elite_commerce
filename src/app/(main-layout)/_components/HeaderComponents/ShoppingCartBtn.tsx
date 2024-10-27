@@ -103,7 +103,7 @@ const ShoppingCartBtn = ({
             )}
 
             {cartProducts?.length > 0 && (
-              <div className="flex flex-col gap-y-5 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(360px,45vh))] md:h-[calc(100vh-max(400px,50vh))] pb-10">
+              <div className="flex flex-col gap-y-5 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(360px,45vh))] md:h-[calc(100vh-max(400px,40vh))] pb-10">
                 {cartProducts?.map((product: ICartProduct) => {
                   return (
                     <QuickOrderItem

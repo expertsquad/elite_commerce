@@ -63,7 +63,7 @@ export const OrderSummary = ({
       <div className="md:block hidden">
         <ButtonPrimary
           buttonType={"submit"}
-          className={`${loading && "cursor-wait opacity-60"}`}
+          className={`!py-3 ${loading && "cursor-wait opacity-60"}`}
         >
           {!loading && <IconBolt size={18} className="fill-white" />}
           <span>
