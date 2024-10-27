@@ -19,7 +19,7 @@ const SearchingProducts = ({
   searchValue: string;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
-  currencyIcon: string;
+  currencyIcon?: string;
 }) => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
