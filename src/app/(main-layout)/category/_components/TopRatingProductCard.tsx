@@ -23,7 +23,7 @@ const TopRatingProductCard = ({
         {products?.map((product: IProduct) => (
           <Link
             href={`/products/${product?.productUrlSlug}`}
-            className="flex items-center hover:bg-gradient-primary-light cursor-pointer"
+            className="flex items-center hover:bg-gradient-primary-light rounded-md cursor-pointer"
             key={product?._id}
           >
             <div className="relative shrink-0 h-[70px] w-[70px]">
