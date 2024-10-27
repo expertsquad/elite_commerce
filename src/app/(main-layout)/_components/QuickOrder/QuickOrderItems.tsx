@@ -55,9 +55,9 @@ export const QuickOrderItem = ({
             <div className="flex items-center gap-1.5">
               <span className="text-black-80 text-base">
                 {currencyIcon}
-                {product?.variant.discountedPrice
-                  ? product?.variant.discountedPrice
-                  : product?.variant.sellingPrice}
+                {product?.variant?.discountedPrice
+                  ? product?.variant?.discountedPrice
+                  : product?.variant?.sellingPrice}
               </span>
               <span>
                 <IconX stroke={1} height={16} width={16} />
@@ -76,9 +76,9 @@ export const QuickOrderItem = ({
             </div>
             <strong className="font-semibold text-gradient-primary text-base">
               {currencyIcon}
-              {product?.variant.discountedPrice
-                ? product?.variant.discountedPrice * product?.orderQuantity
-                : product?.variant.sellingPrice * product?.orderQuantity}
+              {product?.variant?.discountedPrice
+                ? product?.variant?.discountedPrice * product?.orderQuantity
+                : product?.variant?.sellingPrice * product?.orderQuantity}
             </strong>
           </div>
         </div>

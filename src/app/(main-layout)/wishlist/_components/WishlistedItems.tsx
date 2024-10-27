@@ -22,9 +22,11 @@ import QuickViewButton from "../../brands/_components/QuickViewButton";
 const WishlistedItems = ({
   product,
   currencyIcon,
+  shippingAmount,
 }: {
   product: IWishlistProduct;
   currencyIcon: string;
+  shippingAmount: number;
 }) => {
   const { setRefetch } = useContext(WishlistContext);
   const { cartProducts, setRefetch: setRefetchCart } = useContext(CartContext);
@@ -135,6 +137,8 @@ const WishlistedItems = ({
             <IconBolt size={19} stroke={1.5} className="fill-white" />
           }
           buttonText="QUICK ORDER"
+          currencyIcon={currencyIcon}
+          shippingAmount={shippingAmount}
         />
       </td>
     </tr>

@@ -5,9 +5,17 @@ const Wishlist = async () => {
   const currency = await fetchData({
     route: "/settings/shop",
   });
+  // <== Quick Order Services ==>
+  const quickOrderServices = await fetchData({
+    route: "/settings/quick-order-setting",
+  });
+
   return (
     <div>
-      <WishlistPageContent currencyIcon={currency?.data?.currencySymbol} />
+      <WishlistPageContent
+        currencyIcon={currency?.data?.currencySymbol}
+        shippingAmount={quickOrderServices?.data?.deliveryCharge}
+      />
     </div>
   );
 };

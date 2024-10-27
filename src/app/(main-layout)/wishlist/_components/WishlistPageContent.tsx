@@ -14,7 +14,13 @@ import { wishlistTableHeader } from "@/constants/tablesHeaders.constants";
 import WishlistedItems from "./WishlistedItems";
 import Breadcrumb from "@/Components/BreadCrumb/Breadcrumb";
 
-const WishlistPageContent = ({ currencyIcon }: { currencyIcon: string }) => {
+const WishlistPageContent = ({
+  currencyIcon,
+  shippingAmount,
+}: {
+  currencyIcon: string;
+  shippingAmount: number;
+}) => {
   const { wishlistProducts, setRefetch } = useContext(WishlistContext);
 
   useEffect(() => {
@@ -53,6 +59,7 @@ const WishlistPageContent = ({ currencyIcon }: { currencyIcon: string }) => {
                       key={index}
                       product={product}
                       currencyIcon={currencyIcon}
+                      shippingAmount={shippingAmount}
                     />
                   );
                 })}

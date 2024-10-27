@@ -51,7 +51,6 @@ const Page = async () => {
   const quickOrderServices = await fetchData({
     route: "/settings/quick-order-setting",
   });
-  console.log(quickOrderServices?.data?.isQuickOrderServiceActive);
 
   return (
     <>
