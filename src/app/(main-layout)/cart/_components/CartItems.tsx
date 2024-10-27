@@ -19,10 +19,12 @@ const CartItems = ({
   suggestions,
   currencyIcon,
   shippingCharge,
+  shippingAmout,
 }: {
   suggestions: IProduct[];
   currencyIcon?: string;
   shippingCharge: any;
+  shippingAmout: number;
 }) => {
   const {
     cartProducts,
@@ -137,6 +139,8 @@ const CartItems = ({
                     <IconBolt size={17} stroke={1.5} className="fill-white" />
                   }
                   buttonText="Quick Order"
+                  currencyIcon={currencyIcon}
+                  shippingAmount={shippingAmout}
                 />
               </div>
               <div className="mt-5">
