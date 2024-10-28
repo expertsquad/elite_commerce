@@ -5,13 +5,13 @@ import NextTopLoader from "nextjs-toploader";
 import { server_url } from "@/constants";
 import { fetchData } from "@/actions/fetchData";
 import { favicon } from "@/assets";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
-// Fetch metadata from the backend
+// Dynamic metadata
 async function fetchMetadata(): Promise<Metadata> {
   try {
-    // custom fetcher
     const response = await fetchData({
       route: "/settings/home-page-meta",
     });
@@ -39,11 +39,18 @@ export async function generateMetadata(): Promise<Metadata> {
   return await fetchMetadata();
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const data = await fetchData({
+    route: "/settings/google-tag-manager",
+  });
+
+  const gtmId = data?.data?.googleTagManagerId
+    ? data?.data?.googleTagManagerId
+    : "";
   return (
     <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
@@ -66,6 +73,7 @@ export default function RootLayout({
         <NextTopLoader height={4} showSpinner={false} speed={800} />
         {children}
       </body>
+      <GoogleAnalytics gaId={gtmId} />
     </html>
   );
 }
