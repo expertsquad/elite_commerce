@@ -8,12 +8,14 @@ const ScrollToTopBtn = () => {
   };
 
   return (
-    <button
-      onClick={scrollToTop}
-      className="border border-black-10 rounded-full p-[clamp(10px,2.5vw,14px)] text-black-50 cursor-pointer shadow-circle-shadow"
-    >
-      <IconArrowUp />
-    </button>
+    <>
+      <button
+        onClick={scrollToTop}
+        className="border border-black-10 rounded-full bg-white p-[clamp(10px,2.5vw,14px)] text-black-50 cursor-pointer shadow-circle-shadow "
+      >
+        <IconArrowUp size={22} />
+      </button>
+    </>
   );
 };
 

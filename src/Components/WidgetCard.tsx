@@ -34,7 +34,7 @@ const WidgetCard = async ({
       </div>
       <Link
         href={widget?.link || ""}
-        className="uppercase flex items-center justify-center text-white gap-2.5 py-2.5 px-3.5 rounded transition-all duration-300 hover:scale-105 bg-gradient-secondary z-20 "
+        className="uppercase flex items-center justify-center text-white gap-2.5 py-2.5 px-3.5 rounded transition-all duration-300 hover:scale-105 bg-gradient-secondary z-10 "
       >
         <span className=" text-base">{widget?.buttonText || ""}</span>
         <IconArrowRight size={20} />

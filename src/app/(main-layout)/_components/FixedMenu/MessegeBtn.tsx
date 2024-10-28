@@ -56,15 +56,15 @@ const MessegeBtn = ({ data }: { data?: any }) => {
                     rel="noopener noreferrer" // For security best practices
                     className={`px-5 py-3 flex gap-2.5 items-center justify-center rounded-md cursor-pointer ${
                       socialMedia?.mediaName === "Whatsapp"
-                        ? "hover:bg-gradient-positive"
+                        ? "hover:bg-[#1e432b]"
                         : socialMedia?.mediaName === "Messenger"
-                        ? "hover:bg-gradient-primary-reverse"
+                        ? "hover:bg-messenger-bg-reverse"
                         : ""
                     } ${
                       socialMedia?.mediaName === "Whatsapp"
-                        ? "bg-positive"
+                        ? "bg-[#25D366]"
                         : socialMedia?.mediaName === "Messenger"
-                        ? "bg-gradient-primary"
+                        ? "bg-messenger-bg"
                         : ""
                     } w-full text-white `}
                     key={socialMedia?._id}

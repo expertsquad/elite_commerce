@@ -70,6 +70,8 @@ main {
     rgba(14, 148, 122, 0.1) 8.46%,
     rgba(13, 164, 135, 0.1) 62.97%
   );
+  --messenger-bg: linear-gradient(90.14deg, #ff626f, #c740cb, #1889ff);
+  --messenger-bg-reverse: linear-gradient(90.14deg, #1889ff, #c740cb, #ff626f);
 }
 /* 
 @media (prefers-color-scheme: dark) {

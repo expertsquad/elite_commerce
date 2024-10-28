@@ -25,7 +25,7 @@ const MaintainanceBtn = ({ data }: { data?: any }) => {
         </div>
       </div>
       {show && (
-        <div className="bg-white shadow-maintainance-shadow  flex items-center  gap-4  border-l-8 border-warning rounded-[5px]  px-5 py-2.5 fixed md:right-14 right-16 bottom-48  z-50">
+        <div className="bg-white shadow-maintainance-shadow  flex items-center  gap-4  border-l-8 border-warning rounded-[5px]  px-5 py-2.5 fixed md:right-14 right-16 bottom-48  ">
           <div className="flex items-center justify-center bg-[#FFF9E9] rounded-full p-3">
             <div className="relative w-[22px] h-[22px]">
               <Image

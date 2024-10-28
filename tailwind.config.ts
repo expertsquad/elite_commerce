@@ -44,6 +44,8 @@ const config: Config = {
       "gradient-secondary-reverse": "var(--gradient-secondary-reverse)",
       "gradient-secondary-light": "var(--gradient-secondary-light)",
       "gradient-positive": "var(--gradient-positive)",
+      "messenger-bg": "var(--messenger-bg)",
+      "messenger-bg-reverse": "var(--messenger-bg-reverse)",
     },
     // z index
     zIndex: {
