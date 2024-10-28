@@ -58,7 +58,8 @@ const ShippinInfoTotalAmountCard = ({
             <div className="flex items-center justify-between">
               <p>Sub Total</p>
               <strong>
-                {currencySymbol} {totalPrice.toFixed(2)}
+                {currencySymbol}
+                {totalPrice.toFixed(2)}
               </strong>
             </div>
             <div className="flex items-center justify-between">
@@ -82,8 +83,8 @@ const ShippinInfoTotalAmountCard = ({
           <div className="flex items-center justify-between [font-size:_clamp(1.4em,40vw,1.7em)] font-bold my-2">
             <h2 className="">Total</h2>
             <h2 className="text-gradient-primary">
-              {" "}
-              {currencySymbol} {totalPrice + shippingFee}
+              {currencySymbol}
+              {totalPrice + shippingFee}
             </h2>
           </div>
           {/* Button Link */}
@@ -93,10 +94,10 @@ const ShippinInfoTotalAmountCard = ({
           >
             <Link
               href={"/shipping-info/billing-info"}
-              className="flex items-center justify-center py-2.5"
+              className="flex items-center justify-center gap-x-1 py-2.5"
             >
               Continue To Payment
-              <IconArrowRight />
+              <IconArrowRight size={20} stroke={1.5} />
             </Link>
           </Button>
         </>

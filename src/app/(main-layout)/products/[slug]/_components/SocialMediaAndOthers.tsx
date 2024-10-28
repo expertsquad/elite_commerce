@@ -11,8 +11,9 @@ import { whatsapp } from "@/assets";
 import { messenger } from "@/assets";
 import Image from "next/image";
 import React from "react";
+import { ISocialMedia } from "@/interfaces/footer.interface";
 
-const SocialMediaAndOthers = () => {
+const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
   const [isCopied, setIsCopied] = React.useState<boolean>(false);
   const [copyText, setCopyText] = React.useState<string>("");
 
@@ -27,62 +28,127 @@ const SocialMediaAndOthers = () => {
     }, 2000);
   };
 
+  const handleShare = (url: string) => {
+    handleCopy();
+    window.open(url, "_blank");
+  };
+
+  // const currentUrl = encodeURIComponent(window.location.href);
+
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center whitespace-nowrap">
-        <span className="text-black-80 hidden md:hidden xl:block [font-size:_clamp(14px,2.5vw,16px)] mr-2.5">
+        <span className="text-black-80 hidden md:hidden xl:block [font-size:_clamp(12px,2vw,14px)] mr-2.5">
           Message Now:
         </span>
-        <div className="flex items-center gap-x-2 md:gap-x-2.5 cursor-pointer">
-          <div className="flex items-center gap-x-1.5 border border-black-10 rounded-full py-1 px-2">
-            <Image src={whatsapp} alt="whatsapp" className="w-4 h-4" />
-            <span className="text-xs">WhatsApp</span>
-          </div>
-          <div className="flex items-center gap-x-1.5 border border-black-10 rounded-full py-1 px-2">
-            <Image src={messenger} alt="messenger" className="w-4 h-4" />
-            <span className="text-xs">Messenger</span>
-          </div>
+
+        <div className="flex items-center gap-x-2">
+          {socialMedia?.socialMedias?.map((media: ISocialMedia) => {
+            const href =
+              media?.mediaName?.toLowerCase() === "whatsapp"
+                ? `https://wa.me/${media?.phoneNumber}`
+                : media?.mediaName?.toLowerCase() === "messenger"
+                ? `https://m.me/${media?.userName}`
+                : "#";
+
+            return (
+              <a
+                key={media.mediaName}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-x-1.5 border border-black-10 rounded-full py-1 px-2 cursor-pointer"
+              >
+                {media.mediaName === "Whatsapp" && (
+                  <>
+                    <Image src={whatsapp} alt="whatsapp" className="w-4 h-4" />
+                    <span className="text-xs">WhatsApp</span>
+                  </>
+                )}
+                {media.mediaName === "Messenger" && (
+                  <>
+                    <Image
+                      src={messenger}
+                      alt="messenger"
+                      className="w-4 h-4"
+                    />
+                    <span className="text-xs">Messenger</span>
+                  </>
+                )}
+              </a>
+            );
+          })}
         </div>
       </div>
       <div className="flex items-center whitespace-nowrap">
-        <span className="text-black-80 hidden md:block mr-2.5">
+        <span className="text-black-80 hidden md:block mr-2.5 text-sm">
           Share Items:
         </span>
         <div className="flex items-center gap-x-2 md:gap-x-2.5 cursor-pointer">
-          <GenerateGradientIcon
-            IconComponent={IconBrandFacebook}
-            stroke={1}
-            size={20}
-          />
-          <GenerateGradientIcon
-            IconComponent={IconBrandTwitter}
-            stroke={1}
-            size={20}
-          />
-          <GenerateGradientIcon
-            IconComponent={IconBrandPinterest}
-            stroke={1}
-            size={20}
-          />
-          <GenerateGradientIcon
-            IconComponent={IconBrandInstagram}
-            stroke={1}
-            size={20}
-          />
-          <div className="relative flex items-center justify-center">
-            <button onClick={handleCopy}>
+          <button
+            onClick={() =>
+              handleShare(
+                `https://www.facebook.com/sharer/sharer.php?u=${copyText}`
+              )
+            }
+            className={`flex items-center justify-center`}
+          >
+            <GenerateGradientIcon
+              IconComponent={IconBrandFacebook}
+              stroke={1}
+              size={18}
+            />
+          </button>
+          <button
+            onClick={() =>
+              handleShare(`https://twitter.com/share?url=${copyText}`)
+            }
+            className={`flex items-center justify-center`}
+          >
+            <GenerateGradientIcon
+              IconComponent={IconBrandTwitter}
+              stroke={1}
+              size={18}
+            />
+          </button>
+          <button
+            onClick={() =>
+              handleShare(
+                `https://pinterest.com/pin/create/button/?url=${copyText}`
+              )
+            }
+            className={`flex items-center justify-center`}
+          >
+            <GenerateGradientIcon
+              IconComponent={IconBrandPinterest}
+              stroke={1}
+              size={18}
+            />
+          </button>
+          <button
+            onClick={() => handleShare(`https://instagram.com/`)}
+            className={`flex items-center justify-center`}
+          >
+            <GenerateGradientIcon
+              IconComponent={IconBrandInstagram}
+              stroke={1}
+              size={18}
+            />
+          </button>
+          <button className="relative flex items-center justify-center">
+            <span onClick={handleCopy}>
               <IconCopy
                 stroke={1}
                 size={20}
                 style={{ stroke: "url(#gradient1)" }}
               />
-            </button>
+            </span>
             {isCopied && (
               <span className="bg-white text-xs p-2 px-1 border border-black-10 rounded-md absolute top-5 right-0 drop-shadow-lg">
                 Copied Successfully
               </span>
             )}
-          </div>
+          </button>
         </div>
       </div>
     </div>

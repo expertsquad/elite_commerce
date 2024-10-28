@@ -10,24 +10,27 @@ import ProdViewCartIncreamentDecreamentBtn from "./ProdViewCartIncreamentDecream
 import ProductPriceBasedOnVariants from "./ProductPriceBasedOnVariants";
 import { cookies } from "next/headers";
 import ExtraDiscountBasedOnOrder from "./ExtraDiscountBasedOnOrder";
+import { ISocialMedia } from "@/interfaces/footer.interface";
 
 const ProductViewDescAndOthers = ({
   product,
   currencyIcon,
   shippingAmount,
   isQuickOrderActive,
+  socialMedia,
 }: {
   product: IProduct;
   currencyIcon: string;
   shippingAmount: number;
   isQuickOrderActive?: boolean;
+  socialMedia: ISocialMedia[];
 }) => {
   const accessToken = cookies().get("accessToken")?.value;
 
   return (
     <div>
       <div className="hidden md:block">
-        <SocialMediaAndOthers />
+        <SocialMediaAndOthers socialMedia={socialMedia} />
       </div>
       <span className="font-semibold text-lg md:text-2xl line-clamp-2 my-6">
         {product?.productName}

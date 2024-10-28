@@ -44,7 +44,22 @@ const ProductReviewdCustomer = ({
             </div>
           </div>
           <div>
-            <Image src={demoIphone} alt="product image" />
+            {review?.reviewPhotos?.map((photo, index) => (
+              <div
+                key={index}
+                className="relative w-[45px] h-[45px] border border-black-10 rounded-md bg-gradient-primary-light"
+              >
+                <Image
+                  src={server_url + photo}
+                  alt="review photo"
+                  fill
+                  style={{
+                    objectFit: "contain",
+                  }}
+                  className="inset-0 object-contain p-1"
+                />
+              </div>
+            ))}
           </div>
           <span className="text-xs md:text-sm text-black-opacity-70 mb-5 italic">
             {review?.comment}

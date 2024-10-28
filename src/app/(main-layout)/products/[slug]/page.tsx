@@ -13,16 +13,21 @@ import { cookies } from "next/headers";
 
 const ProductViewPage = async ({
   params,
+  searchParams,
 }: {
   params: { id: string; slug: string };
+  searchParams: { sortBy: string };
 }) => {
+  // <== Get a product by productslugURL ==>
   const product = await fetchData({
     route: `/product/slug/${params?.slug}`,
   });
-
+  // <== Get currency icon ==>
   const currencyIcon = await fetchData({
     route: `/settings/shop`,
   });
+
+  // <== Get social media data ==>
   const socialMedia = await fetchData({
     route: "/settings/social-media",
   });
@@ -37,7 +42,7 @@ const ProductViewPage = async ({
   return (
     <div className="main-container px-5 mt-6">
       <div className="block md:hidden mb-5">
-        <SocialMediaAndOthers />
+        <SocialMediaAndOthers socialMedia={socialMedia?.data} />
       </div>
       <div className="grid lg:grid-cols-2 grid-cols-1 mb-16 md:gap-10 gap-5">
         <div>
@@ -51,6 +56,7 @@ const ProductViewPage = async ({
             isQuickOrderActive={
               quickOrderServices?.data?.isQuickOrderServiceActive
             }
+            socialMedia={socialMedia?.data}
           />
         </div>
       </div>
@@ -64,7 +70,9 @@ const ProductViewPage = async ({
             </div>
             <div id="customerreview">
               <CustomerReview
-                productId={params?.id}
+                rating={Number(searchParams?.sortBy)}
+                slug={params?.slug}
+                productId={product?.data?._id}
                 averageRating={product?.data?.averageRating}
               />
             </div>

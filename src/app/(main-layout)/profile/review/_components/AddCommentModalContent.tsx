@@ -7,6 +7,7 @@ import { IconStarFilled } from "@tabler/icons-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const AddCommentModalContent = ({
   reviewNow,
@@ -60,18 +61,21 @@ const AddCommentModalContent = ({
         dataType: "formData",
         method: "PUT",
       });
-      if (response.success) {
+      if (response?.success) {
+        toast.success(response?.message);
         revalidateTagAction("/review");
         revalidateTagAction(`/review/${id}`);
         router.push("/profile/review/all-review-history");
         setAddComments(false);
       } else {
-        console.error(response.message);
+        toast.error(response?.message);
+        console.error(response?.message);
       }
     } catch (error) {
       console.error(error);
       setError("An error occurred while submitting your review.");
     } finally {
+      setAddComments(false);
       setLoading(false);
     }
   };
@@ -81,12 +85,15 @@ const AddCommentModalContent = ({
       <div>
         <p>Product Review</p>
         <div className="py-3 md:py-6 flex items-center justify-center flex-col gap-2 border-b border-black-10">
-          <div className="bg-gradient-primary-light p-8 rounded-full h-40 w-40">
+          <div className="relative bg-gradient-primary-light rounded-full h-40 w-40">
             <Image
               src={`${server_url + reviewNow?.product?.productPhoto}`}
-              height={100}
-              width={100}
               alt="Product Photo"
+              fill
+              style={{
+                objectFit: "contain",
+              }}
+              className="inset-0 object-contain p-5"
             />
           </div>
           <p>{reviewNow?.product?.productName}</p>
@@ -111,7 +118,7 @@ const AddCommentModalContent = ({
           </div>
 
           <textarea
-            className="w-full border border-black-10 rounded-lg my-5 resize-none outline-none p-2 md:p-4"
+            className="w-full border border-black-10 rounded-lg mt-5 resize-none outline-none p-2 md:p-4"
             maxLength={100}
             placeholder="Write Here"
             name="comment"
@@ -123,7 +130,7 @@ const AddCommentModalContent = ({
             {comment?.length}/100
           </small>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 mt-5">
             {[...Array(4)].map((_, index) => (
               <FileUploader
                 key={index}

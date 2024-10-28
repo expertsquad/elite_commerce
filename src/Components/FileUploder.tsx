@@ -55,8 +55,8 @@ const FileUploader = ({
       className={`relative w-full h-full flex flex-col items-center justify-center ${className}`}
     >
       <label className="flex flex-col justify-center items-center h-full w-full">
-        {previewUrls.length > 0 ? (
-          previewUrls.map((url, index) => (
+        {previewUrls?.length > 0 ? (
+          previewUrls?.map((url, index) => (
             <div key={index} className="relative w-full h-full">
               <div className="h-[70px] w-[90px] relative border border-black-10 rounded-md cursor-pointer">
                 <Image

@@ -1,5 +1,4 @@
 "use client";
-import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { storages } from "@/constants";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
@@ -14,11 +13,13 @@ const BuyNowSingleProduct = ({
   accessToken,
   className,
   iconStyle,
+  selectedVariant,
 }: {
   product: IProduct;
   accessToken: string;
   className?: string;
   iconStyle?: string;
+  selectedVariant?: any;
 }) => {
   const router = useRouter();
 
@@ -28,6 +29,7 @@ const BuyNowSingleProduct = ({
   const handleSingleProductClick = (product: IProduct) => {
     const formattedProduct = formatProductForCart({
       product: product,
+      selectedVariant: selectedVariant,
     });
 
     // Update the orderItems with the formatted product
