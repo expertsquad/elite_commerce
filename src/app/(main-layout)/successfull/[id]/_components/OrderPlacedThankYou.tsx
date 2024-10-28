@@ -10,7 +10,6 @@ const OrderPlacedThankYou = ({
   id: string;
   isQuickOrder?: boolean;
 }) => {
-  console.log(id);
   return (
     <div className="flex-1 md:h-[670px] flex flex-col justify-center items-center pb-5 md:pb-0">
       <div className="flex items-center justify-center">

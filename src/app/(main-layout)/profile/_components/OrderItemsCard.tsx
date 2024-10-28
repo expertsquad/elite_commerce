@@ -13,7 +13,6 @@ const OrderItemsCard = ({
   orderItem: OrderItem;
   currency?: string;
 }) => {
-  console.log(orderItem);
   return (
     <div className="text-black-50 flex gap-5 py-5 w-full border-b border-black-10">
       {/* flex first div */}

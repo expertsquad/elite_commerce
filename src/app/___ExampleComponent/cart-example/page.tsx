@@ -28,11 +28,6 @@ const Page = () => {
 
       const localProducts = getLocalStorageData("data");
       const remoteProducts = remoteCart?.data?.products;
-
-      console.log("local:-", localProducts);
-      console.log("remote:--", remoteProducts);
-
-      console.log("merged:---", mergeProducts([localProducts], remoteProducts));
     };
     get();
   }, []);
