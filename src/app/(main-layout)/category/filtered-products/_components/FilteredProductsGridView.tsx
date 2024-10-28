@@ -7,9 +7,15 @@ import { IProduct, IProductApiResponse } from "@/interfaces/product.interface";
 const FilteredProductsGridView = ({
   products,
   isLoading,
+  currency,
+  isQuickOrderActive,
+  shippingAmount,
 }: {
   products: IProductApiResponse;
   isLoading: boolean;
+  currency: string;
+  isQuickOrderActive: boolean;
+  shippingAmount: number;
 }) => {
   const totalPages = Math.ceil(products?.meta?.total / products?.meta?.limit);
 
@@ -30,7 +36,13 @@ const FilteredProductsGridView = ({
         {products?.data?.length > 0 ? (
           <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5  justify-around">
             {products?.data?.map((product: IProduct) => (
-              <ProductCard key={product?._id} product={product} />
+              <ProductCard
+                currencyIcon={currency}
+                isQuickOrderActive={isQuickOrderActive}
+                shippingAmount={shippingAmount}
+                key={product?._id}
+                product={product}
+              />
             ))}
           </div>
         ) : (

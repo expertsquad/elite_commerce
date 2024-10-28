@@ -1,6 +1,7 @@
 import React from "react";
 import { fetchData } from "@/actions/fetchData";
 import SortingSection from "./_components/FilterBySelection";
+import { getCurrency } from "@/utils/getCurrency";
 
 export async function generateMetadata() {
   return {
@@ -31,6 +32,10 @@ const CategoryPage = async () => {
     query: "sortBy=variants.sellingPrice&sortOrder=desc",
     limit: 20,
   });
+  const quickOrderServices = await fetchData({
+    route: "/settings/quick-order-setting",
+  });
+  const currency = await getCurrency();
 
   return (
     <div className="">
@@ -41,6 +46,11 @@ const CategoryPage = async () => {
             newProducts={newProducts}
             highPriceProducts={highPriceProducts}
             lowPriceProducts={lowPriceProducts}
+            currency={currency}
+            isQuickOrderActive={
+              quickOrderServices?.data?.isQuickOrderServiceActive
+            }
+            shippingAmount={quickOrderServices?.data?.deliveryCharge}
           />
         </div>
       </div>

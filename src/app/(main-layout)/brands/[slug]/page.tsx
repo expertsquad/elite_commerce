@@ -5,6 +5,7 @@ import { IProduct } from "@/interfaces/product.interface";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import Pagination from "@/Components/Pagination";
 import ProductEmptyState from "../../_components/ProductEmptyState";
+import { getCurrency } from "@/utils/getCurrency";
 
 const BrandPage = async ({ params }: { params: { slug: string } }) => {
   const response = await fetchData({
@@ -13,6 +14,13 @@ const BrandPage = async ({ params }: { params: { slug: string } }) => {
     limit: 20,
   });
   const totalPages = Math.ceil(response?.meta?.total / response?.meta?.limit);
+
+  const quickOrderServices = await fetchData({
+    route: "/settings/quick-order-setting",
+  });
+
+  const currency = await getCurrency();
+
   return (
     <div className="">
       <div className="flex items-center justify-between mb-6">
@@ -24,7 +32,15 @@ const BrandPage = async ({ params }: { params: { slug: string } }) => {
       {response?.data?.length > 0 ? (
         <div className="grid grid-cols-product-grid gap-5 place-items-center">
           {response?.data?.map((product: IProduct) => (
-            <ProductCard key={product?._id} product={product} />
+            <ProductCard
+              currencyIcon={currency}
+              isQuickOrderActive={
+                quickOrderServices?.data?.isQuickOrderServiceActive
+              }
+              shippingAmount={quickOrderServices?.data?.deliveryCharge}
+              key={product?._id}
+              product={product}
+            />
           ))}
         </div>
       ) : (

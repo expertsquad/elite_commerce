@@ -4,6 +4,7 @@ import SortingSection from "../../_components/FilterBySelection";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct } from "@/interfaces/product.interface";
 import Pagination from "@/Components/Pagination";
+import { getCurrency } from "@/utils/getCurrency";
 
 const ProductsPage = async ({ params }: { params: { page: number } }) => {
   const products = await fetchData({
@@ -13,6 +14,12 @@ const ProductsPage = async ({ params }: { params: { page: number } }) => {
   });
 
   const totalPages = Math.ceil(products?.meta?.total / products?.meta?.limit);
+
+  const quickOrderServices = await fetchData({
+    route: "/settings/quick-order-setting",
+  });
+
+  const currency = await getCurrency();
 
   return (
     <div className="">
@@ -24,7 +31,15 @@ const ProductsPage = async ({ params }: { params: { page: number } }) => {
       </div>
       <div className="grid grid-cols-product-grid gap-5 place-items-center">
         {products?.data?.map((product: IProduct) => (
-          <ProductCard key={product?._id} product={product} />
+          <ProductCard
+            currencyIcon={currency}
+            isQuickOrderActive={
+              quickOrderServices?.data?.isQuickOrderServiceActive
+            }
+            shippingAmount={quickOrderServices?.data?.deliveryCharge}
+            key={product?._id}
+            product={product}
+          />
         ))}
       </div>
 

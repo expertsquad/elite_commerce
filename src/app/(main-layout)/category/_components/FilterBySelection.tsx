@@ -30,11 +30,17 @@ const SortingSection = ({
   newProducts,
   highPriceProducts,
   lowPriceProducts,
+  shippingAmount,
+  isQuickOrderActive,
+  currency,
 }: {
   mostPopularProducts: IResposnseProduct;
   newProducts: IResposnseProduct;
   highPriceProducts: IResposnseProduct;
   lowPriceProducts: IResposnseProduct;
+  shippingAmount: number;
+  isQuickOrderActive: boolean;
+  currency: string;
 }) => {
   const [selected, setSelected] = useState("MostPopular");
 
@@ -83,7 +89,12 @@ const SortingSection = ({
         {selected === "MostPopular" ? (
           <Suspense fallback={<Loading />}>
             {mostPopularProducts?.data?.length > 0 ? (
-              <MostPopularProducts products={mostPopularProducts?.data} />
+              <MostPopularProducts
+                currencyIcon={currency}
+                isQuickOrderActive={isQuickOrderActive}
+                shippingAmount={shippingAmount}
+                products={mostPopularProducts?.data}
+              />
             ) : (
               <ProductEmptyState />
             )}
@@ -91,7 +102,12 @@ const SortingSection = ({
         ) : selected === "New" ? (
           <Suspense fallback={<Loading />}>
             {newProducts?.data?.length > 0 ? (
-              <NewProducts products={newProducts?.data} />
+              <NewProducts
+                currencyIcon={currency}
+                isQuickOrderActive={isQuickOrderActive}
+                shippingAmount={shippingAmount}
+                products={newProducts?.data}
+              />
             ) : (
               <ProductEmptyState />
             )}
@@ -99,7 +115,12 @@ const SortingSection = ({
         ) : selected === "HighPrice" ? (
           <Suspense fallback={<Loading />}>
             {highPriceProducts?.data?.length > 0 ? (
-              <HighPriceProducts products={highPriceProducts?.data} />
+              <HighPriceProducts
+                currencyIcon={currency}
+                isQuickOrderActive={isQuickOrderActive}
+                shippingAmount={shippingAmount}
+                products={highPriceProducts?.data}
+              />
             ) : (
               <ProductEmptyState />
             )}
@@ -107,7 +128,12 @@ const SortingSection = ({
         ) : selected === "LowPrice" ? (
           <Suspense fallback={<Loading />}>
             {lowPriceProducts?.data?.length > 0 ? (
-              <LowPriceProducts products={lowPriceProducts?.data} />
+              <LowPriceProducts
+                currencyIcon={currency}
+                isQuickOrderActive={isQuickOrderActive}
+                shippingAmount={shippingAmount}
+                products={lowPriceProducts?.data}
+              />
             ) : (
               <ProductEmptyState />
             )}

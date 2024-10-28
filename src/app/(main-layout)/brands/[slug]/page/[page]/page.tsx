@@ -3,6 +3,7 @@ import React from "react";
 import { IProduct } from "@/interfaces/product.interface";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import Pagination from "@/Components/Pagination";
+import { getCurrency } from "@/utils/getCurrency";
 
 const BrandProductViewDynamicPage = async ({
   params,
@@ -16,6 +17,12 @@ const BrandProductViewDynamicPage = async ({
     page: Number(params?.page),
   });
   const totalPages = Math.ceil(response?.meta?.total / response?.meta?.limit);
+
+  const quickOrderServices = await fetchData({
+    route: "/settings/quick-order-setting",
+  });
+
+  const currency = await getCurrency();
   return (
     <div className="">
       <div className="flex items-center justify-between mb-6">
@@ -26,7 +33,15 @@ const BrandProductViewDynamicPage = async ({
       </div>
       <div className="grid grid-cols-product-grid gap-5 place-items-center">
         {response?.data?.map((product: IProduct) => (
-          <ProductCard key={product?._id} product={product} />
+          <ProductCard
+            currencyIcon={currency}
+            isQuickOrderActive={
+              quickOrderServices?.data?.isQuickOrderServiceActive
+            }
+            shippingAmount={quickOrderServices?.data?.deliveryCharge}
+            key={product?._id}
+            product={product}
+          />
         ))}
       </div>
       {totalPages > 1 ? (
