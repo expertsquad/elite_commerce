@@ -29,7 +29,6 @@ const OrderSuccessfull = async ({
       quickOrder ? `/quick-order/${params?.id}` : `/online-order/${params?.id}`
     }`,
   });
-  console.log(response?.data);
   const currencyIcon = await fetchData({
     route: "/settings/shop",
   });

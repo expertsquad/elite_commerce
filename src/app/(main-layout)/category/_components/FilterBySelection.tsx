@@ -50,7 +50,6 @@ const SortingSection = ({
       : "";
   const toatalPages = Math.ceil(Number(pages));
 
-  // console.log(toatalPages);
   return (
     <div className=" flex flex-col gap-6">
       <div className="flex md:flex-row flex-col-reverse md:gap-1 gap-2.5 md:items-center justify-between">

@@ -5,6 +5,21 @@ import OrderItems from "@/app/(main-layout)/profile/_components/OrderItems";
 import { Order } from "@/interfaces/oreder.interface";
 import { getCurrency } from "@/utils/getCurrency";
 
+export const generateStaticParams = async () => {
+  const getMe = await fetchProtectedData({
+    route: "/user/me",
+  });
+  const { meta } = await fetchData({
+    route: "/online-order",
+    query: "existOrderStatus.status=Shipping&buyer.userId=" + getMe?.data?._id,
+    limit: 20,
+  });
+  const totalPages = Math.ceil(meta?.total / meta?.limit);
+  return [...Array(totalPages)].map((_, i) => ({
+    params: { page: i + 1 },
+  }));
+};
+
 const ShippedOrdersHistory = async ({
   params,
 }: {
@@ -45,18 +60,3 @@ const ShippedOrdersHistory = async ({
 };
 
 export default ShippedOrdersHistory;
-
-export const generateStaticParams = async () => {
-  const getMe = await fetchProtectedData({
-    route: "/user/me",
-  });
-  const { meta } = await fetchData({
-    route: "/online-order",
-    query: "existOrderStatus.status=Shipping&buyer.userId=" + getMe?.data?._id,
-    limit: 20,
-  });
-  const totalPages = Math.ceil(meta?.total / meta?.limit);
-  return [...Array(totalPages)].map((_, i) => ({
-    params: { page: i + 1 },
-  }));
-};

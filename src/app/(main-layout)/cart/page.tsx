@@ -13,6 +13,10 @@ const CartView = async () => {
   const shippingCharge = await fetchData({
     route: "/settings/shipping-charge",
   });
+  const quickOrderServices = await fetchData({
+    route: "/settings/quick-order-setting",
+  });
+
   return (
     <div>
       <div>
@@ -23,6 +27,7 @@ const CartView = async () => {
           suggestions={productsData?.data}
           currencyIcon={currency?.data?.currencySymbol}
           shippingCharge={shippingCharge?.data}
+          shippingAmout={quickOrderServices?.data?.deliveryCharge}
         />
       </div>
     </div>

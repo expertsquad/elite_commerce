@@ -16,7 +16,6 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   });
   const brands = await fetchData({ route: "/brand", limit: 100 });
   const colors = await fetchData({ route: "/product/colors" });
-  console.log(colors);
   const widgetData = await getWidget();
   const currency = await getCurrency();
 

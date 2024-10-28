@@ -6,6 +6,7 @@ import { server_url } from "@/constants";
 import { fetchData } from "@/actions/fetchData";
 import { favicon } from "@/assets";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Toaster } from "react-hot-toast";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
@@ -72,6 +73,7 @@ export default async function RootLayout({
         {/* children */}
         <NextTopLoader height={4} showSpinner={false} speed={800} />
         {children}
+        <Toaster position="top-right" />
       </body>
       <GoogleAnalytics gaId={gtmId} />
     </html>

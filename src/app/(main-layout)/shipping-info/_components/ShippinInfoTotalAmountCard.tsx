@@ -29,7 +29,6 @@ const ShippinInfoTotalAmountCard = ({
   // getting total and discount by using custom function
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
-  console.log(totalDiscount, totalPrice);
 
   // getting expected shipping fee by using custom function
   const shippingFee = getShippingFee(shippingCharge, city, totalPrice);

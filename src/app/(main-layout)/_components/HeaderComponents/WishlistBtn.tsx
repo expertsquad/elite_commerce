@@ -347,6 +347,7 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                 </Link>
                 <Link
                   href="/"
+                  onClick={() => setShow(false)}
                   className="py-3 relative rounded-full group overflow-hidden font-medium bg-gradient-primary-light text-black inline-block"
                 >
                   <span className="absolute bottom-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-gradient-primary group-hover:h-full opacity-90"></span>

@@ -4,7 +4,12 @@ import { server_url, storages } from "@/constants";
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { CartContext } from "@/Provider/CartProvider";
 import { updateCart } from "@/utils/updateCart.utils";
-import { IconArrowRight, IconShoppingCart, IconX } from "@tabler/icons-react";
+import {
+  IconArrowLeft,
+  IconArrowRight,
+  IconShoppingCart,
+  IconX,
+} from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { Fragment, useContext } from "react";
@@ -16,6 +21,7 @@ import { calculatePercentageToFreeShipping } from "@/utils/calculatePercentageTo
 import { getShippingFee } from "@/utils/getShippingFee";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { Button } from "@/Components/Buttons";
+import { productEmptyState } from "@/assets";
 
 const ShoppingCartBtn = ({
   currencyIcon,
@@ -75,48 +81,41 @@ const ShoppingCartBtn = ({
             <span className="font-semibold [font-size:clamp(14px,5vw,18px)]">
               Shopping Cart
             </span>
-            <div className="flex flex-col gap-2 mt-2">
-              <div className="mt-5 ">
-                <ProgressBar progressValue={progressValue} />
-              </div>
-              <span className="text-sm flex items-center gap-x-1">
-                Buy
-                <span className="text-gradient-primary">
-                  {currencyIcon}
-                  {shippingCharge?.freeShippingMinOrderAmount}
-                </span>
-                more to get
-                <span className="text-gradient-primary font-semibold">
-                  Freeship
-                </span>
-                🔥
-              </span>
-            </div>
             <hr className="border border-black-10 h-[1px] my-3" />
-
-            <div className="flex flex-col gap-y-5 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(360px,45vh))] md:h-[calc(100vh-max(400px,50vh))] pb-10">
-              {cartProducts?.map((product: ICartProduct) => {
-                return (
-                  <QuickOrderItem
-                    key={product?._id}
-                    product={product}
-                    setRefetch={setRefetch}
-                    currencyIcon={currencyIcon}
-                  />
-                );
-              })}
-            </div>
-            {!cartProducts.length ? (
-              <div className="w-full flex items-center justify-center flex-col gap-5">
-                <p className="text-center py-2"> Cart is empty </p>
-                <Link href={"/"} className="w-full">
-                  <Button className="bg-gradient-primary w-full rounded-lg py-2.5 text-white my-2">
-                    Continue Shopping
-                    <IconArrowRight />
-                  </Button>
-                </Link>
+            {cartProducts?.length < 0 && (
+              <div className="flex flex-col gap-2 mt-2">
+                <div className="mt-5 ">
+                  <ProgressBar progressValue={progressValue} />
+                </div>
+                <span className="text-sm flex items-center gap-x-1">
+                  Buy
+                  <span className="text-gradient-primary">
+                    {currencyIcon}
+                    {shippingCharge?.freeShippingMinOrderAmount}
+                  </span>
+                  more to get
+                  <span className="text-gradient-primary font-semibold">
+                    Freeship
+                  </span>
+                  🔥
+                </span>
               </div>
-            ) : null}
+            )}
+
+            {cartProducts?.length > 0 && (
+              <div className="flex flex-col gap-y-5 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(360px,45vh))] md:h-[calc(100vh-max(400px,40vh))] pb-10">
+                {cartProducts?.map((product: ICartProduct) => {
+                  return (
+                    <QuickOrderItem
+                      key={product?._id}
+                      product={product}
+                      setRefetch={setRefetch}
+                      currencyIcon={currencyIcon}
+                    />
+                  );
+                })}
+              </div>
+            )}
 
             {/* if dont have anything in cart it will not show */}
             {cartProducts.length ? (
@@ -146,6 +145,21 @@ const ShoppingCartBtn = ({
                     View Cart <IconArrowRight stroke={2} size={18} />
                   </Link>
                 </div>
+              </div>
+            ) : null}
+
+            {!cartProducts.length ? (
+              <div className="flex flex-col items-center justify-center h-[calc(100vh-250px)]">
+                <span className="text-black-50">Your cart is empty.</span>
+                <Image src={productEmptyState} alt="Empty State" />
+                <Link
+                  href={"/"}
+                  onClick={() => setShow(false)}
+                  className="mt-5 flex items-center gap-x-1"
+                >
+                  <IconArrowLeft stroke={2} size={18} />
+                  BACK TO SHOPPING
+                </Link>
               </div>
             ) : null}
           </div>

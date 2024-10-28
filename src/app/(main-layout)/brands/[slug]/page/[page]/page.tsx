@@ -9,7 +9,6 @@ const BrandProductViewDynamicPage = async ({
 }: {
   params: { slug: string; page: number };
 }) => {
-  console.log(params?.page);
   const response = await fetchData({
     route: "/product",
     query: `brand.brandName=${params.slug}`,

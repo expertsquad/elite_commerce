@@ -1,8 +1,6 @@
 import { IProduct } from "@/interfaces/product.interface";
 import React from "react";
 import SpecificationDetails from "./SpecificationDetails";
-import Image from "next/image";
-import { gradientLine } from "@/assets";
 
 const Specifications = ({ product }: { product: IProduct }) => {
   return (
