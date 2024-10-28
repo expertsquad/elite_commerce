@@ -9,7 +9,7 @@ const FixedMenu = async () => {
   const maintainance = await fetchData({ route: "/settings/maintenance" });
 
   return (
-    <div className="flex flex-col gap-5 items-center fixed md:bottom-14 bottom-24  md:right-16 right-5">
+    <div className="flex flex-col gap-5 items-center fixed md:bottom-14 bottom-24  md:right-16 right-5 z-20">
       <ScrollToTopBtn />
       <MaintainanceBtn data={maintainance?.data} />
       <MessegeBtn data={socialMedia?.data} />

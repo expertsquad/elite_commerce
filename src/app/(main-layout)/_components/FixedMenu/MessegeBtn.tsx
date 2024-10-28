@@ -10,7 +10,7 @@ import {
 import Link from "next/link";
 import React, { useState } from "react";
 
-const MessegeBtn = ({ data }: { data: any }) => {
+const MessegeBtn = ({ data }: { data?: any }) => {
   const [show, setShow] = useState(false);
   return (
     <div className="">
@@ -25,7 +25,7 @@ const MessegeBtn = ({ data }: { data: any }) => {
         )}
       </button>
       {show && (
-        <div className="bg-white rounded-[10px] p-5 fixed md:right-10 right-5 md:bottom-[120px] bottom-[150px]  max-w-[350px]  z-50 shadow-messege-card-shadow">
+        <div className="bg-white rounded-[10px] p-5 fixed md:right-10 right-5 md:bottom-[120px] bottom-[150px]  max-w-[350px]   shadow-messege-card-shadow transition-all duration-700">
           <div className="flex items-end justify-end">
             <button className="self-end" onClick={() => setShow(!show)}>
               <IconX className="text-black-50" />
@@ -56,6 +56,12 @@ const MessegeBtn = ({ data }: { data: any }) => {
                     rel="noopener noreferrer" // For security best practices
                     className={`px-5 py-3 flex gap-2.5 items-center justify-center rounded-md cursor-pointer ${
                       socialMedia?.mediaName === "Whatsapp"
+                        ? "hover:bg-gradient-positive"
+                        : socialMedia?.mediaName === "Messenger"
+                        ? "hover:bg-gradient-primary-reverse"
+                        : ""
+                    } ${
+                      socialMedia?.mediaName === "Whatsapp"
                         ? "bg-positive"
                         : socialMedia?.mediaName === "Messenger"
                         ? "bg-gradient-primary"
@@ -65,7 +71,7 @@ const MessegeBtn = ({ data }: { data: any }) => {
                   >
                     {socialMedia?.mediaName === "Whatsapp" ? (
                       <IconBrandWhatsapp size={20} />
-                    ) : socialMedia?.mediaName === "Messanger" ? (
+                    ) : socialMedia?.mediaName === "Messenger" ? (
                       <IconBrandMessenger />
                     ) : (
                       ""

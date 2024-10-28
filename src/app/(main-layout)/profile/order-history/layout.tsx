@@ -1,6 +1,6 @@
 import { orderHistoryMenus } from "@/constants/orderHistory.constants";
 import React from "react";
-import OrderHistoryMenu from "./components/OrderHistoryMenu";
+import OrderHistoryMenu from "./_components/OrderHistoryMenu";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
