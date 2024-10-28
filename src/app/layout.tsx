@@ -5,6 +5,7 @@ import NextTopLoader from "nextjs-toploader";
 import { server_url } from "@/constants";
 import { fetchData } from "@/actions/fetchData";
 import { favicon } from "@/assets";
+import { Toaster } from "react-hot-toast";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
@@ -65,6 +66,7 @@ export default function RootLayout({
         {/* children */}
         <NextTopLoader height={4} showSpinner={false} speed={800} />
         {children}
+        <Toaster position="top-right" />
       </body>
     </html>
   );
