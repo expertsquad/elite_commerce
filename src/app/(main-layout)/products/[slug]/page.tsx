@@ -13,9 +13,12 @@ import { cookies } from "next/headers";
 
 const ProductViewPage = async ({
   params,
+  searchParams,
 }: {
   params: { id: string; slug: string };
+  searchParams: { sortBy: string };
 }) => {
+  console.log(searchParams);
   // <== Get a product by productslugURL ==>
   const product = await fetchData({
     route: `/product/slug/${params?.slug}`,
@@ -68,6 +71,8 @@ const ProductViewPage = async ({
             </div>
             <div id="customerreview">
               <CustomerReview
+                rating={Number(searchParams?.sortBy)}
+                slug={params?.slug}
                 productId={product?.data?._id}
                 averageRating={product?.data?.averageRating}
               />
