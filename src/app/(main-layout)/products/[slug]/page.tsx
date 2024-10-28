@@ -64,7 +64,7 @@ const ProductViewPage = async ({
             </div>
             <div id="customerreview">
               <CustomerReview
-                productId={params?.id}
+                productId={product?.data?._id}
                 averageRating={product?.data?.averageRating}
               />
             </div>

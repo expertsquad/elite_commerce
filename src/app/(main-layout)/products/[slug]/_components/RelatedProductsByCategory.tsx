@@ -19,6 +19,7 @@ const RelatedProductsByCategory = async ({
   const response = await fetchData({
     route: `/product`,
     query: `category.categoryName=${categoryName}`,
+    limit: 8,
   });
   const isDataArrayEmpty =
     response?.data && Array.isArray(response.data) && response.data.length === 0
@@ -43,7 +44,7 @@ const RelatedProductsByCategory = async ({
 
       <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5">
         <Suspense fallback={<Loading />}>
-          {response?.data?.slice(0, 8)?.map((product: IProduct) => {
+          {response?.data?.map((product: IProduct) => {
             return (
               <div
                 className="grid grid-cols-product-grid grid-rows-product-grid gap-5 justify-around mb-5"

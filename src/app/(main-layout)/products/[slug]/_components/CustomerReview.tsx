@@ -18,6 +18,10 @@ const CustomerReview = async ({
     route: `/review`,
     query: `product.productId=${productId}`,
   });
+  console.log(productId);
+
+  console.log(response);
+
   return (
     <div>
       <h2 className="text-[18px] md:text-[22px] font-semibold pb-3 border-b border-black-10">
