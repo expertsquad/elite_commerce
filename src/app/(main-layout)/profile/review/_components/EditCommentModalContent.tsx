@@ -1,14 +1,13 @@
 "use client";
 import { revalidateTagAction } from "@/actions/revalidateTag";
 import { updateDataMutation } from "@/actions/updateDataMutation";
-import { Button } from "@/Components/Buttons";
 import FileUploader from "@/Components/FileUploder";
 import { server_url } from "@/constants";
-import { IReview } from "@/interfaces/review.interface";
 import { IReviewTypes } from "@/interfaces/reviewData.interfaces";
 import { IconStarFilled } from "@tabler/icons-react";
 import Image from "next/image";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const EditCommentModalContent = ({
   reviewData,
@@ -53,11 +52,12 @@ const EditCommentModalContent = ({
         dataType: "formData",
         method: "PUT",
       });
-      if (response.success) {
+      if (response?.success) {
+        toast.success(response?.message);
         revalidateTagAction("/profile/review/all-review-history");
         revalidateTagAction(`/review/${reviewData?._id}`);
       } else {
-        console.error(response.message);
+        console.log(response?.message);
       }
     } catch (error) {
       console.error(error);
@@ -127,7 +127,7 @@ const EditCommentModalContent = ({
                 onChange={(e) => handleFilesChange(index, e.target.files!)}
                 maxSize={5}
                 accept="image/*"
-                url={reviewData?.reviewPhotos[0]}
+                url={reviewData?.reviewPhotos[index]}
               />
             ))}
           </div>

@@ -17,7 +17,7 @@ const ProductReviewComponents = async () => {
         reviewPending?.data?.map((reviewNow: any) => (
           <div
             key={reviewNow?._id}
-            className="flex w-full lg:flex-row flex-col  border-b border-black-10 py-5
+            className="flex w-full lg:flex-row lg:gap-x-5 flex-col border-b border-black-10 py-5
      "
           >
             {/* Image and titile */}
@@ -33,7 +33,7 @@ const ProductReviewComponents = async () => {
               <p className="line-clamp-2">{reviewNow?.product?.productName}</p>
             </div>
             {/* Purchase on and review */}
-            <div className="flex w-full lg:w-1/2  justify-between items-center">
+            <div className="flex w-full lg:w-1/2 justify-between items-center">
               <div className="flex justify-start flex-col">
                 <p className="text-black-50 text-sm">Purchase on</p>
                 <p>{dateFormat(reviewNow?.createdAt)}</p>
