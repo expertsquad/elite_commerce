@@ -63,14 +63,18 @@ export const OrderSummary = ({
       <div className="md:block hidden">
         <ButtonPrimary
           buttonType={"submit"}
-          className={`!py-3 ${loading && "cursor-wait opacity-60"}`}
+          disabled={products?.length === 0}
+          className={`!py-3 ${
+            products?.length === 0 &&
+            "cursor-not-allowed opacity-55 disabled:cursor-not-allowed"
+          } ${loading && "cursor-wait opacity-60"}`}
         >
           {!loading && <IconBolt size={18} className="fill-white" />}
           <span>
             {loading ? (
               "Order Processing..."
             ) : (
-              <span className="uppercase">{`Confirm Order - ${total}`}</span>
+              <span className="uppercase">{`Confirm Order - ${currencyIcon}${total}`}</span>
             )}
           </span>
         </ButtonPrimary>

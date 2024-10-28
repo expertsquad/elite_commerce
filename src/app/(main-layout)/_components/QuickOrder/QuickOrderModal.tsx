@@ -74,12 +74,16 @@ const QuickOrderModal = ({
         formatted: true,
       });
 
+      console.log(response);
+
       if (response?.success) {
-        toast.success(response?.message);
+        toast.success(response.message);
         const orderId = response?.data?._id;
         router.push(`/successfull/${orderId}?quick-order=true`);
         setFormValues({ fullName: "", phoneNumber: "", address: "" });
         setShow(false);
+      } else {
+        toast.error(response.message);
       }
     } catch (error) {
       toast.error("Quick order failed, Try again!!");
@@ -169,6 +173,10 @@ const QuickOrderModal = ({
                   type="text"
                   value={formValues.fullName}
                   onChange={handleInputChange}
+                  inputStyle={`${
+                    formValues.fullName === "" &&
+                    "border-danger border-opacity-10"
+                  }`}
                 />
                 <CustomInput
                   placeholder="+880"
@@ -177,6 +185,10 @@ const QuickOrderModal = ({
                   type="text"
                   value={formValues.phoneNumber}
                   onChange={handleInputChange}
+                  inputStyle={`${
+                    formValues.phoneNumber === "" &&
+                    "border-danger border-opacity-10"
+                  }`}
                 />
                 <CustomInput
                   placeholder="Dhaka, Bangladesh"
@@ -185,11 +197,16 @@ const QuickOrderModal = ({
                   type="text"
                   value={formValues.address}
                   onChange={handleInputChange}
+                  inputStyle={`${
+                    formValues.address === "" &&
+                    "border-danger border-opacity-10"
+                  }`}
                 />
                 <div className="md:hidden block">
                   <ButtonPrimary
                     buttonType="submit"
-                    className={`!py-3${
+                    disabled={productList?.length === 0}
+                    className={`!py-3 ${
                       loading
                         ? "cursor-wait opacity-60"
                         : "hover:bg-gradient-primary-reverse"
@@ -234,5 +251,4 @@ const QuickOrderModal = ({
     </div>
   );
 };
-
 export default QuickOrderModal;
