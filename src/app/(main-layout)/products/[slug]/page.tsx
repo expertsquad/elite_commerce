@@ -18,7 +18,6 @@ const ProductViewPage = async ({
   params: { id: string; slug: string };
   searchParams: { sortBy: string };
 }) => {
-  console.log(searchParams);
   // <== Get a product by productslugURL ==>
   const product = await fetchData({
     route: `/product/slug/${params?.slug}`,

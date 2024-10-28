@@ -43,18 +43,20 @@ export const ShippingInfoOrderItems = ({
     <div className="flex  justify-between gap-3.5">
       <div className="flex md:items-center gap-3.5">
         <div>
-          <div className="bg-gradient-primary-light md:p-3.5 p-1.5 rounded-[10px]">
-            <div className="relative  md:w-[70px] md:h-[70px]  w-[50px] h-[50px]">
+          <div className="bg-gradient-primary-light p-1.5 rounded-[10px]">
+            <div className="relative md:w-[70px] md:h-[70px] w-[50px] h-[50px]">
               <Image
                 alt="product"
                 src={server_url + product?.productPhoto}
                 fill
-                objectFit="cover"
+                style={{
+                  objectFit: "contain",
+                }}
               />
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-between gap-4">
+        <div className="flex flex-col justify-between gap-y-3">
           <div className="flex flex-col justify-between">
             <span className="line-clamp-1 md:text-base text-sm text-black-80">
               {product?.productName}
@@ -68,8 +70,9 @@ export const ShippingInfoOrderItems = ({
             </div>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="text-black-80 text-xs">
-              {currencySymbol} {price}
+            <span className="text-black-80 text-sm md:text-base whitespace-nowrap">
+              {currencySymbol}
+              {price}
             </span>
             <span>
               <IconX stroke={1} height={12} width={12} />
@@ -88,8 +91,9 @@ export const ShippingInfoOrderItems = ({
             onClick={handleRemoveItem}
           />
         </button>
-        <strong className="font-semibold text-gradient-primary text-base">
-          {currencySymbol} {price * product?.orderQuantity}
+        <strong className="font-semibold text-gradient-primary text-sm md:text-base whitespace-nowrap">
+          {currencySymbol}
+          {price * product?.orderQuantity}
         </strong>
       </div>
     </div>

@@ -8,6 +8,7 @@ import OrderItemsRightSection from "../../_components/OrderItemsRightSection";
 import PaymentOption from "./PaymentOption";
 import ShipToAndBillingSection from "./ShipToAndBillingSection";
 import OrderSubmitAndTotalAmount from "./OrderSubmitAndTotalAmount";
+import toast from "react-hot-toast";
 
 const BillingInfoPageContent = ({
   currencySymbol,
@@ -48,24 +49,27 @@ const BillingInfoPageContent = ({
         formatted: true,
       });
 
-      if (result?.success === true) {
+      if (result?.success) {
+        toast.success(result?.message);
         localStorage.removeItem("orderInit");
         if (orderData?.payment?.paymentMethod === "COD") {
           router.push(`/successfull/${result?.data?._id}`);
         } else {
           router.push(result?.data);
         }
+      } else {
+        toast.error(result?.message);
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
     <section
-      className={`${
+      className={`mb-10 ${
         loading ? "opacity-50 pointer-events-none" : ""
       } "p-5 lg:p-0 main-container flex w-full gap-5 flex-col md:flex-row mb-10" `}
     >

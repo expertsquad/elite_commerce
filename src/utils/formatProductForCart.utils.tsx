@@ -6,10 +6,10 @@ export const formatProductForCart = ({
   selectedVariant,
 }: {
   product: IProduct;
-  selectedVariant?: Record<string, any>;
+  selectedVariant?: string;
 }): ICartProduct => {
   const isSelectedOneExist = product?.variants?.find(
-    (v) => v.variantName === selectedVariant?.variantName
+    (v) => v?.variantName === selectedVariant
   );
   const defaultVariant = product?.variants?.find((v) => v.isDefault);
   const variant = isSelectedOneExist
@@ -17,7 +17,6 @@ export const formatProductForCart = ({
     : defaultVariant
     ? defaultVariant
     : product?.variants[0];
-
   return {
     ...product,
     brandName: product?.brand?.brandName,

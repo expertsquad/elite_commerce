@@ -16,7 +16,6 @@ import { ISocialMedia } from "@/interfaces/footer.interface";
 const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
   const [isCopied, setIsCopied] = React.useState<boolean>(false);
   const [copyText, setCopyText] = React.useState<string>("");
-  console.log(socialMedia);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -34,7 +33,7 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
     window.open(url, "_blank");
   };
 
-  const currentUrl = encodeURIComponent(window.location.href);
+  // const currentUrl = encodeURIComponent(window.location.href);
 
   return (
     <div className="flex items-center justify-between">
@@ -89,7 +88,7 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
           <button
             onClick={() =>
               handleShare(
-                `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`
+                `https://www.facebook.com/sharer/sharer.php?u=${copyText}`
               )
             }
             className={`flex items-center justify-center`}
@@ -102,7 +101,7 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
           </button>
           <button
             onClick={() =>
-              handleShare(`https://twitter.com/share?url=${currentUrl}`)
+              handleShare(`https://twitter.com/share?url=${copyText}`)
             }
             className={`flex items-center justify-center`}
           >
@@ -115,7 +114,7 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
           <button
             onClick={() =>
               handleShare(
-                `https://pinterest.com/pin/create/button/?url=${currentUrl}`
+                `https://pinterest.com/pin/create/button/?url=${copyText}`
               )
             }
             className={`flex items-center justify-center`}

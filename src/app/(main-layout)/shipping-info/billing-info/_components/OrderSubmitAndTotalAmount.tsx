@@ -48,7 +48,8 @@ const OrderSubmitAndTotalAmount = ({
             <div className="flex items-center justify-between">
               <p>Sub Total</p>
               <strong>
-                {currencySymbol} {totalPrice?.toFixed(2)}
+                {currencySymbol}
+                {totalPrice?.toFixed(2)}
               </strong>
             </div>
             <div className="flex items-center justify-between">
@@ -70,7 +71,8 @@ const OrderSubmitAndTotalAmount = ({
           <div className="flex items-center justify-between [font-size:_clamp(1.4em,40vw,1.7em)] font-bold my-2">
             <h2>Total</h2>
             <h2 className="text-gradient-primary">
-              {currencySymbol} {totalPrice + shippingFee}
+              {currencySymbol}
+              {totalPrice + shippingFee}
             </h2>
           </div>
           <div
@@ -84,9 +86,9 @@ const OrderSubmitAndTotalAmount = ({
               className="bg-gradient-primary w-full rounded-lg text-white my-2"
               onSubmit={handleSubmit}
             >
-              <button className="flex items-center justify-center py-2.5 w-full gap-2">
+              <button className="flex items-center justify-center py-2.5 w-full gap-x-1">
                 Place Order
-                <IconArrowRight />
+                <IconArrowRight size={20} stroke={1.5} />
               </button>
             </form>
           </div>
