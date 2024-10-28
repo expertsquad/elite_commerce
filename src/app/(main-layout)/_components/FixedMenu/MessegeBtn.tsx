@@ -43,9 +43,9 @@ const MessegeBtn = ({ data }: { data: any }) => {
             <div className="flex flex-col gap-5 items-center ">
               {data?.socialMedias?.map((socialMedia: ISocialMedia) => {
                 const href =
-                  socialMedia?.mediaName === "Whatsapp"
+                  socialMedia?.mediaName?.toLowerCase() === "whatsapp"
                     ? `https://wa.me/${socialMedia?.phoneNumber}`
-                    : socialMedia?.mediaName === "Messenger"
+                    : socialMedia?.mediaName?.toLowerCase() === "messenger"
                     ? `https://m.me/${socialMedia?.userName}`
                     : "#";
 
