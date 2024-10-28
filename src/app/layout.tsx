@@ -5,15 +5,15 @@ import NextTopLoader from "nextjs-toploader";
 import { server_url } from "@/constants";
 import { fetchData } from "@/actions/fetchData";
 import { favicon } from "@/assets";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Toaster } from "react-hot-toast";
 import ClientProvider from "@/Components/ClientProvider";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
-// Fetch metadata from the backend
+// Dynamic metadata
 async function fetchMetadata(): Promise<Metadata> {
   try {
-    // custom fetcher
     const response = await fetchData({
       route: "/settings/home-page-meta",
     });
@@ -41,11 +41,20 @@ export async function generateMetadata(): Promise<Metadata> {
   return await fetchMetadata();
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const data = await fetchData({
+    route: "/settings/google-tag-manager",
+  });
+
+  const colorsData = await fetchData({ route: "/settings/shop" });
+
+  const gtmId = data?.data?.googleTagManagerId
+    ? data?.data?.googleTagManagerId
+    : "";
   return (
     <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
@@ -55,11 +64,17 @@ export default function RootLayout({
             <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop
                 offset="0%"
-                style={{ stopColor: "#294393", stopOpacity: 1 }}
+                style={{
+                  stopColor: `${colorsData?.data?.primaryColor}`,
+                  stopOpacity: 1,
+                }}
               />
               <stop
                 offset="100%"
-                style={{ stopColor: "#04a4e6", stopOpacity: 1 }}
+                style={{
+                  stopColor: `${colorsData?.data?.seconderyColor}`,
+                  stopOpacity: 1,
+                }}
               />
             </linearGradient>
           </defs>
@@ -69,6 +84,7 @@ export default function RootLayout({
         <ClientProvider>{children}</ClientProvider>
         <Toaster position="top-right" />
       </body>
+      <GoogleAnalytics gaId={gtmId} />
     </html>
   );
 }
