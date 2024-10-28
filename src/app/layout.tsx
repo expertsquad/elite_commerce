@@ -6,6 +6,7 @@ import { server_url } from "@/constants";
 import { fetchData } from "@/actions/fetchData";
 import { favicon } from "@/assets";
 import { Toaster } from "react-hot-toast";
+import ClientProvider from "@/Components/ClientProvider";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
@@ -65,7 +66,7 @@ export default function RootLayout({
         </svg>
         {/* children */}
         <NextTopLoader height={4} showSpinner={false} speed={800} />
-        {children}
+        <ClientProvider>{children}</ClientProvider>
         <Toaster position="top-right" />
       </body>
     </html>

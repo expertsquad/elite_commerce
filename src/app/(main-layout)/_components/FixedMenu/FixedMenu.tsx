@@ -7,7 +7,6 @@ import ScrollToTopBtn from "./ScrollToTopBtn";
 const FixedMenu = async () => {
   const socialMedia = await fetchData({ route: "/settings/social-media" });
   const maintainance = await fetchData({ route: "/settings/maintenance" });
-
   return (
     <div className="flex flex-col gap-5 items-center fixed md:bottom-14 bottom-24  md:right-16 right-5 z-20">
       <ScrollToTopBtn />

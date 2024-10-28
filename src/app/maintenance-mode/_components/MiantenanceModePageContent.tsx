@@ -35,7 +35,7 @@ const MiantenanceModePageContent = ({
             />
           </div>
           <h2 className="[font-size:_clamp(18px,4.5vw,28px)] font-bold text-black-80 uppercase text-center">
-            The site is currently down for <br /> maintenance mode
+            The site is currently down for <br /> maintenance
           </h2>
         </div>
         <div className="flex items-center justify-center my-10">
