@@ -15,7 +15,7 @@ const BrandCard = ({ brand }: { brand: IBrand }) => {
             fill
             src={`${server_url}${brand?.brandPhoto}`}
             alt="brand image"
-            className="object-cover"
+            className="object-contain w-full h-full inset-0"
             placeholder="blur"
             blurDataURL={`${server_url}${brand?.brandPhoto}`}
             sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 33vw"
