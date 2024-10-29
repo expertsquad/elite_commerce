@@ -6,6 +6,7 @@ import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOr
 import ProductCartBtn from "./ProductCartBtn";
 import ProductPreviewRedirect from "./ProductPreviewRedirect";
 import { getPricingDetails } from "./getPricingDetails";
+import Link from "next/link";
 export interface IProductCardProps {
   product: IProduct;
   onClick?: () => void;
@@ -26,10 +27,9 @@ const ProductCard = ({
   const { sellingPrice, discountedPrice } = productDetails;
 
   return (
-    <ProductPreviewRedirect
+    <Link
+      href={`/products/${product?.productUrlSlug}`}
       className="border border-black-10 rounded-lg group relative w-full max-w-[280px] cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg mx-auto"
-      product={product}
-      onClick={onClick}
     >
       <div className="bg-gradient-primary-light">
         <ProductImageSlider
@@ -100,7 +100,7 @@ const ProductCard = ({
           />
         )}
       </div>
-    </ProductPreviewRedirect>
+    </Link>
   );
 };
 
