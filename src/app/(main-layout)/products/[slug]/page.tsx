@@ -58,6 +58,7 @@ const ProductViewPage = async ({
               quickOrderServices?.data?.isQuickOrderServiceActive
             }
             socialMedia={socialMedia?.data}
+            accessToken={accessToken ? accessToken : ""}
           />
         </div>
       </div>

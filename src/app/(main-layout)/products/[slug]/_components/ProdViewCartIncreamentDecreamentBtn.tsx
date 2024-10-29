@@ -3,28 +3,48 @@ import IncreaseDecreaseCartItems from "@/app/(main-layout)/brands/_components/In
 import { IProduct } from "@/interfaces/product.interface";
 import { CartContext } from "@/Provider/CartProvider";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
-import React, { use, useContext } from "react";
+import React, { useContext } from "react";
 
 const ProdViewCartIncreamentDecreamentBtn = ({
   product,
+  quantity,
+  setQuantity,
 }: {
   product: IProduct;
+  quantity: number;
+  setQuantity: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const { cartProducts, setRefetch } = useContext(CartContext);
 
-  const isCarted = cartProducts.find((item) => item._id === product._id);
+  const isCarted = cartProducts?.find((item) => item?._id === product?._id);
+
+  const handleIncrease = () => {
+    setQuantity((prevQuantity) => Math.min(prevQuantity + 1, 99));
+  };
+
+  const handleDecrease = () => {
+    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
+  };
 
   return (
     <div>
       {isCarted ? (
         <IncreaseDecreaseCartItems product={isCarted} setRefetch={setRefetch} />
       ) : (
-        <div className="flex items-center justify-center gap-x-2 py-2 px-3 border border-black-10 rounded-full">
-          <button className="text-black-50 bg-black-10 p-0.5 rounded-full hover:bg-gradient-primary-light">
+        <div className="flex items-center justify-center gap-x-2 py-2 px-3 border border-black-10 rounded-full group group-hover:border-primary">
+          <button
+            onClick={handleDecrease}
+            disabled={quantity <= 1}
+            className="text-black-50 bg-black-10 p-0.5 rounded-full hover:bg-gradient-primary-light"
+          >
             <IconMinus size={18} />
           </button>
-          <span className="text-black-50">{0}</span>
-          <button className="text-black-50 bg-black-10 p-0.5 rounded-full hover:bg-gradient-primary-light">
+          <span className="text-black-50">{quantity}</span>
+          <button
+            onClick={handleIncrease}
+            disabled={quantity >= 99}
+            className="text-black-50 bg-black-10 p-0.5 rounded-full hover:bg-gradient-primary-light"
+          >
             <IconPlus size={18} />
           </button>
         </div>

@@ -15,7 +15,7 @@ import {
   useState,
 } from "react";
 
-// props interface
+// <= Types =>
 export interface IOrderData {
   orderItems: ICartProduct[];
   shippingAddress: IAddress | {} | any;

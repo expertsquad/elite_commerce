@@ -5,6 +5,7 @@ interface IProductVariantPriceProps {
   product: IProduct;
   variant: IProductVariant | any;
   currencyIcon: string;
+  quantity?: number;
 }
 
 const ProductVariantPrice = ({
