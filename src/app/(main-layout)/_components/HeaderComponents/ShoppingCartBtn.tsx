@@ -39,6 +39,8 @@ const ShoppingCartBtn = ({
   const { cartProducts, calculateTotalPriceAndDiscountOfCart, setRefetch } =
     useContext(CartContext);
 
+  console.log(cartProducts);
+
   const { totalPrice } = calculateTotalPriceAndDiscountOfCart(cartProducts);
   // getting progress bar value percentage as number like : 76
   const progressValue = calculatePercentageToFreeShipping(

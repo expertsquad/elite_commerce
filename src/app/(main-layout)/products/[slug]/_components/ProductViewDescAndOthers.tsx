@@ -80,6 +80,7 @@ const ProductViewDescAndOthers = ({
           <BuyNowSingleProduct
             accessToken={accessToken ? accessToken : ""}
             product={product}
+            className="bg-gradient-primary-reverse hover:bg-gradient-primary"
           />
         </div>
       </div>

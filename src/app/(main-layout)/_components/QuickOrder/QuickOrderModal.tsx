@@ -33,7 +33,10 @@ const QuickOrderModal = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [productList, setProductList] = useState(
-    products?.map((product) => ({ ...product, orderQuantity: 1 }))
+    products?.map((product) => ({
+      ...product,
+      orderQuantity: product?.orderQuantity ? product?.orderQuantity : 1,
+    }))
   );
   const [formValues, setFormValues] = useState({
     fullName: "",

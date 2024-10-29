@@ -29,7 +29,7 @@ const OrderItemsRightSection = ({
             <div className="flex flex-col md:gap-7 gap-4 overflow-y-auto scrollbar-y-remove h-[400px] my-4">
               {orderData?.orderItems?.map((product) => (
                 <ShippingInfoOrderItems
-                  key={product._id}
+                  key={product?._id}
                   product={product}
                   currencySymbol={currencySymbol}
                 />

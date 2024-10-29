@@ -4,9 +4,11 @@ import { IProduct } from "@/interfaces/product.interface";
 export const formatProductForCart = ({
   product,
   selectedVariant,
+  selectedQuantity,
 }: {
   product: IProduct;
   selectedVariant?: string;
+  selectedQuantity?: number;
 }): ICartProduct => {
   const isSelectedOneExist = product?.variants?.find(
     (v) => v?.variantName === selectedVariant
@@ -21,7 +23,7 @@ export const formatProductForCart = ({
     ...product,
     brandName: product?.brand?.brandName,
     variant,
-    orderQuantity: 1,
+    orderQuantity: selectedQuantity ? selectedQuantity : 1,
     productPhoto: product?.productPhotos?.length
       ? product.productPhotos[0]
       : "",

@@ -1,5 +1,4 @@
 "use client";
-import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import { IProductCardProps } from "@/Components/ProductCard/ProductCard";
 import { CartContext } from "@/Provider/CartProvider";
 import { updateCart } from "@/utils/updateCart.utils";

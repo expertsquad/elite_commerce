@@ -15,6 +15,7 @@ export const ShippingInfoOrderItems = ({
   product: ICartProduct;
   currencySymbol: string;
 }) => {
+  console.log(product?.variant);
   const { orderData, setRefetch } = useContext(OrderInitContext);
   const handleRemoveItem = () => {
     let updateOrderItems = orderData?.orderItems;
@@ -65,8 +66,24 @@ export const ShippingInfoOrderItems = ({
               <span className="text-positive text-[10px] md:text-xs">
                 {product?.brandName}
               </span>
-              <span className="text-black-10">|</span>
-              <StarRating rating={product?.averageRating || 0} />
+              {product?.averageRating && (
+                <>
+                  <span className="text-black-10">|</span>
+                  <StarRating rating={product?.averageRating || 0} />
+                </>
+              )}
+              {product?.variant?.variantName !== "Not specified" &&
+                product?.variant?.variantName !== "" && (
+                  <>
+                    <span className="text-black-10">|</span>
+                    <div
+                      className="h-3 w-3 rounded-full"
+                      style={{
+                        backgroundColor: product?.variant?.variantName,
+                      }}
+                    ></div>
+                  </>
+                )}
             </div>
           </div>
           <div className="flex items-center gap-1.5">
