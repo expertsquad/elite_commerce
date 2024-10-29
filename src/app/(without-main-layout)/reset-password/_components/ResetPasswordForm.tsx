@@ -31,10 +31,11 @@ const ResetPasswordForm = () => {
     const res = await resetPasswordServerAction({
       data,
     });
-    console.log(res);
+
     if (res?.success) {
       router.replace("/login");
       toast.success(res?.message);
+      toast.success("You can now login with your new password");
     } else {
       setError(res?.message);
       toast.error(res?.message);

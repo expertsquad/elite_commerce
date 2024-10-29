@@ -1,18 +1,13 @@
 "use server";
 
-import { postDataUnauthenticatedMutation } from "@/actions/postDataMutation";
-import { cookies } from "next/headers";
+import { postDataMutation } from "@/actions/postDataMutation";
+
 export const resetPasswordServerAction = async ({ data }: any) => {
-  const res = await postDataUnauthenticatedMutation({
+  const res = await postDataMutation({
     route: "/user/reset-password",
     data: JSON.stringify(data),
     formatted: true,
   });
 
-  if (!res?.success) {
-    return res;
-  } else {
-    cookies().set("accessToken", res?.data?.accessToken);
-    return res;
-  }
+  return res;
 };

@@ -16,9 +16,6 @@ const ForgotPasswordForm = () => {
     const formData = new FormData(event.currentTarget);
     try {
       const response = await requestForOTP(formData);
-
-      console.log(response);
-
       if (response?.success === true) {
         toast.success("An OTP has been sent to your email");
         router.replace(

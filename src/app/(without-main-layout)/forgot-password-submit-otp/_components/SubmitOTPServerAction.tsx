@@ -7,11 +7,12 @@ export const submitOTPServerAction = async ({ data }: any) => {
     data: JSON.stringify(data),
     formatted: true,
   });
+  console.log(res);
 
   if (!res?.success) {
     return res;
   } else {
-    cookies().set("accessToken", res?.data?.resetToken);
+    cookies().set("accessToken", res.data.accessToken);
     return res;
   }
 };

@@ -38,10 +38,6 @@ const VerifyEmail = async ({
     }
   };
 
-  const resendOTP = async () => {
-    console.log("resendOTP");
-  };
-
   return (
     <div className="flex items-center justify-center h-screen relative login-signup-container-background ">
       <div className="z-20 ">
@@ -79,9 +75,9 @@ const VerifyEmail = async ({
               </SubmitButton>
             </Form>
           </div>
-          <form action={resendOTP}>
+          {/* <form action={resendOTP}>
             <ResendOtpAndCountdown />
-          </form>
+          </form> */}
         </div>
         <div className="md:flex hidden items-center  justify-center mt-5 ">
           <BackButton href="/" />
