@@ -19,7 +19,7 @@ const ProductPriceBasedOnVariants = ({
         product={product}
         currencyIcon={currencyIcon}
       />
-      <div className="flex items-center gap-x-5 my-5">
+      <div className="flex items-center gap-x-5">
         <div>
           <span className="text-sm text-black-80">Color</span>
           <div className="flex items-center gap-x-2 mt-1">

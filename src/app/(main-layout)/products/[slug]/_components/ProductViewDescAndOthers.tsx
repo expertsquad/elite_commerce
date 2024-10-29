@@ -28,23 +28,29 @@ const ProductViewDescAndOthers = ({
   const accessToken = cookies().get("accessToken")?.value;
 
   return (
-    <div>
+    <div className="flex flex-col gap-y-5">
       <div className="hidden md:block">
         <SocialMediaAndOthers socialMedia={socialMedia} />
       </div>
-      <span className="font-semibold text-lg md:text-2xl line-clamp-2 my-6">
+      <span className="font-semibold text-lg md:text-[22px] line-clamp-2">
         {product?.productName}
       </span>
-      <CategoryAndBrandSmallComponent
-        categoryName={product?.category?.categoryName}
-        brandPhoto={product?.brand?.brandPhoto}
-      />
-      <div className="my-5">
+      <div>
+        <CategoryAndBrandSmallComponent
+          categoryName={product?.category?.categoryName}
+          brandPhoto={product?.brand?.brandPhoto}
+        />
+      </div>
+      <div>
         <RatingWishlistStockAndSold
-          averageRating={product?.averageRating}
+          averageRating={product?.averageRating ? product?.averageRating : 0}
           instock={product?.variants[0].inStock}
-          soldQuantity={product?.variants[0].soldQuantity}
-          products={product}
+          soldQuantity={
+            product?.variants[0]?.soldQuantity
+              ? product?.variants[0]?.soldQuantity
+              : 0
+          }
+          products={[product]}
         />
       </div>
       {/* <== Bulk order based discount ==> */}
@@ -57,8 +63,8 @@ const ProductViewDescAndOthers = ({
           product={product}
         />
       </div>
-      <div>
-        <div className="flex items-center gap-x-3 mb-5">
+      <div className="flex flex-col gap-y-5">
+        <div className="flex items-center gap-x-3">
           <ProdViewCartIncreamentDecreamentBtn product={product} />
           <div className=" w-full">
             <ProductViewCartBtn product={product} />

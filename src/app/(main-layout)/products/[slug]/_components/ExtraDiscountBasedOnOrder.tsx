@@ -20,7 +20,7 @@ const ExtraDiscountBasedOnOrder = ({ product }: { product: IProduct }) => {
   ).toFixed(0);
 
   return (
-    <div className="my-5">
+    <div className="">
       <ProgressBar progressValue={Number(percentage)} />
       <div>
         {product?.bulk &&

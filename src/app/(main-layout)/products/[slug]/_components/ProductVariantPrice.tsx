@@ -35,9 +35,9 @@ const ProductVariantPrice = ({
               ? variant?.discountPercentage
               : product?.variants[0]?.discountPercentage
           } more!!`}
-          className="bg-gradient-secondary-light rounded-full py-1"
+          className="bg-gradient-secondary-light rounded-md p-0.5"
         >
-          <span className="text-base md:text-lg text-gradient-secondary px-5 font-semibold">
+          <span className="text-sm text-gradient-secondary px-2.5">
             {variant?.discountPercentage
               ? variant?.discountPercentage
               : product?.variants[0]?.discountPercentage}

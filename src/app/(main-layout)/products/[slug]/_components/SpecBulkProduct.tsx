@@ -87,8 +87,8 @@ const SpecBulkProduct = ({
           <span className="text-black-50">|</span>
         )}
         {variant?.discountPercentage && (
-          <div className="bg-gradient-secondary-light rounded-full">
-            <span className="text-xs text-gradient-secondary px-2 font-semibold">
+          <div className="bg-gradient-secondary-light rounded-md">
+            <span className="text-xs text-gradient-secondary px-2 ">
               {variant?.discountPercentage}% OFF
             </span>
           </div>

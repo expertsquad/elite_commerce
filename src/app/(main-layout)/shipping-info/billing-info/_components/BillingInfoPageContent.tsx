@@ -24,7 +24,6 @@ const BillingInfoPageContent = ({
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { orderData } = useContext(OrderInitContext);
-
   // handle submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

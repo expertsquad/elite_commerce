@@ -68,4 +68,5 @@ export interface IProduct {
     minOrder: number;
     discount: number;
   };
+  totalSoldQuantity?: number;
 }
