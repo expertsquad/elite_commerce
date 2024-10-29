@@ -1,20 +1,19 @@
 import Logo from "@/utils/Logo";
-import OTPInput from "./_components/OTPsection";
 import Form from "@/Components/Form";
 import SubmitButton from "@/Components/SubmitButton";
-
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import { cookies } from "next/headers";
 import { permanentRedirect } from "next/navigation";
 import BackButton from "../sign-up/_components/BackButton";
-import Image from "next/image";
-import { loginSignupTopShapeBg } from "@/assets";
+import OTPInput from "../_components/OTPInput";
+import ResendOtpAndCountdown from "../_components/ResendOtpAndCountdown";
 
 const VerifyEmail = async ({
   searchParams,
 }: {
   searchParams: { email: string };
 }) => {
+  const userEmail = searchParams?.email;
   const handleSubmit = async (formData: FormData) => {
     "use server";
     const dataObj: Record<string, any> = {};
@@ -31,24 +30,20 @@ const VerifyEmail = async ({
       method: "PUT",
       formatted: true,
     });
-
     if (res?.data?.accessToken) {
       cookies().set("accessToken", res?.data?.accessToken);
-      permanentRedirect("/");
+      permanentRedirect("/login");
     } else {
       console.error(res?.error);
     }
   };
 
+  const resendOTP = async () => {
+    console.log("resendOTP");
+  };
+
   return (
     <div className="flex items-center justify-center h-screen relative login-signup-container-background ">
-      <div className="absolute top-0 w-full h-full md:block hidden main-container">
-        <Image
-          src={loginSignupTopShapeBg}
-          alt="logintopshape"
-          className="left-0 top-0"
-        />
-      </div>
       <div className="z-20 ">
         <div className="bg-white md:px-6 px-3  py-5 rounded-[10px] shadow-2xl relative">
           <div className="w-[clamp(350px,90vw,450px)]   aspect-square flex flex-col items-center justify-center gap-3">
@@ -84,6 +79,9 @@ const VerifyEmail = async ({
               </SubmitButton>
             </Form>
           </div>
+          <form action={resendOTP}>
+            <ResendOtpAndCountdown />
+          </form>
         </div>
         <div className="md:flex hidden items-center  justify-center mt-5 ">
           <BackButton href="/" />

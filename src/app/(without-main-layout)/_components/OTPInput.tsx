@@ -58,10 +58,6 @@ const OTPInput = ({ length }: OTPInputProps) => {
           />
         ))}
       </div>
-      <div className="flex items-center flex-col gap-2.5 justify-between">
-        <button className="text-positive">Resend OTP code</button>
-        <span className="text-gradient-primary">0:30s </span>
-      </div>
     </div>
   );
 };
