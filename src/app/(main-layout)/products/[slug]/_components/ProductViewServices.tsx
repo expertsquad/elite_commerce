@@ -8,8 +8,8 @@ import { productViewServices } from "@/constants/productsview-services.contstant
 const ProductViewServices = () => {
   return (
     <section className="flex items-center justify-between md:flex-row flex-col">
-      {productViewServices.map((item) => (
-        <div key={item._id} className="py-5 md:py-10">
+      {productViewServices?.map((item, index) => (
+        <div key={index} className="py-5 md:py-10">
           {item.type === "freeShipping" && (
             <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
               <Image src={deliveryTruck} alt="Free Shipping" />

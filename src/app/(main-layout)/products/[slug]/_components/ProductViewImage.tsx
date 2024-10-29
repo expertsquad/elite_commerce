@@ -21,9 +21,9 @@ const ProductViewImage = ({ product }: { product: IProduct }) => {
   return (
     <div className="flex flex-col-reverse md:flex-row gap-5 md:flex-1">
       <div className="flex md:flex-col gap-4">
-        {slicedProducts?.map((image: any) => (
+        {slicedProducts?.map((image: any, index: number) => (
           <div
-            key={image._id}
+            key={index}
             className={`cursor-pointer flex items-center justify-center hover:shadow-md overflow-hidden p-[1px] bg-[#F8F8F8] transition duration-300 rounded-md ${
               selectedImage === image
                 ? "border-gradient-primary "

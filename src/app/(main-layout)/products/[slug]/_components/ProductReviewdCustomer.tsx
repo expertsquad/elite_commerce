@@ -44,7 +44,7 @@ const ProductReviewdCustomer = ({
             </div>
           </div>
           <div>
-            {review?.reviewPhotos?.map((photo, index) => (
+            {review?.reviewPhotos?.map((photo: string, index: number) => (
               <div
                 key={index}
                 className="relative w-[45px] h-[45px] border border-black-10 rounded-md bg-gradient-primary-light"
