@@ -7,7 +7,7 @@ export const formatProductForCart = ({
   selectedQuantity,
 }: {
   product: IProduct;
-  selectedVariant?: string;
+  selectedVariant?: string | any;
   selectedQuantity?: number;
 }): ICartProduct => {
   const isSelectedOneExist = product?.variants?.find(

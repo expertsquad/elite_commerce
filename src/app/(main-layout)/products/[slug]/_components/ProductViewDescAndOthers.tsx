@@ -47,8 +47,10 @@ const ProductViewDescAndOthers = ({
           products={product}
         />
       </div>
-
-      <ExtraDiscountBasedOnOrder product={product} />
+      {/* <== Bulk order based discount ==> */}
+      {product?.bulk?.minOrder && product?.bulk?.minOrder > 0 && (
+        <ExtraDiscountBasedOnOrder product={product} />
+      )}
       <div>
         <ProductPriceBasedOnVariants
           currencyIcon={currencyIcon}

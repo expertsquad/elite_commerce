@@ -6,7 +6,13 @@ import { updateWishlist } from "@/utils/updateWishlist.utils";
 import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
 import React, { useContext } from "react";
 
-const AddToWishlistBtn = ({ products }: any) => {
+const AddToWishlistBtn = ({
+  products,
+  className,
+}: {
+  products: any;
+  className?: string;
+}) => {
   const { wishlistProducts, setRefetch } = useContext(WishlistContext);
 
   const handleAddToFavourite = () => {
@@ -19,7 +25,7 @@ const AddToWishlistBtn = ({ products }: any) => {
         e.stopPropagation();
         handleAddToFavourite();
       }}
-      className={`cursor-pointer rounded-full flex justify-center items-center bg-white hover:bg-gradient-primary-light h-[30px] w-[30px] border border-black-10`}
+      className={`cursor-pointer rounded-full flex justify-center items-center bg-white hover:bg-gradient-primary-light h-[30px] w-[30px] border border-black-10 ${className}`}
     >
       {wishlistProducts?.find(
         (item: IWishlistProduct) => item?.productId === products._id

@@ -30,7 +30,7 @@ export const updateCart = async ({
     if (!formattedProduct.hasOwnProperty("variant")) {
       formattedProduct = formatProductForCart({
         product: formattedProduct,
-        selectedVariant: variant,
+        selectedVariant: variant?.variantName,
       });
     }
     // check is already product exist

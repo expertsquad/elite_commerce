@@ -22,6 +22,7 @@ const ProductViewPage = async ({
   const product = await fetchData({
     route: `/product/slug/${params?.slug}`,
   });
+
   // <== Get currency icon ==>
   const currencyIcon = await fetchData({
     route: `/settings/shop`,
