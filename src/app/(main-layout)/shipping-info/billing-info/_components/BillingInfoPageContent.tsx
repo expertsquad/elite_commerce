@@ -24,6 +24,7 @@ const BillingInfoPageContent = ({
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { orderData } = useContext(OrderInitContext);
+
   // handle submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,11 +40,23 @@ const BillingInfoPageContent = ({
       billingAddress.zipCode = Number(billingAddress.zipCode);
     }
 
-    // Now submit the modified orderData
+    const orderItems = orderData?.orderItems?.map((item) => ({
+      productId: item.productId,
+      variantName: item?.variant?.variantName || "Not specified",
+      orderQuantity: item?.orderQuantity,
+    }));
+
+    // <== sliced all information ==>
+    const orderDataToSubmit = {
+      shippingAddress,
+      billingAddress,
+      orderItems,
+    };
+
     try {
       const result = await updateDataMutation({
         route: "/online-order/add",
-        data: JSON.stringify(orderData),
+        data: JSON.stringify(orderDataToSubmit),
         method: "POST",
         formatted: true,
       });

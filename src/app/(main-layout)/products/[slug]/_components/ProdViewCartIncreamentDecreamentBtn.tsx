@@ -1,6 +1,6 @@
 "use client";
 import IncreaseDecreaseCartItems from "@/app/(main-layout)/brands/_components/IncreaseDecreaseCartItems";
-import { IProduct } from "@/interfaces/product.interface";
+import { IProduct, IProductVariant } from "@/interfaces/product.interface";
 import { CartContext } from "@/Provider/CartProvider";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
 import React, { useContext } from "react";
@@ -9,10 +9,12 @@ const ProdViewCartIncreamentDecreamentBtn = ({
   product,
   quantity,
   setQuantity,
+  variant,
 }: {
   product: IProduct;
   quantity: number;
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
+  variant?: IProductVariant;
 }) => {
   const { cartProducts, setRefetch } = useContext(CartContext);
 
@@ -29,7 +31,11 @@ const ProdViewCartIncreamentDecreamentBtn = ({
   return (
     <div>
       {isCarted ? (
-        <IncreaseDecreaseCartItems product={isCarted} setRefetch={setRefetch} />
+        <IncreaseDecreaseCartItems
+          product={isCarted}
+          setRefetch={setRefetch}
+          variant={variant}
+        />
       ) : (
         <div className="flex items-center justify-center gap-x-2 py-2 px-3 border border-black-10 rounded-full group group-hover:border-primary">
           <button

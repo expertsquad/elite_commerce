@@ -27,8 +27,9 @@ const ProductCard = ({
   const { sellingPrice, discountedPrice } = productDetails;
 
   return (
-    <Link
-      href={`/products/${product?.productUrlSlug}`}
+    <ProductPreviewRedirect
+      onClick={onClick}
+      product={product}
       className="border border-black-10 rounded-lg group relative w-full max-w-[280px] cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg mx-auto"
     >
       <div className="bg-gradient-primary-light">
@@ -100,7 +101,7 @@ const ProductCard = ({
           />
         )}
       </div>
-    </Link>
+    </ProductPreviewRedirect>
   );
 };
 

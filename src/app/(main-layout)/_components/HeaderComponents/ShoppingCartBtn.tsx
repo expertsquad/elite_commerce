@@ -38,9 +38,6 @@ const ShoppingCartBtn = ({
   // cart contex
   const { cartProducts, calculateTotalPriceAndDiscountOfCart, setRefetch } =
     useContext(CartContext);
-
-  console.log(cartProducts);
-
   const { totalPrice } = calculateTotalPriceAndDiscountOfCart(cartProducts);
   // getting progress bar value percentage as number like : 76
   const progressValue = calculatePercentageToFreeShipping(
@@ -84,12 +81,12 @@ const ShoppingCartBtn = ({
               Shopping Cart
             </span>
             <hr className="border border-black-10 h-[1px] my-3" />
-            {cartProducts?.length < 0 && (
+            {cartProducts?.length > 0 && (
               <div className="flex flex-col gap-2 mt-2">
                 <div className="mt-5 ">
                   <ProgressBar progressValue={progressValue} />
                 </div>
-                <span className="text-sm flex items-center gap-x-1">
+                <span className="text-sm flex items-center gap-x-1 mb-5">
                   Buy
                   <span className="text-gradient-primary">
                     {currencyIcon}
@@ -105,7 +102,7 @@ const ShoppingCartBtn = ({
             )}
 
             {cartProducts?.length > 0 && (
-              <div className="flex flex-col gap-y-5 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(360px,45vh))] md:h-[calc(100vh-max(400px,40vh))] pb-10">
+              <div className="flex flex-col gap-y-5 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(360px,45vh))] md:h-[calc(100vh-max(440px,40vh))] pb-10">
                 {cartProducts?.map((product: ICartProduct) => {
                   return (
                     <QuickOrderItem
@@ -183,7 +180,7 @@ export const QuickOrderItem = ({
   currencyIcon?: string;
 }) => {
   const handleRemoveItem = () => {
-    updateCart({ actionType: "remove", product });
+    updateCart({ actionType: "remove", product, variant: product?.variant });
     setRefetch((prev) => prev + 1);
   };
 
@@ -219,8 +216,27 @@ export const QuickOrderItem = ({
               <span className="text-positive text-[10px] md:text-xs">
                 {product?.brandName}
               </span>
-              <span className="text-black-10">|</span>
-              <StarRating rating={product?.averageRating || 0} />
+              {/* {product?.averageRating && (
+                <>
+                  <span className="text-black-10">|</span>
+                  <StarRating rating={product?.averageRating || 0} />
+                </>
+              )} */}
+              {product?.variant &&
+                product?.variant?.variantName !== "Not specified" && (
+                  <>
+                    <span className="text-black-10">|</span>
+                    <div
+                      className="h-3 w-3 rounded-full"
+                      style={{
+                        backgroundColor: product?.variant?.variantName,
+                      }}
+                    ></div>
+                    <span className="text-xs">
+                      {product?.variant?.variantName}
+                    </span>
+                  </>
+                )}
             </div>
             <div className="flex items-center justify-between gap-5"></div>
           </div>
@@ -234,6 +250,9 @@ export const QuickOrderItem = ({
             </span>
             <IncreaseDecreaseCartItems
               product={product}
+              variant={
+                product?.variant ? product?.variant : product?.variants[0]
+              }
               setRefetch={setRefetch}
               className="!px-2 !py-0.5"
               btnStyle="!size-4 !flex !items-center !justify-center !rounded-full"
@@ -243,7 +262,7 @@ export const QuickOrderItem = ({
       </div>
       <div className="flex flex-col items-end justify-between">
         <button onClick={handleRemoveItem}>
-          <IconX stroke={1} color="red" height={16} width={16} />
+          <IconX stroke={1} color="red" size={16} />
         </button>
         <strong className="font-semibold text-gradient-primary text-base">
           {currencyIcon}

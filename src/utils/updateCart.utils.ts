@@ -98,9 +98,14 @@ export const updateCart = async ({
   // -----------------------------
   //   to remove an item from cart
   // -----------------------------
+  // <== Remove this code, Here we have checking product is exist or not and also product has multiple variant or not ==>
   if (actionType === "remove") {
-    updatedCartItems = prevCartItems.filter(
-      (prevProduct) => prevProduct?._id !== product?._id
+    updatedCartItems = prevCartItems?.filter(
+      (prevProduct) =>
+        !(
+          prevProduct?._id === product?._id &&
+          prevProduct?.variant?.variantName === variant?.variantName
+        )
     );
   }
 
@@ -112,10 +117,12 @@ export const updateCart = async ({
 export const updatedCartMutation = async (updatedCartItems: ICartProduct[]) => {
   setLocalStorageData(
     storages.cartProducts,
-    updatedCartItems.map((item) => {
+    updatedCartItems?.map((item) => {
       return { ...item, variantName: item?.variant?.variantName };
     })
   );
+
+  console.log(updatedCartItems?.length, "updatedCartItems");
 
   // update cart to the remote server
   await fetch("/api/cart", {

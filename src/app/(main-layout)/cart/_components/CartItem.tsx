@@ -51,8 +51,21 @@ export const CartItem = ({
             <span className="text-positive text-xs md:text-sm whitespace-nowrap">
               {product?.brandName}
             </span>
-            <span className="text-black-10 text-xs ">|</span>
-            <StarRating rating={product?.averageRating || 0} />
+            {product?.variant &&
+              product?.variant?.variantName !== "Not specified" && (
+                <>
+                  <span className="text-black-10">|</span>
+                  <div
+                    className="h-3 w-3 rounded-full"
+                    style={{
+                      backgroundColor: product?.variant?.variantName,
+                    }}
+                  ></div>
+                  <span className="text-xs">
+                    {product?.variant?.variantName}
+                  </span>
+                </>
+              )}
           </div>
           <div className="md:hidden flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">

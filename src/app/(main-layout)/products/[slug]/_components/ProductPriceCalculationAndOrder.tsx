@@ -8,6 +8,7 @@ import ProductViewCartBtn from "./ProductViewCartBtn";
 import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
 import { IconBolt } from "@tabler/icons-react";
 import BuyNowSingleProduct from "./BuyNowSingleProduct";
+import RatingWishlistStockAndSold from "./RatingWishlistStockAndSold";
 
 const ProductPriceCalculationAndOrder = ({
   product,
@@ -27,6 +28,19 @@ const ProductPriceCalculationAndOrder = ({
 
   return (
     <div className="flex flex-col gap-y-5">
+      <div>
+        <RatingWishlistStockAndSold
+          averageRating={product?.averageRating ? product?.averageRating : 0}
+          instock={product?.variants[0].inStock}
+          soldQuantity={
+            product?.variants[0]?.soldQuantity
+              ? product?.variants[0]?.soldQuantity
+              : 0
+          }
+          product={product}
+          variant={variant ? variant : product?.variants[0]}
+        />
+      </div>
       {/* <== Bulk order based discount ==> */}
       {product?.bulk?.minOrder && product?.bulk?.minOrder > 0 && (
         <ExtraDiscountBasedOnOrder product={product} />
@@ -46,9 +60,13 @@ const ProductPriceCalculationAndOrder = ({
             product={product}
             quantity={quantity}
             setQuantity={setQuantity}
+            variant={variant ? variant : product?.variants[0]}
           />
           <div className=" w-full">
-            <ProductViewCartBtn product={product} />
+            <ProductViewCartBtn
+              product={product}
+              variant={variant ? variant : product?.variants[0]}
+            />
           </div>
         </div>
         <div className="flex items-center justify-between gap-x-2.5">

@@ -1,14 +1,21 @@
 "use client";
 import { IProductCardProps } from "@/Components/ProductCard/ProductCard";
+import { IProduct, IProductVariant } from "@/interfaces/product.interface";
 import { CartContext } from "@/Provider/CartProvider";
 import { updateCart } from "@/utils/updateCart.utils";
 import { IconShoppingCart } from "@tabler/icons-react";
 import React, { useContext } from "react";
 
-const ProductViewCartBtn = ({ product }: IProductCardProps) => {
+const ProductViewCartBtn = ({
+  product,
+  variant,
+}: {
+  product: IProduct;
+  variant: IProductVariant;
+}) => {
   const { setRefetch } = useContext(CartContext);
   const handleAddToCart = () => {
-    updateCart({ actionType: "add", product: product });
+    updateCart({ actionType: "add", product: product, variant });
     setRefetch && setRefetch((prev) => prev + 1);
   };
   return (

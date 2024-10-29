@@ -119,7 +119,10 @@ const ProductImageSlider = ({
 
         <div className="absolute top-2.5 right-2.5 z-10">
           <div className="flex flex-col gap-y-1.5">
-            <AddToWishlistBtn products={product} />
+            <AddToWishlistBtn
+              product={product}
+              variant={product?.variants[0]}
+            />
 
             {isQuickOrderActive && (
               <QuickOrderButton

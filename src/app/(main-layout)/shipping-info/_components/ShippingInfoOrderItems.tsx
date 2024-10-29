@@ -15,7 +15,6 @@ export const ShippingInfoOrderItems = ({
   product: ICartProduct;
   currencySymbol: string;
 }) => {
-  console.log(product?.variant);
   const { orderData, setRefetch } = useContext(OrderInitContext);
   const handleRemoveItem = () => {
     let updateOrderItems = orderData?.orderItems;
@@ -82,6 +81,9 @@ export const ShippingInfoOrderItems = ({
                         backgroundColor: product?.variant?.variantName,
                       }}
                     ></div>
+                    <span className="text-xs">
+                      {product?.variant?.variantName}
+                    </span>
                   </>
                 )}
             </div>

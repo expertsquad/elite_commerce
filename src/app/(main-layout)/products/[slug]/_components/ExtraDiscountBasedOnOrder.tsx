@@ -22,7 +22,7 @@ const ExtraDiscountBasedOnOrder = ({ product }: { product: IProduct }) => {
   return (
     <div className="">
       <ProgressBar progressValue={Number(percentage)} />
-      <div>
+      <div className="mt-1">
         {product?.bulk &&
           (product?.bulk?.minOrder > 1 ||
             (product.bulk && typeof product.bulk !== "boolean")) && (

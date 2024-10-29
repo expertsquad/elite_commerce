@@ -1,7 +1,6 @@
 "use client";
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext } from "react";
 import ButtonPrimary from "../../brands/_components/ButtonPrimary";
-import ButtonPrimaryLight from "../../brands/_components/ButtonPrimaryLight";
 import { IconBolt } from "@tabler/icons-react";
 import Link from "next/link";
 import { CartItem } from "./CartItem";
@@ -14,6 +13,8 @@ import { setLocalStorageData } from "@/helpers/localStorage.helper";
 import { storages } from "@/constants";
 import QuickOrderButton from "../../_components/QuickOrder/QuickOrderButton";
 import { getShippingFee } from "@/utils/getShippingFee";
+import ProgressBar from "../../_components/SliderComponents/ProgressBar";
+import { calculatePercentageToFreeShipping } from "@/utils/calculatePercentageToFreeShipping";
 
 const CartItems = ({
   suggestions,
@@ -53,21 +54,26 @@ const CartItems = ({
     });
     setRefetchOrderInit((prev) => prev + 1);
   };
+
+  const progressValue = calculatePercentageToFreeShipping(
+    totalPrice,
+    shippingFee
+  );
   return (
     <Fragment>
       <div className="flex flex-col gap-5 mt-7">
         <span className="block text-base">
-          Buy{" "}
+          Buy
           <span className="text-gradient-primary">
             {currencyIcon + shippingCharge?.freeShippingMinOrderAmount}
-          </span>{" "}
+          </span>
           more to get
           <span className="text-gradient-primary font-semibold">
             {" " + "Freeship"}
-          </span>{" "}
+          </span>
           🔥
         </span>
-        {/* <ProgressBar progressValue={50} /> */}
+        <ProgressBar progressValue={progressValue} />
       </div>
       <div className="flex md:flex-row flex-col gap-5 mt-7">
         {cartProducts?.length ? (

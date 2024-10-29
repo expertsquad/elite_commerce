@@ -1,7 +1,6 @@
 import SocialMediaAndOthers from "./SocialMediaAndOthers";
 import { IProduct } from "@/interfaces/product.interface";
 import CategoryAndBrandSmallComponent from "./CategoryAndBrandSmallComponent";
-import RatingWishlistStockAndSold from "./RatingWishlistStockAndSold";
 import { ISocialMedia } from "@/interfaces/footer.interface";
 import ProductPriceCalculationAndOrder from "./ProductPriceCalculationAndOrder";
 
@@ -34,18 +33,7 @@ const ProductViewDescAndOthers = ({
           brandPhoto={product?.brand?.brandPhoto}
         />
       </div>
-      <div>
-        <RatingWishlistStockAndSold
-          averageRating={product?.averageRating ? product?.averageRating : 0}
-          instock={product?.variants[0].inStock}
-          soldQuantity={
-            product?.variants[0]?.soldQuantity
-              ? product?.variants[0]?.soldQuantity
-              : 0
-          }
-          products={[product]}
-        />
-      </div>
+
       <ProductPriceCalculationAndOrder
         product={product}
         accessToken={accessToken}

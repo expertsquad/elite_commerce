@@ -18,7 +18,7 @@ const ProgressBar = ({ progressValue }: IProgressBarProps) => {
   };
 
   return (
-    <div className="relative w-full h-6">
+    <div className="relative w-[96%] h-3">
       <div className="relative w-full bg-black-10 rounded-full h-1.5">
         <div
           className="absolute top-0 left-0 bg-gradient-primary rounded-full h-1.5 transition-all duration-300"

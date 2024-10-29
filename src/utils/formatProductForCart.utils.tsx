@@ -18,7 +18,7 @@ export const formatProductForCart = ({
     ? isSelectedOneExist
     : defaultVariant
     ? defaultVariant
-    : product?.variants[0];
+    : product?.variants[0]!;
   return {
     ...product,
     brandName: product?.brand?.brandName,
