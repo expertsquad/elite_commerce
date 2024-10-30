@@ -10,11 +10,13 @@ const ProdViewCartIncreamentDecreamentBtn = ({
   quantity,
   setQuantity,
   variant,
+  btnContainerStyle,
 }: {
   product: IProduct;
   quantity: number;
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
   variant?: IProductVariant;
+  btnContainerStyle?: string;
 }) => {
   const { cartProducts, setRefetch } = useContext(CartContext);
 
@@ -39,9 +41,12 @@ const ProdViewCartIncreamentDecreamentBtn = ({
           product={isCarted}
           setRefetch={setRefetch}
           variant={variant}
+          className="rounded-md"
         />
       ) : (
-        <div className="flex items-center justify-center gap-x-2 py-2 px-3 border border-black-10 rounded-full group group-hover:border-primary">
+        <div
+          className={`flex items-center justify-center gap-x-2 py-2 px-3 border border-black-10 rounded-full group group-hover:border-primary ${btnContainerStyle}`}
+        >
           <button
             onClick={handleDecrease}
             disabled={quantity <= 1}

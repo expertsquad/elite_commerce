@@ -55,6 +55,7 @@ const ProductPriceCalculationAndOrder = ({
             quantity={quantity}
             setQuantity={setQuantity}
             variant={variant ? variant : product?.variants[0]}
+            btnContainerStyle="!rounded-md"
           />
           <div className=" w-full">
             <ProductViewCartBtn
