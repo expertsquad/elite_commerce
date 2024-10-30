@@ -119,6 +119,5 @@ export const config = {
     "/profile/address/billing-address",
     "/profile/review",
     "/profile/review/review-history",
-    "/maintenance-mode", // Add this to allow access to the maintenance page
   ],
 };
