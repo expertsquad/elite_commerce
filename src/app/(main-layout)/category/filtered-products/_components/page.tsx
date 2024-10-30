@@ -41,6 +41,9 @@ const CategoryPage = async () => {
             newProducts={newProducts}
             highPriceProducts={highPriceProducts}
             lowPriceProducts={lowPriceProducts}
+            shippingAmount={0}
+            isQuickOrderActive={false}
+            currency={""}
           />
         </div>
       </div>
