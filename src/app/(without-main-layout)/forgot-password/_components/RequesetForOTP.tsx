@@ -1,9 +1,12 @@
 "use server";
-import { postDataMutation } from "@/actions/postDataMutation";
+import {
+  postDataMutation,
+  postDataUnauthenticatedMutation,
+} from "@/actions/postDataMutation";
 import { cookies } from "next/headers";
 
 export const requestForOTP = async (formData: FormData) => {
-  const res = await postDataMutation({
+  const res = await postDataUnauthenticatedMutation({
     route: "/user/forgot-password",
     data: formData,
   });
