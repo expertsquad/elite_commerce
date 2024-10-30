@@ -21,11 +21,13 @@ const CartItems = ({
   currencyIcon,
   shippingCharge,
   shippingAmout,
+  isQuickOrderActive,
 }: {
   suggestions: IProduct[];
   currencyIcon?: string;
   shippingCharge: any;
   shippingAmout: number;
+  isQuickOrderActive?: boolean;
 }) => {
   const {
     cartProducts,
@@ -57,15 +59,15 @@ const CartItems = ({
 
   const progressValue = calculatePercentageToFreeShipping(
     totalPrice,
-    shippingFee
+    shippingCharge?.freeShippingMinOrderAmount
   );
   return (
     <Fragment>
       <div className="flex flex-col gap-5 mt-7">
         <span className="block text-base">
-          Buy
-          <span className="text-gradient-primary">
-            {currencyIcon + shippingCharge?.freeShippingMinOrderAmount}
+          Buy{" "}
+          <span className="text-gradient-primary font-semibold">
+            {currencyIcon + shippingCharge?.freeShippingMinOrderAmount} {""}
           </span>
           more to get
           <span className="text-gradient-primary font-semibold">
@@ -174,6 +176,8 @@ const CartItems = ({
                 key={product?._id}
                 product={product}
                 currencyIcon={currencyIcon}
+                shippingAmount={shippingAmout}
+                isQuickOrderActive={isQuickOrderActive}
               />
             );
           })}

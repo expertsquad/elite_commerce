@@ -34,18 +34,20 @@ const WishlistedItems = ({
   const { cartProducts, setRefetch: setRefetchCart } = useContext(CartContext);
 
   const handleRemoveFromFav = () => {
-    updateWishlist({ product: product });
+    updateWishlist({ product: product, variant: product?.variant });
     setRefetch((prev) => prev + 1);
   };
 
   const handleAddToCart = ({ product }: { product: IWishlistProduct }) => {
-    updateCart({ actionType: "add", product });
+    updateCart({ actionType: "add", product, variant: product?.variant });
     setRefetch((prev) => prev + 1);
     setRefetchCart && setRefetchCart((prev) => prev + 1);
   };
 
   const isProductInCart = cartProducts.some(
-    (cartProduct) => cartProduct._id === product._id
+    (cartProduct) =>
+      cartProduct._id === product._id &&
+      cartProduct?.variant?.variantName === product?.variant?.variantName
   );
   return (
     <tr>
@@ -78,12 +80,25 @@ const WishlistedItems = ({
             <span className="line-clamp-2 [font-size:_clamp(12px,5vw,18px)]">
               {product?.productName}
             </span>
-            <div className="flex items-center  gap-2">
+            <div className="flex items-center gap-2">
               <span className="text-positive text-sm">
                 {product?.brandName}
               </span>
-              <span className="text-black-10 text-sm">|</span>
-              <StarRating rating={product?.averageRating || 0} />
+              {product?.variant &&
+                product?.variant?.variantName !== "Not specified" && (
+                  <>
+                    <span className="text-black-10">|</span>
+                    <div
+                      className="h-3 w-3 rounded-full"
+                      style={{
+                        backgroundColor: product?.variant?.variantName,
+                      }}
+                    ></div>
+                    <span className="text-xs">
+                      {product?.variant?.variantName}
+                    </span>
+                  </>
+                )}
             </div>
           </div>
         </div>
@@ -94,14 +109,14 @@ const WishlistedItems = ({
           {product?.variant?.discountedPrice || product?.variant?.sellingPrice}
         </span>
       </td>
-      <td className="border border-black-10 border-collapse px-5">
-        <span className="[font-size:_clamp(14px,2.5vw,18px)] text-positive whitespace-nowrap">
+      <td className="border border-black-10 border-collapse">
+        <span className="[font-size:_clamp(14px,2.5vw,18px)] text-positive whitespace-nowrap flex items-center justify-center px-5">
           {product?.variant?.inStock} In Stock
         </span>
       </td>
       <td className="border border-black-10 border-collapse px-5">
         <div className=" flex items-center justify-center">
-          <QuickViewButton product={product}>
+          <QuickViewButton product={product} btnClassName="!pl-0">
             <span className="border border-black-10 flex items-center justify-center p-2.5 rounded-full hover:bg-gradient-primary hover:text-white transition duration-300">
               <IconEye size={18} stroke={1.7} />
             </span>
@@ -128,26 +143,30 @@ const WishlistedItems = ({
         </div>
       </td>
       <td
-        className={`border border-black-10 border-collapse px-5 transition duration-300 ${
+        className={`border border-black-10 border-collapse transition duration-300 ${
           isQuickOrderActive === false && "hidden"
         }`}
       >
-        {isQuickOrderActive && (
-          <QuickOrderButton
-            product={{
-              ...product,
-              orderQuantity: 1,
-              variant: product?.variants?.[0],
-            }}
-            buttonStyle="bg-gradient-primary hover:bg-gradient-primary-reverse whitespace-nowrap text-white rounded-full transition-transform duration-300 px-3.5 uppercase flex items-center justify-center gap-x-1.5 text-sm py-2 group"
-            buttonIcon={
-              <IconBolt size={19} stroke={1.5} className="fill-white" />
-            }
-            buttonText="QUICK ORDER"
-            currencyIcon={currencyIcon}
-            shippingAmount={shippingAmount}
-          />
-        )}
+        <div className="flex items-center justify-center px-5">
+          {isQuickOrderActive && (
+            <QuickOrderButton
+              product={{
+                ...product,
+                orderQuantity: 1,
+                variant: product?.variant
+                  ? product?.variant
+                  : product?.variants[0],
+              }}
+              buttonStyle="bg-gradient-primary hover:bg-gradient-primary-reverse whitespace-nowrap text-white rounded-full transition-transform duration-300 px-3.5 uppercase flex items-center justify-center gap-x-1.5 text-sm py-2 group"
+              buttonIcon={
+                <IconBolt size={19} stroke={1.5} className="fill-white" />
+              }
+              buttonText="QUICK ORDER"
+              currencyIcon={currencyIcon}
+              shippingAmount={shippingAmount}
+            />
+          )}
+        </div>
       </td>
     </tr>
   );

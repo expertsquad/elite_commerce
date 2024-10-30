@@ -7,7 +7,7 @@ const CartView = async () => {
   const productsData = await fetchData({
     route: "/product",
     query: "sortBy=totalSoldQuantity",
-    limit: 4,
+    limit: 8,
   });
   const currency = await fetchData({ route: "/settings/shop" });
   const shippingCharge = await fetchData({
@@ -28,6 +28,9 @@ const CartView = async () => {
           currencyIcon={currency?.data?.currencySymbol}
           shippingCharge={shippingCharge?.data}
           shippingAmout={quickOrderServices?.data?.deliveryCharge}
+          isQuickOrderActive={
+            quickOrderServices?.data?.isQuickOrderServiceActive
+          }
         />
       </div>
     </div>

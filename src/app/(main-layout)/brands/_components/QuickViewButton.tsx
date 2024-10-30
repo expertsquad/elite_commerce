@@ -7,10 +7,18 @@ const QuickViewButton = ({
   product,
   children,
   btnClassName,
+  accessToken,
+  currencyIcon,
+  shippingAmount,
+  isQuickOrderActive,
 }: {
   product: IProduct;
   children?: React.ReactNode;
   btnClassName?: string;
+  currencyIcon: string;
+  shippingAmount: number;
+  isQuickOrderActive?: boolean;
+  accessToken?: string;
 }) => {
   const [show, setShow] = useState(false);
   const handleProductCard = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -33,6 +41,10 @@ const QuickViewButton = ({
           show={show}
           setShow={setShow}
           product={product}
+          isQuickOrderActive={isQuickOrderActive}
+          accessToken={accessToken ? accessToken : ""}
+          currencyIcon={currencyIcon}
+          shippingAmount={shippingAmount}
         />
       )}
     </Fragment>

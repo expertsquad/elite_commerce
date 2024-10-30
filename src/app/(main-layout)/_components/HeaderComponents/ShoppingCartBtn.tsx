@@ -216,12 +216,7 @@ export const QuickOrderItem = ({
               <span className="text-positive text-[10px] md:text-xs">
                 {product?.brandName}
               </span>
-              {/* {product?.averageRating && (
-                <>
-                  <span className="text-black-10">|</span>
-                  <StarRating rating={product?.averageRating || 0} />
-                </>
-              )} */}
+
               {product?.variant &&
                 product?.variant?.variantName !== "Not specified" && (
                   <>

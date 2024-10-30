@@ -30,12 +30,12 @@ const WishlishedProducts = ({
   }: {
     product: IWishlistProduct;
   }) => {
-    updateWishlist({ product });
+    updateWishlist({ product, variant: product?.variant });
     setRefetch((prev) => prev + 1);
   };
 
   const handleAddToCart = ({ product }: { product: IWishlistProduct }) => {
-    updateCart({ actionType: "add", product });
+    updateCart({ actionType: "add", product, variant: product?.variant });
     setRefetch((prev) => prev + 1);
     setRefetchCart && setRefetchCart((prev) => prev + 1);
   };
@@ -50,7 +50,7 @@ const WishlishedProducts = ({
           <div className="relative md:w-[70px] md:h-[70px] w-[50px] h-[50px]">
             <Image
               alt="product"
-              src={`${server_url + product.productPhoto}`}
+              src={`${server_url + product?.productPhoto}`}
               fill
               objectFit="cover"
             />
@@ -85,7 +85,11 @@ const WishlishedProducts = ({
         <button onClick={() => handleRemoveFromWishlist({ product })}>
           <IconX stroke={1} color="red" height={16} width={16} />
         </button>
-        {cartProducts?.some((p) => p?.productId === product?._id) ? (
+        {cartProducts?.some(
+          (p) =>
+            p?.productId === product?._id &&
+            p?.variant?.variantName === product?.variant?.variantName
+        ) ? (
           <small className="text-sm">Carted</small>
         ) : (
           <ButtonPrimary
