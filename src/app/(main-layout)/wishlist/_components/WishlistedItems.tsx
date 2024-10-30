@@ -117,7 +117,7 @@ const WishlistedItems = ({
         </span>
       </td>
       <td className="border border-black-10 border-collapse px-5">
-        <div className=" flex items-center justify-center">
+        <div className="flex items-center justify-center">
           <QuickViewButton
             product={product}
             btnClassName="!pl-0"

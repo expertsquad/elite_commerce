@@ -23,6 +23,7 @@ const ProductPriceCalculationAndOrder = ({
   isQuickOrderActive?: boolean;
   accessToken: string;
 }) => {
+  console.log(product?.bulk);
   const [variant, setVariant] = useState<IProductVariant | null>(null);
   const [quantity, setQuantity] = useState(1);
 
