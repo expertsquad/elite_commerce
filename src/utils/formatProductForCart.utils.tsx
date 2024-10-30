@@ -7,18 +7,20 @@ export const formatProductForCart = ({
   selectedQuantity,
 }: {
   product: IProduct;
-  selectedVariant?: string | any;
+  selectedVariant?: string;
   selectedQuantity?: number;
 }): ICartProduct => {
   const isSelectedOneExist = product?.variants?.find(
     (v) => v?.variantName === selectedVariant
   );
-  const defaultVariant = product?.variants?.find((v) => v.isDefault);
-  const variant = isSelectedOneExist
-    ? isSelectedOneExist
-    : defaultVariant
-    ? defaultVariant
-    : product?.variants[0]!;
+  const defaultVariant = product?.variants?.find((v) => v?.isDefault);
+  // const variant = isSelectedOneExist
+  //   ? isSelectedOneExist
+  //   : defaultVariant
+  //   ? defaultVariant
+  //   : product?.variants[0];
+  const variant = isSelectedOneExist ?? defaultVariant ?? product.variants[0];
+
   return {
     ...product,
     brandName: product?.brand?.brandName,

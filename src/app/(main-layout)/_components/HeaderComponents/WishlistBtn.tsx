@@ -33,12 +33,10 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
 
   const handleRemoveFromWishlist = ({
     product,
-    variant,
   }: {
     product: IWishlistProduct;
-    variant: IProductVariant;
   }) => {
-    updateWishlist({ product, variant });
+    updateWishlist({ product, variant: product?.variant });
     setRefetch((prev) => prev + 1);
   };
 
@@ -145,7 +143,6 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                           onClick={() =>
                             handleRemoveFromWishlist({
                               product,
-                              variant: product?.variant,
                             })
                           }
                         >

@@ -24,11 +24,13 @@ const WishlistedItems = ({
   currencyIcon,
   shippingAmount,
   isQuickOrderActive,
+  accessToken,
 }: {
   product: IWishlistProduct;
   currencyIcon: string;
   shippingAmount: number;
   isQuickOrderActive?: boolean;
+  accessToken?: string;
 }) => {
   const { setRefetch } = useContext(WishlistContext);
   const { cartProducts, setRefetch: setRefetchCart } = useContext(CartContext);
@@ -116,7 +118,14 @@ const WishlistedItems = ({
       </td>
       <td className="border border-black-10 border-collapse px-5">
         <div className=" flex items-center justify-center">
-          <QuickViewButton product={product} btnClassName="!pl-0">
+          <QuickViewButton
+            product={product}
+            btnClassName="!pl-0"
+            currencyIcon={currencyIcon}
+            shippingAmount={shippingAmount}
+            isQuickOrderActive={isQuickOrderActive}
+            accessToken={accessToken ? accessToken : ""}
+          >
             <span className="border border-black-10 flex items-center justify-center p-2.5 rounded-full hover:bg-gradient-primary hover:text-white transition duration-300">
               <IconEye size={18} stroke={1.7} />
             </span>

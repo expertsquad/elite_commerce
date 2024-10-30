@@ -30,7 +30,7 @@ const FeaturedProducts = ({
       <div className="flex justify-between pt-3 border-b border-black-10 mb-10">
         <div className="flex items-center gap-x-5 uppercase">
           <button
-            className={`uppercase text-gradient-primary px-5 border-b  pb-2
+            className={`uppercase text-gradient-primary px-5 border-b pb-2
               ${
                 filter === "Newest"
                   ? "text-gradient-primary border-b border-primary-light"

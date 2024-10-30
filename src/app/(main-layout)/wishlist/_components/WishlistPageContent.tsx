@@ -18,10 +18,12 @@ const WishlistPageContent = ({
   currencyIcon,
   shippingAmount,
   isQuickOrderActive,
+  accessToken,
 }: {
   currencyIcon: string;
   shippingAmount: number;
   isQuickOrderActive?: boolean;
+  accessToken?: string;
 }) => {
   const { wishlistProducts, setRefetch } = useContext(WishlistContext);
 
@@ -68,6 +70,7 @@ const WishlistPageContent = ({
                       currencyIcon={currencyIcon}
                       shippingAmount={shippingAmount}
                       isQuickOrderActive={isQuickOrderActive}
+                      accessToken={accessToken ? accessToken : ""}
                     />
                   );
                 })}
