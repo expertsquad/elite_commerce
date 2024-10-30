@@ -1,8 +1,5 @@
 "use server";
-import {
-  postDataMutation,
-  postDataUnauthenticatedMutation,
-} from "@/actions/postDataMutation";
+import { postDataUnauthenticatedMutation } from "@/actions/postDataMutation";
 import { cookies } from "next/headers";
 
 export const requestForOTP = async (formData: FormData) => {

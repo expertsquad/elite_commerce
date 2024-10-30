@@ -1,6 +1,7 @@
 import React from "react";
 import MiantenanceModePageContent from "./_components/MiantenanceModePageContent";
 import { fetchData } from "@/actions/fetchData";
+import { permanentRedirect, redirect } from "next/navigation";
 
 const page = async () => {
   const logo = await fetchData({
@@ -15,6 +16,9 @@ const page = async () => {
     route: "/settings/maintenance",
   });
 
+  if (!maintenanceData?.data?.isMaintenanceActive) {
+    return permanentRedirect("/");
+  }
   return (
     <MiantenanceModePageContent
       logo={logo?.data?.shopLogo}

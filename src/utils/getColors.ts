@@ -13,8 +13,8 @@ const useGetColors = () => {
           const {
             primaryColor,
             primaryLightColor,
-            secondaryColor,
-            secondaryLightColor,
+            seconderyColor,
+            seconderyLightColor,
           } = data;
           document.documentElement.style.setProperty(
             "--primary-color",
@@ -26,11 +26,11 @@ const useGetColors = () => {
           );
           document.documentElement.style.setProperty(
             "--secondary-color",
-            secondaryColor
+            seconderyColor
           );
           document.documentElement.style.setProperty(
             "--secondary-light-color",
-            secondaryLightColor
+            seconderyLightColor
           );
         }
       } catch (error) {

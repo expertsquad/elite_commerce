@@ -16,7 +16,7 @@ const CategoriesAndSubcategories = async () => {
     limit: 4,
     revalidate: 3600,
   });
-  const currencySymbol = await fetchProtectedData({
+  const currencySymbol = await fetchData({
     route: "/settings/shop",
   });
 
