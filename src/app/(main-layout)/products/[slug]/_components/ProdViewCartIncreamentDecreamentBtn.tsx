@@ -18,7 +18,11 @@ const ProdViewCartIncreamentDecreamentBtn = ({
 }) => {
   const { cartProducts, setRefetch } = useContext(CartContext);
 
-  const isCarted = cartProducts?.find((item) => item?._id === product?._id);
+  const isCarted = cartProducts?.find(
+    (item) =>
+      item?._id === product?._id &&
+      item?.variant?.variantName === variant?.variantName
+  );
 
   const handleIncrease = () => {
     setQuantity((prevQuantity) => Math.min(prevQuantity + 1, 99));
@@ -45,7 +49,9 @@ const ProdViewCartIncreamentDecreamentBtn = ({
           >
             <IconMinus size={18} />
           </button>
-          <span className="text-black-50">{quantity}</span>
+          <span className="text-black-50 text-base font-normal">
+            {quantity}
+          </span>
           <button
             onClick={handleIncrease}
             disabled={quantity >= 99}

@@ -7,7 +7,7 @@ import React, { useContext } from "react";
 const ExtraDiscountBasedOnOrder = ({ product }: { product: IProduct }) => {
   const { cartProducts, setRefetch } = useContext(CartContext);
 
-  const isCarted = cartProducts.find((item) => item._id === product._id);
+  const isCarted = cartProducts.find((item) => item?._id === product?._id);
 
   const productOrderQuantity = isCarted?.orderQuantity || 0;
 
@@ -22,7 +22,7 @@ const ExtraDiscountBasedOnOrder = ({ product }: { product: IProduct }) => {
   return (
     <div className="">
       <ProgressBar progressValue={Number(percentage)} />
-      <div className="mt-1">
+      <div className="mt-1.5">
         {product?.bulk &&
           (product?.bulk?.minOrder > 1 ||
             (product.bulk && typeof product.bulk !== "boolean")) && (

@@ -23,7 +23,6 @@ const ProductPriceCalculationAndOrder = ({
   isQuickOrderActive?: boolean;
   accessToken: string;
 }) => {
-  console.log(product?.bulk);
   const [variant, setVariant] = useState<IProductVariant | null>(null);
   const [quantity, setQuantity] = useState(1);
 
@@ -32,12 +31,6 @@ const ProductPriceCalculationAndOrder = ({
       <div>
         <RatingWishlistStockAndSold
           averageRating={product?.averageRating ? product?.averageRating : 0}
-          instock={product?.variants[0].inStock}
-          soldQuantity={
-            product?.variants[0]?.soldQuantity
-              ? product?.variants[0]?.soldQuantity
-              : 0
-          }
           product={product}
           variant={variant ? variant : product?.variants[0]}
         />
@@ -79,7 +72,9 @@ const ProductPriceCalculationAndOrder = ({
                 variant: variant || product?.variants[0],
               }}
               buttonStyle="text-white bg-gradient-primary hover:bg-gradient-primary-reverse flex items-center justify-center gap-x-1.5 py-2.5 rounded-md w-full text-base"
-              buttonIcon={<IconBolt size={20} fill="#fff" stroke={1} />}
+              buttonIcon={
+                <IconBolt size={20} className="fill-white" stroke={1} />
+              }
               buttonText="QUICK ORDER"
               currencyIcon={currencyIcon}
               shippingAmount={shippingAmount}
