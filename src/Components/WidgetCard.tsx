@@ -44,7 +44,7 @@ const WidgetCard = async ({
           src={`${server_url}${widget?.productPhoto}`}
           alt="widget image"
           fill
-          className="object-cover"
+          className="object-contain w-full h-full inset-0"
         />
       </div>
     </div>
