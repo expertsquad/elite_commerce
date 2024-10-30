@@ -1,43 +1,13 @@
 import Logo from "@/utils/Logo";
-import Form from "@/Components/Form";
-import SubmitButton from "@/Components/SubmitButton";
-import { updateDataMutation } from "@/actions/updateDataMutation";
-import { cookies } from "next/headers";
-import { permanentRedirect } from "next/navigation";
 import BackButton from "../sign-up/_components/BackButton";
-import OTPInput from "../_components/OTPInput";
-import ResendOtpAndCountdown from "../_components/ResendOtpAndCountdown";
 
-const VerifyEmail = async ({
+import ForgotPasswordOTPForm from "./_components/ForgotPasswordOTPForm";
+
+const ForgotPasswordOTPSubmit = async ({
   searchParams,
 }: {
   searchParams: { email: string };
 }) => {
-  const userEmail = searchParams?.email;
-  const handleSubmit = async (formData: FormData) => {
-    "use server";
-    const dataObj: Record<string, any> = {};
-
-    for (const [key, value] of Array.from(formData.entries())) {
-      if (key === "otp") {
-        dataObj[key] = dataObj[key] ? dataObj[key] + value : value;
-      }
-    }
-
-    const res = await updateDataMutation({
-      route: "/user/verify-email",
-      data: JSON.stringify({ otp: Number(dataObj["otp"]) }),
-      method: "PUT",
-      formatted: true,
-    });
-    if (res?.data?.accessToken) {
-      cookies().set("accessToken", res?.data?.accessToken);
-      permanentRedirect("/login");
-    } else {
-      console.error(res?.error);
-    }
-  };
-
   return (
     <div className="flex items-center justify-center h-screen relative login-signup-container-background ">
       <div className="z-20 ">
@@ -63,21 +33,10 @@ const VerifyEmail = async ({
                 Enter the 4 digits code that you Received on your E-mail
               </p>
             </div>
-            <Form handleSubmit={handleSubmit}>
-              <OTPInput length={4} />
-
-              <SubmitButton
-                className={
-                  "bg-gradient-primary w-full py-2.5 px-10 text-white rounded-md mt-5"
-                }
-              >
-                Verify
-              </SubmitButton>
-            </Form>
           </div>
-          {/* <form action={resendOTP}>
-            <ResendOtpAndCountdown />
-          </form> */}
+          <div className="my-5">
+            <ForgotPasswordOTPForm searchParams={searchParams} />
+          </div>
         </div>
         <div className="md:flex hidden items-center  justify-center mt-5 ">
           <BackButton href="/" />
@@ -87,4 +46,4 @@ const VerifyEmail = async ({
   );
 };
 
-export default VerifyEmail;
+export default ForgotPasswordOTPSubmit;

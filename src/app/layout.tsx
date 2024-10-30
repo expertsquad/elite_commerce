@@ -80,7 +80,12 @@ export default async function RootLayout({
           </defs>
         </svg>
         {/* children */}
-        <NextTopLoader height={4} showSpinner={false} speed={800} />
+        <NextTopLoader
+          color={`${colorsData?.data?.primaryColor}`}
+          height={4}
+          showSpinner={false}
+          speed={800}
+        />
         <ClientProvider>{children}</ClientProvider>
         <Toaster position="top-right" />
       </body>
