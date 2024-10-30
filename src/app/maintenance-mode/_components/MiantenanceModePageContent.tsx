@@ -24,8 +24,8 @@ const MiantenanceModePageContent = ({
       <BottomBlurBall />
 
       <div className=" absolute top-0 left-0 right-0 bg-primary-light h-screen backdrop-blur-xl opacity-10"></div>
-      <div className="py-7">
-        <div className="flex flex-col items-center gap-10">
+      <div className="py-[clamp(20px,2.5vw,30px)]">
+        <div className="flex flex-col items-center gap-[clamp(30px,2.5vw,40px)]">
           <div className="flex items-center justify-center">
             <Image
               src={`${server_url + logo}`}
@@ -38,7 +38,7 @@ const MiantenanceModePageContent = ({
             The site is currently down for <br /> maintenance
           </h2>
         </div>
-        <div className="flex items-center justify-center my-10">
+        <div className="flex items-center justify-center my-[clamp(20px,2.5vw,30px)]">
           <Image
             src={maintenanceMode}
             alt="Shop logo at maintenance mode"

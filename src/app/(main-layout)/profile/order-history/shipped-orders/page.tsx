@@ -4,6 +4,7 @@ import OrderItems from "../../_components/OrderItems";
 import Pagination from "@/Components/Pagination";
 import { Order } from "@/interfaces/oreder.interface";
 import { getCurrency } from "@/utils/getCurrency";
+import ProductEmptyState from "@/app/(main-layout)/_components/ProductEmptyState";
 
 const ShippedOrders = async () => {
   const getMe = await fetchProtectedData({
@@ -22,11 +23,17 @@ const ShippedOrders = async () => {
   const currency = await getCurrency();
   return (
     <div className="space-y-5">
-      <div>
-        {orderShippingData?.data?.map((order: Order) => (
-          <OrderItems currency={currency} key={order._id} order={order} />
-        ))}
-      </div>
+      {orderShippingData?.data?.length === 0 ? (
+        <div className="flex items-center justify-center">
+          <ProductEmptyState />
+        </div>
+      ) : (
+        <div className="p-3">
+          {orderShippingData?.data?.map((order: Order) => (
+            <OrderItems currency={currency} key={order._id} order={order} />
+          ))}
+        </div>
+      )}
       <div>
         {totalPages > 1 ? (
           <Pagination
