@@ -42,7 +42,7 @@ const OrderItems = ({
               order?.existOrderStatus?.status === "Order placed"
                 ? "bg-black-10  px-5 rounded-md py-2"
                 : order?.existOrderStatus?.status === "Packaging"
-                ? "bg-gradient-secondary-light text-secondary  px-5 rounded-md py-2"
+                ? "bg-gradient-secondary-light text-secondary-color  px-5 rounded-md py-2"
                 : order?.existOrderStatus?.status === "Shipping"
                 ? "bg-gradient-primary-light text-primary-color  px-5 rounded-md py-2"
                 : order?.existOrderStatus?.status === "Delivered"
