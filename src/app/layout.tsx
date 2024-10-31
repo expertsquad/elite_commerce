@@ -72,7 +72,7 @@ export default async function RootLayout({
               <stop
                 offset="100%"
                 style={{
-                  stopColor: `${colorsData?.data?.seconderyColor}`,
+                  stopColor: `${colorsData?.data?.primaryLightColor}`,
                   stopOpacity: 1,
                 }}
               />

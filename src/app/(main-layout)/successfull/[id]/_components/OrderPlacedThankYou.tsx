@@ -45,7 +45,7 @@ const OrderPlacedThankYou = ({
                     ></path>
                   </svg>
                 </span>
-                <span className="absolute flex items-center justify-center w-full h-full text-secondary transition-all duration-300 transform group-hover:translate-x-full ease">
+                <span className="absolute flex items-center justify-center w-full h-full text-secondary-color transition-all duration-300 transform group-hover:translate-x-full ease">
                   Track Order
                 </span>
                 <span className="relative invisible">Track Order</span>

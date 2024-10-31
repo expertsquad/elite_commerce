@@ -98,7 +98,9 @@ const EditCommentModalContent = ({
                   width={20}
                   height={20}
                   className={
-                    index <= rating - 1 ? "text-secondary" : "text-black-50"
+                    index <= rating - 1
+                      ? "text-secondary-color"
+                      : "text-black-50"
                   }
                   onClick={(e) => handleStarClick(index, e)}
                 />
