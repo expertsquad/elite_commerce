@@ -109,7 +109,11 @@ const CartItems = ({
                 </div>
                 <div className="flex items-center justify-between gap-5">
                   <span className="text-base text-black-80">Shipping Fee</span>
-                  <p className={`${shippingFee ? "" : "text-primary-light"}`}>
+                  <p
+                    className={`${
+                      shippingFee ? "" : "text-primary-color-light-color"
+                    }`}
+                  >
                     {shippingFee
                       ? currencyIcon! + shippingFee
                       : "You Got Free Shipping"}
@@ -154,7 +158,7 @@ const CartItems = ({
               <div className="mt-5">
                 <Link
                   href={"/"}
-                  className="flex items-center justify-center uppercase font-semibold text-sm hover:text-primary"
+                  className="flex items-center justify-center uppercase font-semibold text-sm hover:text-primary-color"
                 >
                   &larr; Continue Shopping
                 </Link>

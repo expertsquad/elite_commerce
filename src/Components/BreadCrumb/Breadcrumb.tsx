@@ -17,7 +17,7 @@ const Breadcrumb = ({ title, elements }: TBreadcrumbComponentProps) => {
           <IconHome
             stroke={1}
             size={20}
-            className="text-black-50 hover:text-primary "
+            className="text-black-50 hover:text-primary-color "
           />
         }
         separator={
@@ -27,7 +27,7 @@ const Breadcrumb = ({ title, elements }: TBreadcrumbComponentProps) => {
             className="rotate-90 text-black-50"
           />
         }
-        activeClasses="text-primary"
+        activeClasses="text-primary-color"
         containerClasses="flex items-center py-5 bg-gradient-to-r from-purple-600 to-blue-600"
         listClasses="hover:underline mx-2 "
         capitalizeLinks

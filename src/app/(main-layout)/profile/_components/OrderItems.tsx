@@ -44,7 +44,7 @@ const OrderItems = ({
                 : order?.existOrderStatus?.status === "Packaging"
                 ? "bg-gradient-secondary-light text-secondary  px-5 rounded-md py-2"
                 : order?.existOrderStatus?.status === "Shipping"
-                ? "bg-gradient-primary-light text-primary  px-5 rounded-md py-2"
+                ? "bg-gradient-primary-light text-primary-color  px-5 rounded-md py-2"
                 : order?.existOrderStatus?.status === "Delivered"
                 ? "bg-gradient-positive text-positive    px-5 rounded-md py-2"
                 : order?.existOrderStatus?.status === "Rejected"

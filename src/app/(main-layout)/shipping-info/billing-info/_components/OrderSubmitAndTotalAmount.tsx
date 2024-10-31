@@ -54,7 +54,11 @@ const OrderSubmitAndTotalAmount = ({
             </div>
             <div className="flex items-center justify-between">
               <p>Shipping</p>
-              <p className={`${shippingFee ? "" : "text-primary-light"}`}>
+              <p
+                className={`${
+                  shippingFee ? "" : "text-primary-color-light-color"
+                }`}
+              >
                 {shippingFee
                   ? currencySymbol + shippingFee
                   : "You Got Free Shipping"}
