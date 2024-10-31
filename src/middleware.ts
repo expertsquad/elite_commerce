@@ -62,62 +62,65 @@ import type { NextRequest } from "next/server";
 import { server_api } from "./constants";
 import { fetchData } from "./actions/fetchData";
 
-// Middleware function to check authorization and maintenance mode
 export async function middleware(request: NextRequest) {
-  const accessToken = request.cookies.get("accessToken")?.value;
+  try {
+    const accessToken = request.cookies.get("accessToken")?.value;
 
-  // Check for active maintenance mode
-  const maintenanceData = await fetchData({
-    route: "/settings/maintenance",
-  });
-  const isActiveMaintenance = maintenanceData?.data?.isMaintenanceActive;
-  const startTime = maintenanceData?.data?.startTime;
-  const currentTime = new Date().toISOString();
+    // Fetch maintenance data
+    const maintenanceData = await fetchData({
+      route: "/settings/maintenance",
+    });
 
-  // Redirect to maintenance mode if maintenance is active and the route isn't "/maintenance-mode"
-  if (isActiveMaintenance && currentTime >= startTime) {
-    if (!request.url.includes("/maintenance-mode")) {
-      return NextResponse.redirect(new URL("/maintenance-mode", request.url));
+    const isActiveMaintenance = maintenanceData?.data?.isMaintenanceActive;
+    const startTime = maintenanceData?.data?.startTime;
+    const currentTime = new Date().toISOString();
+
+    // Maintenance redirect: redirect all users to maintenance page if active
+    if (isActiveMaintenance && currentTime >= startTime) {
+      if (!request.url.includes("/maintenance-mode")) {
+        return NextResponse.redirect(new URL("/maintenance-mode", request.url));
+      }
+      return NextResponse.next(); // Allow access to /maintenance-mode
     }
+
+    // Authentication check for /profile routes
+    if (request.nextUrl.pathname.startsWith("/profile")) {
+      if (!accessToken) {
+        // Redirect to login if there's no access token
+        return NextResponse.redirect(new URL("/login", request.url));
+      } else {
+        // Validate the access token with the server
+        const res = await fetch(server_api + "/user/me", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        const data = await res.json();
+
+        // If token is invalid, redirect to login
+        if (!data || data?.success !== true) {
+          return NextResponse.redirect(new URL("/login", request.url));
+        }
+      }
+    }
+
+    // Allow access to the requested route if all checks pass
+    return NextResponse.next();
+  } catch (error) {
+    console.error("Middleware error:", error);
+    // Fallback response in case of error
+    return NextResponse.redirect(new URL("/error", request.url));
   }
-
-  // If no access token, redirect to login
-  if (!accessToken) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-
-  // Check if the user is authenticated
-  const res = await fetch(server_api + "/user/me", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  const data = await res.json();
-
-  // Redirect to login if authentication fails
-  if (!data || data?.success !== true) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-
-  // Allow access to the requested route if all checks pass
-  return NextResponse.next();
 }
 
-// Configure middleware to run on all routes that should be restricted during maintenance
+// Configure middleware to match relevant routes
 export const config = {
   matcher: [
-    "/profile",
-    "/profile/dashboard",
-    "/profile/order-history",
-    "/profile/account-details",
-    "/profile/account-details/change-password",
-    "/profile/address",
-    "/profile/address/billing-address",
-    "/profile/review",
-    "/profile/review/review-history",
+    "/profile/:path*", // Covers all routes under /profile/*
+    "/((?!maintenance-mode|api|_next|favicon.ico).*)", // All other routes except maintenance, api, and Next.js internals
   ],
 };

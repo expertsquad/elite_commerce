@@ -1,3 +1,6 @@
+"use client";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import TopLeftBall from "./TopLeftBall";
 import BottomBlurBall from "./BottomBlurBall";
 import Image from "next/image";
@@ -16,14 +19,34 @@ const MiantenanceModePageContent = ({
   socialMedia: ISocialMedias[];
   maintainance?: any;
 }) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const startTime = new Date(maintainance?.startTime);
+    const endTime = new Date(maintainance?.endTime);
+    const currentTime = new Date();
+
+    const isWithinMaintenanceTime =
+      currentTime >= startTime && currentTime <= endTime;
+
+    if (isWithinMaintenanceTime) {
+      const handleBeforeUnload = () => {
+        router.push("/maintenance");
+      };
+      window.addEventListener("popstate", handleBeforeUnload);
+
+      return () => {
+        window.removeEventListener("popstate", handleBeforeUnload);
+      };
+    }
+  }, [maintainance, router]);
+
   return (
     <section className="bg-white h-screen backdrop-blur-xl relative">
-      {/* TOP LEFT BLUR BALL */}
       <TopLeftBall />
-      {/* BOTTOM RIGHT BLUR BALL */}
       <BottomBlurBall />
 
-      <div className=" absolute top-0 left-0 right-0 bg-primary-light h-screen backdrop-blur-xl opacity-10"></div>
+      <div className="absolute top-0 left-0 right-0 bg-primary-light h-screen backdrop-blur-xl opacity-10"></div>
       <div className="py-[clamp(20px,2.5vw,30px)]">
         <div className="flex flex-col items-center gap-[clamp(30px,2.5vw,40px)]">
           <div className="flex items-center justify-center">
@@ -62,4 +85,5 @@ const MiantenanceModePageContent = ({
     </section>
   );
 };
+
 export default MiantenanceModePageContent;
