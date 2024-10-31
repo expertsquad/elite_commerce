@@ -6,7 +6,6 @@ import { cookies } from "next/headers";
 import { permanentRedirect } from "next/navigation";
 import BackButton from "../sign-up/_components/BackButton";
 import OTPInput from "../_components/OTPInput";
-import ResendOtpAndCountdown from "../_components/ResendOtpAndCountdown";
 
 const VerifyEmail = async ({
   searchParams,

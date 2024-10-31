@@ -1,6 +1,5 @@
 import Logo from "@/utils/Logo";
 import BackButton from "../sign-up/_components/BackButton";
-
 import ForgotPasswordOTPForm from "./_components/ForgotPasswordOTPForm";
 
 const ForgotPasswordOTPSubmit = async ({

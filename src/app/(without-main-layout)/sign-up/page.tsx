@@ -1,6 +1,4 @@
-import { loginSignupTopShapeBg } from "@/assets";
 import Logo from "@/utils/Logo";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import BackButton from "./_components/BackButton";
