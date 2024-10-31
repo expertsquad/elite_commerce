@@ -47,7 +47,7 @@ const ProductVariantPrice = ({
         {currencyIcon}
         {sellingPrice ? sellingPrice : product?.variants[0]?.sellingPrice}
       </del>
-      {discountPercentage && <span className="text-black-10">|</span>}
+      {discountPercentage > 0 && <span className="text-black-10">|</span>}
       {discountPercentage > 0 && (
         <div
           title={`You will get extra ${
@@ -58,9 +58,9 @@ const ProductVariantPrice = ({
           className="bg-gradient-secondary-light rounded-md p-0.5"
         >
           <span className="text-sm text-gradient-secondary px-2">
-            {discountPercentage
-              ? discountPercentage
-              : product?.variants[0]?.discountPercentage}
+            {discountPercentage > 0
+              ? discountPercentage.toFixed()
+              : product?.variants[0]?.discountPercentage?.toFixed()}
             % OFF
           </span>
         </div>

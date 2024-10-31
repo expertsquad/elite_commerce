@@ -1,4 +1,4 @@
-import { Button } from "@/Components/Buttons";
+"use client";
 import { server_url } from "@/constants";
 import { heroBottomSmallBanner } from "@/interfaces/heroBottom.interface";
 import { IconArrowRight } from "@tabler/icons-react";
@@ -12,9 +12,17 @@ const BottomSmallBanner = ({
   bottomOffer: heroBottomSmallBanner;
   currencyIcon: string;
 }) => {
+  const handleLink = () => {
+    if (bottomOffer?.link && bottomOffer?.backgroundPhoto) {
+      window.open(bottomOffer?.link, "_blank");
+    }
+  };
+
   return (
     <div
-      className={`flex justify-center md:justify-between items-center p-5 rounded-lg flex-1 w-full h-full text-white`}
+      className={`flex justify-center md:justify-between items-center p-5 rounded-lg flex-1 w-full h-full text-white ${
+        bottomOffer?.backgroundPhoto && "cursor-pointer"
+      }`}
       style={{
         backgroundColor: `${
           bottomOffer?.backgroundColor && `${bottomOffer?.backgroundColor}`
@@ -27,8 +35,13 @@ const BottomSmallBanner = ({
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
+      onClick={handleLink}
     >
-      <div className="flex flex-col">
+      <div
+        className={`flex flex-col ${
+          bottomOffer?.backgroundPhoto ? "hidden" : "block"
+        }`}
+      >
         <h2 className="[font-size:_clamp(1.2em,2.60vw,1.6em)] line-clamp-2 mb-2.5">
           {bottomOffer?.offerTag}
         </h2>
@@ -45,7 +58,11 @@ const BottomSmallBanner = ({
         </Link>
       </div>
 
-      <div className="relative w-36 h-36">
+      <div
+        className={`relative w-36 h-36 ${
+          bottomOffer?.backgroundPhoto ? "hidden" : "block"
+        }`}
+      >
         <Image
           src={`${server_url + bottomOffer?.productPhoto}`}
           alt="Hero discount item"

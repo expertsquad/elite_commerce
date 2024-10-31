@@ -124,7 +124,7 @@ const CartItems = ({
                     discount
                   </span>
                   <p className="text-base text-positive">
-                    You've saved {""}
+                    You&apos;ve saved {""}
                     {currencyIcon}
                     {totalDiscount}
                   </p>

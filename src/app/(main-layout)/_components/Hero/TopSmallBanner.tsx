@@ -1,4 +1,4 @@
-import { Button } from "@/Components/Buttons";
+"use client";
 import { server_url } from "@/constants";
 import { heroTopSmallBanner } from "@/interfaces/heroTopCard.interface";
 import { IconArrowRight } from "@tabler/icons-react";
@@ -12,9 +12,16 @@ const TopSmallBanner = ({
   topOffer: heroTopSmallBanner;
   currencyIcon: string;
 }) => {
+  const handleLink = () => {
+    if (topOffer?.link && topOffer?.backgroundPhoto) {
+      window.open(topOffer?.link, "_blank");
+    }
+  };
   return (
     <div
-      className={`flex items-center gap-x-5 p-5 md:justify-start justify-center rounded-lg flex-1 w-full h-full`}
+      className={`flex items-center gap-x-5 p-5 md:justify-start justify-center rounded-lg flex-1 w-full h-full ${
+        topOffer?.backgroundPhoto && "cursor-pointer"
+      }`}
       style={{
         backgroundColor: `${
           topOffer?.backgroundColor && `${topOffer?.backgroundColor}`
@@ -27,8 +34,13 @@ const TopSmallBanner = ({
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
+      onClick={handleLink}
     >
-      <div className="relative w-36 h-36 shrink-0">
+      <div
+        className={`relative w-36 h-36 shrink-0 ${
+          topOffer?.backgroundPhoto ? "hidden" : "block"
+        }`}
+      >
         <Image
           src={`${server_url + topOffer?.productPhoto}`}
           alt="Hero discount item"
@@ -40,7 +52,11 @@ const TopSmallBanner = ({
         />
       </div>
 
-      <div className="flex flex-col">
+      <div
+        className={`flex flex-col ${
+          topOffer?.backgroundPhoto ? "hidden" : "block"
+        }`}
+      >
         <h2 className="text-2xl line-clamp-2 text-start">{topOffer?.title}</h2>
         <div className="flex items-baseline gap-1 main-text-color font-bold mt-2.5">
           <span className="text-lg flex items-start justify-start w-full">
