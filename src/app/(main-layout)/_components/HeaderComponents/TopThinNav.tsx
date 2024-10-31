@@ -8,7 +8,13 @@ const TopThinNav = () => {
       <div className="hidden md:flex justify-between items-center bg-gradient-primary text-white text-xs px-3 py-1">
         <div className="flex items-center gap-6">
           {topMenus.map((menu) => (
-            <span key={menu.label}>{menu.label}</span>
+            <Link
+              href={`${menu?.href}`}
+              className="hover:underline"
+              key={menu.label}
+            >
+              {menu.label}
+            </Link>
           ))}
         </div>
         <ul className="flex items-center gap-6">

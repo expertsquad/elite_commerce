@@ -10,7 +10,7 @@ const Header = () => {
       <TopThinNav />
       <header className="border-b border-black-10 mb-3 sticky top-0 z-50 bg-white-transparent backdrop-blur-lg">
         <LargeDeviceMegaMenu />
-        {/* <SmallDeviceMegaMenu /> */}
+        <SmallDeviceMegaMenu />
       </header>
       {/* <BottomNavSmallDevice /> */}
     </Fragment>

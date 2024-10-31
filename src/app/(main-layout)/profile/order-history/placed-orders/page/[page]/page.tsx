@@ -4,6 +4,7 @@ import Pagination from "@/Components/Pagination";
 import OrderItems from "@/app/(main-layout)/profile/_components/OrderItems";
 import { Order } from "@/interfaces/oreder.interface";
 import { getCurrency } from "@/utils/getCurrency";
+import ProductEmptyState from "@/app/(main-layout)/_components/ProductEmptyState";
 
 // export const generateStaticParams = async () => {
 //   const getMe = await fetchProtectedData({
@@ -44,11 +45,17 @@ const PlacedOrdersHistory = async ({
 
   return (
     <div className="space-y-5">
-      <div>
-        {orderPlacedData?.data?.map((order: Order) => (
-          <OrderItems key={order._id} order={order} currency={currency} />
-        ))}
-      </div>
+      {orderPlacedData?.data?.length === 0 ? (
+        <div className="flex items-center justify-center">
+          <ProductEmptyState />
+        </div>
+      ) : (
+        <div className="p-3">
+          {orderPlacedData?.data?.map((order: Order) => (
+            <OrderItems currency={currency} key={order._id} order={order} />
+          ))}
+        </div>
+      )}
       <div>
         <Pagination
           redirectTo="/profile/order-history/placed-orders/page"
