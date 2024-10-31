@@ -53,7 +53,7 @@ const OrderSummery = ({
       </div>
       <div className="flex items-center justify-between !my-2">
         <span className="text-black-80 md:text-base text-sm">Shipping</span>
-        <p className={`${shippingFee ? "" : "text-primary-light"}`}>
+        <p className={`${shippingFee ? "" : "text-primary-color-light-color"}`}>
           {shippingFee ? currencyIcon! + shippingFee : "You Got Free Shipping"}
         </p>
       </div>

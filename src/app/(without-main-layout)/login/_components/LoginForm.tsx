@@ -81,7 +81,7 @@ const LoginForm = () => {
         />
         <Link
           href={`/forgot-password`}
-          className="ml-auto hover:underline hover:text-primary [font-size:_clamp(12px,2.5vw,14px)]"
+          className="ml-auto hover:underline hover:text-primary-color [font-size:_clamp(12px,2.5vw,14px)]"
         >
           Forgotten password?
         </Link>

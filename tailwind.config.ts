@@ -11,12 +11,12 @@ const config: Config = {
     // colors
     colors: {
       primary: {
-        light: "var(--primary-light)",
-        DEFAULT: "var(--primary)",
+        light: "var(--primary-light-color)",
+        DEFAULT: "var(--primary-color)",
       },
       secondary: {
-        light: "var(--secondary-light)",
-        DEFAULT: "var(--secondary)",
+        light: "var(--secondary-light-color)",
+        DEFAULT: "var(--secondary-color)",
       },
       positive: "var(--positive)",
       danger: "var(--danger)",
