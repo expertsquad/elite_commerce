@@ -27,7 +27,9 @@ const ProdViewCartIncreamentDecreamentBtn = ({
   );
 
   const handleIncrease = () => {
-    setQuantity((prevQuantity) => Math.min(prevQuantity + 1, 99));
+    setQuantity((prevQuantity) =>
+      Math.min(prevQuantity + 1, variant?.inStock || 99)
+    );
   };
 
   const handleDecrease = () => {
