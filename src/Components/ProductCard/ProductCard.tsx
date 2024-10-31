@@ -6,7 +6,6 @@ import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOr
 import ProductCartBtn from "./ProductCartBtn";
 import ProductPreviewRedirect from "./ProductPreviewRedirect";
 import { getPricingDetails } from "./getPricingDetails";
-import Link from "next/link";
 export interface IProductCardProps {
   product: IProduct;
   onClick?: () => void;
@@ -35,7 +34,7 @@ const ProductCard = ({
       <div className="bg-gradient-primary-light">
         <ProductImageSlider
           product={product}
-          shippingAmount={shippingAmount}
+          shippingAmount={shippingAmount ? shippingAmount : 0}
           currencyIcon={currencyIcon}
           isQuickOrderActive={isQuickOrderActive}
         />

@@ -10,18 +10,26 @@ const ProdViewCartIncreamentDecreamentBtn = ({
   quantity,
   setQuantity,
   variant,
+  btnContainerStyle,
 }: {
   product: IProduct;
   quantity: number;
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
   variant?: IProductVariant;
+  btnContainerStyle?: string;
 }) => {
   const { cartProducts, setRefetch } = useContext(CartContext);
 
-  const isCarted = cartProducts?.find((item) => item?._id === product?._id);
+  const isCarted = cartProducts?.find(
+    (item) =>
+      item?._id === product?._id &&
+      item?.variant?.variantName === variant?.variantName
+  );
 
   const handleIncrease = () => {
-    setQuantity((prevQuantity) => Math.min(prevQuantity + 1, 99));
+    setQuantity((prevQuantity) =>
+      Math.min(prevQuantity + 1, variant?.inStock || 99)
+    );
   };
 
   const handleDecrease = () => {
@@ -35,9 +43,12 @@ const ProdViewCartIncreamentDecreamentBtn = ({
           product={isCarted}
           setRefetch={setRefetch}
           variant={variant}
+          className="rounded-md"
         />
       ) : (
-        <div className="flex items-center justify-center gap-x-2 py-2 px-3 border border-black-10 rounded-full group group-hover:border-primary">
+        <div
+          className={`flex items-center justify-center gap-x-2 py-2 px-3 border border-black-10 rounded-full group group-hover:border-primary ${btnContainerStyle}`}
+        >
           <button
             onClick={handleDecrease}
             disabled={quantity <= 1}
@@ -45,7 +56,9 @@ const ProdViewCartIncreamentDecreamentBtn = ({
           >
             <IconMinus size={18} />
           </button>
-          <span className="text-black-50">{quantity}</span>
+          <span className="text-black-50 text-base font-normal">
+            {quantity}
+          </span>
           <button
             onClick={handleIncrease}
             disabled={quantity >= 99}
