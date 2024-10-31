@@ -22,6 +22,7 @@ import { getShippingFee } from "@/utils/getShippingFee";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { Button } from "@/Components/Buttons";
 import { productEmptyState } from "@/assets";
+import { calculateDiscountAndBulkOrderPrice } from "@/utils/calculateDiscountAndBulkOrderPrice";
 
 const ShoppingCartBtn = ({
   currencyIcon,
@@ -118,7 +119,7 @@ const ShoppingCartBtn = ({
 
             {/* if dont have anything in cart it will not show */}
             {cartProducts.length ? (
-              <div className="fixed bottom-0 right-1 md:w-[95%]  mx-auto bg-white w-full ">
+              <div className="fixed bottom-0 right-1 md:w-[95%] mx-auto bg-white w-full ">
                 <OrderSummery
                   setshow={setShow}
                   products={cartProducts}
@@ -184,10 +185,14 @@ export const QuickOrderItem = ({
     setRefetch((prev) => prev + 1);
   };
 
-  const totalPrice =
-    (product?.variant?.discountedPrice
-      ? product?.variant?.discountedPrice
-      : product?.variant?.sellingPrice) * product?.orderQuantity;
+  const { sellingPrice, discountPercentage, discountedPrice } =
+    calculateDiscountAndBulkOrderPrice(
+      product,
+      product?.variant,
+      product?.orderQuantity
+    );
+
+  const totalPrice = discountedPrice * product?.orderQuantity;
 
   return (
     <div className="flex justify-between gap-3.5">
@@ -238,7 +243,9 @@ export const QuickOrderItem = ({
           <div className="flex items-center gap-1.5">
             <span className="text-black-80 font-medium text-base">
               {currencyIcon}
-              {product?.variant?.discountedPrice}
+              {discountedPrice
+                ? discountedPrice
+                : product?.variant?.discountedPrice}
             </span>
             <span className="text-xs">
               <IconX stroke={1} size={16} />

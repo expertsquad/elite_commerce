@@ -5,6 +5,7 @@ import Image from "next/image";
 import IncreaseDecreaseCartItems from "../../brands/_components/IncreaseDecreaseCartItems";
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { updateCart } from "@/utils/updateCart.utils";
+import { calculateDiscountAndBulkOrderPrice } from "@/utils/calculateDiscountAndBulkOrderPrice";
 
 export const CartItem = ({
   product,
@@ -15,8 +16,13 @@ export const CartItem = ({
   setRefetch: React.Dispatch<React.SetStateAction<number>>;
   currencyIcon?: string;
 }) => {
-  const price =
-    product?.variant?.discountedPrice || product?.variant?.sellingPrice;
+  const { sellingPrice, discountPercentage, discountedPrice } =
+    calculateDiscountAndBulkOrderPrice(
+      product,
+      product?.variant,
+      product?.orderQuantity
+    );
+  const price = discountedPrice ? discountedPrice : sellingPrice;
 
   const handleRemoveItem = () => {
     updateCart({ actionType: "remove", product, variant: product?.variant });
@@ -44,7 +50,7 @@ export const CartItem = ({
               {product?.productName}
             </span>
             <button className="md:border rounded-full border-danger p-0.5 block md:hidden">
-              <IconX stroke={1} color="#FF3838" width={16} height={16} />
+              <IconX stroke={1} color="#FF3838" size={16} />
             </button>
           </div>
           <div className="flex items-center gap-2">

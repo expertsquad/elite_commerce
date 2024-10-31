@@ -2,6 +2,7 @@ import Image from "next/image";
 import { IProduct } from "@/interfaces/product.interface";
 import { server_url } from "@/constants";
 import { IconMinus, IconPlus, IconX } from "@tabler/icons-react";
+import { calculateDiscountAndBulkOrderPrice } from "@/utils/calculateDiscountAndBulkOrderPrice";
 
 export const QuickOrderItem = ({
   product,
@@ -16,6 +17,13 @@ export const QuickOrderItem = ({
   onDecreaseQuantity: () => void;
   onRemoveProduct: () => void;
 }) => {
+  const { sellingPrice, discountPercentage, discountedPrice } =
+    calculateDiscountAndBulkOrderPrice(
+      product,
+      product?.variant,
+      product?.orderQuantity
+    );
+
   return (
     <div className="flex justify-between gap-3.5">
       <div className="flex md:items-center gap-3.5 w-full">
@@ -73,9 +81,7 @@ export const QuickOrderItem = ({
             <div className="flex items-center gap-x-1.5">
               <span className="text-black-80 text-base">
                 {currencyIcon}
-                {product?.variant?.discountedPrice
-                  ? product?.variant?.discountedPrice
-                  : product?.variant?.sellingPrice}
+                {discountedPrice}
               </span>
               <div className="flex items-center gap-x-1.5 bg-gradient-primary-light rounded-2xl px-1 py-0.5">
                 <span
@@ -83,7 +89,7 @@ export const QuickOrderItem = ({
                   onClick={onDecreaseQuantity}
                 >
                   <IconMinus
-                    stroke={1}
+                    stroke={2}
                     height={16}
                     width={16}
                     className="hover:fill-white"
@@ -96,15 +102,13 @@ export const QuickOrderItem = ({
                   className="bg-gradient-primary text-white rounded-full font-bold cursor-pointer"
                   onClick={onIncreaseQuantity}
                 >
-                  <IconPlus stroke={1} height={16} width={16} />
+                  <IconPlus stroke={2} height={16} width={16} />
                 </span>
               </div>
             </div>
             <strong className="font-semibold text-gradient-primary text-base">
               {currencyIcon}
-              {product?.variant?.discountedPrice
-                ? product?.variant?.discountedPrice * product?.orderQuantity
-                : product?.variant?.sellingPrice * product?.orderQuantity}
+              {discountedPrice * product?.orderQuantity}
             </strong>
           </div>
         </div>

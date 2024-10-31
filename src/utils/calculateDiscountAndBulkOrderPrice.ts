@@ -13,23 +13,22 @@ export const calculateDiscountAndBulkOrderPrice = (
 ): DiscountCalculationResult => {
   const { sellingPrice, discountedPrice, discountPercentage } = selectedVariant;
 
-  // 1. Check if `discountedPrice` exists, indicating a base discount
+  // <== 1. Check if `discountedPrice` exists, indicating a base discount ==>
   if (discountedPrice !== undefined) {
-    // Calculate base discount percentage if it's missing
+    // <== Calculate base discount percentage if it's missing ==>
     const baseDiscountPercentage =
       discountPercentage ??
       parseFloat(
         (((sellingPrice - discountedPrice) / sellingPrice) * 100).toFixed(2)
       );
 
-    // 2. Apply bulk discount if conditions are met
-    if (product.bulk && quantity >= product.bulk.minOrder) {
-      const bulkDiscount = product.bulk.discount;
+    // <== 2. Apply bulk discount if conditions are met ==>
+    if (product?.bulk && quantity >= product?.bulk?.minOrder) {
+      const bulkDiscount = product?.bulk?.discount;
 
-      // Calculate the total discount percentage by adding base and bulk discounts
       const totalDiscountPercentage = baseDiscountPercentage + bulkDiscount;
 
-      // Calculate the final discounted price based on the total discount
+      // <== Final discount figure ==>
       const finalDiscountedPrice = parseFloat(
         (sellingPrice - (sellingPrice * totalDiscountPercentage) / 100).toFixed(
           2
@@ -43,7 +42,7 @@ export const calculateDiscountAndBulkOrderPrice = (
       };
     }
 
-    // Return standard discount if no bulk discount applies
+    // <== Return standard discount if no bulk discount applies ==>
     return {
       sellingPrice,
       discountedPrice,
@@ -51,7 +50,7 @@ export const calculateDiscountAndBulkOrderPrice = (
     };
   }
 
-  // If no `discountedPrice`, return `sellingPrice` with 0% discount
+  // <== If no `discountedPrice`, return `sellingPrice` with 0% discount ==>
   return {
     sellingPrice,
     discountedPrice: sellingPrice,
