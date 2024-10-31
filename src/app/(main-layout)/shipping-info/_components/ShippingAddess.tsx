@@ -16,9 +16,13 @@ import { storages } from "@/constants";
 const ShippingAddess = ({
   defaultAddress,
   country,
+  states,
+  cities,
 }: {
   defaultAddress: ResponseShippingAddress;
   country?: string;
+  states?: any;
+  cities?: any;
 }) => {
   const [selectedOption, setSelectedOption] = useState("defaultAddress");
   const [shippingAddress, setShippingAddress] = useState(
@@ -114,6 +118,8 @@ const ShippingAddess = ({
         <AddNewShippingInputSection
           country={country ? country : ""}
           onNewAddressChange={handleNewAddressChange}
+          states={states}
+          cities={cities}
         />
       )}
     </div>

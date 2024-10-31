@@ -2,12 +2,18 @@
 import React, { useContext, useState, useEffect } from "react";
 import ShipToCard from "./ShipToCard";
 import AddNewBillingAddress from "./AddNewBillingAddress";
-import { IApiResponse } from "@/interfaces/apiResponse.interface";
-import { IUserMe } from "@/interfaces/getMe.interface";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { AddressData } from "@/interfaces/defaultShippingAddress.interface";
 
-const ShipToAndBillingSection = ({ country }: { country: string }) => {
+const ShipToAndBillingSection = ({
+  country,
+  states,
+  cities,
+}: {
+  country: string;
+  states?: any;
+  cities?: any;
+}) => {
   const [selectedOption, setSelectedOption] = useState("sameAsShipping");
   const { orderData, setOrderData } = useContext(OrderInitContext);
 
@@ -97,6 +103,8 @@ const ShipToAndBillingSection = ({ country }: { country: string }) => {
         <AddNewBillingAddress
           onNewAddressChange={handleNewAddressChange}
           country={country}
+          states={states}
+          cities={cities}
         />
       )}
     </div>

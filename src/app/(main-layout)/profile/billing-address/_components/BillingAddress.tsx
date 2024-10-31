@@ -11,17 +11,24 @@ import { useState } from "react";
 const BillingAddress = ({
   billingAddress,
   country,
+  states,
+  cities,
 }: {
   billingAddress: IAddress;
   country: string;
+  states: any;
+  cities: any;
 }) => {
   const [state, setState] = useState(
-    billingAddress?.state ? billingAddress?.state : ""
+    billingAddress?.state ? billingAddress?.state : "Select State"
   );
   const [city, setCity] = useState(
-    billingAddress?.city ? billingAddress?.city : ""
+    billingAddress?.city ? billingAddress?.city : "Select Ciy"
   );
   const [loading, setLoading] = useState(false);
+
+  const stateByCountryName = states?.data?.map((s: any) => s.name);
+  const cityByCountryName = cities?.data?.map((s: any) => s.name);
 
   // handle submit
   const handleSubmit = async (e: any) => {
@@ -106,7 +113,7 @@ const BillingAddress = ({
           />
         </div>
         <CustomDropdown
-          data={countryNames}
+          data={stateByCountryName}
           onClick={(value) => setState(value)}
           className="w-full border border-black-10 py-2 rounded-lg px-3 "
           itemClassName="py-1 hover:bg-black-10"
@@ -115,7 +122,7 @@ const BillingAddress = ({
           searchInput={true}
         />
         <CustomDropdown
-          data={countryNames}
+          data={cityByCountryName}
           onClick={(value) => setCity(value)}
           className="w-full border border-black-10 py-2 rounded-lg px-3 "
           itemClassName="py-1 hover:bg-black-10"

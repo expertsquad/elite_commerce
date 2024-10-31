@@ -14,10 +14,16 @@ const page = async () => {
   const country = await fetchData({
     route: "/settings/shop",
   });
-
+  // this is from country data api
+  // get all state by country name
   const stateByCountryName = await fetchCountryData({
     route: `/state/` + country?.data?.country,
     limit: 100,
+  });
+  // get all city by country name
+  const cityByStateName = await fetchCountryData({
+    route: `/city/` + country?.data?.country,
+    limit: 1000,
   });
 
   return (
@@ -42,6 +48,8 @@ const page = async () => {
       <ShippingAddress
         country={country?.data?.country}
         shippingAddress={shippingAddress?.data[0]}
+        states={stateByCountryName}
+        cities={cityByStateName}
       />
     </div>
   );

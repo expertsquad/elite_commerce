@@ -15,11 +15,15 @@ const BillingInfoPageContent = ({
   country,
   paymentMethod,
   shippingCharge,
+  states,
+  cities,
 }: {
   currencySymbol: string;
   country?: string;
   paymentMethod: any;
   shippingCharge: any;
+  states?: any;
+  cities?: any;
 }) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -87,7 +91,11 @@ const BillingInfoPageContent = ({
     >
       <div className="w-full">
         <PaymentOption paymentMethod={paymentMethod} />
-        <ShipToAndBillingSection country={country ? country : ""} />
+        <ShipToAndBillingSection
+          country={country ? country : ""}
+          states={states}
+          cities={cities}
+        />
       </div>
 
       <div>

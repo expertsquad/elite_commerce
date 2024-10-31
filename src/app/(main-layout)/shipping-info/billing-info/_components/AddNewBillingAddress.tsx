@@ -6,9 +6,13 @@ import CustomDropdown from "@/Components/CustomDropdown";
 const AddNewBillingAddress = ({
   onNewAddressChange,
   country,
+  states,
+  cities,
 }: {
   onNewAddressChange: (newAddress: any) => void;
   country: string;
+  states?: any;
+  cities?: any;
 }) => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -25,6 +29,9 @@ const AddNewBillingAddress = ({
     selectedShippingAddress: "newAddress",
     city: "",
   });
+
+  const stateByCountryName = states?.data?.map((s: any) => s.name);
+  const cityByCountryName = cities?.data?.map((s: any) => s.name);
 
   // used useEffect to set city and state
   useEffect(() => {
@@ -94,24 +101,24 @@ const AddNewBillingAddress = ({
           />
         </div>
         <CustomDropdown
-          data={countryNames}
+          data={stateByCountryName}
           onClick={(value) => setState(value)}
           className={`w-full py-2 rounded-lg px-3 ${
             state == "" ? "border border-danger" : "border border-black-10"
           }`}
           itemClassName="py-1 hover:bg-black-10"
-          defaultValue={newAddress?.state}
+          defaultValue={newAddress?.state ? newAddress?.state : "Select State"}
           label="State"
           searchInput={true}
         />
         <CustomDropdown
-          data={countryNames}
+          data={cityByCountryName}
           onClick={(value) => setCity(value)}
           className={`w-full py-2 rounded-lg px-3 ${
             city == "" ? "border border-danger" : "border border-black-10"
           }`}
           itemClassName="py-1 hover:bg-black-10"
-          defaultValue={newAddress?.city}
+          defaultValue={newAddress?.city ? newAddress?.city : "Select City"}
           label="City"
           searchInput={true}
         />
