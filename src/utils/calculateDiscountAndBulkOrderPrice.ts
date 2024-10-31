@@ -11,11 +11,11 @@ export const calculateDiscountAndBulkOrderPrice = (
   selectedVariant: IProductVariant,
   quantity: number
 ): DiscountCalculationResult => {
-  let { sellingPrice, discountedPrice, discountPercentage } = selectedVariant;
+  const { sellingPrice, discountedPrice, discountPercentage } = selectedVariant;
 
   // 1. Check if `discountedPrice` exists, indicating a base discount
   if (discountedPrice !== undefined) {
-    // Calculate discount percentage if missing
+    // Calculate base discount percentage if it's missing
     const baseDiscountPercentage =
       discountPercentage ??
       parseFloat(
@@ -26,16 +26,20 @@ export const calculateDiscountAndBulkOrderPrice = (
     if (product.bulk && quantity >= product.bulk.minOrder) {
       const bulkDiscount = product.bulk.discount;
 
-      const bulkDiscountAmount = (discountedPrice * bulkDiscount) / 100;
+      // Calculate the total discount percentage by adding base and bulk discounts
+      const totalDiscountPercentage = baseDiscountPercentage + bulkDiscount;
+
+      // Calculate the final discounted price based on the total discount
       const finalDiscountedPrice = parseFloat(
-        (discountedPrice - bulkDiscountAmount).toFixed(2)
+        (sellingPrice - (sellingPrice * totalDiscountPercentage) / 100).toFixed(
+          2
+        )
       );
-      const finalDiscountPercentage = baseDiscountPercentage + bulkDiscount;
 
       return {
         sellingPrice,
         discountedPrice: finalDiscountedPrice,
-        discountPercentage: finalDiscountPercentage,
+        discountPercentage: totalDiscountPercentage,
       };
     }
 
