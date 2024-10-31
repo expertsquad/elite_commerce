@@ -12,7 +12,7 @@ const Header = () => {
         <LargeDeviceMegaMenu />
         <SmallDeviceMegaMenu />
       </header>
-      {/* <BottomNavSmallDevice /> */}
+      <BottomNavSmallDevice />
     </Fragment>
   );
 };
