@@ -11,12 +11,14 @@ export interface IUpdateCartProps {
   actionType: "add" | "remove" | "decrease";
   product: ICartProduct | IProduct;
   variant?: IProductVariant;
+  quantity?: number;
 }
 
 export const updateCart = async ({
   actionType,
   product,
   variant,
+  quantity,
 }: IUpdateCartProps) => {
   const prevCartItems =
     (getLocalStorageData(storages.cartProducts) as ICartProduct[]) || [];
@@ -25,6 +27,39 @@ export const updateCart = async ({
   // -----------------------------
   // to add an item or increase in the cart
   // -----------------------------
+  // if (actionType === "add") {
+  //   let formattedProduct: ICartProduct = product as ICartProduct;
+  //   if (!formattedProduct.hasOwnProperty("variant")) {
+  //     formattedProduct = formatProductForCart({
+  //       product: formattedProduct,
+  //       selectedVariant: variant?.variantName,
+  //     });
+  //   }
+  //   // check is already product exist
+  //   const existingIndex = prevCartItems.findIndex(
+  //     (prevProduct) =>
+  //       prevProduct?._id === formattedProduct?._id &&
+  //       prevProduct?.variant?.variantName ===
+  //         formattedProduct?.variant?.variantName
+  //   );
+  //   const isAlreadyExist = prevCartItems.find(
+  //     (prevProduct) =>
+  //       prevProduct?._id === formattedProduct?._id &&
+  //       prevProduct?.variant?.variantName ===
+  //         formattedProduct?.variant?.variantName
+  //   );
+  //   // if exist update quantity else add as new one
+  //   if (existingIndex !== -1 && isAlreadyExist) {
+  //     updatedCartItems = [
+  //       ...prevCartItems.slice(0, existingIndex),
+  //       { ...isAlreadyExist, orderQuantity: isAlreadyExist.orderQuantity + 1 },
+  //       ...prevCartItems.slice(existingIndex + 1),
+  //     ];
+  //   } else {
+  //     updatedCartItems = [...prevCartItems, formattedProduct];
+  //   }
+  // }
+
   if (actionType === "add") {
     let formattedProduct: ICartProduct = product as ICartProduct;
     if (!formattedProduct.hasOwnProperty("variant")) {
@@ -33,7 +68,7 @@ export const updateCart = async ({
         selectedVariant: variant?.variantName,
       });
     }
-    // check is already product exist
+
     const existingIndex = prevCartItems.findIndex(
       (prevProduct) =>
         prevProduct?._id === formattedProduct?._id &&
@@ -46,17 +81,26 @@ export const updateCart = async ({
         prevProduct?.variant?.variantName ===
           formattedProduct?.variant?.variantName
     );
-    // if exist update quantity else add as new one
+
+    // If the product exists, update the quantity; otherwise, add as a new item
     if (existingIndex !== -1 && isAlreadyExist) {
       updatedCartItems = [
         ...prevCartItems.slice(0, existingIndex),
-        { ...isAlreadyExist, orderQuantity: isAlreadyExist.orderQuantity + 1 },
+        {
+          ...isAlreadyExist,
+          orderQuantity: isAlreadyExist.orderQuantity + (quantity || 1),
+        },
         ...prevCartItems.slice(existingIndex + 1),
       ];
     } else {
-      updatedCartItems = [...prevCartItems, formattedProduct];
+      // Set initial quantity if provided, otherwise default to 1
+      updatedCartItems = [
+        ...prevCartItems,
+        { ...formattedProduct, orderQuantity: quantity || 1 },
+      ];
     }
   }
+
   // -----------------------------
   // to decrease quantity or remove in the cart
   // -----------------------------

@@ -9,13 +9,27 @@ import React, { useContext } from "react";
 const ProductViewCartBtn = ({
   product,
   variant,
+  quantity,
 }: {
   product: IProduct;
   variant: IProductVariant;
+  quantity?: number;
 }) => {
-  const { setRefetch } = useContext(CartContext);
+  const { cartProducts, setRefetch } = useContext(CartContext);
+
+  const isCarted = cartProducts.find(
+    (item) =>
+      item?._id === product?._id &&
+      item?.variant?.variantName === variant?.variantName
+  );
+
   const handleAddToCart = () => {
-    updateCart({ actionType: "add", product: product, variant });
+    updateCart({
+      actionType: "add",
+      product: product,
+      variant,
+      quantity: isCarted ? undefined : quantity,
+    });
     setRefetch && setRefetch((prev) => prev + 1);
   };
   return (

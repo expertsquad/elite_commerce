@@ -1,6 +1,6 @@
 "use client";
 import { IProduct, IProductVariant } from "@/interfaces/product.interface";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ExtraDiscountBasedOnOrder from "./ExtraDiscountBasedOnOrder";
 import ProductPriceBasedOnVariants from "./ProductPriceBasedOnVariants";
 import ProdViewCartIncreamentDecreamentBtn from "./ProdViewCartIncreamentDecreamentBtn";
@@ -9,6 +9,7 @@ import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOr
 import { IconBolt } from "@tabler/icons-react";
 import BuyNowSingleProduct from "./BuyNowSingleProduct";
 import RatingWishlistStockAndSold from "./RatingWishlistStockAndSold";
+import { CartContext } from "@/Provider/CartProvider";
 
 const ProductPriceCalculationAndOrder = ({
   product,
@@ -23,8 +24,17 @@ const ProductPriceCalculationAndOrder = ({
   isQuickOrderActive?: boolean;
   accessToken: string;
 }) => {
-  const [variant, setVariant] = useState<IProductVariant | null>(null);
+  const [variant, setVariant] = useState<IProductVariant | null>(
+    product?.variants[0] || null
+  );
   const [quantity, setQuantity] = useState(1);
+  const { cartProducts, setRefetch } = useContext(CartContext);
+
+  const isCarted = cartProducts?.find(
+    (item) =>
+      item?._id === product?._id &&
+      item?.variant?.variantName === variant?.variantName
+  );
 
   return (
     <div className="flex flex-col gap-y-5">
@@ -37,7 +47,11 @@ const ProductPriceCalculationAndOrder = ({
       </div>
       {/* <== Bulk order based discount ==> */}
       {product?.bulk?.minOrder && product?.bulk?.minOrder > 0 && (
-        <ExtraDiscountBasedOnOrder product={product} />
+        <ExtraDiscountBasedOnOrder
+          product={product}
+          quantity={quantity}
+          variant={variant}
+        />
       )}
       <div>
         <ProductPriceBasedOnVariants
@@ -61,6 +75,7 @@ const ProductPriceCalculationAndOrder = ({
             <ProductViewCartBtn
               product={product}
               variant={variant ? variant : product?.variants[0]}
+              quantity={quantity ? quantity : 1}
             />
           </div>
         </div>
@@ -69,7 +84,7 @@ const ProductPriceCalculationAndOrder = ({
             <QuickOrderButton
               product={{
                 ...product,
-                orderQuantity: quantity,
+                orderQuantity: isCarted ? isCarted?.orderQuantity : quantity,
                 variant: variant || product?.variants[0],
               }}
               buttonStyle="text-white bg-gradient-primary hover:bg-gradient-primary-reverse flex items-center justify-center gap-x-1.5 py-2.5 rounded-md w-full text-base"
