@@ -14,7 +14,9 @@ export const fetchCountryData = async ({
   try {
     const accessToken = country_data_access_Token;
     if (!accessToken) {
-      throw Error("Access token not found, please login again!");
+      throw Error(
+        "Access token not found, please contact with https://expertsquad.net/"
+      );
     }
 
     const res = await fetch(

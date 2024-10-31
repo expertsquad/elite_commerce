@@ -3,7 +3,6 @@ import Link from "next/link";
 import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import ShippingAddress from "./_components/ShippingAddress";
 import { fetchCountryData } from "@/actions/fetchCountryData";
-import { country_data_access_Token, country_data_url } from "@/constants";
 
 const page = async () => {
   // Get data
@@ -16,11 +15,10 @@ const page = async () => {
     route: "/settings/shop",
   });
 
-  const countryData = await fetchCountryData({
-    route: "/country",
+  const stateByCountryName = await fetchCountryData({
+    route: `/state/` + country?.data?.country,
+    limit: 100,
   });
-
-  console.log(countryData);
 
   return (
     <div>
