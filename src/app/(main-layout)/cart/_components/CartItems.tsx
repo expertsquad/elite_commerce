@@ -123,8 +123,9 @@ const CartItems = ({
                   <span className="text-base text-black-80 capitalize">
                     discount
                   </span>
-                  <p className="text-base font-semibold text-danger">
-                    -{currencyIcon}
+                  <p className="text-base text-positive">
+                    You've saved {""}
+                    {currencyIcon}
                     {totalDiscount}
                   </p>
                 </div>

@@ -74,12 +74,14 @@ const ShippinInfoTotalAmountCard = ({
                   : "You Got Free Shipping"}
               </p>
             </div>
-            <div className="flex items-center justify-between">
-              <p>Discount</p>
+
+            <div className="flex items-center justify-between text-positive">
+              <span className="text-black-80 md:text-base text-sm">
+                Discount
+              </span>
               <p>
-                {" "}
-                -{currencySymbol}
-                {totalDiscount}
+                You saved ({currencySymbol}
+                {totalDiscount})
               </p>
             </div>
           </div>

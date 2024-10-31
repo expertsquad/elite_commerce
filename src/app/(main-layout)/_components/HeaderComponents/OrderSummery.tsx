@@ -57,11 +57,11 @@ const OrderSummery = ({
           {shippingFee ? currencyIcon! + shippingFee : "You Got Free Shipping"}
         </p>
       </div>
-      <div className="flex items-center justify-between ">
+      <div className="flex items-center justify-between text-positive">
         <span className="text-black-80 md:text-base text-sm">Discount</span>
         <p>
-          -{currencyIcon}
-          {totalDiscount}
+          You saved ({currencyIcon}
+          {totalDiscount})
         </p>
       </div>
       <hr className="border-black-10 border my-3.5" />

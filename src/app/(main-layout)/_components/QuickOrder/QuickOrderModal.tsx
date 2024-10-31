@@ -124,19 +124,22 @@ const QuickOrderModal = ({
                     onIncreaseQuantity={() =>
                       handleIncreaseQuickOrderQuantity(
                         product?._id,
-                        setProductList
+                        setProductList,
+                        product?.variant
                       )
                     }
                     onDecreaseQuantity={() =>
                       handleDecreaseQuickOrderQuantity(
                         product?._id,
-                        setProductList
+                        setProductList,
+                        product?.variant
                       )
                     }
                     onRemoveProduct={() =>
                       handleRemoveQuickOrderProduct(
                         product?._id,
-                        setProductList
+                        setProductList,
+                        product?.variant
                       )
                     }
                   />

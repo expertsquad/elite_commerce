@@ -13,10 +13,14 @@ const IncreaseDecreaseOrderItems = ({ product }: { product: ICartProduct }) => {
     if (product?.orderQuantity < product?.variant?.inStock) {
       let updateOrderItems = orderData?.orderItems;
       const productIndex = orderData?.orderItems?.findIndex(
-        (item) => item.productId === product.productId
+        (item) =>
+          item.productId === product.productId &&
+          item?.variant?.variantName === product?.variant?.variantName
       );
       const existProduct = orderData?.orderItems?.find(
-        (item) => item.productId === product.productId
+        (item) =>
+          item.productId === product.productId &&
+          item?.variant?.variantName === product?.variant?.variantName
       );
       updateOrderItems = [
         ...updateOrderItems.slice(0, productIndex),
@@ -39,10 +43,14 @@ const IncreaseDecreaseOrderItems = ({ product }: { product: ICartProduct }) => {
     if (product?.orderQuantity > 1) {
       let updateOrderItems = orderData?.orderItems;
       const productIndex = orderData?.orderItems?.findIndex(
-        (item) => item.productId === product.productId
+        (item) =>
+          item.productId === product.productId &&
+          item?.variant?.variantName === product?.variant?.variantName
       );
       const existProduct = orderData?.orderItems?.find(
-        (item) => item.productId === product.productId
+        (item) =>
+          item.productId === product.productId &&
+          item?.variant?.variantName === product?.variant?.variantName
       );
       updateOrderItems = [
         ...updateOrderItems.slice(0, productIndex),
@@ -60,6 +68,10 @@ const IncreaseDecreaseOrderItems = ({ product }: { product: ICartProduct }) => {
       setRefetch((prev) => prev + 1);
     }
   };
+
+  const isQuantityOverStock =
+    product?.orderQuantity >= product?.variant?.inStock;
+
   return (
     <div className="bg-gradient-primary-light rounded-full px-1 py-[3px] flex items-center gap-2">
       <button
@@ -70,7 +82,10 @@ const IncreaseDecreaseOrderItems = ({ product }: { product: ICartProduct }) => {
       </button>
       <strong className="text-xs font-normal">{product?.orderQuantity}</strong>
       <button
-        className="bg-gradient-primary rounded-full p-1"
+        title={`${isQuantityOverStock ? "Stock over alert!" : "Add more"}`}
+        className={`bg-gradient-primary rounded-full p-1 ${
+          isQuantityOverStock && "cursor-wait"
+        }`}
         onClick={handleIncreaseQuantity}
       >
         <IconPlus className="text-white" stroke={1.5} width={13} height={13} />

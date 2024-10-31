@@ -7,6 +7,7 @@ import IncreaseDecreaseOrderItems from "../../brands/_components/IncreaseDecreas
 import { useContext } from "react";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
+import { calculateDiscountAndBulkOrderPrice } from "@/utils/calculateDiscountAndBulkOrderPrice";
 
 export const ShippingInfoOrderItems = ({
   product,
@@ -19,7 +20,9 @@ export const ShippingInfoOrderItems = ({
   const handleRemoveItem = () => {
     let updateOrderItems = orderData?.orderItems;
     const productIndex = orderData?.orderItems?.findIndex(
-      (item) => item.productId === product.productId
+      (item) =>
+        item.productId === product.productId &&
+        item?.variant?.variantName === product?.variant?.variantName
     );
     const existProduct = orderData?.orderItems?.find(
       (item) => item.productId === product.productId
@@ -35,9 +38,16 @@ export const ShippingInfoOrderItems = ({
     });
     setRefetch((prev) => prev + 1);
   };
-  // product price
-  const price =
-    product?.variant?.discountedPrice || product?.variant?.sellingPrice;
+  // <== product price ==>
+
+  const { sellingPrice, discountPercentage, discountedPrice } =
+    calculateDiscountAndBulkOrderPrice(
+      product,
+      product?.variant,
+      product?.orderQuantity
+    );
+
+  const price = discountedPrice ? discountedPrice : sellingPrice;
 
   return (
     <div className="flex  justify-between gap-3.5">
