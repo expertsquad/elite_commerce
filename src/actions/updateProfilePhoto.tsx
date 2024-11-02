@@ -1,3 +1,4 @@
+"use server";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import { revalidateTagAction } from "./revalidateTag";
 

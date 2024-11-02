@@ -2,25 +2,30 @@
 import { updateProfilePhoto } from "@/actions/updateProfilePhoto";
 import { IconPhotoEdit } from "@tabler/icons-react";
 import Image from "next/image";
-import React, { Fragment, useRef, useState, useTransition } from "react";
+import React, { Fragment, useRef, useState } from "react";
 
 const AddProfilePhoto = ({ profilePhotoUrl }: { profilePhotoUrl: string }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoading(true);
     const file = e.target.files?.[0];
     if (file) {
-      setLoading(true);
       const formData = new FormData();
       formData.append("profilePhoto", file);
-      //server action called
+
+      // Call the server action without async/await
       updateProfilePhoto(formData)
-        .then(() => setLoading(false))
+        .then(() => {
+          setLoading(false);
+        })
         .catch((error) => {
           console.error("An error occurred during the update:", error);
           setLoading(false);
         });
+    } else {
+      setLoading(false);
     }
   };
 
