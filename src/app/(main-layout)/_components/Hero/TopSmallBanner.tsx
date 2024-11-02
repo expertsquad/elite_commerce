@@ -57,15 +57,14 @@ const TopSmallBanner = ({
           topOffer?.backgroundPhoto ? "hidden" : "block"
         }`}
       >
-        <h2 className="text-2xl line-clamp-2 text-start">{topOffer?.title}</h2>
-        <div className="flex items-baseline gap-1 main-text-color font-bold mt-2.5">
-          <span className="text-lg flex items-start justify-start w-full">
-            {currencyIcon}
-            {topOffer?.price || 200}
-          </span>
-        </div>
+        <h2 className="text-lg md:text-xl line-clamp-2 text-start mb-2.5">
+          {topOffer?.title}
+        </h2>
+        <span className="text-lg md:text-sm line-clamp-2 text-start">
+          {topOffer?.offerTag}
+        </span>
 
-        <div className="flex items-start justify-start ">
+        <div className="flex items-start justify-start uppercase">
           <Link
             href={topOffer?.link || ""}
             target="_blank"

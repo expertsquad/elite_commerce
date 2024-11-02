@@ -37,32 +37,24 @@ const BottomSmallBanner = ({
       }}
       onClick={handleLink}
     >
-      <div
-        className={`flex flex-col ${
-          bottomOffer?.backgroundPhoto ? "hidden" : "block"
-        }`}
-      >
-        <h2 className="[font-size:_clamp(1.2em,2.60vw,1.6em)] line-clamp-2 mb-2.5">
+      <div className={`flex flex-col `}>
+        <h2 className="text-lg md:text-xl line-clamp-2 mb-2.5">
           {bottomOffer?.offerTag}
         </h2>
-        <h2 className="line-clamp-2 [font-size:_clamp(0.8em,60vw,1em)]">
+        <span className="line-clamp-2 text-lg md:text-sm">
           {bottomOffer?.title}
-        </h2>
+        </span>
 
         <Link
           href={bottomOffer?.link}
           target="_blank"
-          className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-md py-2 mt-9 max-w-[110px] whitespace-nowrap text-xs"
+          className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-md py-2 mt-9 max-w-[110px] whitespace-nowrap text-xs uppercase"
         >
           {bottomOffer?.buttonText} <IconArrowRight size={16} />
         </Link>
       </div>
 
-      <div
-        className={`relative w-36 h-36 ${
-          bottomOffer?.backgroundPhoto ? "hidden" : "block"
-        }`}
-      >
+      <div className={`relative w-36 h-36`}>
         <Image
           src={`${server_url + bottomOffer?.productPhoto}`}
           alt="Hero discount item"

@@ -7,4 +7,5 @@ export interface heroTopSmallBanner {
   buttonText: string;
   link: string;
   _id: string;
+  offerTag?: string;
 }

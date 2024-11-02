@@ -9,10 +9,7 @@ import { QuickOrderItem } from "./QuickOrderItems";
 import { OrderSummary } from "./OrderSummary";
 import CustomInput from "@/Components/CustomInput";
 import { ICartProduct } from "@/interfaces/cart.interface";
-import {
-  postDataMutation,
-  postDataUnauthenticatedMutation,
-} from "@/actions/postDataMutation";
+import { postDataUnauthenticatedMutation } from "@/actions/postDataMutation";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import {
@@ -46,15 +43,36 @@ const QuickOrderModal = ({
     phoneNumber: "",
     address: "",
   });
+  const [formErrors, setFormErrors] = useState({
+    fullName: false,
+    phoneNumber: false,
+    address: false,
+  });
   const router = useRouter();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
+    setFormErrors({ ...formErrors, [name]: false });
   };
 
   const handleOrderSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // <== Check for empty fields and set errors ==>
+    const errors = {
+      fullName: formValues.fullName === "",
+      phoneNumber: formValues.phoneNumber === "",
+      address: formValues.address === "",
+    };
+    setFormErrors(errors);
+
+    // <== If any errors exist, don't proceed with the submission ==>
+    if (Object.values(errors).some((error) => error)) {
+      toast.error("Please fill out all required fields.");
+      return;
+    }
+
     setLoading(true);
 
     const orderItems = productList.map((product) => ({
@@ -73,12 +91,6 @@ const QuickOrderModal = ({
     };
 
     try {
-      // const response = await postDataMutation({
-      //   route: "/quick-order/add",
-      //   dataType: "json",
-      //   data: JSON.stringify(value),
-      //   formatted: true,
-      // });
       const response = await postDataUnauthenticatedMutation({
         route: "/quick-order/add",
         dataType: "json",
@@ -97,7 +109,6 @@ const QuickOrderModal = ({
       }
     } catch (error) {
       toast.error("Quick order failed, Try again!!");
-      console.error("Order failed:", error);
     } finally {
       setLoading(false);
     }
@@ -187,8 +198,7 @@ const QuickOrderModal = ({
                   value={formValues.fullName}
                   onChange={handleInputChange}
                   inputStyle={`${
-                    formValues.fullName === "" &&
-                    "border-danger border-opacity-10"
+                    formErrors.fullName ? "border-danger border-opacity-10" : ""
                   }`}
                 />
                 <CustomInput
@@ -199,8 +209,9 @@ const QuickOrderModal = ({
                   value={formValues.phoneNumber}
                   onChange={handleInputChange}
                   inputStyle={`${
-                    formValues.phoneNumber === "" &&
-                    "border-danger border-opacity-10"
+                    formErrors.phoneNumber
+                      ? "border-danger border-opacity-10"
+                      : ""
                   }`}
                 />
                 <CustomInput
@@ -211,8 +222,7 @@ const QuickOrderModal = ({
                   value={formValues.address}
                   onChange={handleInputChange}
                   inputStyle={`${
-                    formValues.address === "" &&
-                    "border-danger border-opacity-10"
+                    formErrors.address ? "border-danger border-opacity-10" : ""
                   }`}
                 />
                 <div className="md:hidden block">
@@ -264,4 +274,5 @@ const QuickOrderModal = ({
     </div>
   );
 };
+
 export default QuickOrderModal;
