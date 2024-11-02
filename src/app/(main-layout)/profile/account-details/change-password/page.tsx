@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import PasswordInput from "../../_components/PasswordInput";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import SubmitButton from "@/Components/SubmitButton";
+import toast from "react-hot-toast";
 
 const Page = () => {
   const [err, setErr] = useState("");
@@ -33,6 +34,7 @@ const Page = () => {
       method: "PUT",
     });
     if (result?.success) {
+      toast.success(result?.message)
       e.target.reset();
     } else {
       setErr(result.message);
