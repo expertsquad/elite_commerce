@@ -8,11 +8,13 @@ const MainMenuItem = ({
   className,
   parentClassName,
   onClick,
+  key,
 }: {
   menu: { label: string; href: string };
   className?: string;
   parentClassName?: string;
   onClick?: () => void;
+  key?: number;
 }) => {
   const pathName = usePathname();
   const isActive =
@@ -20,16 +22,17 @@ const MainMenuItem = ({
 
   return (
     <li
+      key={key}
       className={`${parentClassName}`}
       onClick={onClick ? () => onClick() : undefined}
     >
       <Link
-        href={menu.href}
+        href={menu?.href}
         className={`${className} block w-full py-2 px-3 hover:text-gradient-primary font-normal text-base ${
           isActive ? "text-gradient-primary font-semibold" : ""
         }`}
       >
-        {menu.label}
+        {menu?.label}
       </Link>
     </li>
   );

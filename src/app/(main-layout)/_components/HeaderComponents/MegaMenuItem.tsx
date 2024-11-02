@@ -12,11 +12,13 @@ const MegaMenuItem = ({
   widget,
   featureProduct,
   currencySymbol,
+  key,
 }: {
   category?: ICategory;
   widget: IWidgetCard;
   currencySymbol?: string;
   featureProduct?: IProduct[];
+  key?: string;
 }) => {
   const redirectPath = "/category/single-category";
   const router = useRouter();
@@ -25,7 +27,7 @@ const MegaMenuItem = ({
     router.push(`${redirectPath}?category=${categoryName}`);
   };
   return (
-    <li key={category?._id} className="group/category cursor-pointer">
+    <li key={key} className="group/category cursor-pointer">
       <span
         onClick={() =>
           category?.categoryName && handleCategoryClick(category?.categoryName)

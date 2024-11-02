@@ -1,6 +1,6 @@
 import { ICategory } from "@/interfaces/category.interface";
 import MegaMenuItem from "./MegaMenuItem";
-import { fetchData, fetchProtectedData } from "@/actions/fetchData";
+import { fetchData } from "@/actions/fetchData";
 import { getWidget } from "@/utils/getWidget";
 
 const CategoriesAndSubcategories = async () => {
