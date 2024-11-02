@@ -23,22 +23,34 @@ const AddToWishlistBtn = ({
     setRefetch && setRefetch((prev) => prev + 1);
   };
 
+  const isWishlist = wishlistProducts?.find(
+    (item: IWishlistProduct) =>
+      item?.productId === product?._id &&
+      item?.variant?.variantName === variant?.variantName
+  );
+
   return (
     <button
       onClick={(e) => {
         e.stopPropagation();
         handleAddToFavourite();
       }}
-      className={`cursor-pointer rounded-full flex justify-center items-center bg-white hover:bg-gradient-primary-light h-[30px] w-[30px] border border-black-10 ${className}`}
+      className={`group/fav cursor-pointer rounded-full flex justify-center items-center bg-white hover:bg-black h-[30px] w-[30px] ${className} ${
+        isWishlist ? "bg-danger hover:bg-black" : ""
+      }`}
     >
-      {wishlistProducts?.find(
-        (item: IWishlistProduct) =>
-          item?.productId === product?._id &&
-          item?.variant?.variantName === variant?.variantName
-      ) ? (
-        <IconHeartFilled stroke={1} size={20} className="fill-primary" />
+      {isWishlist ? (
+        <IconHeartFilled
+          stroke={1.5}
+          size={20}
+          className={`${isWishlist && "fill-white"}`}
+        />
       ) : (
-        <GenerateGradientIcon IconComponent={IconHeart} stroke={1} size={20} />
+        <IconHeart
+          stroke={1.5}
+          size={20}
+          className="text-black hover:text-white group-hover/fav:text-white"
+        />
       )}
     </button>
   );

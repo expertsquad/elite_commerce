@@ -22,7 +22,7 @@ const BestDealsSectionProduct = async ({
 
   return (
     <Link
-      href={`products/${product?.productId}`}
+      href={`products/${product?.productUrlSlug}`}
       className="flex items-center min-w-[200px] md:min-w-[220px] xl:min-w-[290px] max-w-[300px] p-2.5 rounded-md bg-white hover:drop-shadow-lg hover:duration-500 cursor-pointer"
     >
       <div className="relative w-[60px] h-[60px] shrink-0 mr-2">
@@ -47,16 +47,16 @@ const BestDealsSectionProduct = async ({
         />
 
         <div className="flex items-baseline gap-x-1.5">
-          <span className="flex items-center text-xs md:text-base font-medium text-gradient-primary">
+          <span className="flex items-center text-xs md:text-base font-medium text-primary">
             {currencyIcon?.data?.currencySymbol}
             {product?.sellingPrice}
           </span>
-          {product?.discountPercentage && (
-            <del className="flex items-center text-[10px] md:text-sm text-gradient-primary line-through">
+          {product?.discountPercentage && product?.sellingPrice ? (
+            <span className="flex items-center text-[10px] md:text-sm text-primary line-through">
               {currencyIcon?.data?.currencySymbol}
               {discountedPrice}
-            </del>
-          )}
+            </span>
+          ) : null}
         </div>
       </div>
     </Link>

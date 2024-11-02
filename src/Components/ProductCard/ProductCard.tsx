@@ -58,11 +58,11 @@ const ProductCard = ({
           <div className="flex items-center whitespace-nowrap">
             <span className="[font-size:_clamp(16px,2vw,22px)] text-gradient-primary font-bold">
               {currencyIcon}
-              {discountedPrice && discountedPrice}
+              {discountedPrice ? discountedPrice : sellingPrice}
             </span>
-            {sellingPrice && (
+            {sellingPrice && discountedPrice ? (
               <span className={`mx-0.5 text-black-10 text-xl`}>|</span>
-            )}
+            ) : null}
             <del
               className={`text-black-50 [font-size:_clamp(14px,2vw,18px)] ${
                 product?.variants[0]?.discountedPrice ? "block" : "hidden"

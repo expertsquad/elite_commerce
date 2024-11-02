@@ -9,6 +9,7 @@ export interface IBestDealsProductData {
   averageRating: number | null;
   link: string;
   productId: string;
+  productUrlSlug: string;
   _id: string;
   createdAt: string;
   updatedAt: string;

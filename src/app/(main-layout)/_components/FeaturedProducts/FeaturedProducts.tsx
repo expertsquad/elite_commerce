@@ -28,9 +28,9 @@ const FeaturedProducts = ({
   return (
     <div>
       <div className="flex justify-between pt-3 border-b border-black-10 mb-10">
-        <div className="flex items-center gap-x-5 uppercase">
+        <div className="flex items-center gap-x-3 md:gap-x-5 uppercase">
           <button
-            className={`uppercase text-gradient-primary px-5 border-b pb-2
+            className={`uppercase text-sm md:text-base whitespace-nowrap text-gradient-primary px-5 border-b pb-2
               ${
                 filter === "Newest"
                   ? "text-gradient-primary border-b border-primary-light"
@@ -43,7 +43,7 @@ const FeaturedProducts = ({
           </button>
 
           <button
-            className={`uppercase text-gradient-primary px-5 border-b  pb-2
+            className={`uppercase text-sm md:text-base whitespace-nowrap text-gradient-primary px-5 border-b  pb-2
               ${
                 filter === "TopSell"
                   ? "text-gradient-primary border-b border-primary-light"
@@ -56,7 +56,7 @@ const FeaturedProducts = ({
           </button>
 
           <button
-            className={`uppercase text-gradient-primary px-5 border-b  pb-2
+            className={`uppercase text-sm md:text-base whitespace-nowrap text-gradient-primary px-5 border-b  pb-2
               ${
                 filter === "Popular"
                   ? "text-gradient-primary border-b border-primary-light"
@@ -69,7 +69,7 @@ const FeaturedProducts = ({
           </button>
         </div>
         <Link
-          className="flex items-center text-gradient-primary pb-2"
+          className="hidden md:flex items-center text-gradient-primary pb-2"
           href="/category/page/1"
         >
           See All <b className="px-2">&rarr;</b>
