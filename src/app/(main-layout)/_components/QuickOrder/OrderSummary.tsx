@@ -42,7 +42,7 @@ export const OrderSummary = ({
       <div className="flex items-center justify-between ">
         <span className="text-black-80 md:text-base text-sm">Discount </span>
         <p className="md:text-base text-sm text-positive">
-          You've saved ({currencyIcon}
+          You&apos;ve saved ({currencyIcon}
           {totalDiscount})
         </p>
       </div>

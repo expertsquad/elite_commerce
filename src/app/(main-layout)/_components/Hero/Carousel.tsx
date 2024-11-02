@@ -14,10 +14,18 @@ const Carousel = ({
   const discountedPrice =
     item?.price - item?.price * (item?.discountPercentage / 100);
 
+  const handleLink = () => {
+    if (item?.link && item?.backgroundPhoto) {
+      window.open(item?.link, "_blank");
+    }
+  };
+
   return (
     <div
       key={item?._id}
-      className={`w-full rounded-lg h-full`}
+      className={`w-full rounded-lg h-full ${
+        item?.backgroundPhoto && "cursor-pointer"
+      }`}
       style={{
         backgroundColor: `${
           item?.backgroundColor !== "" && `${item?.backgroundColor}`
@@ -30,8 +38,13 @@ const Carousel = ({
         backgroundSize: "cover",
       }}
       id={item._id}
+      onClick={handleLink}
     >
-      <div className="flex items-center md:gap-5 gap-3.5 justify-between lg:px-9 md:px-6 px-4 py-4 h-full w-full">
+      <div
+        className={`flex items-center md:gap-5 gap-3.5 justify-between lg:px-9 md:px-6 px-4 py-4 h-full w-full ${
+          item?.backgroundPhoto ? "hidden" : "block"
+        }`}
+      >
         <div className="flex flex-col gap-y-3 w-6/12">
           <h3 className="font-bold text-gradient-secondary [font-size:_clamp(0.5em,60vw,0.9em)] animate-bounce hidden md:block">
             {item?.sliderTag}

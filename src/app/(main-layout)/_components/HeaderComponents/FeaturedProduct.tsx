@@ -12,7 +12,7 @@ export const FeaturedProduct = async ({
 }) => {
   return (
     <Link
-      href={`/products/${product?._id}`}
+      href={`/products/${product?.productUrlSlug}`}
       className="flex items-center border rounded border-black-10 p-3 gap-3 max-w-[350px]"
     >
       <div className="w-20 h-20 relative ">
