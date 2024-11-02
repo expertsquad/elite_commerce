@@ -47,12 +47,12 @@ const BestDealsSectionProduct = async ({
         />
 
         <div className="flex items-baseline gap-x-1.5">
-          <span className="flex items-center text-xs md:text-base font-medium text-primary">
+          <span className="flex items-center text-xs md:text-base font-medium text-black">
             {currencyIcon?.data?.currencySymbol}
             {product?.sellingPrice}
           </span>
           {product?.discountPercentage && product?.sellingPrice ? (
-            <span className="flex items-center text-[10px] md:text-sm text-primary line-through">
+            <span className="flex items-center text-[10px] md:text-sm text-black line-through">
               {currencyIcon?.data?.currencySymbol}
               {discountedPrice}
             </span>
