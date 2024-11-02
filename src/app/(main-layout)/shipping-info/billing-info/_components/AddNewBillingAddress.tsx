@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { countryNames } from "@/constants/countryNames.constant";
 import CustomInput from "@/Components/CustomInput";
 import CustomDropdown from "@/Components/CustomDropdown";
 
@@ -29,9 +28,11 @@ const AddNewBillingAddress = ({
     selectedShippingAddress: "newAddress",
     city: "",
   });
-
+  // country data api
   const stateByCountryName = states?.data?.map((s: any) => s.name);
   const cityByCountryName = cities?.data?.map((s: any) => s.name);
+
+  console.log(onNewAddressChange);
 
   // used useEffect to set city and state
   useEffect(() => {
