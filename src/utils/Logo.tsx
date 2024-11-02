@@ -1,11 +1,23 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import useGetLogo from "./useGetLogo";
+import { server_url } from "@/constants";
 
 const Logo = ({ onClick }: { onClick?: () => void }) => {
+  const { logo } = useGetLogo();
+
   return (
-    <Link href="/" className="text-2xl text-gradient-primary" onClick={onClick}>
-      <Image src="/full-logo.svg" width={100} height={100} alt="logo" />
+    <Link href="/" onClick={onClick}>
+      <div className="relative h-[40px] w-[140px]">
+        <Image
+          src={`${logo ? server_url + logo : "/full-logo.svg"}`}
+          fill
+          className="object-contain w-full h-auto inset-0"
+          alt="logo"
+        />
+      </div>
     </Link>
   );
 };

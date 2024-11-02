@@ -35,7 +35,7 @@ const Page = async () => {
   });
   const favouriteBrands = await fetchData({
     route: "/brand",
-    limit: 20,
+    limit: 24,
     // query: "sortBy=",
   });
 
