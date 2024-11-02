@@ -27,7 +27,7 @@ const CustomerReviewStatistic = ({
         </div>
       </div>
 
-      {ratings.map((rating) => {
+      {ratings.map((rating, i) => {
         const ratingCount = ratingInfo?.filter(
           (item) => item?.rating === rating
         ).length;
@@ -36,7 +36,7 @@ const CustomerReviewStatistic = ({
           : 0;
 
         return (
-          <div key={rating} className="flex items-center gap-x-2">
+          <div key={i} className="flex items-center gap-x-2">
             <span>{rating}</span>
             <span className="">
               <IconStarFilled className="text-[#E73C17] w-4 h-4" />

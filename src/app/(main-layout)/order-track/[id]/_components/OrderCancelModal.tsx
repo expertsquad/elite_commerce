@@ -92,7 +92,7 @@ const OrderCancelModal = ({ id }: { id: string }) => {
                     "Change Payment method",
                   ].map((opt, index) => (
                     <option
-                      key={opt}
+                      key={index}
                       value={opt}
                       selected={index === 0}
                       hidden={index === 0}
