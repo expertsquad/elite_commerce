@@ -1,26 +1,40 @@
 "use client";
 import { updateProfilePhoto } from "@/actions/updateProfilePhoto";
 import { IconPhotoEdit } from "@tabler/icons-react";
+import { revalidatePath } from "next/cache";
 import Image from "next/image";
-import React, { Fragment, useRef, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import React, { Fragment, useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 const AddProfilePhoto = ({ profilePhotoUrl }: { profilePhotoUrl: string }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
-
-  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const router = useRouter();
+  const handleProfilePhotoChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    e.preventDefault();
     const file = e.target.files?.[0];
+    console.log(file);
+    const formData = new FormData();
     if (file) {
       setLoading(true);
-      const formData = new FormData();
       formData.append("profilePhoto", file);
-      //server action called
-      updateProfilePhoto(formData)
-        .then(() => setLoading(false))
-        .catch((error) => {
-          console.error("An error occurred during the update:", error);
-          setLoading(false);
-        });
+    }
+    try {
+      const res = await updateProfilePhoto(formData);
+      console.log(res);
+      if (res?.success) {
+        toast.success(res?.message);
+        router.refresh();
+      } else if (!res?.success) {
+        toast.error(res?.message);
+      }
+    } catch (error) {
+      console.error("An error occurred during the update:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,7 +66,7 @@ const AddProfilePhoto = ({ profilePhotoUrl }: { profilePhotoUrl: string }) => {
             id="profilePhoto"
             name="profilePhoto"
             ref={fileInputRef}
-            onChange={handleFileInputChange}
+            onChange={handleProfilePhotoChange}
           />
         </label>
       </div>
