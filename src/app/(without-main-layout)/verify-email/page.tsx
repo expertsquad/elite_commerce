@@ -6,13 +6,13 @@ import { cookies } from "next/headers";
 import { permanentRedirect } from "next/navigation";
 import BackButton from "../sign-up/_components/BackButton";
 import OTPInput from "../_components/OTPInput";
+import { revalidateTagAction } from "@/actions/revalidateTag";
 
 const VerifyEmail = async ({
   searchParams,
 }: {
   searchParams: { email: string };
 }) => {
-  const userEmail = searchParams?.email;
   const handleSubmit = async (formData: FormData) => {
     "use server";
     const dataObj: Record<string, any> = {};
@@ -31,6 +31,7 @@ const VerifyEmail = async ({
     });
     if (res?.data?.accessToken) {
       cookies().set("accessToken", res?.data?.accessToken);
+      revalidateTagAction("/user");
       permanentRedirect("/login");
     } else {
       console.error(res?.error);

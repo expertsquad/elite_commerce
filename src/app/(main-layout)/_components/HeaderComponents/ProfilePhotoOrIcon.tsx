@@ -4,10 +4,15 @@ import { UserContext } from "@/Provider/UserProvider";
 import { server_url } from "@/constants";
 import { IconUserCircle } from "@tabler/icons-react";
 import Image from "next/image";
-import React, { Fragment, useContext, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import React, { Fragment, useContext } from "react";
 
 const ProfilePhotoOrIcon = () => {
   const { user } = useContext(UserContext);
+  const pathName = usePathname();
+
+  const isProfilePath = pathName.startsWith("/profile");
+
   if (user?.profilePhoto) {
     return (
       <Fragment>
@@ -19,7 +24,7 @@ const ProfilePhotoOrIcon = () => {
             fill
           />
         </div>
-        <div className="md:hidden flex flex-col items-center ">
+        <div className="md:hidden flex flex-col items-center">
           <div className="relative w-5 h-5 rounded-full overflow-hidden">
             <Image
               src={server_url + user?.profilePhoto}
@@ -28,7 +33,11 @@ const ProfilePhotoOrIcon = () => {
               fill
             />
           </div>
-          <span className="text-sm ">Profile</span>
+          <span
+            className={`text-sm ${isProfilePath ? "text-primary-light" : ""}`}
+          >
+            Profile
+          </span>
         </div>
       </Fragment>
     );

@@ -16,7 +16,7 @@ import { getWidget } from "@/utils/getWidget";
 
 const Page = async () => {
   const newestProducts = await fetchData({ route: "/product", limit: 8 });
-  const allProducts = await fetchData({ route: "/product", limit: 12 });
+  const allProducts = await fetchData({ route: "/product", limit: 20 });
 
   // for counting total product page
   const totalPages = Math.ceil(
@@ -35,7 +35,7 @@ const Page = async () => {
   });
   const favouriteBrands = await fetchData({
     route: "/brand",
-    limit: 20,
+    limit: 24,
     // query: "sortBy=",
   });
 
@@ -169,15 +169,17 @@ const Page = async () => {
             })}
           </Suspense>
         </div>
-        {totalPages > 1 ? (
-          <Pagination
-            totalPages={totalPages}
-            currentPage={1}
-            redirectTo="/category/page"
-          />
-        ) : (
-          ""
-        )}
+        <div className="mb-5">
+          {totalPages > 1 ? (
+            <Pagination
+              totalPages={totalPages}
+              currentPage={1}
+              redirectTo="/category/page"
+            />
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     </>
   );
