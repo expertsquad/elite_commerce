@@ -95,7 +95,7 @@ const ProductImageSlider = ({
               />
             </div>
             <div className="flex items-center justify-center">
-              <div className="absolute bottom-5 z-10">
+              <div className="absolute bottom-3 z-10">
                 <div className="indicators gap-2 flex justify-center items-center ">
                   {product?.productPhotos?.map((_: any, dotIndex: number) => (
                     <div

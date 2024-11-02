@@ -1,5 +1,3 @@
-// utils/getPricingDetails.ts
-
 import { IProduct } from "@/interfaces/product.interface";
 
 interface PricingDetails {
@@ -13,13 +11,15 @@ export const getPricingDetails = (product: IProduct): PricingDetails => {
 
   const sellingPrice = firstVariant?.sellingPrice || 0;
   const discountedPrice = firstVariant?.discountedPrice ?? sellingPrice;
-  const discountPercentage = firstVariant?.discountPercentage
-    ? firstVariant.discountPercentage
-    : ((sellingPrice - discountedPrice) / sellingPrice) * 100;
+  const discountPercentage =
+    firstVariant?.discountPercentage ??
+    (sellingPrice !== discountedPrice
+      ? ((sellingPrice - discountedPrice) / sellingPrice) * 100
+      : 0);
 
   return {
     sellingPrice,
-    discountedPrice,
+    discountedPrice: discountedPrice === sellingPrice ? 0 : discountedPrice,
     discountPercentage,
   };
 };

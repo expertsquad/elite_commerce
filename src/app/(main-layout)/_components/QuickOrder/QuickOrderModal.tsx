@@ -9,7 +9,10 @@ import { QuickOrderItem } from "./QuickOrderItems";
 import { OrderSummary } from "./OrderSummary";
 import CustomInput from "@/Components/CustomInput";
 import { ICartProduct } from "@/interfaces/cart.interface";
-import { postDataMutation } from "@/actions/postDataMutation";
+import {
+  postDataMutation,
+  postDataUnauthenticatedMutation,
+} from "@/actions/postDataMutation";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import {
@@ -70,12 +73,20 @@ const QuickOrderModal = ({
     };
 
     try {
-      const response = await postDataMutation({
+      // const response = await postDataMutation({
+      //   route: "/quick-order/add",
+      //   dataType: "json",
+      //   data: JSON.stringify(value),
+      //   formatted: true,
+      // });
+      const response = await postDataUnauthenticatedMutation({
         route: "/quick-order/add",
         dataType: "json",
         data: JSON.stringify(value),
         formatted: true,
       });
+
+      console.log(response);
 
       if (response?.success) {
         toast.success(response.message);
