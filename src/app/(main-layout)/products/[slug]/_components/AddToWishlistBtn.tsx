@@ -35,8 +35,8 @@ const AddToWishlistBtn = ({
         e.stopPropagation();
         handleAddToFavourite();
       }}
-      className={`group/fav cursor-pointer rounded-full flex justify-center items-center bg-white hover:bg-black h-[30px] w-[30px] ${className} ${
-        isWishlist ? "bg-danger hover:bg-black" : ""
+      className={`group/fav cursor-pointer rounded-full flex justify-center items-center hover:bg-black h-[30px] w-[30px] ${className} ${
+        isWishlist ? "bg-[#f56565] hover:bg-black" : "bg-white"
       }`}
     >
       {isWishlist ? (
