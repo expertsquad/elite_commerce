@@ -48,22 +48,18 @@ export const bottomNavMenus = [
   {
     label: "Home",
     href: "/",
-    icon: IconHome,
   },
   {
     label: "Brands",
     href: "/brands",
-    icon: IconBrandMercedes,
   },
   {
     label: "Cart",
     href: "/cart",
-    icon: IconGardenCart,
   },
   {
     label: "Products",
     href: "/category",
-    icon: IconCategory,
   },
 ];
 
