@@ -86,8 +86,6 @@ const QuickOrderModal = ({
         formatted: true,
       });
 
-      console.log(response);
-
       if (response?.success) {
         toast.success(response.message);
         const orderId = response?.data?._id;
