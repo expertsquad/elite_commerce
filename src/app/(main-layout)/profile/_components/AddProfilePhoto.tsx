@@ -1,6 +1,5 @@
 "use client";
-import { revalidateTagAction } from "@/actions/revalidateTag";
-import { updateDataMutation } from "@/actions/updateDataMutation";
+import { updateProfilePhoto } from "@/actions/updateProfilePhoto";
 import { IconPhotoEdit } from "@tabler/icons-react";
 import Image from "next/image";
 import React, { Fragment, useRef, useState } from "react";
@@ -9,31 +8,26 @@ const AddProfilePhoto = ({ profilePhotoUrl }: { profilePhotoUrl: string }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleFileInputChange = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setLoading(true);
     const file = e.target.files?.[0];
     if (file) {
       const formData = new FormData();
       formData.append("profilePhoto", file);
-      try {
-        // Await the mutation and revalidation actions
-        await updateDataMutation({
-          route: "/user/update",
-          dataType: "formData",
-          data: formData,
-          method: "PUT",
-          formatted: true,
+
+      // Call the server action without async/await
+      updateProfilePhoto(formData)
+        .then(() => {
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("An error occurred during the update:", error);
+          setLoading(false);
         });
-        await revalidateTagAction("/user/update");
-      } catch (error) {
-        console.error("An error occurred during the update:", error);
-      }
+    } else {
+      setLoading(false);
     }
-    // Set loading to false after everything completes
-    setLoading(false);
   };
 
   return (
