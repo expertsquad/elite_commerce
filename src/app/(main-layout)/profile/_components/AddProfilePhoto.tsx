@@ -9,7 +9,6 @@ const AddProfilePhoto = ({ profilePhotoUrl }: { profilePhotoUrl: string }) => {
   const [loading, setLoading] = useState(false);
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
     setLoading(true);
     const file = e.target.files?.[0];
     if (file) {

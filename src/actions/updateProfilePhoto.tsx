@@ -1,7 +1,5 @@
-// /actions/updateProfilePhoto.ts
-
-import { revalidateTagAction } from "@/actions/revalidateTag";
 import { updateDataMutation } from "@/actions/updateDataMutation";
+import { revalidateTagAction } from "./revalidateTag";
 
 export async function updateProfilePhoto(formData: FormData) {
   try {
