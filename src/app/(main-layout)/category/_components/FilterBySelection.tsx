@@ -44,7 +44,7 @@ const SortingSection = ({
   isQuickOrderActive: boolean;
   currency: string;
 }) => {
-  const [selected, setSelected] = useState("MostPopular");
+  const [selected, setSelected] = useState("Most Popular");
 
   const pages =
     selected === "MostPopular"
@@ -62,41 +62,31 @@ const SortingSection = ({
     <div className=" flex flex-col gap-6">
       <div className="flex md:flex-row flex-col-reverse md:gap-1 gap-2.5 md:items-center justify-between">
         <span className="text-lg">
-          {selected === "MostPopular"
+          {selected === "Most Popular"
             ? mostPopularProducts?.meta?.total
-            : selected === "New"
+            : selected === "New Product"
             ? newProducts?.meta?.total
-            : selected === "HighPrice"
+            : selected === "High Price"
             ? highPriceProducts?.meta?.total
-            : selected === "LowPrice"
+            : selected === "Low Price"
             ? lowPriceProducts?.meta?.total
             : ""}{" "}
           Items result found-{" "}
         </span>
-        {/* <div className="border border-black-10 px-3 rounded-md w-auto ">
-          <select
-            name="products-sort"
-            className="py-2 rounded-md outline-none border-none w-full  bg-transparent text-gray-700 active:text-fuchsia-700 "
-            onChange={(e) => setSelected(e.target.value)}
-          >
-            <option value="MostPopular">Most Popular</option>
-            <option value="New">New Product</option>
-            <option value="HighPrice">High Price</option>
-            <option value="LowPrice">Low Price</option>
-          </select>
-        </div> */}
 
-        <CustomDropdown
-          data={selectOptionMenu}
-          onClick={(value) => setSelected(value)}
-          className="w-fit border border-black-10 py-2 rounded-lg px-3 "
-          itemClassName="py-1 hover:bg-black-10"
-          defaultValue={selected}
-        />
+        <div className="flex items-end justify-end">
+          <CustomDropdown
+            data={selectOptionMenu}
+            onClick={(value) => setSelected(value)}
+            className="w-fit border border-black-10 py-2 rounded-lg px-3 "
+            itemClassName="py-1 hover:bg-black-10"
+            defaultValue={selected}
+          />
+        </div>
       </div>
 
       <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5  justify-around">
-        {selected === "MostPopular" ? (
+        {selected === "Most Popular" ? (
           <Suspense fallback={<Loading />}>
             {mostPopularProducts?.data?.length > 0 ? (
               <MostPopularProducts
@@ -109,7 +99,7 @@ const SortingSection = ({
               <ProductEmptyState />
             )}
           </Suspense>
-        ) : selected === "New" ? (
+        ) : selected === "New Product" ? (
           <Suspense fallback={<Loading />}>
             {newProducts?.data?.length > 0 ? (
               <NewProducts
@@ -122,7 +112,7 @@ const SortingSection = ({
               <ProductEmptyState />
             )}
           </Suspense>
-        ) : selected === "HighPrice" ? (
+        ) : selected === "High Price" ? (
           <Suspense fallback={<Loading />}>
             {highPriceProducts?.data?.length > 0 ? (
               <HighPriceProducts
@@ -135,7 +125,7 @@ const SortingSection = ({
               <ProductEmptyState />
             )}
           </Suspense>
-        ) : selected === "LowPrice" ? (
+        ) : selected === "Low Price" ? (
           <Suspense fallback={<Loading />}>
             {lowPriceProducts?.data?.length > 0 ? (
               <LowPriceProducts
