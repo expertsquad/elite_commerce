@@ -1,6 +1,6 @@
 import ShippingInfoContent from "./_components/ShippingInfoContent";
 import ShippingAddess from "./_components/ShippingAddess";
-import { fetchProtectedData } from "@/actions/fetchData";
+import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import AddNewShippingAddress from "./_components/AddNewShippingAddress";
 import OrderItemsRightSection from "./_components/OrderItemsRightSection";
 import ShippinInfoTotalAmountCard from "./_components/ShippinInfoTotalAmountCard";
@@ -14,7 +14,7 @@ const page = async () => {
   const getMe = await fetchProtectedData({
     route: "/user/me",
   });
-  const shippingCharge = await fetchProtectedData({
+  const shippingCharge = await fetchData({
     route: "/settings/shipping-charge",
   });
   // fetch shop data to get country and currency symbol

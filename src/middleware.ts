@@ -4,6 +4,7 @@ import { server_api } from "./constants";
 import { fetchData } from "./actions/fetchData";
 
 export async function middleware(request: NextRequest) {
+  console.log("Current path:", request.nextUrl.pathname);
   try {
     const accessToken = request.cookies.get("accessToken")?.value;
     const maintenanceData = await fetchData({
@@ -20,7 +21,10 @@ export async function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
-    if (request.nextUrl.pathname.startsWith("/profile")) {
+    if (
+      request.nextUrl.pathname.startsWith("/profile") ||
+      request.nextUrl.pathname.startsWith("/shipping-info")
+    ) {
       if (!accessToken) {
         return NextResponse.redirect(new URL("/login", request.url));
       } else {
@@ -49,7 +53,7 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     "/profile/:path*",
-    "/shipping-info",
+    "/shipping-info/:path*",
     "/((?!maintenance-mode|api|_next|favicon.ico).*)",
   ],
 };
