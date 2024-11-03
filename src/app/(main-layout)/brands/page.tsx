@@ -9,7 +9,6 @@ import { IBrand } from "@/interfaces/brand.interface";
 import ProductEmptyState from "../_components/ProductEmptyState";
 
 const Brand = async () => {
-  throw new Error("Error");
   const brandData = await fetchData({
     route: "/brand",
     query: `sortBy=productCount`,
