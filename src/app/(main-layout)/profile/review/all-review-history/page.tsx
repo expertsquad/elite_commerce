@@ -5,11 +5,20 @@ import { server_url } from "@/constants";
 import { fetchProtectedData } from "@/actions/fetchData";
 import EditReviewBtn from "../_components/EditReviewBtn";
 import Pagination from "@/Components/Pagination";
+import { noReview } from "@/assets";
 
 const AllReviewHistory = async () => {
+  // <== Get me to get all reviews by user id ==>
+  const getUserInfo = await fetchProtectedData({
+    route: "/user/me",
+  });
+
+  const userId = getUserInfo?.data?._id;
+
+  // <== Get all reviews by user id ==>
   const allReviews = await fetchProtectedData({
     route: "/review",
-    query: `reviewStatus=Reviewed`,
+    query: `reviewStatus=Reviewed&reviewer.userId=${userId}`,
     limit: 20,
   });
 
@@ -47,17 +56,24 @@ const AllReviewHistory = async () => {
           </div>
         ))
       ) : (
-        <div className="flex justify-center items-center">
-          <p className="text-black-50 text-sm">No review yet</p>
+        <div className="flex flex-col items-center justify-center h-[calc(100vh-200px)]">
+          <div className="flex justify-center items-center">
+            No reviewed products available!!
+          </div>
+          <div className="flex items-center justify-center">
+            <Image src={noReview} alt="No Review" height={100} width={100} />
+          </div>
         </div>
       )}
-      <Pagination
-        currentPage={1}
-        totalPages={Math.ceil(
-          allReviews?.meta?.total / allReviews?.meta?.limit
-        )}
-        redirectTo="all-review-history"
-      />
+      {allReviews?.data?.length > 1 && (
+        <Pagination
+          currentPage={1}
+          totalPages={Math.ceil(
+            allReviews?.meta?.total / allReviews?.meta?.limit
+          )}
+          redirectTo="all-review-history"
+        />
+      )}
     </div>
   );
 };

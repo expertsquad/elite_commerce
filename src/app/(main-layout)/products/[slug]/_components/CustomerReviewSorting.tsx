@@ -18,14 +18,14 @@ const CustomerReviewSorting = ({ slug }: CustomerReviewSortingProps) => {
       ? `/products/${slug}?sortBy=${newSort}`
       : `/products/${slug}`;
 
-    router.push(newUrl);
+    router.push(newUrl, { scroll: false });
   };
 
   return (
     <div className="flex items-center gap-x-3 flex-wrap gap-y-3">
       <button
         onClick={() => handleSortToggle("")}
-        className={`text-sm md:text-base border border-black-10 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white ${
+        className={`text-sm md:text-base border border-black-10 hover:border-black-50 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white ${
           selectedSort === "" ? "bg-gradient-primary text-white" : ""
         }`}
       >
@@ -33,7 +33,7 @@ const CustomerReviewSorting = ({ slug }: CustomerReviewSortingProps) => {
       </button>
       <button
         onClick={() => handleSortToggle("5")}
-        className={`text-sm md:text-base border border-black-10 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white ${
+        className={`text-sm md:text-base border border-black-10 hover:border-black-50 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white ${
           selectedSort === "5" ? "bg-gradient-primary text-white" : ""
         }`}
       >
@@ -41,7 +41,7 @@ const CustomerReviewSorting = ({ slug }: CustomerReviewSortingProps) => {
       </button>
       <button
         onClick={() => handleSortToggle("4")}
-        className={`text-sm md:text-base border border-black-10 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white ${
+        className={`text-sm md:text-base border border-black-10 hover:border-black-50 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white ${
           selectedSort === "4" ? "bg-gradient-primary text-white" : ""
         }`}
       >
@@ -49,7 +49,7 @@ const CustomerReviewSorting = ({ slug }: CustomerReviewSortingProps) => {
       </button>
       <button
         onClick={() => handleSortToggle("3")}
-        className={`text-sm md:text-base border border-black-10 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white ${
+        className={`text-sm md:text-base border border-black-10 hover:border-black-50 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white ${
           selectedSort === "3" ? "bg-gradient-primary text-white" : ""
         }`}
       >
@@ -57,7 +57,7 @@ const CustomerReviewSorting = ({ slug }: CustomerReviewSortingProps) => {
       </button>
       <button
         onClick={() => handleSortToggle("2")}
-        className={`text-sm md:text-base border border-black-10 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white ${
+        className={`text-sm md:text-base border border-black-10 hover:border-black-50 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white ${
           selectedSort === "2" ? "bg-gradient-primary text-white" : ""
         }`}
       >
@@ -65,7 +65,7 @@ const CustomerReviewSorting = ({ slug }: CustomerReviewSortingProps) => {
       </button>
       <button
         onClick={() => handleSortToggle("1")}
-        className={`text-sm md:text-base border border-black-10 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white ${
+        className={`text-sm md:text-base border border-black-10 hover:border-black-50 rounded-full px-4 py-1 whitespace-nowrap active:bg-gradient-primary active:text-white ${
           selectedSort === "1" ? "bg-gradient-primary text-white" : ""
         }`}
       >

@@ -33,8 +33,6 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
     window.open(url, "_blank");
   };
 
-  // const currentUrl = encodeURIComponent(window.location.href);
-
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center whitespace-nowrap">
@@ -57,7 +55,7 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-x-1.5 border border-black-10 rounded-full py-1 px-2 cursor-pointer"
+                className="flex items-center gap-x-1.5 border border-black-10 hover:border-black-50 rounded-full py-1 px-2 cursor-pointer"
               >
                 {media.mediaName === "Whatsapp" && (
                   <>
@@ -93,10 +91,10 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
             }
             className={`flex items-center justify-center`}
           >
-            <GenerateGradientIcon
-              IconComponent={IconBrandFacebook}
+            <IconBrandFacebook
               stroke={1}
               size={18}
+              className="text-primary hover:fill-primary"
             />
           </button>
           <button
@@ -105,10 +103,10 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
             }
             className={`flex items-center justify-center`}
           >
-            <GenerateGradientIcon
-              IconComponent={IconBrandTwitter}
+            <IconBrandTwitter
               stroke={1}
               size={18}
+              className="text-primary hover:fill-primary"
             />
           </button>
           <button
@@ -119,28 +117,28 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
             }
             className={`flex items-center justify-center`}
           >
-            <GenerateGradientIcon
-              IconComponent={IconBrandPinterest}
+            <IconBrandPinterest
               stroke={1}
               size={18}
+              className="text-primary hover:fill-primary"
             />
           </button>
           <button
             onClick={() => handleShare(`https://instagram.com/`)}
             className={`flex items-center justify-center`}
           >
-            <GenerateGradientIcon
-              IconComponent={IconBrandInstagram}
+            <IconBrandInstagram
               stroke={1}
               size={18}
+              className="text-primary hover:fill-primary"
             />
           </button>
           <button className="relative flex items-center justify-center">
             <span onClick={handleCopy}>
               <IconCopy
                 stroke={1}
-                size={20}
-                style={{ stroke: "url(#gradient1)" }}
+                size={18}
+                className="text-primary hover:fill-primary"
               />
             </span>
             {isCopied && (

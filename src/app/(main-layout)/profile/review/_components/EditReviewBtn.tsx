@@ -11,7 +11,7 @@ const EditReviewBtn = ({ allReview }: { allReview: any }) => {
     <div>
       <Button
         onClick={() => setEditComment(true)}
-        className="py-2 px-5 bg-gradient-primary text-white rounded-lg"
+        className="py-2 px-5 bg-gradient-primary hover:bg-gradient-primary-reverse text-white rounded-lg"
       >
         Edit Review
       </Button>
