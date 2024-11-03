@@ -18,7 +18,7 @@ const WidgetCard = async ({
     >
       <div className="flex flex-col items-center gap-1.5 text-white z-20">
         <span className="text-sm">{widget?.tag || ""}</span>
-        <span className="text-[26px] font-bold line-clamp-1">
+        <span className="text-[26px] font-bold line-clamp-2">
           {widget?.title || ""}
         </span>
         <span className="text-sm line-clamp-2">
