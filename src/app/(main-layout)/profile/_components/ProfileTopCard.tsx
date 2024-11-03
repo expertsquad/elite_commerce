@@ -5,16 +5,17 @@ import totalOrderIcon from "@/assets/Images/totalOrderIcon.svg";
 import starIcon from "@/assets/Images/starIcon.svg";
 import Image from "next/image";
 import { fetchData, fetchProtectedData } from "@/actions/fetchData";
+import { IUser } from "@/interfaces/user.interface";
 
-const ProfileTopCard = async ({ getMe }: { getMe: any }) => {
+const ProfileTopCard = async ({ getMe }: { getMe: IUser }) => {
   const orderItems = await fetchProtectedData({
     route: "/online-order",
-    query: "buyer.userId=" + getMe?.data?._id,
+    query: "buyer.userId=" + getMe?._id,
   });
 
   const reviewPending = await fetchData({
     route: "/review",
-    query: `buyer.userId=${getMe?.data?._id}&reviewStatus=Pending`,
+    query: `reviewer.userId=${getMe?._id}&reviewStatus=Pending`,
   });
   return (
     <section className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-5 w-full ">
@@ -33,7 +34,7 @@ const ProfileTopCard = async ({ getMe }: { getMe: any }) => {
       <div className="flex items-center justify-center flex-col bg-gradient-positive rounded-lg p-6 w-full">
         <Image src={totalOrderIcon} alt="total order" width={40} height={40} />
         <h3 className="text-lg whitespace-nowrap mt-5">Total Order</h3>
-        <p className="text-lg font-bold">{orderItems?.meta?.total}</p>
+        <p className="text-lg font-bold">{orderItems?.meta?.total || 0}</p>
       </div>
       {/* Pending Review */}
       <Link href="/profile/review">

@@ -9,7 +9,7 @@ const page = async () => {
   });
   return (
     <div className="">
-      <ProfileTopCard getMe={getMe} />
+      <ProfileTopCard getMe={getMe?.data} />
       <OrderSection getMe={getMe} />
     </div>
   );

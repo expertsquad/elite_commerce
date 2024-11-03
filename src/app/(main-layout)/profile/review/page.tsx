@@ -2,13 +2,21 @@ import { dateFormat } from "@/utils/dateFormat";
 import Image from "next/image";
 import React from "react";
 import { server_url } from "@/constants";
-import { fetchData } from "@/actions/fetchData";
+import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import ReviewNewBtn from "./_components/ReviewNewBtn";
+import { noReview } from "@/assets";
 
 const ProductReviewComponents = async () => {
-  const reviewPending = await fetchData({
+  // <== Get me to get all reviews by user id ==>
+  const getUserInfo = await fetchProtectedData({
+    route: "/user/me",
+  });
+
+  const userId = getUserInfo?.data?._id;
+
+  const reviewPending = await fetchProtectedData({
     route: "/review",
-    query: `reviewStatus=Pending`,
+    query: `reviewStatus=Pending&reviewer.userId=${userId}`,
   });
 
   return (
@@ -50,8 +58,13 @@ const ProductReviewComponents = async () => {
           </div>
         ))
       ) : (
-        <div className="h-72 flex items-center justify-center w-full">
-          No Pending Review Found!
+        <div className="flex flex-col items-center justify-center h-[calc(100vh-200px)]">
+          <div className="flex justify-center items-center">
+            No pending review yet!!
+          </div>
+          <div className="flex items-center justify-center">
+            <Image src={noReview} alt="No Review" height={80} width={80} />
+          </div>
         </div>
       )}
     </div>

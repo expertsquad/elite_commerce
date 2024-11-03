@@ -38,6 +38,7 @@ import successGif from "./Images/success.gif";
 import favicon from "./Images/favicon.svg";
 import maintenanceMode from "./Images/maintenancemode.png";
 import productEmptyState from "./Images/ProductEmptyState.svg";
+import noReview from "./Images/no-review.png";
 export {
   // smallLogo,
   // fullLogo,
@@ -79,4 +80,5 @@ export {
   favicon,
   maintenanceMode,
   productEmptyState,
+  noReview,
 };
