@@ -9,7 +9,6 @@ export async function middleware(request: NextRequest) {
     const maintenanceData = await fetchData({
       route: "/settings/maintenance",
     });
-
     const isActiveMaintenance = maintenanceData?.data?.isMaintenanceActive;
     const startTime = maintenanceData?.data?.startTime;
     const currentTime = new Date().toISOString();

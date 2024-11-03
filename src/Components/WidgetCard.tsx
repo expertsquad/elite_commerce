@@ -4,7 +4,6 @@ import { IconArrowRight } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import widgetBg from "@/assets/Images/widgetBg.png";
 
 const WidgetCard = async ({
   className,
@@ -15,12 +14,16 @@ const WidgetCard = async ({
 }) => {
   return (
     <div
-      className={`relative flex flex-col items-center gap-3.5 justify-center bg-gradient-primary rounded-[10px] p-5 md:w-full max-w-[300px] ${className} overflow-hidden text-center`}
+      className={`relative flex flex-col items-center gap-3.5 justify-center bg-gradient-primary rounded-[10px] p-5 md:w-full max-w-[340px] h-[500px]  ${className} overflow-hidden text-center`}
     >
       <div className="flex flex-col items-center gap-1.5 text-white z-20">
         <span className="text-sm">{widget?.tag || ""}</span>
-        <span className="text-[26px] font-bold">{widget?.title || ""}</span>
-        <span className="text-sm">{widget?.description || ""}</span>
+        <span className="text-[26px] font-bold line-clamp-1">
+          {widget?.title || ""}
+        </span>
+        <span className="text-sm line-clamp-2">
+          {widget?.description || ""}
+        </span>
       </div>
       <Link
         href={`/products/${widget?.link}`}

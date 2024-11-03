@@ -1,6 +1,5 @@
 "use client";
 import { fetchData } from "@/actions/fetchData";
-import Loading from "@/app/loading";
 import AnimatedLoading from "@/Components/AnimatedLoading";
 import StarRating from "@/Components/StarRating";
 import { server_url } from "@/constants";

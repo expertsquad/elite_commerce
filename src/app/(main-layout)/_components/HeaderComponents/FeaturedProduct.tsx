@@ -6,14 +6,17 @@ import Link from "next/link";
 export const FeaturedProduct = async ({
   product,
   currencySymbol,
+  key,
 }: {
   product: IProduct;
   currencySymbol: string;
+  key?: number;
 }) => {
   return (
     <Link
+      key={key}
       href={`/products/${product?.productUrlSlug}`}
-      className="flex items-center border rounded border-black-10 p-3 gap-3 max-w-[350px]"
+      className="flex items-center border rounded border-black-10 p-3 gap-3 max-w-[350px] hover:bg-gradient-primary-light hover:border-primary-light transition-all duration-300"
     >
       <div className="w-20 h-20 relative ">
         <Image

@@ -27,12 +27,12 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
         onChange={onChange}
         name={name}
         placeholder={placeholder}
-        className={`border border-black-10 w-full py-2 pl-3 outline-none  rounded-md mt-3 placeholder:text-sm ${inputStyle}`}
+        className={`border border-black-10 w-full py-2 pl-3 outline-none  rounded-md  placeholder:text-sm ${inputStyle}`}
       />
       <button
         type="button"
         onClick={handleTogglePassword}
-        className="absolute top-6 right-0 flex items-center px-3 text-black-50"
+        className="absolute top-3 right-0 flex items-center px-3 text-black-50"
       >
         {showPassword ? (
           <IconEyeOff width={20} stroke={2} height={20} />
