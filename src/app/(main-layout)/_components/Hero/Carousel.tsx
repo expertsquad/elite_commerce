@@ -41,9 +41,7 @@ const Carousel = ({
       onClick={handleLink}
     >
       <div
-        className={`flex items-center md:gap-5 gap-3.5 justify-between lg:px-9 md:px-6 px-4 py-4 h-full w-full ${
-          item?.backgroundPhoto ? "hidden" : "block"
-        }`}
+        className={`flex items-center md:gap-5 gap-3.5 justify-between lg:px-9 md:px-6 px-4 py-4 h-full w-full`}
       >
         <div className="flex flex-col gap-y-3 w-6/12">
           <h3 className="font-bold text-gradient-secondary [font-size:_clamp(0.5em,60vw,0.9em)] animate-bounce hidden md:block">

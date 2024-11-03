@@ -29,7 +29,7 @@ export const OrderSummary = ({
         <span className="text-black-80 md:text-base text-sm">Subtotal</span>
         <strong className="text-black-80 md:text-base text-sm font-semibold">
           {currencyIcon}
-          {total}
+          {totalPrice}
         </strong>
       </div>
       <div className="flex items-center justify-between ">
