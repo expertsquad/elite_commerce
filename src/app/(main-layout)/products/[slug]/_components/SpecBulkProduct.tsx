@@ -102,7 +102,7 @@ const SpecBulkProduct = ({
               product={productdata}
               selectedVariant={variant?.variantName}
               accessToken={accessToken ? accessToken : ""}
-              className="!py-2.5 !text-[13px]"
+              className="!py-2.5 !text-[13px] hover:bg-gradient-primary-reverse"
               iconStyle="!size-4"
             />
           </div>
@@ -124,13 +124,14 @@ const SpecBulkProduct = ({
         <div className="border border-black-10 rounded-md mt-5">
           <button
             onClick={handleAddToCart}
-            className="text-gradient-primary flex items-center justify-center gap-x-1.5 w-full py-2 text-[13px]"
+            className="text-black flex items-center justify-center gap-x-1.5 w-full py-2 text-[13px] hover:bg-gradient-primary rounded-md hover:text-white"
           >
-            <GenerateGradientIcon
+            {/* <GenerateGradientIcon
               IconComponent={IconShoppingCart}
               stroke={1.2}
               size={15}
-            />
+            /> */}
+            <IconShoppingCart size={15} stroke={1.7} />
             ADD TO CART
           </button>
         </div>

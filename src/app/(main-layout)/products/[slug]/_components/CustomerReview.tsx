@@ -19,7 +19,7 @@ const CustomerReview = async ({
 }: CustomerReviewProps) => {
   const response = await fetchData({
     route: `/review`,
-    query: `product.productId=${productId}`,
+    query: `product.productId=${productId}&${rating ? `rating=${rating}` : ""}`,
   });
 
   return (
