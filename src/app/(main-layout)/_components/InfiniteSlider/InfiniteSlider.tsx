@@ -12,7 +12,7 @@ const InfiniteSlider = async () => {
 
   const element = cateogriesData?.data?.map((category) => (
     <Link
-      href={"/category/" + category?.categoryName}
+      href={`/category/single-category?category=${category?.categoryName}`}
       key={category?._id}
       className="flex flex-col items-center gap-2"
     >
