@@ -25,7 +25,7 @@ const OrderedItemsTableData = async ({
       <div className="hidden md:flex bg-[#F7F7F7] px-3 py-2 text-sm font-medium mb-5 w-full">
         <span className="w-[45%]">Product Name</span>
         <span className="w-[15%]">Un Price</span>
-        <span className="w-[15%]">Qty</span>
+        <span className="w-[15%]">QTY</span>
         <span className="w-[15%]">Total</span>
         <span className="w-[10%]"></span>
       </div>
@@ -71,7 +71,7 @@ const OrderedItemsTableData = async ({
                       {item?.variant?.discountedPrice}
                     </span>
                     <span className="text-sm">
-                      <IconX size={16} />
+                      <IconX size={16} stroke={2} />
                     </span>
                     <span className="text-sm">{item?.orderQuantity}</span>
                   </div>
