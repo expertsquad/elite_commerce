@@ -1,4 +1,3 @@
-import { demoProductPhoto } from "@/assets";
 import { server_url } from "@/constants";
 import { IWidgetCard } from "@/interfaces/widget.interface";
 import Image from "next/image";
@@ -7,7 +6,7 @@ import React from "react";
 
 const MegaDiscountCard = ({ widget }: { widget: IWidgetCard }) => {
   return (
-    <div className="bg-gradient-secondary-light  p-8 flex flex-col gap-4 items-center max-w-[340px] h-[500px] overflow-hidden rounded">
+    <div className="bg-gradient-secondary-light  p-8 flex flex-col gap-4 items-center max-w-[340px] h-[450px] overflow-hidden rounded">
       <div className="flex flex-col items-center gap-2">
         <span>{widget?.tag}</span>
         <h3 className="text-2xl font-semibold line-clamp-1">{widget?.title}</h3>
