@@ -16,7 +16,6 @@ const AddProfilePhoto = ({ profilePhotoUrl }: { profilePhotoUrl: string }) => {
   ) => {
     e.preventDefault();
     const file = e.target.files?.[0];
-    console.log(file);
     const formData = new FormData();
     if (file) {
       setLoading(true);
@@ -24,7 +23,6 @@ const AddProfilePhoto = ({ profilePhotoUrl }: { profilePhotoUrl: string }) => {
     }
     try {
       const res = await updateProfilePhoto(formData);
-      console.log(res);
       if (res?.success) {
         toast.success(res?.message);
         router.refresh();

@@ -17,8 +17,6 @@ export default function Error({
   const [countdown, setCountdown] = useState(5); // Start countdown at 5 seconds
 
   useEffect(() => {
-    console.log("error::::", error);
-
     const timer = setInterval(() => {
       setCountdown((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);

@@ -57,7 +57,7 @@ const EditCommentModalContent = ({
         revalidateTagAction("/profile/review/all-review-history");
         revalidateTagAction(`/review/${reviewData?._id}`);
       } else {
-        console.log(response?.message);
+        toast.error(response?.message);
       }
     } catch (error) {
       console.error(error);

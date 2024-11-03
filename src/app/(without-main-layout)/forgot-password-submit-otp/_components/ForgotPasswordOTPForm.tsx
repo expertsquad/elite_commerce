@@ -56,10 +56,8 @@ const ForgotPasswordOTPForm = ({
     formdata.append("email", userEmail);
 
     const data = Object.fromEntries(formdata.entries());
-    console.log(data);
 
     const res = await requestForOTP(formdata);
-    console.log(res);
   };
 
   return (

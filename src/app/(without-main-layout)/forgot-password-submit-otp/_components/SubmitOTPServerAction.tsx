@@ -7,7 +7,6 @@ export const submitOTPServerAction = async ({ data }: any) => {
     data: JSON.stringify(data),
     formatted: true,
   });
-  console.log(res);
 
   if (!res?.success) {
     return res;

@@ -21,8 +21,6 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   const handlePrevClick = () => {
-    console.log("prev clicked");
-
     if (currentPage > 1) {
       handlePageClick(currentPage - 1);
     }

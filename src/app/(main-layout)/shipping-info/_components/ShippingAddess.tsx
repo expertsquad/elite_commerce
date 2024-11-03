@@ -62,8 +62,6 @@ const ShippingAddess = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedOption, shippingAddress]);
 
-  console.log(orderData.shippingAddress);
-
   return (
     <div className="p-7 border border-black-10 rounded-lg ">
       <DefaultAddress defaultAddress={defaultAddress?.data?.[0]} />

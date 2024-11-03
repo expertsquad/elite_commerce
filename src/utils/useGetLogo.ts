@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 const useGetLogo = () => {
   const [logo, setLogo] = useState<string | null>(null);
-  console.log(logo);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 

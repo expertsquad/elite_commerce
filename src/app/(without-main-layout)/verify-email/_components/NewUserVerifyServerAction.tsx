@@ -10,7 +10,6 @@ export const newUserVerifyServerAction = async (dataObj: any) => {
     method: "PUT",
     formatted: true,
   });
-  console.log(res);
   if (!res?.success) {
     return res;
   }

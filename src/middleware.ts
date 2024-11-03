@@ -4,7 +4,6 @@ import { server_api } from "./constants";
 import { fetchData } from "./actions/fetchData";
 
 export async function middleware(request: NextRequest) {
-  console.log("Current path:", request.nextUrl.pathname);
   try {
     const accessToken = request.cookies.get("accessToken")?.value;
     const maintenanceData = await fetchData({
