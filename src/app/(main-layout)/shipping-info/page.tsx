@@ -1,6 +1,6 @@
 import ShippingInfoContent from "./_components/ShippingInfoContent";
 import ShippingAddess from "./_components/ShippingAddess";
-import { fetchData, fetchProtectedData } from "@/actions/fetchData";
+import { fetchProtectedData } from "@/actions/fetchData";
 import AddNewShippingAddress from "./_components/AddNewShippingAddress";
 import OrderItemsRightSection from "./_components/OrderItemsRightSection";
 import ShippinInfoTotalAmountCard from "./_components/ShippinInfoTotalAmountCard";
@@ -26,7 +26,7 @@ const page = async () => {
   // get all state by country name
   const stateByCountryName = await fetchCountryData({
     route: `/state/` + shopSetting?.data?.country,
-    limit: 100,
+    limit: 1000,
   });
   // get all city by country name
   const cityByStateName = await fetchCountryData({

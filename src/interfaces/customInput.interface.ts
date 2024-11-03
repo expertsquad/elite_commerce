@@ -15,4 +15,5 @@ export interface CustomInputProps {
   label?: string;
   disabled?: boolean;
   errors?: IErrorMessages[] | null;
+  required?: boolean;
 }

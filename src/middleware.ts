@@ -50,6 +50,7 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     "/profile/:path*",
+    "/shipping-info",
     "/((?!maintenance-mode|api|_next|favicon.ico).*)",
   ],
 };

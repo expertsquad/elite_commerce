@@ -32,8 +32,6 @@ const AddNewBillingAddress = ({
   const stateByCountryName = states?.data?.map((s: any) => s.name);
   const cityByCountryName = cities?.data?.map((s: any) => s.name);
 
-  console.log(onNewAddressChange);
-
   // used useEffect to set city and state
   useEffect(() => {
     setNewAddress((prevAddress) => ({
@@ -64,9 +62,9 @@ const AddNewBillingAddress = ({
           placeholder="Zayed"
           value={newAddress?.firstName}
           onChange={handleInputChange}
-          inputStyle={
-            newAddress?.firstName === "" ? " border border-danger" : ""
-          }
+          // inputStyle={
+          //   newAddress?.firstName === "" ? " border border-danger" : ""
+          // }
         />
         <CustomInput
           label="Last Name"
@@ -75,9 +73,9 @@ const AddNewBillingAddress = ({
           placeholder="Hossain"
           value={newAddress?.lastName}
           onChange={handleInputChange}
-          inputStyle={
-            newAddress?.lastName === "" ? " border border-danger" : ""
-          }
+          // inputStyle={
+          //   newAddress?.lastName === "" ? " border border-danger" : ""
+          // }
         />
 
         <CustomInput
@@ -87,9 +85,9 @@ const AddNewBillingAddress = ({
           placeholder="017*******"
           value={newAddress?.phoneNumber}
           onChange={handleInputChange}
-          inputStyle={
-            newAddress?.phoneNumber === "" ? " border border-danger" : ""
-          }
+          // inputStyle={
+          //   newAddress?.phoneNumber === "" ? " border border-danger" : ""
+          // }
         />
         <div className="opacity-50 pointer-events-none">
           <CustomInput
@@ -104,9 +102,12 @@ const AddNewBillingAddress = ({
         <CustomDropdown
           data={stateByCountryName}
           onClick={(value) => setState(value)}
-          className={`w-full py-2 rounded-lg px-3 ${
-            state == "" ? "border border-danger" : "border border-black-10"
+          className={`w-full py-2 rounded-lg px-3 border border-black-10 ${
+            state == "" ? "" : "border border-black-10"
           }`}
+          // className={`w-full py-2 rounded-lg px-3 ${
+          //   state == "" ? "border border-danger" : "border border-black-10"
+          // }`}
           itemClassName="py-1 hover:bg-black-10"
           defaultValue={newAddress?.state ? newAddress?.state : "Select State"}
           label="State"
@@ -115,9 +116,12 @@ const AddNewBillingAddress = ({
         <CustomDropdown
           data={cityByCountryName}
           onClick={(value) => setCity(value)}
-          className={`w-full py-2 rounded-lg px-3 ${
-            city == "" ? "border border-danger" : "border border-black-10"
+          className={`w-full py-2 rounded-lg px-3 border border-black-10 ${
+            city == "" ? "" : "border border-black-10"
           }`}
+          // className={`w-full py-2 rounded-lg px-3 ${
+          //   city == "" ? "border border-danger" : "border border-black-10"
+          // }`}
           itemClassName="py-1 hover:bg-black-10"
           defaultValue={newAddress?.city ? newAddress?.city : "Select City"}
           label="City"
@@ -131,7 +135,7 @@ const AddNewBillingAddress = ({
           placeholder="00108"
           value={newAddress?.zipCode}
           onChange={handleInputChange}
-          inputStyle={newAddress?.zipCode === "" ? " border border-danger" : ""}
+          // inputStyle={newAddress?.zipCode === "" ? " border border-danger" : ""}
         />
         <CustomInput
           label="Company Name (Optional)"
@@ -149,9 +153,9 @@ const AddNewBillingAddress = ({
             placeholder="1234 Main St"
             value={newAddress?.streetAddress}
             onChange={handleInputChange}
-            inputStyle={
-              newAddress?.streetAddress == "" ? " border border-danger" : ""
-            }
+            // inputStyle={
+            //   newAddress?.streetAddress == "" ? " border border-danger" : ""
+            // }
           />
         </div>
       </div>

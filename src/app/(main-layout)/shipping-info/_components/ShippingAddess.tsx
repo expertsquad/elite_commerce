@@ -28,7 +28,8 @@ const ShippingAddess = ({
   const [shippingAddress, setShippingAddress] = useState(
     defaultAddress?.data[0] || {}
   );
-  const { orderData, setRefetch } = useContext(OrderInitContext);
+  const { orderData, setRefetch, setOrderData } = useContext(OrderInitContext);
+
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSelectedOption(value);
@@ -60,6 +61,8 @@ const ShippingAddess = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedOption, shippingAddress]);
+
+  console.log(orderData.shippingAddress);
 
   return (
     <div className="p-7 border border-black-10 rounded-lg ">

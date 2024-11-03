@@ -14,6 +14,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
   label,
   disabled,
   errors,
+  required,
 }) => {
   const error = errors?.find((e) => e.path === name);
   return (
@@ -37,6 +38,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
           type={type}
           onChange={onChange}
           defaultValue={defaultValue}
+          required={required}
           value={value}
           name={name}
           className={`${inputStyle} required w-full border border-black-10 py-2  pr-4 focus:outline-none rounded-md ${
