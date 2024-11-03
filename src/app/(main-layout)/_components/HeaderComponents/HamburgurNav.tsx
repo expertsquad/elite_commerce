@@ -126,11 +126,11 @@ const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
         <IconMenu2 color="white" />
         All Categories
       </button>
-      {mainMenus.map((menu) => (
+      {mainMenus.map((menu, i: number) => (
         <MainMenuItem
           parentClassName="list-none"
           className="!py-3 !px-5 !hover:font-bold list-none"
-          key={menu.label}
+          key={i}
           menu={menu}
           onClick={() => setShowMenu(false)}
         />
@@ -143,10 +143,10 @@ const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
         //   {menu?.label}
         // </Link>
       ))}
-      {topMenus.map((menu) => (
+      {topMenus.map((menu, i: number) => (
         <Link
           href={menu.href}
-          key={menu.label}
+          key={i}
           className="py-3 px-5 hover:text-gradient-primary hover:font-bold"
           onClick={() => setShowMenu(false)}
         >

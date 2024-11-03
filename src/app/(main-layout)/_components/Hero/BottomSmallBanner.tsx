@@ -48,7 +48,7 @@ const BottomSmallBanner = ({
         <Link
           href={bottomOffer?.link}
           target="_blank"
-          className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-md py-2 mt-9 max-w-[110px] whitespace-nowrap text-xs uppercase"
+          className="flex items-center justify-center gap-2 bg-gradient-primary hover:bg-gradient-primary-reverse transition-all duration-300 text-white rounded-md py-2 mt-9 max-w-[110px] whitespace-nowrap text-xs uppercase"
         >
           {bottomOffer?.buttonText} <IconArrowRight size={16} />
         </Link>

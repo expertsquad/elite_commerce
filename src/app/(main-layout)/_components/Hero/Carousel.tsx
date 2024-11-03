@@ -75,7 +75,7 @@ const Carousel = ({
           <div className="md:mt-6 hover:text-positive">
             <Link
               href={item?.link}
-              className="min-w-[100px] max-w-[180px] flex items-center justify-center gap-x-2 bg-gradient-primary text-white rounded-lg py-3 [font-size:_clamp(12px,2.5vw,16px)] uppercase whitespace-nowrap"
+              className="min-w-[100px] max-w-[180px] flex items-center justify-center gap-x-2 bg-gradient-primary hover:bg-gradient-primary-reverse duration-150 transition-all text-white rounded-lg py-3 [font-size:_clamp(12px,2.5vw,16px)] uppercase whitespace-nowrap"
             >
               {item?.buttonText} <IconArrowRight size={20} />
             </Link>

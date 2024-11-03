@@ -68,7 +68,7 @@ const TopSmallBanner = ({
           <Link
             href={topOffer?.link || ""}
             target="_blank"
-            className="mt-10 flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-md py-2 max-w-[110px] whitespace-nowrap w-full text-xs"
+            className="mt-10 flex items-center justify-center gap-2 bg-gradient-primary hover:bg-gradient-primary-reverse transition-all duration-300 text-white rounded-md py-2 max-w-[110px] whitespace-nowrap w-full text-xs"
           >
             {topOffer?.buttonText} <IconArrowRight size={16} />
           </Link>
