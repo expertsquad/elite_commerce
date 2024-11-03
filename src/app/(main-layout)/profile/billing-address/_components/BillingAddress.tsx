@@ -1,6 +1,5 @@
 "use client";
 import CustomInput from "../../../../../Components/CustomInput";
-import { countryNames } from "@/constants/countryNames.constant";
 import SubmitButton from "@/Components/SubmitButton";
 import { IAddress } from "@/interfaces/address.interface";
 import CustomDropdown from "@/Components/CustomDropdown";
@@ -76,7 +75,7 @@ const BillingAddress = ({
       className={`${loading ? "opacity-50 pointer-events-none" : ""}`}
     >
       <h3 className="[font-size:_clamp(1em,5vw,1.5em)] font-semibold text-gradient-primary my-7 ">
-        Shipping Address
+        Billing Address
       </h3>
 
       <div className="grid grid-cols-1 gap-4 md:gap-6 lg:grid-cols-2">
@@ -86,6 +85,7 @@ const BillingAddress = ({
           name="firstName"
           placeholder="Zayed"
           defaultValue={billingAddress?.firstName}
+          required={true}
         />
         <CustomInput
           label="Last Name"
@@ -93,6 +93,7 @@ const BillingAddress = ({
           name="lastName"
           placeholder="Hossain"
           defaultValue={billingAddress?.lastName}
+          required={true}
         />
 
         <CustomInput
@@ -101,6 +102,7 @@ const BillingAddress = ({
           name="phoneNumber"
           placeholder="017*******"
           defaultValue={billingAddress?.phoneNumber}
+          required={true}
         />
 
         <div className="opacity-50 pointer-events-none">
@@ -136,6 +138,7 @@ const BillingAddress = ({
           name="zipCode"
           placeholder="00108"
           defaultValue={billingAddress?.zipCode}
+          required={true}
         />
 
         <CustomInput
@@ -153,6 +156,7 @@ const BillingAddress = ({
           name="streetAddress"
           placeholder="1234 Main St"
           defaultValue={billingAddress?.streetAddress}
+          required={true}
         />
       </div>
       <div className="flex justify-end items-center mt-5">

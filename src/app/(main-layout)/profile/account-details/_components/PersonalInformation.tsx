@@ -38,6 +38,7 @@ const PersonalInformation = async () => {
             name="fullName"
             placeholder="Zayed Hossain"
             defaultValue={getMe?.data?.fullName}
+            required={true}
           />
           <CustomInput
             label="Email"
@@ -54,6 +55,7 @@ const PersonalInformation = async () => {
             name="phoneNumber"
             defaultValue={getMe?.data?.phoneNumber}
             placeholder="017*******"
+            required={true}
           />
         </div>
 

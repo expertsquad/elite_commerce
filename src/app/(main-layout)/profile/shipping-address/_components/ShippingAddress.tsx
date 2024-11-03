@@ -29,7 +29,6 @@ const ShippingAddress = ({
 
   const stateByCountryName = states?.data?.map((s: any) => s.name);
   const cityByCountryName = cities?.data?.map((s: any) => s.name);
-  console.log(cityByCountryName);
   // handle submit
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -86,6 +85,7 @@ const ShippingAddress = ({
           name="firstName"
           placeholder="Zayed"
           defaultValue={shippingAddress?.firstName}
+          required={true}
         />
         <CustomInput
           label="Last Name"
@@ -93,6 +93,7 @@ const ShippingAddress = ({
           name="lastName"
           placeholder="Hossain"
           defaultValue={shippingAddress?.lastName}
+          required={true}
         />
 
         <CustomInput
@@ -101,6 +102,7 @@ const ShippingAddress = ({
           name="phoneNumber"
           placeholder="017*******"
           defaultValue={shippingAddress?.phoneNumber}
+          required={true}
         />
 
         <div className="opacity-50 pointer-events-none">
@@ -136,6 +138,7 @@ const ShippingAddress = ({
           name="zipCode"
           placeholder="00108"
           defaultValue={shippingAddress?.zipCode}
+          required={true}
         />
 
         <CustomInput
@@ -153,6 +156,7 @@ const ShippingAddress = ({
           name="streetAddress"
           placeholder="1234 Main St"
           defaultValue={shippingAddress?.streetAddress}
+          required={true}
         />
       </div>
       <div className="flex justify-end items-center mt-5">
