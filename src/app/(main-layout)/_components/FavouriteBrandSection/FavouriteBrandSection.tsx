@@ -42,7 +42,7 @@ const FavouriteBrandSection = ({
               <Link href={`brands/${brand?.brandName}`}>
                 <div
                   key={brand?._id}
-                  className="border border-black-10 h-[60px] 2xl:h-[70px] relative rounded-lg"
+                  className="border hover:border-primary-light hover:bg-gradient-primary-light transition-all duration-100 border-black-10 h-[60px] 2xl:h-[70px] relative rounded-lg"
                 >
                   <Image
                     src={server_url + brand?.brandPhoto}
