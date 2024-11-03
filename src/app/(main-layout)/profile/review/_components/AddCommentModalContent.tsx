@@ -109,7 +109,7 @@ const AddCommentModalContent = ({
                   key={index}
                   size={20}
                   className={`${
-                    index < rating ? "text-secondary" : "text-black-10"
+                    index < rating ? "text-secondary" : "text-white"
                   } stroke-secondary`}
                   onClick={(e) => handleStarClick(index, e)}
                 />

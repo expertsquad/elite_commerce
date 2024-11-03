@@ -57,10 +57,8 @@ const Page = async () => {
         {/* Hero section added */}
         <Hero currencyIcon={currencyIcon?.data?.currencySymbol} />
         {/* hottest categories */}
-        <p className="text-sm text-gradient-secondary mt-10">
-          Shop by Category
-        </p>
-        <p className="text-xl text-gradient-primary font-semibold mt-3 mb-10">
+
+        <p className="text-xl text-gradient-primary font-semibold mt-14 mb-10">
           Browse Our Hottest Categories
         </p>
         <InfiniteSlider />
