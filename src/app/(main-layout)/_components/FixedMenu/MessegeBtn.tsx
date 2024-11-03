@@ -16,7 +16,7 @@ const MessegeBtn = ({ data }: { data?: any }) => {
     <div className="">
       <button
         onClick={() => setShow(!show)}
-        className="bg-gradient-primary rounded-full flex items-center justify-center p-[clamp(10px,2.5vw,14px)] cursor-pointer shadow-circle-shadow outline-none"
+        className="bg-gradient-primary hover:bg-gradient-primary-reverse transition-all duration-300 rounded-full flex items-center justify-center p-[clamp(10px,2.5vw,14px)] cursor-pointer shadow-circle-shadow outline-none"
       >
         {show ? (
           <IconX className="text-white" />
