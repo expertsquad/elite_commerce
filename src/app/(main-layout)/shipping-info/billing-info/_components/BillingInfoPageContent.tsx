@@ -9,6 +9,7 @@ import PaymentOption from "./PaymentOption";
 import ShipToAndBillingSection from "./ShipToAndBillingSection";
 import OrderSubmitAndTotalAmount from "./OrderSubmitAndTotalAmount";
 import toast from "react-hot-toast";
+import { postDataMutation } from "@/actions/postDataMutation";
 
 const BillingInfoPageContent = ({
   currencySymbol,
@@ -17,6 +18,7 @@ const BillingInfoPageContent = ({
   shippingCharge,
   states,
   cities,
+  defaultAddress,
 }: {
   currencySymbol: string;
   country?: string;
@@ -24,6 +26,7 @@ const BillingInfoPageContent = ({
   shippingCharge: any;
   states?: any;
   cities?: any;
+  defaultAddress?: any;
 }) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -33,6 +36,7 @@ const BillingInfoPageContent = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
     // Convert zip code strings to numbers
     const shippingAddress = orderData?.shippingAddress as IAddress;
     if (typeof shippingAddress?.zipCode === "string") {
@@ -50,13 +54,42 @@ const BillingInfoPageContent = ({
       orderQuantity: item?.orderQuantity,
     }));
 
-    // <== sliced all information ==>
+    // Data to be submitted
     const orderDataToSubmit = {
       shippingAddress,
       billingAddress,
       orderItems,
     };
 
+    // Handle address mutations without blocking other actions
+    try {
+      if (
+        shippingAddress?.selectedShippingAddress === "newAddress" &&
+        shippingAddress?.isDefault === true &&
+        !defaultAddress
+      ) {
+        await postDataMutation({
+          route: "/user-address/add",
+          data: JSON.stringify(shippingAddress),
+          formatted: true,
+        });
+      } else if (
+        shippingAddress?.selectedShippingAddress === "newAddress" &&
+        shippingAddress?.isDefault === true
+      ) {
+        await updateDataMutation({
+          route: "/user-address/" + defaultAddress?.data[0]?._id,
+          data: JSON.stringify(shippingAddress),
+          formatted: true,
+          method: "PUT",
+        });
+      }
+    } catch (error) {
+      console.error("Address mutation error:", error);
+      // Optional: You can show a toast or log an error here if desired
+    }
+
+    // Submit order data
     try {
       const result = await updateDataMutation({
         route: "/online-order/add",
@@ -77,7 +110,7 @@ const BillingInfoPageContent = ({
         toast.error(result?.message);
       }
     } catch (error) {
-      console.error(error);
+      console.error("Order submission error:", error);
     } finally {
       setLoading(false);
     }

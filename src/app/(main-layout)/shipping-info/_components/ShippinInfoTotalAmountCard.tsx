@@ -96,7 +96,9 @@ const ShippinInfoTotalAmountCard = ({
           {/* Button Link */}
           <Button
             className="bg-gradient-primary w-full rounded-lg text-white my-2"
-            disabled={!isAddressComplete()}
+            disabled={
+              !isAddressComplete() || orderData?.shippingAddress == undefined
+            }
           >
             <Link
               href={"/shipping-info/billing-info"}

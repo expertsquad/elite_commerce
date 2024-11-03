@@ -90,6 +90,7 @@ const AddNewShippingInputSection = ({
           //   newAddress?.phoneNumber === "" ? " border border-danger" : ""
           // }
         />
+
         <div className="opacity-50 pointer-events-none">
           <CustomInput
             label="Country"
@@ -98,6 +99,7 @@ const AddNewShippingInputSection = ({
             placeholder="Bangladesh"
             value={country}
             onChange={handleInputChange}
+            readonly
           />
         </div>
         <CustomDropdown

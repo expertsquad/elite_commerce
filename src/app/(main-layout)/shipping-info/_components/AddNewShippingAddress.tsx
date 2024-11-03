@@ -18,7 +18,6 @@ const AddNewShippingAddress = ({
     updateShippingAddressInContext(newAddress);
   };
 
-  console.log(states, cities);
   const updateShippingAddressInContext = (address: AddressData) => {
     setOrderData((prevOrderData) => ({
       ...prevOrderData,

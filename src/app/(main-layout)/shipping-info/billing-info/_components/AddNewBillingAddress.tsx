@@ -97,6 +97,7 @@ const AddNewBillingAddress = ({
             placeholder="Bangladesh"
             value={country}
             onChange={handleInputChange}
+            readonly
           />
         </div>
         <CustomDropdown

@@ -13,6 +13,11 @@ const page = async () => {
     route: "/settings/shipping-charge",
   });
 
+  const defaultAddress = await fetchProtectedData({
+    route: "/user-address/me",
+    query: "isDefault=true",
+  });
+
   // this is from country data api
   // get all state by country name
   const stateByCountryName = await fetchCountryData({
@@ -33,6 +38,7 @@ const page = async () => {
       shippingCharge={shippingCharge?.data}
       states={stateByCountryName}
       cities={cityByStateName}
+      defaultAddress={defaultAddress}
     />
   );
 };

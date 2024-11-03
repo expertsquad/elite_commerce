@@ -11,6 +11,7 @@ const page = async () => {
     route: "/user-address/me",
     query: "isDefault=true",
   });
+
   const getMe = await fetchProtectedData({
     route: "/user/me",
   });
@@ -18,7 +19,7 @@ const page = async () => {
     route: "/settings/shipping-charge",
   });
   // fetch shop data to get country and currency symbol
-  const shopSetting = await fetchProtectedData({
+  const shopSetting = await fetchData({
     route: "/settings/shop",
   });
 

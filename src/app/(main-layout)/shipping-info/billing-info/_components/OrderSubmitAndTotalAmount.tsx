@@ -24,9 +24,25 @@ const OrderSubmitAndTotalAmount = ({
     calculateTotalPriceAndDiscountOfCart(products);
   const shippingFee = getShippingFee(shippingCharge, city, totalPrice);
 
-  // Function to check if the shipping address is complete
-  const isAddressComplete = () => {
+  // Function to check if the billing address is complete
+  const isBillingAdressComplete = () => {
     const address = orderData?.billingAddress;
+    return (
+      address &&
+      address.firstName &&
+      address.lastName &&
+      address.state &&
+      address.country &&
+      address.streetAddress &&
+      address.phoneNumber &&
+      address.zipCode &&
+      address.city
+    );
+  };
+
+  // Function to check if the billing address is complete
+  const isShippingAdressComplete = () => {
+    const address = orderData?.shippingAddress;
     return (
       address &&
       address.firstName &&
@@ -83,7 +99,9 @@ const OrderSubmitAndTotalAmount = ({
           </div>
           <div
             className={`${
-              !orderData?.payment || !isAddressComplete()
+              !orderData?.payment ||
+              !isBillingAdressComplete() ||
+              !isShippingAdressComplete()
                 ? "opacity-50 pointer-events-none"
                 : ""
             }`}
