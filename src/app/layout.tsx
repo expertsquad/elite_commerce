@@ -81,7 +81,7 @@ export default async function RootLayout({
         </svg>
         {/* children */}
         <NextTopLoader
-          color={`${colorsData?.data?.primaryColor}`}
+          color={`${colorsData?.data?.primaryLightColor}`}
           height={4}
           showSpinner={false}
           speed={800}
