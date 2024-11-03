@@ -218,7 +218,7 @@ const CartInterceptingPage = () => {
               <div className="my-2 flex items-center justify-center">
                 {" "}
                 <button
-                  className="text-positive text-sm uppercase "
+                  className="text-positive text-sm uppercase hover:text-primary-light"
                   onClick={() => window.location.reload()}
                 >
                   View Cart &rarr;

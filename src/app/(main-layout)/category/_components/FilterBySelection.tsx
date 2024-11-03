@@ -5,6 +5,8 @@ import { IProduct } from "@/interfaces/product.interface";
 import dynamic from "next/dynamic";
 import React, { Suspense, useState } from "react";
 import ProductEmptyState from "../../_components/ProductEmptyState";
+import CustomDropdown from "@/Components/CustomDropdown";
+import { selectOptionMenu } from "@/constants/selectOptionMenu";
 
 const MostPopularProducts = dynamic(
   () => import("./SortedProducts/MostPopularProducts")
@@ -71,7 +73,7 @@ const SortingSection = ({
             : ""}{" "}
           Items result found-{" "}
         </span>
-        <div className="border border-black-10 px-3 rounded-md w-auto ">
+        {/* <div className="border border-black-10 px-3 rounded-md w-auto ">
           <select
             name="products-sort"
             className="py-2 rounded-md outline-none border-none w-full  bg-transparent text-gray-700 active:text-fuchsia-700 "
@@ -82,7 +84,15 @@ const SortingSection = ({
             <option value="HighPrice">High Price</option>
             <option value="LowPrice">Low Price</option>
           </select>
-        </div>
+        </div> */}
+
+        <CustomDropdown
+          data={selectOptionMenu}
+          onClick={(value) => setSelected(value)}
+          className="w-fit border border-black-10 py-2 rounded-lg px-3 "
+          itemClassName="py-1 hover:bg-black-10"
+          defaultValue={selected}
+        />
       </div>
 
       <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5  justify-around">

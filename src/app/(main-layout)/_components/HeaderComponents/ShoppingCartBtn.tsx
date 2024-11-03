@@ -136,9 +136,9 @@ const ShoppingCartBtn = ({
                   <Link
                     onClick={() => setShow(!show)}
                     href={"/cart"}
-                    className={`text-positive text-sm uppercase select-none flex items-center gap-x-1 ${
+                    className={`text-positive text-sm uppercase select-none flex items-center gap-x-1 hover:text-primary-light ${
                       cartProducts?.length === 0
-                        ? "pointer-events-none cursor-not-allowed opacity-50"
+                        ? "pointer-events-none cursor-not-allowed opacity-50 "
                         : ""
                     }`}
                   >
