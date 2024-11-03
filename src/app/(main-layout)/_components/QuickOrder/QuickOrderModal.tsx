@@ -186,10 +186,11 @@ const QuickOrderModal = ({
                   type="text"
                   value={formValues.fullName}
                   onChange={handleInputChange}
-                  inputStyle={`${
-                    formValues.fullName === "" &&
-                    "border-danger border-opacity-10"
-                  }`}
+                  required={true}
+                  // inputStyle={`${
+                  //   formValues.fullName === "" &&
+                  //   "border-danger border-opacity-10"
+                  // }`}
                 />
                 <CustomInput
                   placeholder="+880"
@@ -198,10 +199,11 @@ const QuickOrderModal = ({
                   type="text"
                   value={formValues.phoneNumber}
                   onChange={handleInputChange}
-                  inputStyle={`${
-                    formValues.phoneNumber === "" &&
-                    "border-danger border-opacity-10"
-                  }`}
+                  required={true}
+                  // inputStyle={`${
+                  //   formValues.phoneNumber === "" &&
+                  //   "border-danger border-opacity-10"
+                  // }`}
                 />
                 <CustomInput
                   placeholder="Dhaka, Bangladesh"
@@ -210,10 +212,11 @@ const QuickOrderModal = ({
                   type="text"
                   value={formValues.address}
                   onChange={handleInputChange}
-                  inputStyle={`${
-                    formValues.address === "" &&
-                    "border-danger border-opacity-10"
-                  }`}
+                  required={true}
+                  // inputStyle={`${
+                  //   formValues.address === "" &&
+                  //   "border-danger border-opacity-10"
+                  // }`}
                 />
                 <div className="md:hidden block">
                   <ButtonPrimary
@@ -245,7 +248,7 @@ const QuickOrderModal = ({
             </form>
             <Link
               href="/"
-              className="uppercase text-black-80 md:flex items-center justify-center mt-5 gap-x-1 hidden"
+              className="uppercase text-black-80 md:flex items-center justify-center mt-5 gap-x-1 hidden hover:text-primary-light"
             >
               <IconArrowLeft size={20} />
               <span>Continue Shopping</span>
