@@ -84,7 +84,7 @@ const ProductViewPage = async ({
               productdata={product?.data}
               currencyIcon={currencyIcon?.data?.currencySymbol}
               shippingAmount={quickOrderServices?.data?.deliveryCharge}
-              accessToken={accessToken!}
+              accessToken={accessToken ? accessToken : ""}
               isQuickOrderActive={
                 quickOrderServices?.data?.isQuickOrderServiceActive
               }

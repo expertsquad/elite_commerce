@@ -39,6 +39,7 @@ import favicon from "./Images/favicon.svg";
 import maintenanceMode from "./Images/maintenancemode.png";
 import productEmptyState from "./Images/ProductEmptyState.svg";
 import noReview from "./Images/no-review.png";
+import userPlaceholder from "./Images/user-placeholder.png";
 export {
   // smallLogo,
   // fullLogo,
@@ -81,4 +82,5 @@ export {
   maintenanceMode,
   productEmptyState,
   noReview,
+  userPlaceholder,
 };
