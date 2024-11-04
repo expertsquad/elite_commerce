@@ -45,6 +45,8 @@ const ShoppingCartBtn = ({
     totalPrice,
     shippingCharge?.freeShippingMinOrderAmount
   );
+  console.log(totalPrice);
+  console.log(shippingCharge?.freeShippingMinOrderAmount);
 
   const { orderData } = useContext(OrderInitContext);
 
@@ -87,18 +89,24 @@ const ShoppingCartBtn = ({
                 <div className="mt-5 ">
                   <ProgressBar progressValue={progressValue} />
                 </div>
-                <span className="text-sm flex items-center gap-x-1 mb-5">
-                  Buy
-                  <span className="text-gradient-primary">
-                    {currencyIcon}
-                    {shippingCharge?.freeShippingMinOrderAmount}
+                {totalPrice > shippingCharge?.freeShippingMinOrderAmount ? (
+                  <div className="text-sm text-positive mb-5">
+                    Congratulations! You&apos;ve unlocked free shipping🚚{" "}
+                  </div>
+                ) : (
+                  <span className="text-sm flex items-center gap-x-1 mb-5">
+                    Buy
+                    <span className="text-gradient-primary">
+                      {currencyIcon}
+                      {shippingCharge?.freeShippingMinOrderAmount}
+                    </span>
+                    more to get
+                    <span className="text-gradient-primary font-semibold">
+                      Freeship
+                    </span>
+                    🔥
                   </span>
-                  more to get
-                  <span className="text-gradient-primary font-semibold">
-                    Freeship
-                  </span>
-                  🔥
-                </span>
+                )}
               </div>
             )}
 

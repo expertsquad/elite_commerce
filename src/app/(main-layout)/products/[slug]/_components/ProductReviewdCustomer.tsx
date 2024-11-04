@@ -11,6 +11,7 @@ const ProductReviewdCustomer = ({
 }: {
   reviewData: CustomerReviewProps[];
 }) => {
+  console.log(reviewData);
   return (
     <div className="">
       {reviewData?.map((review: CustomerReviewProps) => (
