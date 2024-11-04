@@ -52,7 +52,7 @@ const ProductReviewdCustomer = async ({
               </div>
             </div>
           </div>
-          <div>
+          <div className="flex items-center gap-x-2">
             {review?.reviewPhotos?.map((photo: string, index: number) => (
               <div
                 key={index}

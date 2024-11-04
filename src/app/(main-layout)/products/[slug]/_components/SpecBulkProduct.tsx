@@ -40,7 +40,7 @@ const SpecBulkProduct = ({
   );
 
   return (
-    <div className="max-w-[370px] min-w-80 p-5 shadow-lg rounded-md hidden md:block sticky top-20">
+    <div className="max-w-[370px] min-w-80 p-5 shadow-lg rounded-md hidden md:block sticky top-24">
       <div className="flex items-center gap-x-4 mb-3">
         {productdata?.productPhotos?.slice(0, 4)?.map((photo, index) => (
           <div
@@ -114,7 +114,7 @@ const SpecBulkProduct = ({
                 orderQuantity: 1,
                 variant: variant,
               }}
-              buttonStyle="text-white bg-gradient-primary hover:bg-gradient-primary-reverse flex items-center justify-center gap-x-1.5 py-2.5 rounded-md w-full text-[13px]"
+              buttonStyle="text-white bg-gradient-secondary hover:bg-gradient-primary-reverse flex items-center justify-center gap-x-1.5 py-2.5 rounded-md w-full text-[13px]"
               buttonIcon={<IconBolt size={16} fill="#fff" />}
               buttonText="QUICK ORDER"
               currencyIcon={currencyIcon}

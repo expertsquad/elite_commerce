@@ -28,12 +28,17 @@ const EditCommentModalContent = ({
     setRating((prev: number) => (prev === index + 1 ? 0 : index + 1));
   };
 
-  const handleFilesChange = (index: number, files: FileList) => {
-    if (files[0]) {
-      const updatedPhotos = [...photos];
-      updatedPhotos[index] = files[0];
-      setPhotos(updatedPhotos);
-    }
+  // const handleFilesChange = (index: number, files: FileList) => {
+  //   if (files[0]) {
+  //     const updatedPhotos = [...photos];
+  //     updatedPhotos[index] = files[0];
+  //     setPhotos(updatedPhotos);
+  //   }
+  // };
+
+  const handleFilesChange = (files: FileList) => {
+    const newPhotos = Array.from(files); // Convert FileList to an array
+    setPhotos((prevPhotos) => [...prevPhotos, ...newPhotos]);
   };
 
   const handleAddCommentSubmit = async (e: React.FormEvent) => {
@@ -44,6 +49,11 @@ const EditCommentModalContent = ({
     const formData = new FormData();
     formData.append("comment", comments);
     formData.append("rating", rating.toString());
+    photos.forEach((photo) => {
+      if (photo) {
+        formData.append("reviewPhotos", photo);
+      }
+    });
 
     try {
       const response = await updateDataMutation({
@@ -98,9 +108,7 @@ const EditCommentModalContent = ({
                   width={20}
                   height={20}
                   className={
-                    index <= rating - 1
-                      ? "text-secondary-color"
-                      : "text-black-50"
+                    index <= rating - 1 ? "text-secondary" : "text-black-50"
                   }
                   onClick={(e) => handleStarClick(index, e)}
                 />
@@ -126,7 +134,8 @@ const EditCommentModalContent = ({
                 key={index}
                 name={`reviewPhotos${index}`}
                 multiple={true}
-                onChange={(e) => handleFilesChange(index, e.target.files!)}
+                // onChange={(e) => handleFilesChange(index, e.target.files!)}
+                onChange={(e) => handleFilesChange(e.target.files!)}
                 maxSize={5}
                 accept="image/*"
                 url={reviewData?.reviewPhotos[index]}

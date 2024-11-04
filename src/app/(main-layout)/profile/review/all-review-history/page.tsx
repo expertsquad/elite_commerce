@@ -65,7 +65,7 @@ const AllReviewHistory = async () => {
           </div>
         </div>
       )}
-      {allReviews?.data?.length > 1 && (
+      {/* {allReviews?.data?.length > 1 && (
         <Pagination
           currentPage={1}
           totalPages={Math.ceil(
@@ -73,7 +73,7 @@ const AllReviewHistory = async () => {
           )}
           redirectTo="all-review-history"
         />
-      )}
+      )} */}
     </div>
   );
 };
