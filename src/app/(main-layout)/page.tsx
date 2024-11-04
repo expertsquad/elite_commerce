@@ -1,19 +1,17 @@
 import React, { Suspense } from "react";
 import Hero from "./_components/Hero/Hero";
 import InfiniteSlider from "./_components/InfiniteSlider/InfiniteSlider";
-import Image from "next/image";
 import FeaturedProducts from "./_components/FeaturedProducts/FeaturedProducts";
 import { fetchData } from "@/actions/fetchData";
 import BestDealsSection from "./_components/BestDealsSection/BestDealsSection";
-import { extraServices } from "@/constants/extraServices.constants";
 import FavouriteBrandSection from "./_components/FavouriteBrandSection/FavouriteBrandSection";
 import { IProduct } from "@/interfaces/product.interface";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import Loading from "../loading";
-import Pagination from "@/Components/Pagination";
 import DealsOfTheDaySection from "./_components/DealsOfTheDaySection/DealsOfTheDaySection";
 import { getWidget } from "@/utils/getWidget";
 import Link from "next/link";
+import ProductViewServices from "./products/[slug]/_components/ProductViewServices";
 
 const Page = async () => {
   const newestProducts = await fetchData({ route: "/product", limit: 8 });
@@ -88,28 +86,7 @@ const Page = async () => {
       <BestDealsSection />
       {/* <== Deals of the day section ==> */}
       <div className="main-container">
-        <div className="flex flex-col md:flex-row items-center justify-between  text-center md:text-left gap-10 my-20 xl:my-28">
-          {extraServices.map((service) => (
-            <div
-              className="flex flex-col md:flex-row md:gap-2 items-center"
-              key={service.title}
-            >
-              <Image
-                src={service.icon}
-                alt="delivery truck icon"
-                className="w-12 h-12 md:w-8 md:h-8 lg:w-12 lg:h-12"
-              />
-              <div>
-                <h5 className="font-bold text-sm md:text-sm whitespace-nowrap">
-                  {service.title}
-                </h5>
-                <p className="text-black-50 text-xs md:text-sm">
-                  {service.tagline}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ProductViewServices className="my-20 xl:my-28" />
         {/* favourite brand section */}
         <FavouriteBrandSection
           widget={widget}

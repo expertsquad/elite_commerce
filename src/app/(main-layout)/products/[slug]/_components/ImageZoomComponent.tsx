@@ -23,7 +23,7 @@ const ImageZoomComponent = ({ selectedImage }: { selectedImage: any }) => {
   };
 
   return (
-    <div className="flex items-center justify-center rounded-lg w-full border border-black-10 bg-gradient-primary-light">
+    <div className="flex items-center justify-center rounded-lg w-full border border-black-10 bg-image-background">
       {selectedImage && (
         <div
           className="relative shrink-0 flex-1 h-[400px] md:h-[515px] overflow-hidden"

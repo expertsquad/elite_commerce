@@ -18,8 +18,8 @@ const RelatedProductsByCategory = async ({
 }) => {
   const response = await fetchData({
     route: `/product`,
-    query: `category.categoryName=${categoryName}`,
-    limit: 8,
+    query: `category.categoryName=${categoryName}&sortBy=totalSoldQuantity`,
+    limit: 4,
   });
   const isDataArrayEmpty =
     response?.data && Array.isArray(response.data) && response.data.length === 0
@@ -42,25 +42,27 @@ const RelatedProductsByCategory = async ({
         </Link>
       </div>
 
-      <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5">
-        <Suspense fallback={<Loading />}>
-          {response?.data?.map((product: IProduct) => {
-            return (
-              <div
-                className="grid grid-cols-product-grid grid-rows-product-grid gap-5 justify-around mb-5"
-                key={product?._id}
-              >
-                <ProductCard
-                  product={product}
-                  currencyIcon={currencyIcon}
-                  shippingAmount={shippingAmount}
-                  isQuickOrderActive={isQuickOrderActive}
-                />
-              </div>
-            );
-          })}
-        </Suspense>
-      </div>
+      {response?.data?.length > 0 ? (
+        <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5">
+          <Suspense fallback={<Loading />}>
+            {response?.data?.map((product: IProduct) => {
+              return (
+                <div
+                  className="grid grid-cols-product-grid grid-rows-product-grid gap-5 justify-around mb-5"
+                  key={product?._id}
+                >
+                  <ProductCard
+                    product={product}
+                    currencyIcon={currencyIcon}
+                    shippingAmount={shippingAmount}
+                    isQuickOrderActive={isQuickOrderActive}
+                  />
+                </div>
+              );
+            })}
+          </Suspense>
+        </div>
+      ) : null}
     </div>
   );
 };

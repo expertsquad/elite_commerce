@@ -20,6 +20,8 @@ const OrderedItemsTableData = async ({
     route: "/settings/shop",
   });
 
+  console.log(orderItems);
+
   return (
     <section>
       <div className="hidden md:flex bg-[#F7F7F7] px-3 py-2 text-sm font-medium mb-5 w-full">
@@ -63,6 +65,14 @@ const OrderedItemsTableData = async ({
                   <div>
                     <StarRating rating={2} />
                   </div>
+                  {item?.variant?.discountPercentage && (
+                    <>
+                      <span className="text-black-10">|</span>
+                      <span className="text-secondary text-[10px] md:text-xs">
+                        {item?.variant?.discountPercentage}%
+                      </span>
+                    </>
+                  )}
                 </div>
                 <div className="md:hidden flex items-center justify-between">
                   <div className="flex items-center gap-x-1 text-black-80">

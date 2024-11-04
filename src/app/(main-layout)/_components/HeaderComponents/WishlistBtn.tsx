@@ -18,7 +18,6 @@ import { CartContext } from "@/Provider/CartProvider";
 import { updateWishlist } from "@/utils/updateWishlist.utils";
 import { updateCart } from "@/utils/updateCart.utils";
 import { productEmptyState } from "@/assets";
-import { IProductVariant } from "@/interfaces/product.interface";
 
 const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
   const [show, setShow] = React.useState(false);
@@ -45,7 +44,7 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
     setRefetch((prev) => prev + 1);
     setRefetchCart && setRefetchCart((prev) => prev + 1);
   };
-
+  console.log(wishlistProducts[3]);
   return (
     <Fragment>
       <button className="relative" onClick={() => setShow(true)}>
@@ -122,18 +121,34 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                                     </span>
                                   </div>
                                 )}
+                              {product?.variant?.discountPercentage &&
+                                product?.variant?.discountPercentage > 0 && (
+                                  <>
+                                    <span className="text-black-10">|</span>
+                                    <span className="text-secondary text-[10px] md:text-xs">
+                                      {product?.variant?.discountPercentage}%
+                                    </span>
+                                  </>
+                                )}
                             </div>
 
                             <div className="flex items-baseline gap-1.5">
                               <strong className="font-semibold text-gradient-primary text-base">
                                 {currencyIcon}
-                                {product?.variant?.discountedPrice}
+                                {product?.variant?.discountedPrice
+                                  ? product?.variant?.discountedPrice
+                                  : product?.variant?.sellingPrice}
                               </strong>
-                              <span className="text-black-10">|</span>
-                              <strong className="font-normal line-through text-black-50 text-sm">
-                                {currencyIcon}
-                                {product?.variant?.sellingPrice}
-                              </strong>
+                              {product?.variant?.discountedPrice &&
+                                product?.variant?.discountPercentage && (
+                                  <>
+                                    <span className="text-black-10">|</span>
+                                    <strong className="font-normal line-through text-black-50 text-sm">
+                                      {currencyIcon}
+                                      {product?.variant?.sellingPrice}
+                                    </strong>
+                                  </>
+                                )}
                             </div>
                           </div>
                         </div>

@@ -11,6 +11,7 @@ const ProductReviewdCustomer = ({
 }: {
   reviewData: CustomerReviewProps[];
 }) => {
+  console.log(reviewData);
   return (
     <div className="">
       {reviewData?.map((review: CustomerReviewProps) => (
@@ -47,7 +48,7 @@ const ProductReviewdCustomer = ({
             {review?.reviewPhotos?.map((photo: string, index: number) => (
               <div
                 key={index}
-                className="relative w-[45px] h-[45px] border border-black-10 rounded-md bg-gradient-primary-light"
+                className="relative w-[45px] h-[45px] border border-black-10 rounded-md bg-image-background"
               >
                 <Image
                   src={server_url + photo}
