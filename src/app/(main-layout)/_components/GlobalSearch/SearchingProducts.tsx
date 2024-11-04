@@ -49,7 +49,7 @@ const SearchingProducts = ({
 
   const router = useRouter();
   const handleProductView = (product: IProduct) => {
-    router.push("/products/" + product?._id);
+    router.push("/products/" + product?.productUrlSlug);
     setShow(false);
     setSearchValue("");
   };
@@ -98,6 +98,14 @@ const SearchingProducts = ({
                       rating={Math.round(product.averageRating || 0)}
                     />
                   </span>
+                  {product?.variants[0].discountPercentage && (
+                    <>
+                      <span className="text-black-10 mx-0.5">|</span>
+                      <span className="text-secondary text-[10px] md:text-xs">
+                        {product?.variants[0]?.discountPercentage}%
+                      </span>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

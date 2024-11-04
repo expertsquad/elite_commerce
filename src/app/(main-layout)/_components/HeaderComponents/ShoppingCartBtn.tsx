@@ -45,8 +45,6 @@ const ShoppingCartBtn = ({
     totalPrice,
     shippingCharge?.freeShippingMinOrderAmount
   );
-  console.log(totalPrice);
-  console.log(shippingCharge?.freeShippingMinOrderAmount);
 
   const { orderData } = useContext(OrderInitContext);
 
@@ -245,6 +243,14 @@ export const QuickOrderItem = ({
                     </span>
                   </>
                 )}
+              {discountPercentage > 0 && (
+                <>
+                  <span className="text-black-10">|</span>
+                  <span className="text-secondary text-[10px] md:text-xs">
+                    {discountPercentage}%
+                  </span>
+                </>
+              )}
             </div>
             <div className="flex items-center justify-between gap-5"></div>
           </div>

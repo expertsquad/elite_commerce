@@ -66,7 +66,7 @@ export const ShippingInfoOrderItems = ({
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-between gap-y-3">
+        <div className="flex flex-col justify-between gap-y-2">
           <div className="flex flex-col justify-between">
             <span className="line-clamp-1 md:text-base text-sm text-black-80">
               {product?.productName}
@@ -91,6 +91,14 @@ export const ShippingInfoOrderItems = ({
                     </span>
                   </>
                 )}
+              {discountPercentage > 0 && (
+                <>
+                  <span className="text-black-10">|</span>
+                  <span className="text-secondary text-[10px] md:text-xs">
+                    {discountPercentage}%
+                  </span>
+                </>
+              )}
             </div>
           </div>
           <div className="flex items-center gap-1.5">

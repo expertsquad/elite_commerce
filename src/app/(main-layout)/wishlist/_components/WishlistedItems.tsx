@@ -101,6 +101,14 @@ const WishlistedItems = ({
                     </span>
                   </>
                 )}
+              {product?.variant?.discountPercentage && (
+                <>
+                  <span className="text-black-10">|</span>
+                  <span className="text-secondary text-[10px] md:text-xs">
+                    {product?.variant?.discountPercentage}%
+                  </span>
+                </>
+              )}
             </div>
           </div>
         </div>

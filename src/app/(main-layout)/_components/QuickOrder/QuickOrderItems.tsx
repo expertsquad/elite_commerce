@@ -74,6 +74,14 @@ export const QuickOrderItem = ({
                   </span>
                 </div>
               )}
+              {discountPercentage > 0 && (
+                <>
+                  <span className="text-black-10">|</span>
+                  <span className="text-secondary text-[10px] md:text-xs">
+                    {discountPercentage}%
+                  </span>
+                </>
+              )}
             </div>
           </div>
 
