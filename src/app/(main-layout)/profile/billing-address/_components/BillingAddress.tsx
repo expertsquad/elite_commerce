@@ -6,6 +6,8 @@ import CustomDropdown from "@/Components/CustomDropdown";
 import { postDataMutation } from "@/actions/postDataMutation";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import { useState } from "react";
+import CustomLoader from "@/Components/CustomLoader";
+import toast from "react-hot-toast";
 
 const BillingAddress = ({
   billingAddress,
@@ -58,6 +60,11 @@ const BillingAddress = ({
         data: JSON.stringify(dataObj),
         formatted: true,
       });
+      if (result?.success) {
+        toast.success(result?.message);
+      } else {
+        toast.error(result?.message);
+      }
     } else {
       const result = await updateDataMutation({
         route: "/user-address" + "/" + billingAddress?._id,
@@ -65,15 +72,18 @@ const BillingAddress = ({
         formatted: true,
         method: "PUT",
       });
+      if (result?.success) {
+        toast.success(result?.message);
+      } else {
+        toast.error(result?.message);
+      }
     }
     setLoading(false);
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={`${loading ? "opacity-50 pointer-events-none" : ""}`}
-    >
+    <form onSubmit={handleSubmit} className={`relative`}>
+      {loading && <CustomLoader />}
       <h3 className="[font-size:_clamp(1em,5vw,1.5em)] font-semibold text-gradient-primary my-7 ">
         Billing Address
       </h3>

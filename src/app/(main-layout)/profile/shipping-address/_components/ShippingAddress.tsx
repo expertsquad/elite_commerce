@@ -1,12 +1,13 @@
 "use client";
 import CustomInput from "../../../../../Components/CustomInput";
-import { countryNames } from "@/constants/countryNames.constant";
 import SubmitButton from "@/Components/SubmitButton";
 import { IAddress } from "@/interfaces/address.interface";
 import CustomDropdown from "@/Components/CustomDropdown";
 import { postDataMutation } from "@/actions/postDataMutation";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import { useState } from "react";
+import CustomLoader from "@/Components/CustomLoader";
+import toast from "react-hot-toast";
 
 const ShippingAddress = ({
   shippingAddress,
@@ -58,6 +59,11 @@ const ShippingAddress = ({
         data: JSON.stringify(dataObj),
         formatted: true,
       });
+      if (result?.success) {
+        toast.success(result?.message);
+      } else {
+        toast.error(result?.message);
+      }
     } else {
       const result = await updateDataMutation({
         route: "/user-address" + "/" + shippingAddress?._id,
@@ -65,15 +71,18 @@ const ShippingAddress = ({
         formatted: true,
         method: "PUT",
       });
+      if (result?.success) {
+        toast.success(result?.message);
+      } else {
+        toast.error(result?.message);
+      }
     }
     setLoading(false);
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={`${loading ? "opacity-50 pointer-events-none" : ""}`}
-    >
+    <form onSubmit={handleSubmit} className={`relative`}>
+      {loading && <CustomLoader />}
       <h3 className="[font-size:_clamp(1em,5vw,1.5em)] font-semibold text-gradient-primary my-7 ">
         Shipping Address
       </h3>
@@ -112,6 +121,7 @@ const ShippingAddress = ({
             name="state"
             placeholder="Bangladesh"
             defaultValue={country}
+            readonly
           />
         </div>
         <CustomDropdown

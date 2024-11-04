@@ -5,6 +5,7 @@ import PasswordInput from "../../_components/PasswordInput";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import SubmitButton from "@/Components/SubmitButton";
 import toast from "react-hot-toast";
+import CustomLoader from "@/Components/CustomLoader";
 
 const Page = () => {
   const [err, setErr] = useState("");
@@ -42,22 +43,22 @@ const Page = () => {
     setLoading(false);
   };
   return (
-    <div className={`${loading ? "pointer-events-none opacity-50" : ""}`}>
+    <div className={"relative"}>
+      {loading && <CustomLoader />}
       {/* tab to toggle section */}
       <div className="flex gap-6 items-center border-b border-black-10 justify-start">
-        <div className="text-base">
+        <div className="text-base pb-2">
           <Link className=" " href="/profile/account-details">
             Personal Information
           </Link>
         </div>
-        <div className="pb-[1px]  border-gradient-primary">
-          <Link
-            className=" text-gradient-primary font-semibold text-base "
-            href="/profile/account-details/change-password"
-          >
-            Change Password
-          </Link>
-        </div>
+
+        <Link
+          className=" text-gradient-primary font-semibold text-base border-b !border-primary-light pb-2"
+          href="/profile/account-details/change-password"
+        >
+          Change Password
+        </Link>
       </div>
 
       {/* main contain */}
@@ -72,6 +73,7 @@ const Page = () => {
           <PasswordInput
             name="oldPassword"
             error={err == "Password Not Matched" ? "" : err}
+            required
           />
         </div>
 
@@ -80,6 +82,7 @@ const Page = () => {
           <PasswordInput
             name="newPassword"
             error={err == "Old password is wrong!" ? "" : err}
+            required
           />
         </div>
 
@@ -88,6 +91,7 @@ const Page = () => {
           <PasswordInput
             name="confirmPassword"
             error={err == "Old password is wrong!" ? "" : err}
+            required
           />
         </div>
 

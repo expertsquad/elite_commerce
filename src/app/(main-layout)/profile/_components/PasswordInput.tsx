@@ -11,6 +11,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
   value,
   name,
   error,
+  required,
 }) => {
   const [showPassword, setShowPassword] = useState(true);
 
@@ -27,6 +28,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
         onChange={onChange}
         name={name}
         placeholder={placeholder}
+        required={required}
         className={`border border-black-10 w-full py-2 pl-3 outline-none  rounded-md  placeholder:text-sm ${inputStyle}`}
       />
       <button
