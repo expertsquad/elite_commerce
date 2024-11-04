@@ -1,17 +1,16 @@
-import { fetchProtectedData } from "@/actions/fetchData";
+"use client";
 import { revalidateTagAction } from "@/actions/revalidateTag";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import CustomInput from "@/Components/CustomInput";
-import Form from "@/Components/Form";
 import SubmitButton from "@/Components/SubmitButton";
+import { useState } from "react";
 
-const PersonalInformation = async () => {
-  const getMe = await fetchProtectedData({
-    route: "/user/me",
-  });
+const PersonalInformation = ({ getMe }: { getMe: any }) => {
+  const [loading, setLoading] = useState(false);
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
 
-  const handleSubmit = async (formData: FormData) => {
-    "use server";
+    const formData = new FormData(e.target);
     const result = await updateDataMutation({
       route: "/user/update",
       data: formData,
@@ -23,11 +22,11 @@ const PersonalInformation = async () => {
   };
 
   return (
-    <div className="">
-      <h3 className="[font-size:_clamp(1em,5vw,1.5em)] font-semibold text-gradient-primary my-7 ">
+    <div className={`${loading}`}>
+      <h3 className="[font-size:_clam p(1em,5vw,1.5em)] font-semibold text-gradient-primary my-7 ">
         Personal Information
       </h3>
-      <Form handleSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div
           id="myform"
           className="grid grid-cols-1 gap-4 md:gap-6 lg:grid-cols-2 w-full"
@@ -64,7 +63,7 @@ const PersonalInformation = async () => {
             Update Account Details
           </SubmitButton>
         </div>
-      </Form>
+      </form>
     </div>
   );
 };

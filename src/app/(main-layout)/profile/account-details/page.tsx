@@ -1,8 +1,12 @@
 import React from "react";
 import PersonalInformation from "./_components/PersonalInformation";
 import Link from "next/link";
+import { fetchProtectedData } from "@/actions/fetchData";
 
-const page = () => {
+const page = async () => {
+  const getMe = await fetchProtectedData({
+    route: "/user/me",
+  });
   return (
     <div>
       {/* tab to toggle section */}
@@ -23,7 +27,7 @@ const page = () => {
         </div>
       </div>
 
-      <PersonalInformation />
+      <PersonalInformation getMe={getMe} />
     </div>
   );
 };

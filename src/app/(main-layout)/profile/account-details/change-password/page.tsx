@@ -34,7 +34,7 @@ const Page = () => {
       method: "PUT",
     });
     if (result?.success) {
-      toast.success(result?.message)
+      toast.success(result?.message);
       e.target.reset();
     } else {
       setErr(result.message);
