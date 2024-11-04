@@ -6,7 +6,7 @@ const SpecificationDetails = ({ specificationDetails }: any) => {
       <div className="rounded-lg w-full">
         {specificationDetails?.map((data: any, index: number) => (
           <div key={index} className="w-full">
-            <div className="bg-gradient-primary-light w-full py-2 pl-4">
+            <div className="bg-image-background w-full py-2 pl-4">
               <span className="font-semibold [font-size:_clamp(16px,4vw,20px)] text-gradient-primary">
                 {data.sectionName}
               </span>
