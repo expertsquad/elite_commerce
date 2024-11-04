@@ -43,7 +43,7 @@ const FilterByColor = ({
             key={index}
             className={`border border-black-10 rounded-full px-2.5 py-1 flex items-center gap-x-2.5 cursor-pointer ${
               filter?.["variants.variantName"] === color
-                ? "bg-gradient-primary-light"
+                ? "bg-image-background"
                 : ""
             }`}
           >

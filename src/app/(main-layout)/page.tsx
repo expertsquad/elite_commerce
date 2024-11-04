@@ -13,15 +13,11 @@ import Loading from "../loading";
 import Pagination from "@/Components/Pagination";
 import DealsOfTheDaySection from "./_components/DealsOfTheDaySection/DealsOfTheDaySection";
 import { getWidget } from "@/utils/getWidget";
+import Link from "next/link";
 
 const Page = async () => {
   const newestProducts = await fetchData({ route: "/product", limit: 8 });
   const allProducts = await fetchData({ route: "/product", limit: 20 });
-
-  // for counting total product page
-  const totalPages = Math.ceil(
-    allProducts?.meta?.total / allProducts?.meta?.limit
-  );
 
   const topSellProducts = await fetchData({
     route: "/product",
@@ -167,16 +163,13 @@ const Page = async () => {
             })}
           </Suspense>
         </div>
-        <div className="mb-5">
-          {totalPages > 1 ? (
-            <Pagination
-              totalPages={totalPages}
-              currentPage={1}
-              redirectTo="/category/page"
-            />
-          ) : (
-            ""
-          )}
+        <div className="flex items-center justify-center my-5">
+          <Link
+            className="bg-gradient-primary text-white px-5 py-3 rounded-md"
+            href="/category"
+          >
+            See all products
+          </Link>
         </div>
       </div>
     </>

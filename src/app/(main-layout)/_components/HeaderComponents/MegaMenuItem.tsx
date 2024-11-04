@@ -32,7 +32,7 @@ const MegaMenuItem = ({
         onClick={() =>
           category?.categoryName && handleCategoryClick(category?.categoryName)
         }
-        className="flex w-full px-4  py-2 group-hover/category:bg-gradient-primary-light justify-between group-hover/category:font-semibold"
+        className="flex w-full px-4  py-2 group-hover/category:bg-image-background justify-between "
       >
         {category?.categoryName}
         <IconChevronRight className="text-black-50 hidden group-hover/category:block transition-all duration-700  " />
@@ -45,7 +45,7 @@ const MegaMenuItem = ({
               onClick={() => handleCategoryClick(subcategory?.subcategoryName)}
               key={subcategory?.subcategoryId}
             >
-              <span className="block w-full px-4 py-2 hover:bg-gradient-primary-light hover:font-semibold">
+              <span className="block w-full px-4 py-2 hover:bg-image-background ">
                 {subcategory?.subcategoryName}
               </span>
             </li>
