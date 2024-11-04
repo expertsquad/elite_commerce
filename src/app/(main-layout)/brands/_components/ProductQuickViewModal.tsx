@@ -27,18 +27,17 @@ const ProductQuickViewModal = ({
       show={show}
       setShow={setShow}
       alignment="right"
-      className="w-full md:w-[900px] scrollbar-y-remove md:overflow-auto overflow-y-auto"
       showCancelBtnINSmallDevice={show}
     >
-      <div className="grid grid-cols-1 md:grid-cols-5 md:gap-7 md:p-3.5 p-2.5">
-        <div className="col-span-2 md:order-none order-2 md:flex md:flex-col md:flex-nowrap flex-wrap justify-center md:justify-normal gap-5 items-center scrollbar-y-remove h-[850px] overflow-y-auto  ">
+      <div className="grid grid-cols-1 md:grid-cols-5 md:gap-7 gap-5 md:p-3.5 p-2.5 md:w-[900px] w-full md:overflow-hidden overflow-y-auto scrollbar-y-remove md:h-auto h-[calc(100vh-20px)]">
+        <div className="md:col-span-2 md:h-[calc(100vh-80px)] md:overflow-y-auto scrollbar-y-remove grid grid-cols-2 md:grid-cols-1 gap-5 ">
           {product?.productPhotos?.map((img, i) => {
             return (
               <div
                 key={i}
-                className="bg-gradient-primary-light rounded-2xl  px-6 py-10 flex items-center justify-center border border-black-10 mt-5 md:mt-0"
+                className="bg-image-background rounded-2xl  md:px-6 md:py-10 py-6 px-7 flex items-center justify-center border border-black-10 mt-5 md:mt-0"
               >
-                <div className="relative w-[250px] h-[250px] overflow-hidden">
+                <div className="relative md:w-[250px] w-[100px] h-[100px] md:h-[250px] overflow-hidden">
                   <Image src={`${server_url + img}`} fill alt="product photo" />
                 </div>
               </div>
