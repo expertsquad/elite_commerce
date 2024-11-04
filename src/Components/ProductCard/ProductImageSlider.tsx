@@ -131,7 +131,13 @@ const ProductImageSlider = ({
                   orderQuantity: 1,
                   variant: product?.variants[0],
                 }}
-                buttonIcon={<IconBolt size={18} stroke={1} />}
+                buttonIcon={
+                  <IconBolt
+                    size={20}
+                    stroke={1.5}
+                    className="active:fill-white focus:fill-white"
+                  />
+                }
                 buttonStyle="cursor-pointer rounded-full flex justify-center items-center bg-white h-[30px] w-[30px] border border-black-10 md:hidden"
                 currencyIcon={currencyIcon}
                 shippingAmount={shippingAmount ? shippingAmount : 0}

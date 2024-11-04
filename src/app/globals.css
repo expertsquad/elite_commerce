@@ -30,6 +30,7 @@ main {
   --black-80: #333333;
   --black-transparent: #7f7f7f63;
   --bg-color-f8: #f8f8f8;
+  --image-background: #f7f7fb;
 
   /* gradient colors */
   --gradient-primary: linear-gradient(

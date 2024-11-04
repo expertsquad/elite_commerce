@@ -31,7 +31,7 @@ const ProductCard = ({
       product={product}
       className="border border-black-10 rounded-lg group relative w-full max-w-[280px] cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg mx-auto"
     >
-      <div className="bg-gradient-primary-light">
+      <div className="bg-image-background">
         <ProductImageSlider
           product={product}
           shippingAmount={shippingAmount ? shippingAmount : 0}

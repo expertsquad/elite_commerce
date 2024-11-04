@@ -27,6 +27,7 @@ const config: Config = {
         DEFAULT: "var(--white)",
       },
       "frame-bg": "var(--frame-bg)",
+      "image-background": "var(--image-background)",
       black: {
         transparent: "var(--black-transparent)",
         10: "var(--black-10)",

@@ -4,7 +4,6 @@ import React, { useContext } from "react";
 import ProductVariantColor from "./ProductVariantColor";
 import Image from "next/image";
 import { server_url } from "@/constants";
-import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import { IconBolt, IconShoppingCart } from "@tabler/icons-react";
 import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
 import { CartContext } from "@/Provider/CartProvider";
@@ -126,11 +125,6 @@ const SpecBulkProduct = ({
             onClick={handleAddToCart}
             className="text-black flex items-center justify-center gap-x-1.5 w-full py-2 text-[13px] hover:bg-gradient-primary rounded-md hover:text-white"
           >
-            {/* <GenerateGradientIcon
-              IconComponent={IconShoppingCart}
-              stroke={1.2}
-              size={15}
-            /> */}
             <IconShoppingCart size={15} stroke={1.7} />
             ADD TO CART
           </button>
