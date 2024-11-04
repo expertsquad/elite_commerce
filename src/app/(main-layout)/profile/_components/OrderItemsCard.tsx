@@ -18,7 +18,7 @@ const OrderItemsCard = ({
       {/* flex first div */}
       <div className="flex items-center gap-3 w-full lg:w-1/2">
         {/* image part */}
-        <div className="bg-gradient-primary-light rounded-lg flex items-center justify-center relative w-14 h-14 shrink-0">
+        <div className="bg-image-background rounded-lg flex items-center justify-center relative w-14 h-14 shrink-0">
           <Image
             alt="Product Image"
             fill

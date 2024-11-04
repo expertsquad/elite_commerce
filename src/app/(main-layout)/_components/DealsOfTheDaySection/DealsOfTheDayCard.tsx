@@ -1,6 +1,5 @@
 import { server_url } from "@/constants";
 import Image from "next/image";
-import style from "./DealsOfTheDaySection.module.css";
 import Link from "next/link";
 
 type IDealsOfThedayCardProps = {
@@ -17,32 +16,29 @@ type IDealsOfThedayCardProps = {
 
 const DealsOfTheDayCard = ({ deal, index }: IDealsOfThedayCardProps) => {
   return (
-    <div
-      className={` rounded-[10px] ${
-        index % 2 === 0
-          ? deal?.discount
-            ? style?.cornerGold
-            : ""
-          : deal?.discount
-          ? style?.cornerBlue
-          : ""
-      }  relative overflow-hidden`}
-    >
+    <div className={` rounded-[10px]   relative overflow-hidden `}>
       {deal?.discount && (
-        <span className="text-white uppercase text-lg font-semibold absolute right-5 top-2.5">
-          {" "}
-          {deal?.discount}% <br /> Off
-        </span>
+        <div
+          className={`${
+            index % 2 === 0 ? "bg-gradient-primary" : "bg-gradient-secondary"
+          } rounded-full w-[100px] h-[100px] absolute  -right-3 -top-2.5 flex items-center justify-center`}
+        >
+          <span className="text-white uppercase text-lg font-semibold ">
+            {" "}
+            {deal?.discount}% <br /> Off
+          </span>
+        </div>
       )}
+
       <div
         className={`${
           index % 2 === 0
-            ? "bg-gradient-primary-light"
+            ? "bg-image-background"
             : "bg-gradient-secondary-light"
         } md:h-[500px] h-[450px] pt-[clamp(10px,2.5vw,20px)]`}
       >
         <div className="flex items-center justify-center">
-          <div className="relative  md:w-[200px] w-[180px] md:h-[200px] h-[200px] mx-auto -z-1">
+          <div className="relative  md:w-[200px] w-[180px] md:h-[200px] h-[200px] mx-auto ">
             <Image
               src={`${server_url}${deal?.productPhoto}`}
               alt="deals photo"

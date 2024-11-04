@@ -14,8 +14,8 @@ const ProfileNavMenu = () => {
         <div className="flex gap-5 w-full " key={index}>
           <Link
             href={item?.link}
-            className={`flex items-center gap-2 py-4 px-7 my-2 rounded-full group w-full hover:bg-gradient-primary-light transition-all ${
-              pathName.startsWith(item?.link) ? "bg-gradient-primary-light" : ""
+            className={`flex items-center gap-2 py-2 px-7 my-2 rounded-full group w-full  transition-all ${
+              pathName.startsWith(item?.link) ? "" : ""
             }`}
           >
             <div className="w-6 h-6">
@@ -39,7 +39,7 @@ const ProfileNavMenu = () => {
                 pathName === item?.link
                   ? "text-gradient-primary font-semibold"
                   : ""
-              } group-hover:text-gradient-primary group-hover:font-semibold`}
+              } group-hover:text-gradient-primary `}
             >
               {item.name}
             </span>

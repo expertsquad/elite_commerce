@@ -34,7 +34,7 @@ const LargeDeviceMegaMenu = async () => {
           <li className="transition-all duration-300 group/categorybtn">
             <Link
               href="/category"
-              className="flex items-center py-2 px-3 rounded-full group-hover/categorybtn:bg-gradient-primary-light"
+              className="flex items-center py-2 px-3 rounded-full group-hover/categorybtn:bg-[#E6E6E6]"
             >
               <span className="group-hover/categorybtn:text-gradient-primary">
                 {" "}

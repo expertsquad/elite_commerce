@@ -20,7 +20,7 @@ const ProfileTopCard = async ({ getMe }: { getMe: IUser }) => {
   return (
     <section className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-5 w-full ">
       {/* account details */}
-      <div className="flex items-center justify-center flex-col bg-gradient-primary-light rounded-lg p-6 w-full">
+      <div className="flex items-center justify-center flex-col bg-image-background rounded-lg p-6 w-full">
         <GenerateGradientIcon size={36} IconComponent={IconUser} />
         <h3 className="text-lg whitespace-nowrap mt-5">Account Details</h3>
         <Link
