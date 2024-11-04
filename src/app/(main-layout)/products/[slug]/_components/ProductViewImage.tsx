@@ -37,7 +37,7 @@ const ProductViewImage = ({ product }: { product: IProduct }) => {
             }`}
             onClick={() => handleChangePhoto(image)}
           >
-            <div className="w-[50px] h-[50px] md:w-[70px] md:h-[80px] relative overflow-hidden">
+            <div className="w-[59px] h-[69px] relative overflow-hidden">
               <Image
                 src={`${server_url + image}`}
                 alt="Product Photo"
@@ -51,7 +51,7 @@ const ProductViewImage = ({ product }: { product: IProduct }) => {
         {videoLink && (
           <div
             onClick={() => setShowVideoModal(true)}
-            className="w-[54px] h-[54px] md:w-[78px] md:h-[88px] relative overflow-hidden bg-image-background rounded-md flex items-center justify-center cursor-pointer border border-black-10"
+            className="w-[63px] h-[73px] relative overflow-hidden bg-image-background rounded-md flex items-center justify-center cursor-pointer border border-black-10"
           >
             <span className="bg-danger p-2 rounded-full">
               <IconPlayerPlay className="text-white size-4 md:size-6" />

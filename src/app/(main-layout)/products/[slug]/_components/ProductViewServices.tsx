@@ -8,7 +8,7 @@ const ProductViewServices = ({ className }: { className?: string }) => {
     >
       {extraServices?.map((service) => (
         <div
-          className="flex flex-col md:flex-row gap-y-3 md:gap-2 items-center"
+          className="flex flex-col lg:flex-row gap-y-3 md:gap-2 items-center"
           key={service.title}
         >
           <GenerateGradientIcon
@@ -17,7 +17,7 @@ const ProductViewServices = ({ className }: { className?: string }) => {
             stroke={1}
           />
           <div>
-            <h5 className="font-bold text-sm md:text-sm whitespace-nowrap">
+            <h5 className="font-bold text-sm whitespace-nowrap">
               {service.title}
             </h5>
             <p className="text-black-50 text-xs md:text-sm">

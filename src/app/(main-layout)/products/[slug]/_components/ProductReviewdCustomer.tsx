@@ -1,17 +1,21 @@
-import { demoIphone } from "@/assets";
+import { fetchData } from "@/actions/fetchData";
+import { userPlaceholder } from "@/assets";
 import StarRating from "@/Components/StarRating";
-import { server_url, store_name } from "@/constants";
+import { server_url } from "@/constants";
 import { formatDateShorting } from "@/constants/formateDate.constants";
 import { CustomerReviewProps } from "@/interfaces/productview.review.interface";
 import Image from "next/image";
 import React from "react";
 
-const ProductReviewdCustomer = ({
+const ProductReviewdCustomer = async ({
   reviewData,
 }: {
   reviewData: CustomerReviewProps[];
 }) => {
-  console.log(reviewData);
+  const getAuthor = await fetchData({
+    route: "/settings/shop",
+  });
+
   return (
     <div className="">
       {reviewData?.map((review: CustomerReviewProps) => (
@@ -22,11 +26,13 @@ const ProductReviewdCustomer = ({
           <div className="flex items-center gap-3 mb-3">
             <div className="h-[45px] w-[45px] relative shrink-0">
               <Image
-                src={`${server_url + review?.reviewer?.profilePhoto}`}
+                src={`${server_url}${
+                  review?.reviewer?.profilePhoto || userPlaceholder
+                }`}
                 alt="user Photo"
                 fill
                 style={{ objectFit: "cover" }}
-                className="w-full h-full top-0 left-0 object-cover rounded-full border border-black-10"
+                className="inset-0 top-0 left-0 object-cover rounded-full border border-black-10"
               />
             </div>
             <div className="flex flex-col gap-y-2">
@@ -36,7 +42,9 @@ const ProductReviewdCustomer = ({
                 </h3>
                 <span className="w-[6px] h-[6px] rounded-full bg-black-10"></span>
                 <span className="text-xs">
-                  {formatDateShorting(review?.createdAt)}
+                  {formatDateShorting(
+                    review?.createdAt ? review?.updatedAt : review?.createdAt
+                  )}
                 </span>
               </div>
               <div className="flex">
@@ -70,7 +78,7 @@ const ProductReviewdCustomer = ({
               <div className="flex items-center gap-3 mb-1 md:mb-3">
                 <div className="h-[45px] w-[45px] relative shrink-0">
                   <Image
-                    src="/small-logo.svg"
+                    src={`${server_url + getAuthor?.data?.favIcon}`}
                     alt="AUTHOR"
                     fill
                     style={{ objectFit: "cover" }}
@@ -79,7 +87,9 @@ const ProductReviewdCustomer = ({
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <h3 className="text-sm font-semibold">{store_name}</h3>
+                  <h3 className="text-sm font-semibold">
+                    {getAuthor?.data?.shopName}
+                  </h3>
                   <span className="w-[6px] h-[6px] rounded-full bg-black-10"></span>
                   <span className="text-xs">
                     {formatDateShorting(review?.updatedAt)}
