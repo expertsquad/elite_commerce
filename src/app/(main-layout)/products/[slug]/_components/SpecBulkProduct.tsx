@@ -57,11 +57,12 @@ const SpecBulkProduct = ({
         ))}
       </div>
       <span className="text-black-80">{productdata?.productName}</span>
-
-      <CategoryAndBrandSmallComponent
-        brandPhoto={productdata?.brand?.brandPhoto}
-        categoryName={productdata?.category?.categoryName}
-      />
+      <div className="my-2">
+        <CategoryAndBrandSmallComponent
+          brandPhoto={productdata?.brand?.brandPhoto}
+          categoryName={productdata?.category?.categoryName}
+        />
+      </div>
       <span className="bg-black-10 h-0.5 w-full hidden md:flex my-4"></span>
       {/* == Product variants color and storage == */}
       <div className="flex items-center justify-between gap-x-5 mb-5">

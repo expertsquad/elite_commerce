@@ -13,13 +13,13 @@ const CategoryAndBrandSmallComponent = ({
 }: CategoryAndBrandSmallComponentProps) => {
   return (
     <div className="flex items-center gap-x-1.5">
-      <div className="h-4 w-10 relative shrink-0">
+      <div className="h-4 w-16 relative shrink-0">
         <Image
           src={`${server_url + brandPhoto}`}
           alt="Prand Photo"
           fill
-          style={{ objectFit: "cover" }}
-          className="inset-0 object-cover"
+          style={{ objectFit: "contain" }}
+          className="inset-0 object-contain"
         />
       </div>
       <span className="text-black-10">|</span>
