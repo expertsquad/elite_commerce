@@ -33,7 +33,7 @@ const OrderItems = ({
             href={`/order-track/${order?._id}`}
             className="border-gradient-primary p-[1px] rounded-md whitespace-nowrap"
           >
-            <Button className="text-gradient-primary text-xs md:text-base px-5 py-2">
+            <Button className="text-primary-light text-xs md:text-base px-5 py-2 hover:bg-gradient-primary-light">
               Track Order
             </Button>
           </Link>
