@@ -62,7 +62,7 @@ const ProductViewPage = async ({
           />
         </div>
       </div>
-      <ProductViewServices />
+      <ProductViewServices className="my-20" />
       <section>
         <SpecificationsMenu />
         <div className="flex justify-between md:gap-7 gap-0 w-full">
