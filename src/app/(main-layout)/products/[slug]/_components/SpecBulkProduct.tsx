@@ -9,6 +9,7 @@ import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOr
 import { CartContext } from "@/Provider/CartProvider";
 import { updateCart } from "@/utils/updateCart.utils";
 import BuyNowSingleProduct from "./BuyNowSingleProduct";
+import CategoryAndBrandSmallComponent from "./CategoryAndBrandSmallComponent";
 
 const SpecBulkProduct = ({
   productdata,
@@ -26,11 +27,17 @@ const SpecBulkProduct = ({
   const [variant, setVariant] = React.useState<IProduct["variants"][0]>(
     productdata?.variants[0]
   );
-  const { setRefetch } = useContext(CartContext);
+  const { cartProducts, setRefetch } = useContext(CartContext);
   const handleAddToCart = () => {
     updateCart({ actionType: "add", product: productdata, variant: variant });
     setRefetch && setRefetch((prev) => prev + 1);
   };
+
+  const isCarted = cartProducts?.find(
+    (item) =>
+      item?._id === productdata?._id &&
+      item?.variant?.variantName === variant?.variantName
+  );
 
   return (
     <div className="max-w-[370px] min-w-80 p-5 shadow-lg rounded-md hidden md:block sticky top-20">
@@ -50,14 +57,11 @@ const SpecBulkProduct = ({
         ))}
       </div>
       <span className="text-black-80">{productdata?.productName}</span>
-      <div className="relative shrink-0 h-6 w-10 mt-3">
-        <Image
-          src={`${server_url + productdata?.brand?.brandPhoto}`}
-          alt="brand photo"
-          fill
-          className="inset-0 object-contain"
-        />
-      </div>
+
+      <CategoryAndBrandSmallComponent
+        brandPhoto={productdata?.brand?.brandPhoto}
+        categoryName={productdata?.category?.categoryName}
+      />
       <span className="bg-black-10 h-0.5 w-full hidden md:flex my-4"></span>
       {/* == Product variants color and storage == */}
       <div className="flex items-center justify-between gap-x-5 mb-5">
@@ -75,13 +79,19 @@ const SpecBulkProduct = ({
       <div className="flex items-center gap-x-2 mb-10">
         <span className="text-2xl font-bold text-gradient-primary">
           {currencyIcon}
-          {variant?.discountedPrice}
+          {variant?.discountedPrice
+            ? variant?.discountedPrice
+            : variant?.sellingPrice}
         </span>
-        <span className="text-black-50">|</span>
-        <del className="text-base text-black-50">
-          {currencyIcon}
-          {variant?.sellingPrice}
-        </del>
+        {variant?.sellingPrice && variant?.discountedPrice && (
+          <>
+            <span className="text-black-50">|</span>
+            <del className="text-base text-black-50">
+              {currencyIcon}
+              {variant?.sellingPrice}
+            </del>
+          </>
+        )}
         {variant?.discountPercentage && (
           <span className="text-black-50">|</span>
         )}
@@ -96,15 +106,6 @@ const SpecBulkProduct = ({
       {/* == Buy now, quick order and add to cart == */}
       <div>
         <div className="flex items-center justify-between gap-x-2.5">
-          <div className="bg-gradient-primary-light rounded-md w-full">
-            <BuyNowSingleProduct
-              product={productdata}
-              selectedVariant={variant?.variantName}
-              accessToken={accessToken ? accessToken : ""}
-              className="!py-2.5 !text-[13px] hover:bg-gradient-primary-reverse"
-              iconStyle="!size-4"
-            />
-          </div>
           {isQuickOrderActive && (
             <QuickOrderButton
               product={{
@@ -119,14 +120,32 @@ const SpecBulkProduct = ({
               shippingAmount={shippingAmount}
             />
           )}
+          <div className="bg-gradient-primary-light rounded-md w-full">
+            <BuyNowSingleProduct
+              product={productdata}
+              selectedVariant={variant?.variantName}
+              accessToken={accessToken ? accessToken : ""}
+              className="!py-2.5 !text-[13px] hover:bg-gradient-primary-reverse"
+              iconStyle="!size-4"
+            />
+          </div>
         </div>
         <div className="border border-black-10 rounded-md mt-5">
           <button
             onClick={handleAddToCart}
             className="text-black flex items-center justify-center gap-x-1.5 w-full py-2 text-[13px] hover:bg-gradient-primary rounded-md hover:text-white"
           >
-            <IconShoppingCart size={15} stroke={1.7} />
-            ADD TO CART
+            {isCarted ? (
+              <>
+                <IconShoppingCart size={15} stroke={1.7} />
+                ALREADY CARTED
+              </>
+            ) : (
+              <>
+                <IconShoppingCart size={15} stroke={1.7} />
+                ADD TO CART
+              </>
+            )}
           </button>
         </div>
       </div>

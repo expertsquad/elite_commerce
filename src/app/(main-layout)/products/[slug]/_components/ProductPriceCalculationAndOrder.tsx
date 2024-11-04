@@ -87,7 +87,7 @@ const ProductPriceCalculationAndOrder = ({
                 orderQuantity: isCarted ? isCarted?.orderQuantity : quantity,
                 variant: variant || product?.variants[0],
               }}
-              buttonStyle="text-white bg-gradient-primary hover:bg-gradient-primary-reverse flex items-center justify-center gap-x-1.5 py-2.5 rounded-md w-full text-base"
+              buttonStyle="text-white bg-gradient-secondary hover:bg-gradient-primary-reverse flex items-center justify-center gap-x-1.5 py-2.5 rounded-md w-full text-base"
               buttonIcon={
                 <IconBolt size={20} className="fill-white" stroke={1} />
               }
