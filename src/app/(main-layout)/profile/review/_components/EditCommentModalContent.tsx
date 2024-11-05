@@ -22,7 +22,6 @@ const EditCommentModalContent = ({
   const [photos, setPhotos] = useState<File[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-
   const handleStarClick = (index: number, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -44,10 +43,6 @@ const EditCommentModalContent = ({
     const formData = new FormData();
     formData.append("comment", comments);
     formData.append("rating", rating.toString());
-    // photos.forEach((photo) => {
-    //   formData.append("reviewPhotos[]", photo.name);
-    // });
-
     for (let i = 0; i < photos.length; i++) {
       formData.append("reviewPhotos", photos[i]);
     }
@@ -59,16 +54,15 @@ const EditCommentModalContent = ({
         dataType: "formData",
         method: "PUT",
       });
-      console.log(response);
       if (response?.success) {
         toast.success(response?.message);
         revalidateTagAction("/profile/review/all-review-history");
         revalidateTagAction(`/review/${reviewData?._id}`);
+        revalidateTagAction(`/products/[slug]`);
       } else {
         toast.error(response?.message);
       }
     } catch (error) {
-      console.error(error);
       setError("An error occurred while submitting your review.");
     } finally {
       setLoading(false);

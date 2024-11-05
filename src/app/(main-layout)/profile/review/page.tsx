@@ -27,7 +27,6 @@ const ProductReviewComponents = async () => {
             className="flex w-full lg:flex-row lg:items-center lg:gap-x-5 flex-col border-b border-black-10 py-5
      "
           >
-            {/* Image and titile */}
             <div className="w-full lg:w-1/2 flex  justify-start items-center gap-4">
               <div className="flex justify-center items-center bg-gradient-primary-light rounded-lg relative shrink-0 w-16 h-16">
                 <Image
@@ -41,10 +40,12 @@ const ProductReviewComponents = async () => {
                 <p className="line-clamp-2 text-sm md:text-base">
                   {reviewNow?.product?.productName}
                 </p>
-                <span className="text-sm">{reviewNow?.product?.brandName}</span>
+                <span className="text-sm text-positive">
+                  {reviewNow?.product?.brandName}
+                </span>
               </div>
             </div>
-            {/* Purchase on and review */}
+
             <div className="flex w-full lg:w-1/2 justify-between items-center">
               <div className="flex justify-start flex-col">
                 <p className="text-black-50 text-sm">Purchase on</p>
@@ -67,8 +68,11 @@ const ProductReviewComponents = async () => {
             <Image src={noReview} alt="No Review" height={350} width={250} />
           </div>
           <div className="flex flex-col justify-center items-center ">
-            <span className="text-2xl font-medium"> No Review Found here</span>
-            <span className="text-center">
+            <span className="text-2xl font-medium mb-1">
+              {" "}
+              No Review Found here
+            </span>
+            <span className="text-center text-sm">
               No reviews found. Be the first to share your thoughts and help{" "}
               <br />
               others make informed decisions about this product.

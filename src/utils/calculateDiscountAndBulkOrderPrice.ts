@@ -8,9 +8,16 @@ interface DiscountCalculationResult {
 
 export const calculateDiscountAndBulkOrderPrice = (
   product: IProduct,
-  selectedVariant: IProductVariant,
+  selectedVariant: IProductVariant | undefined | 0,
   quantity: number
 ): DiscountCalculationResult => {
+  if (!selectedVariant) {
+    return {
+      sellingPrice: 0,
+      discountedPrice: 0,
+      discountPercentage: 0,
+    };
+  }
   const { sellingPrice, discountedPrice, discountPercentage } = selectedVariant;
 
   // Check if user has only selling price (no discountPercentage, no discountedPrice)

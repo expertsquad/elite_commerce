@@ -3,6 +3,7 @@ import { Button } from "@/Components/Buttons";
 import Modal from "@/Components/Modal";
 import React, { useState } from "react";
 import EditCommentModalContent from "./EditCommentModalContent";
+import { IconEdit } from "@tabler/icons-react";
 
 const EditReviewBtn = ({ allReview }: { allReview: any }) => {
   const [editComment, setEditComment] = useState(false);
@@ -11,9 +12,12 @@ const EditReviewBtn = ({ allReview }: { allReview: any }) => {
     <div>
       <Button
         onClick={() => setEditComment(true)}
-        className="py-2 px-5 bg-gradient-primary hover:bg-gradient-primary-reverse text-white rounded-lg"
+        className="p-2 md:py-1.5 md:px-3 lg:py-2 lg:px-5 bg-gradient-primary hover:bg-gradient-primary-reverse text-white rounded-lg whitespace-nowrap"
       >
-        Edit Review
+        <span className="hidden md:block">Edit Review</span>
+        <span className="block md:hidden">
+          <IconEdit />
+        </span>
       </Button>
       {editComment && (
         <Modal
