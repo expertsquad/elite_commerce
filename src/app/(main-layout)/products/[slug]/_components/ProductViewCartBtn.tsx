@@ -35,7 +35,10 @@ const ProductViewCartBtn = ({
   return (
     <button
       title="Add To Cart Button"
-      className={`border-gradient-primary p-[1px] rounded-md w-full flex items-center justify-center hover:bg-gradient-primary hover:text-white  transition duration-300 `}
+      disabled={variant?.inStock < 1}
+      className={`border-gradient-primary p-[1px] rounded-md w-full flex items-center justify-center hover:bg-gradient-primary hover:text-white  transition duration-300 ${
+        variant?.inStock < 1 && "opacity-50 cursor-not-allowed"
+      }`}
       onClick={(e) => {
         e.preventDefault();
         handleAddToCart();

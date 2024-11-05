@@ -51,7 +51,7 @@ const ProdViewCartIncreamentDecreamentBtn = ({
         >
           <button
             onClick={handleDecrease}
-            disabled={quantity <= 1}
+            disabled={quantity <= 1 || (variant && variant?.inStock < 1)}
             className="text-black-50 bg-black-10 p-0.5 rounded-full hover:bg-gradient-primary-light"
           >
             <IconMinus size={18} />
@@ -61,7 +61,7 @@ const ProdViewCartIncreamentDecreamentBtn = ({
           </span>
           <button
             onClick={handleIncrease}
-            disabled={quantity >= 99}
+            disabled={quantity >= 99 || (variant && variant?.inStock < 1)}
             className="text-black-50 bg-black-10 p-0.5 rounded-full hover:bg-gradient-primary-light"
           >
             <IconPlus size={18} />

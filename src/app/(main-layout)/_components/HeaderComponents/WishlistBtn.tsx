@@ -126,6 +126,7 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                                     <span className="text-black-10">|</span>
                                     <span className="text-secondary text-[10px] md:text-xs">
                                       {product?.variant?.discountPercentage}%
+                                      OFF
                                     </span>
                                   </>
                                 )}
@@ -179,7 +180,12 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                           </div>
                         ) : (
                           <button
-                            className="flex items-center justify-center gap-x-1 bg-gradient-primary hover:bg-gradient-primary-reverse hover:text-white px-2 py-1 rounded-md text-white"
+                            disabled={product?.variant?.inStock < 1}
+                            className={`flex items-center justify-center gap-x-1 bg-gradient-primary hover:bg-gradient-primary-reverse hover:text-white px-2 py-1 rounded-md text-white ${
+                              product?.variant?.inStock < 1
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
+                            }`}
                             onClick={() =>
                               handleAddToCart({
                                 product,

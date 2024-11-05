@@ -36,9 +36,15 @@ const RatingWishlistStockAndSold = ({
         </span>
       </div>
       <span className="text-black-10">|</span>
-      <span className="text-positive text-xs md:text-base whitespace-nowrap">
-        In Stock : {variant?.inStock}
-      </span>
+      {variant?.inStock! > 0 ? (
+        <span className="text-positive text-xs md:text-base whitespace-nowrap">
+          In Stock : {variant?.inStock}
+        </span>
+      ) : (
+        <span className="text-danger font-bold text-xs md:text-base whitespace-nowrap">
+          Stock Out
+        </span>
+      )}
       {variant?.soldQuantity! > 0 && (
         <>
           <span className="text-black-10">|</span>

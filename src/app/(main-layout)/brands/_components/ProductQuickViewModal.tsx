@@ -76,7 +76,7 @@ const ProductQuickViewModal = ({
             {product?.description ? (
               <div className="flex flex-col gap-5 mt-5 overflow-y-auto scrollbar-y-remove h-[300px]">
                 <span className="font-semibold text-2xl">Description</span>
-                <p className="">{product?.description}</p>
+                {/* <p className="">{product?.description}</p> */}
               </div>
             ) : (
               ""

@@ -63,18 +63,25 @@ const CartItems = ({
   );
   return (
     <Fragment>
-      <div className="flex flex-col gap-5 mt-7">
-        <span className="block text-base">
-          Buy{" "}
-          <span className="text-gradient-primary font-semibold">
-            {currencyIcon + shippingCharge?.freeShippingMinOrderAmount} {""}
+      <div className="flex flex-col gap-y-3 mt-7">
+        {totalPrice > shippingCharge?.freeShippingMinOrderAmount ? (
+          <div className="text-sm text-positive">
+            Congratulations! You&apos;ve unlocked free shipping🚚{" "}
+          </div>
+        ) : (
+          <span className="text-sm flex items-center gap-x-1">
+            Buy
+            <span className="text-gradient-primary">
+              {currencyIcon}
+              {shippingCharge?.freeShippingMinOrderAmount}
+            </span>
+            more to get
+            <span className="text-gradient-primary font-semibold">
+              Freeship
+            </span>
+            🔥
           </span>
-          more to get
-          <span className="text-gradient-primary font-semibold">
-            {" " + "Freeship"}
-          </span>
-          🔥
-        </span>
+        )}
         <ProgressBar progressValue={progressValue} />
       </div>
       <div className="flex md:flex-row flex-col gap-5 mt-7">

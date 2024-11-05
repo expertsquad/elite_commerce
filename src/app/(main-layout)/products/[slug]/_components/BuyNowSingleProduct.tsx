@@ -2,7 +2,7 @@
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { storages } from "@/constants";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
-import { IProduct } from "@/interfaces/product.interface";
+import { IProduct, IProductVariant } from "@/interfaces/product.interface";
 import { formatProductForCart } from "@/utils/formatProductForCart.utils";
 import { IconShoppingBag } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
@@ -14,12 +14,14 @@ const BuyNowSingleProduct = ({
   className,
   iconStyle,
   selectedVariant,
+  disabled,
 }: {
   product: IProduct;
   accessToken: string;
   className?: string;
   iconStyle?: string;
   selectedVariant?: any;
+  disabled?: boolean;
 }) => {
   const router = useRouter();
 
@@ -45,10 +47,12 @@ const BuyNowSingleProduct = ({
       router.push("/shipping-info");
     }
   };
-
   return (
     <button
-      className={`bg-gradient-primary rounded-md w-full flex items-center justify-center gap-x-1.5 py-2.5 text-white ${className}`}
+      disabled={disabled}
+      className={`bg-gradient-primary rounded-md w-full flex items-center justify-center gap-x-1.5 py-2.5 text-white ${className} ${
+        disabled && "cursor-not-allowed"
+      }`}
       onClick={() => handleSingleProductClick(product)}
     >
       <IconShoppingBag stroke={2} className={`size-5 ${iconStyle}`} />
@@ -56,5 +60,4 @@ const BuyNowSingleProduct = ({
     </button>
   );
 };
-
 export default BuyNowSingleProduct;

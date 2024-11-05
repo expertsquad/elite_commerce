@@ -119,6 +119,7 @@ const SpecBulkProduct = ({
               buttonText="QUICK ORDER"
               currencyIcon={currencyIcon}
               shippingAmount={shippingAmount}
+              variant={variant}
             />
           )}
           <div className="bg-gradient-primary-light rounded-md w-full">
@@ -128,13 +129,17 @@ const SpecBulkProduct = ({
               accessToken={accessToken ? accessToken : ""}
               className="!py-2.5 !text-[13px] hover:bg-gradient-primary-reverse"
               iconStyle="!size-4"
+              disabled={variant ? variant.inStock < 1 : false}
             />
           </div>
         </div>
         <div className="border border-black-10 rounded-md mt-5">
           <button
+            disabled={variant ? variant.inStock < 1 : false}
             onClick={handleAddToCart}
-            className="text-black flex items-center justify-center gap-x-1.5 w-full py-2 text-[13px] hover:bg-gradient-primary rounded-md hover:text-white"
+            className={`text-black flex items-center justify-center gap-x-1.5 w-full py-2 text-[13px] hover:bg-gradient-primary rounded-md hover:text-white ${
+              variant && variant?.inStock < 1 ? "cursor-not-allowed" : ""
+            }`}
           >
             {isCarted ? (
               <>

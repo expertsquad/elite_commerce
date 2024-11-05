@@ -20,7 +20,6 @@ import OrderSummery from "./OrderSummery";
 import { calculatePercentageToFreeShipping } from "@/utils/calculatePercentageToFreeShipping";
 import { getShippingFee } from "@/utils/getShippingFee";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
-import { Button } from "@/Components/Buttons";
 import { productEmptyState } from "@/assets";
 import { calculateDiscountAndBulkOrderPrice } from "@/utils/calculateDiscountAndBulkOrderPrice";
 
@@ -247,7 +246,7 @@ export const QuickOrderItem = ({
                 <>
                   <span className="text-black-10">|</span>
                   <span className="text-secondary text-[10px] md:text-xs">
-                    {discountPercentage}%
+                    {discountPercentage}% OFF
                   </span>
                 </>
               )}

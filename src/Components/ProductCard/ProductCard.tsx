@@ -85,7 +85,6 @@ const ProductCard = ({
         <QuickViewButton
           product={product}
           btnClassName="text-sm transition-all duration-300 hover:bg-gradient-primary hover:text-white hover:w-full !px-4 py-2"
-          // accessToken={}
           currencyIcon={currencyIcon ? currencyIcon : ""}
           shippingAmount={shippingAmount ? shippingAmount : 0}
           isQuickOrderActive={isQuickOrderActive}
@@ -101,6 +100,7 @@ const ProductCard = ({
             buttonText="Quick Order"
             currencyIcon={currencyIcon}
             shippingAmount={shippingAmount ? shippingAmount : 0}
+            variant={product?.variants[0]}
           />
         )}
       </div>

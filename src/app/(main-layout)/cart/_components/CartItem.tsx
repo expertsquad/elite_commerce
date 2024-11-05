@@ -76,7 +76,7 @@ export const CartItem = ({
               <>
                 <span className="text-black-10">|</span>
                 <span className="text-secondary text-[10px] md:text-xs">
-                  {discountPercentage}%
+                  {discountPercentage}% OFF
                 </span>
               </>
             )}

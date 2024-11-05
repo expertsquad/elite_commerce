@@ -105,7 +105,7 @@ const WishlistedItems = ({
                 <>
                   <span className="text-black-10">|</span>
                   <span className="text-secondary text-[10px] md:text-xs">
-                    {product?.variant?.discountPercentage}%
+                    {product?.variant?.discountPercentage}% OFF
                   </span>
                 </>
               )}
@@ -130,7 +130,7 @@ const WishlistedItems = ({
             product={product}
             btnClassName="!pl-0"
             currencyIcon={currencyIcon}
-            shippingAmount={shippingAmount}
+            shippingAmount={shippingAmount ? shippingAmount : 0}
             isQuickOrderActive={isQuickOrderActive}
             accessToken={accessToken ? accessToken : ""}
           >
@@ -146,8 +146,11 @@ const WishlistedItems = ({
             </div>
           ) : (
             <ButtonPrimaryLight
-              className="!rounded-full !text-black-80 !whitespace-nowrap !py-2 !px-3.5 !gap-x-2"
+              className={`!rounded-full !text-black-80 !whitespace-nowrap !py-2 !px-3.5 !gap-x-2 ${
+                product?.variant?.inStock < 1 ? "cursor-not-allowed" : ""
+              }`}
               onClick={() => handleAddToCart({ product })}
+              disabled={product?.variant?.inStock < 1}
             >
               <GenerateGradientIcon
                 size={20}
@@ -181,6 +184,7 @@ const WishlistedItems = ({
               buttonText="QUICK ORDER"
               currencyIcon={currencyIcon}
               shippingAmount={shippingAmount}
+              variant={product?.variant}
             />
           )}
         </div>
