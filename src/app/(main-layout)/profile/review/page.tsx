@@ -21,9 +21,9 @@ const ProductReviewComponents = async () => {
   return (
     <div>
       {reviewPending?.data?.length ? (
-        reviewPending?.data?.map((reviewNow: any) => (
+        reviewPending?.data?.map((reviewNow: any, index: number) => (
           <div
-            key={reviewNow?._id}
+            key={index}
             className="flex w-full lg:flex-row lg:items-center lg:gap-x-5 flex-col border-b border-black-10 py-5
      "
           >

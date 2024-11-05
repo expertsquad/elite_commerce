@@ -109,10 +109,10 @@ const ShoppingCartBtn = ({
 
             {cartProducts?.length > 0 && (
               <div className="flex flex-col gap-y-5 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(360px,45vh))] md:h-[calc(100vh-max(440px,40vh))] pb-10">
-                {cartProducts?.map((product: ICartProduct) => {
+                {cartProducts?.map((product: ICartProduct, index: number) => {
                   return (
                     <QuickOrderItem
-                      key={product?._id}
+                      key={index}
                       product={product}
                       setRefetch={setRefetch}
                       currencyIcon={currencyIcon}

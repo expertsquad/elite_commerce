@@ -76,7 +76,7 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                 {wishlistProducts?.map(
                   (product: IWishlistProduct, index: number) => (
                     <div
-                      key={product?._id}
+                      key={index}
                       className="flex justify-between gap-3.5 border-b border-black-10 pb-5 mb-1"
                     >
                       <div className="flex items-center gap-3">

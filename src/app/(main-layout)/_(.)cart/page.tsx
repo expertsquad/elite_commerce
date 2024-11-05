@@ -197,10 +197,10 @@ const CartInterceptingPage = () => {
             <hr className="border border-black-10 h-[1px] my-3" />
 
             <div className="flex flex-col gap-2 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(350px,45vh))] pb-10">
-              {cartProducts?.map((product: ICartProduct) => {
+              {cartProducts?.map((product: ICartProduct, index: number) => {
                 return (
                   <QuickOrderItem
-                    key={product?._id}
+                    key={index}
                     product={product}
                     setRefetch={setRefetch}
                   />

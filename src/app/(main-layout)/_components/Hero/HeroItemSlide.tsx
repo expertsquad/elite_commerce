@@ -36,7 +36,7 @@ const HeroItemSlide = ({
         className="h-[280px] md:h-[450px] w-full flex transition-transform ease-out duration-500"
         style={{ transform: `translateX(-${curr * 100}%)` }}
       >
-        {sliderArray?.map((item: any, index: any) => (
+        {sliderArray?.map((item: any, index: number) => (
           <div key={index} className="w-full flex-shrink-0">
             <Carousel item={item} currencyIcon={currencyIcon} />
           </div>

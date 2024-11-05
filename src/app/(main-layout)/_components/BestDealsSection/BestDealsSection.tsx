@@ -74,8 +74,8 @@ const BestDealsSection = async () => {
         <div className="flex w-full overflow-x-scroll scrollbar-x-remove">
           <div className="flex items-center md:justify-center gap-x-5 md:gap-x-5 xl:justify-between w-[300%] md:w-full">
             {bestDeals?.data?.products?.map(
-              (product: IBestDealsProductData) => (
-                <BestDealsSectionProduct key={product?._id} product={product} />
+              (product: IBestDealsProductData, index: number) => (
+                <BestDealsSectionProduct key={index} product={product} />
               )
             )}
           </div>

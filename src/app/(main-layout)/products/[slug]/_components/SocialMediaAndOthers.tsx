@@ -41,41 +41,47 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
         </span>
 
         <div className="flex items-center gap-x-2">
-          {socialMedia?.socialMedias?.map((media: ISocialMedia) => {
-            const href =
-              media?.mediaName?.toLowerCase() === "whatsapp"
-                ? `https://wa.me/${media?.phoneNumber}`
-                : media?.mediaName?.toLowerCase() === "messenger"
-                ? `https://m.me/${media?.userName}`
-                : "#";
+          {socialMedia?.socialMedias?.map(
+            (media: ISocialMedia, index: number) => {
+              const href =
+                media?.mediaName?.toLowerCase() === "whatsapp"
+                  ? `https://wa.me/${media?.phoneNumber}`
+                  : media?.mediaName?.toLowerCase() === "messenger"
+                  ? `https://m.me/${media?.userName}`
+                  : "#";
 
-            return (
-              <a
-                key={media.mediaName}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-x-1.5 border border-black-10 hover:border-black-50 rounded-full py-1 px-2 cursor-pointer"
-              >
-                {media.mediaName === "Whatsapp" && (
-                  <>
-                    <Image src={whatsapp} alt="whatsapp" className="w-4 h-4" />
-                    <span className="text-xs">WhatsApp</span>
-                  </>
-                )}
-                {media.mediaName === "Messenger" && (
-                  <>
-                    <Image
-                      src={messenger}
-                      alt="messenger"
-                      className="w-4 h-4"
-                    />
-                    <span className="text-xs">Messenger</span>
-                  </>
-                )}
-              </a>
-            );
-          })}
+              return (
+                <a
+                  key={index}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-x-1.5 border border-black-10 hover:border-black-50 rounded-full py-1 px-2 cursor-pointer"
+                >
+                  {media.mediaName === "Whatsapp" && (
+                    <>
+                      <Image
+                        src={whatsapp}
+                        alt="whatsapp"
+                        className="w-4 h-4"
+                      />
+                      <span className="text-xs">WhatsApp</span>
+                    </>
+                  )}
+                  {media.mediaName === "Messenger" && (
+                    <>
+                      <Image
+                        src={messenger}
+                        alt="messenger"
+                        className="w-4 h-4"
+                      />
+                      <span className="text-xs">Messenger</span>
+                    </>
+                  )}
+                </a>
+              );
+            }
+          )}
         </div>
       </div>
       <div className="flex items-center whitespace-nowrap">

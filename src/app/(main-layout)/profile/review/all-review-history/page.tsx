@@ -27,9 +27,9 @@ const AllReviewHistory = async () => {
   return (
     <div className="space-y-3">
       {allReviews?.data?.length ? (
-        allReviews?.data?.map((allReview: any) => (
+        allReviews?.data?.map((allReview: any, index: number) => (
           <div
-            key={allReview?._id}
+            key={index}
             className="flex items-center justify-between lg:items-center w-full border-b border-black-10 py-5"
           >
             <div className="flex justify-start items-center gap-x-2 md:gap-x-3 w-[60%] lg:w-[40%] xl:w-[55%]">

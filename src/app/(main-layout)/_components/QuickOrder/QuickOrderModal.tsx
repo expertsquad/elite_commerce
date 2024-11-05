@@ -136,9 +136,9 @@ const QuickOrderModal = ({
             </span>
             <div className="flex flex-col gap-5 md:max-h-[540px] md:overflow-y-scroll scrollbar-y-remove">
               {productList?.length > 0 ? (
-                productList?.map((product) => (
+                productList?.map((product, index) => (
                   <QuickOrderItem
-                    key={product?._id}
+                    key={index}
                     product={product}
                     currencyIcon={currencyIcon}
                     onIncreaseQuantity={() =>

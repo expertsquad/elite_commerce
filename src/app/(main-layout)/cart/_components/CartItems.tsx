@@ -87,10 +87,10 @@ const CartItems = ({
       <div className="flex md:flex-row flex-col gap-5 mt-7">
         {cartProducts?.length ? (
           <div className=" flex flex-col gap-5 md:border border-black-10 md:p-[30px] md:basis-4/6 rounded-[10px]">
-            {cartProducts?.map((product: ICartProduct) => {
+            {cartProducts?.map((product: ICartProduct, index: number) => {
               return (
                 <CartItem
-                  key={product?._id}
+                  key={index}
                   product={product}
                   setRefetch={setRefetch}
                   currencyIcon={currencyIcon}

@@ -6,10 +6,10 @@ const ProductViewServices = ({ className }: { className?: string }) => {
     <div
       className={`flex flex-col md:flex-row items-center justify-between  text-center md:text-left gap-10 ${className}`}
     >
-      {extraServices?.map((service) => (
+      {extraServices?.map((service, index) => (
         <div
           className="flex flex-col lg:flex-row gap-y-3 md:gap-2 items-center"
-          key={service.title}
+          key={index}
         >
           <GenerateGradientIcon
             IconComponent={service.icon}
