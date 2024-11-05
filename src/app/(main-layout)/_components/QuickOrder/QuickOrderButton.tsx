@@ -34,6 +34,7 @@ const QuickOrderButton = ({
   return (
     <Fragment>
       <button
+        aria-label="quick order"
         disabled={variant && variant?.inStock < 1 ? true : false}
         onClick={(e) => handleQuickOrderButton(e)}
         className={`${buttonStyle} ${

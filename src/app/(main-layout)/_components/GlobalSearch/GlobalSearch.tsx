@@ -41,6 +41,7 @@ const GlobalSearch = ({
   return (
     <div>
       <button
+        aria-label="Search"
         className="first:after:content-['|'] after:text-black-50 after:opacity-50 flex items-center gap-2"
         onClick={(e) => hanldeGlobalSearch(e)}
       >
