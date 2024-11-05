@@ -39,9 +39,11 @@ export default function Error({
       <div className="flex flex-col items-center gap-4">
         <h2 className="text-danger text-9xl font-bold">ERROR!</h2>
         <div className="text-danger">
-          {error.message === "Access token not found, please login again!"
-            ? "Please Login"
-            : error.message}
+          {error.message === "Access token not found, please login again!" ? (
+            <Link href={`/login`}>Please Login</Link>
+          ) : (
+            error.message
+          )}
           !
         </div>
       </div>
