@@ -69,6 +69,7 @@ const OrderItems = ({
           currency={currency}
           key={orderItem._id}
           orderItem={orderItem}
+          orderStatus={order?.existOrderStatus?.status}
         />
       ))}
 

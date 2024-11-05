@@ -2,7 +2,7 @@ import { dateFormat } from "@/utils/dateFormat";
 import Image from "next/image";
 import React from "react";
 import { server_url } from "@/constants";
-import { fetchData, fetchProtectedData } from "@/actions/fetchData";
+import { fetchProtectedData } from "@/actions/fetchData";
 import ReviewNewBtn from "./_components/ReviewNewBtn";
 import { noReview } from "@/assets";
 

@@ -5,13 +5,16 @@ import Image from "next/image";
 import React from "react";
 import OrderCardHeader from "./OrderCardHeader";
 import AddOrEditReview from "./AddOrEditReview";
+import Link from "next/link";
 
 const OrderItemsCard = ({
   orderItem,
   currency,
+  orderStatus,
 }: {
   orderItem: OrderItem;
   currency?: string;
+  orderStatus?: string;
 }) => {
   return (
     <div className="text-black-50 flex gap-5 py-5 w-full border-b border-black-10">
@@ -35,6 +38,20 @@ const OrderItemsCard = ({
             <small className="text-positive">
               {orderItem?.brand?.brandName}
             </small>
+
+            {orderItem?.variant?.variantName &&
+              orderItem?.variant?.variantName !== "Not specified" && (
+                <div className="flex items-center gap-x-1">
+                  <div>|</div>
+                  <div
+                    className="h-3 w-3 rounded-full"
+                    style={{
+                      backgroundColor: orderItem?.variant?.variantName,
+                    }}
+                  ></div>
+                  <span>{orderItem?.variant?.variantName}</span>
+                </div>
+              )}
             <div>|</div>
             <StarRating rating={4} />
           </div>
@@ -80,8 +97,16 @@ const OrderItemsCard = ({
             value={`${currency}${orderItem?.subTotalPayable?.toString()}`}
             className="text-lg font-bold text-gradient-primary"
           />
-          {orderItem?.isReviewed && (
-            <AddOrEditReview value={orderItem?.isReviewed} />
+          {orderItem?.isReviewed ? (
+            <AddOrEditReview isReviewed={orderItem?.isReviewed} />
+          ) : (
+            orderItem?.isReviewed === false &&
+            orderStatus === "Delivered" && (
+              <AddOrEditReview
+                isReviewed={orderItem?.isReviewed}
+                status={orderStatus}
+              />
+            )
           )}
         </div>
       </div>

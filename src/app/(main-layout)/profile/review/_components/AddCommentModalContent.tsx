@@ -24,6 +24,7 @@ const AddCommentModalContent = ({
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  console.log(photos);
 
   const handleStarClick = (index: number, e: React.MouseEvent) => {
     e.preventDefault();
@@ -48,10 +49,10 @@ const AddCommentModalContent = ({
     formData.append("comment", comment);
     formData.append("rating", rating.toString());
 
-    photos.forEach((photo) => {
-      if (photo) {
-        formData.append("reviewPhotos", photo);
-      }
+    const filteredPhotos = photos.filter((photo) => photo !== undefined);
+
+    filteredPhotos.forEach((file: File) => {
+      formData.append("reviewPhotos", file);
     });
 
     try {
