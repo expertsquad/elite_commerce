@@ -1,31 +1,29 @@
-import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import notFoundImage from "@/assets/Images/notfound.webp";
 
 const NotFound = () => {
   return (
-    <div className="h-screen flex items-center justify-center">
-      <div className="flex flex-col items-center justify-center gap-5">
-        <h2 className="font-bold [font-size:_clamp(26px,2.5vw,26px)]">
-          404 PAGE NOT FOUND!
-        </h2>
-        <div className="relative w-[450px] h-[450px]">
-          <Image
-            src={notFoundImage}
-            alt="Not Found Image"
-            fill
-            className="inset-0 object-contain w-full h-full"
-          />
+    <section className="flex items-center h-full p-16 dark:bg-gray-50 dark:text-gray-800">
+      <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
+        <div className="max-w-md text-center">
+          <h2 className="mb-8 font-extrabold text-9xl text-gradient-primary">
+            <span className="sr-only">Error</span>404
+          </h2>
+          <p className="text-2xl font-semibold md:text-3xl">
+            Sorry, we couldn&apos;t find this page.
+          </p>
+          <p className="mt-4 mb-8 dark:text-gray-600">
+            But dont worry, you can find plenty of other things on our homepage.
+          </p>
+          <Link
+            rel="noopener noreferrer"
+            href="/"
+            className="px-8 py-3 font-semibold rounded bg-gradient-secondary hover:bg-gradient-secondary-reverse  text-white"
+          >
+            Back to homepage
+          </Link>
         </div>
-        <Link
-          className="bg-gradient-primary text-white rounded-md px-5 py-2.5 transition-all hover:scale-105 duration-300"
-          href={`/`}
-        >
-          Back To Home
-        </Link>
       </div>
-    </div>
+    </section>
   );
 };
 
