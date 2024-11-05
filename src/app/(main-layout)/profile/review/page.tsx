@@ -18,14 +18,13 @@ const ProductReviewComponents = async () => {
     route: "/review",
     query: `reviewStatus=Pending&reviewer.userId=${userId}`,
   });
-
   return (
     <div>
       {reviewPending?.data?.length ? (
         reviewPending?.data?.map((reviewNow: any) => (
           <div
             key={reviewNow?._id}
-            className="flex w-full lg:flex-row lg:gap-x-5 flex-col border-b border-black-10 py-5
+            className="flex w-full lg:flex-row lg:items-center lg:gap-x-5 flex-col border-b border-black-10 py-5
      "
           >
             {/* Image and titile */}
@@ -37,8 +36,13 @@ const ProductReviewComponents = async () => {
                   fill
                   className="inset-0 object-contain p-1"
                 />
-              </div>{" "}
-              <p className="line-clamp-2">{reviewNow?.product?.productName}</p>
+              </div>
+              <div>
+                <p className="line-clamp-2 text-sm md:text-base">
+                  {reviewNow?.product?.productName}
+                </p>
+                <span className="text-sm">{reviewNow?.product?.brandName}</span>
+              </div>
             </div>
             {/* Purchase on and review */}
             <div className="flex w-full lg:w-1/2 justify-between items-center">

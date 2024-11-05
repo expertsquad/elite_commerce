@@ -6,6 +6,8 @@ import { fetchProtectedData } from "@/actions/fetchData";
 import EditReviewBtn from "../_components/EditReviewBtn";
 import Pagination from "@/Components/Pagination";
 import { noReview } from "@/assets";
+import StarRating from "@/Components/StarRating";
+import { formatDateShorting } from "@/constants/formateDate.constants";
 
 const AllReviewHistory = async () => {
   // <== Get me to get all reviews by user id ==>
@@ -18,7 +20,7 @@ const AllReviewHistory = async () => {
   // <== Get all reviews by user id ==>
   const allReviews = await fetchProtectedData({
     route: "/review",
-    query: `reviewStatus=Reviewed&reviewer.userId=${userId}`,
+    query: `reviewStatus=Reviewed&reviewer.userId=${userId}&sortBy=updatedAt`,
     limit: 20,
   });
 
@@ -42,13 +44,33 @@ const AllReviewHistory = async () => {
                   className="inset-0 object-contain p-1"
                 />
               </div>
-              <p className="line-clamp-2">{allReview?.product?.productName}</p>
+              <div>
+                <p className="line-clamp-2">
+                  {allReview?.product?.productName}
+                </p>
+                <div className="flex items-center gap-x-1">
+                  <span className="text-sm">
+                    {allReview?.product?.brandName}
+                  </span>
+                  <span className="text-black-10">|</span>
+
+                  <StarRating rating={allReview?.rating} />
+                </div>
+              </div>
             </div>
 
             <div className="flex w-full lg:w-1/2  justify-between items-center mt-3 md:mt-0">
-              <div className="flex justify-start flex-col">
-                <p className="text-black-50 text-sm">Purchase on</p>
-                <p>{dateFormat(allReview?.createdAt)}</p>
+              <div className="flex items-center gap-x-2">
+                <div className="flex justify-start flex-col">
+                  <p className="text-black-50 text-sm">Purchase on</p>
+                  <p className="text-sm">{dateFormat(allReview?.createdAt)}</p>
+                </div>
+                <div className="flex justify-start flex-col">
+                  <p className="text-black-50 text-sm">Updated At</p>
+                  <span className="text-sm">
+                    {formatDateShorting(allReview?.updatedAt)}
+                  </span>
+                </div>
               </div>
 
               <EditReviewBtn allReview={allReview} />
@@ -65,15 +87,6 @@ const AllReviewHistory = async () => {
           </div>
         </div>
       )}
-      {/* {allReviews?.data?.length > 1 && (
-        <Pagination
-          currentPage={1}
-          totalPages={Math.ceil(
-            allReviews?.meta?.total / allReviews?.meta?.limit
-          )}
-          redirectTo="all-review-history"
-        />
-      )} */}
     </div>
   );
 };
