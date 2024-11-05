@@ -25,7 +25,6 @@ const AddCommentModalContent = ({
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  console.log(photos);
 
   const handleStarClick = (index: number, e: React.MouseEvent) => {
     e.preventDefault();

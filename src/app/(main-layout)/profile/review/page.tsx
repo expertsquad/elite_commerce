@@ -63,11 +63,16 @@ const ProductReviewComponents = async () => {
         ))
       ) : (
         <div className="flex flex-col items-center justify-center h-[calc(100vh-200px)]">
-          <div className="flex justify-center items-center">
-            No pending review yet!!
-          </div>
           <div className="flex items-center justify-center">
-            <Image src={noReview} alt="No Review" height={80} width={80} />
+            <Image src={noReview} alt="No Review" height={350} width={250} />
+          </div>
+          <div className="flex flex-col justify-center items-center ">
+            <span className="text-2xl font-medium"> No Review Found here</span>
+            <span className="text-center">
+              No reviews found. Be the first to share your thoughts and help{" "}
+              <br />
+              others make informed decisions about this product.
+            </span>
           </div>
         </div>
       )}

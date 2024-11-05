@@ -8,7 +8,6 @@ const AddOrEditReview = ({
   isReviewed: boolean;
   status?: string;
 }) => {
-  console.log(isReviewed);
   return (
     <div className="flex items-center justify-center">
       {isReviewed && (

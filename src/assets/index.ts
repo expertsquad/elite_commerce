@@ -38,7 +38,7 @@ import successGif from "./Images/success.gif";
 import favicon from "./Images/favicon.svg";
 import maintenanceMode from "./Images/maintenancemode.png";
 import productEmptyState from "./Images/ProductEmptyState.svg";
-import noReview from "./Images/no-review.png";
+import noReview from "./Images/no-review-img.png";
 import userPlaceholder from "./Images/user-placeholder.png";
 export {
   // smallLogo,

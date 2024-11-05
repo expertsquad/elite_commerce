@@ -19,7 +19,6 @@ const OrderedItemsTableData = async ({
   const currencyIcon = await fetchData({
     route: "/settings/shop",
   });
-  console.log(orderItems);
 
   return (
     <section>

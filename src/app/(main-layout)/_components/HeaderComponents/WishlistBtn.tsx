@@ -44,7 +44,6 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
     setRefetch((prev) => prev + 1);
     setRefetchCart && setRefetchCart((prev) => prev + 1);
   };
-  console.log(wishlistProducts[3]);
   return (
     <Fragment>
       <button className="relative" onClick={() => setShow(true)}>
