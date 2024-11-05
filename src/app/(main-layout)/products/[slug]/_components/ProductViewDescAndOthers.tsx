@@ -31,6 +31,7 @@ const ProductViewDescAndOthers = ({
         <CategoryAndBrandSmallComponent
           categoryName={product?.category?.categoryName}
           brandPhoto={product?.brand?.brandPhoto}
+          brandName={product?.brand?.brandName}
         />
       </div>
 

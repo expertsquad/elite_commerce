@@ -1,6 +1,7 @@
 "use client";
 import { revalidateTagAction } from "@/actions/revalidateTag";
 import { updateDataMutation } from "@/actions/updateDataMutation";
+import CustomLoader from "@/Components/CustomLoader";
 import FileUploader from "@/Components/FileUploder";
 import { server_url } from "@/constants";
 import { IReviewTypes } from "@/interfaces/reviewData.interfaces";
@@ -28,19 +29,13 @@ const EditCommentModalContent = ({
     setRating((prev: number) => (prev === index + 1 ? 0 : index + 1));
   };
 
-  // const handleFilesChange = (index: number, files: FileList) => {
-  //   if (files[0]) {
-  //     const updatedPhotos = [...photos];
-  //     updatedPhotos[index] = files[0];
-  //     setPhotos(updatedPhotos);
-  //   }
-  // };
-
+  // <== Handle file upload ==>
   const handleFilesChange = (files: FileList) => {
-    const newPhotos = Array.from(files); // Convert FileList to an array
+    const newPhotos = Array.from(files);
     setPhotos((prevPhotos) => [...prevPhotos, ...newPhotos]);
   };
 
+  // <== Update review data ==>
   const handleAddCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -49,11 +44,13 @@ const EditCommentModalContent = ({
     const formData = new FormData();
     formData.append("comment", comments);
     formData.append("rating", rating.toString());
-    photos.forEach((photo) => {
-      if (photo) {
-        formData.append("reviewPhotos", photo);
-      }
-    });
+    // photos.forEach((photo) => {
+    //   formData.append("reviewPhotos[]", photo.name);
+    // });
+
+    for (let i = 0; i < photos.length; i++) {
+      formData.append("reviewPhotos", photos[i]);
+    }
 
     try {
       const response = await updateDataMutation({
@@ -62,6 +59,7 @@ const EditCommentModalContent = ({
         dataType: "formData",
         method: "PUT",
       });
+      console.log(response);
       if (response?.success) {
         toast.success(response?.message);
         revalidateTagAction("/profile/review/all-review-history");
@@ -79,7 +77,8 @@ const EditCommentModalContent = ({
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full relative">
+      {loading && <CustomLoader />}
       <div>
         <p>Product Review</p>
         <div className="py-6 flex items-center justify-center flex-col gap-2 border-b border-black-10">
@@ -134,7 +133,6 @@ const EditCommentModalContent = ({
                 key={index}
                 name={`reviewPhotos${index}`}
                 multiple={true}
-                // onChange={(e) => handleFilesChange(index, e.target.files!)}
                 onChange={(e) => handleFilesChange(e.target.files!)}
                 maxSize={5}
                 accept="image/*"

@@ -1,6 +1,7 @@
 "use client";
 import { revalidateTagAction } from "@/actions/revalidateTag";
 import { updateDataMutation } from "@/actions/updateDataMutation";
+import CustomLoader from "@/Components/CustomLoader";
 import FileUploader from "@/Components/FileUploder";
 import { server_url } from "@/constants";
 import { IconStarFilled } from "@tabler/icons-react";
@@ -62,6 +63,7 @@ const AddCommentModalContent = ({
         dataType: "formData",
         method: "PUT",
       });
+      console.log(response);
       if (response?.success) {
         toast.success(response?.message);
         revalidateTagAction("/review");
@@ -82,7 +84,8 @@ const AddCommentModalContent = ({
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full relative">
+      {loading && <CustomLoader />}
       <div>
         <p>Product Review</p>
         <div className="py-3 md:py-6 flex items-center justify-center flex-col gap-2 border-b border-black-10">

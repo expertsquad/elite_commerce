@@ -19,7 +19,6 @@ const OrderedItemsTableData = async ({
   const currencyIcon = await fetchData({
     route: "/settings/shop",
   });
-
   console.log(orderItems);
 
   return (
@@ -35,7 +34,7 @@ const OrderedItemsTableData = async ({
         {orderItems?.map((item: OrderItemsTypes) => (
           <div key={item?._id} className="mb-5 flex items-center">
             <div className="flex items-center w-full md:w-[45%]">
-              <div className="w-[50px] h-[60px] md:h-[50px] shrink-0 relative bg-gradient-primary-light rounded-md mr-2.5">
+              <div className="w-[55px] h-[60px] shrink-0 relative bg-gradient-primary-light rounded-md mr-2.5">
                 <Image
                   src={`${server_url + item?.productPhotos[0]}`}
                   alt="product photo"
@@ -48,7 +47,7 @@ const OrderedItemsTableData = async ({
               </div>
               <div className="w-full">
                 <div className="flex items-center gap-x-2 justify-between">
-                  <span className="line-clamp-1 text-sm md:text-base">
+                  <span className="line-clamp-1 text-sm">
                     {item?.productName}
                   </span>
                   {orderStatusLength <= 2 && (
@@ -65,11 +64,27 @@ const OrderedItemsTableData = async ({
                   <div>
                     <StarRating rating={2} />
                   </div>
+                </div>
+                <div className="flex items-center">
+                  {item?.variant &&
+                    item?.variant?.variantName !== "Not specified" && (
+                      <>
+                        <div
+                          className="h-3 w-3 rounded-full"
+                          style={{
+                            backgroundColor: item?.variant?.variantName,
+                          }}
+                        ></div>
+                        <span className="text-xs ml-1">
+                          {item?.variant?.variantName}
+                        </span>
+                      </>
+                    )}
                   {item?.variant?.discountPercentage && (
                     <>
                       <span className="text-black-10">|</span>
                       <span className="text-secondary text-[10px] md:text-xs">
-                        {item?.variant?.discountPercentage}%
+                        {item?.variant?.discountPercentage}% OFF
                       </span>
                     </>
                   )}
