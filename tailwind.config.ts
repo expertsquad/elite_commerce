@@ -79,15 +79,6 @@ const config: Config = {
         "messege-card-shadow": "0px 4px 30px rgba(0, 0, 0, 0.1)",
         "maintainance-shadow": " 0px 4px 30px rgba(0, 0, 0, 0.14)",
       },
-      keyframes: {
-        "left-logo-scroll": {
-          "0%": { transform: "translateX(0%)" },
-          "100%": { transform: "translateX(-100%)" },
-        },
-      },
-      animation: {
-        "left-logo-scroll": "left-logo-scroll 40s linear infinite",
-      },
     },
   },
   plugins: [],
