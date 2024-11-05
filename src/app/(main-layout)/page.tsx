@@ -56,6 +56,7 @@ const Page = async () => {
           Browse Our Hottest Categories
         </p>
         <InfiniteSlider />
+        {/* <InfiniteCarousel /> */}
 
         {/* <== Featured Products ==> */}
         <div className="flex justify-center items-center  flex-col gap-3.5 mt-16 mb-10">

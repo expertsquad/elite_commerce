@@ -36,20 +36,14 @@ export default function Error({
 
   return (
     <div className="min-h-full w-full flex items-center justify-center flex-col gap-5">
-      <div className="relative w-[450px] h-[450px]">
-        <Image
-          src={errorImg}
-          alt="Error Image"
-          fill
-          className="inset-0 object-contain w-full h-full"
-        />
-      </div>
       <div className="flex flex-col items-center gap-4">
-        <h2 className="text-danger text-3xl font-bold">ERROR!</h2>
+        <h2 className="text-danger text-9xl font-bold">ERROR!</h2>
         <div className="text-danger">
-          {error.message === "Access token not found, please login again!"
-            ? "Please Login"
-            : error.message}
+          {error.message === "Access token not found, please login again!" ? (
+            <Link href={`/login`}>Please Login</Link>
+          ) : (
+            error.message
+          )}
           !
         </div>
       </div>
