@@ -15,7 +15,7 @@ const PaymentOptionCard = ({
 }) => {
   return (
     <div
-      className="w-full flex items-center justify-start gap-4 bg-gradient-primary-light p-5 rounded-lg cursor-pointer"
+      className="w-full flex items-center justify-start gap-4 bg-image-background p-5 rounded-lg cursor-pointer"
       onClick={onSelect}
     >
       <input

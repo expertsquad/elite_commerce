@@ -38,7 +38,7 @@ const ExtraDiscountBasedOnOrder = ({
           (product?.bulk?.minOrder > 1 ||
             (product.bulk && typeof product.bulk !== "boolean")) && (
             <div className="whitespace-nowrap text-black-80">
-              {productQuantity > bulkItems ? (
+              {productQuantity >= bulkItems ? (
                 <div>
                   <span className="text-positive font-medium">
                     Congratulations
