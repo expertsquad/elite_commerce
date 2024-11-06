@@ -11,6 +11,46 @@ import SpecBulkProduct from "./_components/SpecBulkProduct";
 import SpecificationsMenu from "./_components/SpecificationsMenu";
 import { cookies } from "next/headers";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  try {
+    const product = await fetchData({
+      route: `/product/slug/${params?.slug}`,
+    });
+    const metaTitle =
+      product?.data?.seo?.metaTitle || product?.data?.productName;
+    const metaDescription =
+      product?.data?.seo?.metaDescription || product?.data?.productName;
+
+    const ogImage = product?.data?.productPhotos[0];
+
+    return {
+      title: `${metaTitle}`,
+      description: `${metaDescription}`,
+      openGraph: {
+        title: `${metaTitle}`,
+        description: `${metaDescription}`,
+        images: [
+          {
+            url: ogImage,
+            width: 100,
+            height: 100,
+            alt: `Product OG Image`,
+          },
+        ],
+      },
+    };
+  } catch (error) {
+    return {
+      title: "Not Found",
+      description: "The page you're looking for does not exist!",
+    };
+  }
+}
+
 const ProductViewPage = async ({
   params,
   searchParams,

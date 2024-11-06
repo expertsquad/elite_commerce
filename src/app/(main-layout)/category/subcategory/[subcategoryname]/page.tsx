@@ -15,6 +15,10 @@ export async function generateMetadata({
     });
     const product = response.data[0];
 
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
     if (!response?.data) {
       return {
         title: "Not Found",
@@ -27,7 +31,7 @@ export async function generateMetadata({
     );
 
     return {
-      title: `Products in ${params?.subcategoryname}: ${productNames} | Elite Commerece`,
+      title: `${params?.subcategoryname} | ${shopInfo?.data?.shopName}`,
       description: `Browse through our selection of products in the ${params?.subcategoryname} category.`,
       "og:image": `${product?.productPhotos[0]}`,
     };
@@ -44,6 +48,7 @@ const ProductsBySubCategory = async ({
 }: {
   params: { subcategoryname: string };
 }) => {
+  console.log(params?.subcategoryname);
   const response = await fetchData({
     route: "/product",
     query: `category.subcategory.subcategoryName=${params?.subcategoryname}`,

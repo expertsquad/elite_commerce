@@ -40,6 +40,7 @@ import maintenanceMode from "./Images/maintenancemode.png";
 import productEmptyState from "./Images/ProductEmptyState.svg";
 import noReview from "./Images/no-review-img.png";
 import userPlaceholder from "./Images/user-placeholder.png";
+import logoPlaceholder from "./Images/logo-placeholder.svg";
 export {
   // smallLogo,
   // fullLogo,
@@ -83,4 +84,5 @@ export {
   productEmptyState,
   noReview,
   userPlaceholder,
+  logoPlaceholder,
 };

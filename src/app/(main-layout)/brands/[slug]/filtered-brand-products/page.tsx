@@ -8,7 +8,6 @@ import { IProduct, IProductApiResponse } from "@/interfaces/product.interface";
 import { FilterContext } from "@/Provider/BrandProductFilteringProvider";
 import { buildQueryString } from "@/utils/buildQueryString";
 import { getCurrency } from "@/utils/getCurrency";
-
 import { useContext, useEffect, useState } from "react";
 
 const FilteredBrandProductsPage = ({

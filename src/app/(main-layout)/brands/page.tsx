@@ -8,6 +8,25 @@ import { getCurrency } from "@/utils/getCurrency";
 import { IBrand } from "@/interfaces/brand.interface";
 import ProductEmptyState from "../_components/ProductEmptyState";
 
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Brands | ${shopInfo?.data?.shopName}`,
+      description: `Browse top brands at ${shopInfo?.data?.shopName}. Discover exclusive products and trusted names in various categories to meet all your shopping needs.`,
+    };
+  } catch (error) {
+    return {
+      title: "Brands",
+      description:
+        "Browse top brands and discover exclusive products across various categories. Find trusted names and quality items for every need.",
+    };
+  }
+}
+
 const Brand = async () => {
   const brandData = await fetchData({
     route: "/brand",
