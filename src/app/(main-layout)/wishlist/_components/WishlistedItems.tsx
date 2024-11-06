@@ -8,7 +8,6 @@ import {
 import QuickOrderButton from "../../_components/QuickOrder/QuickOrderButton";
 import ButtonPrimaryLight from "../../brands/_components/ButtonPrimaryLight";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
-import StarRating from "@/Components/StarRating";
 import Image from "next/image";
 import { server_url } from "@/constants";
 import { IWishlistProduct } from "@/interfaces/wishlist.interface";
@@ -65,7 +64,7 @@ const WishlistedItems = ({
       </td>
       <td className="border border-black-10 border-collapse px-5 py-6">
         <div className="flex gap-5">
-          <div className="bg-gradient-primary-light md:p-3.5 p-1.5 rounded-[10px] flex items-center justify-center">
+          <div className="bg-image-background md:p-3.5 p-1.5 rounded-[10px] flex items-center justify-center">
             <div className="relative md:w-[60px] md:h-[60px] w-[50px] h-[50px]">
               <Image
                 alt="product"
@@ -146,7 +145,7 @@ const WishlistedItems = ({
             </div>
           ) : (
             <ButtonPrimaryLight
-              className={`!rounded-full !text-black-80 !whitespace-nowrap !py-2 !px-3.5 !gap-x-2 ${
+              className={`!rounded-full !text-black-80 !whitespace-nowrap !py-2 !px-3.5 !gap-x-2${
                 product?.variant?.inStock < 1 ? "cursor-not-allowed" : ""
               }`}
               onClick={() => handleAddToCart({ product })}

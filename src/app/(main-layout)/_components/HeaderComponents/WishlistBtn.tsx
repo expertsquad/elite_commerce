@@ -80,7 +80,7 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                       className="flex justify-between gap-3.5 border-b border-black-10 pb-5 mb-1"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="bg-gradient-primary-light md:p-3 p-1.5 rounded-[10px]">
+                        <div className="bg-image-background md:p-3 p-1.5 rounded-[10px]">
                           <div className="relative md:w-[70px] md:h-[70px]  w-[50px] h-[50px]">
                             <Image
                               alt="product"
@@ -207,7 +207,7 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                 <Link
                   href="/wishlist"
                   onClick={() => setShow(false)}
-                  className={`py-3 relative rounded-full group overflow-hidden font-medium bg-gradient-primary-light text-black inline-block ${
+                  className={`py-3 relative rounded-full group overflow-hidden font-medium bg-image-background text-black inline-block ${
                     wishlistProducts?.length === 0
                       ? "pointer-events-none cursor-not-allowed opacity-50 select-none"
                       : ""
@@ -221,7 +221,7 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                 <Link
                   href="/"
                   onClick={() => setShow(false)}
-                  className="py-3 relative rounded-full group overflow-hidden font-medium bg-gradient-primary-light text-black inline-block"
+                  className="py-3 relative rounded-full group overflow-hidden font-medium bg-image-background text-black inline-block"
                 >
                   <span className="absolute bottom-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-gradient-primary group-hover:h-full opacity-90"></span>
                   <span className="relative flex items-center justify-center gap-x-1 group-hover:text-white">

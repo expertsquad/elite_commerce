@@ -31,7 +31,7 @@ export const CartItem = ({
   return (
     <div className="flex items-center md:cart-item-data border-b pb-5 border-black-10">
       <div className="flex items-center gap-x-2.5 w-full">
-        <div className="bg-gradient-primary-light p-1.5 rounded-[10px]">
+        <div className="bg-image-background p-1.5 rounded-[10px]">
           <div className="relative w-[50px] md:h-[50px] h-[60px]">
             <Image
               alt="product"

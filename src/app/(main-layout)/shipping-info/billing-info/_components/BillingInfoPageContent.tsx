@@ -28,6 +28,7 @@ const BillingInfoPageContent = ({
   cities?: any;
   defaultAddress?: any;
 }) => {
+  console.log(paymentMethod);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { orderData } = useContext(OrderInitContext);

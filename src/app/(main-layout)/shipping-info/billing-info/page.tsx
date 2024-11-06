@@ -1,6 +1,25 @@
-import { fetchProtectedData } from "@/actions/fetchData";
+import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import BillingInfoPageContent from "./_components/BillingInfoPageContent";
 import { fetchCountryData } from "@/actions/fetchCountryData";
+
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Billing Information | ${shopInfo?.data?.shopName}`,
+      description: `Review and manage your billing information at ${shopInfo?.data?.shopName}. Ensure secure payment details for a smooth checkout process.`,
+    };
+  } catch (error) {
+    return {
+      title: "Billing Information",
+      description:
+        "Review and manage your billing information. Ensure secure payment details for a smooth checkout process.",
+    };
+  }
+}
 
 const page = async () => {
   const shopSetting = await fetchProtectedData({

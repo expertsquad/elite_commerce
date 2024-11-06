@@ -203,7 +203,7 @@ export const QuickOrderItem = ({
     <div className="flex justify-between gap-3.5">
       <div className="flex md:items-center gap-3.5">
         <div>
-          <div className="bg-gradient-primary-light p-1.5 rounded-[10px]">
+          <div className="bg-image-background p-1.5 rounded-[10px]">
             <div className="relative md:w-[70px] md:h-[70px] w-[50px] h-[60px]">
               <Image
                 alt="product"
