@@ -69,7 +69,7 @@ const Carousel = ({
               {item?.price.toFixed(2)}
             </del>
             <span className="text-xs md:text-base  text-danger">
-              {item?.discountPercentage}%
+              {item?.discountPercentage}% OFF
             </span>
           </div>
           <div className="md:mt-6 hover:text-positive">

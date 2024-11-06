@@ -1,10 +1,50 @@
 import React from "react";
-import SortingSection from "../../category/_components/FilterBySelection";
 import BrandFilterSection from "../_components/BrandFilterSection";
 import BrandFilterModal from "../_components/BrandFilterModal";
 import { fetchData } from "@/actions/fetchData";
 import { getWidget } from "@/utils/getWidget";
 import { getCurrency } from "@/utils/getCurrency";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    const brandInfo = await fetchData({
+      route: `/brand/slug/${params.slug.toLowerCase()}`,
+    });
+
+    const ogImage = brandInfo?.data?.brandPhoto;
+
+    return {
+      title: `${brandInfo?.data?.brandName || "Brand"} | ${
+        shopInfo?.data?.shopName
+      }`,
+      description: `Discover the exclusive ${brandInfo?.data?.brandName} collection at ${shopInfo?.data?.shopName}. Explore high-quality products designed to meet your needs and enhance your lifestyle.`,
+      openGraph: {
+        images: [
+          {
+            url: ogImage,
+            width: 100,
+            height: 100,
+            alt: "Brand Photo",
+          },
+        ],
+      },
+    };
+  } catch (error) {
+    return {
+      title: "Brand",
+      description:
+        "Discover premium products from top brands. Explore high-quality items tailored to meet your needs and enhance your lifestyle.",
+    };
+  }
+}
 
 const Layout = async ({
   children,

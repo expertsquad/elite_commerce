@@ -7,6 +7,25 @@ import FilteringSection from "./_components/FilteringSection";
 import { getWidget } from "@/utils/getWidget";
 import { getCurrency } from "@/utils/getCurrency";
 
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Category | ${shopInfo?.data?.shopName}`,
+      description: `Explore a wide range of categories at ${shopInfo?.data?.shopName}. Discover products across various categories tailored to your needs, all in one place.`,
+    };
+  } catch (error) {
+    return {
+      title: "Category",
+      description:
+        "Explore a wide range of product categories tailored to meet every need, all in one place.",
+    };
+  }
+}
+
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const categories = await fetchData({ route: "/category", limit: 100 });
   const products = await fetchData({

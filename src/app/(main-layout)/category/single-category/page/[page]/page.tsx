@@ -6,6 +6,51 @@ import { IProduct } from "@/interfaces/product.interface";
 import { getCurrency } from "@/utils/getCurrency";
 import React from "react";
 
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: { slug: string };
+  searchParams: { category: string };
+}) {
+  try {
+    const category = await fetchData({
+      route: `/category/slug/${searchParams?.category?.toLowerCase()}`,
+    });
+
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+    const metaTitle = category?.data?.categoryName || "Category";
+
+    const ogImage = category?.data?.categoryPhoto;
+
+    return {
+      title: `${metaTitle} | ${shopInfo?.data?.shopName}`,
+      description:
+        "Explore a wide range of products in this category, curated to meet your needs and preferences.",
+      openGraph: {
+        title: `${metaTitle}`,
+        description:
+          "Explore a wide range of products in this category, curated to meet your needs and preferences.",
+        images: [
+          {
+            url: ogImage,
+            width: 100,
+            height: 100,
+            alt: `Category OG Image`,
+          },
+        ],
+      },
+    };
+  } catch (error) {
+    return {
+      title: "Category Not Found",
+      description: "The category you're looking for does not exist!",
+    };
+  }
+}
+
 const SingleDynamicCategory = async ({
   searchParams,
   params,

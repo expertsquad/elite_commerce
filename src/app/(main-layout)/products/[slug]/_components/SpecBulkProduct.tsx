@@ -56,7 +56,9 @@ const SpecBulkProduct = ({
           </div>
         ))}
       </div>
-      <span className="text-black-80">{productdata?.productName}</span>
+      <span className="text-black-80 line-clamp-3">
+        {productdata?.productName}
+      </span>
       <div className="my-2">
         <CategoryAndBrandSmallComponent
           brandPhoto={productdata?.brand?.brandPhoto}

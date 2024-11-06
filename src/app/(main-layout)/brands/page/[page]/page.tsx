@@ -1,12 +1,30 @@
 import React from "react";
 import { fetchData } from "@/actions/fetchData";
 import BrandCard from "@/Components/BrandCard";
-import SmallProductCard from "../../_components/SmallProductCard";
 import WidgetCard from "@/Components/WidgetCard";
 import Pagination from "@/Components/Pagination";
 import TopSellingBrandProducts from "../../_components/TopSellingBrandProducts";
 import { IBrand } from "@/interfaces/brand.interface";
 import ProductEmptyState from "@/app/(main-layout)/_components/ProductEmptyState";
+
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Brands | ${shopInfo?.data?.shopName}`,
+      description: `Browse top brands at ${shopInfo?.data?.shopName}. Discover exclusive products and trusted names in various categories to meet all your shopping needs.`,
+    };
+  } catch (error) {
+    return {
+      title: "Brands",
+      description:
+        "Browse top brands and discover exclusive products across various categories. Find trusted names and quality items for every need.",
+    };
+  }
+}
 
 const BrandsPage = async ({ params }: { params: { page: number } }) => {
   const brandData = await fetchData({
