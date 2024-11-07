@@ -1,6 +1,26 @@
 import { orderHistoryMenus } from "@/constants/orderHistory.constants";
 import React from "react";
 import OrderHistoryMenu from "./_components/OrderHistoryMenu";
+import { fetchData } from "@/actions/fetchData";
+
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Order History | My Profile | ${shopInfo?.data?.shopName}`,
+      description: `View your order history at ${shopInfo?.data?.shopName}. Track past orders, view details, and monitor your shopping activity from your profile.`,
+    };
+  } catch (error) {
+    return {
+      title: "Order History | My Profile",
+      description:
+        "View your order history. Track past orders, view details, and monitor your shopping activity from your profile.",
+    };
+  }
+}
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (

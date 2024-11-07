@@ -2,12 +2,30 @@ import { dateFormat } from "@/utils/dateFormat";
 import Image from "next/image";
 import React from "react";
 import { server_url } from "@/constants";
-import { fetchProtectedData } from "@/actions/fetchData";
+import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import EditReviewBtn from "../_components/EditReviewBtn";
-import Pagination from "@/Components/Pagination";
 import { noReview } from "@/assets";
 import StarRating from "@/Components/StarRating";
 import { formatDateShorting } from "@/constants/formateDate.constants";
+
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Edit Review | ${shopInfo?.data?.shopName}`,
+      description: `Update your product review for items purchased at ${shopInfo?.data?.shopName}. Refine your feedback to help others make informed decisions.`,
+    };
+  } catch (error) {
+    return {
+      title: "Edit Review",
+      description:
+        "Update your product review to refine your feedback and help others make informed decisions.",
+    };
+  }
+}
 
 const AllReviewHistory = async () => {
   // <== Get me to get all reviews by user id ==>
@@ -21,7 +39,7 @@ const AllReviewHistory = async () => {
   const allReviews = await fetchProtectedData({
     route: "/review",
     query: `reviewStatus=Reviewed&reviewer.userId=${userId}&sortBy=updatedAt`,
-    limit: 20,
+    limit: 40,
   });
 
   return (
