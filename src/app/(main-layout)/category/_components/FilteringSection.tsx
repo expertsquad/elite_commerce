@@ -17,6 +17,7 @@ export interface IFilteringSectionProps {
   widget: IWidgetCard;
   currency?: string;
   colors?: string[];
+  productMaxPrice?: number;
 }
 const FilteringSection = ({
   categories,
@@ -25,11 +26,16 @@ const FilteringSection = ({
   widget,
   currency,
   colors,
+  productMaxPrice,
 }: IFilteringSectionProps) => {
   const redirectPath = "/category/filtered-products";
   return (
     <div className="">
-      <PriceRange currency={currency} redirectPath={redirectPath} />
+      <PriceRange
+        currency={currency}
+        redirectPath={redirectPath}
+        productMaxPrice={productMaxPrice}
+      />
       <span className="bg-black-10 h-0.5 w-full flex my-5 md:my-[30px]"></span>
       <div>
         <CategoryCard

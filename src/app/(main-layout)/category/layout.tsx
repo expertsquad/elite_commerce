@@ -1,6 +1,5 @@
 import React from "react";
 import Breadcrumb from "../../../Components/BreadCrumb/Breadcrumb";
-import SortingSection from "./_components/FilterBySelection";
 import FilterModal from "./_components/FilterModal";
 import { fetchData } from "@/actions/fetchData";
 import FilteringSection from "./_components/FilteringSection";
@@ -37,6 +36,9 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   const colors = await fetchData({ route: "/product/colors" });
   const widgetData = await getWidget();
   const currency = await getCurrency();
+  const productMaxPrice = await fetchData({
+    route: "/product/max-price",
+  });
 
   return (
     <div>
@@ -53,6 +55,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
             brands={brands?.data}
             widget={widgetData}
             currency={currency}
+            productMaxPrice={productMaxPrice?.data}
           />
         </div>
         <div className=" gap-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3">
@@ -67,6 +70,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
               widget={widgetData}
               currency={currency}
               colors={colors?.data}
+              productMaxPrice={productMaxPrice?.data}
             />
           </div>
         </div>

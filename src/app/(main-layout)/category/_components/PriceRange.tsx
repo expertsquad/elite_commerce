@@ -7,15 +7,17 @@ import Slider from "react-slider";
 const PriceRange = ({
   redirectPath,
   currency,
+  productMaxPrice,
 }: {
   redirectPath: string;
   currency?: string;
+  productMaxPrice?: number;
 }) => {
   const router = useRouter();
   const pathname = usePathname();
 
   const minValue = 0;
-  const maxValue = 20000;
+  const maxValue = productMaxPrice || 500000;
 
   const { filter, setFilter } = useContext(FilterContext);
   const [values, setValues] = useState([minValue, maxValue]);

@@ -60,6 +60,9 @@ const Layout = async ({
     query: "sortBy=averageRating",
   });
   const brands = await fetchData({ route: "/brand", limit: 10 });
+  const productMaxPrice = await fetchData({
+    route: "/product/max-price",
+  });
   const widgetData = await getWidget();
   const currency = await getCurrency();
 
@@ -74,6 +77,7 @@ const Layout = async ({
           brands={brands?.data}
           widget={widgetData}
           currency={currency}
+          productMaxPrice={productMaxPrice?.data}
         />
       </div>
       <div className="gap-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3">
@@ -85,6 +89,7 @@ const Layout = async ({
             params={params}
             widget={widgetData}
             currency={currency}
+            productMaxPrice={productMaxPrice?.data}
           />
         </div>
         <div className="lg:col-span-3 md:grid-cols-2 md:col-span-2">
