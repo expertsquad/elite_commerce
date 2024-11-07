@@ -17,6 +17,7 @@ import { CartContext } from "@/Provider/CartProvider";
 import { updateWishlist } from "@/utils/updateWishlist.utils";
 import { updateCart } from "@/utils/updateCart.utils";
 import QuickViewButton from "../../brands/_components/QuickViewButton";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 const WishlistedItems = ({
   product,
@@ -96,7 +97,7 @@ const WishlistedItems = ({
                       }}
                     ></div>
                     <span className="text-xs">
-                      {product?.variant?.variantName}
+                      {formatProductVariantName(product?.variant?.variantName)}
                     </span>
                   </>
                 )}

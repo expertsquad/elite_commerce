@@ -18,6 +18,7 @@ import { CartContext } from "@/Provider/CartProvider";
 import { updateWishlist } from "@/utils/updateWishlist.utils";
 import { updateCart } from "@/utils/updateCart.utils";
 import { productEmptyState } from "@/assets";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
   const [show, setShow] = React.useState(false);
@@ -116,7 +117,9 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                                       }}
                                     ></div>
                                     <span className="text-xs">
-                                      {product?.variant?.variantName}
+                                      {formatProductVariantName(
+                                        product?.variant?.variantName
+                                      )}
                                     </span>
                                   </div>
                                 )}

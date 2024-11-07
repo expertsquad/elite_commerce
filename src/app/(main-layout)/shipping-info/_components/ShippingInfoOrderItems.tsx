@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
 import { calculateDiscountAndBulkOrderPrice } from "@/utils/calculateDiscountAndBulkOrderPrice";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 export const ShippingInfoOrderItems = ({
   product,
@@ -87,7 +88,7 @@ export const ShippingInfoOrderItems = ({
                       }}
                     ></div>
                     <span className="text-xs">
-                      {product?.variant?.variantName}
+                      {formatProductVariantName(product?.variant?.variantName)}
                     </span>
                   </>
                 )}

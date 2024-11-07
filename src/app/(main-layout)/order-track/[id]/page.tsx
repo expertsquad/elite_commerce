@@ -25,6 +25,7 @@ export async function generateMetadata() {
 
 const OrderTrackPage = async ({ params }: { params: { id: string } }) => {
   const response = await fetchData({ route: `/online-order/${params?.id}` });
+  console.log(response);
   const currencyIcon = await fetchData({
     route: "/settings/shop",
   });

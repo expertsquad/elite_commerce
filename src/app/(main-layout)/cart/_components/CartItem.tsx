@@ -1,4 +1,3 @@
-import StarRating from "@/Components/StarRating";
 import { server_url } from "@/constants";
 import { IconX } from "@tabler/icons-react";
 import Image from "next/image";
@@ -6,6 +5,7 @@ import IncreaseDecreaseCartItems from "../../brands/_components/IncreaseDecrease
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { updateCart } from "@/utils/updateCart.utils";
 import { calculateDiscountAndBulkOrderPrice } from "@/utils/calculateDiscountAndBulkOrderPrice";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 export const CartItem = ({
   product,
@@ -68,7 +68,7 @@ export const CartItem = ({
                     }}
                   ></div>
                   <span className="text-xs">
-                    {product?.variant?.variantName}
+                    {formatProductVariantName(product?.variant?.variantName)}
                   </span>
                 </>
               )}

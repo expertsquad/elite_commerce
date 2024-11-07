@@ -8,6 +8,7 @@ const OrderSection = async ({ getMe }: { getMe: any }) => {
   const orderItems = await fetchProtectedData({
     route: "/online-order",
     query: "buyer.userId=" + getMe?.data?._id,
+    limit: 15,
   });
 
   const currency = await getCurrency();

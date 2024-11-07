@@ -3,6 +3,7 @@ import { IProduct } from "@/interfaces/product.interface";
 import { server_url } from "@/constants";
 import { IconMinus, IconPlus, IconX } from "@tabler/icons-react";
 import { calculateDiscountAndBulkOrderPrice } from "@/utils/calculateDiscountAndBulkOrderPrice";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 export const QuickOrderItem = ({
   product,
@@ -70,7 +71,7 @@ export const QuickOrderItem = ({
                     }}
                   ></div>
                   <span className="text-[10px] md:text-xs">
-                    {product?.variant?.variantName}
+                    {formatProductVariantName(product?.variant?.variantName)}
                   </span>
                 </div>
               )}

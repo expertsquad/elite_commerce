@@ -7,6 +7,7 @@ import { server_url } from "@/constants";
 import TotalSubTotalShippingFee from "./_components/TotalSubTotalShippingFee";
 import { IconX } from "@tabler/icons-react";
 import { orderPlacedDesign } from "@/assets";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 export async function generateMetadata() {
   try {
@@ -48,7 +49,6 @@ const OrderSuccessfull = async ({
       quickOrder ? `/quick-order/${params?.id}` : `/online-order/${params?.id}`
     }`,
   });
-  console.log(response);
   const currencyIcon = await fetchData({
     route: "/settings/shop",
   });
@@ -101,6 +101,23 @@ const OrderSuccessfull = async ({
                         ? item?.variant?.discountedPrice
                         : item?.variant?.sellingPrice}
                     </span>
+                    {item?.variant &&
+                      item?.variant?.variantName !== "Not specified" && (
+                        <>
+                          <span className="text-black-10">|</span>
+                          <div
+                            className="h-3 w-3 rounded-full"
+                            style={{
+                              backgroundColor: item?.variant?.variantName,
+                            }}
+                          ></div>
+                          <span className="text-xs">
+                            {formatProductVariantName(
+                              item?.variant?.variantName
+                            )}
+                          </span>
+                        </>
+                      )}
                   </div>
                   <span>
                     {currencyIcon?.data?.currencySymbol}

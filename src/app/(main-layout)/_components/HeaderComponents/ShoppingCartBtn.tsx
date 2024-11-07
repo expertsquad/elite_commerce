@@ -22,6 +22,7 @@ import { getShippingFee } from "@/utils/getShippingFee";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { productEmptyState } from "@/assets";
 import { calculateDiscountAndBulkOrderPrice } from "@/utils/calculateDiscountAndBulkOrderPrice";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 const ShoppingCartBtn = ({
   currencyIcon,
@@ -238,7 +239,7 @@ export const QuickOrderItem = ({
                       }}
                     ></div>
                     <span className="text-xs">
-                      {product?.variant?.variantName}
+                      {formatProductVariantName(product?.variant?.variantName)}
                     </span>
                   </>
                 )}
