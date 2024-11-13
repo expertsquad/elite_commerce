@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
 import { calculateDiscountAndBulkOrderPrice } from "@/utils/calculateDiscountAndBulkOrderPrice";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 export const ShippingInfoOrderItems = ({
   product,
@@ -53,7 +54,7 @@ export const ShippingInfoOrderItems = ({
     <div className="flex  justify-between gap-3.5">
       <div className="flex md:items-center gap-3.5">
         <div>
-          <div className="bg-gradient-primary-light p-1.5 rounded-[10px]">
+          <div className="bg-image-background p-1.5 rounded-[10px]">
             <div className="relative md:w-[70px] md:h-[70px] w-[50px] h-[50px]">
               <Image
                 alt="product"
@@ -87,7 +88,7 @@ export const ShippingInfoOrderItems = ({
                       }}
                     ></div>
                     <span className="text-xs">
-                      {product?.variant?.variantName}
+                      {formatProductVariantName(product?.variant?.variantName)}
                     </span>
                   </>
                 )}
@@ -95,7 +96,7 @@ export const ShippingInfoOrderItems = ({
                 <>
                   <span className="text-black-10">|</span>
                   <span className="text-secondary text-[10px] md:text-xs">
-                    {discountPercentage}%
+                    {discountPercentage}% OFF
                   </span>
                 </>
               )}

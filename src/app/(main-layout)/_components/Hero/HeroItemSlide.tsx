@@ -36,7 +36,7 @@ const HeroItemSlide = ({
         className="h-[280px] md:h-[450px] w-full flex transition-transform ease-out duration-500"
         style={{ transform: `translateX(-${curr * 100}%)` }}
       >
-        {sliderArray?.map((item: any, index: any) => (
+        {sliderArray?.map((item: any, index: number) => (
           <div key={index} className="w-full flex-shrink-0">
             <Carousel item={item} currencyIcon={currencyIcon} />
           </div>
@@ -44,12 +44,14 @@ const HeroItemSlide = ({
       </div>
 
       <button
+        aria-label="prev"
         onClick={prev}
         className="p-1.5 rounded-full shadow bg-white/80 hover:text-white duration-150 group-hover:-ml-3 delay-100 absolute top-1/2 opacity-0 -left-4 hover:bg-gradient-primary-light group-hover/slider:opacity-100 group-hover/slider:left-1"
       >
         <IconChevronLeft size={18} stroke={2} />
       </button>
       <button
+        aria-label="next"
         onClick={next}
         className="p-1.5 rounded-full shadow bg-white/80 hover:text-white duration-150 group-hover:-ml-3 delay-100 absolute top-1/2 opacity-0 -right-4 hover:bg-gradient-primary-light group-hover/slider:opacity-100 group-hover/slider:right-1"
       >

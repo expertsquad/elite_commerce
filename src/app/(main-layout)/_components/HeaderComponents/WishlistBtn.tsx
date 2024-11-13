@@ -18,6 +18,7 @@ import { CartContext } from "@/Provider/CartProvider";
 import { updateWishlist } from "@/utils/updateWishlist.utils";
 import { updateCart } from "@/utils/updateCart.utils";
 import { productEmptyState } from "@/assets";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
   const [show, setShow] = React.useState(false);
@@ -44,7 +45,6 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
     setRefetch((prev) => prev + 1);
     setRefetchCart && setRefetchCart((prev) => prev + 1);
   };
-  console.log(wishlistProducts[3]);
   return (
     <Fragment>
       <button className="relative" onClick={() => setShow(true)}>
@@ -77,11 +77,11 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                 {wishlistProducts?.map(
                   (product: IWishlistProduct, index: number) => (
                     <div
-                      key={product?._id}
+                      key={index}
                       className="flex justify-between gap-3.5 border-b border-black-10 pb-5 mb-1"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="bg-gradient-primary-light md:p-3 p-1.5 rounded-[10px]">
+                        <div className="bg-image-background md:p-3 p-1.5 rounded-[10px]">
                           <div className="relative md:w-[70px] md:h-[70px]  w-[50px] h-[50px]">
                             <Image
                               alt="product"
@@ -117,7 +117,9 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                                       }}
                                     ></div>
                                     <span className="text-xs">
-                                      {product?.variant?.variantName}
+                                      {formatProductVariantName(
+                                        product?.variant?.variantName
+                                      )}
                                     </span>
                                   </div>
                                 )}
@@ -127,6 +129,7 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                                     <span className="text-black-10">|</span>
                                     <span className="text-secondary text-[10px] md:text-xs">
                                       {product?.variant?.discountPercentage}%
+                                      OFF
                                     </span>
                                   </>
                                 )}
@@ -180,7 +183,12 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                           </div>
                         ) : (
                           <button
-                            className="flex items-center justify-center gap-x-1 bg-gradient-primary hover:bg-gradient-primary-reverse hover:text-white px-2 py-1 rounded-md text-white"
+                            disabled={product?.variant?.inStock < 1}
+                            className={`flex items-center justify-center gap-x-1 bg-gradient-primary hover:bg-gradient-primary-reverse hover:text-white px-2 py-1 rounded-md text-white ${
+                              product?.variant?.inStock < 1
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
+                            }`}
                             onClick={() =>
                               handleAddToCart({
                                 product,
@@ -202,7 +210,7 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                 <Link
                   href="/wishlist"
                   onClick={() => setShow(false)}
-                  className={`py-3 relative rounded-full group overflow-hidden font-medium bg-gradient-primary-light text-black inline-block ${
+                  className={`py-3 relative rounded-full group overflow-hidden font-medium bg-image-background text-black inline-block ${
                     wishlistProducts?.length === 0
                       ? "pointer-events-none cursor-not-allowed opacity-50 select-none"
                       : ""
@@ -216,7 +224,7 @@ const WishlistBtn = ({ currencyIcon }: { currencyIcon: string }) => {
                 <Link
                   href="/"
                   onClick={() => setShow(false)}
-                  className="py-3 relative rounded-full group overflow-hidden font-medium bg-gradient-primary-light text-black inline-block"
+                  className="py-3 relative rounded-full group overflow-hidden font-medium bg-image-background text-black inline-block"
                 >
                   <span className="absolute bottom-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-gradient-primary group-hover:h-full opacity-90"></span>
                   <span className="relative flex items-center justify-center gap-x-1 group-hover:text-white">

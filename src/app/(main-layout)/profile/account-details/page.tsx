@@ -1,7 +1,26 @@
 import React from "react";
 import PersonalInformation from "./_components/PersonalInformation";
 import Link from "next/link";
-import { fetchProtectedData } from "@/actions/fetchData";
+import { fetchData, fetchProtectedData } from "@/actions/fetchData";
+
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Personal Information | My Profile | ${shopInfo?.data?.shopName}`,
+      description: `Manage your personal information, update contact details, and keep your account secure at ${shopInfo?.data?.shopName}. Ensure your profile is up-to-date for a seamless shopping experience.`,
+    };
+  } catch (error) {
+    return {
+      title: "Account Details | My Profile",
+      description:
+        "Manage your personal information, update contact details, and keep your account secure. Ensure your profile is up-to-date for a seamless shopping experience.",
+    };
+  }
+}
 
 const page = async () => {
   const getMe = await fetchProtectedData({

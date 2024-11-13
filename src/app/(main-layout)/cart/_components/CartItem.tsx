@@ -1,4 +1,3 @@
-import StarRating from "@/Components/StarRating";
 import { server_url } from "@/constants";
 import { IconX } from "@tabler/icons-react";
 import Image from "next/image";
@@ -6,6 +5,7 @@ import IncreaseDecreaseCartItems from "../../brands/_components/IncreaseDecrease
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { updateCart } from "@/utils/updateCart.utils";
 import { calculateDiscountAndBulkOrderPrice } from "@/utils/calculateDiscountAndBulkOrderPrice";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 export const CartItem = ({
   product,
@@ -31,7 +31,7 @@ export const CartItem = ({
   return (
     <div className="flex items-center md:cart-item-data border-b pb-5 border-black-10">
       <div className="flex items-center gap-x-2.5 w-full">
-        <div className="bg-gradient-primary-light p-1.5 rounded-[10px]">
+        <div className="bg-image-background p-1.5 rounded-[10px]">
           <div className="relative w-[50px] md:h-[50px] h-[60px]">
             <Image
               alt="product"
@@ -68,7 +68,7 @@ export const CartItem = ({
                     }}
                   ></div>
                   <span className="text-xs">
-                    {product?.variant?.variantName}
+                    {formatProductVariantName(product?.variant?.variantName)}
                   </span>
                 </>
               )}
@@ -76,7 +76,7 @@ export const CartItem = ({
               <>
                 <span className="text-black-10">|</span>
                 <span className="text-secondary text-[10px] md:text-xs">
-                  {discountPercentage}%
+                  {discountPercentage}% OFF
                 </span>
               </>
             )}

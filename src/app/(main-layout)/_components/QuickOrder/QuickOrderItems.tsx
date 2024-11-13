@@ -3,6 +3,7 @@ import { IProduct } from "@/interfaces/product.interface";
 import { server_url } from "@/constants";
 import { IconMinus, IconPlus, IconX } from "@tabler/icons-react";
 import { calculateDiscountAndBulkOrderPrice } from "@/utils/calculateDiscountAndBulkOrderPrice";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 export const QuickOrderItem = ({
   product,
@@ -28,7 +29,7 @@ export const QuickOrderItem = ({
     <div className="flex justify-between gap-3.5">
       <div className="flex md:items-center gap-3.5 w-full">
         <div>
-          <div className="bg-gradient-primary-light p-1.5 rounded-lg">
+          <div className="bg-image-background p-1.5 rounded-lg">
             <div className="relative shrink-0 w-[55px] h-[55px]">
               {product?.productPhotos?.length > 0 && (
                 <Image
@@ -70,7 +71,7 @@ export const QuickOrderItem = ({
                     }}
                   ></div>
                   <span className="text-[10px] md:text-xs">
-                    {product?.variant?.variantName}
+                    {formatProductVariantName(product?.variant?.variantName)}
                   </span>
                 </div>
               )}
@@ -91,7 +92,7 @@ export const QuickOrderItem = ({
                 {currencyIcon}
                 {discountedPrice}
               </span>
-              <div className="flex items-center gap-x-1.5 bg-gradient-primary-light rounded-2xl px-1 py-0.5">
+              <div className="flex items-center gap-x-1.5 bg-image-background rounded-2xl px-1 py-0.5">
                 <span
                   className="bg-gradient-primary text-white rounded-full font-bold cursor-pointer"
                   onClick={onDecreaseQuantity}

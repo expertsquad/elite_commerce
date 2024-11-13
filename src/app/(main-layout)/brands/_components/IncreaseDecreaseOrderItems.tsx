@@ -73,7 +73,7 @@ const IncreaseDecreaseOrderItems = ({ product }: { product: ICartProduct }) => {
     product?.orderQuantity >= product?.variant?.inStock;
 
   return (
-    <div className="bg-gradient-primary-light rounded-full px-1 py-[3px] flex items-center gap-2">
+    <div className="bg-image-background rounded-full px-1 py-[3px] flex items-center gap-2">
       <button
         className="bg-gradient-primary rounded-full p-1"
         onClick={handleDecreaseQuantity}

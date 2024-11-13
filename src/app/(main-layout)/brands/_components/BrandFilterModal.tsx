@@ -15,6 +15,7 @@ const BrandFilterModal = ({
   params,
   widget,
   currency,
+  productMaxPrice,
 }: {
   categories: ICategory[];
   products: IProduct[];
@@ -22,6 +23,7 @@ const BrandFilterModal = ({
   params: { slug: string };
   widget: IWidgetCard;
   currency?: string;
+  productMaxPrice?: number;
 }) => {
   const [show, setShow] = useState(false);
   return (
@@ -49,6 +51,7 @@ const BrandFilterModal = ({
             params={params}
             widget={widget}
             currency={currency}
+            productMaxPrice={productMaxPrice}
           />
         </Modal>
       )}

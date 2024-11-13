@@ -10,16 +10,16 @@ const SocialMediaConnect = async () => {
     route: "/settings/footer",
   });
   const socialMedias = footer?.data?.socialMedias;
-  const currentYear = new Date().getFullYear();
+
   return (
     <div className="flex flex-col gap-2.5 ">
       <div className="flex items-center md:justify-normal justify-center gap-3.5">
-        {socialMedias?.map((socialMedia: ISocialMedia) => {
+        {socialMedias?.map((socialMedia: ISocialMedia, index: number) => {
           return (
             <Link
               target="_blank"
               href={`${socialMedia?.link}` || ""}
-              key={socialMedia?._position}
+              key={index}
               className="relative md:w-[30px] md:h-[30px] w-[26px] h-[26px] rounded-full overflow-hidden border border-black-10 transition-all duration-700 hover:rotate-[360deg]"
             >
               <Image
@@ -33,7 +33,7 @@ const SocialMediaConnect = async () => {
         })}
       </div>
       <span className="text-black text-[10px] md:text-sm">
-        {footer?.data?.copyright} © {currentYear}. All Rights Reserved
+        {footer?.data?.copyright}
       </span>
     </div>
   );

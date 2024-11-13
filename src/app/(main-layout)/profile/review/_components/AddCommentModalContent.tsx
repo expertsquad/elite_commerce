@@ -25,7 +25,6 @@ const AddCommentModalContent = ({
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  console.log(photos);
 
   const handleStarClick = (index: number, e: React.MouseEvent) => {
     e.preventDefault();
@@ -33,12 +32,10 @@ const AddCommentModalContent = ({
     setRating((prev) => (prev === index + 1 ? 0 : index + 1));
   };
 
-  const handleFilesChange = (index: number, files: FileList) => {
-    if (files[0]) {
-      const updatedPhotos = [...photos];
-      updatedPhotos[index] = files[0];
-      setPhotos(updatedPhotos);
-    }
+  // <== Handle file upload ==>
+  const handleFilesChange = (files: FileList) => {
+    const newPhotos = Array.from(files);
+    setPhotos((prevPhotos) => [...prevPhotos, ...newPhotos]);
   };
 
   const handleAddCommentSubmit = async (e: React.FormEvent) => {
@@ -49,12 +46,9 @@ const AddCommentModalContent = ({
     const formData = new FormData();
     formData.append("comment", comment);
     formData.append("rating", rating.toString());
-
-    const filteredPhotos = photos.filter((photo) => photo !== undefined);
-
-    filteredPhotos.forEach((file: File) => {
-      formData.append("reviewPhotos", file);
-    });
+    for (let i = 0; i < photos.length; i++) {
+      formData.append("reviewPhotos", photos[i]);
+    }
 
     try {
       const response = await updateDataMutation({
@@ -63,21 +57,21 @@ const AddCommentModalContent = ({
         dataType: "formData",
         method: "PUT",
       });
-      console.log(response);
       if (response?.success) {
         toast.success(response?.message);
         revalidateTagAction("/review");
+        revalidateTagAction("profile/review");
         revalidateTagAction(`/review/${id}`);
+        revalidateTagAction(`/products/[slug]`);
         router.push("/profile/review/all-review-history");
         setAddComments(false);
       } else {
         toast.error(response?.message);
-        console.error(response?.message);
       }
     } catch (error) {
-      console.error(error);
       setError("An error occurred while submitting your review.");
     } finally {
+      router.push("/profile/review/all-review-history");
       setAddComments(false);
       setLoading(false);
     }
@@ -140,7 +134,7 @@ const AddCommentModalContent = ({
                 key={index}
                 name={`reviewPhotos${index}`}
                 multiple={true}
-                onChange={(e) => handleFilesChange(index, e.target.files!)}
+                onChange={(e) => handleFilesChange(e.target.files!)}
                 maxSize={5}
                 accept="image/*"
               />

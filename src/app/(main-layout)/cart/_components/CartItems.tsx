@@ -63,27 +63,34 @@ const CartItems = ({
   );
   return (
     <Fragment>
-      <div className="flex flex-col gap-5 mt-7">
-        <span className="block text-base">
-          Buy{" "}
-          <span className="text-gradient-primary font-semibold">
-            {currencyIcon + shippingCharge?.freeShippingMinOrderAmount} {""}
+      <div className="flex flex-col gap-y-3 mt-7">
+        {totalPrice > shippingCharge?.freeShippingMinOrderAmount ? (
+          <div className="text-sm text-positive">
+            Congratulations! You&apos;ve unlocked free shipping🚚{" "}
+          </div>
+        ) : (
+          <span className="text-sm flex items-center gap-x-1">
+            Buy
+            <span className="text-gradient-primary">
+              {currencyIcon}
+              {shippingCharge?.freeShippingMinOrderAmount}
+            </span>
+            more to get
+            <span className="text-gradient-primary font-semibold">
+              Freeship
+            </span>
+            🔥
           </span>
-          more to get
-          <span className="text-gradient-primary font-semibold">
-            {" " + "Freeship"}
-          </span>
-          🔥
-        </span>
+        )}
         <ProgressBar progressValue={progressValue} />
       </div>
       <div className="flex md:flex-row flex-col gap-5 mt-7">
         {cartProducts?.length ? (
           <div className=" flex flex-col gap-5 md:border border-black-10 md:p-[30px] md:basis-4/6 rounded-[10px]">
-            {cartProducts?.map((product: ICartProduct) => {
+            {cartProducts?.map((product: ICartProduct, index: number) => {
               return (
                 <CartItem
-                  key={product?._id}
+                  key={index}
                   product={product}
                   setRefetch={setRefetch}
                   currencyIcon={currencyIcon}
@@ -147,7 +154,7 @@ const CartItems = ({
 
                 <QuickOrderButton
                   product={cartProducts}
-                  buttonStyle="text-black-80 !uppercase !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] flex items-center justify-center gap-x-1 px-5 w-full py-3.5 bg-gradient-primary-light hover:bg-gradient-primary rounded-full hover:text-white !text-sm"
+                  buttonStyle="text-black-80 !uppercase !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] flex items-center justify-center gap-x-1 px-5 w-full py-3.5 bg-image-background hover:bg-gradient-primary rounded-full hover:text-white !text-sm"
                   buttonIcon={
                     <IconBolt size={17} stroke={1.5} className="fill-white" />
                   }

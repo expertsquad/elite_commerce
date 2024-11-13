@@ -6,7 +6,7 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 import React, { useContext, useEffect } from "react";
-import WishlishedProducts from "../../_(.)wishlist/_components/WishlishedProducts";
+import WishlishedProducts from "./WishlishedProducts";
 import { IWishlistProduct } from "@/interfaces/wishlist.interface";
 import { WishlistContext } from "@/Provider/WishlistProvider";
 import { getWishlistRemoteAndLocalDataAndMerge } from "@/helpers/getWishlistRemoteAndLocalDataAndMerge";

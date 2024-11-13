@@ -10,7 +10,7 @@ const PaymentOption = ({ paymentMethod }: { paymentMethod: any }) => {
       ? orderData?.payment?.paymentMethodName
       : ""
   );
-
+  console.log(selectedOption);
   // Handler for selecting a payment option
   const handleSelectCOD = (option: string) => {
     setSelectedOption(option);
@@ -51,9 +51,9 @@ const PaymentOption = ({ paymentMethod }: { paymentMethod: any }) => {
       </h3>
 
       <div className="flex items-center justify-center gap-4 flex-col w-full">
-        {paymentMethod?.map((payment: any) => (
+        {paymentMethod?.map((payment: any, index: number) => (
           <PaymentOptionCard
-            key={payment?._id}
+            key={index}
             name={payment?.paymentMethodName}
             title={payment?.paymentMethodName}
             onSelect={() => handleSelectCOD(payment?.paymentMethodName)}

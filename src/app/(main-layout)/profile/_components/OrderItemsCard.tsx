@@ -5,7 +5,7 @@ import Image from "next/image";
 import React from "react";
 import OrderCardHeader from "./OrderCardHeader";
 import AddOrEditReview from "./AddOrEditReview";
-import Link from "next/link";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 const OrderItemsCard = ({
   orderItem,
@@ -16,6 +16,12 @@ const OrderItemsCard = ({
   currency?: string;
   orderStatus?: string;
 }) => {
+  const orderItemPrice = orderItem?.variant?.discountedPrice
+    ? orderItem?.variant?.discountedPrice
+    : orderItem?.variant?.sellingPrice;
+
+  const subTotalPrice = orderItemPrice * orderItem?.orderQuantity;
+
   return (
     <div className="text-black-50 flex gap-5 py-5 w-full border-b border-black-10">
       {/* flex first div */}
@@ -49,7 +55,9 @@ const OrderItemsCard = ({
                       backgroundColor: orderItem?.variant?.variantName,
                     }}
                   ></div>
-                  <span>{orderItem?.variant?.variantName}</span>
+                  <span className="text-sm">
+                    {formatProductVariantName(orderItem?.variant?.variantName)}
+                  </span>
                 </div>
               )}
             <div>|</div>
@@ -61,14 +69,11 @@ const OrderItemsCard = ({
             <div className="flex items-center justify-between">
               <p>
                 {currency}
-                {orderItem?.variant?.discountedPrice
-                  ? orderItem?.variant?.discountedPrice?.toString()
-                  : orderItem?.variant?.sellingPrice?.toString()}{" "}
-                x {orderItem.orderQuantity}
+                {orderItemPrice?.toString()}
               </p>
               <strong className="text-gradient-primary">
                 {currency}
-                {orderItem?.subTotalPayable}
+                {subTotalPrice?.toString()}
               </strong>
             </div>
           </div>
@@ -94,7 +99,7 @@ const OrderItemsCard = ({
           />
           <OrderCardHeader
             title="Sub Total"
-            value={`${currency}${orderItem?.subTotalPayable?.toString()}`}
+            value={`${currency}${subTotalPrice?.toString()}`}
             className="text-lg font-bold text-gradient-primary"
           />
           {orderItem?.isReviewed ? (

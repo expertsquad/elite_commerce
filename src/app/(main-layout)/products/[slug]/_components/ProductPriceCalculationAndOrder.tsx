@@ -87,6 +87,7 @@ const ProductPriceCalculationAndOrder = ({
                 orderQuantity: isCarted ? isCarted?.orderQuantity : quantity,
                 variant: variant || product?.variants[0],
               }}
+              variant={variant ? variant : product?.variants[0]}
               buttonStyle="text-white bg-gradient-secondary hover:bg-gradient-primary-reverse flex items-center justify-center gap-x-1.5 py-2.5 rounded-md w-full text-base"
               buttonIcon={
                 <IconBolt size={20} className="fill-white" stroke={1} />
@@ -99,10 +100,13 @@ const ProductPriceCalculationAndOrder = ({
           <BuyNowSingleProduct
             accessToken={accessToken || ""}
             product={product}
-            className="bg-gradient-primary-reverse hover:bg-gradient-primary"
+            className={`bg-gradient-primary-reverse hover:bg-gradient-primary ${
+              variant && variant?.inStock < 1 && " cursor-not-allowed"
+            }`}
             selectedVariant={
               variant ? variant?.variantName : product?.variants[0]?.variantName
             }
+            disabled={variant ? variant.inStock < 1 : false}
           />
         </div>
       </div>

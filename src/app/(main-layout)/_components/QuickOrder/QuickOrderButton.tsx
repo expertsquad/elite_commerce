@@ -1,7 +1,7 @@
 "use client";
 import React, { Fragment, useState } from "react";
 import QuickOrderModal from "./QuickOrderModal";
-import { IProduct } from "@/interfaces/product.interface";
+import { IProduct, IProductVariant } from "@/interfaces/product.interface";
 import { ICartProduct } from "@/interfaces/cart.interface";
 
 interface IQuickOrderButtonProps {
@@ -11,6 +11,7 @@ interface IQuickOrderButtonProps {
   buttonIcon?: any;
   currencyIcon?: string;
   shippingAmount?: number;
+  variant?: IProductVariant;
 }
 
 const QuickOrderButton = ({
@@ -20,6 +21,7 @@ const QuickOrderButton = ({
   buttonText,
   currencyIcon,
   shippingAmount,
+  variant,
 }: IQuickOrderButtonProps) => {
   const [show, setShow] = useState(false);
 
@@ -32,8 +34,12 @@ const QuickOrderButton = ({
   return (
     <Fragment>
       <button
+        aria-label="quick order"
+        disabled={variant && variant?.inStock < 1 ? true : false}
         onClick={(e) => handleQuickOrderButton(e)}
-        className={`${buttonStyle}`}
+        className={`${buttonStyle} ${
+          variant && variant?.inStock < 1 ? "cursor-not-allowed" : ""
+        }`}
       >
         {buttonIcon && <span>{buttonIcon}</span>}
         {buttonText}

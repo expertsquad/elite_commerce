@@ -7,35 +7,46 @@ import ProductEmptyState from "../../_components/ProductEmptyState";
 import { getCurrency } from "@/utils/getCurrency";
 
 export async function generateMetadata({
+  params,
   searchParams,
 }: {
+  params: { slug: string };
   searchParams: { category: string };
 }) {
   try {
-    const response = await fetchData({
-      route: "/product",
-      query: `category.categoryName=${searchParams?.category}`,
+    const category = await fetchData({
+      route: `/category/slug/${searchParams?.category?.toLowerCase()}`,
     });
 
-    if (!response?.data) {
-      return {
-        title: "Not Found",
-        description: "The page you're looking for does not exist!",
-      };
-    }
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+    const metaTitle = category?.data?.categoryName || "Category";
 
-    const productNames = response.data.map(
-      (product: IProduct) => product?.productName
-    );
+    const ogImage = category?.data?.categoryPhoto;
 
     return {
-      title: `Products in ${searchParams?.category}: ${productNames} | Elite Commerece`,
-      description: `Browse through our selection of products in the ${searchParams?.category} category.`,
+      title: `${metaTitle} | ${shopInfo?.data?.shopName}`,
+      description:
+        "Explore a wide range of products in this category, curated to meet your needs and preferences.",
+      openGraph: {
+        title: `${metaTitle}`,
+        description:
+          "Explore a wide range of products in this category, curated to meet your needs and preferences.",
+        images: [
+          {
+            url: ogImage,
+            width: 100,
+            height: 100,
+            alt: `Category OG Image`,
+          },
+        ],
+      },
     };
   } catch (error) {
     return {
-      title: "Not Found",
-      description: "The page you're looking for does not exist!",
+      title: "Category Not Found",
+      description: "The category you're looking for does not exist!",
     };
   }
 }

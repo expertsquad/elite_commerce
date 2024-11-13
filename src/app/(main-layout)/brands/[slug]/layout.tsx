@@ -1,10 +1,50 @@
 import React from "react";
-import SortingSection from "../../category/_components/FilterBySelection";
 import BrandFilterSection from "../_components/BrandFilterSection";
 import BrandFilterModal from "../_components/BrandFilterModal";
 import { fetchData } from "@/actions/fetchData";
 import { getWidget } from "@/utils/getWidget";
 import { getCurrency } from "@/utils/getCurrency";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    const brandInfo = await fetchData({
+      route: `/brand/slug/${params.slug.toLowerCase()}`,
+    });
+
+    const ogImage = brandInfo?.data?.brandPhoto;
+
+    return {
+      title: `${brandInfo?.data?.brandName || "Brand"} | ${
+        shopInfo?.data?.shopName
+      }`,
+      description: `Discover the exclusive ${brandInfo?.data?.brandName} collection at ${shopInfo?.data?.shopName}. Explore high-quality products designed to meet your needs and enhance your lifestyle.`,
+      openGraph: {
+        images: [
+          {
+            url: ogImage,
+            width: 100,
+            height: 100,
+            alt: "Brand Photo",
+          },
+        ],
+      },
+    };
+  } catch (error) {
+    return {
+      title: "Brand",
+      description:
+        "Discover premium products from top brands. Explore high-quality items tailored to meet your needs and enhance your lifestyle.",
+    };
+  }
+}
 
 const Layout = async ({
   children,
@@ -20,6 +60,9 @@ const Layout = async ({
     query: "sortBy=averageRating",
   });
   const brands = await fetchData({ route: "/brand", limit: 10 });
+  const productMaxPrice = await fetchData({
+    route: "/product/max-price",
+  });
   const widgetData = await getWidget();
   const currency = await getCurrency();
 
@@ -34,6 +77,7 @@ const Layout = async ({
           brands={brands?.data}
           widget={widgetData}
           currency={currency}
+          productMaxPrice={productMaxPrice?.data}
         />
       </div>
       <div className="gap-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3">
@@ -45,6 +89,7 @@ const Layout = async ({
             params={params}
             widget={widgetData}
             currency={currency}
+            productMaxPrice={productMaxPrice?.data}
           />
         </div>
         <div className="lg:col-span-3 md:grid-cols-2 md:col-span-2">

@@ -6,6 +6,25 @@ import OrderItemsRightSection from "./_components/OrderItemsRightSection";
 import ShippinInfoTotalAmountCard from "./_components/ShippinInfoTotalAmountCard";
 import { fetchCountryData } from "@/actions/fetchCountryData";
 
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Shipping Information | ${shopInfo?.data?.shopName}`,
+      description: `Learn about the shipping options, delivery times, and rates at ${shopInfo?.data?.shopName}. Find all the details to ensure a smooth delivery for your order.`,
+    };
+  } catch (error) {
+    return {
+      title: "Shipping Information",
+      description:
+        "Learn about our shipping options, delivery times, and rates. Find all the details to ensure a smooth delivery for your order.",
+    };
+  }
+}
+
 const page = async () => {
   const defaultAddress = await fetchProtectedData({
     route: "/user-address/me",

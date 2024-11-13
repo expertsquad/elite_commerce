@@ -3,6 +3,25 @@ import Breadcrumb from "../../../Components/BreadCrumb/Breadcrumb";
 import { fetchData } from "@/actions/fetchData";
 import CartItems from "./_components/CartItems";
 
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Shopping Cart | ${shopInfo?.data?.shopName}`,
+      description: `View and manage items in your cart at ${shopInfo?.data?.shopName}. Easily review your selected products and proceed to checkout when ready.`,
+    };
+  } catch (error) {
+    return {
+      title: "Shopping Cart",
+      description:
+        "View and manage items in your cart. Easily review your selected products and proceed to checkout when ready.",
+    };
+  }
+}
+
 const CartView = async () => {
   const productsData = await fetchData({
     route: "/product",

@@ -4,8 +4,28 @@ import OrderInformation from "./_components/OrderInformation";
 import OrderSummary from "./_components/OrderSummary";
 import OrderedItems from "./_components/OrderedItems";
 
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Track Your Order | ${shopInfo?.data?.shopName}`,
+      description: `Easily track your order status at ${shopInfo?.data?.shopName}. Stay updated on your orders progress and estimated delivery date.`,
+    };
+  } catch (error) {
+    return {
+      title: "Track Your Order",
+      description:
+        "Easily track your order status. Stay updated on your order’s progress and estimated delivery date.",
+    };
+  }
+}
+
 const OrderTrackPage = async ({ params }: { params: { id: string } }) => {
   const response = await fetchData({ route: `/online-order/${params?.id}` });
+  console.log(response);
   const currencyIcon = await fetchData({
     route: "/settings/shop",
   });

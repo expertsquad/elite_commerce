@@ -4,6 +4,25 @@ import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import ShippingAddress from "./_components/ShippingAddress";
 import { fetchCountryData } from "@/actions/fetchCountryData";
 
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Address Book | My Profile | ${shopInfo?.data?.shopName}`,
+      description: `Manage your saved addresses for a quicker checkout at ${shopInfo?.data?.shopName}. Add, edit, or remove addresses to keep your profile information up-to-date.`,
+    };
+  } catch (error) {
+    return {
+      title: "Address Book | My Profile",
+      description:
+        "Manage your saved addresses for a quicker checkout. Add, edit, or remove addresses to keep your profile information up-to-date.",
+    };
+  }
+}
+
 const page = async () => {
   // Get data
   const shippingAddress = await fetchProtectedData({

@@ -47,7 +47,11 @@ export default function Error({
           !
         </div>
       </div>
-      <button onClick={() => reset()} className="text-gradient-primary">
+      <button
+        aria-label="Try again"
+        onClick={() => reset()}
+        className="text-gradient-primary"
+      >
         Try again
       </button>
       <p className="text-sm text-black-50">

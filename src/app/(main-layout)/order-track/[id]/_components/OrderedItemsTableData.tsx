@@ -6,6 +6,7 @@ import Image from "next/image";
 import React from "react";
 import OrderCancelModal from "./OrderCancelModal";
 import { fetchData } from "@/actions/fetchData";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 const OrderedItemsTableData = async ({
   orderItems,
@@ -19,7 +20,6 @@ const OrderedItemsTableData = async ({
   const currencyIcon = await fetchData({
     route: "/settings/shop",
   });
-  console.log(orderItems);
 
   return (
     <section>
@@ -76,13 +76,17 @@ const OrderedItemsTableData = async ({
                           }}
                         ></div>
                         <span className="text-xs ml-1">
-                          {item?.variant?.variantName}
+                          {formatProductVariantName(item?.variant?.variantName)}
                         </span>
                       </>
                     )}
                   {item?.variant?.discountPercentage && (
                     <>
-                      <span className="text-black-10">|</span>
+                      {item?.variant &&
+                        item?.variant?.variantName !== "Not specified" && (
+                          <span className="text-black-10">|</span>
+                        )}
+
                       <span className="text-secondary text-[10px] md:text-xs">
                         {item?.variant?.discountPercentage}% OFF
                       </span>

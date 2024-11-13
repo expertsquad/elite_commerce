@@ -8,6 +8,25 @@ import { formatDate } from "@/constants/formateDate.constants";
 import { fetchData } from "@/actions/fetchData";
 import { orderPlacedDesign } from "@/assets";
 
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Order Successful | ${shopInfo?.data?.shopName}`,
+      description: `Thank you for shopping with ${shopInfo?.data?.shopName}! Your order has been placed successfully. We are preparing your items for delivery.`,
+    };
+  } catch (error) {
+    return {
+      title: "Order Successful",
+      description:
+        "Thank you for your order! Your purchase has been completed successfully, and we are preparing your items for delivery.",
+    };
+  }
+}
+
 interface Params {
   id: string;
 }

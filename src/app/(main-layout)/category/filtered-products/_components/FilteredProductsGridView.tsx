@@ -1,5 +1,5 @@
 import ProductEmptyState from "@/app/(main-layout)/_components/ProductEmptyState";
-import AnimatedLoading from "@/Components/AnimatedLoading";
+import CustomLoading from "@/Components/CustomLoader";
 import Pagination from "@/Components/Pagination";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct, IProductApiResponse } from "@/interfaces/product.interface";
@@ -22,7 +22,7 @@ const FilteredProductsGridView = ({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <AnimatedLoading />
+        <CustomLoading />
       </div>
     );
   }

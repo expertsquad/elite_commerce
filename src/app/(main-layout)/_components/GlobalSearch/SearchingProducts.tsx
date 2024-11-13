@@ -66,7 +66,7 @@ const SearchingProducts = ({
             <div
               key={product?._id}
               onClick={() => handleProductView(product)}
-              className="flex items-center gap-x-5 mb-5 cursor-pointer border-b border-black-10 pb-5 transition-all duration-300 hover:bg-gradient-primary-light"
+              className="flex items-center gap-x-5 cursor-pointer border-b border-black-10 transition-all duration-300 hover:bg-gradient-primary-light py-2"
             >
               <div className="bg-gradient-primary-light w-[70px] h-[70px] shrink-0 relative rounded-md">
                 <Image
@@ -102,7 +102,7 @@ const SearchingProducts = ({
                     <>
                       <span className="text-black-10 mx-0.5">|</span>
                       <span className="text-secondary text-[10px] md:text-xs">
-                        {product?.variants[0]?.discountPercentage}%
+                        {product?.variants[0]?.discountPercentage}% OFF
                       </span>
                     </>
                   )}

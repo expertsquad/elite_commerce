@@ -8,8 +8,8 @@ import SmallMenuItem from "./SmallMenuItem";
 const BottomNavSmallDevice = () => {
   return (
     <div className="fixed bottom-0 z-20 h-16 md:hidden flex bg-white w-full justify-around items-center text-sm">
-      {bottomNavMenus?.map((menu) => (
-        <SmallMenuItem menu={menu} key={menu?.label} />
+      {bottomNavMenus?.map((menu, index) => (
+        <SmallMenuItem menu={menu} key={index} />
       ))}
       <Link
         href="/profile/dashboard"

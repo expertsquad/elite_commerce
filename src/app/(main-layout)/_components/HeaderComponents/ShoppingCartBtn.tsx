@@ -20,9 +20,9 @@ import OrderSummery from "./OrderSummery";
 import { calculatePercentageToFreeShipping } from "@/utils/calculatePercentageToFreeShipping";
 import { getShippingFee } from "@/utils/getShippingFee";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
-import { Button } from "@/Components/Buttons";
 import { productEmptyState } from "@/assets";
 import { calculateDiscountAndBulkOrderPrice } from "@/utils/calculateDiscountAndBulkOrderPrice";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 const ShoppingCartBtn = ({
   currencyIcon,
@@ -110,10 +110,10 @@ const ShoppingCartBtn = ({
 
             {cartProducts?.length > 0 && (
               <div className="flex flex-col gap-y-5 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(360px,45vh))] md:h-[calc(100vh-max(440px,40vh))] pb-10">
-                {cartProducts?.map((product: ICartProduct) => {
+                {cartProducts?.map((product: ICartProduct, index: number) => {
                   return (
                     <QuickOrderItem
-                      key={product?._id}
+                      key={index}
                       product={product}
                       setRefetch={setRefetch}
                       currencyIcon={currencyIcon}
@@ -204,7 +204,7 @@ export const QuickOrderItem = ({
     <div className="flex justify-between gap-3.5">
       <div className="flex md:items-center gap-3.5">
         <div>
-          <div className="bg-gradient-primary-light p-1.5 rounded-[10px]">
+          <div className="bg-image-background p-1.5 rounded-[10px]">
             <div className="relative md:w-[70px] md:h-[70px] w-[50px] h-[60px]">
               <Image
                 alt="product"
@@ -239,7 +239,7 @@ export const QuickOrderItem = ({
                       }}
                     ></div>
                     <span className="text-xs">
-                      {product?.variant?.variantName}
+                      {formatProductVariantName(product?.variant?.variantName)}
                     </span>
                   </>
                 )}
@@ -247,7 +247,7 @@ export const QuickOrderItem = ({
                 <>
                   <span className="text-black-10">|</span>
                   <span className="text-secondary text-[10px] md:text-xs">
-                    {discountPercentage}%
+                    {discountPercentage}% OFF
                   </span>
                 </>
               )}

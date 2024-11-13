@@ -7,6 +7,26 @@ import { server_url } from "@/constants";
 import TotalSubTotalShippingFee from "./_components/TotalSubTotalShippingFee";
 import { IconX } from "@tabler/icons-react";
 import { orderPlacedDesign } from "@/assets";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
+
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Order Successful | ${shopInfo?.data?.shopName}`,
+      description: `Thank you for shopping with ${shopInfo?.data?.shopName}! Your order has been placed successfully. We are preparing your items for delivery.`,
+    };
+  } catch (error) {
+    return {
+      title: "Order Successful",
+      description:
+        "Thank you for your order! Your purchase has been completed successfully, and we are preparing your items for delivery.",
+    };
+  }
+}
 
 interface Params {
   id: string;
@@ -81,6 +101,23 @@ const OrderSuccessfull = async ({
                         ? item?.variant?.discountedPrice
                         : item?.variant?.sellingPrice}
                     </span>
+                    {item?.variant &&
+                      item?.variant?.variantName !== "Not specified" && (
+                        <>
+                          <span className="text-black-10">|</span>
+                          <div
+                            className="h-3 w-3 rounded-full"
+                            style={{
+                              backgroundColor: item?.variant?.variantName,
+                            }}
+                          ></div>
+                          <span className="text-xs">
+                            {formatProductVariantName(
+                              item?.variant?.variantName
+                            )}
+                          </span>
+                        </>
+                      )}
                   </div>
                   <span>
                     {currencyIcon?.data?.currencySymbol}

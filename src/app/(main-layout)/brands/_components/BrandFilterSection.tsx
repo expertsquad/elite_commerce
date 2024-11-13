@@ -18,6 +18,7 @@ const BrandFilterSection = ({
   params,
   widget,
   currency,
+  productMaxPrice,
 }: {
   categories: ICategory[];
   products: IProduct[];
@@ -25,6 +26,7 @@ const BrandFilterSection = ({
   params: { slug?: string };
   widget: IWidgetCard;
   currency?: string;
+  productMaxPrice?: number;
 }) => {
   const redirectPath = `/brands/${params?.slug || ""}/filtered-brand-products`;
   return (
@@ -36,7 +38,10 @@ const BrandFilterSection = ({
       />
       <span className="bg-black-10 h-0.5 w-full flex my-5 md:my-[30px]"></span>
 
-      <PriceRangeFilterForBrand redirectPath={redirectPath} />
+      <PriceRangeFilterForBrand
+        redirectPath={redirectPath}
+        productMaxPrice={productMaxPrice}
+      />
       <span className="bg-black-10 h-0.5 w-full flex my-5 md:my-[30px]"></span>
       <TopRatingProductCard products={products} currency={currency} />
       <span className="bg-black-10 h-0.5 w-full flex my-5 md:my-[30px]"></span>

@@ -15,9 +15,13 @@ const ProductCartBtn = ({ product }: IProductCardProps) => {
     updateCart({ actionType: "add", product: product });
     setRefetch && setRefetch((prev) => prev + 1);
   };
+
   return (
     <button
+      disabled={product?.variants[0]?.inStock < 1}
       className={`${
+        product?.variants[0]?.inStock < 1 && "opacity-50 cursor-not-allowed"
+      } ${
         isProductInCart
           ? "bg-gradient-primary text-white rounded-full transition-all duration-300 p-2"
           : "group-hover/productcard:bg-gradient-primary group-hover/productcard:text-white text-black-50 rounded-full transition-all duration-300 p-2"

@@ -78,7 +78,7 @@ const OrderSummery = ({
         {isQuickOrderActive && (
           <QuickOrderButton
             product={products}
-            buttonStyle="!uppercase text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] flex items-center justify-center gap-2.5 px-5 w-full py-3.5 bg-gradient-primary-light hover:bg-gradient-primary hover:text-white rounded-lg "
+            buttonStyle="!uppercase text-black-80 !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] flex items-center justify-center gap-2.5 px-5 w-full py-3.5 bg-image-background hover:bg-gradient-primary hover:text-white rounded-lg "
             buttonIcon={<IconBolt size={18} />}
             buttonText="QUICK ORDER"
             currencyIcon={currencyIcon}
