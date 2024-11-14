@@ -4,6 +4,8 @@ import React from "react";
 import { IProduct } from "@/interfaces/product.interface";
 import { server_url } from "@/constants";
 import ProductPriceCalculationAndOrder from "../../products/[slug]/_components/ProductPriceCalculationAndOrder";
+import useGetSingleProduct from "@/utils/useGetSingleProduct";
+import useCustomStyles from "@/utils/useCustomStyles";
 
 const ProductQuickViewModal = ({
   show,
@@ -22,6 +24,8 @@ const ProductQuickViewModal = ({
   isQuickOrderActive?: boolean;
   accessToken: string;
 }) => {
+  const { singleProduct } = useGetSingleProduct(product?._id);
+  useCustomStyles(singleProduct?.description || "");
   return (
     <Modal
       show={show}
@@ -73,10 +77,15 @@ const ProductQuickViewModal = ({
               shippingAmount={shippingAmount}
               isQuickOrderActive={isQuickOrderActive}
             />
-            {product?.description ? (
+            {singleProduct?.description ? (
               <div className="flex flex-col gap-5 mt-5 overflow-y-auto scrollbar-y-remove h-[300px]">
                 <span className="font-semibold text-2xl">Description</span>
-                {/* <p className="">{product?.description}</p> */}
+                <div
+                  id="preview"
+                  dangerouslySetInnerHTML={{
+                    __html: singleProduct?.description,
+                  }}
+                />
               </div>
             ) : (
               ""

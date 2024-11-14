@@ -31,7 +31,7 @@ const LargeDeviceMegaMenu = async () => {
       <div className="flex gap-5 items-center">
         <Logo />
         <ul className="flex items-center gap-3 z-20">
-          <li className="transition-all duration-300 group/categorybtn">
+          <li className="transition-all duration-300 group/categorybtn list-none">
             <Link
               href="/category"
               className="flex items-center py-2 px-3 rounded-full group-hover/categorybtn:bg-[#E6E6E6]"
@@ -52,7 +52,7 @@ const LargeDeviceMegaMenu = async () => {
           {/* ======================== menus ========================== */}
 
           {mainMenus.map((menu, index) => (
-            <MainMenuItem menu={menu} key={index} />
+            <MainMenuItem parentClassName="list-none" menu={menu} key={index} />
           ))}
         </ul>
       </div>
