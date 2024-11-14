@@ -10,7 +10,7 @@ const TermsAndConditions = async () => {
       <h1 className="text-black text-[clamp(20px,2.5vw,40px)] font-semibold">
         Terms And Conditions{" "}
       </h1>
-      <DescriptionReader data={res} />
+      <DescriptionReader description={res?.data?.data} />
     </div>
   );
 };

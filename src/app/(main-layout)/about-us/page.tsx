@@ -15,7 +15,7 @@ const AboutUs = async () => {
       <h1 className="text-black text-[clamp(20px,2.5vw,40px)] font-semibold">
         About The Elite Commerce
       </h1>
-      <DescriptionReader data={res} />
+      <DescriptionReader description={res?.data?.data} />
     </div>
   );
 };

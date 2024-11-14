@@ -48,7 +48,6 @@ const ProductsBySubCategory = async ({
 }: {
   params: { subcategoryname: string };
 }) => {
-  console.log(params?.subcategoryname);
   const response = await fetchData({
     route: "/product",
     query: `category.subcategory.subcategoryName=${params?.subcategoryname}`,

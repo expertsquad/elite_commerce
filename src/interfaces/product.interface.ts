@@ -58,7 +58,7 @@ export interface IProduct {
   variant: IProductVariant;
   orderQuantity: number;
   shortDescription?: string;
-  description: string;
+  description: string | any;
   seo: {
     metaTitle: string;
     metaDescription: string;

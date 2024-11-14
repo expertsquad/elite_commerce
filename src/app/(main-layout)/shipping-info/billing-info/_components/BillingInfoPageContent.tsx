@@ -62,8 +62,6 @@ const BillingInfoPageContent = ({
       payment: orderData?.payment,
     };
 
-    console.log(orderDataToSubmit, "Order data submit");
-
     // Handle address mutations without blocking other actions
     try {
       if (

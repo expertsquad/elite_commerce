@@ -6,6 +6,7 @@ import { server_url } from "@/constants";
 import ProductPriceCalculationAndOrder from "../../products/[slug]/_components/ProductPriceCalculationAndOrder";
 import useGetSingleProduct from "@/utils/useGetSingleProduct";
 import useCustomStyles from "@/utils/useCustomStyles";
+import DescriptionReader from "@/Components/DescriptionReader";
 
 const ProductQuickViewModal = ({
   show,
@@ -77,7 +78,7 @@ const ProductQuickViewModal = ({
               shippingAmount={shippingAmount}
               isQuickOrderActive={isQuickOrderActive}
             />
-            {singleProduct?.description ? (
+            {/* {singleProduct?.description ? (
               <div className="flex flex-col gap-5 mt-5 overflow-y-auto scrollbar-y-remove h-[300px]">
                 <span className="font-semibold text-2xl">Description</span>
                 <div
@@ -89,7 +90,11 @@ const ProductQuickViewModal = ({
               </div>
             ) : (
               ""
-            )}
+            )} */}
+            <DescriptionReader
+              className="mt-5"
+              description={singleProduct?.description?.data}
+            />
           </div>
         </div>
       </div>

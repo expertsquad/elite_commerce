@@ -20,7 +20,6 @@ async function fetchMetadata(): Promise<Metadata> {
     const shopInfo = await fetchData({
       route: "/settings/shop",
     });
-    // console.log(shopInfo?.data?.shopName);
     const data = response?.data;
     return {
       title: data?.metaTitle || `Home | ${shopInfo?.data?.shopName}`,

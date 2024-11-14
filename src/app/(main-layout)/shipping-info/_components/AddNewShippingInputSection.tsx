@@ -108,13 +108,12 @@ const AddNewShippingInputSection = ({
     if (stateSearchInputValue) {
       const fetchData = async () => {
         try {
-          console.log(stateSearchInputValue);
           const res = await fetchCountryDataClientSide({
             route: "/state",
             query: `country_name=${country}&name=${stateSearchInputValue}`,
             limit: 10,
           });
-          console.log(res);
+
           if (res?.success) {
             const stateData = res?.data?.map((s: any) => s?.name);
             setStateDatas(stateData?.length ? stateData : ["Data Not Found"]);

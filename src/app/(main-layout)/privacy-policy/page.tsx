@@ -9,7 +9,7 @@ const PrivacyPolicy = async () => {
       <h1 className="text-black text-[clamp(20px,2.5vw,40px)] font-semibold">
         Privacy Policy{" "}
       </h1>
-      <DescriptionReader data={res} />
+      <DescriptionReader description={res?.data?.data} />
     </div>
   );
 };
