@@ -8,7 +8,6 @@ export async function generateMetadata() {
     const shopInfo = await fetchData({
       route: "/settings/shop",
     });
-
     return {
       title: `Address Book | My Profile | ${shopInfo?.data?.shopName}`,
       description: `Manage your saved addresses for a quicker checkout at ${shopInfo?.data?.shopName}. Add, edit, or remove addresses to keep your profile information up-to-date.`,
@@ -31,7 +30,6 @@ const page = async () => {
   const country = await fetchProtectedData({
     route: "/settings/shop",
   });
-
   // this is from country data api
   // get all state by country name
   const stateByCountryName = await fetchCountryData({
@@ -41,7 +39,7 @@ const page = async () => {
   // get all city by country name
   const cityByStateName = await fetchCountryData({
     route: `/city/` + country?.data?.country,
-    limit: 1000,
+    limit: 100,
   });
 
   return (

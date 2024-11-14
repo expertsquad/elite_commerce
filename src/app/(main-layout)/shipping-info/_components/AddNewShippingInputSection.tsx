@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CustomInput from "../../../../Components/CustomInput";
 import { IAddress } from "@/interfaces/address.interface";
-import CustomDropdown from "@/Components/CustomDropdown";
 import CustomDropdownSearchToApiFetch from "@/Components/CustomDropdownSearchToApiFetch";
 import toast from "react-hot-toast";
 import { fetchCountryDataClientSide } from "@/actions/fetchCountryDataClientSide";
@@ -140,9 +139,6 @@ const AddNewShippingInputSection = ({
           value={newAddress?.firstName}
           onChange={handleInputChange}
           required
-          // inputStyle={
-          //   newAddress?.firstName === "" ? " border border-danger" : ""
-          // }
         />
         <CustomInput
           label="Last Name"
@@ -152,9 +148,6 @@ const AddNewShippingInputSection = ({
           value={newAddress?.lastName}
           onChange={handleInputChange}
           required
-          // inputStyle={
-          //   newAddress?.lastName === "" ? " border border-danger" : ""
-          // }
         />
 
         <CustomInput
@@ -165,9 +158,6 @@ const AddNewShippingInputSection = ({
           value={newAddress?.phoneNumber}
           onChange={handleInputChange}
           required
-          // inputStyle={
-          //   newAddress?.phoneNumber === "" ? " border border-danger" : ""
-          // }
         />
 
         <div className="opacity-50 pointer-events-none">
@@ -212,7 +202,6 @@ const AddNewShippingInputSection = ({
           value={newAddress?.zipCode}
           onChange={handleInputChange}
           required
-          // inputStyle={newAddress?.zipCode === "" ? " border border-danger" : ""}
         />
         <CustomInput
           label="Company Name (Optional)"
@@ -232,9 +221,6 @@ const AddNewShippingInputSection = ({
             value={newAddress?.streetAddress}
             onChange={handleInputChange}
             required
-            // inputStyle={
-            //   newAddress?.streetAddress == "" ? " border border-danger" : ""
-            // }
           />
         </div>
       </div>

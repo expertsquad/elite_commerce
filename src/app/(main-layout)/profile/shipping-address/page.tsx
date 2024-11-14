@@ -42,7 +42,7 @@ const page = async () => {
   // get all city by country name
   const cityByStateName = await fetchCountryData({
     route: `/city/` + country?.data?.country,
-    limit: 1000,
+    limit: 100,
   });
 
   return (

@@ -138,9 +138,6 @@ const AddNewBillingAddress = ({
           value={newAddress?.firstName}
           onChange={handleInputChange}
           required
-          // inputStyle={
-          //   newAddress?.firstName === "" ? " border border-danger" : ""
-          // }
         />
         <CustomInput
           label="Last Name"
@@ -150,9 +147,6 @@ const AddNewBillingAddress = ({
           value={newAddress?.lastName}
           onChange={handleInputChange}
           required
-          // inputStyle={
-          //   newAddress?.lastName === "" ? " border border-danger" : ""
-          // }
         />
 
         <CustomInput
@@ -163,9 +157,6 @@ const AddNewBillingAddress = ({
           value={newAddress?.phoneNumber}
           onChange={handleInputChange}
           required
-          // inputStyle={
-          //   newAddress?.phoneNumber === "" ? " border border-danger" : ""
-          // }
         />
         <div className="opacity-50 pointer-events-none">
           <CustomInput
@@ -209,7 +200,6 @@ const AddNewBillingAddress = ({
           value={newAddress?.zipCode}
           onChange={handleInputChange}
           required
-          // inputStyle={newAddress?.zipCode === "" ? " border border-danger" : ""}
         />
         <CustomInput
           label="Company Name (Optional)"
@@ -228,10 +218,6 @@ const AddNewBillingAddress = ({
             value={newAddress?.streetAddress}
             onChange={handleInputChange}
             required
-
-            // inputStyle={
-            //   newAddress?.streetAddress == "" ? " border border-danger" : ""
-            // }
           />
         </div>
       </div>

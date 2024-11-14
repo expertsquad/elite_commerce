@@ -5,9 +5,11 @@ import { IAddress } from "@/interfaces/address.interface";
 import CustomDropdown from "@/Components/CustomDropdown";
 import { postDataMutation } from "@/actions/postDataMutation";
 import { updateDataMutation } from "@/actions/updateDataMutation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomLoader from "@/Components/CustomLoader";
 import toast from "react-hot-toast";
+import CustomDropdownSearchToApiFetch from "@/Components/CustomDropdownSearchToApiFetch";
+import { fetchCountryDataClientSide } from "@/actions/fetchCountryDataClientSide";
 
 const ShippingAddress = ({
   shippingAddress,
@@ -20,23 +22,91 @@ const ShippingAddress = ({
   states: any;
   cities: any;
 }) => {
-  const [state, setState] = useState(
-    shippingAddress?.state ? shippingAddress?.state : "Select State"
-  );
-  const [city, setCity] = useState(
-    shippingAddress?.city ? shippingAddress?.city : "Select City"
-  );
   const [loading, setLoading] = useState(false);
+  const [city, setCity] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const [cityDatas, setCityDatas] = useState(
+    cities?.data?.map((c: any) => c?.name)
+  );
+  const [stateDatas, setStateDatas] = useState(
+    states?.data?.map((s: any) => s?.name)
+  );
+  const [citySearchInputValue, setCitySearchInputValue] = useState("");
+  const [stateSearchInputValue, setStateSearchInputValue] = useState("");
 
-  const stateByCountryName = states?.data?.map((s: any) => s.name);
-  const cityByCountryName = cities?.data?.map((s: any) => s.name);
+  useEffect(() => {
+    const handleClientSiteCityFetch = async (
+      country: string,
+      selectedState: string,
+      citySearchInputValue: string
+    ) => {
+      try {
+        // fatching data from country api by city and country name
+        if (citySearchInputValue) {
+          const res = await fetchCountryDataClientSide({
+            route: "/city",
+            query: `name=${citySearchInputValue}&country_name=${country}`,
+            limit: 10,
+          });
+
+          if (res?.success) {
+            const cityData = res?.data?.map((c: any) => c?.name);
+            setCityDatas(cityData?.length ? cityData : ["No Data Found"]);
+          }
+        } else if (selectedState) {
+          // fatching data from country api by state and country name
+          const res = await fetchCountryDataClientSide({
+            route: "/city",
+            query: `country_name=${country}&state_name=${selectedState}`,
+            limit: 10,
+          });
+
+          if (res?.success) {
+            const cityData = res?.data?.map((c: any) => c?.name);
+            setCityDatas(cityData?.length ? cityData : ["No Data Found"]);
+          }
+        }
+      } catch (error) {
+        toast.error("Error fetching city data");
+      }
+    };
+
+    handleClientSiteCityFetch(country, selectedState, citySearchInputValue);
+  }, [selectedState, country, citySearchInputValue]);
+
+  // getting state data by country and stete name
+
+  useEffect(() => {
+    if (stateSearchInputValue) {
+      const fetchData = async () => {
+        try {
+          console.log(stateSearchInputValue);
+          const res = await fetchCountryDataClientSide({
+            route: "/state",
+            query: `country_name=${country}&name=${stateSearchInputValue}`,
+            limit: 10,
+          });
+          console.log(res);
+          if (res?.success) {
+            const stateData = res?.data?.map((s: any) => s?.name);
+            setStateDatas(stateData?.length ? stateData : ["Data Not Found"]);
+          }
+        } catch (error) {
+          toast.error("Error fetching state data");
+        }
+      };
+
+      fetchData();
+    }
+  }, [stateSearchInputValue, country]);
+
   // handle submit
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData(e.target);
     // state appended
-    formData.append("state", state);
+    formData.append("state", selectedState);
     // city appended
     formData.append("city", city);
     // country appended
@@ -124,23 +194,30 @@ const ShippingAddress = ({
             readonly
           />
         </div>
-        <CustomDropdown
-          data={stateByCountryName}
-          onClick={(value) => setState(value)}
+        <CustomDropdownSearchToApiFetch
+          data={stateDatas ? stateDatas : ["No Data For This Country"]}
+          onClick={(value) => setSelectedState(value)}
           className="w-full border border-black-10 py-2 rounded-lg px-3 "
           itemClassName="py-1 hover:bg-black-10"
-          defaultValue={state}
-          label="State"
+          defaultValue={
+            shippingAddress?.state ? shippingAddress?.state : "Select State"
+          }
+          label="Select State"
           searchInput={true}
+          setSearchInputValue={setStateSearchInputValue}
         />
-        <CustomDropdown
-          data={cityByCountryName}
+
+        <CustomDropdownSearchToApiFetch
+          data={cityDatas ? cityDatas : ["No Data For This Country"]}
           onClick={(value) => setCity(value)}
           className="w-full border border-black-10 py-2 rounded-lg px-3 "
           itemClassName="py-1 hover:bg-black-10"
-          defaultValue={city}
-          label="City"
+          defaultValue={
+            shippingAddress?.city ? shippingAddress?.city : "Select City"
+          }
+          label="Select City"
           searchInput={true}
+          setSearchInputValue={setCitySearchInputValue}
         />
         <CustomInput
           label="Zip Code"

@@ -100,7 +100,7 @@ const BillingInfoPageContent = ({
         method: "POST",
         formatted: true,
       });
-      console.log(result);
+
       if (result?.success) {
         toast.success(result?.message);
         localStorage.removeItem("orderInit");
