@@ -33,7 +33,6 @@ const page = async () => {
   const country = await fetchData({
     route: "/settings/shop",
   });
-  // this is from country data api
   // get all state by country name
   const stateByCountryName = await fetchCountryData({
     route: `/state/` + country?.data?.country,
