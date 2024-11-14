@@ -48,12 +48,12 @@ const page = async () => {
     route: `/state/` + shopSetting?.data?.country,
     limit: 1000,
   });
+
   // get all city by country name
   const cityByStateName = await fetchCountryData({
     route: `/city/` + shopSetting?.data?.country,
     limit: 1000,
   });
-
   return (
     <section className=" p-5 lg:p-0 main-container flex w-full gap-5 flex-col md:flex-row mb-10">
       <div className="w-full">

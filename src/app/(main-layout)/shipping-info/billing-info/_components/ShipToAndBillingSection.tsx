@@ -17,6 +17,8 @@ const ShipToAndBillingSection = ({
   const [selectedOption, setSelectedOption] = useState("sameAsShipping");
   const { orderData, setOrderData } = useContext(OrderInitContext);
 
+  console.log(orderData, "afaskldfajs;dlfkasjfd ");
+
   useEffect(() => {
     if (selectedOption === "sameAsShipping") {
       setOrderData((prevData) => ({

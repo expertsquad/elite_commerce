@@ -28,7 +28,6 @@ const BillingInfoPageContent = ({
   cities?: any;
   defaultAddress?: any;
 }) => {
-  console.log(paymentMethod);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { orderData } = useContext(OrderInitContext);
@@ -60,7 +59,10 @@ const BillingInfoPageContent = ({
       shippingAddress,
       billingAddress,
       orderItems,
+      payment: orderData?.payment,
     };
+
+    console.log(orderDataToSubmit, "Order data submit");
 
     // Handle address mutations without blocking other actions
     try {
@@ -98,7 +100,7 @@ const BillingInfoPageContent = ({
         method: "POST",
         formatted: true,
       });
-
+      console.log(result);
       if (result?.success) {
         toast.success(result?.message);
         localStorage.removeItem("orderInit");

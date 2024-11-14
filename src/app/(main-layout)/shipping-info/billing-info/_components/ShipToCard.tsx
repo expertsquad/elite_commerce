@@ -48,9 +48,11 @@ const ShipToCard = () => {
             <p>{shippingAddress?.streetAddress}</p>
             <p>
               {shippingAddress?.country +
-                " " +
+                ", " +
                 shippingAddress?.state +
-                " " +
+                ", " +
+                shippingAddress?.city +
+                ", " +
                 shippingAddress?.zipCode}
             </p>
             <p>{shippingAddress?.phoneNumber}</p>
