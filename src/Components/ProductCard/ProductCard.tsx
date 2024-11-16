@@ -4,7 +4,6 @@ import StarRating from "../StarRating";
 import QuickViewButton from "@/app/(main-layout)/brands/_components/QuickViewButton";
 import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
 import ProductCartBtn from "./ProductCartBtn";
-import ProductPreviewRedirect from "./ProductPreviewRedirect";
 import { getPricingDetails } from "./getPricingDetails";
 import Link from "next/link";
 export interface IProductCardProps {

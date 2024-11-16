@@ -24,8 +24,8 @@ const CategoryAndBrandSmallComponent = ({
           src={`${server_url + brandPhoto}`}
           alt="Prand Photo"
           fill
-          style={{ objectFit: "contain" }}
-          className="inset-0 object-contain"
+          style={{ objectFit: "cover" }}
+          className="inset-0 object-cover"
         />
       </Link>
       <span className="text-black-10">|</span>
