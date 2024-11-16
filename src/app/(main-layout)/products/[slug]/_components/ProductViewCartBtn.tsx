@@ -17,7 +17,7 @@ const ProductViewCartBtn = ({
 }) => {
   const { cartProducts, setRefetch } = useContext(CartContext);
 
-  const isCarted = cartProducts.find(
+  const isCarted = cartProducts?.find(
     (item) =>
       item?._id === product?._id &&
       item?.variant?.variantName === variant?.variantName
@@ -32,10 +32,15 @@ const ProductViewCartBtn = ({
     });
     setRefetch && setRefetch((prev) => prev + 1);
   };
+
+  const isDisabled =
+    variant?.inStock < 1 ||
+    (isCarted && isCarted?.orderQuantity >= variant?.inStock);
+
   return (
     <button
       title="Add To Cart Button"
-      disabled={variant?.inStock < 1}
+      disabled={isDisabled}
       className={`border-gradient-primary p-[1px] rounded-md w-full flex items-center justify-center hover:bg-gradient-primary hover:text-white  transition duration-300 ${
         variant?.inStock < 1 && "opacity-50 cursor-not-allowed"
       }`}

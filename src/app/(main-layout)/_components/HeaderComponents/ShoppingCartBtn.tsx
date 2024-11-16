@@ -73,11 +73,11 @@ const ShoppingCartBtn = ({
         <Modal
           show={show}
           setShow={setShow}
-          className="w-[600px] overflow-y-auto  scrollbar-y-remove"
+          className="w-[600px] overflow-y-auto  scrollbar-y-remove p-5"
           alignment="right"
           showCancelBtnINSmallDevice={show}
         >
-          <div className="p-2">
+          <div className="">
             <span className="font-semibold [font-size:clamp(14px,5vw,18px)]">
               Shopping Cart
             </span>
@@ -125,7 +125,7 @@ const ShoppingCartBtn = ({
 
             {/* if dont have anything in cart it will not show */}
             {cartProducts.length ? (
-              <div className="fixed bottom-0 right-1 md:w-[95%] mx-auto bg-white w-full ">
+              <div className="fixed bottom-0 right-1 mx-auto bg-white w-full px-5">
                 <OrderSummery
                   setshow={setShow}
                   products={cartProducts}
@@ -282,7 +282,7 @@ export const QuickOrderItem = ({
         </button>
         <strong className="font-semibold text-gradient-primary text-base">
           {currencyIcon}
-          {totalPrice}
+          {totalPrice.toFixed(1)}
         </strong>
       </div>
     </div>
