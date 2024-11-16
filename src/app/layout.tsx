@@ -17,15 +17,16 @@ async function fetchMetadata(): Promise<Metadata> {
     const response = await fetchData({
       route: "/settings/home-page-meta",
     });
+    const data = response?.data;
     const shopInfo = await fetchData({
       route: "/settings/shop",
     });
-    const data = response?.data;
+    const shopData = shopInfo.data;
     return {
-      title: data?.metaTitle || `Home | ${shopInfo?.data?.shopName}`,
+      title: data?.metaTitle || `Home | ${shopData.shopName}`,
       description: data?.metaDescription || "Description",
       icons: {
-        icon: `${server_url + data?.metaPhoto}` || `${favicon}`,
+        icon: `${server_url + shopData.favIcon}` || `${favicon}`,
       },
     };
   } catch (error) {
