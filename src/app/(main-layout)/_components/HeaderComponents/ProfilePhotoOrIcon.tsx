@@ -4,6 +4,7 @@ import { UserContext } from "@/Provider/UserProvider";
 import { server_url } from "@/constants";
 import { IconUserCircle } from "@tabler/icons-react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { Fragment, useContext } from "react";
 
@@ -15,7 +16,7 @@ const ProfilePhotoOrIcon = () => {
 
   if (user?.profilePhoto) {
     return (
-      <Fragment>
+      <Link href={"profile/dashboard"}>
         <div className="relative hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-white-transparent shadow-md shadow-black-100 overflow-hidden">
           <Image
             src={server_url + user?.profilePhoto}
@@ -39,15 +40,17 @@ const ProfilePhotoOrIcon = () => {
             Profile
           </span>
         </div>
-      </Fragment>
+      </Link>
     );
   } else {
     return (
-      <GenerateGradientIcon
-        IconComponent={IconUserCircle}
-        stroke={1.2}
-        size={34}
-      />
+      <Link href={"/profile/dashboard"}>
+        <GenerateGradientIcon
+          IconComponent={IconUserCircle}
+          stroke={1.2}
+          size={34}
+        />
+      </Link>
     );
   }
 };
