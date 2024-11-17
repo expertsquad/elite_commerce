@@ -76,12 +76,9 @@ const LargeDeviceMegaMenu = async () => {
           }
         />
         {/* profile */}
-        <Link
-          href="/profile/dashboard"
-          className="flex items-center justify-center"
-        >
+        <div className="flex items-center justify-center">
           <ProfilePhotoOrIcon />
-        </Link>
+        </div>
       </div>
     </nav>
   );
