@@ -104,7 +104,6 @@ const GlobalSearch = ({
                       <ProductCard
                         key={item?._id}
                         product={item}
-                        onClick={() => setShow(false)}
                         currencyIcon={currencyIcon}
                         quickAction={true}
                       />
