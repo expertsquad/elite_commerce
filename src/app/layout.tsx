@@ -21,12 +21,12 @@ async function fetchMetadata(): Promise<Metadata> {
     const shopInfo = await fetchData({
       route: "/settings/shop",
     });
-    const shopData = shopInfo.data;
+    const shopData = shopInfo?.data;
     return {
-      title: data?.metaTitle || `Home | ${shopData.shopName}`,
+      title: data?.metaTitle || `Home | ${shopData?.shopName}`,
       description: data?.metaDescription || "Description",
       icons: {
-        icon: `${server_url + shopData.favIcon}` || `${favicon}`,
+        icon: `${server_url + shopData?.favIcon}` || `${favicon}`,
       },
     };
   } catch (error) {
