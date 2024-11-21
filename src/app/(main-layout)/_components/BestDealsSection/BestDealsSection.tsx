@@ -36,10 +36,10 @@ const BestDealsSection = async () => {
               src={server_url + bestDeals?.data?.firstProductPhoto}
               alt="product photo"
               style={{
-                objectFit: "cover",
+                objectFit: "contain",
               }}
               fill
-              className="inset-0 top-0 left-0 object-cover"
+              className="inset-0 top-0 left-0 object-contain"
             />
           </div>
           <div className="flex flex-col justify-center items-center">
@@ -64,10 +64,10 @@ const BestDealsSection = async () => {
               src={server_url + bestDeals?.data?.secondProductPhoto}
               alt="product photo"
               style={{
-                objectFit: "cover",
+                objectFit: "contain",
               }}
               fill
-              className="inset-0 top-0 left-0 object-cover"
+              className="inset-0 top-0 left-0 object-contain"
             />
           </div>
         </div>
