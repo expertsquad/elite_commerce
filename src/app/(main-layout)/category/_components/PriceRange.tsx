@@ -26,6 +26,7 @@ const PriceRange = ({
     const min = filter?.["variants.sellingPrice[gte]"] || minValue;
     const max = filter?.["variants.sellingPrice[lte]"] || maxValue;
     setValues([min, max]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
   // Custom debounce function
