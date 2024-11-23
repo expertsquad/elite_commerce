@@ -1,7 +1,6 @@
 "use client";
 import { updateProfilePhoto } from "@/actions/updateProfilePhoto";
 import { IconPhotoEdit } from "@tabler/icons-react";
-import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { Fragment, useRef, useState } from "react";
@@ -28,9 +27,10 @@ const AddProfilePhoto = ({ profilePhotoUrl }: { profilePhotoUrl: string }) => {
         router.refresh();
       } else if (!res?.success) {
         toast.error(res?.message);
+        router.refresh();
       }
     } catch (error) {
-      console.error("An error occurred during the update:", error);
+      console.log(error);
     } finally {
       setLoading(false);
     }
