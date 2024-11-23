@@ -22,7 +22,6 @@ const AddCommentModalContent = ({
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [photos, setPhotos] = useState<File[]>([]);
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -40,8 +39,21 @@ const AddCommentModalContent = ({
 
   const handleAddCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!comment.trim() && rating === 0) {
+      toast.error("Rating and comment are required.");
+      return;
+    }
+    if (!comment.trim()) {
+      toast.error("Comment is required.");
+      return;
+    }
+    if (rating === 0) {
+      toast.error("Rating is required.");
+      return;
+    }
+
     setLoading(true);
-    setError(null);
 
     const formData = new FormData();
     formData.append("comment", comment);
@@ -62,14 +74,15 @@ const AddCommentModalContent = ({
         revalidateTagAction("/review");
         revalidateTagAction("profile/review");
         revalidateTagAction(`/review/${id}`);
-        revalidateTagAction(`/products/[slug]`);
+        revalidateTagAction("/products/[slug]");
+        revalidateTagAction("/profile/dashboard");
         router.push("/profile/review/all-review-history");
         setAddComments(false);
       } else {
         toast.error(response?.message);
       }
     } catch (error) {
-      setError("An error occurred while submitting your review.");
+      console.log("An error occurred while submitting your review.");
     } finally {
       router.push("/profile/review/all-review-history");
       setAddComments(false);
@@ -141,8 +154,6 @@ const AddCommentModalContent = ({
             ))}
           </div>
         </div>
-
-        {error && <p className="text-danger text-xs">{error}</p>}
 
         <div className="flex items-center justify-center">
           <button
