@@ -1,5 +1,5 @@
 .container {
-  --animated-element-gap: 100px;
+  --animated-element-gap: 80px;
   position: relative;
   width: 100%;
   padding: 10px 0;

@@ -46,9 +46,9 @@ const TopSmallBanner = ({
           alt="Hero discount item"
           fill
           style={{
-            objectFit: "cover",
+            objectFit: "contain",
           }}
-          className="inset-0 top-0 left-0 object-cover"
+          className="inset-0 top-0 left-0 object-contain"
         />
       </div>
 

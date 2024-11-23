@@ -57,7 +57,7 @@ const ExtraDiscountBasedOnOrder = ({
                 </span>
                 item to get more
                 <span className="font-semibold text-gradient-primary ml-1.5">
-                  {product?.bulk?.discount} extra!
+                  {product?.bulk?.discount}% extra!
                 </span>
               </p>
             )}
