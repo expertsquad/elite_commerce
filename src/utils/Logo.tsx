@@ -6,20 +6,38 @@ import useGetLogo from "./useGetLogo";
 import { server_url } from "@/constants";
 import { logoPlaceholder } from "@/assets";
 
-const Logo = ({ onClick }: { onClick?: () => void }) => {
-  const { logo } = useGetLogo();
+const Logo = () => {
+  const { logo, loading } = useGetLogo();
 
   return (
-    <Link href="/" onClick={onClick}>
-      <div className="relative h-[40px] w-[140px]">
-        <Image
-          src={`${logo ? server_url + logo : server_url + logoPlaceholder}`}
-          fill
-          className="object-contain w-full h-auto inset-0"
-          alt="logo"
-        />
-      </div>
-    </Link>
+    <>
+      {!logo ? (
+        // Skeleton initial state
+        <div className="h-[40px] w-[180px] bg-black-10 animate-pulse rounded"></div>
+      ) : (
+        <>
+          {loading ? (
+            // Skeleton loading state
+            <div className="h-[40px] w-[180px] bg-black-10 animate-pulse rounded"></div>
+          ) : (
+            <Link href="/">
+              <div className="relative h-[40px] w-[180px] ">
+                {" "}
+                {/* Added text-left */}
+                <Image
+                  src={`${
+                    logo ? server_url + logo : server_url + logoPlaceholder
+                  }`}
+                  fill
+                  className="object-contain h-auto"
+                  alt="logo"
+                />
+              </div>
+            </Link>
+          )}
+        </>
+      )}
+    </>
   );
 };
 
