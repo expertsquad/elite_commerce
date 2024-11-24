@@ -22,14 +22,12 @@ const Logo = () => {
           ) : (
             <Link href="/">
               <div className="relative h-[40px] w-[180px] ">
-                {" "}
-                {/* Added text-left */}
                 <Image
                   src={`${
                     logo ? server_url + logo : server_url + logoPlaceholder
                   }`}
                   fill
-                  className="object-contain h-auto"
+                  className="object-contain h-auto border border-danger w-full absolute left-0"
                   alt="logo"
                 />
               </div>
