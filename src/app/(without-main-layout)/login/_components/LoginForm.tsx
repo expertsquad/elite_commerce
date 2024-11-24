@@ -34,7 +34,9 @@ const LoginForm = () => {
     const formData = new FormData(event.currentTarget);
     const result = await loginServerAction(formData);
 
-    if (result?.success) {
+    if (result?.data?.user?.isVerified === false) {
+      router.push("/verify-email");
+    } else if (result?.success) {
       setIsLoading(false);
       setMerging(true);
       // merge remote and local cart items
