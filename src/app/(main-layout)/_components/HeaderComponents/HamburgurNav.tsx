@@ -113,11 +113,7 @@ const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
   const menusNode = (
     <div className="h-full w-full overflow-auto flex flex-col">
       <div className="p-2">
-        <Logo
-          onClick={() => {
-            setShowMenu(false);
-          }}
-        />
+        <Logo />
       </div>
       <button
         className="flex items-center gap-2 py-3 px-5 bg-gradient-primary w-full text-white"

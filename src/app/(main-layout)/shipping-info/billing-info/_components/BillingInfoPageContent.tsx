@@ -10,6 +10,7 @@ import ShipToAndBillingSection from "./ShipToAndBillingSection";
 import OrderSubmitAndTotalAmount from "./OrderSubmitAndTotalAmount";
 import toast from "react-hot-toast";
 import { postDataMutation } from "@/actions/postDataMutation";
+import CustomLoading from "@/Components/CustomLoader";
 
 const BillingInfoPageContent = ({
   currencySymbol,
@@ -65,9 +66,8 @@ const BillingInfoPageContent = ({
     // Handle address mutations without blocking other actions
     try {
       if (
-        shippingAddress?.selectedShippingAddress === "newAddress" &&
-        shippingAddress?.isDefault === true &&
-        !defaultAddress
+        shippingAddress?.selectedShippingAddress === "newAddress" ||
+        (shippingAddress?.isDefault === true && !defaultAddress)
       ) {
         await postDataMutation({
           route: "/user-address/add",
@@ -75,7 +75,7 @@ const BillingInfoPageContent = ({
           formatted: true,
         });
       } else if (
-        shippingAddress?.selectedShippingAddress === "newAddress" &&
+        shippingAddress?.selectedShippingAddress === "newAddress" ||
         shippingAddress?.isDefault === true
       ) {
         await updateDataMutation({
@@ -119,10 +119,10 @@ const BillingInfoPageContent = ({
 
   return (
     <section
-      className={`mb-10 ${
-        loading ? "opacity-50 pointer-events-none" : ""
-      } "p-5 lg:p-0 main-container flex w-full gap-5 flex-col md:flex-row mb-10" `}
+      className={`mb-10 p-5 lg:p-0 main-container flex w-full gap-5 flex-col md:flex-row relative `}
     >
+      {loading && <CustomLoading />}
+
       <div className="w-full">
         <PaymentOption paymentMethod={paymentMethod} />
         <ShipToAndBillingSection
