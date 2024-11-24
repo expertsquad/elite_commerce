@@ -5,7 +5,6 @@ import QuickViewButton from "@/app/(main-layout)/brands/_components/QuickViewBut
 import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
 import ProductCartBtn from "./ProductCartBtn";
 import { getPricingDetails } from "./getPricingDetails";
-import Link from "next/link";
 import ProductPreviewRedirect from "./ProductPreviewRedirect";
 export interface IProductCardProps {
   product: IProduct;

@@ -7,12 +7,12 @@ import ProductPriceCalculationAndOrder from "../../products/[slug]/_components/P
 import useGetSingleProduct from "@/utils/useGetSingleProduct";
 import useCustomStyles from "@/utils/useCustomStyles";
 import DescriptionReader from "@/Components/DescriptionReader";
+import { getAccessTokenFromCookies } from "@/utils/getAccessTokenFromCookies";
 
 const ProductQuickViewModal = ({
   show,
   setShow,
   product,
-  accessToken,
   currencyIcon,
   shippingAmount,
   isQuickOrderActive,
@@ -23,10 +23,12 @@ const ProductQuickViewModal = ({
   currencyIcon: string;
   shippingAmount: number;
   isQuickOrderActive?: boolean;
-  accessToken: string;
 }) => {
   const { singleProduct } = useGetSingleProduct(product?._id);
   useCustomStyles(singleProduct?.description || "");
+
+  const accessTokenValue = getAccessTokenFromCookies();
+  console.log(accessTokenValue);
   return (
     <Modal
       show={show}
@@ -73,7 +75,7 @@ const ProductQuickViewModal = ({
             </div>
             <ProductPriceCalculationAndOrder
               product={product}
-              accessToken={accessToken}
+              accessToken={accessTokenValue}
               currencyIcon={currencyIcon}
               shippingAmount={shippingAmount}
               isQuickOrderActive={isQuickOrderActive}
