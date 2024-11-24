@@ -17,6 +17,7 @@ import {
   handleIncreaseQuickOrderQuantity,
   handleRemoveQuickOrderProduct,
 } from "@/utils/quickorder/quickOrdersFunctions";
+import CustomLoading from "@/Components/CustomLoader";
 
 const QuickOrderModal = ({
   show,
@@ -120,9 +121,12 @@ const QuickOrderModal = ({
         show={show}
         setShow={setShow}
         alignment="center"
-        className="max-h-screen md:w-[768px] lg:w-[950px] w-full overflow-y-scroll scrollbar-y-remove"
+        className={`max-h-screen md:w-[768px] lg:w-[950px] w-full overflow-y-scroll scrollbar-y-remove ${
+          loading && "relative overflow-hidden"
+        }`}
         showCancelBtnINSmallDevice={true}
       >
+        {loading && <CustomLoading />}
         <div className="flex justify-between gap-5 md:flex-row flex-col-reverse md:p-2 p-3.5 relative">
           <div className="flex-1 flex md:border-r border-black-10 flex-col md:pr-5">
             <div className="md:flex flex-col gap-3.5 hidden">

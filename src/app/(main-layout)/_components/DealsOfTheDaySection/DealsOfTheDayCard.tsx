@@ -48,7 +48,7 @@ const DealsOfTheDayCard = ({ deal, index }: IDealsOfThedayCardProps) => {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-3.5 items-center text-center px-5 mt-5">
+        <div className="flex flex-col gap-y-5 items-center text-center px-5 mt-5">
           <h3
             className={`text-2xl font-semibold capitalize line-clamp-2 ${
               index % 2 === 0
@@ -58,7 +58,7 @@ const DealsOfTheDayCard = ({ deal, index }: IDealsOfThedayCardProps) => {
           >
             {deal?.title}
           </h3>
-          <p className="text-base text-black-80 line-clamp-2">
+          <p className="text-base text-black-80 line-clamp-2 md:line-clamp-3">
             {deal?.description}
           </p>
         </div>

@@ -12,6 +12,9 @@ const BestDealsSection = async () => {
     revalidate: 0,
   });
 
+  const currentDate = new Date();
+  const endDate = bestDeals?.data?.endDate;
+  const endDateTime = endDate ? new Date(endDate) : null;
   return (
     <div
       className="w-full"
@@ -52,12 +55,12 @@ const BestDealsSection = async () => {
             <p className="text-center mt-2 text-black-80 [font-size:clamp(14px,2vw,18)] md:line-clamp-3 line-clamp-2 hidden md:block">
               {bestDeals?.data?.description}
             </p>
-            <div className="mt-9">
+            {endDateTime && currentDate <= endDateTime && (
               <CountdownTimer
                 startDate={bestDeals?.data?.startDate}
                 endDate={bestDeals?.data?.endDate}
               />
-            </div>
+            )}
           </div>
           <div className="relative w-[clamp(250px,10vw,350px)] min-h-[250px] max-h-[350px] shrink-0">
             <Image
