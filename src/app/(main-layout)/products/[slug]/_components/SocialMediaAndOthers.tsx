@@ -14,7 +14,6 @@ import React from "react";
 import { ISocialMedia } from "@/interfaces/footer.interface";
 
 const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
-  console.log(socialMedia);
   const [isCopied, setIsCopied] = React.useState<boolean>(false);
   const [copyText, setCopyText] = React.useState<string>("");
 
