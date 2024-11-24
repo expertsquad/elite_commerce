@@ -6,7 +6,7 @@ import { getWidget } from "@/utils/getWidget";
 const CategoriesAndSubcategories = async () => {
   const categories = await fetchData({
     route: "/category",
-    limit: 1000,
+    limit: 12,
     revalidate: 600,
   });
   const widget = await getWidget();
