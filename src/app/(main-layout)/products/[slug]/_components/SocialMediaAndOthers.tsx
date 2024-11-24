@@ -14,6 +14,7 @@ import React from "react";
 import { ISocialMedia } from "@/interfaces/footer.interface";
 
 const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
+  console.log(socialMedia);
   const [isCopied, setIsCopied] = React.useState<boolean>(false);
   const [copyText, setCopyText] = React.useState<string>("");
 
@@ -56,9 +57,14 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-x-1.5 border border-black-10 hover:border-black-50 rounded-full py-1 px-2 cursor-pointer"
+                  className={`${
+                    media?.mediaName?.toLowerCase() === "whatsapp" ||
+                    media?.mediaName?.toLowerCase() === "messenger"
+                      ? "flex items-center gap-x-1.5 border border-black-10 hover:border-black-50 rounded-full py-1 px-2 cursor-pointer"
+                      : ""
+                  }`}
                 >
-                  {media.mediaName === "Whatsapp" && (
+                  {media?.mediaName === "Whatsapp" && (
                     <>
                       <Image
                         src={whatsapp}
@@ -68,7 +74,7 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
                       <span className="text-xs">WhatsApp</span>
                     </>
                   )}
-                  {media.mediaName === "Messenger" && (
+                  {media?.mediaName === "Messenger" && (
                     <>
                       <Image
                         src={messenger}
