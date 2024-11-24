@@ -1,8 +1,7 @@
 "use client";
 import { IProduct } from "@/interfaces/product.interface";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomLoading from "../CustomLoader";
 
 const ProductPreviewRedirect = ({
@@ -18,15 +17,18 @@ const ProductPreviewRedirect = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRedirect = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent event propagation
-    setIsLoading(true); // Show custom loading
+    e.stopPropagation();
+    setIsLoading(true);
 
-    // Simulate loading for 2 seconds before navigating
-    setTimeout(() => {
-      setIsLoading(false); // Hide loader
-      router.push(`/products/${product?.productUrlSlug}`); // Navigate after delay
-    }, 3000);
+    router.push(`/products/${product?.productUrlSlug}`);
   };
+
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setTimeout(() => setIsLoading(false), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
 
   return (
     <div className={`${className} relative`} onClick={handleRedirect}>
