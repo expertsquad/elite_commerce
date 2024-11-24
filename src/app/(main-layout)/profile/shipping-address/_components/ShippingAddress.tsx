@@ -2,14 +2,13 @@
 import CustomInput from "../../../../../Components/CustomInput";
 import SubmitButton from "@/Components/SubmitButton";
 import { IAddress } from "@/interfaces/address.interface";
-import CustomDropdown from "@/Components/CustomDropdown";
 import { postDataMutation } from "@/actions/postDataMutation";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import { useEffect, useState } from "react";
 import CustomLoader from "@/Components/CustomLoader";
 import toast from "react-hot-toast";
 import CustomDropdownSearchToApiFetch from "@/Components/CustomDropdownSearchToApiFetch";
-import { fetchCountryDataClientSide } from "@/actions/fetchCountryDataClientSide";
+import { fetchCountryData } from "@/actions/fetchCountryData";
 
 const ShippingAddress = ({
   shippingAddress,
@@ -43,7 +42,7 @@ const ShippingAddress = ({
       try {
         // fatching data from country api by city and country name
         if (citySearchInputValue) {
-          const res = await fetchCountryDataClientSide({
+          const res = await fetchCountryData({
             route: "/city",
             query: `name=${citySearchInputValue}&country_name=${country}`,
             limit: 10,
@@ -55,7 +54,7 @@ const ShippingAddress = ({
           }
         } else if (selectedState) {
           // fatching data from country api by state and country name
-          const res = await fetchCountryDataClientSide({
+          const res = await fetchCountryData({
             route: "/city",
             query: `country_name=${country}&state_name=${selectedState}`,
             limit: 10,
@@ -80,7 +79,7 @@ const ShippingAddress = ({
     if (stateSearchInputValue) {
       const fetchData = async () => {
         try {
-          const res = await fetchCountryDataClientSide({
+          const res = await fetchCountryData({
             route: "/state",
             query: `country_name=${country}&name=${stateSearchInputValue}`,
             limit: 10,

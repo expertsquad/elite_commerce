@@ -1,6 +1,7 @@
 import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import BillingInfoPageContent from "./_components/BillingInfoPageContent";
 import { fetchCountryData } from "@/actions/fetchCountryData";
+import CustomLoading from "@/Components/CustomLoader";
 
 export async function generateMetadata() {
   try {
@@ -22,44 +23,46 @@ export async function generateMetadata() {
 }
 
 const page = async () => {
-  const shopSetting = await fetchProtectedData({
-    route: "/settings/shop",
-  });
-  const paymentMethodData = await fetchProtectedData({
-    route: "/settings/payment-method/active",
-  });
-  const shippingCharge = await fetchProtectedData({
-    route: "/settings/shipping-charge",
-  });
+  try {
+    const [shopSetting, paymentMethodData, shippingCharge, defaultAddress] =
+      await Promise.all([
+        fetchProtectedData({ route: "/settings/shop" }),
+        fetchProtectedData({ route: "/settings/payment-method/active" }),
+        fetchProtectedData({ route: "/settings/shipping-charge" }),
+        fetchProtectedData({
+          route: "/user-address/me",
+          query: "isDefault=true",
+        }),
+      ]);
 
-  const defaultAddress = await fetchProtectedData({
-    route: "/user-address/me",
-    query: "isDefault=true",
-  });
+    // Fetch country data after knowing shopSetting's country
+    const country = shopSetting?.data?.country;
 
-  // this is from country data api
-  // get all state by country name
-  const stateByCountryName = await fetchCountryData({
-    route: `/state/` + shopSetting?.data?.country,
-    limit: 100,
-  });
-  // get all city by country name
-  const cityByStateName = await fetchCountryData({
-    route: `/city/` + shopSetting?.data?.country,
-    limit: 1000,
-  });
+    const [stateByCountryName, cityByStateName] = await Promise.all([
+      fetchCountryData({ route: `/state/${country}`, limit: 100 }),
+      fetchCountryData({ route: `/city/${country}`, limit: 1000 }),
+    ]);
 
-  return (
-    <BillingInfoPageContent
-      currencySymbol={shopSetting?.data?.currencySymbol}
-      country={shopSetting?.data?.country}
-      paymentMethod={paymentMethodData?.data}
-      shippingCharge={shippingCharge?.data}
-      states={stateByCountryName}
-      cities={cityByStateName}
-      defaultAddress={defaultAddress}
-    />
-  );
+    return (
+      <BillingInfoPageContent
+        currencySymbol={shopSetting?.data?.currencySymbol}
+        country={country}
+        paymentMethod={paymentMethodData?.data}
+        shippingCharge={shippingCharge?.data}
+        states={stateByCountryName}
+        cities={cityByStateName}
+        defaultAddress={defaultAddress}
+      />
+    );
+  } catch (error) {
+    console.error("Error loading data for billing info page:", error);
+    // Handle errors as needed or return fallback content
+    return (
+      <div className="relative">
+        <CustomLoading />
+      </div>
+    );
+  }
 };
 
 export default page;
