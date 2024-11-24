@@ -1,7 +1,6 @@
 "use client";
 import { IProduct } from "@/interfaces/product.interface";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React from "react";
 
 const ProductPreviewRedirect = ({
