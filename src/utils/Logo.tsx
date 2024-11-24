@@ -27,7 +27,7 @@ const Logo = () => {
                     logo ? server_url + logo : server_url + logoPlaceholder
                   }`}
                   fill
-                  className="object-contain h-auto border border-danger w-full absolute left-0"
+                  className="object-contain h-auto "
                   alt="logo"
                 />
               </div>
