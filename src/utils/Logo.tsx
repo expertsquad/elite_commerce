@@ -20,14 +20,15 @@ const Logo = () => {
             // Skeleton loading state
             <div className="h-[40px] w-[180px] bg-black-10 animate-pulse rounded"></div>
           ) : (
-            <Link href="/">
-              <div className="relative h-[40px] w-[180px] ">
+            <Link href="/" className="overflow-hidden">
+              <div className="relative h-[40px] w-[180px] flex items-center justify-start">
                 <Image
                   src={`${
                     logo ? server_url + logo : server_url + logoPlaceholder
                   }`}
-                  fill
-                  className="object-contain h-auto "
+                  width={180}
+                  height={40}
+                  className="object-contain h-[40px]  w-auto "
                   alt="logo"
                 />
               </div>
