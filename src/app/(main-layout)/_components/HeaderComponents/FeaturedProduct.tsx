@@ -14,13 +14,16 @@ export const FeaturedProduct = async ({
   return (
     <Link
       href={`/products/${product?.productUrlSlug}`}
-      className="flex items-center border rounded border-black-10 p-3 gap-3 max-w-[350px] hover:bg-image-background hover:border-primary-light transition-all duration-300"
+      className="flex items-center border rounded border-black-10 p-[11px] gap-2.5 max-w-[350px] hover:bg-image-background hover:border-primary-light transition-all duration-300"
     >
-      <div className="w-20 h-20 relative ">
+      <div className="w-16 h-16 relative overflow-hidden">
         <Image
           src={server_url + product?.productPhotos[0]}
           alt="featured-products"
           fill
+          style={{
+            objectFit: "contain",
+          }}
           className="object-contain h-full w-full inset-0"
         />
       </div>

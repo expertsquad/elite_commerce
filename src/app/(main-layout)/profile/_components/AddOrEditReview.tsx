@@ -13,7 +13,7 @@ const AddOrEditReview = ({
       {isReviewed && (
         <Link
           href={"/profile/review/all-review-history"}
-          className="bg-positive text-white py-2 px-2.5 rounded-md"
+          className="bg-secondary text-white py-2 px-2.5 rounded-md"
         >
           Edit Review
         </Link>
@@ -21,7 +21,7 @@ const AddOrEditReview = ({
       {isReviewed === false && status === "Delivered" && (
         <Link
           href={"/profile/review"}
-          className="bg-gradient-primary text-white hover:bg-gradient-primary-reverse py-2 px-2.5 rounded-md"
+          className="bg-positive text-white py-2 px-2.5 rounded-md"
         >
           Start Review
         </Link>

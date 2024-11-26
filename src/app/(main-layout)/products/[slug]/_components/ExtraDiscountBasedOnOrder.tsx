@@ -35,34 +35,34 @@ const ExtraDiscountBasedOnOrder = ({
       <ProgressBar progressValue={Number(percentage)} />
       <div className="mt-1.5">
         {product?.bulk &&
-          (product?.bulk?.minOrder > 1 ||
-            (product.bulk && typeof product.bulk !== "boolean")) && (
-            <div className="whitespace-nowrap text-black-80">
-              {productQuantity >= bulkItems ? (
-                <div>
-                  <span className="text-positive font-medium">
-                    Congratulations
-                  </span>
-                  , You got a{" "}
-                  <span className="text-gradient-primary font-medium">
-                    {product?.bulk?.discount}% extra
-                  </span>{" "}
-                  discount, Thank you.
-                </div>
-              ) : (
-                <p>
-                  Buy
-                  <span className="font-semibold text-gradient-primary mx-1.5">
-                    {product?.bulk?.minOrder - productQuantity}
-                  </span>
-                  item to get more
-                  <span className="font-semibold text-gradient-primary ml-1.5">
-                    {product?.bulk?.discount} extra!
-                  </span>
-                </p>
-              )}
-            </div>
-          )}
+        (product?.bulk?.minOrder > 1 ||
+          (product.bulk && typeof product.bulk !== "boolean")) ? (
+          <div className="whitespace-nowrap text-black-80">
+            {productQuantity >= bulkItems ? (
+              <div>
+                <span className="text-positive font-medium">
+                  Congratulations
+                </span>
+                , You got a{" "}
+                <span className="text-gradient-primary font-medium">
+                  {product?.bulk?.discount}% extra{" "}
+                </span>
+                discount, Thank you.
+              </div>
+            ) : (
+              <p>
+                Buy
+                <span className="font-semibold text-gradient-primary mx-1.5">
+                  {product?.bulk?.minOrder - productQuantity}
+                </span>
+                item to get more
+                <span className="font-semibold text-gradient-primary ml-1.5">
+                  {product?.bulk?.discount}% extra!
+                </span>
+              </p>
+            )}
+          </div>
+        ) : null}
       </div>
     </div>
   );

@@ -33,8 +33,6 @@ const Page = async () => {
     // query: "sortBy=",
   });
 
-  const widget = await getWidget();
-
   // <== Get Currency ==>
   const currencyIcon = await fetchData({
     route: "/settings/shop",
@@ -44,6 +42,8 @@ const Page = async () => {
   const quickOrderServices = await fetchData({
     route: "/settings/quick-order-setting",
   });
+
+  const widget = await getWidget();
 
   return (
     <>

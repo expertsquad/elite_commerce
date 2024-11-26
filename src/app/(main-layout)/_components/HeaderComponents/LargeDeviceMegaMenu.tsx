@@ -29,7 +29,7 @@ const LargeDeviceMegaMenu = async () => {
     <nav className="hidden md:flex main-container py-[clamp(8px,2vh,20px)] text-md items-center justify-between">
       {/* Left section of the navigation */}
       <div className="flex gap-5 items-center">
-        <Logo />
+        <Logo alignLeft />
         <ul className="flex items-center gap-3 z-20">
           <li className="transition-all duration-300 group/categorybtn list-none">
             <Link
@@ -77,7 +77,7 @@ const LargeDeviceMegaMenu = async () => {
         />
         {/* profile */}
         <Link
-          href="/profile/dashboard"
+          href={"profile/dashboard"}
           className="flex items-center justify-center"
         >
           <ProfilePhotoOrIcon />

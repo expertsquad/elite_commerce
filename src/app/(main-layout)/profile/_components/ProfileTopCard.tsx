@@ -7,16 +7,13 @@ import Image from "next/image";
 import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import { IUser } from "@/interfaces/user.interface";
 
-const ProfileTopCard = async ({ getMe }: { getMe: IUser }) => {
-  const orderItems = await fetchProtectedData({
-    route: "/online-order",
-    query: "buyer.userId=" + getMe?._id,
-  });
-
-  const reviewPending = await fetchData({
-    route: "/review",
-    query: `reviewer.userId=${getMe?._id}&reviewStatus=Pending`,
-  });
+const ProfileTopCard = async ({
+  orderItems,
+  reviewPending,
+}: {
+  orderItems: any;
+  reviewPending: any;
+}) => {
   return (
     <section className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-5 w-full ">
       {/* account details */}
@@ -45,7 +42,7 @@ const ProfileTopCard = async ({ getMe }: { getMe: IUser }) => {
           <Image src={starIcon} alt="total order" width={40} height={40} />
           <h3 className="text-lg whitespace-nowrap mt-5">Pending Review</h3>
           {/* i will add here pending review count later */}
-          <p className="text-lg font-bold">{reviewPending?.meta?.total}</p>
+          <p className="text-lg font-bold">{reviewPending?.meta?.total || 0}</p>
         </div>
       </Link>
     </section>

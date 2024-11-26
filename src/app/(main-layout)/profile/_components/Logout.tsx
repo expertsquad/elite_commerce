@@ -1,4 +1,5 @@
 "use client";
+import { logoutServerAction } from "@/actions/logoutServerAction";
 import GenerateGradientIcon from "@/Components/GenerateGradientIcon";
 import { profileNavMenu } from "@/constants/profileNavMenu.constants";
 import { useRouter } from "next/navigation";
@@ -7,22 +8,26 @@ import toast from "react-hot-toast";
 
 const Logout = () => {
   const router = useRouter();
-  const handleLogout = async () => {
-    try {
-      const res = await fetch("/api/logout", {
-        method: "POST",
-      });
+  // const handleLogout = async () => {
+  //   try {
+  //     const res = await fetch("/api/logout", {
+  //       method: "POST",
+  //     });
 
-      if (res.ok) {
-        localStorage.removeItem("userSession");
-        router.replace("/");
-      } else {
-        toast.error("Failed to logout");
-        console.error("Failed to logout");
-      }
-    } catch (error) {
-      console.error("An error occurred while logging out:", error);
-    }
+  //     if (res.ok) {
+  //       localStorage.removeItem("userSession");
+  //       router.replace("/");
+  //     } else {
+  //       toast.error("Failed to logout");
+  //       console.error("Failed to logout");
+  //     }
+  //   } catch (error) {
+  //     console.error("An error occurred while logging out:", error);
+  //   }
+  // };
+
+  const handleLogout = async () => {
+    await logoutServerAction();
   };
 
   return (

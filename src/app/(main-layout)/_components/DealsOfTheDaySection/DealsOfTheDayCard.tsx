@@ -1,4 +1,5 @@
 import { server_url } from "@/constants";
+import { IconArrowRight } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,16 +17,16 @@ type IDealsOfThedayCardProps = {
 
 const DealsOfTheDayCard = ({ deal, index }: IDealsOfThedayCardProps) => {
   return (
-    <div className={` rounded-[10px]   relative overflow-hidden `}>
+    <div className={` relative overflow-hidden rounded-md`}>
       {deal?.discount && (
         <div
           className={`${
             index % 2 === 0 ? "bg-gradient-primary" : "bg-gradient-secondary"
-          } rounded-full w-[100px] h-[100px] absolute  -right-3 -top-2.5 flex items-center justify-center`}
+          } rounded-full w-[90px] h-[90px] absolute -right-3 -top-2.5 flex items-center justify-center`}
         >
-          <span className="text-white uppercase text-lg font-semibold ">
-            {" "}
-            {deal?.discount}% <br /> Off
+          <span className="text-white uppercase text-base font-semibold ">
+            {deal?.discount}% <br />
+            Off
           </span>
         </div>
       )}
@@ -47,9 +48,9 @@ const DealsOfTheDayCard = ({ deal, index }: IDealsOfThedayCardProps) => {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-3.5 items-center text-center px-5 mt-5">
+        <div className="flex flex-col gap-y-5 items-center text-center px-5 mt-5">
           <h3
-            className={`text-2xl md:text-3xl font-semibold capitalize line-clamp-2 ${
+            className={`text-2xl font-semibold capitalize line-clamp-2 ${
               index % 2 === 0
                 ? "text-gradient-primary"
                 : "text-gradient-secondary"
@@ -57,18 +58,19 @@ const DealsOfTheDayCard = ({ deal, index }: IDealsOfThedayCardProps) => {
           >
             {deal?.title}
           </h3>
-          <p className="text-base text-black-80 line-clamp-2">
+          <p className="text-base text-black-80 line-clamp-2 md:line-clamp-3">
             {deal?.description}
           </p>
         </div>
-        <div className="flex items-center justify-center  mt-3 md:mt-5">
+        <div className="flex items-center justify-center mt-3 md:mt-5">
           <Link
             href={`${deal?.link}`}
             className={`${
               index % 2 === 0 ? "bg-gradient-primary" : "bg-gradient-secondary"
-            } rounded-full flex items-center justify-center text-white py-3 px-5 uppercase transition-all duration-300 hover:scale-105`}
+            } rounded-full flex items-center justify-center text-white text-sm py-2.5 px-4 uppercase transition-all duration-300 hover:scale-105`}
           >
-            {deal?.buttonText} &rarr;
+            {deal?.buttonText}
+            <IconArrowRight size={20} className="ml-1" />
           </Link>
         </div>
       </div>

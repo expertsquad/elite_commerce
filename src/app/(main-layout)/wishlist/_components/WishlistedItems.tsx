@@ -132,7 +132,6 @@ const WishlistedItems = ({
             currencyIcon={currencyIcon}
             shippingAmount={shippingAmount ? shippingAmount : 0}
             isQuickOrderActive={isQuickOrderActive}
-            accessToken={accessToken ? accessToken : ""}
           >
             <span className="border border-black-10 flex items-center justify-center p-2.5 rounded-full hover:bg-gradient-primary hover:text-white transition duration-300">
               <IconEye size={18} stroke={1.7} />

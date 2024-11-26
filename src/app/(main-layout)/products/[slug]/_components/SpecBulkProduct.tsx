@@ -39,6 +39,10 @@ const SpecBulkProduct = ({
       item?.variant?.variantName === variant?.variantName
   );
 
+  const isDisabled =
+    variant?.inStock < 1 ||
+    (isCarted && isCarted?.orderQuantity >= variant?.inStock);
+
   return (
     <div className="max-w-[370px] min-w-80 p-5 shadow-lg rounded-md hidden md:block sticky top-24">
       <div className="flex items-center gap-x-4 mb-3">
@@ -137,7 +141,7 @@ const SpecBulkProduct = ({
         </div>
         <div className="border border-black-10 rounded-md mt-5">
           <button
-            disabled={variant ? variant.inStock < 1 : false}
+            disabled={isDisabled}
             onClick={handleAddToCart}
             className={`text-black flex items-center justify-center gap-x-1.5 w-full py-2 text-[13px] hover:bg-gradient-primary rounded-md hover:text-white ${
               variant && variant?.inStock < 1 ? "cursor-not-allowed" : ""

@@ -108,6 +108,7 @@ const CustomDropdownSearchToApiFetch: React.FC<CustomDropdownProps> = ({
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleKeyDown);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, searchInput, setShowModal, focusedIndex, filteredData]);
 
   const handleOptionClick = (value: string) => {

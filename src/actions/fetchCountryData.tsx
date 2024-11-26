@@ -1,3 +1,4 @@
+"use server";
 import { country_data_access_Token, country_data_url } from "@/constants";
 
 export const fetchCountryData = async ({

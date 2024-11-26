@@ -49,7 +49,10 @@ export const CartItem = ({
             <span className="line-clamp-1 md:line-clamp-2 [font-size:clamp(10px,5vw,14px)]">
               {product?.productName}
             </span>
-            <button className="md:border rounded-full border-danger p-0.5 block md:hidden">
+            <button
+              onClick={handleRemoveItem}
+              className="md:border rounded-full border-danger p-0.5 block md:hidden"
+            >
               <IconX stroke={1} color="#FF3838" size={16} />
             </button>
           </div>

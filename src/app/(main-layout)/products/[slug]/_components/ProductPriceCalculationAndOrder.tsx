@@ -46,13 +46,13 @@ const ProductPriceCalculationAndOrder = ({
         />
       </div>
       {/* <== Bulk order based discount ==> */}
-      {product?.bulk?.minOrder && product?.bulk?.minOrder > 0 && (
+      {product?.bulk?.minOrder && product?.bulk?.minOrder > 0 ? (
         <ExtraDiscountBasedOnOrder
           product={product}
           quantity={quantity}
           variant={variant}
         />
-      )}
+      ) : null}
       <div>
         <ProductPriceBasedOnVariants
           currencyIcon={currencyIcon}

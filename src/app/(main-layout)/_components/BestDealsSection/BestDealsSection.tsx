@@ -12,6 +12,9 @@ const BestDealsSection = async () => {
     revalidate: 0,
   });
 
+  const currentDate = new Date();
+  const endDate = bestDeals?.data?.endDate;
+  const endDateTime = endDate ? new Date(endDate) : null;
   return (
     <div
       className="w-full"
@@ -36,10 +39,10 @@ const BestDealsSection = async () => {
               src={server_url + bestDeals?.data?.firstProductPhoto}
               alt="product photo"
               style={{
-                objectFit: "cover",
+                objectFit: "contain",
               }}
               fill
-              className="inset-0 top-0 left-0 object-cover"
+              className="inset-0 top-0 left-0 object-contain"
             />
           </div>
           <div className="flex flex-col justify-center items-center">
@@ -52,22 +55,22 @@ const BestDealsSection = async () => {
             <p className="text-center mt-2 text-black-80 [font-size:clamp(14px,2vw,18)] md:line-clamp-3 line-clamp-2 hidden md:block">
               {bestDeals?.data?.description}
             </p>
-            <div className="mt-9">
+            {endDateTime && currentDate <= endDateTime && (
               <CountdownTimer
                 startDate={bestDeals?.data?.startDate}
                 endDate={bestDeals?.data?.endDate}
               />
-            </div>
+            )}
           </div>
           <div className="relative w-[clamp(250px,10vw,350px)] min-h-[250px] max-h-[350px] shrink-0">
             <Image
               src={server_url + bestDeals?.data?.secondProductPhoto}
               alt="product photo"
               style={{
-                objectFit: "cover",
+                objectFit: "contain",
               }}
               fill
-              className="inset-0 top-0 left-0 object-cover"
+              className="inset-0 top-0 left-0 object-contain"
             />
           </div>
         </div>

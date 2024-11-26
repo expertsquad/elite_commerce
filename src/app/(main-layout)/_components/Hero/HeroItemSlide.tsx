@@ -63,7 +63,7 @@ const HeroItemSlide = ({
           {sliderArray?.map((s: any, index: number) => (
             <div
               key={index}
-              className={`transition-all w-2 h-2 bg-gradient-primary rounded-full ${
+              className={`transition-all w-2 h-2 bg-image-background rounded-full ${
                 curr === index ? "pr-4 delay-100" : "bg-opacity-50"
               }`}
             />

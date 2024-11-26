@@ -20,7 +20,7 @@ const Footer = async () => {
           <div className="flex flex-col md:items-start items-center gap-3.5">
             {/* logo */}
             <div className="">
-              <Logo />
+              <Logo alignLeft />
             </div>
             <p className="whitespace-pre-wrap text-black-80 md:text-sm text-xs md:text-start text-center">
               {footer?.data?.description}

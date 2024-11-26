@@ -4,11 +4,10 @@ import StarRating from "../StarRating";
 import QuickViewButton from "@/app/(main-layout)/brands/_components/QuickViewButton";
 import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
 import ProductCartBtn from "./ProductCartBtn";
-import ProductPreviewRedirect from "./ProductPreviewRedirect";
 import { getPricingDetails } from "./getPricingDetails";
+import ProductPreviewRedirect from "./ProductPreviewRedirect";
 export interface IProductCardProps {
   product: IProduct;
-  onClick?: () => void;
   currencyIcon?: string;
   quickAction?: boolean;
   shippingAmount?: number;
@@ -16,7 +15,6 @@ export interface IProductCardProps {
 }
 const ProductCard = ({
   product,
-  onClick,
   currencyIcon,
   quickAction,
   shippingAmount,
@@ -27,9 +25,8 @@ const ProductCard = ({
 
   return (
     <ProductPreviewRedirect
-      onClick={onClick}
-      product={product}
       className="border border-black-10 rounded-lg group relative w-full max-w-[280px] cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg mx-auto"
+      product={product}
     >
       <div className="bg-image-background">
         <ProductImageSlider

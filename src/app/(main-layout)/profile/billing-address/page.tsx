@@ -2,6 +2,7 @@ import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import BillingAddress from "./_components/BillingAddress";
 import Link from "next/link";
 import { fetchCountryData } from "@/actions/fetchCountryData";
+import CustomLoading from "@/Components/CustomLoader";
 
 export async function generateMetadata() {
   try {
@@ -22,51 +23,59 @@ export async function generateMetadata() {
 }
 
 const page = async () => {
-  // Get data
-  const billingAddress = await fetchProtectedData({
-    route: "/user-address/me",
-    query: "isBilling=true",
-  });
-  const country = await fetchProtectedData({
-    route: "/settings/shop",
-  });
-  // this is from country data api
-  // get all state by country name
-  const stateByCountryName = await fetchCountryData({
-    route: `/state/` + country?.data?.country,
-    limit: 100,
-  });
-  // get all city by country name
-  const cityByStateName = await fetchCountryData({
-    route: `/city/` + country?.data?.country,
-    limit: 100,
-  });
+  try {
+    // Fetch primary data concurrently
+    const [billingAddress, countryData] = await Promise.all([
+      fetchProtectedData({
+        route: "/user-address/me",
+        query: "isBilling=true",
+      }),
+      fetchProtectedData({
+        route: "/settings/shop",
+      }),
+    ]);
 
-  return (
-    <div className="">
-      {/* Tab to toggle section */}
+    const country = countryData?.data?.country;
 
-      <div className="flex gap-5 border-b border-black-10 items-center justify-start">
-        <div className="text-base pb-2">
-          <Link href="/profile/shipping-address">Shipping Address</Link>
+    // Fetch country-dependent data concurrently
+    const [stateByCountryName, cityByStateName] = await Promise.all([
+      fetchCountryData({ route: `/state/${country}`, limit: 100 }),
+      fetchCountryData({ route: `/city/${country}`, limit: 100 }),
+    ]);
+
+    return (
+      <div className="">
+        {/* Tab to toggle section */}
+        <div className="flex gap-5 border-b border-black-10 items-center justify-start">
+          <div className="text-base pb-2">
+            <Link href="/profile/shipping-address">Shipping Address</Link>
+          </div>
+
+          <Link
+            className="text-gradient-primary font-semibold text-base border-b !border-primary-light pb-2"
+            href="/profile/billing-address"
+          >
+            Billing Address
+          </Link>
         </div>
 
-        <Link
-          className="text-gradient-primary font-semibold text-base border-b !border-primary-light pb-2"
-          href="/profile/billing-address"
-        >
-          Billing Address
-        </Link>
+        <BillingAddress
+          country={country}
+          billingAddress={billingAddress?.data[0]}
+          states={stateByCountryName}
+          cities={cityByStateName}
+        />
       </div>
-
-      <BillingAddress
-        country={country?.data?.country}
-        billingAddress={billingAddress?.data[0]}
-        states={stateByCountryName}
-        cities={cityByStateName}
-      />
-    </div>
-  );
+    );
+  } catch (error) {
+    console.error("Error loading billing address page:", error);
+    // Handle errors or return fallback UI
+    return (
+      <div className="relative">
+        <CustomLoading />
+      </div>
+    );
+  }
 };
 
 export default page;

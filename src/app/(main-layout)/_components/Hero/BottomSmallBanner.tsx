@@ -45,26 +45,30 @@ const BottomSmallBanner = ({
           {bottomOffer?.title}
         </span>
 
-        <Link
-          href={bottomOffer?.link}
-          target="_blank"
-          className="flex items-center justify-center gap-2 bg-gradient-primary hover:bg-gradient-primary-reverse transition-all duration-300 text-white rounded-md py-2 mt-9 max-w-[110px] whitespace-nowrap text-xs uppercase"
-        >
-          {bottomOffer?.buttonText} <IconArrowRight size={16} />
-        </Link>
+        {bottomOffer?.buttonText ? (
+          <Link
+            href={bottomOffer?.link}
+            target="_blank"
+            className="flex items-center justify-center gap-2 bg-gradient-primary hover:bg-gradient-primary-reverse transition-all duration-300 text-white rounded-md py-2 mt-9 max-w-[110px] whitespace-nowrap text-xs uppercase"
+          >
+            {bottomOffer?.buttonText} <IconArrowRight size={16} />
+          </Link>
+        ) : null}
       </div>
 
-      <div className={`relative w-36 h-36`}>
-        <Image
-          src={`${server_url + bottomOffer?.productPhoto}`}
-          alt="Hero discount item"
-          fill
-          style={{
-            objectFit: "cover",
-          }}
-          className="inset-0 top-0 left-0 object-cover"
-        />
-      </div>
+      {bottomOffer?.productPhoto ? (
+        <div className={`relative w-36 h-36`}>
+          <Image
+            src={`${server_url + bottomOffer?.productPhoto}`}
+            alt="Hero discount item"
+            fill
+            style={{
+              objectFit: "contain",
+            }}
+            className="inset-0 top-0 left-0 object-contain"
+          />
+        </div>
+      ) : null}
     </div>
   );
 };

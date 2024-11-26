@@ -15,7 +15,6 @@ const ProductReviewdCustomer = async ({
   const getAuthor = await fetchData({
     route: "/settings/shop",
   });
-
   return (
     <div className="">
       {reviewData?.map((review: CustomerReviewProps) => (
