@@ -98,7 +98,7 @@ const PersonalInformation = ({ getMe }: { getMe: any }) => {
             </div>
           </div>
           <div className="flex justify-end items-center mt-10">
-            <SubmitButton className="bg-gradient-primary text-white py-2.5 px-5 my-3 rounded-full w-full lg:max-w-fit ">
+            <SubmitButton className="bg-gradient-primary hover:bg-gradient-primary-reverse text-white py-2.5 px-5 my-3 rounded-full w-full lg:max-w-fit ">
               Update Account Details
             </SubmitButton>
           </div>
