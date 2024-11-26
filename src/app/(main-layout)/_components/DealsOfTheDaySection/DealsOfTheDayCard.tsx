@@ -17,7 +17,7 @@ type IDealsOfThedayCardProps = {
 
 const DealsOfTheDayCard = ({ deal, index }: IDealsOfThedayCardProps) => {
   return (
-    <div className={` relative overflow-hidden`}>
+    <div className={` relative overflow-hidden rounded-md`}>
       {deal?.discount && (
         <div
           className={`${

@@ -137,6 +137,7 @@ const ProductViewPage = async ({
         currencyIcon={currencyIcon?.data?.currencySymbol}
         shippingAmount={quickOrderServices?.data?.deliveryCharge}
         isQuickOrderActive={quickOrderServices?.data?.isQuickOrderServiceActive}
+        productId={product?.data?._id}
       />
     </div>
   );
