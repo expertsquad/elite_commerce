@@ -19,7 +19,7 @@ const AboutUs = async () => {
           <h1 className="text-black text-[clamp(20px,2.5vw,40px)] font-semibold">
             About Us
           </h1>
-          <div className="px-5">
+          <div className="my-10">
             <DescriptionReader description={res?.data?.content?.data} />
           </div>
         </div>
