@@ -78,7 +78,7 @@ const SignupForm = () => {
         <small className="text-xs text-danger text-center my-3">
           {globalError?.message}
         </small>
-        <SubmitButton className="bg-gradient-primary w-full mx-auto py-1.5 text-white rounded-md">
+        <SubmitButton className="bg-gradient-primary hover:bg-gradient-primary-reverse w-full mx-auto py-1.5 text-white rounded-md">
           Sign Up
         </SubmitButton>
       </fieldset>

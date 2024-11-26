@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 import PersonalInformation from "./_components/PersonalInformation";
 import Link from "next/link";
 import { fetchData, fetchProtectedData } from "@/actions/fetchData";
+import CustomLoading from "@/Components/CustomLoader";
 
 export async function generateMetadata() {
   try {
@@ -45,7 +46,10 @@ const page = async () => {
         </div>
       </div>
 
-      <PersonalInformation getMe={getMe} />
+      <Suspense fallback={<CustomLoading />}>
+        {" "}
+        <PersonalInformation getMe={getMe} />
+      </Suspense>
     </div>
   );
 };

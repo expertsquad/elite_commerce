@@ -10,7 +10,7 @@ const ProfileUploader = ({
   url,
   multiple = false,
   accept = ".jpg,.jpeg,.png",
-  maxSize,
+  maxSize = 2,
   className,
   disabled,
   bottomText,
