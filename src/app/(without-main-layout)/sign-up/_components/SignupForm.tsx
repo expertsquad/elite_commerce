@@ -23,9 +23,10 @@ const SignupForm = () => {
     setIsLoading(true);
     const formData = new FormData(event.currentTarget);
     const result = await signUpServerAction(formData);
+    console.log(result);
     if (result?.success) {
       setIsLoading(false);
-      toast.success("Signup Successful");
+      toast.success("Account created. Please verify your email.");
       router.replace(`/verify-email?email=${result?.data?.user?.email}`);
     } else {
       toast.error(result?.message);

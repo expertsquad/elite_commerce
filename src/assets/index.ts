@@ -41,6 +41,7 @@ import productEmptyState from "./Images/ProductEmptyState.svg";
 import noReview from "./Images/no-review-img.png";
 import userPlaceholder from "./Images/user-placeholder.png";
 import logoPlaceholder from "./Images/logo-placeholder.svg";
+import fileWarning from "./Images/emptyWarningFile.svg";
 export {
   // smallLogo,
   // fullLogo,
@@ -85,4 +86,5 @@ export {
   noReview,
   userPlaceholder,
   logoPlaceholder,
+  fileWarning,
 };

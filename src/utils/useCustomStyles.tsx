@@ -37,11 +37,11 @@ const useCustomStyles = (content: string) => {
       });
 
       orderedListElements.forEach((element) => {
-        // (element as HTMLElement).style.marginLeft = "20px";
+        (element as HTMLElement).style.marginLeft = "20px";
         (element as HTMLElement).style.listStyleType = "decimal";
       });
       unOrderedListElements.forEach((element) => {
-        // (element as HTMLElement).style.marginLeft = "20px";
+        (element as HTMLElement).style.marginLeft = "30px";
         (element as HTMLElement).style.listStyleType = "disc";
       });
       blockquoteElements.forEach((element) => {

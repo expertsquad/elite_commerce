@@ -24,15 +24,23 @@ const ProductReviewdCustomer = async ({
         >
           <div className="flex items-center gap-3 mb-3">
             <div className="h-[45px] w-[45px] relative shrink-0">
-              <Image
-                src={`${server_url}${
-                  review?.reviewer?.profilePhoto || userPlaceholder
-                }`}
-                alt="user Photo"
-                fill
-                style={{ objectFit: "cover" }}
-                className="inset-0 top-0 left-0 object-cover rounded-full border border-black-10"
-              />
+              {review?.reviewer?.profilePhoto ? (
+                <Image
+                  src={`${server_url + review?.reviewer?.profilePhoto}`}
+                  alt="user Photo"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  className="inset-0 top-0 left-0 object-cover rounded-full border border-black-10"
+                />
+              ) : (
+                <Image
+                  src={userPlaceholder}
+                  alt="user Photo"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  className="inset-0 top-0 left-0 object-cover rounded-full border border-black-10"
+                />
+              )}
             </div>
             <div className="flex flex-col gap-y-2">
               <div className="flex items-center gap-2">
