@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const AboutUs = async () => {
   const res = await fetchData({ route: "/settings/about-us" });
-  console.log(res);
+
   return (
     <div className="main-container ">
       {res?.data?.content?.data !== "" ? (
