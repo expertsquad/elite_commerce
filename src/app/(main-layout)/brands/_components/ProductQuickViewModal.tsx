@@ -28,7 +28,6 @@ const ProductQuickViewModal = ({
   useCustomStyles(singleProduct?.description || "");
 
   const accessTokenValue = getAccessTokenFromCookies();
-  console.log(accessTokenValue);
   return (
     <Modal
       show={show}

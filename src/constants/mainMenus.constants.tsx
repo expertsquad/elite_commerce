@@ -34,10 +34,7 @@ export const topMenus = [
     label: "Privacy Policy",
     href: "/privacy-policy",
   },
-  {
-    label: "Track order",
-    href: "/track-order",
-  },
+
   {
     label: "Wishlist",
     href: "/wishlist",

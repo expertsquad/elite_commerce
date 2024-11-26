@@ -10,11 +10,13 @@ const RelatedProductsByCategory = async ({
   currencyIcon,
   shippingAmount,
   isQuickOrderActive,
+  productId,
 }: {
   categoryName: string;
   currencyIcon: string;
   shippingAmount: number;
   isQuickOrderActive?: boolean;
+  productId?: string;
 }) => {
   const response = await fetchData({
     route: `/product`,
@@ -25,6 +27,10 @@ const RelatedProductsByCategory = async ({
     response?.data && Array.isArray(response.data) && response.data.length === 0
       ? false
       : true;
+
+  const filteredProducts = response?.data?.filter(
+    (product: IProduct) => product?._id !== productId
+  );
 
   return (
     <div className="my-10 md:my-[70px]">
@@ -42,10 +48,10 @@ const RelatedProductsByCategory = async ({
         </Link>
       </div>
 
-      {response?.data?.length > 0 ? (
+      {filteredProducts?.length > 0 ? (
         <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5">
           <Suspense fallback={<Loading />}>
-            {response?.data?.map((product: IProduct) => {
+            {filteredProducts?.map((product: IProduct) => {
               return (
                 <div
                   className="grid grid-cols-product-grid grid-rows-product-grid gap-5 justify-around mb-5"
