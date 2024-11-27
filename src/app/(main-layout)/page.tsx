@@ -12,6 +12,7 @@ import DealsOfTheDaySection from "./_components/DealsOfTheDaySection/DealsOfTheD
 import { getWidget } from "@/utils/getWidget";
 import Link from "next/link";
 import ProductViewServices from "./products/[slug]/_components/ProductViewServices";
+import { cookies } from "next/headers";
 
 const Page = async () => {
   const newestProducts = await fetchData({ route: "/product", limit: 8 });
@@ -44,6 +45,9 @@ const Page = async () => {
   });
 
   const widget = await getWidget();
+
+  const accessToken = cookies().get("accessToken")?.value;
+  console.log(accessToken);
 
   return (
     <>
