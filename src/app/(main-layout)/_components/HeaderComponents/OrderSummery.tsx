@@ -86,7 +86,7 @@ const OrderSummery = ({
           />
         )}
         <Link
-          href="/shipping-info"
+          href="/shipping"
           className="w-full"
           onClick={handleAddToInitOrder}
         >

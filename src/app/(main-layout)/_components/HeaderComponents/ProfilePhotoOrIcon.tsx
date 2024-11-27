@@ -4,18 +4,27 @@ import { UserContext } from "@/Provider/UserProvider";
 import { server_url } from "@/constants";
 import { IconUserCircle } from "@tabler/icons-react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useContext } from "react";
 
-const ProfilePhotoOrIcon = () => {
+const ProfilePhotoOrIcon = ({
+  accessToken,
+}: {
+  accessToken?: string | null;
+}) => {
   const { user } = useContext(UserContext);
   const pathName = usePathname();
 
   const isProfilePath = pathName.startsWith("/profile");
 
-  if (user?.profilePhoto) {
+  if (accessToken && !user?.profilePhoto) {
     return (
-      <div>
+      <div className="w-8 h-8 rounded-full bg-black-10 animate-pulse"></div>
+    );
+  } else if (accessToken && user?.profilePhoto) {
+    return (
+      <Link href={"/profile"}>
         <div className="relative hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-white-transparent shadow-md shadow-black-100 overflow-hidden">
           <Image
             src={server_url + user?.profilePhoto}
@@ -39,17 +48,17 @@ const ProfilePhotoOrIcon = () => {
             Profile
           </span>
         </div>
-      </div>
+      </Link>
     );
   } else {
     return (
-      <div>
+      <Link href={"/profile"}>
         <GenerateGradientIcon
           IconComponent={IconUserCircle}
           stroke={1.2}
           size={34}
         />
-      </div>
+      </Link>
     );
   }
 };
