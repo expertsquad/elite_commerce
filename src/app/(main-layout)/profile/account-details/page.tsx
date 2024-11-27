@@ -1,18 +1,8 @@
-import React, { Suspense } from "react";
 import Link from "next/link";
 import { fetchData, fetchProtectedData } from "@/actions/fetchData";
-import CustomLoading from "@/Components/CustomLoader";
-import toast from "react-hot-toast";
 import { updateDataMutation } from "@/actions/updateDataMutation";
 import { revalidateTagAction } from "@/actions/revalidateTag";
-import dynamic from "next/dynamic";
-
-const PersonalInformation = dynamic(
-  () => import("./_components/PersonalInformation"),
-  {
-    ssr: false,
-  }
-);
+import PersonalInformation from "./_components/UI/PersonalInformation";
 
 export async function generateMetadata() {
   try {
@@ -51,11 +41,9 @@ const AccountDetails = async () => {
         method: "PUT",
         dataType: "formData",
       });
-      console.log(res);
       revalidateTagAction("/user/me");
     } catch (error) {
       console.error(error);
-      toast.error("something went wrong");
     }
   };
 
@@ -78,13 +66,7 @@ const AccountDetails = async () => {
         </div>
       </div>
 
-      <Suspense fallback={<CustomLoading />}>
-        {" "}
-        <PersonalInformation
-          getMe={getMe}
-          handleUserAction={handleUserAction}
-        />
-      </Suspense>
+      <PersonalInformation getMe={getMe} handleUserAction={handleUserAction} />
     </div>
   );
 };

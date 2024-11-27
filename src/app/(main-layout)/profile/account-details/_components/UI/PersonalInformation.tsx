@@ -1,4 +1,3 @@
-import { Button } from "@/Components/Buttons";
 import CustomInput from "@/Components/CustomInput";
 import ProfileUploader from "@/Components/ProfileUploader";
 import { IconPhotoPlus } from "@tabler/icons-react";
@@ -67,10 +66,7 @@ const PersonalInformation = ({
           </div>
         </div>
         <div className="flex justify-end items-center mt-10">
-          <button
-            type="submit"
-            className="bg-gradient-primary rounded-full px-5 py-3.5"
-          >
+          <button className="bg-gradient-primary rounded-full px-5 py-3.5 text-white">
             Update Account Details
           </button>
         </div>
