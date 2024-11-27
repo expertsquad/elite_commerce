@@ -8,28 +8,20 @@ const page = async () => {
     route: "/user/me",
   });
 
-  const orderItems = fetchData({
+  const orderItems = await fetchProtectedData({
     route: "/online-order",
     query: "buyer.userId=" + getMe?.data?._id,
   });
 
-  const reviewPending = fetchData({
+  const reviewPending = await fetchData({
     route: "/review",
-    query: `reviewer.userId=${getMe?._id}&reviewStatus=Pending`,
+    query: `reviewer.userId=${getMe?.data?._id}&reviewStatus=Pending`,
   });
-
-  const [orderItemsData, reviewPendingData] = await Promise.all([
-    orderItems,
-    reviewPending,
-  ]);
 
   return (
     <div className="">
-      <ProfileTopCard
-        orderItems={orderItemsData}
-        reviewPending={reviewPendingData}
-      />
-      <OrderSection orderItems={orderItemsData} />
+      <ProfileTopCard orderItems={orderItems} reviewPending={reviewPending} />
+      <OrderSection orderItems={orderItems} />
     </div>
   );
 };
