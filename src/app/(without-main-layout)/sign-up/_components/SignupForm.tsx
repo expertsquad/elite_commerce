@@ -23,7 +23,6 @@ const SignupForm = () => {
     setIsLoading(true);
     const formData = new FormData(event.currentTarget);
     const result = await signUpServerAction(formData);
-    console.log(result);
     if (result?.success) {
       setIsLoading(false);
       toast.success("Account created. Please verify your email.");

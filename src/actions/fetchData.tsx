@@ -62,7 +62,6 @@ export const fetchProtectedData = async ({
     const url = `${
       server_api + route
     }?page=${page}&limit=${limit}&query=${encodeURIComponent(query)}`;
-    console.log("Fetching URL:", url);
 
     const res = await fetch(url, {
       method: "GET",
