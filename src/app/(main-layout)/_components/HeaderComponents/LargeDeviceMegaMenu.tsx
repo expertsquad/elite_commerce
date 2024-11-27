@@ -63,6 +63,9 @@ const LargeDeviceMegaMenu = async () => {
           products={products?.data}
           categories={categories?.data}
           currencyIcon={currencyIcon?.data?.currencySymbol}
+          isQuickOrderActive={
+            quickOrderServices?.data?.isQuickOrderServiceActive
+          }
         />
         {/* wishlist */}
         <WishlistBtn currencyIcon={currencyIcon?.data?.currencySymbol} />
