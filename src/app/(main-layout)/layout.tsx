@@ -11,7 +11,7 @@ import FixedMenu from "./_components/FixedMenu/FixedMenu";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <UserProvider>
         <CartProvider>
           <WishlistProvider>

@@ -10,6 +10,7 @@ import GlobalSearch from "../GlobalSearch/GlobalSearch";
 import ProfilePhotoOrIcon from "./ProfilePhotoOrIcon";
 import CategoriesAndSubcategories from "./CategoriesAndSubcategories";
 import MainMenuItem from "./MainMenuItem";
+import { cookies, headers } from "next/headers";
 
 const LargeDeviceMegaMenu = async () => {
   const categories = await fetchData({ route: "/category", limit: 5 });
@@ -24,6 +25,10 @@ const LargeDeviceMegaMenu = async () => {
   const quickOrderServices = await fetchData({
     route: "/settings/quick-order-setting",
   });
+
+  // ===== get cookie to check user login or not
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value || null;
 
   return (
     <nav className="hidden md:flex main-container py-[clamp(8px,2vh,20px)] text-md items-center justify-between">
@@ -76,12 +81,9 @@ const LargeDeviceMegaMenu = async () => {
           }
         />
         {/* profile */}
-        <Link
-          href={"profile/dashboard"}
-          className="flex items-center justify-center"
-        >
-          <ProfilePhotoOrIcon />
-        </Link>
+        <div className="flex items-center justify-center">
+          <ProfilePhotoOrIcon accessToken={accessToken} />
+        </div>
       </div>
     </nav>
   );

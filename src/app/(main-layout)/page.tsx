@@ -143,7 +143,7 @@ const Page = async () => {
         </div>
         <div className="flex items-center justify-center my-5">
           <Link
-            className="bg-gradient-primary text-white px-5 py-3 rounded-md"
+            className="bg-gradient-primary hover:bg-gradient-primary-reverse text-white px-5 py-3 rounded-md"
             href="/category"
           >
             See all products
