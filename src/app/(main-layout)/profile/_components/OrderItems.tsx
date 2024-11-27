@@ -31,7 +31,13 @@ const OrderItems = ({
         <div className="flex items-start gap-3">
           <Link
             href={`/order-track/${order?._id}`}
-            className="border-gradient-primary p-[1px] rounded-md whitespace-nowrap"
+            className={`border-gradient-primary p-[1px] rounded-md whitespace-nowrap ${
+              ["Pending", "Cancelled", "Rejected"].includes(
+                order?.existOrderStatus?.status
+              )
+                ? "hidden"
+                : "block"
+            }`}
           >
             <Button className="text-primary-light text-xs md:text-base px-5 py-2 hover:bg-gradient-primary-light">
               Track Order
