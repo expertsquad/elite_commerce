@@ -126,7 +126,7 @@ export const ShippingInfoOrderItems = ({
         </button>
         <strong className="font-semibold text-gradient-primary text-sm md:text-base whitespace-nowrap">
           {currencySymbol}
-          {price * product?.orderQuantity}
+          {(price * product?.orderQuantity)?.toFixed(1)}
         </strong>
       </div>
     </div>
