@@ -1,4 +1,4 @@
-import { fetchData } from "@/actions/fetchData";
+import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import OrderPlacedThankYou from "./_components/OrderPlacedThankYou";
 import { formatDate } from "@/constants/formateDate.constants";
 import { OrderItemsTypes } from "@/interfaces/orderitems.interface";
@@ -32,27 +32,28 @@ interface Params {
   id: string;
 }
 
-interface SearchParams {
-  [key: string]: any;
-}
-
 const OrderSuccessfull = async ({
   params,
   searchParams,
 }: {
   params: Params;
-  searchParams: SearchParams;
+  searchParams: {
+    quickorder: string;
+    quickorderId: string;
+  };
 }) => {
-  const quickOrder = searchParams["quick-order"] === "true";
-  const response = await fetchData({
-    route: `${
-      quickOrder ? `/quick-order/${params?.id}` : `/online-order/${params?.id}`
-    }`,
-  });
-  const currencyIcon = await fetchData({
+  const quickOrder = searchParams.quickorder === "true";
+
+  const response = quickOrder
+    ? await fetchData({
+        route: `/quick-order/${searchParams?.quickorderId}`,
+      })
+    : await fetchProtectedData({
+        route: `/online-order/${params?.id}`,
+      });
+  const currencyIcon = await fetchProtectedData({
     route: "/settings/shop",
   });
-
   return (
     <div className="max-w-7xl mx-auto md:px-0 flex flex-col-reverse md:flex-row md:items-center md:gap-x-6 mb-6 md:mb-16">
       <div className="flex-1 md:w-1/2 md:h-[700px] bg-[#333333] text-white px-2 md:px-[30px] md:py-[30px] py-5 md:rounded-lg relative">

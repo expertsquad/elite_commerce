@@ -127,7 +127,7 @@ export const CartItem = ({
         <span className="text-sm text-black-80">Sub Total</span>
         <strong className="text-gradient-primary">
           {currencyIcon}
-          {price * product?.orderQuantity}
+          {(price * product?.orderQuantity).toFixed(1)}
         </strong>
       </div>
       <div className="md:flex flex-col md:items-center items-end md:justify-center hidden justify-between">

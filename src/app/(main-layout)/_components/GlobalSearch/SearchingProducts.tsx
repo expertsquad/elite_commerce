@@ -1,6 +1,5 @@
 "use client";
 import { fetchData } from "@/actions/fetchData";
-import AnimatedLoading from "@/Components/AnimatedLoading";
 import StarRating from "@/Components/StarRating";
 import { server_url } from "@/constants";
 import { IProduct } from "@/interfaces/product.interface";
@@ -8,6 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import emptyState from "@/assets/Images/empty_item.svg";
+import CustomLoading from "@/Components/CustomLoader";
 
 const SearchingProducts = ({
   searchValue,
@@ -58,7 +58,7 @@ const SearchingProducts = ({
     <div className="mb-5 flex flex-col overflow-y-auto h-[500px] scrollbar-y-remove  ">
       {loading ? (
         <div className="flex items-center justify-center h-full ">
-          <AnimatedLoading />
+          <CustomLoading />
         </div>
       ) : searchValue ? (
         products?.length > 0 ? (
@@ -66,9 +66,9 @@ const SearchingProducts = ({
             <div
               key={product?._id}
               onClick={() => handleProductView(product)}
-              className="flex items-center gap-x-5 cursor-pointer border-b border-black-10 transition-all duration-300 hover:bg-gradient-primary-light py-2"
+              className="flex items-center gap-x-5 cursor-pointer border-b border-black-10 transition-all duration-300 hover:bg-image-background py-2 px-3"
             >
-              <div className="bg-gradient-primary-light w-[70px] h-[70px] shrink-0 relative rounded-md">
+              <div className="bg-image-background w-[70px] h-[70px] shrink-0 relative rounded-md">
                 <Image
                   src={`${server_url + product?.productPhotos[0]}`}
                   alt="Product Photo"

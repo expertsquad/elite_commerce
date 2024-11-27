@@ -102,7 +102,9 @@ const QuickOrderModal = ({
       if (response?.success) {
         toast.success(response.message);
         const orderId = response?.data?._id;
-        router.push(`/successfull/${orderId}?quick-order=true`);
+        router.push(
+          `/successfull/${orderId}?quickorder=true&quickorderId=${orderId}`
+        );
         setFormValues({ fullName: "", phoneNumber: "", address: "" });
         setShow(false);
       } else {

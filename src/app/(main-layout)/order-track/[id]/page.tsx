@@ -1,4 +1,4 @@
-import { fetchData } from "@/actions/fetchData";
+import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import OrderStatusStep from "./_components/OrderStatusStep";
 import OrderInformation from "./_components/OrderInformation";
 import OrderSummary from "./_components/OrderSummary";
@@ -24,8 +24,10 @@ export async function generateMetadata() {
 }
 
 const OrderTrackPage = async ({ params }: { params: { id: string } }) => {
-  const response = await fetchData({ route: `/online-order/${params?.id}` });
-  const currencyIcon = await fetchData({
+  const response = await fetchProtectedData({
+    route: `/online-order/${params?.id}`,
+  });
+  const currencyIcon = await fetchProtectedData({
     route: "/settings/shop",
   });
   return (
