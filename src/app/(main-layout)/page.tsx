@@ -46,9 +46,6 @@ const Page = async () => {
 
   const widget = await getWidget();
 
-  const accessToken = cookies().get("accessToken")?.value;
-  console.log(accessToken);
-
   return (
     <>
       <div className="main-container pb-10">
