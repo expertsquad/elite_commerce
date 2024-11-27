@@ -1,8 +1,18 @@
 import React, { Suspense } from "react";
-import PersonalInformation from "./_components/PersonalInformation";
 import Link from "next/link";
 import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import CustomLoading from "@/Components/CustomLoader";
+import toast from "react-hot-toast";
+import { updateDataMutation } from "@/actions/updateDataMutation";
+import { revalidateTagAction } from "@/actions/revalidateTag";
+import dynamic from "next/dynamic";
+
+const PersonalInformation = dynamic(
+  () => import("./_components/PersonalInformation"),
+  {
+    ssr: false,
+  }
+);
 
 export async function generateMetadata() {
   try {
@@ -23,10 +33,32 @@ export async function generateMetadata() {
   }
 }
 
-const page = async () => {
+const AccountDetails = async () => {
   const getMe = await fetchProtectedData({
     route: "/user/me",
   });
+
+  const handleUserAction = async (formData: FormData) => {
+    "use server";
+    const profilePhoto = formData.get("profilePhoto") as File | null;
+    if (profilePhoto && profilePhoto.size === 0) {
+      formData.delete("profilePhoto");
+    }
+    try {
+      const res = await updateDataMutation({
+        route: "/user/update",
+        data: formData,
+        method: "PUT",
+        dataType: "formData",
+      });
+      console.log(res);
+      revalidateTagAction("/user/me");
+    } catch (error) {
+      console.error(error);
+      toast.error("something went wrong");
+    }
+  };
+
   return (
     <div>
       {/* tab to toggle section */}
@@ -48,10 +80,13 @@ const page = async () => {
 
       <Suspense fallback={<CustomLoading />}>
         {" "}
-        <PersonalInformation getMe={getMe} />
+        <PersonalInformation
+          getMe={getMe}
+          handleUserAction={handleUserAction}
+        />
       </Suspense>
     </div>
   );
 };
 
-export default page;
+export default AccountDetails;
