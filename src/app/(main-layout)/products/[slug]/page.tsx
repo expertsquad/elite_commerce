@@ -19,7 +19,6 @@ export async function generateMetadata({
   try {
     const product = await fetchData({
       route: `/product/slug/${params?.slug}`,
-      pathToRevalidate: "product",
     });
     const metaTitle =
       product?.data?.seo?.metaTitle || product?.data?.productName;
@@ -62,7 +61,7 @@ const ProductViewPage = async ({
   // <== Get a product by productslugURL ==>
   const product = await fetchData({
     route: `/product/slug/${params?.slug}`,
-    pathToRevalidate: "/products/[slug]",
+    pathToRevalidate: "/product",
   });
 
   // <== Get currency icon ==>
