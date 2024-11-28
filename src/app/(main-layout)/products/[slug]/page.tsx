@@ -19,6 +19,7 @@ export async function generateMetadata({
   try {
     const product = await fetchData({
       route: `/product/slug/${params?.slug}`,
+      pathToRevalidate: "product",
     });
     const metaTitle =
       product?.data?.seo?.metaTitle || product?.data?.productName;

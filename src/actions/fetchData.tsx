@@ -10,14 +10,14 @@ export const fetchData = async ({
   query = "",
   page = 1,
   limit = 10,
-  // revalidate = 3600,
+  revalidate = 3600,
   pathToRevalidate,
 }: {
   route: string;
   query?: string;
   page?: number;
   limit?: number;
-  // revalidate?: number;
+  revalidate?: number;
   pathToRevalidate?: string;
 }) => {
   try {
@@ -41,6 +41,8 @@ export const fetchData = async ({
     if (pathToRevalidate) {
       revalidatePath(pathToRevalidate);
       revalidateTag(pathToRevalidate);
+    } else if (revalidate) {
+      next.revalidate = revalidate;
     }
 
     return data;
