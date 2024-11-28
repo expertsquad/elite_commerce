@@ -5,7 +5,6 @@ const SearchPage = async () => {
   const categories = await fetchData({
     route: "/category",
     limit: 1000,
-    revalidate: 600,
   });
 
   const currencyIcon = await fetchData({

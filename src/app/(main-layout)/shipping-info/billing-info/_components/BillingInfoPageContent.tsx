@@ -11,6 +11,7 @@ import OrderSubmitAndTotalAmount from "./OrderSubmitAndTotalAmount";
 import toast from "react-hot-toast";
 import { postDataMutation } from "@/actions/postDataMutation";
 import CustomLoading from "@/Components/CustomLoader";
+import { revalidateTagAction } from "@/actions/revalidateTag";
 
 const BillingInfoPageContent = ({
   currencySymbol,
@@ -101,11 +102,14 @@ const BillingInfoPageContent = ({
       });
 
       if (result?.success) {
+        revalidateTagAction("/products/[slug]");
         toast.success(result?.message);
         localStorage.removeItem("orderInit");
         if (orderData?.payment?.paymentMethod === "COD") {
+          revalidateTagAction("/products/[slug]");
           router.push(`/successfull/${result?.data?._id}`);
         } else {
+          revalidateTagAction("/products/[slug]");
           router.push(result?.data);
         }
       } else {

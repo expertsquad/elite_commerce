@@ -9,7 +9,6 @@ const SmallDeviceMegaMenu = async () => {
   const categories = await fetchData({
     route: "/category",
     limit: 1000,
-    revalidate: 600,
   });
 
   return (
