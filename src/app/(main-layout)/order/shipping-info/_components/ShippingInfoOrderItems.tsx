@@ -1,14 +1,13 @@
-import StarRating from "@/Components/StarRating";
 import { IconX } from "@tabler/icons-react";
 import Image from "next/image";
 import { ICartProduct } from "@/interfaces/cart.interface";
 import { server_url, storages } from "@/constants";
-import IncreaseDecreaseOrderItems from "../../brands/_components/IncreaseDecreaseOrderItems";
 import { useContext } from "react";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
 import { calculateDiscountAndBulkOrderPrice } from "@/utils/calculateDiscountAndBulkOrderPrice";
 import { formatProductVariantName } from "@/constants/formatProductVariantName";
+import IncreaseDecreaseOrderItems from "@/app/(main-layout)/brands/_components/IncreaseDecreaseOrderItems";
 
 export const ShippingInfoOrderItems = ({
   product,

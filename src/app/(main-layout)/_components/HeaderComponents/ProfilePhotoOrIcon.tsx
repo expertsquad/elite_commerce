@@ -18,7 +18,7 @@ const ProfilePhotoOrIcon = ({
 
   const isProfilePath = pathName.startsWith("/profile");
 
-  if (accessToken && !user?.profilePhoto) {
+  if (accessToken && !user?._id) {
     return (
       <div className="w-8 h-8 rounded-full bg-black-10 animate-pulse"></div>
     );

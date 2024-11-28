@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 const Page = () => {
   const router = useRouter();
-  router.push("/shipping-info");
+  router.push("/order/shipping-info");
 
   return (
     <section className="main-container h-dvh">
@@ -25,7 +25,7 @@ const Page = () => {
           </div>
         </div>
         {/* Left section */}
-        <div className="w-[300px] md:w-[500px]"></div>
+        <div className="w-full md:w-[clamp(350px,40vw,450px)]"></div>
       </div>
     </section>
   );

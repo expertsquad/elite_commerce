@@ -4,13 +4,13 @@ import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { IAddress } from "@/interfaces/address.interface";
-import OrderItemsRightSection from "../../_components/OrderItemsRightSection";
 import PaymentOption from "./PaymentOption";
 import ShipToAndBillingSection from "./ShipToAndBillingSection";
 import OrderSubmitAndTotalAmount from "./OrderSubmitAndTotalAmount";
 import toast from "react-hot-toast";
 import { postDataMutation } from "@/actions/postDataMutation";
 import CustomLoading from "@/Components/CustomLoader";
+import OrderItemsRightSection from "../../shipping-info/_components/OrderItemsRightSection";
 
 const BillingInfoPageContent = ({
   currencySymbol,

@@ -85,11 +85,7 @@ const OrderSummery = ({
             shippingAmount={shippingAmount}
           />
         )}
-        <Link
-          href="/shipping"
-          className="w-full"
-          onClick={handleAddToInitOrder}
-        >
+        <Link href="/order" className="w-full" onClick={handleAddToInitOrder}>
           <ButtonPrimary
             onClick={() => setshow(false)}
             className="!uppercase !whitespace-nowrap py-[clamp(2px,1.2vh,20px)] hover:bg-gradient-primary-reverse"

@@ -22,7 +22,7 @@ export async function middleware(request: NextRequest) {
 
     if (
       request.nextUrl.pathname.startsWith("/profile") ||
-      request.nextUrl.pathname.startsWith("/shipping-info")
+      request.nextUrl.pathname.startsWith("/order")
     ) {
       if (!accessToken) {
         return NextResponse.redirect(new URL("/login", request.url));
@@ -52,7 +52,7 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     "/profile/:path*",
-    "/shipping-info/:path*",
+    "/order/:path*",
     "/((?!maintenance-mode|api|_next|favicon.ico).*)",
   ],
 };
