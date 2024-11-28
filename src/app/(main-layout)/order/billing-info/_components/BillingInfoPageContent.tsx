@@ -10,11 +10,7 @@ import OrderSubmitAndTotalAmount from "./OrderSubmitAndTotalAmount";
 import toast from "react-hot-toast";
 import { postDataMutation } from "@/actions/postDataMutation";
 import CustomLoading from "@/Components/CustomLoader";
-<<<<<<< HEAD:src/app/(main-layout)/order/billing-info/_components/BillingInfoPageContent.tsx
 import OrderItemsRightSection from "../../shipping-info/_components/OrderItemsRightSection";
-=======
-import { revalidateTagAction } from "@/actions/revalidateTag";
->>>>>>> bce6a7fb9bd13b82b40385b2446c3376dd403bc5:src/app/(main-layout)/shipping-info/billing-info/_components/BillingInfoPageContent.tsx
 
 const BillingInfoPageContent = ({
   currencySymbol,
@@ -77,7 +73,6 @@ const BillingInfoPageContent = ({
           route: "/user-address/add",
           data: JSON.stringify(shippingAddress),
           formatted: true,
-          pathToRevalidate: "/product",
         });
       } else if (
         shippingAddress?.selectedShippingAddress === "newAddress" ||
@@ -88,6 +83,7 @@ const BillingInfoPageContent = ({
           data: JSON.stringify(shippingAddress),
           formatted: true,
           method: "PUT",
+          pathToRevalidate: "/product",
         });
       }
     } catch (error) {
@@ -105,14 +101,11 @@ const BillingInfoPageContent = ({
       });
 
       if (result?.success) {
-        revalidateTagAction("/products/[slug]");
         toast.success(result?.message);
         localStorage.removeItem("orderInit");
         if (orderData?.payment?.paymentMethod === "COD") {
-          revalidateTagAction("/products/[slug]");
           router.push(`/successfull/${result?.data?._id}`);
         } else {
-          revalidateTagAction("/products/[slug]");
           router.push(result?.data);
         }
       } else {
