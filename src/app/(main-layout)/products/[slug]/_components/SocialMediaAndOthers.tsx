@@ -59,7 +59,7 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
                   className={`${
                     media?.mediaName?.toLowerCase() === "whatsapp" ||
                     media?.mediaName?.toLowerCase() === "messenger"
-                      ? "flex items-center gap-x-1.5 border border-primary-light hover:border-primary-light rounded-full py-1 px-2 cursor-pointer"
+                      ? "flex items-center gap-x-1.5 border border-black-10 hover:border-primary-light rounded-full py-1 px-2 cursor-pointer"
                       : ""
                   }`}
                 >
