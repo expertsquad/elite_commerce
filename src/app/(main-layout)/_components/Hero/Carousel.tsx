@@ -1,3 +1,4 @@
+"use client";
 import { server_url } from "@/constants";
 import { HeroSliderProps } from "@/interfaces/heroSliderProps";
 import { IconArrowRight } from "@tabler/icons-react";
@@ -11,12 +12,17 @@ const Carousel = ({
   item: HeroSliderProps;
   currencyIcon: string;
 }) => {
+  const isInternalLink = item?.link?.startsWith("/");
+
   const discountedPrice =
     item?.price - item?.price * (item?.discountPercentage / 100);
 
   const handleLink = () => {
-    if (item?.link && item?.backgroundPhoto) {
+    if (item?.link && !isInternalLink && item?.backgroundPhoto) {
       window.open(item?.link, "_blank");
+    }
+    if (item?.link && isInternalLink) {
+      window.location.href = "/products" + item?.link;
     }
   };
 
@@ -37,7 +43,7 @@ const Carousel = ({
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
-      id={item._id}
+      id={item?._id}
       onClick={handleLink}
     >
       <div
@@ -77,7 +83,8 @@ const Carousel = ({
           {item?.buttonText ? (
             <div className="md:mt-6 hover:text-positive">
               <Link
-                href={item?.link}
+                href={isInternalLink ? `/products${item?.link}` : item?.link}
+                target={`${isInternalLink ? "_self" : "_blank"}`}
                 className="min-w-[100px] max-w-[180px] flex items-center justify-center gap-x-2 bg-gradient-primary hover:bg-gradient-primary-reverse duration-150 transition-all text-white rounded-lg py-3 [font-size:_clamp(12px,2.5vw,16px)] uppercase whitespace-nowrap"
               >
                 {item?.buttonText} <IconArrowRight size={20} />
