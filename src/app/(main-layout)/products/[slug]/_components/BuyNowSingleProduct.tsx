@@ -44,7 +44,7 @@ const BuyNowSingleProduct = ({
     if (!accessToken) {
       router.push("/login");
     } else {
-      router.push("/shipping-info");
+      router.push("/shipping");
     }
   };
   return (
