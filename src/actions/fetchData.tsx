@@ -1,6 +1,7 @@
 "use server";
 
 import { server_api } from "@/constants";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 // use this for ssg and isr
@@ -9,21 +10,20 @@ export const fetchData = async ({
   query = "",
   page = 1,
   limit = 10,
-  revalidate = 3600,
+  // revalidate = 3600,
+  pathToRevalidate,
 }: {
   route: string;
   query?: string;
   page?: number;
   limit?: number;
-  revalidate?: number;
+  // revalidate?: number;
+  pathToRevalidate?: string;
 }) => {
   try {
     const next: NextFetchRequestConfig | undefined = {
       tags: [route],
     };
-    if (revalidate) {
-      next.revalidate = revalidate;
-    }
 
     const res = await fetch(
       `${server_api + route + `?page=${page}&limit=${limit}&${query}`}`,
@@ -36,6 +36,13 @@ export const fetchData = async ({
       }
     );
     const data = await res.json();
+
+    // revalidate path
+    if (pathToRevalidate) {
+      revalidatePath(pathToRevalidate);
+      revalidateTag(pathToRevalidate);
+    }
+
     return data;
   } catch (error) {
     throw error;
