@@ -1,6 +1,7 @@
 "use server";
 
 import { server_api } from "@/constants";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 // for un authenticate mutation
@@ -10,11 +11,13 @@ export const postDataUnauthenticatedMutation = async ({
   //   set format value true if you don't want format here
   formatted = false,
   data,
+  pathToRevalidate,
 }: {
   route: string;
   dataType?: "json" | "formData";
   formatted?: boolean;
   data: string | FormData;
+  pathToRevalidate?: string;
 }) => {
   try {
     // handle data based on data type
@@ -53,7 +56,6 @@ export const postDataUnauthenticatedMutation = async ({
       headers,
       body: structuredData,
     });
-
     const result = await res.json();
     return result;
   } catch (error) {
@@ -68,11 +70,13 @@ export const postDataMutation = async ({
   //   set format value true if you don't want format here
   formatted = false,
   data,
+  pathToRevalidate,
 }: {
   route: string;
   dataType?: "json" | "formData";
   formatted?: boolean;
   data: string | FormData;
+  pathToRevalidate?: string;
 }) => {
   try {
     const accessToken = cookies().get("accessToken")?.value;
@@ -118,6 +122,11 @@ export const postDataMutation = async ({
       headers,
       body: structuredData,
     });
+    // revalidate path
+    if (pathToRevalidate) {
+      revalidatePath(pathToRevalidate);
+      revalidateTag(pathToRevalidate);
+    }
 
     const result = await res.json();
     return result;
