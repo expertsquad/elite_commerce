@@ -18,6 +18,7 @@ import {
   handleRemoveQuickOrderProduct,
 } from "@/utils/quickorder/quickOrdersFunctions";
 import CustomLoading from "@/Components/CustomLoader";
+import { revalidateTagAction } from "@/actions/revalidateTag";
 
 const QuickOrderModal = ({
   show,
@@ -102,6 +103,7 @@ const QuickOrderModal = ({
       if (response?.success) {
         toast.success(response.message);
         const orderId = response?.data?._id;
+        revalidateTagAction("/products/[slug]");
         router.push(
           `/successfull/${orderId}?quickorder=true&quickorderId=${orderId}`
         );

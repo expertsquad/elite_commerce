@@ -2,7 +2,7 @@ import { dateFormat } from "@/utils/dateFormat";
 import Image from "next/image";
 import React from "react";
 import { server_url } from "@/constants";
-import { fetchProtectedData } from "@/actions/fetchData";
+import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import ReviewNewBtn from "./_components/ReviewNewBtn";
 import { noReview } from "@/assets";
 
@@ -14,7 +14,7 @@ const ProductReviewComponents = async () => {
 
   const userId = getUserInfo?.data?._id;
 
-  const reviewPending = await fetchProtectedData({
+  const reviewPending = await fetchData({
     route: "/review",
     query: `reviewStatus=Pending&reviewer.userId=${userId}`,
   });

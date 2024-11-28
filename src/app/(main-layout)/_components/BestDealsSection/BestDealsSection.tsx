@@ -9,7 +9,6 @@ import CountdownTimer from "./CountDownTimer";
 const BestDealsSection = async () => {
   const bestDeals = await fetchData({
     route: "/promotions/best-deals",
-    revalidate: 0,
   });
 
   const currentDate = new Date();

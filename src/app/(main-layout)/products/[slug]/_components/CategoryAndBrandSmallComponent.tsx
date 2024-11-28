@@ -18,7 +18,7 @@ const CategoryAndBrandSmallComponent = ({
     <div className="flex items-center gap-x-1.5">
       <Link
         href={`/brands/${brandName}`}
-        className="h-6 w-16 relative shrink-0"
+        className="h-10 w-10 relative shrink-0"
       >
         <Image
           src={`${server_url + brandPhoto}`}

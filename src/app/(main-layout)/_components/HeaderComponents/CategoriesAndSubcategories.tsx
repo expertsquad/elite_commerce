@@ -7,14 +7,12 @@ const CategoriesAndSubcategories = async () => {
   const categories = await fetchData({
     route: "/category",
     limit: 12,
-    revalidate: 600,
   });
   const widget = await getWidget();
   const featureProduct = await fetchData({
     route: "/product",
     query: "sortBy=totalSoldQuantity",
     limit: 4,
-    revalidate: 3600,
   });
   const currencySymbol = await fetchData({
     route: "/settings/shop",

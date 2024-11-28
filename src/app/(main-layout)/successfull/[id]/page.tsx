@@ -51,7 +51,7 @@ const OrderSuccessfull = async ({
     : await fetchProtectedData({
         route: `/online-order/${params?.id}`,
       });
-  const currencyIcon = await fetchProtectedData({
+  const currencyIcon = await fetchData({
     route: "/settings/shop",
   });
   return (

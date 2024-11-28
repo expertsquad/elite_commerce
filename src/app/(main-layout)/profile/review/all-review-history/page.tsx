@@ -36,7 +36,7 @@ const AllReviewHistory = async () => {
   const userId = getUserInfo?.data?._id;
 
   // <== Get all reviews by user id ==>
-  const allReviews = await fetchProtectedData({
+  const allReviews = await fetchData({
     route: "/review",
     query: `reviewStatus=Reviewed&reviewer.userId=${userId}&sortBy=updatedAt`,
     limit: 40,
