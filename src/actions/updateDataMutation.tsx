@@ -1,6 +1,7 @@
 "use server";
 
 import { server_api } from "@/constants";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 // use this for ssg and isr
@@ -11,12 +12,14 @@ export const updateDataMutation = async ({
   formatted = false,
   data,
   method = "PATCH",
+  pathToRevalidate,
 }: {
   route: string;
   dataType?: "json" | "formData";
   formatted?: boolean;
   data: string | FormData;
   method?: "PATCH" | "PUT" | "POST";
+  pathToRevalidate?: string;
 }) => {
   try {
     const accessToken = cookies().get("accessToken")?.value;
@@ -63,6 +66,12 @@ export const updateDataMutation = async ({
       headers,
       body: structuredData,
     });
+
+    // revalidate path
+    if (pathToRevalidate) {
+      revalidatePath(pathToRevalidate);
+      revalidateTag(pathToRevalidate);
+    }
 
     const result = await res.json();
     return result;

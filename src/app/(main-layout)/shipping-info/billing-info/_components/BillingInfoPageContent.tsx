@@ -73,6 +73,7 @@ const BillingInfoPageContent = ({
           route: "/user-address/add",
           data: JSON.stringify(shippingAddress),
           formatted: true,
+          pathToRevalidate: "/product",
         });
       } else if (
         shippingAddress?.selectedShippingAddress === "newAddress" ||
