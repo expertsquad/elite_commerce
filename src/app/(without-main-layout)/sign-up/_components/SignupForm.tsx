@@ -1,17 +1,15 @@
 "use client";
 import PasswordInput from "@/app/(main-layout)/profile/_components/PasswordInput";
-import Loading from "@/app/loading";
 import CustomInput from "@/Components/CustomInput";
+import CustomLoader from "@/Components/CustomLoader";
 import SubmitButton from "@/Components/SubmitButton";
 import { IErrorMessages } from "@/interfaces/error.interface";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { signUpServerAction } from "./SignUpServerAction";
+import toast from "react-hot-toast";
 
-const SignupForm = ({
-  handleSubmit,
-}: {
-  handleSubmit: (formData: FormData) => Promise<any>;
-}) => {
+const SignupForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<IErrorMessages[] | null>(null);
@@ -23,13 +21,14 @@ const SignupForm = ({
   const formSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
-    // handle signup action
     const formData = new FormData(event.currentTarget);
-    const result = await handleSubmit(formData);
+    const result = await signUpServerAction(formData);
     if (result?.success) {
       setIsLoading(false);
+      toast.success("Account created. Please verify your email.");
       router.replace(`/verify-email?email=${result?.data?.user?.email}`);
     } else {
+      toast.error(result?.message);
       setError(result?.errorMessages);
       setIsLoading(false);
     }
@@ -37,7 +36,7 @@ const SignupForm = ({
 
   return (
     <form onSubmit={formSubmit} className="w-full">
-      {isLoading && <Loading />}
+      {isLoading && <CustomLoader />}
       <fieldset className="w-4/4 flex flex-col border-t border-black-10">
         <legend className="mx-auto md:mb-3 font-medium md:text-xl text-lg text-black-80">
           Sign up
@@ -52,15 +51,15 @@ const SignupForm = ({
 
         <CustomInput
           errors={error}
-          type="number"
-          placeholder="Mobile Number"
+          type="text"
+          placeholder="+880123456789"
           name="phoneNumber"
         />
 
         <CustomInput
           errors={error}
           type="email"
-          placeholder="Email"
+          placeholder="example@mail.com"
           name="email"
         />
         <div className="space-y-2.5">
@@ -79,7 +78,7 @@ const SignupForm = ({
         <small className="text-xs text-danger text-center my-3">
           {globalError?.message}
         </small>
-        <SubmitButton className="bg-gradient-primary w-full mx-auto py-1.5 text-white rounded-md">
+        <SubmitButton className="bg-gradient-primary hover:bg-gradient-primary-reverse w-full mx-auto py-1.5 text-white rounded-md">
           Sign Up
         </SubmitButton>
       </fieldset>

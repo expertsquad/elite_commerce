@@ -6,6 +6,7 @@ type IButtonPrimary = {
   buttonText?: string;
   className?: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
 };
 
 const ButtonPrimary = ({
@@ -14,10 +15,12 @@ const ButtonPrimary = ({
   className,
   children,
   onClick,
+  disabled,
 }: IButtonPrimary) => {
   return (
     <button
       type={buttonType}
+      disabled={disabled}
       onClick={onClick}
       className={`flex items-center justify-center gap-2.5 px-5 w-full py-3.5  bg-gradient-primary  text-white rounded-lg ${className}`}
     >

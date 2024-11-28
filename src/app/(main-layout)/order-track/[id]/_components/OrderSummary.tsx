@@ -40,9 +40,9 @@ const OrderSummary = ({
       </div>
       <div className="flex items-center justify-between mb-3">
         <span>Discount </span>
-        <span className="text-danger">
-          -{currencyIcon}
-          {discount}
+        <span className="text-positive">
+          You&apos;ve saved ({currencyIcon}
+          {discount?.toFixed(1)})
         </span>
       </div>
       <span className="h-[1px] bg-black-10 flex w-full mb-5"></span>

@@ -1,4 +1,4 @@
-import { Button } from "@/Components/Buttons";
+"use client";
 import { server_url } from "@/constants";
 import { heroBottomSmallBanner } from "@/interfaces/heroBottom.interface";
 import { IconArrowRight } from "@tabler/icons-react";
@@ -7,12 +7,22 @@ import Link from "next/link";
 
 const BottomSmallBanner = ({
   bottomOffer,
+  currencyIcon,
 }: {
   bottomOffer: heroBottomSmallBanner;
+  currencyIcon: string;
 }) => {
+  const handleLink = () => {
+    if (bottomOffer?.link && bottomOffer?.backgroundPhoto) {
+      window.open(bottomOffer?.link, "_blank");
+    }
+  };
+
   return (
     <div
-      className={`flex justify-center md:justify-between items-center p-5 rounded-lg flex-1 w-full h-full text-white`}
+      className={`flex justify-center md:justify-between items-center p-5 rounded-lg flex-1 w-full h-full text-white ${
+        bottomOffer?.backgroundPhoto && "cursor-pointer"
+      }`}
       style={{
         backgroundColor: `${
           bottomOffer?.backgroundColor && `${bottomOffer?.backgroundColor}`
@@ -25,35 +35,40 @@ const BottomSmallBanner = ({
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
+      onClick={handleLink}
     >
-      <div className="flex flex-col">
-        <h2 className="[font-size:_clamp(1.2em,2.60vw,1.6em)] line-clamp-2 mb-2.5">
+      <div className={`flex flex-col `}>
+        <h2 className="text-lg md:text-xl line-clamp-2 mb-2.5">
           {bottomOffer?.offerTag}
         </h2>
-        <h2 className="line-clamp-2 [font-size:_clamp(0.8em,60vw,1em)]">
+        <span className="line-clamp-2 text-lg md:text-sm">
           {bottomOffer?.title}
-        </h2>
+        </span>
 
-        <Link
-          href={bottomOffer?.link}
-          target="_blank"
-          className="flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-md py-2 [font-size:_clamp(0.5em,60vw,0.9em)] mt-9 max-w-[130px] whitespace-nowrap"
-        >
-          {bottomOffer?.buttonText} <IconArrowRight size={20} />
-        </Link>
+        {bottomOffer?.buttonText ? (
+          <Link
+            href={bottomOffer?.link}
+            target="_blank"
+            className="flex items-center justify-center gap-2 bg-gradient-primary hover:bg-gradient-primary-reverse transition-all duration-300 text-white rounded-md py-2 mt-9 max-w-[110px] whitespace-nowrap text-xs uppercase"
+          >
+            {bottomOffer?.buttonText} <IconArrowRight size={16} />
+          </Link>
+        ) : null}
       </div>
 
-      <div className="relative w-36 h-36">
-        <Image
-          src={`${server_url + bottomOffer?.productPhoto}`}
-          alt="Hero discount item"
-          fill
-          style={{
-            objectFit: "cover",
-          }}
-          className="inset-0 top-0 left-0 object-cover"
-        />
-      </div>
+      {bottomOffer?.productPhoto ? (
+        <div className={`relative w-36 h-36`}>
+          <Image
+            src={`${server_url + bottomOffer?.productPhoto}`}
+            alt="Hero discount item"
+            fill
+            style={{
+              objectFit: "contain",
+            }}
+            className="inset-0 top-0 left-0 object-contain"
+          />
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -5,24 +5,33 @@ import Image from "next/image";
 import React from "react";
 import OrderCardHeader from "./OrderCardHeader";
 import AddOrEditReview from "./AddOrEditReview";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 const OrderItemsCard = ({
   orderItem,
   currency,
+  orderStatus,
 }: {
   orderItem: OrderItem;
   currency?: string;
+  orderStatus?: string;
 }) => {
+  const orderItemPrice = orderItem?.variant?.discountedPrice
+    ? orderItem?.variant?.discountedPrice
+    : orderItem?.variant?.sellingPrice;
+
+  const subTotalPrice = orderItemPrice * orderItem?.orderQuantity;
+
   return (
     <div className="text-black-50 flex gap-5 py-5 w-full border-b border-black-10">
       {/* flex first div */}
       <div className="flex items-center gap-3 w-full lg:w-1/2">
         {/* image part */}
-        <div className="bg-gradient-primary-light rounded-lg flex items-center justify-center relative w-14 h-14 shrink-0">
+        <div className="bg-image-background rounded-lg flex items-center justify-center relative w-14 h-14 shrink-0">
           <Image
             alt="Product Image"
             fill
-            src={server_url! + orderItem?.productPhotos}
+            src={server_url! + orderItem?.productPhotos[0]}
             className="inset-0 object-contain p-1.5"
           />
         </div>
@@ -35,6 +44,22 @@ const OrderItemsCard = ({
             <small className="text-positive">
               {orderItem?.brand?.brandName}
             </small>
+
+            {orderItem?.variant?.variantName &&
+              orderItem?.variant?.variantName !== "Not specified" && (
+                <div className="flex items-center gap-x-1">
+                  <div>|</div>
+                  <div
+                    className="h-3 w-3 rounded-full"
+                    style={{
+                      backgroundColor: orderItem?.variant?.variantName,
+                    }}
+                  ></div>
+                  <span className="text-sm">
+                    {formatProductVariantName(orderItem?.variant?.variantName)}
+                  </span>
+                </div>
+              )}
             <div>|</div>
             <StarRating rating={4} />
           </div>
@@ -44,14 +69,11 @@ const OrderItemsCard = ({
             <div className="flex items-center justify-between">
               <p>
                 {currency}
-                {orderItem?.variant?.discountedPrice
-                  ? orderItem?.variant?.discountedPrice?.toString()
-                  : orderItem?.variant?.sellingPrice?.toString()}{" "}
-                x {orderItem.orderQuantity}
+                {orderItemPrice?.toString()}
               </p>
               <strong className="text-gradient-primary">
                 {currency}
-                {orderItem?.subTotalPayable}
+                {subTotalPrice?.toString()}
               </strong>
             </div>
           </div>
@@ -68,7 +90,7 @@ const OrderItemsCard = ({
           />
           <OrderCardHeader
             title="Unit Price"
-            value={`$${
+            value={`${currency}${
               orderItem?.variant?.discountedPrice
                 ? orderItem?.variant?.discountedPrice?.toString()
                 : orderItem?.variant?.sellingPrice?.toString()
@@ -77,11 +99,19 @@ const OrderItemsCard = ({
           />
           <OrderCardHeader
             title="Sub Total"
-            value={`$${orderItem?.subTotalPayable?.toString()}`}
+            value={`${currency}${subTotalPrice?.toString()}`}
             className="text-lg font-bold text-gradient-primary"
           />
-          {orderItem?.isReviewed && (
-            <AddOrEditReview value={orderItem?.isReviewed} />
+          {orderItem?.isReviewed ? (
+            <AddOrEditReview isReviewed={orderItem?.isReviewed} />
+          ) : (
+            orderItem?.isReviewed === false &&
+            orderStatus === "Delivered" && (
+              <AddOrEditReview
+                isReviewed={orderItem?.isReviewed}
+                status={orderStatus}
+              />
+            )
           )}
         </div>
       </div>

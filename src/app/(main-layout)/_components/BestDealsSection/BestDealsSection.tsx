@@ -5,7 +5,6 @@ import React from "react";
 import BestDealsSectionProduct from "./BestDealsSectionProduct";
 import { IBestDealsProductData } from "@/interfaces/bestDeals.interface";
 import CountdownTimer from "./CountDownTimer";
-import { bestDealsBG } from "@/assets";
 
 const BestDealsSection = async () => {
   const bestDeals = await fetchData({
@@ -13,6 +12,9 @@ const BestDealsSection = async () => {
     revalidate: 0,
   });
 
+  const currentDate = new Date();
+  const endDate = bestDeals?.data?.endDate;
+  const endDateTime = endDate ? new Date(endDate) : null;
   return (
     <div
       className="w-full"
@@ -37,46 +39,46 @@ const BestDealsSection = async () => {
               src={server_url + bestDeals?.data?.firstProductPhoto}
               alt="product photo"
               style={{
-                objectFit: "cover",
+                objectFit: "contain",
               }}
               fill
-              className="inset-0 top-0 left-0 object-cover"
+              className="inset-0 top-0 left-0 object-contain"
             />
           </div>
           <div className="flex flex-col justify-center items-center">
-            <h3 className="text-gradient-primary uppercase text-sm">
+            <h3 className="text-gradient-primary uppercase text-sm font-medium">
               Best Deals
             </h3>
-            <span className="text-gradient-primary uppercase text-center [font-size:clamp(18px,2.5vw,25px)] font-bold line-clamp-2">
+            <span className="text-gradient-primary uppercase text-center [font-size:clamp(18px,3vw,30px)] font-bold line-clamp-2 xl:w-[80%]">
               {bestDeals?.data?.title}
             </span>
-            <h1 className="text-center mt-2 text-black-80 [font-size:clamp(14px,2vw,18)] md:line-clamp-3 line-clamp-2">
+            <p className="text-center mt-2 text-black-80 [font-size:clamp(14px,2vw,18)] md:line-clamp-3 line-clamp-2 hidden md:block">
               {bestDeals?.data?.description}
-            </h1>
-            <div className="mt-9">
+            </p>
+            {endDateTime && currentDate <= endDateTime && (
               <CountdownTimer
                 startDate={bestDeals?.data?.startDate}
                 endDate={bestDeals?.data?.endDate}
               />
-            </div>
+            )}
           </div>
           <div className="relative w-[clamp(250px,10vw,350px)] min-h-[250px] max-h-[350px] shrink-0">
             <Image
               src={server_url + bestDeals?.data?.secondProductPhoto}
               alt="product photo"
               style={{
-                objectFit: "cover",
+                objectFit: "contain",
               }}
               fill
-              className="inset-0 top-0 left-0 object-cover"
+              className="inset-0 top-0 left-0 object-contain"
             />
           </div>
         </div>
         <div className="flex w-full overflow-x-scroll scrollbar-x-remove">
-          <div className="flex items-center justify-center gap-x-5 w-full">
+          <div className="flex items-center md:justify-center gap-x-5 md:gap-x-5 xl:justify-between w-[300%] md:w-full">
             {bestDeals?.data?.products?.map(
-              (product: IBestDealsProductData) => (
-                <BestDealsSectionProduct key={product?._id} product={product} />
+              (product: IBestDealsProductData, index: number) => (
+                <BestDealsSectionProduct key={index} product={product} />
               )
             )}
           </div>

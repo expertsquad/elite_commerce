@@ -10,6 +10,7 @@ const FilterModal = ({
   brands,
   widget,
   currency,
+  productMaxPrice,
 }: IFilteringSectionProps) => {
   const [show, setShow] = useState(false);
   return (
@@ -36,6 +37,7 @@ const FilterModal = ({
             products={products}
             brands={brands}
             currency={currency}
+            productMaxPrice={productMaxPrice}
           />
         </Modal>
       )}

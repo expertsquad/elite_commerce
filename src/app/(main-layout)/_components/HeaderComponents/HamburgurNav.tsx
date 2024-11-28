@@ -14,11 +14,20 @@ import {
   IconMenu2,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
+import MainMenuItem from "./MainMenuItem";
 
 const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
   const [showMenu, setShowMenu] = React.useState<boolean>(false);
   const [content, setContent] = React.useState<React.ReactNode>(false);
+  const redirectPath = "/category/single-category";
+  const router = useRouter();
+
+  const handleCategoryClick = (categoryName: string) => {
+    router.push(`${redirectPath}?category=${categoryName}`);
+    setShowMenu(false);
+  };
 
   {
     /*===========================
@@ -40,13 +49,14 @@ const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
               key={subcategory?.subcategoryId}
               className="hover:bg-gradient-primary hover:text-white flex items-center justify-between group/category"
             >
-              <Link
-                href={"/subcategory/" + subcategory.subcategoryName}
+              <span
+                onClick={() =>
+                  handleCategoryClick(subcategory?.subcategoryName)
+                }
                 className="py-3 px-2 flex w-full"
-                onClick={() => setShowMenu(false)}
               >
                 {subcategory?.subcategoryName}
-              </Link>
+              </span>
             </li>
           ))}
       </ul>
@@ -69,23 +79,22 @@ const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
       <ul className="flex flex-col">
         {categories.map((category) => (
           <li
-            key={category.categoryName}
+            key={category?.categoryName}
             className="hover:bg-gradient-primary hover:text-white flex items-center justify-between group/category"
           >
-            <Link
-              href={"/category/" + category?.categoryName}
+            <span
               className={`py-3 px-2 flex ${
                 category?.subcategories?.length ? "basis-10/12" : "basis-full"
               }`}
-              onClick={() => setShowMenu(false)}
+              onClick={() => handleCategoryClick(category?.categoryName)}
             >
               {category?.categoryName}
-            </Link>
+            </span>
             {category?.subcategories?.length && (
               <button
                 className="basis-2/12 h-full group-hover/category:bg-gradient-primary"
                 onClick={() => {
-                  setContent(createSubcategoryNode(category.subcategories));
+                  setContent(createSubcategoryNode(category?.subcategories));
                 }}
               >
                 <IconChevronRight />
@@ -104,34 +113,37 @@ const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
   const menusNode = (
     <div className="h-full w-full overflow-auto flex flex-col">
       <div className="p-2">
-        <Logo
-          onClick={() => {
-            setShowMenu(false);
-          }}
-        />
+        <Logo />
       </div>
       <button
-        className="flex items-center gap-2 py-3 px-2 bg-gradient-primary w-full text-white"
+        className="flex items-center gap-2 py-3 px-5 bg-gradient-primary w-full text-white"
         onClick={() => setContent(categoriesNode)}
       >
         <IconMenu2 color="white" />
         All Categories
       </button>
-      {mainMenus.map((menu) => (
-        <Link
-          href={menu.href}
-          key={menu.label}
-          className="py-3 px-2 hover:text-gradient-primary hover:font-bold"
+      {mainMenus.map((menu, i: number) => (
+        <MainMenuItem
+          parentClassName="list-none"
+          className="!py-3 !px-5 !hover:font-bold list-none"
+          key={i}
+          menu={menu}
           onClick={() => setShowMenu(false)}
-        >
-          {menu?.label}
-        </Link>
+        />
+        // <Link
+        //   href={menu.href}
+        //   key={menu.label}
+        //   className="py-3 px-5 hover:text-gradient-primary hover:font-bold"
+        //   onClick={() => setShowMenu(false)}
+        // >
+        //   {menu?.label}
+        // </Link>
       ))}
-      {topMenus.map((menu) => (
+      {topMenus.map((menu, i: number) => (
         <Link
           href={menu.href}
-          key={menu.label}
-          className="py-3 px-2 hover:text-gradient-primary hover:font-bold"
+          key={i}
+          className="py-3 px-5 hover:text-gradient-primary hover:font-bold"
           onClick={() => setShowMenu(false)}
         >
           {menu?.label}

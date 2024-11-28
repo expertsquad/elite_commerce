@@ -1,9 +1,28 @@
 import { fetchData } from "@/actions/fetchData";
 import React from "react";
-import SortingSection from "../../_components/FilterBySelection";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct } from "@/interfaces/product.interface";
 import Pagination from "@/Components/Pagination";
+import { getCurrency } from "@/utils/getCurrency";
+
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Category | ${shopInfo?.data?.shopName}`,
+      description: `Explore a wide range of categories at ${shopInfo?.data?.shopName}. Discover products across various categories tailored to your needs, all in one place.`,
+    };
+  } catch (error) {
+    return {
+      title: "Category",
+      description:
+        "Explore a wide range of product categories tailored to meet every need, all in one place.",
+    };
+  }
+}
 
 const ProductsPage = async ({ params }: { params: { page: number } }) => {
   const products = await fetchData({
@@ -13,6 +32,12 @@ const ProductsPage = async ({ params }: { params: { page: number } }) => {
   });
 
   const totalPages = Math.ceil(products?.meta?.total / products?.meta?.limit);
+
+  const quickOrderServices = await fetchData({
+    route: "/settings/quick-order-setting",
+  });
+
+  const currency = await getCurrency();
 
   return (
     <div className="">
@@ -24,17 +49,29 @@ const ProductsPage = async ({ params }: { params: { page: number } }) => {
       </div>
       <div className="grid grid-cols-product-grid gap-5 place-items-center">
         {products?.data?.map((product: IProduct) => (
-          <ProductCard key={product?._id} product={product} />
+          <ProductCard
+            currencyIcon={currency}
+            isQuickOrderActive={
+              quickOrderServices?.data?.isQuickOrderServiceActive
+            }
+            shippingAmount={quickOrderServices?.data?.deliveryCharge}
+            key={product?._id}
+            product={product}
+          />
         ))}
       </div>
 
-      <div className="my-10">
-        <Pagination
-          totalPages={totalPages}
-          currentPage={Number(params?.page)}
-          redirectTo="/category/page"
-        />
-      </div>
+      {totalPages > 1 ? (
+        <div className="my-10">
+          <Pagination
+            totalPages={totalPages}
+            currentPage={Number(params?.page)}
+            redirectTo="/category/page"
+          />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

@@ -34,10 +34,7 @@ export const topMenus = [
     label: "Privacy Policy",
     href: "/privacy-policy",
   },
-  {
-    label: "Track order",
-    href: "/track-order",
-  },
+
   {
     label: "Wishlist",
     href: "/wishlist",
@@ -48,49 +45,55 @@ export const bottomNavMenus = [
   {
     label: "Home",
     href: "/",
-    icon: IconHome,
   },
   {
     label: "Brands",
     href: "/brands",
-    icon: IconBrandMercedes,
   },
   {
     label: "Cart",
     href: "/cart",
-    icon: IconGardenCart,
   },
   {
     label: "Products",
     href: "/category",
-    icon: IconCategory,
   },
 ];
+
+const websiteUrl = "https://elite-commerce.vercel.app/";
 
 export const storeSocialMedia = [
   {
     label: "Facebook",
-    href: "https://www.facebook.com/nirimon123",
+    href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      websiteUrl
+    )}`,
     icon: IconBrandFacebook,
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/nirimon123",
+    href: `https://www.instagram.com/?url=${encodeURIComponent(websiteUrl)}`, // Instagram does not support direct URL sharing
     icon: IconBrandInstagram,
   },
   {
     label: "Twitter",
-    href: "https://www.twitter.com/nirimon123",
+    href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      websiteUrl
+    )}`,
     icon: IconBrandTwitter,
   },
   {
     label: "Pinterest",
-    href: "https://www.pinterest.com/nirimon123",
+    href: `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(
+      websiteUrl
+    )}`,
     icon: IconBrandPinterest,
   },
   {
     label: "Linkedin",
-    href: "https://www.linkedin.com/nirimon123",
+    href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+      websiteUrl
+    )}`,
     icon: IconBrandLinkedin,
   },
 ];

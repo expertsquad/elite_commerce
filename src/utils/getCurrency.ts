@@ -1,10 +1,8 @@
-import { fetchProtectedData } from "@/actions/fetchData";
+import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 
 export const getCurrency = async () => {
-  const res = await fetchProtectedData({
+  const res = await fetchData({
     route: "/settings/shop",
   });
-  console.log(res);
-
   return res?.data?.currencySymbol;
 };

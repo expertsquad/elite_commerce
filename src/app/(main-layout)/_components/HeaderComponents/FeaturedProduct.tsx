@@ -1,6 +1,7 @@
 import { server_url } from "@/constants";
 import { IProduct } from "@/interfaces/product.interface";
 import Image from "next/image";
+import Link from "next/link";
 
 export const FeaturedProduct = async ({
   product,
@@ -8,15 +9,22 @@ export const FeaturedProduct = async ({
 }: {
   product: IProduct;
   currencySymbol: string;
+  key?: number;
 }) => {
   return (
-    <div className="flex items-center border rounded border-black-10 p-3 gap-3">
-      <div className="w-20 h-20 relative ">
+    <Link
+      href={`/products/${product?.productUrlSlug}`}
+      className="flex items-center border rounded border-black-10 p-[11px] gap-2.5 max-w-[350px] hover:bg-image-background hover:border-primary-light transition-all duration-300"
+    >
+      <div className="w-16 h-16 relative overflow-hidden">
         <Image
           src={server_url + product?.productPhotos[0]}
           alt="featured-products"
           fill
-          className="object-cover"
+          style={{
+            objectFit: "contain",
+          }}
+          className="object-contain h-full w-full inset-0"
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -32,6 +40,6 @@ export const FeaturedProduct = async ({
             : product?.variants[0].sellingPrice}
         </strong>
       </div>
-    </div>
+    </Link>
   );
 };

@@ -16,15 +16,20 @@ import { storages } from "@/constants";
 const ShippingAddess = ({
   defaultAddress,
   country,
+  states,
+  cities,
 }: {
   defaultAddress: ResponseShippingAddress;
   country?: string;
+  states?: any;
+  cities?: any;
 }) => {
   const [selectedOption, setSelectedOption] = useState("defaultAddress");
   const [shippingAddress, setShippingAddress] = useState(
     defaultAddress?.data[0] || {}
   );
-  const { orderData, setRefetch } = useContext(OrderInitContext);
+  const { orderData, setRefetch, setOrderData } = useContext(OrderInitContext);
+
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSelectedOption(value);
@@ -62,7 +67,7 @@ const ShippingAddess = ({
       <DefaultAddress defaultAddress={defaultAddress?.data?.[0]} />
 
       {/* Radio button */}
-      <div className="my-5 flex items-center justify-start gap-5">
+      <div className="my-5 flex md:items-center justify-start md:flex-row flex-col gap-5">
         <label className="inline-flex items-center mb-4 cursor-pointer">
           <div
             className={`w-5 h-5 rounded-full bg-white flex items-center justify-center border-gradient-primary p-[2px] ${
@@ -114,6 +119,8 @@ const ShippingAddess = ({
         <AddNewShippingInputSection
           country={country ? country : ""}
           onNewAddressChange={handleNewAddressChange}
+          states={states}
+          cities={cities}
         />
       )}
     </div>

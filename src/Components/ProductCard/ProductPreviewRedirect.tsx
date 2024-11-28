@@ -1,29 +1,38 @@
 "use client";
 import { IProduct } from "@/interfaces/product.interface";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import CustomLoading from "../CustomLoader";
 
 const ProductPreviewRedirect = ({
   className,
   children,
   product,
-  onClick,
 }: {
   className?: string;
   children: React.ReactNode;
   product: IProduct;
-  onClick?: () => void;
 }) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleRedirect = (e: React.MouseEvent) => {
     e.stopPropagation();
-    onClick && onClick();
-    router.push(`/products/${product?._id}`);
+    setIsLoading(true);
+
+    router.push(`/products/${product?.productUrlSlug}`);
   };
 
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setTimeout(() => setIsLoading(false), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
+
   return (
-    <div className={className} onClick={handleRedirect}>
+    <div className={`${className} relative`} onClick={handleRedirect}>
+      {isLoading && <CustomLoading />}
       {children}
     </div>
   );

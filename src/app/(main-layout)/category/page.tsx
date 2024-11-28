@@ -1,12 +1,25 @@
 import React from "react";
 import { fetchData } from "@/actions/fetchData";
 import SortingSection from "./_components/FilterBySelection";
+import { getCurrency } from "@/utils/getCurrency";
 
 export async function generateMetadata() {
-  return {
-    title: "Category | Elite Commerce",
-    description: "All categories of products",
-  };
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Category | ${shopInfo?.data?.shopName}`,
+      description: `Explore a wide range of categories at ${shopInfo?.data?.shopName}. Discover products across various categories tailored to your needs, all in one place.`,
+    };
+  } catch (error) {
+    return {
+      title: "Category",
+      description:
+        "Explore a wide range of product categories tailored to meet every need, all in one place.",
+    };
+  }
 }
 
 const CategoryPage = async () => {
@@ -31,6 +44,10 @@ const CategoryPage = async () => {
     query: "sortBy=variants.sellingPrice&sortOrder=desc",
     limit: 20,
   });
+  const quickOrderServices = await fetchData({
+    route: "/settings/quick-order-setting",
+  });
+  const currency = await getCurrency();
 
   return (
     <div className="">
@@ -41,6 +58,11 @@ const CategoryPage = async () => {
             newProducts={newProducts}
             highPriceProducts={highPriceProducts}
             lowPriceProducts={lowPriceProducts}
+            currency={currency}
+            isQuickOrderActive={
+              quickOrderServices?.data?.isQuickOrderServiceActive
+            }
+            shippingAmount={quickOrderServices?.data?.deliveryCharge}
           />
         </div>
       </div>

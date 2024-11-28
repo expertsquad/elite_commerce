@@ -12,9 +12,10 @@ import { updatedCartMutation } from "@/utils/updateCart.utils";
 import PasswordInput from "@/app/(main-layout)/profile/_components/PasswordInput";
 import MergingIndicator from "./MergingIndicator";
 import { CartContext } from "@/Provider/CartProvider";
-import Loading from "@/app/loading";
 import { IErrorMessages } from "@/interfaces/error.interface";
 import CustomLoader from "@/Components/CustomLoader";
+import toast from "react-hot-toast";
+import Link from "next/link";
 
 const LoginForm = () => {
   const { setRefetch } = useContext(CartContext);
@@ -33,7 +34,9 @@ const LoginForm = () => {
     const formData = new FormData(event.currentTarget);
     const result = await loginServerAction(formData);
 
-    if (result?.success) {
+    if (result?.data?.user?.isVerified === false) {
+      router.push("/verify-email");
+    } else if (result?.success) {
       setIsLoading(false);
       setMerging(true);
       // merge remote and local cart items
@@ -48,7 +51,9 @@ const LoginForm = () => {
       setRefetch((prev) => prev + 1);
       router.back();
       setMerging(false);
+      toast.success(result?.message);
     } else {
+      toast.error(result?.message);
       setError(result?.errorMessages);
       setIsLoading(false);
     }
@@ -64,7 +69,7 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full flex items-start justify-center relative"
+      className="w-full flex items-start justify-center relative z-10"
     >
       {isLoading && <CustomLoader />}
       <fieldset className="w-3/4 flex flex-col gap-3 border-t border-black-10">
@@ -76,7 +81,12 @@ const LoginForm = () => {
           name="password"
           error={error?.find((err) => err.path === "password")?.message}
         />
-        <small className="ml-auto">Forgot password</small>
+        <Link
+          href={`/forgot-password`}
+          className="ml-auto hover:underline hover:text-primary-color [font-size:_clamp(12px,2.5vw,14px)]"
+        >
+          Forgotten password?
+        </Link>
 
         {globalError && (
           <small className="text-danger text-xs text-center">
@@ -84,7 +94,9 @@ const LoginForm = () => {
           </small>
         )}
         <SubmitButton
-          className={"bg-gradient-primary w-full py-3 text-white rounded-md"}
+          className={
+            "bg-gradient-primary transition-all hover:bg-gradient-primary-reverse duration-300 w-full py-3 text-white rounded-md"
+          }
         >
           Login
         </SubmitButton>

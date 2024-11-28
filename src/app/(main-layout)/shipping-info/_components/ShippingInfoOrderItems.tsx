@@ -7,6 +7,8 @@ import IncreaseDecreaseOrderItems from "../../brands/_components/IncreaseDecreas
 import { useContext } from "react";
 import { OrderInitContext } from "@/Provider/OrderInitDataProvider";
 import { setLocalStorageData } from "@/helpers/localStorage.helper";
+import { calculateDiscountAndBulkOrderPrice } from "@/utils/calculateDiscountAndBulkOrderPrice";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
 
 export const ShippingInfoOrderItems = ({
   product,
@@ -15,12 +17,13 @@ export const ShippingInfoOrderItems = ({
   product: ICartProduct;
   currencySymbol: string;
 }) => {
-  console.log(currencySymbol);
   const { orderData, setRefetch } = useContext(OrderInitContext);
   const handleRemoveItem = () => {
     let updateOrderItems = orderData?.orderItems;
     const productIndex = orderData?.orderItems?.findIndex(
-      (item) => item.productId === product.productId
+      (item) =>
+        item.productId === product.productId &&
+        item?.variant?.variantName === product?.variant?.variantName
     );
     const existProduct = orderData?.orderItems?.find(
       (item) => item.productId === product.productId
@@ -36,26 +39,35 @@ export const ShippingInfoOrderItems = ({
     });
     setRefetch((prev) => prev + 1);
   };
-  // product price
-  const price =
-    product?.variant?.discountedPrice || product?.variant?.sellingPrice;
+  // <== product price ==>
+
+  const { sellingPrice, discountPercentage, discountedPrice } =
+    calculateDiscountAndBulkOrderPrice(
+      product,
+      product?.variant,
+      product?.orderQuantity
+    );
+
+  const price = discountedPrice ? discountedPrice : sellingPrice;
 
   return (
     <div className="flex  justify-between gap-3.5">
       <div className="flex md:items-center gap-3.5">
         <div>
-          <div className="bg-gradient-primary-light md:p-3.5 p-1.5 rounded-[10px]">
-            <div className="relative  md:w-[70px] md:h-[70px]  w-[50px] h-[50px]">
+          <div className="bg-image-background p-1.5 rounded-[10px]">
+            <div className="relative md:w-[70px] md:h-[70px] w-[50px] h-[50px]">
               <Image
                 alt="product"
                 src={server_url + product?.productPhoto}
                 fill
-                objectFit="cover"
+                style={{
+                  objectFit: "contain",
+                }}
               />
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-between gap-4">
+        <div className="flex flex-col justify-between gap-y-2">
           <div className="flex flex-col justify-between">
             <span className="line-clamp-1 md:text-base text-sm text-black-80">
               {product?.productName}
@@ -64,13 +76,36 @@ export const ShippingInfoOrderItems = ({
               <span className="text-positive text-[10px] md:text-xs">
                 {product?.brandName}
               </span>
-              <span className="text-black-10">|</span>
-              <StarRating rating={product?.averageRating || 0} />
+
+              {product?.variant?.variantName !== "Not specified" &&
+                product?.variant?.variantName !== "" && (
+                  <>
+                    <span className="text-black-10">|</span>
+                    <div
+                      className="h-3 w-3 rounded-full"
+                      style={{
+                        backgroundColor: product?.variant?.variantName,
+                      }}
+                    ></div>
+                    <span className="text-xs">
+                      {formatProductVariantName(product?.variant?.variantName)}
+                    </span>
+                  </>
+                )}
+              {discountPercentage > 0 && (
+                <>
+                  <span className="text-black-10">|</span>
+                  <span className="text-secondary text-[10px] md:text-xs">
+                    {discountPercentage}% OFF
+                  </span>
+                </>
+              )}
             </div>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="text-black-80 text-xs">
-              {currencySymbol} {price}
+            <span className="text-black-80 text-sm md:text-base whitespace-nowrap">
+              {currencySymbol}
+              {price}
             </span>
             <span>
               <IconX stroke={1} height={12} width={12} />
@@ -89,8 +124,9 @@ export const ShippingInfoOrderItems = ({
             onClick={handleRemoveItem}
           />
         </button>
-        <strong className="font-semibold text-gradient-primary text-base">
-          {currencySymbol} {price * product?.orderQuantity}
+        <strong className="font-semibold text-gradient-primary text-sm md:text-base whitespace-nowrap">
+          {currencySymbol}
+          {(price * product?.orderQuantity)?.toFixed(1)}
         </strong>
       </div>
     </div>

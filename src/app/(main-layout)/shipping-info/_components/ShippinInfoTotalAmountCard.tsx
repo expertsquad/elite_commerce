@@ -29,7 +29,6 @@ const ShippinInfoTotalAmountCard = ({
   // getting total and discount by using custom function
   const { totalDiscount, totalPrice } =
     calculateTotalPriceAndDiscountOfCart(products);
-  console.log(totalDiscount, totalPrice);
 
   // getting expected shipping fee by using custom function
   const shippingFee = getShippingFee(shippingCharge, city, totalPrice);
@@ -59,23 +58,30 @@ const ShippinInfoTotalAmountCard = ({
             <div className="flex items-center justify-between">
               <p>Sub Total</p>
               <strong>
-                {currencySymbol} {totalPrice.toFixed(2)}
+                {currencySymbol}
+                {totalPrice.toFixed(2)}
               </strong>
             </div>
             <div className="flex items-center justify-between">
               <p>Shipping</p>
-              <p className={`${shippingFee ? "" : "text-primary-light"}`}>
+              <p
+                className={`${
+                  shippingFee ? "" : "text-primary-color-light-color"
+                }`}
+              >
                 {shippingFee
                   ? currencySymbol + shippingFee
                   : "You Got Free Shipping"}
               </p>
             </div>
-            <div className="flex items-center justify-between">
-              <p>Discount</p>
+
+            <div className="flex items-center justify-between text-positive">
+              <span className="text-black-80 md:text-base text-sm">
+                Discount
+              </span>
               <p>
-                {" "}
-                -{currencySymbol}
-                {totalDiscount}
+                You saved ({currencySymbol}
+                {totalDiscount})
               </p>
             </div>
           </div>
@@ -83,21 +89,23 @@ const ShippinInfoTotalAmountCard = ({
           <div className="flex items-center justify-between [font-size:_clamp(1.4em,40vw,1.7em)] font-bold my-2">
             <h2 className="">Total</h2>
             <h2 className="text-gradient-primary">
-              {" "}
-              {currencySymbol} {totalPrice + shippingFee}
+              {currencySymbol}
+              {totalPrice + shippingFee}
             </h2>
           </div>
           {/* Button Link */}
           <Button
             className="bg-gradient-primary w-full rounded-lg text-white my-2"
-            disabled={!isAddressComplete()}
+            disabled={
+              !isAddressComplete() || orderData?.shippingAddress == undefined
+            }
           >
             <Link
               href={"/shipping-info/billing-info"}
-              className="flex items-center justify-center py-2.5"
+              className="flex items-center justify-center gap-x-1 py-2.5"
             >
               Continue To Payment
-              <IconArrowRight />
+              <IconArrowRight size={20} stroke={1.5} />
             </Link>
           </Button>
         </>

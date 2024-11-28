@@ -14,10 +14,16 @@ const BestDealsSectionProduct = async ({
   const currencyIcon = await fetchData({
     route: "/settings/shop",
   });
+
+  const discountedPrice = product?.discountPercentage
+    ? product.sellingPrice -
+      (product.sellingPrice * product.discountPercentage) / 100
+    : null;
+
   return (
     <Link
-      href={`products/${product?.productId}`}
-      className="flex items-center min-w-[200px] md:min-w-[220px] xl:min-w-[250px] max-w-[290px] py-2 px-2 rounded-xl bg-white hover:drop-shadow-lg hover:duration-500 cursor-pointer"
+      href={`products/${product?.productUrlSlug}`}
+      className="flex items-center min-w-[200px] md:min-w-[220px] xl:min-w-[290px] max-w-[300px] p-2.5 rounded-md bg-white hover:drop-shadow-lg hover:duration-500 cursor-pointer"
     >
       <div className="relative w-[60px] h-[60px] shrink-0 mr-2">
         <Image
@@ -27,7 +33,7 @@ const BestDealsSectionProduct = async ({
           style={{
             objectFit: "cover",
           }}
-          className="inset-0 top-0 left-0 object-cover rounded-md"
+          className="inset-0 top-0 left-0 object-cover rounded-sm"
         />
       </div>
       <div className="flex justify-center flex-col gap-1">
@@ -36,21 +42,21 @@ const BestDealsSectionProduct = async ({
         </span>
 
         <StarRating
-          rating={Math.round(product?.averageRating || 1)}
+          rating={Math.round(product?.averageRating || 0)}
           className="w-2 h-2 md:w-2.5 md:h-2.5"
         />
 
-        <div className="flex items-center">
-          <span className="flex items-center text-xs md:text-base font-medium text-gradient-primary">
+        <div className="flex items-baseline gap-x-1.5">
+          <span className="flex items-center text-xs md:text-base font-semibold text-gradient-primary">
             {currencyIcon?.data?.currencySymbol}
             {product?.sellingPrice}
           </span>
-          {product?.discountedPrice && (
-            <del className="flex items-center text-[10px] md:text-sm">
+          {product?.discountPercentage && product?.sellingPrice ? (
+            <span className="flex items-center text-[10px] md:text-sm text-black-80 line-through">
               {currencyIcon?.data?.currencySymbol}
-              {product?.discountedPrice}
-            </del>
-          )}
+              {discountedPrice}
+            </span>
+          ) : null}
         </div>
       </div>
     </Link>

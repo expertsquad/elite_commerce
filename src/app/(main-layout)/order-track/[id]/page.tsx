@@ -1,13 +1,33 @@
-import { fetchData } from "@/actions/fetchData";
+import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import OrderStatusStep from "./_components/OrderStatusStep";
 import OrderInformation from "./_components/OrderInformation";
 import OrderSummary from "./_components/OrderSummary";
 import OrderedItems from "./_components/OrderedItems";
 
-const OrderTrackPage = async ({ params }: { params: { id: string } }) => {
-  const response = await fetchData({ route: `/online-order/${params?.id}` });
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
 
-  const currencyIcon = await fetchData({
+    return {
+      title: `Track Your Order | ${shopInfo?.data?.shopName}`,
+      description: `Easily track your order status at ${shopInfo?.data?.shopName}. Stay updated on your orders progress and estimated delivery date.`,
+    };
+  } catch (error) {
+    return {
+      title: "Track Your Order",
+      description:
+        "Easily track your order status. Stay updated on your order’s progress and estimated delivery date.",
+    };
+  }
+}
+
+const OrderTrackPage = async ({ params }: { params: { id: string } }) => {
+  const response = await fetchProtectedData({
+    route: `/online-order/${params?.id}`,
+  });
+  const currencyIcon = await fetchProtectedData({
     route: "/settings/shop",
   });
   return (
@@ -29,7 +49,10 @@ const OrderTrackPage = async ({ params }: { params: { id: string } }) => {
             shipping={response?.data?.shippingCharge}
             total={response?.data?.totalPayable}
             subTotal={response?.data?.totalPrice}
-            discount={response?.data?.totalDiscount}
+            discount={
+              response?.data?.totalDiscount ||
+              response?.data?.additionalDiscount
+            }
             orderQuanity={response?.data?.totalQuantity}
             orderItemsLength={response?.data?.orderItems?.length}
             currencyIcon={currencyIcon?.data?.currencySymbol}

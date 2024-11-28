@@ -9,20 +9,29 @@ const StarRating = ({
   className?: string;
 }) => {
   const maxRating = 5;
-  const filledStars = Math.round(rating);
-  const emptyStars = maxRating - filledStars;
 
-  if (isNaN(filledStars) || isNaN(emptyStars)) {
-    return null;
-  }
+  // Validate and normalize the rating
+  const normalizedRating = Number.isFinite(rating)
+    ? Math.max(0, Math.min(rating, maxRating))
+    : 0;
+
+  // Calculate star counts
+  const filledStars = Math.round(normalizedRating);
+  const emptyStars = Math.max(0, maxRating - filledStars);
 
   return (
     <div className="flex items-center gap-0.5">
-      {[...Array(filledStars)]?.map((_, index) => (
-        <IconStarFilled key={index} className={`text-[#E73C17] ${className}`} />
+      {[...Array(filledStars)].map((_, index) => (
+        <IconStarFilled
+          key={`filled-${index}`}
+          className={`text-[#E73C17] ${className}`}
+        />
       ))}
-      {[...Array(emptyStars)]?.map((_, index) => (
-        <IconStarFilled key={index} className={`text-black-10 ${className}`} />
+      {[...Array(emptyStars)].map((_, index) => (
+        <IconStarFilled
+          key={`empty-${index}`}
+          className={`text-black-10 ${className}`}
+        />
       ))}
     </div>
   );

@@ -13,12 +13,13 @@ main {
 /* don't forget to add the color to the config file */
 :root {
   /* colors */
-  --primary: #294393;
-  --primary-light: #04a4e6;
-  --secondary: #fb8e48;
-  --secondary-light: #cb380f;
+  --primary-color: #294393;
+  --primary-light-color: #04a4e6;
+  --secondary-color: #fb8e48;
+  --secondary-light-color: #cb380f;
   --danger: red;
   --positive: #119f5b;
+  --warning: #ffc021;
   --transparent: transparent;
   --white: white;
   --white-15: #ffffff26;
@@ -29,17 +30,18 @@ main {
   --black-80: #333333;
   --black-transparent: #7f7f7f63;
   --bg-color-f8: #f8f8f8;
+  --image-background: #f7f7fb;
 
   /* gradient colors */
   --gradient-primary: linear-gradient(
     90.37deg,
-    var(--primary),
-    var(--primary-light)
+    var(--primary-color),
+    var(--primary-light-color)
   );
   --gradient-primary-reverse: linear-gradient(
     90.37deg,
-    var(--primary-light),
-    var(--primary)
+    var(--primary-light-color),
+    var(--primary-color)
   );
   --gradient-primary-light: linear-gradient(
     90.37deg,
@@ -49,8 +51,14 @@ main {
 
   --gradient-secondary: linear-gradient(
     180deg,
-    var(--secondary),
-    var(--secondary-light)
+    var(--secondary-color),
+    var(--secondary-light-color)
+  );
+
+  --gradient-secondary-reverse: linear-gradient(
+    90.37deg,
+    var(--secondary-light-color),
+    var(--secondary-color)
   );
   --gradient-secondary-light: linear-gradient(
     180deg,
@@ -63,6 +71,8 @@ main {
     rgba(14, 148, 122, 0.1) 8.46%,
     rgba(13, 164, 135, 0.1) 62.97%
   );
+  --messenger-bg: linear-gradient(90.14deg, #ff626f, #c740cb, #1889ff);
+  --messenger-bg-reverse: linear-gradient(90.14deg, #1889ff, #c740cb, #ff626f);
 }
 /* 
 @media (prefers-color-scheme: dark) {
@@ -86,7 +96,7 @@ main {
 
 .border-gradient-primary {
   background-image: linear-gradient(white, white),
-    linear-gradient(90deg, var(--primary), var(--primary-light));
+    linear-gradient(90deg, var(--primary-color), var(--primary-light-color));
   background-origin: border-box;
   background-clip: content-box, border-box;
 }

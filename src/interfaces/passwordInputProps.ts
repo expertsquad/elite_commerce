@@ -8,4 +8,5 @@ export interface PasswordInputProps {
   value?: string | number;
   name?: string;
   error?: string;
+  required?: boolean;
 }

@@ -1,11 +1,6 @@
 import React from "react";
 import ContactInfo from "./FooterComponents/ContactInfo";
 import SocialMediaConnect from "./FooterComponents/SocialMediaConnect";
-import {
-  Categories,
-  Helps,
-  myAccount,
-} from "@/constants/footerMenus.constants";
 import AppStoreLink from "./FooterComponents/AppStoreLink";
 import PaymentMethods from "./FooterComponents/PaymentMethods";
 import Logo from "@/utils/Logo";
@@ -19,13 +14,13 @@ const Footer = async () => {
   const footerMenus = footer?.data?.menus;
 
   return (
-    <div className="min-h-72   bg-gradient-primary-light md:py-10 py-5 md:pb-10 pb-24 px-5">
+    <footer className="min-h-72   bg-image-background md:py-10 py-5 md:pb-10 pb-24 px-5">
       <div className="main-container grid grid-cols-1 md:grid-cols-4 gap-5 ">
         <div className="flex flex-col gap-5">
           <div className="flex flex-col md:items-start items-center gap-3.5">
             {/* logo */}
             <div className="">
-              <Logo />
+              <Logo alignLeft />
             </div>
             <p className="whitespace-pre-wrap text-black-80 md:text-sm text-xs md:text-start text-center">
               {footer?.data?.description}
@@ -64,7 +59,7 @@ const Footer = async () => {
           <SocialMediaConnect />
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
 

@@ -14,6 +14,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
   label,
   disabled,
   errors,
+  required,
 }) => {
   const error = errors?.find((e) => e.path === name);
   return (
@@ -37,12 +38,13 @@ const CustomInput: React.FC<CustomInputProps> = ({
           type={type}
           onChange={onChange}
           defaultValue={defaultValue}
+          required={required}
           value={value}
           name={name}
           className={`${inputStyle} required w-full border border-black-10 py-2  pr-4 focus:outline-none rounded-md ${
             error ? "border-danger" : ""
           } ${readonly ? "text-black-50" : "text-black"} placeholder:text-sm ${
-            placeholderIcon ? "pl-9" : "pl-5"
+            placeholderIcon ? "pl-9" : "pl-3"
           } ${customClassName}`}
           placeholder={placeholder}
         />

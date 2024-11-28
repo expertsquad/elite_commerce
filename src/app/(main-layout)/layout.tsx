@@ -7,10 +7,11 @@ import OrderInitProvider from "@/Provider/OrderInitDataProvider";
 import CategoryProductFilteringProvider from "@/Provider/CategoryProductFilteringProvider";
 import BrandProductFilteringProvider from "@/Provider/BrandProductFilteringProvider";
 import UserProvider from "@/Provider/UserProvider";
+import FixedMenu from "./_components/FixedMenu/FixedMenu";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <UserProvider>
         <CartProvider>
           <WishlistProvider>
@@ -19,6 +20,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                 <BrandProductFilteringProvider>
                   {/* main sections */}
                   <Header />
+                  <FixedMenu />
                   <section>{children}</section>
                   <Footer />
                   {/* main sections */}

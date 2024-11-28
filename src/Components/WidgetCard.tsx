@@ -12,19 +12,22 @@ const WidgetCard = async ({
   className?: string;
   widget?: IWidgetCard;
 }) => {
-  console.log(widget);
   return (
     <div
-      className={`flex flex-col items-center gap-3.5 justify-center bg-gradient-primary rounded-[10px] p-5 md:w-full max-w-[300px] ${className}`}
+      className={`relative flex flex-col items-center gap-3.5 justify-center bg-gradient-primary rounded-[10px] p-5 md:w-full max-w-[340px] h-[500px]  ${className} overflow-hidden text-center`}
     >
-      <div className="flex flex-col items-center gap-1.5 text-white">
+      <div className="flex flex-col items-center gap-1.5 text-white z-20">
         <span className="text-sm">{widget?.tag || ""}</span>
-        <span className="text-[26px] font-bold">{widget?.title || ""}</span>
-        <span className="text-sm">{widget?.description || ""}</span>
+        <span className="text-[26px] font-bold line-clamp-2">
+          {widget?.title || ""}
+        </span>
+        <span className="text-sm line-clamp-2">
+          {widget?.description || ""}
+        </span>
       </div>
       <Link
-        href={widget?.link || ""}
-        className="uppercase flex items-center justify-center text-white gap-2.5 py-2.5 px-3.5 rounded transition-all duration-300 hover:scale-105 bg-gradient-secondary "
+        href={`/products/${widget?.link}`}
+        className="uppercase flex items-center justify-center text-white gap-2.5 py-2.5 px-3.5 rounded transition-all duration-300 hover:scale-105 bg-gradient-secondary z-10 "
       >
         <span className=" text-base">{widget?.buttonText || ""}</span>
         <IconArrowRight size={20} />
@@ -34,7 +37,7 @@ const WidgetCard = async ({
           src={`${server_url}${widget?.productPhoto}`}
           alt="widget image"
           fill
-          className="object-cover"
+          className="object-contain w-full h-full inset-0"
         />
       </div>
     </div>

@@ -2,22 +2,39 @@ import ProductImageSlider from "./ProductImageSlider";
 import { IProduct } from "@/interfaces/product.interface";
 import StarRating from "../StarRating";
 import QuickViewButton from "@/app/(main-layout)/brands/_components/QuickViewButton";
-import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
+import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
 import ProductCartBtn from "./ProductCartBtn";
+import { getPricingDetails } from "./getPricingDetails";
 import ProductPreviewRedirect from "./ProductPreviewRedirect";
 export interface IProductCardProps {
   product: IProduct;
-  onClick?: () => void;
+  currencyIcon?: string;
+  quickAction?: boolean;
+  shippingAmount?: number;
+  isQuickOrderActive?: boolean;
 }
-const ProductCard = ({ product, onClick }: IProductCardProps) => {
+const ProductCard = ({
+  product,
+  currencyIcon,
+  quickAction,
+  shippingAmount,
+  isQuickOrderActive,
+}: IProductCardProps) => {
+  const productDetails = getPricingDetails(product);
+  const { sellingPrice, discountedPrice } = productDetails;
+
   return (
     <ProductPreviewRedirect
       className="border border-black-10 rounded-lg group relative w-full max-w-[280px] cursor-pointer duration-500 overflow-hidden group/productcard hover:shadow-lg mx-auto"
       product={product}
-      onClick={onClick}
     >
-      <div className="bg-gradient-primary-light">
-        <ProductImageSlider product={product} />
+      <div className="bg-image-background">
+        <ProductImageSlider
+          product={product}
+          shippingAmount={shippingAmount ? shippingAmount : 0}
+          currencyIcon={currencyIcon}
+          isQuickOrderActive={isQuickOrderActive}
+        />
       </div>
 
       <div className="p-4">
@@ -37,36 +54,52 @@ const ProductCard = ({ product, onClick }: IProductCardProps) => {
         <div className="flex items-center justify-between mt-5">
           <div className="flex items-center whitespace-nowrap">
             <span className="[font-size:_clamp(16px,2vw,22px)] text-gradient-primary font-bold">
-              $
-              {product?.variants[0]?.discountedPrice
-                ? product?.variants[0]?.discountedPrice
-                : product?.variants[0]?.sellingPrice}
+              {currencyIcon}
+              {discountedPrice ? discountedPrice : sellingPrice}
             </span>
-            <span className="mx-0.5 text-black-10">|</span>
+            {sellingPrice && discountedPrice ? (
+              <span className={`mx-0.5 text-black-10 text-xl`}>|</span>
+            ) : null}
             <del
               className={`text-black-50 [font-size:_clamp(14px,2vw,18px)] ${
                 product?.variants[0]?.discountedPrice ? "block" : "hidden"
               }`}
             >
-              $
-              {product?.variants[0]?.discountedPrice &&
-                product?.variants[0]?.sellingPrice}
+              {currencyIcon}
+              {sellingPrice && sellingPrice}
             </del>
           </div>
           <ProductCartBtn product={product} />
         </div>
       </div>
-      <div className="absolute flex gap-3 items-center top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 opacity-0 md:group-hover:opacity-100 transition-all duration-300">
-        <QuickViewButton product={product} />
-        <QuickOrderButton
-          product={{
-            ...product,
-            orderQuantity: 1,
-            variant: product?.variants[0],
-          }}
-          buttonStyle="text-base bg-white py-1.5 whitespace-nowrap px-5 rounded-full"
-          buttonText="Quick Order"
+      <div
+        className={`absolute ${
+          quickAction
+            ? "flex flex-col top-[40%] left-[50%]"
+            : "flex flex-row top-[50%] left-[50%]"
+        } gap-3 items-center  transform -translate-x-1/2 -translate-y-1/2 opacity-0 md:group-hover:opacity-100 transition-all duration-300`}
+      >
+        <QuickViewButton
+          product={product}
+          btnClassName="text-sm transition-all duration-300 hover:bg-gradient-primary hover:text-white hover:w-full !px-4 py-2"
+          currencyIcon={currencyIcon ? currencyIcon : ""}
+          shippingAmount={shippingAmount ? shippingAmount : 0}
+          isQuickOrderActive={isQuickOrderActive}
         />
+        {isQuickOrderActive && (
+          <QuickOrderButton
+            product={{
+              ...product,
+              orderQuantity: 1,
+              variant: product?.variants[0],
+            }}
+            buttonStyle="text-base bg-white hover:bg-gradient-primary hover:text-white py-2 whitespace-nowrap px-4 rounded-full text-sm transition-all duration-300"
+            buttonText="Quick Order"
+            currencyIcon={currencyIcon}
+            shippingAmount={shippingAmount ? shippingAmount : 0}
+            variant={product?.variants[0]}
+          />
+        )}
       </div>
     </ProductPreviewRedirect>
   );

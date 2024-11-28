@@ -1,7 +1,5 @@
 "use client";
 import { fetchData } from "@/actions/fetchData";
-import Loading from "@/app/loading";
-import AnimatedLoading from "@/Components/AnimatedLoading";
 import StarRating from "@/Components/StarRating";
 import { server_url } from "@/constants";
 import { IProduct } from "@/interfaces/product.interface";
@@ -9,15 +7,18 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import emptyState from "@/assets/Images/empty_item.svg";
+import CustomLoading from "@/Components/CustomLoader";
 
 const SearchingProducts = ({
   searchValue,
   setShow,
   setSearchValue,
+  currencyIcon,
 }: {
   searchValue: string;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+  currencyIcon?: string;
 }) => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -48,7 +49,7 @@ const SearchingProducts = ({
 
   const router = useRouter();
   const handleProductView = (product: IProduct) => {
-    router.push("/products/" + product?._id);
+    router.push("/products/" + product?.productUrlSlug);
     setShow(false);
     setSearchValue("");
   };
@@ -57,7 +58,7 @@ const SearchingProducts = ({
     <div className="mb-5 flex flex-col overflow-y-auto h-[500px] scrollbar-y-remove  ">
       {loading ? (
         <div className="flex items-center justify-center h-full ">
-          <AnimatedLoading />
+          <CustomLoading />
         </div>
       ) : searchValue ? (
         products?.length > 0 ? (
@@ -65,9 +66,9 @@ const SearchingProducts = ({
             <div
               key={product?._id}
               onClick={() => handleProductView(product)}
-              className="flex items-center gap-x-5 mb-5 cursor-pointer border-b border-black-10 pb-5"
+              className="flex items-center gap-x-5 cursor-pointer border-b border-black-10 transition-all duration-300 hover:bg-image-background py-2 px-3"
             >
-              <div className="bg-gradient-primary-light w-[70px] h-[70px] shrink-0 relative rounded-md">
+              <div className="bg-image-background w-[70px] h-[70px] shrink-0 relative rounded-md">
                 <Image
                   src={`${server_url + product?.productPhotos[0]}`}
                   alt="Product Photo"
@@ -84,7 +85,8 @@ const SearchingProducts = ({
                 </span>
                 <div className="flex items-center gap-x-0.5">
                   <span className="font-semibold text-gradient-primary">
-                    ${product.variants[0]?.sellingPrice}
+                    {currencyIcon}
+                    {product.variants[0]?.sellingPrice}
                   </span>
                   <span className="text-black-10 mx-0.5">|</span>
                   <span className="text-positive [font-size:_clamp(0.5em,4vw,0.8em)]">
@@ -96,6 +98,14 @@ const SearchingProducts = ({
                       rating={Math.round(product.averageRating || 0)}
                     />
                   </span>
+                  {product?.variants[0].discountPercentage && (
+                    <>
+                      <span className="text-black-10 mx-0.5">|</span>
+                      <span className="text-secondary text-[10px] md:text-xs">
+                        {product?.variants[0]?.discountPercentage}% OFF
+                      </span>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

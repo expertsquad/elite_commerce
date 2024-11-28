@@ -24,9 +24,25 @@ const OrderSubmitAndTotalAmount = ({
     calculateTotalPriceAndDiscountOfCart(products);
   const shippingFee = getShippingFee(shippingCharge, city, totalPrice);
 
-  // Function to check if the shipping address is complete
-  const isAddressComplete = () => {
+  // Function to check if the billing address is complete
+  const isBillingAdressComplete = () => {
     const address = orderData?.billingAddress;
+    return (
+      address &&
+      address.firstName &&
+      address.lastName &&
+      address.state &&
+      address.country &&
+      address.streetAddress &&
+      address.phoneNumber &&
+      address.zipCode &&
+      address.city
+    );
+  };
+
+  // Function to check if the billing address is complete
+  const isShippingAdressComplete = () => {
+    const address = orderData?.shippingAddress;
     return (
       address &&
       address.firstName &&
@@ -48,34 +64,44 @@ const OrderSubmitAndTotalAmount = ({
             <div className="flex items-center justify-between">
               <p>Sub Total</p>
               <strong>
-                {currencySymbol} {totalPrice?.toFixed(2)}
+                {currencySymbol}
+                {totalPrice?.toFixed(2)}
               </strong>
             </div>
             <div className="flex items-center justify-between">
               <p>Shipping</p>
-              <p className={`${shippingFee ? "" : "text-primary-light"}`}>
+              <p
+                className={`${
+                  shippingFee ? "" : "text-primary-color-light-color"
+                }`}
+              >
                 {shippingFee
                   ? currencySymbol + shippingFee
                   : "You Got Free Shipping"}
               </p>
             </div>
-            <div className="flex items-center justify-between">
-              <p>Discount</p>
+            <div className="flex items-center justify-between text-positive">
+              <span className="text-black-80 md:text-base text-sm">
+                Discount
+              </span>
               <p>
-                -{currencySymbol}
-                {totalDiscount}
+                You saved ({currencySymbol}
+                {totalDiscount})
               </p>
             </div>
           </div>
           <div className="flex items-center justify-between [font-size:_clamp(1.4em,40vw,1.7em)] font-bold my-2">
             <h2>Total</h2>
             <h2 className="text-gradient-primary">
-              {currencySymbol} {totalPrice + shippingFee}
+              {currencySymbol}
+              {totalPrice + shippingFee}
             </h2>
           </div>
           <div
             className={`${
-              !orderData?.payment || !isAddressComplete()
+              !orderData?.payment ||
+              !isBillingAdressComplete() ||
+              !isShippingAdressComplete()
                 ? "opacity-50 pointer-events-none"
                 : ""
             }`}
@@ -84,9 +110,9 @@ const OrderSubmitAndTotalAmount = ({
               className="bg-gradient-primary w-full rounded-lg text-white my-2"
               onSubmit={handleSubmit}
             >
-              <button className="flex items-center justify-center py-2.5 w-full gap-2">
+              <button className="flex items-center justify-center py-2.5 w-full gap-x-1">
                 Place Order
-                <IconArrowRight />
+                <IconArrowRight size={20} stroke={1.5} />
               </button>
             </form>
           </div>

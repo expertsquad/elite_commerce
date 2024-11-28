@@ -3,13 +3,13 @@ import { server_url } from "@/constants";
 import { IFileUploaderProps } from "@/interfaces/fileUploader.interface";
 import { IconPhotoPlus, IconX } from "@tabler/icons-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const FileUploader = ({
   name,
   url,
   multiple = false,
-  accept,
+  accept = "image/*",
   maxSize,
   error,
   className,
@@ -20,10 +20,16 @@ const FileUploader = ({
 }: IFileUploaderProps) => {
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
 
+  // Initialize previewUrls with url if provided
+  useEffect(() => {
+    if (url) {
+      setPreviewUrls([server_url + url]);
+    }
+  }, [url]);
+
   // Handle file change, check size, and set the preview
   const checkSizeAndHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-
     if (files) {
       const newPreviewUrls: string[] = [];
       for (let i = 0; i < files.length; i++) {
@@ -40,7 +46,7 @@ const FileUploader = ({
 
       setPreviewUrls((prev) => [...prev, ...newPreviewUrls]);
       if (onChange) {
-        onChange(e);
+        onChange(e); // Pass the files to the parent onChange
       }
     }
   };
@@ -79,15 +85,6 @@ const FileUploader = ({
               </div>
             </div>
           ))
-        ) : url ? (
-          <div className="h-[70px] w-[90px] relative border border-black-10 rounded-md cursor-pointer">
-            <Image
-              src={server_url + url}
-              alt={name}
-              fill
-              className="inset-0 object-contain"
-            />
-          </div>
         ) : (
           <div className="h-[70px] w-[90px] relative border border-black-10 rounded-md flex items-center justify-center cursor-pointer">
             <div className="flex flex-col items-center justify-center">

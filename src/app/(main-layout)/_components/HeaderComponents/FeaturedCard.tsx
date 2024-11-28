@@ -10,7 +10,7 @@ const FeaturedCard = ({
   currencySymbol,
 }: {
   widget: IWidgetCard;
-  products: IProduct[];
+  products?: IProduct[];
   currencySymbol?: string;
 }) => {
   return (
@@ -20,7 +20,7 @@ const FeaturedCard = ({
           Top Products
         </h1>
         <div className="flex flex-col gap-4 overflow-y-auto scrollbar-y-remove h-[clamp(100px,70vh,500px)]">
-          {products.map((product, index) => (
+          {products?.map((product, index) => (
             <FeaturedProduct
               key={index}
               product={product}

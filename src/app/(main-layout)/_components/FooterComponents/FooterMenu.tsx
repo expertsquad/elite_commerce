@@ -12,7 +12,7 @@ const FooterMenu = ({ data }: any) => {
           (item: { title: string; link: string }, index: number) => (
             <Link
               href={`${item?.link}`}
-              className="md:text-black-80 text-black-50 hover:text-primary-light hover:underline transition-all duration-300"
+              className="md:text-black-80 text-black-50 hover:text-primary-color-light-color hover:underline transition-all duration-300"
               key={index}
             >
               {item.title}

@@ -10,9 +10,16 @@ import SearchingProducts from "./SearchingProducts";
 export interface IGlobalSearchProps {
   categories: ICategory[];
   products?: IProduct[];
+  currencyIcon?: string;
+  isQuickOrderActive?: boolean;
 }
 
-const GlobalSearch = ({ categories, products }: IGlobalSearchProps) => {
+const GlobalSearch = ({
+  categories,
+  products,
+  currencyIcon,
+  isQuickOrderActive,
+}: IGlobalSearchProps) => {
   const [show, setShow] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [isMounted, setIsMounted] = useState(false);
@@ -27,8 +34,6 @@ const GlobalSearch = ({ categories, products }: IGlobalSearchProps) => {
     setShow(true);
   };
 
-  const iconStroke = 1.2;
-
   if (!isMounted) {
     return null;
   }
@@ -36,10 +41,11 @@ const GlobalSearch = ({ categories, products }: IGlobalSearchProps) => {
   return (
     <div>
       <button
+        aria-label="Search"
         className="first:after:content-['|'] after:text-black-50 after:opacity-50 flex items-center gap-2"
         onClick={(e) => hanldeGlobalSearch(e)}
       >
-        <IconSearch stroke={iconStroke} />
+        <IconSearch stroke={1.2} />
       </button>
       {show && (
         <Modal
@@ -68,6 +74,7 @@ const GlobalSearch = ({ categories, products }: IGlobalSearchProps) => {
                   setShow={setShow}
                   searchValue={searchValue}
                   setSearchValue={setSearchValue}
+                  currencyIcon={currencyIcon}
                 />
               </div>
             ) : (
@@ -81,7 +88,7 @@ const GlobalSearch = ({ categories, products }: IGlobalSearchProps) => {
                       <div
                         key={item?._id}
                         onClick={() => setSearchValue(item?.categoryName)}
-                        className="text-xs transition-all duration-300 hover:bg-gradient-primary hover:text-white  md:text-base text-black-50 border border-black-10 px-3 py-2.5 rounded-full cursor-pointer"
+                        className="text-xs transition-all duration-300 hover:bg-gradient-primary hover:text-white md:text-sm text-black-50 border border-black-10 px-3 py-2 rounded-full cursor-pointer"
                       >
                         {item?.categoryName}
                       </div>
@@ -97,7 +104,9 @@ const GlobalSearch = ({ categories, products }: IGlobalSearchProps) => {
                       <ProductCard
                         key={item?._id}
                         product={item}
-                        onClick={() => setShow(false)}
+                        currencyIcon={currencyIcon}
+                        quickAction={true}
+                        isQuickOrderActive={isQuickOrderActive}
                       />
                     ))}
                   </div>

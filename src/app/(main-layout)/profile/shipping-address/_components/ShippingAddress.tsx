@@ -1,27 +1,102 @@
 "use client";
 import CustomInput from "../../../../../Components/CustomInput";
-import { countryNames } from "@/constants/countryNames.constant";
 import SubmitButton from "@/Components/SubmitButton";
 import { IAddress } from "@/interfaces/address.interface";
-import CustomDropdown from "@/Components/CustomDropdown";
 import { postDataMutation } from "@/actions/postDataMutation";
 import { updateDataMutation } from "@/actions/updateDataMutation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CustomLoader from "@/Components/CustomLoader";
+import toast from "react-hot-toast";
+import CustomDropdownSearchToApiFetch from "@/Components/CustomDropdownSearchToApiFetch";
+import { fetchCountryData } from "@/actions/fetchCountryData";
 
 const ShippingAddress = ({
   shippingAddress,
   country,
+  states,
+  cities,
 }: {
   shippingAddress: IAddress;
   country: string;
+  states: any;
+  cities: any;
 }) => {
-  const [state, setState] = useState(
-    shippingAddress?.state ? shippingAddress?.state : ""
-  );
-  const [city, setCity] = useState(
-    shippingAddress?.city ? shippingAddress?.city : ""
-  );
   const [loading, setLoading] = useState(false);
+  const [city, setCity] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const [cityDatas, setCityDatas] = useState(
+    cities?.data?.map((c: any) => c?.name)
+  );
+  const [stateDatas, setStateDatas] = useState(
+    states?.data?.map((s: any) => s?.name)
+  );
+  const [citySearchInputValue, setCitySearchInputValue] = useState("");
+  const [stateSearchInputValue, setStateSearchInputValue] = useState("");
+
+  useEffect(() => {
+    const handleClientSiteCityFetch = async (
+      country: string,
+      selectedState: string,
+      citySearchInputValue: string
+    ) => {
+      try {
+        // fatching data from country api by city and country name
+        if (citySearchInputValue) {
+          const res = await fetchCountryData({
+            route: "/city",
+            query: `name=${citySearchInputValue}&country_name=${country}`,
+            limit: 10,
+          });
+
+          if (res?.success) {
+            const cityData = res?.data?.map((c: any) => c?.name);
+            setCityDatas(cityData?.length ? cityData : ["No Data Found"]);
+          }
+        } else if (selectedState) {
+          // fatching data from country api by state and country name
+          const res = await fetchCountryData({
+            route: "/city",
+            query: `country_name=${country}&state_name=${selectedState}`,
+            limit: 10,
+          });
+
+          if (res?.success) {
+            const cityData = res?.data?.map((c: any) => c?.name);
+            setCityDatas(cityData?.length ? cityData : ["No Data Found"]);
+          }
+        }
+      } catch (error) {
+        toast.error("Error fetching city data");
+      }
+    };
+
+    handleClientSiteCityFetch(country, selectedState, citySearchInputValue);
+  }, [selectedState, country, citySearchInputValue]);
+
+  // getting state data by country and stete name
+
+  useEffect(() => {
+    if (stateSearchInputValue) {
+      const fetchData = async () => {
+        try {
+          const res = await fetchCountryData({
+            route: "/state",
+            query: `country_name=${country}&name=${stateSearchInputValue}`,
+            limit: 10,
+          });
+
+          if (res?.success) {
+            const stateData = res?.data?.map((s: any) => s?.name);
+            setStateDatas(stateData?.length ? stateData : ["Data Not Found"]);
+          }
+        } catch (error) {
+          toast.error("Error fetching state data");
+        }
+      };
+
+      fetchData();
+    }
+  }, [stateSearchInputValue, country]);
 
   // handle submit
   const handleSubmit = async (e: any) => {
@@ -29,7 +104,7 @@ const ShippingAddress = ({
     setLoading(true);
     const formData = new FormData(e.target);
     // state appended
-    formData.append("state", state);
+    formData.append("state", selectedState);
     // city appended
     formData.append("city", city);
     // country appended
@@ -52,6 +127,11 @@ const ShippingAddress = ({
         data: JSON.stringify(dataObj),
         formatted: true,
       });
+      if (result?.success) {
+        toast.success(result?.message);
+      } else {
+        toast.error(result?.message);
+      }
     } else {
       const result = await updateDataMutation({
         route: "/user-address" + "/" + shippingAddress?._id,
@@ -59,15 +139,18 @@ const ShippingAddress = ({
         formatted: true,
         method: "PUT",
       });
+      if (result?.success) {
+        toast.success(result?.message);
+      } else {
+        toast.error(result?.message);
+      }
     }
     setLoading(false);
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={`${loading ? "opacity-50 pointer-events-none" : ""}`}
-    >
+    <form onSubmit={handleSubmit} className={`relative`}>
+      {loading && <CustomLoader />}
       <h3 className="[font-size:_clamp(1em,5vw,1.5em)] font-semibold text-gradient-primary my-7 ">
         Shipping Address
       </h3>
@@ -79,6 +162,7 @@ const ShippingAddress = ({
           name="firstName"
           placeholder="Zayed"
           defaultValue={shippingAddress?.firstName}
+          required={true}
         />
         <CustomInput
           label="Last Name"
@@ -86,6 +170,7 @@ const ShippingAddress = ({
           name="lastName"
           placeholder="Hossain"
           defaultValue={shippingAddress?.lastName}
+          required={true}
         />
 
         <CustomInput
@@ -94,6 +179,7 @@ const ShippingAddress = ({
           name="phoneNumber"
           placeholder="017*******"
           defaultValue={shippingAddress?.phoneNumber}
+          required={true}
         />
 
         <div className="opacity-50 pointer-events-none">
@@ -103,25 +189,33 @@ const ShippingAddress = ({
             name="state"
             placeholder="Bangladesh"
             defaultValue={country}
+            readonly
           />
         </div>
-        <CustomDropdown
-          data={countryNames}
-          onClick={(value) => setState(value)}
+        <CustomDropdownSearchToApiFetch
+          data={stateDatas ? stateDatas : ["No Data For This Country"]}
+          onClick={(value) => setSelectedState(value)}
           className="w-full border border-black-10 py-2 rounded-lg px-3 "
           itemClassName="py-1 hover:bg-black-10"
-          defaultValue={state}
-          label="State"
+          defaultValue={
+            shippingAddress?.state ? shippingAddress?.state : "Select State"
+          }
+          label="Select State"
           searchInput={true}
+          setSearchInputValue={setStateSearchInputValue}
         />
-        <CustomDropdown
-          data={countryNames}
+
+        <CustomDropdownSearchToApiFetch
+          data={cityDatas ? cityDatas : ["No Data For This Country"]}
           onClick={(value) => setCity(value)}
           className="w-full border border-black-10 py-2 rounded-lg px-3 "
           itemClassName="py-1 hover:bg-black-10"
-          defaultValue={city}
-          label="City"
+          defaultValue={
+            shippingAddress?.city ? shippingAddress?.city : "Select City"
+          }
+          label="Select City"
           searchInput={true}
+          setSearchInputValue={setCitySearchInputValue}
         />
         <CustomInput
           label="Zip Code"
@@ -129,6 +223,7 @@ const ShippingAddress = ({
           name="zipCode"
           placeholder="00108"
           defaultValue={shippingAddress?.zipCode}
+          required={true}
         />
 
         <CustomInput
@@ -146,6 +241,7 @@ const ShippingAddress = ({
           name="streetAddress"
           placeholder="1234 Main St"
           defaultValue={shippingAddress?.streetAddress}
+          required={true}
         />
       </div>
       <div className="flex justify-end items-center mt-5">

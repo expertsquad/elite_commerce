@@ -1,51 +1,50 @@
 import { IconBolt } from "@tabler/icons-react";
 import ButtonPrimary from "../../brands/_components/ButtonPrimary";
 import { IProduct } from "@/interfaces/product.interface";
-// import { useGetShippingFee } from "@/utils/shppingCharge/getShippingFee";
+import { calculateQuickOrderTotal } from "./calculateQuickOrderTotal";
+import { calculateProductsTotalDiscount } from "@/constants/calculateProductsTotalDiscount";
 
 interface IOrderSummaryProps {
   products: IProduct[];
   loading: boolean;
+  currencyIcon?: string;
+  shippingAmount: number;
 }
 
-export const OrderSummary = ({ products, loading }: IOrderSummaryProps) => {
-  const subtotal = products?.reduce((acc, product: IProduct) => {
-    const productTotal =
-      product?.orderQuantity * (product?.variant?.discountedPrice ?? 0);
+export const OrderSummary = ({
+  products,
+  loading,
+  currencyIcon,
+  shippingAmount,
+}: IOrderSummaryProps) => {
+  // const totalAmount = calculateQuickOrderTotal({ products });
 
-    if (product.bulk && product.orderQuantity >= product.bulk.minOrder) {
-      return acc + productTotal * (1 - product.bulk.discount / 100);
-    }
-
-    return acc + productTotal;
-  }, 0);
-
-  // const shipping = useGetShippingFee({ soldAmount: subtotal }) || 0;
-  const shipping = 0;
-
-  const discount = 0;
-
-  const total = subtotal + shipping - discount;
+  const { totalDiscount, totalPrice } =
+    calculateProductsTotalDiscount(products);
+  const total = totalPrice + shippingAmount;
 
   return (
     <div className="md:border border-black-10 rounded-[10px] px-5 py-3.5  space-y-2.5 bg-white drop-shadow-2xl md:drop-shadow-none">
       <div className="flex items-center justify-between ">
         <span className="text-black-80 md:text-base text-sm">Subtotal</span>
         <strong className="text-black-80 md:text-base text-sm font-semibold">
-          ${subtotal}
+          {currencyIcon}
+          {totalPrice}
         </strong>
       </div>
       <div className="flex items-center justify-between ">
         <span className="text-black-80 md:text-base text-sm">Shipping</span>
         <strong className="text-black-80 md:text-base text-sm font-semibold">
-          ${shipping}
+          {currencyIcon}
+          {shippingAmount}
         </strong>
       </div>
       <div className="flex items-center justify-between ">
-        <span className="text-black-80 md:text-base text-sm">Discount</span>
-        <strong className="text-gradient-secondary md:text-base text-sm font-semibold">
-          -${discount}
-        </strong>
+        <span className="text-black-80 md:text-base text-sm">Discount </span>
+        <p className="md:text-base text-sm text-positive">
+          You&apos;ve saved ({currencyIcon}
+          {totalDiscount})
+        </p>
       </div>
       <hr className="border-black-10 border my-3.5" />
       <div className="flex items-center justify-between ">
@@ -53,20 +52,25 @@ export const OrderSummary = ({ products, loading }: IOrderSummaryProps) => {
           Total
         </span>
         <strong className="text-black-80 md:text-lg text-base font-semibold">
-          ${total}
+          {currencyIcon}
+          {total}
         </strong>
       </div>
       <div className="md:block hidden">
         <ButtonPrimary
           buttonType={"submit"}
-          className={`${loading && "cursor-wait opacity-60"}`}
+          disabled={products?.length === 0}
+          className={`!py-3 ${
+            products?.length === 0 &&
+            "cursor-not-allowed opacity-55 disabled:cursor-not-allowed"
+          } ${loading && "cursor-wait opacity-60"}`}
         >
-          {!loading && <IconBolt height={20} width={20} />}
+          {!loading && <IconBolt size={18} className="fill-white" />}
           <span>
             {loading ? (
               "Order Processing..."
             ) : (
-              <span className="uppercase">{`Confirm Order - ${total}`}</span>
+              <span className="uppercase">{`Confirm Order - ${currencyIcon}${total}`}</span>
             )}
           </span>
         </ButtonPrimary>

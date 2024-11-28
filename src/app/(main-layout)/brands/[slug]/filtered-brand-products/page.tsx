@@ -1,12 +1,13 @@
 "use client";
 import { fetchData } from "@/actions/fetchData";
-import AnimatedLoading from "@/Components/AnimatedLoading";
+import ProductEmptyState from "@/app/(main-layout)/_components/ProductEmptyState";
+import CustomLoading from "@/Components/CustomLoader";
 import Pagination from "@/Components/Pagination";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct, IProductApiResponse } from "@/interfaces/product.interface";
 import { FilterContext } from "@/Provider/BrandProductFilteringProvider";
 import { buildQueryString } from "@/utils/buildQueryString";
-
+import { getCurrency } from "@/utils/getCurrency";
 import { useContext, useEffect, useState } from "react";
 
 const FilteredBrandProductsPage = ({
@@ -16,6 +17,9 @@ const FilteredBrandProductsPage = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState<IProductApiResponse | null>(null);
+  const [activeQucikOrder, setActiveQuickOrder] = useState(false);
+  const [shippingAmount, setShippingAmount] = useState(0);
+  const [currency, setCurrency] = useState<string>("");
   const { filter } = useContext(FilterContext);
 
   const totalPages = Math.ceil(
@@ -34,6 +38,15 @@ const FilteredBrandProductsPage = ({
         limit: 20,
         query: `${query}&${filterQuery}`,
       });
+      const quickOrderServices = await fetchData({
+        route: "/settings/quick-order-setting",
+      });
+
+      const currency = await getCurrency();
+      setProducts(response);
+      setActiveQuickOrder(quickOrderServices?.data?.isQuickOrderServiceActive);
+      setShippingAmount(quickOrderServices?.data?.deliveryCharge);
+      setCurrency(currency);
       setProducts(response);
       setIsLoading(false);
     };
@@ -44,14 +57,7 @@ const FilteredBrandProductsPage = ({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <AnimatedLoading />
-      </div>
-    );
-  }
-  if (products?.data?.length === 0) {
-    return (
-      <div className="flex text-center mt-20 justify-center items-center">
-        <span className="text-lg">No products found</span>
+        <CustomLoading />
       </div>
     );
   }
@@ -59,11 +65,21 @@ const FilteredBrandProductsPage = ({
   return (
     <div className="flex flex-col gap-5">
       <span>{products?.data?.length} items found</span>
-      <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5  justify-around">
-        {products?.data?.map((product: IProduct) => (
-          <ProductCard key={product?._id} product={product} />
-        ))}
-      </div>
+      {products && products?.data?.length > 0 ? (
+        <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5  justify-around">
+          {products?.data?.map((product: IProduct) => (
+            <ProductCard
+              currencyIcon={currency}
+              isQuickOrderActive={activeQucikOrder}
+              shippingAmount={shippingAmount}
+              key={product?._id}
+              product={product}
+            />
+          ))}
+        </div>
+      ) : (
+        <ProductEmptyState message="No Product Found" />
+      )}
       <div>
         {totalPages > 1 ? (
           <Pagination

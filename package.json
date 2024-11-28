@@ -9,13 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/third-parties": "^15.0.1",
     "@tabler/icons-react": "^3.9.0",
     "next": "14.2.3",
     "nextjs-toploader": "^1.6.12",
     "react": "^18",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
-    "react-slider": "^2.0.6"
+    "react-slider": "^2.0.6",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@types/node": "^20",

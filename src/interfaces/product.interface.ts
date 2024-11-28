@@ -23,6 +23,7 @@ export interface IProductVariant {
 export interface IProduct {
   _id: string;
   productName: string;
+  productUrlSlug: string;
   productCart: any;
   brand: {
     brandName: string;
@@ -57,7 +58,7 @@ export interface IProduct {
   variant: IProductVariant;
   orderQuantity: number;
   shortDescription?: string;
-  description: string;
+  description: string | any;
   seo: {
     metaTitle: string;
     metaDescription: string;
@@ -67,4 +68,5 @@ export interface IProduct {
     minOrder: number;
     discount: number;
   };
+  totalSoldQuantity?: number;
 }

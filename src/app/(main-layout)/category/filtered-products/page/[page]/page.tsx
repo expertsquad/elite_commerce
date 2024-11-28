@@ -1,11 +1,13 @@
 "use client";
 import { fetchData } from "@/actions/fetchData";
+import ProductEmptyState from "@/app/(main-layout)/_components/ProductEmptyState";
 import AnimatedLoading from "@/Components/AnimatedLoading";
 import Pagination from "@/Components/Pagination";
 import ProductCard from "@/Components/ProductCard/ProductCard";
 import { IProduct, IProductApiResponse } from "@/interfaces/product.interface";
 import { FilterContext } from "@/Provider/CategoryProductFilteringProvider";
 import { buildQueryString } from "@/utils/buildQueryString";
+import { getCurrency } from "@/utils/getCurrency";
 import React, { useContext, useEffect, useState } from "react";
 
 const FilteredProductDynamicPage = ({
@@ -15,6 +17,9 @@ const FilteredProductDynamicPage = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState<IProductApiResponse | null>(null);
+  const [activeQucikOrder, setActiveQuickOrder] = useState(false);
+  const [shippingAmount, setShippingAmount] = useState(0);
+  const [currency, setCurrency] = useState<string>("");
   const { filter } = useContext(FilterContext);
 
   const totalPages = Math.ceil(
@@ -31,6 +36,15 @@ const FilteredProductDynamicPage = ({
         query: query,
         page: Number(params.page),
       });
+      const quickOrderServices = await fetchData({
+        route: "/settings/quick-order-setting",
+      });
+
+      const currency = await getCurrency();
+      setProducts(response);
+      setActiveQuickOrder(quickOrderServices?.data?.isQuickOrderServiceActive);
+      setShippingAmount(quickOrderServices?.data?.deliveryCharge);
+      setCurrency(currency);
       setProducts(response);
       setIsLoading(false);
     };
@@ -44,31 +58,39 @@ const FilteredProductDynamicPage = ({
       </div>
     );
   }
-  if (products?.data?.length === 0) {
-    return (
-      <div className="flex text-center mt-20 justify-center items-center">
-        <span className="text-lg">No products found</span>
-      </div>
-    );
-  }
+
   return (
     <div className="space-y-5">
       <div className="flex flex-col gap-5 mb-10">
         <span className="text-lg">
           {products?.data?.length} Items result found
         </span>
-        <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5  justify-around">
-          {products?.data?.map((product: IProduct) => (
-            <ProductCard key={product?._id} product={product} />
-          ))}
-        </div>
+        {products && products?.data?.length > 0 ? (
+          <div className="grid grid-cols-product-grid grid-rows-product-grid gap-5  justify-around">
+            {products?.data?.map((product: IProduct) => (
+              <ProductCard
+                currencyIcon={currency}
+                isQuickOrderActive={activeQucikOrder}
+                shippingAmount={shippingAmount}
+                key={product?._id}
+                product={product}
+              />
+            ))}
+          </div>
+        ) : (
+          <ProductEmptyState />
+        )}
       </div>
       <div>
-        <Pagination
-          redirectTo="/category/filtered-products/page/"
-          currentPage={Number(params.page)}
-          totalPages={totalPages || 0}
-        />
+        {totalPages > 1 ? (
+          <Pagination
+            redirectTo="/category/filtered-products/page/"
+            currentPage={Number(params.page)}
+            totalPages={totalPages || 0}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

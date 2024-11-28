@@ -1,26 +1,28 @@
 "use client";
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
-import { IconBolt, IconHeart, IconHeartFilled } from "@tabler/icons-react";
-import { server_url, storages } from "@/constants";
+import { IconBolt } from "@tabler/icons-react";
+import { server_url } from "@/constants";
 import { IProduct } from "@/interfaces/product.interface";
-import { updateWishlist } from "@/utils/updateWishlist.utils";
-import { getLocalStorageData } from "@/helpers/localStorage.helper";
 import { WishlistContext } from "@/Provider/WishlistProvider";
-import { IWishlistProduct } from "@/interfaces/wishlist.interface";
-import AddToWishlistBtn from "@/app/(main-layout)/products/[id]/_components/AddToWishlistBtn";
-import QuickOrderButton from "@/app/(main-layout)/brands/_components/QuickOrderButton";
+import AddToWishlistBtn from "@/app/(main-layout)/products/[slug]/_components/AddToWishlistBtn";
+import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
+import { getPricingDetails } from "./getPricingDetails";
 
 type ProductImageSliderProps = {
   product: IProduct;
   defaultVariant?: any;
   loading?: any;
+  currencyIcon?: string;
+  shippingAmount?: number;
+  isQuickOrderActive?: boolean;
 };
 
 const ProductImageSlider = ({
   product,
-  defaultVariant,
-  loading,
+  currencyIcon,
+  shippingAmount,
+  isQuickOrderActive,
 }: ProductImageSliderProps) => {
   const { wishlistProducts, setRefetch } = useContext(WishlistContext);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -60,18 +62,16 @@ const ProductImageSlider = ({
     setCurrentSlide(index);
   };
 
-  const handleAddToFavourite = () => {
-    updateWishlist({ product: product });
-    setRefetch && setRefetch((prev) => prev + 1);
-  };
+  const productDetails = getPricingDetails(product);
+  const { discountPercentage } = productDetails;
 
   return (
     <section>
       <div className="w-full flex justify-between gap-x-0.5 relative">
-        {product?.variants?.[0]?.discountPercentage && (
-          <div className="absolute top-2.5 left-2.5 z-10">
-            <span className="bg-gradient-secondary py-1 px-2 rounded-lg text-white md:text-xs text-[10px] cursor-default">
-              {product?.variants?.[0]?.discountPercentage}%
+        {discountPercentage > 0 && (
+          <div className="absolute top-2.5 left-2.5 z-10 ">
+            <span className="bg-gradient-secondary py-1 px-2 rounded-md text-white md:text-xs text-[10px] cursor-default">
+              -{discountPercentage && discountPercentage.toFixed(0)}%
             </span>
           </div>
         )}
@@ -91,25 +91,27 @@ const ProductImageSlider = ({
                 fill
                 src={`${server_url}${productImg}`}
                 sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw, 33vw"
-                className="w-full h-full top-0 left-0 object-contain"
+                className="w-full h-full top-0 left-0 object-contain p-2"
               />
             </div>
-            <div className="absolute bottom-5 right-[50%] z-10">
-              <div className="indicators gap-2 flex justify-center items-center ">
-                {product?.productPhotos?.map((_: any, dotIndex: number) => (
-                  <div
-                    key={dotIndex}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDotClick(dotIndex);
-                    }}
-                    className={`indicator w-[6px] h-[6px] rounded-full cursor-pointer ${
-                      dotIndex === currentSlide
-                        ? "bg-gradient-primary"
-                        : "bg-black-50"
-                    }`}
-                  />
-                ))}
+            <div className="flex items-center justify-center">
+              <div className="absolute bottom-3 z-10">
+                <div className="indicators gap-2 flex justify-center items-center ">
+                  {product?.productPhotos?.map((_: any, dotIndex: number) => (
+                    <div
+                      key={dotIndex}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDotClick(dotIndex);
+                      }}
+                      className={`indicator w-[6px] h-[6px] rounded-full cursor-pointer ${
+                        dotIndex === currentSlide
+                          ? "bg-gradient-primary"
+                          : "bg-black-50"
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -117,13 +119,30 @@ const ProductImageSlider = ({
 
         <div className="absolute top-2.5 right-2.5 z-10">
           <div className="flex flex-col gap-y-1.5">
-            <AddToWishlistBtn products={product} />
-
-            <QuickOrderButton
+            <AddToWishlistBtn
               product={product}
-              buttonIcon={<IconBolt size={18} stroke={1} />}
-              buttonStyle="cursor-pointer rounded-full flex justify-center items-center bg-white h-[30px] w-[30px] border border-black-10 md:hidden"
+              variant={product?.variants[0]}
             />
+
+            {isQuickOrderActive && (
+              <QuickOrderButton
+                product={{
+                  ...product,
+                  orderQuantity: 1,
+                  variant: product?.variants[0],
+                }}
+                buttonIcon={
+                  <IconBolt
+                    size={20}
+                    stroke={1.5}
+                    className="active:fill-white focus:fill-white"
+                  />
+                }
+                buttonStyle="cursor-pointer rounded-full flex justify-center items-center bg-white h-[30px] w-[30px] border border-black-10 md:hidden"
+                currencyIcon={currencyIcon}
+                shippingAmount={shippingAmount ? shippingAmount : 0}
+              />
+            )}
           </div>
         </div>
       </div>

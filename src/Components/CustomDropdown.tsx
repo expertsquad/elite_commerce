@@ -140,9 +140,9 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         {isOpen && (
           <ul className="absolute left-0 mt-1 w-full bg-white border border-black-10 rounded-md shadow-lg z-20 transition-all duration-300 ease-in-out md:max-h-[300px] max-h-[200px] overflow-y-auto">
             {filteredData.length ? (
-              filteredData.map((item) => (
+              filteredData.map((item, i) => (
                 <li
-                  key={item}
+                  key={i}
                   className={`px-4 py-2 cursor-pointer ${itemClassName}`}
                   onClick={() => handleOptionClick(item)}
                 >

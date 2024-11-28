@@ -1,14 +1,27 @@
-import { Button } from "@/Components/Buttons";
+"use client";
 import { server_url } from "@/constants";
 import { heroTopSmallBanner } from "@/interfaces/heroTopCard.interface";
 import { IconArrowRight } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const TopSmallBanner = ({ topOffer }: { topOffer: heroTopSmallBanner }) => {
+const TopSmallBanner = ({
+  topOffer,
+  currencyIcon,
+}: {
+  topOffer: heroTopSmallBanner;
+  currencyIcon: string;
+}) => {
+  const handleLink = () => {
+    if (topOffer?.link && topOffer?.backgroundPhoto) {
+      window.open(topOffer?.link, "_blank");
+    }
+  };
   return (
     <div
-      className={`flex items-center gap-x-5 p-5 md:justify-start justify-center rounded-lg flex-1 w-full h-full`}
+      className={`flex items-center gap-x-5 p-5 md:justify-start justify-center rounded-lg flex-1 w-full h-full ${
+        topOffer?.backgroundPhoto && "cursor-pointer"
+      }`}
       style={{
         backgroundColor: `${
           topOffer?.backgroundColor && `${topOffer?.backgroundColor}`
@@ -21,34 +34,43 @@ const TopSmallBanner = ({ topOffer }: { topOffer: heroTopSmallBanner }) => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
+      onClick={handleLink}
     >
-      <div className="relative w-36 h-36 shrink-0">
+      <div
+        className={`relative w-36 h-36 shrink-0 ${
+          topOffer?.backgroundPhoto ? "hidden" : "block"
+        }`}
+      >
         <Image
           src={`${server_url + topOffer?.productPhoto}`}
           alt="Hero discount item"
           fill
           style={{
-            objectFit: "cover",
+            objectFit: "contain",
           }}
-          className="inset-0 top-0 left-0 object-cover"
+          className="inset-0 top-0 left-0 object-contain"
         />
       </div>
 
-      <div className="flex flex-col">
-        <h2 className="text-2xl line-clamp-2 text-right">{topOffer?.title}</h2>
-        <div className="flex items-baseline gap-1 main-text-color font-bold mt-2.5">
-          <span className="text-lg flex items-end justify-end w-full">
-            ${topOffer?.price || 200}
-          </span>
-        </div>
+      <div
+        className={`flex flex-col ${
+          topOffer?.backgroundPhoto ? "hidden" : "block"
+        }`}
+      >
+        <h2 className="text-lg md:text-xl line-clamp-2 text-start mb-2.5">
+          {topOffer?.title}
+        </h2>
+        <span className="text-lg md:text-sm line-clamp-2 text-start">
+          {topOffer?.offerTag}
+        </span>
 
-        <div className="flex items-end justify-end ">
+        <div className="flex items-start justify-start uppercase">
           <Link
             href={topOffer?.link || ""}
             target="_blank"
-            className="mt-10 flex items-center justify-center gap-2 bg-gradient-primary text-white rounded-md py-2 [font-size:_clamp(0.5em,60vw,0.9em)] max-w-[130px] whitespace-nowrap w-full"
+            className="mt-10 flex items-center justify-center gap-2 bg-gradient-primary hover:bg-gradient-primary-reverse transition-all duration-300 text-white rounded-md py-2 max-w-[110px] whitespace-nowrap w-full text-xs"
           >
-            {topOffer?.buttonText} <IconArrowRight size={20} />
+            {topOffer?.buttonText} <IconArrowRight size={16} />
           </Link>
         </div>
       </div>

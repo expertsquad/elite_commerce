@@ -1,4 +1,4 @@
-import { fetchData } from "@/actions/fetchData";
+import { fetchData, fetchProtectedData } from "@/actions/fetchData";
 import OrderPlacedThankYou from "./_components/OrderPlacedThankYou";
 import { formatDate } from "@/constants/formateDate.constants";
 import { OrderItemsTypes } from "@/interfaces/orderitems.interface";
@@ -7,13 +7,29 @@ import { server_url } from "@/constants";
 import TotalSubTotalShippingFee from "./_components/TotalSubTotalShippingFee";
 import { IconX } from "@tabler/icons-react";
 import { orderPlacedDesign } from "@/assets";
+import { formatProductVariantName } from "@/constants/formatProductVariantName";
+
+export async function generateMetadata() {
+  try {
+    const shopInfo = await fetchData({
+      route: "/settings/shop",
+    });
+
+    return {
+      title: `Order Successful | ${shopInfo?.data?.shopName}`,
+      description: `Thank you for shopping with ${shopInfo?.data?.shopName}! Your order has been placed successfully. We are preparing your items for delivery.`,
+    };
+  } catch (error) {
+    return {
+      title: "Order Successful",
+      description:
+        "Thank you for your order! Your purchase has been completed successfully, and we are preparing your items for delivery.",
+    };
+  }
+}
 
 interface Params {
   id: string;
-}
-
-interface SearchParams {
-  [key: string]: any;
 }
 
 const OrderSuccessfull = async ({
@@ -21,15 +37,21 @@ const OrderSuccessfull = async ({
   searchParams,
 }: {
   params: Params;
-  searchParams: SearchParams;
+  searchParams: {
+    quickorder: string;
+    quickorderId: string;
+  };
 }) => {
-  const quickOrder = searchParams["quick-order"] === "true";
-  const response = await fetchData({
-    route: `${
-      quickOrder ? `/quick-order/${params?.id}` : `/online-order/${params?.id}`
-    }`,
-  });
-  const currencyIcon = await fetchData({
+  const quickOrder = searchParams.quickorder === "true";
+
+  const response = quickOrder
+    ? await fetchData({
+        route: `/quick-order/${searchParams?.quickorderId}`,
+      })
+    : await fetchProtectedData({
+        route: `/online-order/${params?.id}`,
+      });
+  const currencyIcon = await fetchProtectedData({
     route: "/settings/shop",
   });
   return (
@@ -76,8 +98,27 @@ const OrderSuccessfull = async ({
                     <IconX size={18} />
                     <span>
                       {currencyIcon?.data?.currencySymbol}
-                      {item?.variant?.discountedPrice}
+                      {item?.variant?.discountedPrice
+                        ? item?.variant?.discountedPrice
+                        : item?.variant?.sellingPrice}
                     </span>
+                    {item?.variant &&
+                      item?.variant?.variantName !== "Not specified" && (
+                        <>
+                          <span className="text-black-10">|</span>
+                          <div
+                            className="h-3 w-3 rounded-full"
+                            style={{
+                              backgroundColor: item?.variant?.variantName,
+                            }}
+                          ></div>
+                          <span className="text-xs">
+                            {formatProductVariantName(
+                              item?.variant?.variantName
+                            )}
+                          </span>
+                        </>
+                      )}
                   </div>
                   <span>
                     {currencyIcon?.data?.currencySymbol}
@@ -94,7 +135,9 @@ const OrderSuccessfull = async ({
           shipping={response?.data?.shippingCharge}
           total={response?.data?.totalPayable}
           subTotal={response?.data?.totalPrice}
-          discount={response?.data?.totalDiscount}
+          discount={
+            response?.data?.totalDiscount || response?.data?.additionalDiscount
+          }
           currencySymbol={currencyIcon?.data?.currencySymbol}
         />
       </div>

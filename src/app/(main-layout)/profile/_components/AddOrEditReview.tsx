@@ -1,16 +1,30 @@
+import Link from "next/link";
 import React from "react";
 
-const AddOrEditReview = ({ value }: { value: boolean }) => {
+const AddOrEditReview = ({
+  isReviewed,
+  status,
+}: {
+  isReviewed: boolean;
+  status?: string;
+}) => {
   return (
     <div className="flex items-center justify-center">
-      {value ? (
-        <button className="bg-positive text-white py-2 px-2.5 rounded-md">
+      {isReviewed && (
+        <Link
+          href={"/profile/review/all-review-history"}
+          className="bg-secondary text-white py-2 px-2.5 rounded-md"
+        >
           Edit Review
-        </button>
-      ) : (
-        <button className="bg-gradient-primary text-white hover:bg-gradient-primary-reverse py-2 px-2.5 rounded-md">
+        </Link>
+      )}
+      {isReviewed === false && status === "Delivered" && (
+        <Link
+          href={"/profile/review"}
+          className="bg-positive text-white py-2 px-2.5 rounded-md"
+        >
           Start Review
-        </button>
+        </Link>
       )}
     </div>
   );

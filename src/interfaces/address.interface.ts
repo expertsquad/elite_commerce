@@ -12,4 +12,5 @@ export interface IAddress {
   phoneNumber: string;
   userId: string;
   city: string;
+  selectedShippingAddress?: string;
 }

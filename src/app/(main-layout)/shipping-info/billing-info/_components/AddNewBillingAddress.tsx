@@ -1,17 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { countryNames } from "@/constants/countryNames.constant";
 import CustomInput from "@/Components/CustomInput";
-import CustomDropdown from "@/Components/CustomDropdown";
+import CustomDropdownSearchToApiFetch from "@/Components/CustomDropdownSearchToApiFetch";
+import toast from "react-hot-toast";
+import { fetchCountryData } from "@/actions/fetchCountryData";
 
 const AddNewBillingAddress = ({
   onNewAddressChange,
   country,
+  states,
+  cities,
 }: {
   onNewAddressChange: (newAddress: any) => void;
   country: string;
+  states?: any;
+  cities?: any;
 }) => {
   const [city, setCity] = useState("");
-  const [state, setState] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const [cityDatas, setCityDatas] = useState(
+    cities?.data?.map((c: any) => c?.name)
+  );
+  const [stateDatas, setStateDatas] = useState(
+    states?.data?.map((s: any) => s?.name)
+  );
+  const [citySearchInputValue, setCitySearchInputValue] = useState("");
+  const [stateSearchInputValue, setStateSearchInputValue] = useState("");
   const [newAddress, setNewAddress] = useState({
     firstName: "",
     lastName: "",
@@ -31,10 +44,76 @@ const AddNewBillingAddress = ({
     setNewAddress((prevAddress) => ({
       ...prevAddress,
       city: city,
-      state: state,
+      state: selectedState,
       country: country,
     }));
-  }, [city, state, country]);
+  }, [city, selectedState, country]);
+
+  // fatching expected data from country api
+
+  useEffect(() => {
+    const handleClientSiteCityFetch = async (
+      country: string,
+      selectedState: string,
+      citySearchInputValue: string
+    ) => {
+      try {
+        // fatching data from country api by city and country name
+        if (citySearchInputValue) {
+          const res = await fetchCountryData({
+            route: "/city",
+            query: `name=${citySearchInputValue}&country_name=${country}`,
+            limit: 10,
+          });
+
+          if (res?.success) {
+            const cityData = res?.data?.map((c: any) => c?.name);
+            setCityDatas(cityData?.length ? cityData : ["No Data Found"]);
+          }
+        } else if (selectedState) {
+          // fatching data from country api by state and country name
+          const res = await fetchCountryData({
+            route: "/city",
+            query: `country_name=${country}&state_name=${selectedState}`,
+            limit: 10,
+          });
+
+          if (res?.success) {
+            const cityData = res?.data?.map((c: any) => c?.name);
+            setCityDatas(cityData?.length ? cityData : ["No Data Found"]);
+          }
+        }
+      } catch (error) {
+        toast.error("Error fetching city data");
+      }
+    };
+
+    handleClientSiteCityFetch(country, selectedState, citySearchInputValue);
+  }, [selectedState, country, citySearchInputValue]);
+
+  // getting state data by country and stete name
+
+  useEffect(() => {
+    if (stateSearchInputValue) {
+      const fetchData = async () => {
+        try {
+          const res = await fetchCountryData({
+            route: "/state",
+            query: `country_name=${country}&name=${stateSearchInputValue}`,
+            limit: 10,
+          });
+          if (res?.success) {
+            const stateData = res?.data?.map((s: any) => s?.name);
+            setStateDatas(stateData?.length ? stateData : ["Data Not Found"]);
+          }
+        } catch (error) {
+          toast.error("Error fetching state data");
+        }
+      };
+
+      fetchData();
+    }
+  }, [stateSearchInputValue, country]);
 
   const handleInputChange = (event: any) => {
     const { name, value, type, checked } = event.target;
@@ -56,9 +135,7 @@ const AddNewBillingAddress = ({
           placeholder="Zayed"
           value={newAddress?.firstName}
           onChange={handleInputChange}
-          inputStyle={
-            newAddress?.firstName === "" ? " border border-danger" : ""
-          }
+          required
         />
         <CustomInput
           label="Last Name"
@@ -67,9 +144,7 @@ const AddNewBillingAddress = ({
           placeholder="Hossain"
           value={newAddress?.lastName}
           onChange={handleInputChange}
-          inputStyle={
-            newAddress?.lastName === "" ? " border border-danger" : ""
-          }
+          required
         />
 
         <CustomInput
@@ -79,9 +154,7 @@ const AddNewBillingAddress = ({
           placeholder="017*******"
           value={newAddress?.phoneNumber}
           onChange={handleInputChange}
-          inputStyle={
-            newAddress?.phoneNumber === "" ? " border border-danger" : ""
-          }
+          required
         />
         <div className="opacity-50 pointer-events-none">
           <CustomInput
@@ -91,29 +164,30 @@ const AddNewBillingAddress = ({
             placeholder="Bangladesh"
             value={country}
             onChange={handleInputChange}
+            readonly
           />
         </div>
-        <CustomDropdown
-          data={countryNames}
-          onClick={(value) => setState(value)}
-          className={`w-full py-2 rounded-lg px-3 ${
-            state == "" ? "border border-danger" : "border border-black-10"
-          }`}
+
+        <CustomDropdownSearchToApiFetch
+          data={stateDatas ? stateDatas : ["No Data For This Country"]}
+          onClick={(value) => setSelectedState(value)}
+          className="w-full border border-black-10 py-2 rounded-lg px-3 "
           itemClassName="py-1 hover:bg-black-10"
-          defaultValue={newAddress?.state}
-          label="State"
+          defaultValue="Select State"
+          label="Select State"
           searchInput={true}
+          setSearchInputValue={setStateSearchInputValue}
         />
-        <CustomDropdown
-          data={countryNames}
+
+        <CustomDropdownSearchToApiFetch
+          data={cityDatas ? cityDatas : ["No Data For This Country"]}
           onClick={(value) => setCity(value)}
-          className={`w-full py-2 rounded-lg px-3 ${
-            city == "" ? "border border-danger" : "border border-black-10"
-          }`}
+          className="w-full border border-black-10 py-2 rounded-lg px-3 "
           itemClassName="py-1 hover:bg-black-10"
-          defaultValue={newAddress?.city}
-          label="City"
+          defaultValue="Select Cities"
+          label="Select Cities"
           searchInput={true}
+          setSearchInputValue={setCitySearchInputValue}
         />
 
         <CustomInput
@@ -123,7 +197,7 @@ const AddNewBillingAddress = ({
           placeholder="00108"
           value={newAddress?.zipCode}
           onChange={handleInputChange}
-          inputStyle={newAddress?.zipCode === "" ? " border border-danger" : ""}
+          required
         />
         <CustomInput
           label="Company Name (Optional)"
@@ -141,9 +215,7 @@ const AddNewBillingAddress = ({
             placeholder="1234 Main St"
             value={newAddress?.streetAddress}
             onChange={handleInputChange}
-            inputStyle={
-              newAddress?.streetAddress == "" ? " border border-danger" : ""
-            }
+            required
           />
         </div>
       </div>

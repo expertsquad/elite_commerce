@@ -14,4 +14,12 @@ export interface IFileUploaderProps {
   children?: ReactNode;
   uid?: number;
   bottomText?: string;
+  imageController?: string;
+  overlay?: any;
+  overlayIConX?: any;
+  overlayIConXClassName?: string;
+  childrenMainDiv?: string;
+  imgClassName?: string;
+  deleteServerImage?: boolean;
+  setDeletedImageUrl?: any;
 }

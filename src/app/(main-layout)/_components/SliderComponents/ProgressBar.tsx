@@ -18,11 +18,11 @@ const ProgressBar = ({ progressValue }: IProgressBarProps) => {
   };
 
   return (
-    <div className="relative w-full h-6">
+    <div className="relative w-[96%] h-3">
       <div className="relative w-full bg-black-10 rounded-full h-1.5">
         <div
           className="absolute top-0 left-0 bg-gradient-primary rounded-full h-1.5 transition-all duration-300"
-          style={{ width: `${progress}%` }}
+          style={{ width: `${progress?.toFixed()}%` }}
         />
       </div>
       <div
@@ -32,7 +32,7 @@ const ProgressBar = ({ progressValue }: IProgressBarProps) => {
           border: "1.5px solid #1A69B3",
         }}
       >
-        {progress ? progress : 0}%
+        {progress ? progress.toFixed() : 0}%
       </div>
       <input
         type="range"
