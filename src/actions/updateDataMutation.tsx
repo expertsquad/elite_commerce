@@ -66,14 +66,13 @@ export const updateDataMutation = async ({
       headers,
       body: structuredData,
     });
+    const result = await res.json();
 
     // revalidate path
     if (pathToRevalidate) {
       revalidatePath(pathToRevalidate);
       revalidateTag(pathToRevalidate);
     }
-
-    const result = await res.json();
     return result;
   } catch (error) {
     throw error;
