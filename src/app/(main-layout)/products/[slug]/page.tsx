@@ -61,6 +61,7 @@ const ProductViewPage = async ({
   // <== Get a product by productslugURL ==>
   const product = await fetchData({
     route: `/product/slug/${params?.slug}`,
+    revalidate: 10,
   });
 
   // <== Get currency icon ==>
