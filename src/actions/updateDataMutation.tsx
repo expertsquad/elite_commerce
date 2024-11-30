@@ -73,6 +73,7 @@ export const updateDataMutation = async ({
       revalidatePath(pathToRevalidate);
       revalidateTag(pathToRevalidate);
     }
+
     return result;
   } catch (error) {
     throw error;

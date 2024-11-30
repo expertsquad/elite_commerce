@@ -20,6 +20,11 @@ export const fetchData = async ({
   revalidate?: number;
   pathToRevalidate?: string;
 }) => {
+  if (pathToRevalidate) {
+    revalidatePath(pathToRevalidate);
+    revalidateTag(pathToRevalidate);
+  }
+
   try {
     const next: NextFetchRequestConfig | undefined = {
       tags: [route],
@@ -36,12 +41,6 @@ export const fetchData = async ({
       }
     );
     const data = await res.json();
-
-    // revalidate path
-    if (pathToRevalidate) {
-      revalidatePath(pathToRevalidate);
-      revalidateTag(pathToRevalidate);
-    }
 
     if (revalidate) {
       next.revalidate = revalidate;
@@ -71,8 +70,8 @@ export const fetchProtectedData = async ({
     }
 
     const url = `${
-      server_api + route
-    }?page=${page}&limit=${limit}&query=${encodeURIComponent(query)}`;
+      server_api + route + `?page=${page}&limit=${limit}&${query}`
+    }`;
 
     const res = await fetch(url, {
       method: "GET",
