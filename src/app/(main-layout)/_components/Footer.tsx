@@ -26,7 +26,7 @@ const Footer = async () => {
               {footer?.data?.description}
             </p>
           </div>
-          <hr className="md:hidden border-black-50 " />
+          <hr className="md:hidden  border-black-10 " />
           <div className="md:flex flex-col gap-10 hidden">
             <ContactInfo />
             <SocialMediaConnect />

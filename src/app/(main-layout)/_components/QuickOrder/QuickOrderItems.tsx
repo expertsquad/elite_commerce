@@ -117,7 +117,7 @@ export const QuickOrderItem = ({
             </div>
             <strong className="font-semibold text-gradient-primary text-base">
               {currencyIcon}
-              {discountedPrice * product?.orderQuantity}
+              {(discountedPrice * product?.orderQuantity).toFixed(2)}
             </strong>
           </div>
         </div>

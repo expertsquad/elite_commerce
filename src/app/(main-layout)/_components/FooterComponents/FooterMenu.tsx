@@ -20,7 +20,7 @@ const FooterMenu = ({ data }: any) => {
           )
         )}
       </ul>
-      <div className="md:hidden bg-black-50 h-[1px] w-full"></div>
+      <div className="md:hidden bg-black-10 h-[1px] w-full"></div>
     </div>
   );
 };

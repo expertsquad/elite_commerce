@@ -100,7 +100,7 @@ export const CartItem = ({
             </div>
             <span className="font-bold text-gradient-primary">
               {currencyIcon}
-              {price * product?.orderQuantity}
+              {(price * product?.orderQuantity).toFixed(2)}
             </span>
           </div>
         </div>

@@ -98,12 +98,12 @@ const Page = async () => {
         <div className="flex justify-center items-center  flex-col gap-3.5 my-16">
           <div className="flex justify-center items-center gap-5">
             <div className="border-b w-[100px] border-black-50"></div>
-            <span className="text-[clamp(20px,5vw,30px)] text-gradient-primary font-bold">
+            <span className="text-[clamp(20px,5vw,30px)] text-gradient-primary font-bold whitespace-nowrap text-center">
               Deals Of The Day
             </span>
             <div className="border-b w-[100px] border-black-50"></div>
           </div>
-          <p className="text-black-80 [font-size:_clamp(14px,2.5vw,16px)]">
+          <p className="text-black-80 text-center [font-size:_clamp(14px,2.5vw,16px)]">
             Grab today&apos;s best deals with limited-time discounts. Shop now
             before they&apos;re gone!
           </p>
