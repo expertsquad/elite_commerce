@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import { postDataMutation } from "@/actions/postDataMutation";
 import CustomLoading from "@/Components/CustomLoader";
 import OrderItemsRightSection from "../../shipping-info/_components/OrderItemsRightSection";
+import { revalidateTagAction } from "@/actions/revalidateTag";
 
 const BillingInfoPageContent = ({
   currencySymbol,
@@ -83,7 +84,6 @@ const BillingInfoPageContent = ({
           data: JSON.stringify(shippingAddress),
           formatted: true,
           method: "PUT",
-          pathToRevalidate: "/product",
         });
       }
     } catch (error) {
@@ -98,14 +98,17 @@ const BillingInfoPageContent = ({
         data: JSON.stringify(orderDataToSubmit),
         method: "POST",
         formatted: true,
+        pathToRevalidate: "/product",
       });
 
       if (result?.success) {
         toast.success(result?.message);
         localStorage.removeItem("orderInit");
         if (orderData?.payment?.paymentMethod === "COD") {
+          revalidateTagAction("/product");
           router.push(`/successfull/${result?.data?._id}`);
         } else {
+          revalidateTagAction("/product");
           router.push(result?.data);
         }
       } else {

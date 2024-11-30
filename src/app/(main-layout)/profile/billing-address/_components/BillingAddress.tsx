@@ -22,8 +22,10 @@ const BillingAddress = ({
   cities: any;
 }) => {
   const [loading, setLoading] = useState(false);
-  const [city, setCity] = useState("");
-  const [selectedState, setSelectedState] = useState("");
+  const [city, setCity] = useState(billingAddress?.city || "");
+  const [selectedState, setSelectedState] = useState(
+    billingAddress?.state || ""
+  );
   const [cityDatas, setCityDatas] = useState(
     cities?.data?.map((c: any) => c?.name)
   );

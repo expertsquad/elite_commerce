@@ -22,8 +22,10 @@ const ShippingAddress = ({
   cities: any;
 }) => {
   const [loading, setLoading] = useState(false);
-  const [city, setCity] = useState("");
-  const [selectedState, setSelectedState] = useState("");
+  const [city, setCity] = useState(shippingAddress?.city || "");
+  const [selectedState, setSelectedState] = useState(
+    shippingAddress?.state || ""
+  );
   const [cityDatas, setCityDatas] = useState(
     cities?.data?.map((c: any) => c?.name)
   );
@@ -121,6 +123,8 @@ const ShippingAddress = ({
     // Add isDefault = true
     dataObj.isDefault = true;
 
+    console.log(dataObj);
+
     if (!shippingAddress) {
       const result = await postDataMutation({
         route: "/user-address/add",
@@ -139,6 +143,7 @@ const ShippingAddress = ({
         formatted: true,
         method: "PUT",
       });
+      console.log(result);
       if (result?.success) {
         toast.success(result?.message);
       } else {

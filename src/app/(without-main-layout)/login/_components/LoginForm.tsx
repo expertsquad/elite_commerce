@@ -100,10 +100,10 @@ const LoginForm = () => {
         >
           Login
         </SubmitButton>
-        <div className="flex mx-auto gap-2 text-xs">
+        {/* <div className="flex mx-auto gap-2 text-xs">
           <input type="checkbox" id="expandDate" name="isDayExtended" />
           <label htmlFor="expandDate">Remember me for 30 days</label>
-        </div>
+        </div> */}
       </fieldset>
     </form>
   );

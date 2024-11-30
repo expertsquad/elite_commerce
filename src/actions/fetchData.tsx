@@ -41,7 +41,9 @@ export const fetchData = async ({
     if (pathToRevalidate) {
       revalidatePath(pathToRevalidate);
       revalidateTag(pathToRevalidate);
-    } else if (revalidate) {
+    }
+
+    if (revalidate) {
       next.revalidate = revalidate;
     }
 
