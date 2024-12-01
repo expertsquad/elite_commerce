@@ -54,7 +54,11 @@ const TopThinNav = async () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <socialMedia.icon size={16} />
+                <socialMedia.icon
+                  size={16}
+                  stroke={1}
+                  className="hover:text-primary-light"
+                />
               </Link>
             </li>
           ))}

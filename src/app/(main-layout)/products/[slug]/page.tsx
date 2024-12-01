@@ -10,6 +10,7 @@ import SocialMediaAndOthers from "./_components/SocialMediaAndOthers";
 import SpecBulkProduct from "./_components/SpecBulkProduct";
 import SpecificationsMenu from "./_components/SpecificationsMenu";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -78,6 +79,10 @@ const ProductViewPage = async ({
   const quickOrderServices = await fetchData({
     route: "/settings/quick-order-setting",
   });
+
+  if (product?.success === false) {
+    redirect("/error");
+  }
 
   const accessToken = cookies().get("accessToken")?.value;
 
