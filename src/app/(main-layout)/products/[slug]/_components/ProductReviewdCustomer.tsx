@@ -15,6 +15,7 @@ const ProductReviewdCustomer = async ({
   const getAuthor = await fetchData({
     route: "/settings/shop",
   });
+  console.log(reviewData);
   return (
     <div className="">
       {reviewData?.map((review: CustomerReviewProps) => (
@@ -99,7 +100,7 @@ const ProductReviewdCustomer = async ({
                   </h3>
                   <span className="w-[6px] h-[6px] rounded-full bg-black-10"></span>
                   <span className="text-xs">
-                    {formatDateShorting(review?.updatedAt)}
+                    {formatDateShorting(review?.replyTime || "")}
                   </span>
                 </div>
               </div>
