@@ -57,12 +57,19 @@ export const fetchProtectedData = async ({
   query = "",
   page = 1,
   limit = 10,
+  pathToRevalidate,
 }: {
   route: string;
   query?: string;
   page?: number;
   limit?: number;
+  pathToRevalidate?: string;
 }) => {
+  if (pathToRevalidate) {
+    revalidatePath(pathToRevalidate);
+    revalidateTag(pathToRevalidate);
+  }
+
   try {
     const accessToken = cookies().get("accessToken")?.value;
     if (!accessToken) {

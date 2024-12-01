@@ -3,7 +3,7 @@ import { IProduct } from "@/interfaces/product.interface";
 import Image from "next/image";
 import Link from "next/link";
 
-export const FeaturedProduct = async ({
+export const FeaturedProduct = ({
   product,
   currencySymbol,
 }: {

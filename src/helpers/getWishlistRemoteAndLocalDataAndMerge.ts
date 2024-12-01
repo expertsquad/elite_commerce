@@ -8,6 +8,7 @@ export const getWishlistRemoteAndLocalDataAndMerge = async () => {
   try {
     const remoteWishlist = await fetchProtectedData({
       route: "/wishlist/me",
+      pathToRevalidate: "/wishlist",
     });
     const localProducts = getLocalStorageData(storages.wishlistProducts) || [];
     const remoteProducts = remoteWishlist?.data?.products || [];
