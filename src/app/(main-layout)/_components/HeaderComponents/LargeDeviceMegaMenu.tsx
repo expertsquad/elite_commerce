@@ -20,6 +20,7 @@ const LargeDeviceMegaMenu = async () => {
   });
   const shippingCharge = await fetchData({
     route: "/settings/shipping-charge",
+    pathToRevalidate: "/settings/shipping-charge",
   });
   // <== Quick Order Services ==>
   const quickOrderServices = await fetchData({

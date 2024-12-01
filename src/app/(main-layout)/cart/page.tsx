@@ -31,6 +31,7 @@ const CartView = async () => {
   const currency = await fetchData({ route: "/settings/shop" });
   const shippingCharge = await fetchData({
     route: "/settings/shipping-charge",
+    pathToRevalidate: "/settings/shipping-charge",
   });
   const quickOrderServices = await fetchData({
     route: "/settings/quick-order-setting",
