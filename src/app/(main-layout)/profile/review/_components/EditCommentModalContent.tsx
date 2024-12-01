@@ -20,18 +20,29 @@ const EditCommentModalContent = ({
   const [rating, setRating] = useState(reviewData?.rating || 0);
   const [comments, setComment] = useState(reviewData?.comment || "");
   const [photos, setPhotos] = useState<File[]>([]);
+  const [deletedPhotos, setDeletedPhotos] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  // <== Select star by this fn ==>
   const handleStarClick = (index: number, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setRating((prev: number) => (prev === index + 1 ? 0 : index + 1));
   };
 
-  // <== Handle file upload ==>
-  const handleFilesChange = (files: FileList) => {
-    const newPhotos = Array.from(files);
-    setPhotos((prevPhotos) => [...prevPhotos, ...newPhotos]);
+  // <== Handle file upload and delete ==>
+  const handleFilesChange = (
+    files: FileList | null,
+    fileUrlToDelete?: string
+  ) => {
+    if (fileUrlToDelete) {
+      // Add the URL of the deleted photo to `deletedPhotos`
+      setDeletedPhotos((prev) => [...prev, fileUrlToDelete]);
+    } else if (files) {
+      const newPhotos = Array.from(files);
+      setPhotos((prevPhotos) => [...prevPhotos, ...newPhotos]);
+    }
   };
 
   // <== Update review data ==>
@@ -45,6 +56,9 @@ const EditCommentModalContent = ({
     formData.append("rating", rating.toString());
     for (let i = 0; i < photos.length; i++) {
       formData.append("reviewPhotos", photos[i]);
+    }
+    for (let i = 0; i < deletedPhotos.length; i++) {
+      formData.append("deleteReviewPhotos", deletedPhotos[i]);
     }
 
     try {
@@ -122,12 +136,15 @@ const EditCommentModalContent = ({
             {comments?.length}/100
           </small>
           <div className="flex items-center space-x-2 mt-5">
-            {[...Array(4)].map((_, index) => (
+            {[...Array(1)].map((_, index) => (
               <FileUploader
                 key={index}
                 name={`reviewPhotos${index}`}
-                multiple={true}
+                // multiple={true}
                 onChange={(e) => handleFilesChange(e.target.files!)}
+                onDelete={(deletedUrl) =>
+                  setDeletedPhotos((prev) => [...prev, deletedUrl])
+                }
                 maxSize={5}
                 accept="image/*"
                 url={reviewData?.reviewPhotos[index]}

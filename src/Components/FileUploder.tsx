@@ -17,6 +17,7 @@ const FileUploader = ({
   bottomText,
   uid = 1,
   onChange,
+  onDelete,
 }: IFileUploaderProps) => {
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
 
@@ -51,18 +52,28 @@ const FileUploader = ({
     }
   };
 
-  // Handle file removal and reset the preview
+  // <== Handle file removal and reset the preview ==>
   const handleRemoveClick = (index: number) => {
-    setPreviewUrls((prev) => prev.filter((_, i) => i !== index));
+    const removedUrl = previewUrls[index];
+    if (removedUrl) {
+      const cleanedUrl = removedUrl?.startsWith(server_url || "")
+        ? removedUrl.slice(server_url!.length)
+        : removedUrl;
+
+      setPreviewUrls((prev) => prev.filter((_, i) => i !== index));
+      if (onDelete) {
+        onDelete(cleanedUrl);
+      }
+    }
   };
 
   return (
     <div
       className={`relative w-full h-full flex flex-col items-center justify-center ${className}`}
     >
-      <label className="flex flex-col justify-center items-center h-full w-full">
-        {previewUrls.length > 0 ? (
-          previewUrls.map((url, index) => (
+      <label className="flex flex-col justify-start items-start h-full w-full">
+        {previewUrls?.length > 0 ? (
+          previewUrls?.map((url, index) => (
             <div key={index} className="relative w-full h-full">
               <div className="h-[70px] w-[90px] relative border border-black-10 rounded-md cursor-pointer">
                 <Image
@@ -104,7 +115,7 @@ const FileUploader = ({
           disabled={disabled}
         />
       </label>
-      {bottomText && <p className="mt-2 text-gray-500">{bottomText}</p>}
+      {bottomText && <p className="mt-2 text-black-80">{bottomText}</p>}
       {error && <p className="mt-2 text-danger">{error}</p>}
     </div>
   );
