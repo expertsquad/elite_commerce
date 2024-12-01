@@ -126,7 +126,7 @@ const WishlistedItems = ({
       </td>
       <td className="border border-black-10 border-collapse px-5">
         <div className="flex items-center justify-center">
-          <QuickViewButton
+          {/* <QuickViewButton
             product={product}
             btnClassName="!pl-0"
             currencyIcon={currencyIcon}
@@ -136,7 +136,7 @@ const WishlistedItems = ({
             <span className="border border-black-10 flex items-center justify-center p-2.5 rounded-full hover:bg-gradient-primary hover:text-white transition duration-300">
               <IconEye size={18} stroke={1.7} />
             </span>
-          </QuickViewButton>
+          </QuickViewButton> */}
 
           {isProductInCart ? (
             <div className="text-positive flex items-center justify-center gap-x-1">
