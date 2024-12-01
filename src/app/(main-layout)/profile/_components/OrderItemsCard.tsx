@@ -99,7 +99,7 @@ const OrderItemsCard = ({
           />
           <OrderCardHeader
             title="Sub Total"
-            value={`${currency}${subTotalPrice?.toString()}`}
+            value={`${currency}${subTotalPrice?.toFixed(2)}`}
             className="text-lg font-bold text-gradient-primary"
           />
           {orderItem?.isReviewed ? (

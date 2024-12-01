@@ -13,6 +13,8 @@ const OrderHistoryMenu = ({
   key?: string | number;
 }) => {
   const pathName = usePathname();
+  console.log(pathName, "pathname");
+  console.log(href, "href");
   const isActive = href === "/" ? pathName === href : pathName.startsWith(href);
   return (
     <Link

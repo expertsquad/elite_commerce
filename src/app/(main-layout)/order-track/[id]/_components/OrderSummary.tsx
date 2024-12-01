@@ -28,7 +28,7 @@ const OrderSummary = ({
         <span className="text-black-80">Sub Total </span>
         <span className="font-bold">
           {currencyIcon}
-          {subTotal}
+          {subTotal.toFixed(2)}
         </span>
       </div>
       <div className="flex items-center justify-between mb-3">

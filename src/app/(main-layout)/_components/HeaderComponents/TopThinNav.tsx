@@ -47,7 +47,7 @@ const TopThinNav = async () => {
         </div>
         <ul className="flex items-center gap-6">
           Share
-          {storeSocialMedia.map((socialMedia, i: number) => (
+          {storeSocialMedia?.map((socialMedia, i: number) => (
             <li key={i} className="list-none">
               <Link
                 href={socialMedia.href}
