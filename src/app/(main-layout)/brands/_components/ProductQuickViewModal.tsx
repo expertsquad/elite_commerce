@@ -39,18 +39,21 @@ const ProductQuickViewModal = ({
         <div className="md:col-span-2 md:h-[calc(100vh-80px)] md:overflow-y-auto scrollbar-y-remove grid grid-cols-2 md:grid-cols-1 gap-5 ">
           {product?.productPhotos?.map((img, i) => {
             return (
-              <div
-                key={i}
-                className="bg-image-background rounded-2xl  md:px-6 md:py-10 py-6 px-7 flex items-center justify-center border border-black-10 mt-5 md:mt-0"
-              >
-                <div className="relative md:w-[250px] w-[100px] h-[100px] md:h-[250px] overflow-hidden">
-                  <Image src={`${server_url + img}`} fill alt="product photo" />
+              <div key={i}>
+                <div className="bg-image-background rounded-2xl  md:px-6 md:py-10 py-6 px-7 flex items-center justify-center border border-black-10 mt-5 md:mt-0">
+                  <div className="relative md:w-[250px] w-[100px] h-[100px] md:h-[250px] overflow-hidden">
+                    <Image
+                      src={`${server_url + img}`}
+                      fill
+                      alt="product photo"
+                    />
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
-        <div className="md:col-span-3 mb-10 md:mb-0">
+        <div className="md:col-span-3 mb-10 md:mb-0 md:h-[calc(100vh-80px)] md:overflow-y-auto scrollbar-y-remove">
           <span className="text-sm text-black-80">Quick View</span>
           <div className="mt-[30px]">
             <h1 className="text-base md:text-xl xl:text-2xl font-semibold">

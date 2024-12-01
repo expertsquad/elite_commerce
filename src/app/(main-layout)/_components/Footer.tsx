@@ -14,51 +14,63 @@ const Footer = async () => {
   const footerMenus = footer?.data?.menus;
 
   return (
-    <footer className="min-h-72   bg-image-background md:py-10 py-5 md:pb-10 pb-24 px-5">
-      <div className="main-container grid grid-cols-1 md:grid-cols-4 gap-5 ">
-        <div className="flex flex-col gap-5">
-          <div className="flex flex-col md:items-start items-center gap-3.5">
-            {/* logo */}
-            <div className="">
-              <Logo alignLeft />
+    <footer className="min-h-72 bg-image-background md:py-10 py-5 md:pb-10 pb-24 px-5">
+      {footer?.data === null ? (
+        <div className="flex items-center justify-center h-">
+          <p className="text-gradient-primary text-[clamp(20px,2.5vw,24px)] font-bold text-center">
+            For customize the footer, please go to{" "}
+            <span className="text-danger  ">shop setup</span> route on the admin
+            panel and customize the footer section as you want.
+          </p>
+        </div>
+      ) : (
+        <>
+          <div className="main-container grid grid-cols-1 md:grid-cols-4 gap-5 ">
+            <div className="flex flex-col gap-5">
+              <div className="flex flex-col md:items-start items-center gap-3.5">
+                {/* logo */}
+                <div className="">
+                  <Logo alignLeft />
+                </div>
+                <p className="whitespace-pre-wrap text-black-80 md:text-sm text-xs md:text-start text-center">
+                  {footer?.data?.description}
+                </p>
+              </div>
+              <hr className="md:hidden  border-black-10 " />
+              <div className="md:flex flex-col gap-10 hidden">
+                <ContactInfo />
+                <SocialMediaConnect />
+              </div>
             </div>
-            <p className="whitespace-pre-wrap text-black-80 md:text-sm text-xs md:text-start text-center">
-              {footer?.data?.description}
-            </p>
+            <div className="flex  md:col-span-2  justify-between md:flex-row flex-col items-center md:items-start">
+              {footerMenus?.map(
+                (
+                  menu: {
+                    menu: {
+                      menuName: string;
+                      children: {
+                        title: string;
+                        link: string;
+                      }[];
+                    };
+                  },
+                  index: number
+                ) => {
+                  return <FooterMenu data={menu} key={index} />;
+                }
+              )}
+            </div>
+            <div className="flex md:items-end items-center md:flex-col flex-col-reverse md:gap-16 gap-3.5">
+              <AppStoreLink footer={footer?.data} />
+              <PaymentMethods footer={footer?.data} />
+            </div>
+            <div className="md:hidden flex flex-col items-center gap-3.5 ">
+              <ContactInfo />
+              <SocialMediaConnect />
+            </div>
           </div>
-          <hr className="md:hidden  border-black-10 " />
-          <div className="md:flex flex-col gap-10 hidden">
-            <ContactInfo />
-            <SocialMediaConnect />
-          </div>
-        </div>
-        <div className="flex  md:col-span-2  justify-between md:flex-row flex-col items-center md:items-start">
-          {footerMenus?.map(
-            (
-              menu: {
-                menu: {
-                  menuName: string;
-                  children: {
-                    title: string;
-                    link: string;
-                  }[];
-                };
-              },
-              index: number
-            ) => {
-              return <FooterMenu data={menu} key={index} />;
-            }
-          )}
-        </div>
-        <div className="flex md:items-end items-center md:flex-col flex-col-reverse md:gap-16 gap-3.5">
-          <AppStoreLink footer={footer?.data} />
-          <PaymentMethods footer={footer?.data} />
-        </div>
-        <div className="md:hidden flex flex-col items-center gap-3.5 ">
-          <ContactInfo />
-          <SocialMediaConnect />
-        </div>
-      </div>
+        </>
+      )}
     </footer>
   );
 };
