@@ -8,26 +8,34 @@ import React from "react";
 const AppStoreLink = ({ footer }: { footer: IFooter }) => {
   return (
     <div className="flex md:items-end items-center justify-center md:justify-end md:flex-col gap-5 w-full">
-      <Link target="_blank" href={`${footer?.playstoreLink}`}>
-        <div className="md:w-[168px] w-[140px] h-[50px] relative">
-          <Image
-            src={googlePlay}
-            alt="google play"
-            fill
-            className="object-contain"
-          />
-        </div>
-      </Link>
-      <Link target="_blank" href={`${footer?.appstoreLink}`}>
-        <div className="md:w-[168px] w-[140px] h-[50px] relative">
-          <Image
-            src={appStore}
-            alt="google play"
-            fill
-            className="object-contain"
-          />
-        </div>
-      </Link>
+      {footer?.playstoreLink ? (
+        <Link target="_blank" href={`${footer?.playstoreLink}`}>
+          <div className="md:w-[168px] w-[140px] h-[50px] relative">
+            <Image
+              src={googlePlay}
+              alt="google play"
+              fill
+              className="object-contain"
+            />
+          </div>
+        </Link>
+      ) : (
+        ""
+      )}
+      {footer?.appstoreLink ? (
+        <Link target="_blank" href={`${footer?.appstoreLink}`}>
+          <div className="md:w-[168px] w-[140px] h-[50px] relative">
+            <Image
+              src={appStore}
+              alt="google play"
+              fill
+              className="object-contain"
+            />
+          </div>
+        </Link>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

@@ -6,6 +6,7 @@ export const requestForOTP = async (formData: FormData) => {
   const res = await postDataUnauthenticatedMutation({
     route: "/user/forgot-password",
     data: formData,
+    pathToRevalidate: "/user",
   });
 
   if (!res?.success) {

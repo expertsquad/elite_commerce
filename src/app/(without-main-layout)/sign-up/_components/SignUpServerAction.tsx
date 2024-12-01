@@ -8,8 +8,8 @@ export const signUpServerAction = async (formData: FormData) => {
   const result = await postDataUnauthenticatedMutation({
     route: "/user/signup",
     data: formData,
+    pathToRevalidate: "/user",
   });
-
   if (result?.data?.accessToken) {
     cookies().set("accessToken", result?.data?.accessToken);
     return result;

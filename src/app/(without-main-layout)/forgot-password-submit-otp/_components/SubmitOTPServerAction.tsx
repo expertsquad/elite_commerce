@@ -6,6 +6,7 @@ export const submitOTPServerAction = async ({ data }: any) => {
     route: "/user/forgot-password-otp",
     data: JSON.stringify(data),
     formatted: true,
+    pathToRevalidate: "/user",
   });
 
   if (!res?.success) {
