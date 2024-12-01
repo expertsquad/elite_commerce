@@ -35,11 +35,11 @@ const RelatedProductsByCategory = async ({
   return (
     <div className="my-10 md:my-[70px]">
       <div className="flex items-center justify-between mb-6">
-        {filteredProducts?.length && (
+        {filteredProducts?.length ? (
           <h2 className="text-lg md:text-2xl font-semibold">
-            You’ll love this too
+            You&apos;ll love this too
           </h2>
-        )}
+        ) : null}
         <Link
           className="text-gradient-primary block md:hidden font-bold"
           href={"/"}
