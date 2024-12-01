@@ -36,6 +36,7 @@ const ShoppingCartBtn = ({
   isQuickOrderActive?: boolean;
 }) => {
   const [show, setShow] = React.useState(false);
+  console.log(shippingCharge);
   // cart contex
   const { cartProducts, calculateTotalPriceAndDiscountOfCart, setRefetch } =
     useContext(CartContext);
@@ -82,31 +83,32 @@ const ShoppingCartBtn = ({
               Shopping Cart
             </span>
             <hr className="border border-black-10 h-[1px] my-3" />
-            {cartProducts?.length > 0 && (
-              <div className="flex flex-col gap-2 mt-2">
-                <div className="mt-5 ">
-                  <ProgressBar progressValue={progressValue} />
-                </div>
-                {totalPrice > shippingCharge?.freeShippingMinOrderAmount ? (
-                  <div className="text-sm text-positive mb-5">
-                    Congratulations! You&apos;ve unlocked free shipping🚚{" "}
+            {cartProducts?.length > 0 &&
+              shippingCharge?.isFreeShippingActive && (
+                <div className="flex flex-col gap-2 mt-2">
+                  <div className="mt-5 ">
+                    <ProgressBar progressValue={progressValue} />
                   </div>
-                ) : (
-                  <span className="text-sm flex items-center gap-x-1 mb-5">
-                    Buy
-                    <span className="text-gradient-primary">
-                      {currencyIcon}
-                      {shippingCharge?.freeShippingMinOrderAmount}
+                  {totalPrice > shippingCharge?.freeShippingMinOrderAmount ? (
+                    <div className="text-sm text-positive mb-5">
+                      Congratulations! You&apos;ve unlocked free shipping🚚{" "}
+                    </div>
+                  ) : (
+                    <span className="text-sm flex items-center gap-x-1 mb-5">
+                      Buy
+                      <span className="text-gradient-primary">
+                        {currencyIcon}
+                        {shippingCharge?.freeShippingMinOrderAmount}
+                      </span>
+                      more to get
+                      <span className="text-gradient-primary font-semibold">
+                        Freeship
+                      </span>
+                      🔥
                     </span>
-                    more to get
-                    <span className="text-gradient-primary font-semibold">
-                      Freeship
-                    </span>
-                    🔥
-                  </span>
-                )}
-              </div>
-            )}
+                  )}
+                </div>
+              )}
 
             {cartProducts?.length > 0 && (
               <div className="flex flex-col gap-y-5 overflow-y-auto scrollbar-y-remove h-[calc(100vh-max(360px,45vh))] md:h-[calc(100vh-max(440px,40vh))] pb-10">
