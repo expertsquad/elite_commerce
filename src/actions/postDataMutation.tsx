@@ -3,6 +3,7 @@
 import { server_api } from "@/constants";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
+import { revalidateTagAction } from "./revalidateTag";
 
 // for un authenticate mutation
 export const postDataUnauthenticatedMutation = async ({
@@ -11,12 +12,17 @@ export const postDataUnauthenticatedMutation = async ({
   //   set format value true if you don't want format here
   formatted = false,
   data,
+  pathToRevalidate,
 }: {
   route: string;
   dataType?: "json" | "formData";
   formatted?: boolean;
   data: string | FormData;
+  pathToRevalidate?: string;
 }) => {
+  if (pathToRevalidate) {
+    revalidateTagAction(pathToRevalidate);
+  }
   try {
     // handle data based on data type
     let structuredData: BodyInit = data;

@@ -28,6 +28,7 @@ const VerifyEmail = async ({
       data: JSON.stringify({ otp: Number(dataObj["otp"]) }),
       method: "PUT",
       formatted: true,
+      pathToRevalidate: "/user",
     });
     if (res?.data?.accessToken) {
       cookies().set("accessToken", res?.data?.accessToken);

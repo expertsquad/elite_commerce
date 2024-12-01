@@ -8,6 +8,7 @@ export const loginServerAction = async (formData: FormData) => {
   const result = await postDataUnauthenticatedMutation({
     route: "/user/login",
     data: formData,
+    pathToRevalidate: "/user",
   });
 
   if (result?.data?.accessToken) {

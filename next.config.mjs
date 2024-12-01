@@ -2,7 +2,7 @@
   images: {
     remotePatterns: [
       {
-        protocol: "https",
+        protocol: "http",
         hostname: "**",
       },
     ],
