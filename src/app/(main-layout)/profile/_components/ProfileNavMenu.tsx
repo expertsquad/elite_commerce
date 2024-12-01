@@ -8,7 +8,6 @@ import { usePathname } from "next/navigation";
 
 const ProfileNavMenu = () => {
   const pathName = usePathname();
-  console.log(pathName);
   return (
     <div className="transition-all">
       {profileNavMenu.slice(0, -1).map((item, index) => (
