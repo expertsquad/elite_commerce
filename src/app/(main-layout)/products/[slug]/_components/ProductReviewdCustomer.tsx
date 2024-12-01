@@ -89,7 +89,7 @@ const ProductReviewdCustomer = async ({
                     alt="AUTHOR"
                     fill
                     style={{ objectFit: "cover" }}
-                    className="w-full h-full top-0 left-0 object-cover rounded-full border border-black-10"
+                    className="w-full h-full top-0 left-0 object-cover rounded-full border border-black-10 p-2"
                   />
                 </div>
 
