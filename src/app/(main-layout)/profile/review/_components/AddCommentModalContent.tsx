@@ -141,12 +141,12 @@ const AddCommentModalContent = ({
             {comment?.length}/100
           </small>
 
-          <div className="flex items-center space-x-2 mt-5">
-            {[...Array(4)].map((_, index) => (
+          <div className="flex items-start justify-start space-x-2 mt-5">
+            {[...Array(1)].map((_, index) => (
               <FileUploader
                 key={index}
                 name={`reviewPhotos${index}`}
-                multiple={true}
+                // multiple={true}
                 onChange={(e) => handleFilesChange(e.target.files!)}
                 maxSize={5}
                 accept="image/*"

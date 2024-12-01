@@ -22,4 +22,5 @@ export interface IFileUploaderProps {
   imgClassName?: string;
   deleteServerImage?: boolean;
   setDeletedImageUrl?: any;
+  onDelete?: (url: string) => void;
 }
