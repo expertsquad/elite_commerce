@@ -29,7 +29,6 @@ const CartItems = ({
   shippingAmout: number;
   isQuickOrderActive?: boolean;
 }) => {
-  console.log(shippingCharge);
   const {
     cartProducts,
     calculateTotalPriceAndDiscountOfCart,

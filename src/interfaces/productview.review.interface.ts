@@ -50,4 +50,5 @@ export interface CustomerReviewProps {
   updatedAt: string;
   __v: number;
   reply: string;
+  replyTime?: string;
 }
