@@ -16,7 +16,16 @@ const FavouriteBrandSection = ({
   return (
     <div className="md:flex items-start gap-5">
       {/* wiget card */}
-      <WidgetCard widget={widget} className="w-[350px] mx-auto" />
+      {widget ? (
+        <WidgetCard widget={widget} className="w-[350px] mx-auto" />
+      ) : (
+        <div className="w-[380px] rounded-lg h-[450px] mx-auto bg-gradient-primary-light flex items-center justify-center ">
+          <span className="text-gradient-primary text-lg font-bold p-5 text-center">
+            Widget will be shown here
+          </span>
+        </div>
+      )}
+
       <div className="w-full mt-5 md:mt-0">
         <div className="relative w-full flex items-center justify-between">
           <div className="flex items-center gap-2">
