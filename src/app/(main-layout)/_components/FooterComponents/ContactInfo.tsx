@@ -5,11 +5,11 @@ import { fetchData } from "@/actions/fetchData";
 import Link from "next/link";
 
 const ContactInfo = async () => {
-  const getContact = await fetchData({
+  const contactData = await fetchData({
     route: "/settings/shop",
   });
 
-  return (
+  return contactData?.data?.phoneNumber ? (
     <div className="flex items-center gap-2.5">
       <div className="flex items-center justify-center">
         <GenerateGradientIcon
@@ -19,14 +19,16 @@ const ContactInfo = async () => {
       </div>
       <div className="flex flex-col gap-2.5">
         <Link
-          href={`tel:${getContact?.data?.phoneNumber}` || ""}
+          href={`tel:${contactData?.data?.phoneNumber}` || ""}
           className="text-gradient-primary font-medium text-xs md:text-sm"
         >
-          <span>+88</span> {getContact?.data?.phoneNumber || "+880123456789"}
+          <span>+88</span> {contactData?.data?.phoneNumber}
         </Link>
         <div className="bg-gradient-primary h-[1.5px]"></div>
       </div>
     </div>
+  ) : (
+    ""
   );
 };
 

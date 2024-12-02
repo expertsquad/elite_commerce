@@ -105,7 +105,7 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
             <IconBrandFacebook
               stroke={1}
               size={18}
-              className="text-primary hover:fill-primary"
+              className="text-primary hover:text-secondary"
             />
           </button>
           <button
@@ -117,7 +117,7 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
             <IconBrandTwitter
               stroke={1}
               size={18}
-              className="text-primary hover:fill-primary"
+              className="text-primary hover:text-secondary"
             />
           </button>
           <button
@@ -131,7 +131,7 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
             <IconBrandPinterest
               stroke={1}
               size={18}
-              className="text-primary hover:fill-primary"
+              className="text-primary hover:text-secondary"
             />
           </button>
           <button
@@ -141,7 +141,7 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
             <IconBrandInstagram
               stroke={1}
               size={18}
-              className="text-primary hover:fill-primary"
+              className="text-primary hover:text-secondary"
             />
           </button>
           <button className="relative flex items-center justify-center">
@@ -149,7 +149,7 @@ const SocialMediaAndOthers = ({ socialMedia }: { socialMedia: any }) => {
               <IconCopy
                 stroke={1}
                 size={18}
-                className="text-primary hover:fill-primary"
+                className="text-primary hover:text-secondary"
               />
             </span>
             {isCopied && (

@@ -36,7 +36,6 @@ const ShoppingCartBtn = ({
   isQuickOrderActive?: boolean;
 }) => {
   const [show, setShow] = React.useState(false);
-  console.log(shippingCharge);
   // cart contex
   const { cartProducts, calculateTotalPriceAndDiscountOfCart, setRefetch } =
     useContext(CartContext);

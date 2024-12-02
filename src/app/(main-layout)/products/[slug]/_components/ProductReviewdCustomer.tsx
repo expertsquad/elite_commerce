@@ -15,6 +15,7 @@ const ProductReviewdCustomer = async ({
   const getAuthor = await fetchData({
     route: "/settings/shop",
   });
+  console.log(reviewData);
   return (
     <div className="">
       {reviewData?.map((review: CustomerReviewProps) => (
@@ -89,7 +90,7 @@ const ProductReviewdCustomer = async ({
                     alt="AUTHOR"
                     fill
                     style={{ objectFit: "cover" }}
-                    className="w-full h-full top-0 left-0 object-cover rounded-full border border-black-10"
+                    className="w-full h-full top-0 left-0 object-cover rounded-full border border-black-10 p-2"
                   />
                 </div>
 
@@ -99,7 +100,7 @@ const ProductReviewdCustomer = async ({
                   </h3>
                   <span className="w-[6px] h-[6px] rounded-full bg-black-10"></span>
                   <span className="text-xs">
-                    {formatDateShorting(review?.updatedAt)}
+                    {formatDateShorting(review?.replyTime || "")}
                   </span>
                 </div>
               </div>
