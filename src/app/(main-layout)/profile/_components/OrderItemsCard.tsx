@@ -6,13 +6,15 @@ import React from "react";
 import OrderCardHeader from "./OrderCardHeader";
 import AddOrEditReview from "./AddOrEditReview";
 import { formatProductVariantName } from "@/constants/formatProductVariantName";
+import { calculateOrderedItemPricesAndDiscount } from "@/utils/calculateBulkOrderDiscount";
+import { OrderItemsTypes } from "@/interfaces/orderitems.interface";
 
 const OrderItemsCard = ({
   orderItem,
   currency,
   orderStatus,
 }: {
-  orderItem: OrderItem;
+  orderItem: OrderItemsTypes;
   currency?: string;
   orderStatus?: string;
 }) => {
@@ -22,6 +24,11 @@ const OrderItemsCard = ({
 
   const subTotalPrice = orderItemPrice * orderItem?.orderQuantity;
 
+  console.log(orderItem);
+
+  const { finalDiscountedPrice, totalDiscountPercentage, discountedTotal } =
+    calculateOrderedItemPricesAndDiscount(orderItem);
+  console.log(finalDiscountedPrice, totalDiscountPercentage, discountedTotal);
   return (
     <div className="text-black-50 flex gap-5 py-5 w-full border-b border-black-10">
       {/* flex first div */}
@@ -61,7 +68,12 @@ const OrderItemsCard = ({
                 </div>
               )}
             <div>|</div>
-            <StarRating rating={4} />
+            <span className="text-sm text-secondary">
+              {orderItem?.bulk
+                ? totalDiscountPercentage
+                : orderItem?.variant?.discountPercentage}
+              % OFF
+            </span>
           </div>
 
           {/* will apply only sm device */}
@@ -69,11 +81,11 @@ const OrderItemsCard = ({
             <div className="flex items-center justify-between">
               <p>
                 {currency}
-                {orderItemPrice?.toString()}
+                {finalDiscountedPrice?.toString()}
               </p>
               <strong className="text-gradient-primary">
                 {currency}
-                {subTotalPrice?.toString()}
+                {discountedTotal?.toString()}
               </strong>
             </div>
           </div>
@@ -91,15 +103,22 @@ const OrderItemsCard = ({
           <OrderCardHeader
             title="Unit Price"
             value={`${currency}${
-              orderItem?.variant?.discountedPrice
+              orderItem?.bulk
+                ? finalDiscountedPrice.toString()
+                : orderItem?.variant?.discountedPrice
                 ? orderItem?.variant?.discountedPrice?.toString()
                 : orderItem?.variant?.sellingPrice?.toString()
             }`}
             className="text-lg text-black"
           />
+
           <OrderCardHeader
             title="Sub Total"
-            value={`${currency}${subTotalPrice?.toFixed(2)}`}
+            value={`${currency}${
+              orderItem?.bulk
+                ? discountedTotal.toString()
+                : subTotalPrice?.toFixed(2)
+            }`}
             className="text-lg font-bold text-gradient-primary"
           />
           {orderItem?.isReviewed ? (

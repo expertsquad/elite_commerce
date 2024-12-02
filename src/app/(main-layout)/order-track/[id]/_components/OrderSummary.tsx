@@ -8,6 +8,7 @@ type TotalSubTotalShippingFeeProps = {
   orderQuanity: number;
   orderItemsLength: number;
   currencyIcon?: string;
+  totalBulkDiscount?: number;
 };
 
 const OrderSummary = ({
@@ -18,7 +19,9 @@ const OrderSummary = ({
   orderItemsLength,
   orderQuanity,
   currencyIcon,
+  totalBulkDiscount,
 }: TotalSubTotalShippingFeeProps) => {
+  const totalBulkDiscountAmount = totalBulkDiscount || 0;
   return (
     <div className="border border-black-10 md:p-[30px] p-5 rounded-lg my-6 md:my-0">
       <h1 className="font-semibold text-base md:text-lg mb-[30px]">
@@ -42,7 +45,7 @@ const OrderSummary = ({
         <span>Discount </span>
         <span className="text-positive">
           You&apos;ve saved ({currencyIcon}
-          {discount?.toFixed(1)})
+          {(discount + totalBulkDiscountAmount)?.toFixed(1)})
         </span>
       </div>
       <span className="h-[1px] bg-black-10 flex w-full mb-5"></span>

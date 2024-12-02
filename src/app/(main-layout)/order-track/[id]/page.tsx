@@ -30,6 +30,7 @@ const OrderTrackPage = async ({ params }: { params: { id: string } }) => {
   const currencyIcon = await fetchProtectedData({
     route: "/settings/shop",
   });
+
   return (
     <div className="main-container mb-10 md:mb-28">
       <OrderStatusStep orderStatus={response?.data?.orderStatuses} />
@@ -56,6 +57,7 @@ const OrderTrackPage = async ({ params }: { params: { id: string } }) => {
             orderQuanity={response?.data?.totalQuantity}
             orderItemsLength={response?.data?.orderItems?.length}
             currencyIcon={currencyIcon?.data?.currencySymbol}
+            totalBulkDiscount={response?.data?.totalBulkDiscount}
           />
         </div>
         <div className="md:w-1/3">
