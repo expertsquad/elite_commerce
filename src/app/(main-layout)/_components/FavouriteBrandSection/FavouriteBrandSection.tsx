@@ -44,7 +44,7 @@ const FavouriteBrandSection = ({
                   src={server_url + brand?.brandPhoto}
                   alt={brand?.brandName}
                   fill
-                  className="object-contain p-2"
+                  className="object-contain p-4"
                 />
               </div>
             </Link>

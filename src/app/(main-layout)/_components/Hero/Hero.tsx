@@ -4,7 +4,10 @@ import HeroItemSlide from "./HeroItemSlide";
 import TopSmallBanner from "./TopSmallBanner";
 
 const Hero = async ({ currencyIcon }: { currencyIcon: string }) => {
-  const data = await fetchData({ route: "/promotions/slider" });
+  const data = await fetchData({
+    route: "/promotions/slider",
+    pathToRevalidate: "/promotions/slider",
+  });
 
   const sliderArray = Object.values(data?.data?.slider || {});
 
