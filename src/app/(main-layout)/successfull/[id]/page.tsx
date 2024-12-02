@@ -44,6 +44,7 @@ const OrderSuccessfull = async ({
 }) => {
   const quickOrder = searchParams.quickorder === "true";
 
+  // <== conditionally fetching quick order and online order both ==>
   const response = quickOrder
     ? await fetchData({
         route: `/quick-order/${searchParams?.quickorderId}`,
@@ -51,6 +52,7 @@ const OrderSuccessfull = async ({
     : await fetchProtectedData({
         route: `/online-order/${params?.id}`,
       });
+  // <== Get currency icon from shop settings ==>
   const currencyIcon = await fetchData({
     route: "/settings/shop",
   });
@@ -142,9 +144,9 @@ const OrderSuccessfull = async ({
         />
       </div>
       <div className="md:w-1/2 bg-[#2943931A] bg-opacity-10 md:rounded-lg">
-        <div className="flex items-center">
+        <div className="flex items-center justify-between">
           {[...Array(3)].map((_, index) => (
-            <div key={index} className="flex justify-center items-center">
+            <div key={index} className="flex justify-between items-center">
               <Image src={orderPlacedDesign} alt="order placed design" />
             </div>
           ))}
