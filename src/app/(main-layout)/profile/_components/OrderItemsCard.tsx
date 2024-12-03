@@ -65,13 +65,22 @@ const OrderItemsCard = ({
                   </span>
                 </div>
               )}
-            <div>|</div>
-            <span className="text-sm text-secondary">
-              {orderItem?.bulk
-                ? totalDiscountPercentage
-                : orderItem?.variant?.discountPercentage}
-              % OFF
-            </span>
+
+            {orderItem?.bulk && totalDiscountPercentage ? (
+              <>
+                <div>|</div>
+                <span className="text-xs text-secondary">
+                  ({totalDiscountPercentage}% OFF)
+                </span>
+              </>
+            ) : orderItem?.variant?.discountPercentage ? (
+              <>
+                <div>|</div>
+                <span className="text-xs text-secondary">
+                  ({orderItem?.variant?.discountPercentage}% OFF)
+                </span>
+              </>
+            ) : null}
           </div>
 
           {/* will apply only sm device */}

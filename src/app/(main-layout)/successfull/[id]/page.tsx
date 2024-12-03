@@ -132,7 +132,7 @@ const OrderSuccessfull = async ({
                             </span>
                           </>
                         )}
-                      {item?.bulk || item?.variant?.discountPercentage ? (
+                      {item?.bulk && totalDiscountPercentage ? (
                         <>
                           <span className="text-black-10">|</span>
                           <span className="text-positive">
@@ -140,6 +140,13 @@ const OrderSuccessfull = async ({
                               ? totalDiscountPercentage
                               : item?.variant?.discountPercentage}
                             % OFF
+                          </span>
+                        </>
+                      ) : item.variant?.discountPercentage ? (
+                        <>
+                          <span className="text-black-10">|</span>
+                          <span className="text-positive">
+                            {item?.variant?.discountPercentage} % OFF
                           </span>
                         </>
                       ) : null}
