@@ -67,6 +67,7 @@ const SpecBulkProduct = ({
         <CategoryAndBrandSmallComponent
           brandPhoto={productdata?.brand?.brandPhoto}
           categoryName={productdata?.category?.categoryName}
+          className="text-positive"
         />
       </div>
       <span className="bg-black-10 h-0.5 w-full hidden md:flex my-4"></span>

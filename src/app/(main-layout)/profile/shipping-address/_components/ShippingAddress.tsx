@@ -123,8 +123,6 @@ const ShippingAddress = ({
     // Add isDefault = true
     dataObj.isDefault = true;
 
-    console.log(dataObj);
-
     if (!shippingAddress) {
       const result = await postDataMutation({
         route: "/user-address/add",
@@ -143,7 +141,6 @@ const ShippingAddress = ({
         formatted: true,
         method: "PUT",
       });
-      console.log(result);
       if (result?.success) {
         toast.success(result?.message);
       } else {

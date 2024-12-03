@@ -24,11 +24,9 @@ const OrderItemsCard = ({
 
   const subTotalPrice = orderItemPrice * orderItem?.orderQuantity;
 
-  console.log(orderItem);
-
   const { finalDiscountedPrice, totalDiscountPercentage, discountedTotal } =
     calculateOrderedItemPricesAndDiscount(orderItem);
-  console.log(finalDiscountedPrice, totalDiscountPercentage, discountedTotal);
+
   return (
     <div className="text-black-50 flex gap-5 py-5 w-full border-b border-black-10">
       {/* flex first div */}
