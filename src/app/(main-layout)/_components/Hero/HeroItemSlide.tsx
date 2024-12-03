@@ -36,7 +36,7 @@ const HeroItemSlide = ({
         className="h-[280px] md:h-[450px] w-full flex transition-transform ease-out duration-500"
         style={{ transform: `translateX(-${curr * 100}%)` }}
       >
-        {sliderArray?.length > 0 ? (
+        {sliderArray?.length < 0 ? (
           <>
             <div className="w-full flex-shrink-0 bg-gradient-primary-light flex items-center justify-center rounded-md">
               <span className="text-lg text-gradient-primary animate-pulse">
