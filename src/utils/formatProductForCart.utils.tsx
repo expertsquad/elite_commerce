@@ -14,11 +14,6 @@ export const formatProductForCart = ({
     (v) => v?.variantName === selectedVariant
   );
   const defaultVariant = product?.variants?.find((v) => v?.isDefault);
-  // const variant = isSelectedOneExist
-  //   ? isSelectedOneExist
-  //   : defaultVariant
-  //   ? defaultVariant
-  //   : product?.variants[0];
   const variant = isSelectedOneExist ?? defaultVariant ?? product.variants[0];
 
   return {

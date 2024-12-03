@@ -41,7 +41,12 @@ const WishlistPageContent = ({
       <div>
         <Breadcrumb title="My Wishlist" />
       </div>
-      <div className="max-w-[1320px] mx-auto px-5 mt-12">
+      <div
+        className={`max-w-[1320px] mx-auto px-5 mt-12 ${
+          !wishlistProducts?.length &&
+          "md:h-[calc(100vh-490px)] flex flex-col items-center justify-center"
+        }`}
+      >
         <div className="relative table-auto overflow-x-auto scrollbar-x-remove hidden md:block">
           {wishlistProducts?.length ? (
             <table className=" border border-black-10 border-collapse w-full">
@@ -93,6 +98,9 @@ const WishlistPageContent = ({
           ))}
         </div>
         <div className="flex flex-col md:flex-row gap-y-5 items-center justify-center md:gap-x-3.5 my-12">
+          <p className="text-center text-gradient-secondary text-lg font-semibold block md:hidden">
+            No products found in your wishlist
+          </p>
           <Link
             href="/"
             className="relative inline-flex items-center justify-center w-[220px] py-3 overflow-hidden font-medium transition-all bg-gradient-secondary-light rounded hover:bg-white group"

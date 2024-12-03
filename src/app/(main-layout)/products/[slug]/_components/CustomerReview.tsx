@@ -23,7 +23,6 @@ const CustomerReview = async ({
       rating ? `rating=${rating}` : ""
     }`,
   });
-
   return (
     <div>
       <h2 className="text-[18px] md:text-[22px] font-semibold pb-3 border-b border-black-10">

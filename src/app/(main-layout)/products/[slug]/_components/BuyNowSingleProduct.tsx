@@ -15,6 +15,7 @@ const BuyNowSingleProduct = ({
   iconStyle,
   selectedVariant,
   disabled,
+  selectedQuantity,
 }: {
   product: IProduct;
   accessToken: string;
@@ -22,6 +23,7 @@ const BuyNowSingleProduct = ({
   iconStyle?: string;
   selectedVariant?: any;
   disabled?: boolean;
+  selectedQuantity?: number;
 }) => {
   const router = useRouter();
 
@@ -32,6 +34,7 @@ const BuyNowSingleProduct = ({
     const formattedProduct = formatProductForCart({
       product: product,
       selectedVariant: selectedVariant,
+      selectedQuantity: selectedQuantity,
     });
 
     // Update the orderItems with the formatted product

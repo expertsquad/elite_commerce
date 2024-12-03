@@ -4,6 +4,7 @@ import Link from "next/link";
 import OrderItemsCard from "./OrderItemsCard";
 import { Order } from "@/interfaces/oreder.interface";
 import { dateFormat } from "@/utils/dateFormat";
+import { OrderItemsTypes } from "@/interfaces/orderitems.interface";
 
 const OrderItems = ({
   order,
@@ -12,6 +13,7 @@ const OrderItems = ({
   order: Order;
   currency?: string;
 }) => {
+  console.log(order);
   return (
     <div className=" md:shadow-order-history-card-shadow shadow-none border border-black-10 md:border-transparent mt-5 p-5 rounded-lg">
       {/* Order top section start */}
@@ -70,7 +72,7 @@ const OrderItems = ({
       </div>
       {/* Order top section finish */}
       {/* Order items card */}
-      {order?.orderItems?.map((orderItem) => (
+      {order?.orderItems?.map((orderItem: OrderItemsTypes) => (
         <OrderItemsCard
           currency={currency}
           key={orderItem._id}

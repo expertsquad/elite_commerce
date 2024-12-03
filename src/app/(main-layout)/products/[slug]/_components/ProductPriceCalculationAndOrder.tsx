@@ -107,6 +107,7 @@ const ProductPriceCalculationAndOrder = ({
               variant ? variant?.variantName : product?.variants[0]?.variantName
             }
             disabled={variant ? variant.inStock < 1 : false}
+            selectedQuantity={isCarted ? isCarted?.orderQuantity : quantity}
           />
         </div>
       </div>
