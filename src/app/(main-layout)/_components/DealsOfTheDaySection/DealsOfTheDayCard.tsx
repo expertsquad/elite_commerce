@@ -18,7 +18,7 @@ type IDealsOfThedayCardProps = {
 const DealsOfTheDayCard = ({ deal, index }: IDealsOfThedayCardProps) => {
   return (
     <div className={` relative overflow-hidden rounded-md`}>
-      {deal?.discount && (
+      {deal?.discount ? (
         <div
           className={`${
             index % 2 === 0 ? "bg-gradient-primary" : "bg-gradient-secondary"
@@ -29,6 +29,8 @@ const DealsOfTheDayCard = ({ deal, index }: IDealsOfThedayCardProps) => {
             Off
           </span>
         </div>
+      ) : (
+        ""
       )}
 
       <div
