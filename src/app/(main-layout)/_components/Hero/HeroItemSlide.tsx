@@ -36,11 +36,31 @@ const HeroItemSlide = ({
         className="h-[280px] md:h-[450px] w-full flex transition-transform ease-out duration-500"
         style={{ transform: `translateX(-${curr * 100}%)` }}
       >
-        {sliderArray?.map((item: any, index: number) => (
-          <div key={index} className="w-full flex-shrink-0">
-            <Carousel item={item} currencyIcon={currencyIcon} />
-          </div>
-        ))}
+        {sliderArray?.length < 0 ? (
+          <>
+            <div className="w-full flex-shrink-0 bg-gradient-primary-light flex items-center justify-center rounded-md">
+              <span className="text-lg text-gradient-primary animate-pulse">
+                First Slider Will Appear Here
+              </span>
+            </div>
+            <div className="w-full flex-shrink-0 bg-gradient-secondary-light flex items-center justify-center rounded-md">
+              <span className="text-lg text-gradient-secondary animate-pulse">
+                Second Slider Will Appear Here
+              </span>
+            </div>
+            <div className="w-full flex-shrink-0 bg-warning flex items-center justify-center rounded-md">
+              <span className="text-lg text-gradient-primary animate-pulse">
+                Third Slider Will Appear Here
+              </span>
+            </div>
+          </>
+        ) : (
+          sliderArray?.map((item: any, index: number) => (
+            <div key={index} className="w-full flex-shrink-0">
+              <Carousel item={item} currencyIcon={currencyIcon} />
+            </div>
+          ))
+        )}
       </div>
 
       <button
