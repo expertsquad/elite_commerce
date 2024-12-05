@@ -14,21 +14,6 @@ const BestDealsSection = async () => {
   const currentDate = new Date();
   const endDate = bestDeals?.data?.endDate;
   const endDateTime = endDate ? new Date(endDate) : null;
-
-  if (!bestDeals?.data) {
-    // Fallback placeholder when bestDeals is undefined
-    return (
-      <div className="w-full bg-gray-200 py-10 text-center border border-black-10 h-[450px] bg-gradient-primary-light mx-5 rounded-lg flex flex-col items-center justify-center">
-        <h3 className="text-lg font-bold text-gradient-primary">
-          No Best Deals Available
-        </h3>
-        <p className="text-sm text-black-80">
-          Check back later for exciting deals and offers!
-        </p>
-      </div>
-    );
-  }
-
   return (
     <div
       className="w-full"

@@ -27,7 +27,7 @@ const MegaMenuItem = ({
     router.push(`${redirectPath}?category=${categoryName}`);
   };
   return (
-    <div key={key} className="group/category cursor-pointer">
+    <li key={key} className="group/category cursor-pointer">
       <span
         onClick={() =>
           category?.categoryName && handleCategoryClick(category?.categoryName)
@@ -39,25 +39,25 @@ const MegaMenuItem = ({
       </span>
       {/* ================= sub categories ================== */}
       <div className="fixed top-0 left-[245px] bg-white opacity-0 h-0 invisible transition-all  duration-300 group-hover/category:visible group-hover/category:opacity-100 group-hover/category:h-[clamp(100px,70vh,500px)] backdrop-blur-xl py-2 shadow-2xl rounded-md  flex ">
-        <div className="w-48 mt-5 h-full flex flex-col overflow-auto">
+        <ul className="w-48 mt-5 h-full flex flex-col overflow-auto">
           {category?.subcategories?.map((subcategory) => (
-            <div
+            <li
               onClick={() => handleCategoryClick(subcategory?.subcategoryName)}
               key={subcategory?.subcategoryId}
             >
               <span className="block w-full px-4 py-2 hover:bg-image-background ">
                 {subcategory?.subcategoryName}
               </span>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
         <FeaturedCard
           products={featureProduct}
           currencySymbol={currencySymbol}
           widget={widget}
         />
       </div>
-    </div>
+    </li>
   );
 };
 

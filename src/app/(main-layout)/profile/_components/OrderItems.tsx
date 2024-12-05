@@ -13,6 +13,7 @@ const OrderItems = ({
   order: Order;
   currency?: string;
 }) => {
+  console.log(order);
   return (
     <div className=" md:shadow-order-history-card-shadow shadow-none border border-black-10 md:border-transparent mt-5 p-5 rounded-lg">
       {/* Order top section start */}

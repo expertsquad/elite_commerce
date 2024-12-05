@@ -10,7 +10,7 @@ import GlobalSearch from "../GlobalSearch/GlobalSearch";
 import ProfilePhotoOrIcon from "./ProfilePhotoOrIcon";
 import CategoriesAndSubcategories from "./CategoriesAndSubcategories";
 import MainMenuItem from "./MainMenuItem";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 const LargeDeviceMegaMenu = async () => {
   const categories = await fetchData({ route: "/category", limit: 5 });
@@ -36,8 +36,8 @@ const LargeDeviceMegaMenu = async () => {
       {/* Left section of the navigation */}
       <div className="flex gap-5 items-center">
         <Logo alignLeft />
-        <div className="flex items-center gap-3 z-20">
-          <div className="transition-all duration-300 group/categorybtn list-none">
+        <ul className="flex items-center gap-3 z-20">
+          <li className="transition-all duration-300 group/categorybtn list-none">
             <Link
               href="/category"
               className="flex items-center py-2 px-3 rounded-full group-hover/categorybtn:bg-[#E6E6E6]"
@@ -53,14 +53,14 @@ const LargeDeviceMegaMenu = async () => {
             {/* ================= categories ================== */}
             {/* ========================================================== */}
             <CategoriesAndSubcategories />
-          </div>
+          </li>
 
           {/* ======================== menus ========================== */}
 
           {mainMenus.map((menu, index) => (
             <MainMenuItem parentClassName="list-none" menu={menu} key={index} />
           ))}
-        </div>
+        </ul>
       </div>
 
       {/* Right section of the navigation */}
