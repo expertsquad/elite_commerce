@@ -35,7 +35,7 @@ const CategoryAndBrandSmallComponent = ({
         href={`/category/single-category?category=${categoryName}`}
         className={`text-black-80 [font-size:_clamp(13px,2.5vw,16px)] ${className}`}
       >
-        Category: {categoryName}
+        {categoryName}
       </Link>
     </div>
   );
