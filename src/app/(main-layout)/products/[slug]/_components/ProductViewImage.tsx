@@ -10,9 +10,15 @@ import Modal from "@/Components/Modal";
 const ProductViewImage = ({ product }: { product: IProduct }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [showVideoModal, setShowVideoModal] = useState(false);
-  const videoLink = product?.videoLink
-    ? `https://www.youtube.com/embed/${product.videoLink.split("v=")[1]}`
-    : null;
+
+  const getEmbedUrl = (url: string) => {
+    const videoIdMatch = url.match(
+      /(?:shorts\/|v=|embed\/|youtu\.be\/|\/v\/|\/)([a-zA-Z0-9_-]{11})/
+    );
+    return videoIdMatch
+      ? `https://www.youtube.com/embed/${videoIdMatch[1]}`
+      : null;
+  };
 
   useEffect(() => {
     setSelectedImage(product?.productPhotos[0]);
@@ -48,7 +54,7 @@ const ProductViewImage = ({ product }: { product: IProduct }) => {
             </div>
           </div>
         ))}
-        {videoLink && (
+        {product?.videoLink && (
           <div
             onClick={() => setShowVideoModal(true)}
             className="w-[63px] h-[73px] relative overflow-hidden bg-image-background rounded-md flex items-center justify-center cursor-pointer border border-black-10"
@@ -80,7 +86,7 @@ const ProductViewImage = ({ product }: { product: IProduct }) => {
           <iframe
             width="100%"
             height="100%"
-            src={`${videoLink}`}
+            src={`${getEmbedUrl(product?.videoLink)}`}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

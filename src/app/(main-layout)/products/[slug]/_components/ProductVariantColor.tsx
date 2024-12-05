@@ -30,7 +30,7 @@ const ProductVariantColor = ({
             isSelected ? "border-2" : "border"
           } ${
             isNotSpecified || color?.variantName === "white"
-              ? "border-black border-2"
+              ? "border-black border-2 hidden"
               : ""
           }`}
           onClick={() => handleClick(index)}
