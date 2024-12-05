@@ -12,6 +12,7 @@ const Footer = async () => {
     route: "/settings/footer",
   });
   const footerMenus = footer?.data?.menus;
+  console.log(footerMenus);
 
   return (
     <footer className="min-h-72 bg-image-background md:py-10 py-5 md:pb-10 pb-24 px-5">
