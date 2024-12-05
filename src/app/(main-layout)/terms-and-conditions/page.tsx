@@ -1,13 +1,27 @@
 import { fetchData } from "@/actions/fetchData";
 import DescriptionReader from "@/Components/DescriptionReader";
 import EmptyContent from "@/Components/EmptyContent";
+import { Metadata } from "next";
 import React from "react";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const res = await fetchData({ route: "/settings/terms-and-conditions" });
+
+  const metaTitle = res?.data?.metaTitle || "Terms And Conditions";
+  const metaDescription =
+    res?.data?.metaDescription || "This is Terms And Conditions page";
+
+  return {
+    title: metaTitle,
+    description: metaDescription,
+  };
+}
 
 const TermsAndConditions = async () => {
   const res = await fetchData({ route: "/settings/terms-and-conditions" });
 
   return (
-    <div className="main-container  my-10 ">
+    <div className="main-container h-dvh  my-10 ">
       {res?.data?.content?.data !== "" ? (
         <div className="space-y-[30px]">
           <h1 className="text-black text-[clamp(20px,2.5vw,40px)] font-semibold">
