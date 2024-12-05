@@ -7,7 +7,7 @@ const FooterMenu = ({ data }: any) => {
       <h6 className="text-black md:font-medium md:text-base text-lg ">
         {data?.menuName}
       </h6>
-      <ul className="flex flex-col md:items-start items-center  md:gap-1 gap-3.5 ">
+      <div className="flex flex-col md:items-start items-center  md:gap-1 gap-3.5 ">
         {data?.children?.map(
           (item: { title: string; link: string }, index: number) => (
             <Link
@@ -26,7 +26,7 @@ const FooterMenu = ({ data }: any) => {
             </Link>
           )
         )}
-      </ul>
+      </div>
       <div className="md:hidden bg-black-10 h-[1px] w-full"></div>
     </div>
   );
