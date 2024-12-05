@@ -27,7 +27,13 @@ const ProductPriceBasedOnVariants = ({
       />
       <div className="flex items-center gap-x-5">
         <div>
-          <span className="text-sm text-black-80">Color</span>
+          <span
+            className={`text-sm text-black-80 ${
+              variant?.variantName === "Not specified" ? "hidden" : ""
+            }`}
+          >
+            Color
+          </span>
           <div className="flex items-center gap-x-2 mt-1">
             <ProductVariantColor
               onSelectVariant={onVariantSelect}
