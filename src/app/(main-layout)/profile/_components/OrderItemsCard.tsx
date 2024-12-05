@@ -24,11 +24,8 @@ const OrderItemsCard = ({
 
   const subTotalPrice = orderItemPrice * orderItem?.orderQuantity;
 
-  console.log(orderItem);
-
   const { finalDiscountedPrice, totalDiscountPercentage, discountedTotal } =
     calculateOrderedItemPricesAndDiscount(orderItem);
-  console.log(finalDiscountedPrice, totalDiscountPercentage, discountedTotal);
   return (
     <div className="text-black-50 flex gap-5 py-5 w-full border-b border-black-10">
       {/* flex first div */}
@@ -67,13 +64,18 @@ const OrderItemsCard = ({
                   </span>
                 </div>
               )}
-            <div>|</div>
-            <span className="text-sm text-secondary">
-              {orderItem?.bulk
-                ? totalDiscountPercentage
-                : orderItem?.variant?.discountPercentage}
-              % OFF
-            </span>
+
+            {orderItem?.bulk || orderItem?.variant?.discountPercentage ? (
+              <>
+                <span className="text-black-10">|</span>
+                <span className="text-secondary text-sm">
+                  {orderItem?.bulk
+                    ? totalDiscountPercentage
+                    : orderItem?.variant?.discountPercentage}
+                  % OFF
+                </span>
+              </>
+            ) : null}
           </div>
 
           {/* will apply only sm device */}
