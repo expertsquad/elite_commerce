@@ -12,6 +12,7 @@ import React, { useState } from "react";
 
 const MessegeBtn = ({ data }: { data?: any }) => {
   const [show, setShow] = useState(false);
+
   return (
     <div className="">
       <button
@@ -43,43 +44,45 @@ const MessegeBtn = ({ data }: { data?: any }) => {
 
             <div className="flex flex-col gap-5 items-center ">
               {data?.socialMedias?.map((socialMedia: ISocialMedia) => {
-                const href =
-                  socialMedia?.mediaName?.toLowerCase() === "whatsapp"
-                    ? `https://wa.me/${socialMedia?.phoneNumber}`
-                    : socialMedia?.mediaName?.toLowerCase() === "messenger"
-                    ? `https://m.me/${socialMedia?.userName}`
-                    : "#";
+                if (socialMedia?.isActive) {
+                  const href =
+                    socialMedia?.mediaName?.toLowerCase() === "whatsapp"
+                      ? `https://wa.me/${socialMedia?.phoneNumber}`
+                      : socialMedia?.mediaName?.toLowerCase() === "messenger"
+                      ? `https://m.me/${socialMedia?.userName}`
+                      : "#";
 
-                return (
-                  <Link
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer" // For security best practices
-                    className={`px-5 py-3 flex gap-2.5 items-center justify-center rounded-md cursor-pointer ${
-                      socialMedia?.mediaName === "Whatsapp"
-                        ? "hover:bg-[#1e432b]"
-                        : socialMedia?.mediaName === "Messenger"
-                        ? "hover:bg-messenger-bg-reverse"
-                        : ""
-                    } ${
-                      socialMedia?.mediaName === "Whatsapp"
-                        ? "bg-[#25D366]"
-                        : socialMedia?.mediaName === "Messenger"
-                        ? "bg-messenger-bg"
-                        : ""
-                    } w-full text-white `}
-                    key={socialMedia?._id}
-                  >
-                    {socialMedia?.mediaName === "Whatsapp" ? (
-                      <IconBrandWhatsapp size={20} />
-                    ) : socialMedia?.mediaName === "Messenger" ? (
-                      <IconBrandMessenger />
-                    ) : (
-                      ""
-                    )}
-                    {socialMedia?.mediaName}
-                  </Link>
-                );
+                  return (
+                    <Link
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer" // For security best practices
+                      className={`px-5 py-3 flex gap-2.5 items-center justify-center rounded-md cursor-pointer ${
+                        socialMedia?.mediaName === "Whatsapp"
+                          ? "hover:bg-[#1e432b]"
+                          : socialMedia?.mediaName === "Messenger"
+                          ? "hover:bg-messenger-bg-reverse"
+                          : ""
+                      } ${
+                        socialMedia?.mediaName === "Whatsapp"
+                          ? "bg-[#25D366]"
+                          : socialMedia?.mediaName === "Messenger"
+                          ? "bg-messenger-bg"
+                          : ""
+                      } w-full text-white `}
+                      key={socialMedia?._id}
+                    >
+                      {socialMedia?.mediaName === "Whatsapp" ? (
+                        <IconBrandWhatsapp size={20} />
+                      ) : socialMedia?.mediaName === "Messenger" ? (
+                        <IconBrandMessenger />
+                      ) : (
+                        ""
+                      )}
+                      {socialMedia?.mediaName}
+                    </Link>
+                  );
+                }
               })}
             </div>
           </div>

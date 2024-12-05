@@ -26,7 +26,6 @@ const OrderItemsCard = ({
 
   const { finalDiscountedPrice, totalDiscountPercentage, discountedTotal } =
     calculateOrderedItemPricesAndDiscount(orderItem);
-
   return (
     <div className="text-black-50 flex gap-5 py-5 w-full border-b border-black-10">
       {/* flex first div */}
@@ -66,18 +65,14 @@ const OrderItemsCard = ({
                 </div>
               )}
 
-            {orderItem?.bulk && totalDiscountPercentage ? (
+            {orderItem?.bulk || orderItem?.variant?.discountPercentage ? (
               <>
-                <div>|</div>
-                <span className="text-xs text-secondary">
-                  ({totalDiscountPercentage}% OFF)
-                </span>
-              </>
-            ) : orderItem?.variant?.discountPercentage ? (
-              <>
-                <div>|</div>
-                <span className="text-xs text-secondary">
-                  ({orderItem?.variant?.discountPercentage}% OFF)
+                <span className="text-black-10">|</span>
+                <span className="text-secondary text-sm">
+                  {orderItem?.bulk
+                    ? totalDiscountPercentage
+                    : orderItem?.variant?.discountPercentage}
+                  % OFF
                 </span>
               </>
             ) : null}

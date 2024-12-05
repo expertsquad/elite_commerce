@@ -11,7 +11,14 @@ const FooterMenu = ({ data }: any) => {
         {data?.children?.map(
           (item: { title: string; link: string }, index: number) => (
             <Link
-              href={`${item?.link}`}
+              href={
+                data?.menuName === "Category"
+                  ? `/category/single-category?category=${(item?.link).replace(
+                      "/",
+                      ""
+                    )}`
+                  : `${item?.link}`
+              }
               className="md:text-black-80 text-black-50 hover:text-primary-color-light-color hover:underline transition-all duration-300"
               key={index}
             >

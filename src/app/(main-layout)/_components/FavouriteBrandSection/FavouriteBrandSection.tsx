@@ -16,9 +16,7 @@ const FavouriteBrandSection = ({
   return (
     <div className="md:flex items-start gap-5">
       {/* wiget card */}
-
       <WidgetCard widget={widget} className="w-[350px] mx-auto" />
-
       <div className="w-full mt-5 md:mt-0">
         <div className="relative w-full flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -46,7 +44,7 @@ const FavouriteBrandSection = ({
                   src={server_url + brand?.brandPhoto}
                   alt={brand?.brandName}
                   fill
-                  className="object-contain p-4"
+                  className="object-contain p-2"
                 />
               </div>
             </Link>

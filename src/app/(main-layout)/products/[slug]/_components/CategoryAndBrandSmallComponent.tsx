@@ -7,14 +7,12 @@ type CategoryAndBrandSmallComponentProps = {
   brandPhoto: string;
   categoryName: string;
   brandName?: string;
-  className?: string;
 };
 
 const CategoryAndBrandSmallComponent = ({
   brandPhoto,
   categoryName,
   brandName,
-  className,
 }: CategoryAndBrandSmallComponentProps) => {
   return (
     <div className="flex items-center gap-x-1.5">
@@ -33,9 +31,9 @@ const CategoryAndBrandSmallComponent = ({
       <span className="text-black-10">|</span>
       <Link
         href={`/category/single-category?category=${categoryName}`}
-        className={`text-black-80 [font-size:_clamp(13px,2.5vw,16px)] ${className}`}
+        className="text-black-80 [font-size:_clamp(13px,2.5vw,16px)]"
       >
-        Category: {categoryName}
+        {categoryName}
       </Link>
     </div>
   );

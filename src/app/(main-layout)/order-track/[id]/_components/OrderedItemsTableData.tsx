@@ -108,7 +108,7 @@ const OrderedItemsTableData = async ({
                         </span>
                       </>
                     )} */}
-                    {item?.bulk && totalDiscountPercentage ? (
+                    {item?.bulk || item?.variant?.discountPercentage ? (
                       <>
                         <span className="text-black-10">|</span>
                         <span className="text-secondary text-[10px] md:text-xs">
@@ -116,13 +116,6 @@ const OrderedItemsTableData = async ({
                             ? totalDiscountPercentage
                             : item?.variant?.discountPercentage}
                           % OFF
-                        </span>
-                      </>
-                    ) : item.variant?.discountPercentage ? (
-                      <>
-                        <span className="text-black-10">|</span>
-                        <span className="text-secondary text-[10px] md:text-xs">
-                          {item?.variant?.discountPercentage} % OFF
                         </span>
                       </>
                     ) : null}

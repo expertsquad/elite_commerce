@@ -16,6 +16,8 @@ const ProfilePhotoOrIcon = ({
   const { user } = useContext(UserContext);
   const pathName = usePathname();
 
+  console.log(user);
+
   const isProfilePath = pathName.startsWith("/profile");
 
   if (accessToken && !user?._id) {
@@ -48,6 +50,16 @@ const ProfilePhotoOrIcon = ({
             Profile
           </span>
         </div>
+      </Link>
+    );
+  } else if (accessToken && user === undefined) {
+    return (
+      <Link href={"/profile"}>
+        <GenerateGradientIcon
+          IconComponent={IconUserCircle}
+          stroke={1.2}
+          size={34}
+        />
       </Link>
     );
   } else {
