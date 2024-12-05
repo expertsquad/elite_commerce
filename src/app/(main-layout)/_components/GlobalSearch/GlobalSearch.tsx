@@ -51,7 +51,7 @@ const GlobalSearch = ({
         <Modal
           show={show}
           setShow={setShow}
-          className="w-[clamp(450px,70vw,1000px)] min-h-[650px] overflow-hidden"
+          className="!md:p-0 !p-5 w-[clamp(450px,70vw,1000px)] h-[clamp(550px,2.5vh,650px)] overflow-y-auto scrollbar-y-remove "
           alignment="center"
           isOnlyLargeDevice={true}
         >
