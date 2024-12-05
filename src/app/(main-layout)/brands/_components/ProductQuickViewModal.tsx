@@ -71,7 +71,7 @@ const ProductQuickViewModal = ({
                 </div>
                 <span className="text-black-10 text-sm">|</span>
                 <span className="text-black-80">
-                  Category: {product?.category?.categoryName}
+                  {product?.category?.categoryName}
                 </span>
               </div>
             </div>

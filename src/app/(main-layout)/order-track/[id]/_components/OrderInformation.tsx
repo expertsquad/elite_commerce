@@ -11,6 +11,7 @@ interface Address {
   zipCode: number;
   phoneNumber: string;
   _id: string;
+  city?: string;
 }
 
 interface OrderInformationProps {
@@ -78,7 +79,13 @@ const OrderInformation = ({
           Shipping Address
         </label>
         <span className="text-wrap line-clamp-2">
-          {ordreInformation?.shippingAddress?.streetAddress}
+          {ordreInformation?.shippingAddress?.streetAddress +
+            ", " +
+            ordreInformation?.shippingAddress?.state +
+            ", " +
+            ordreInformation?.shippingAddress?.city +
+            " - " +
+            ordreInformation?.shippingAddress?.zipCode}
         </span>
       </div>
       <div className="flex flex-col gap-y-1 mb-3.5">

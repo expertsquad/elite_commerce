@@ -17,6 +17,8 @@ const DefaultAddress = ({
           ", " +
           defaultAddress?.state +
           ", " +
+          defaultAddress?.city +
+          ", " +
           defaultAddress?.zipCode}
       </p>
       <p>{defaultAddress?.phoneNumber}</p>

@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import ProductVariantColor from "./ProductVariantColor";
 import Image from "next/image";
 import { server_url } from "@/constants";
-import { IconBolt, IconShoppingCart } from "@tabler/icons-react";
+import { IconBolt, IconCheck, IconShoppingCart } from "@tabler/icons-react";
 import QuickOrderButton from "@/app/(main-layout)/_components/QuickOrder/QuickOrderButton";
 import { CartContext } from "@/Provider/CartProvider";
 import { updateCart } from "@/utils/updateCart.utils";
@@ -149,7 +149,7 @@ const SpecBulkProduct = ({
           >
             {isCarted ? (
               <>
-                <IconShoppingCart size={15} stroke={1.7} />
+                <IconCheck size={15} stroke={1.7} />
                 ALREADY CARTED
               </>
             ) : (
