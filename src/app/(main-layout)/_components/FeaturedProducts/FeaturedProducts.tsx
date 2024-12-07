@@ -77,7 +77,7 @@ const FeaturedProducts = ({
         </Link>
       </div>
       {/* layout */}
-      <div className="grid grid-cols-product-grid grid-rows-product-grid gap-10 min-h-[500px] justify-around">
+      <div className="grid grid-cols-product-grid grid-rows-product-grid gap-10 min-h-[700px] justify-around">
         {filter === "Newest" ? (
           <NewestProducts
             products={newestProducts}
