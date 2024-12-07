@@ -114,12 +114,12 @@ const Page = async () => {
         <div className="flex justify-center items-center capitalize flex-col gap-3.5 my-16">
           <div className="flex justify-center items-center gap-5">
             <div className="border-b w-[100px] border-black-50"></div>
-            <span className="text-[clamp(20px,5vw,30px)] text-gradient-primary font-bold">
+            <span className="text-[clamp(20px,2.5vw,30px)] text-gradient-primary font-bold whitespace-nowrap text-center">
               Explore Our Product
             </span>
             <div className="border-b w-[100px] border-black-50"></div>
           </div>
-          <p className="text-black-80 [font-size:_clamp(14px,2.5vw,16px)]">
+          <p className="text-black-80 [font-size:_clamp(14px,2.5vw,16px)] md:text-start text-center">
             Browse through our diverse range of high-quality products. Find
             everything you need in one place!
           </p>
