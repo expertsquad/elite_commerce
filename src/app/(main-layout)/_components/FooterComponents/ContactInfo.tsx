@@ -22,7 +22,7 @@ const ContactInfo = async () => {
           href={`tel:${contactData?.data?.phoneNumber}` || ""}
           className="text-gradient-primary font-medium text-xs md:text-sm"
         >
-          <span>+88</span> {contactData?.data?.phoneNumber}
+          <span></span> {contactData?.data?.phoneNumber}
         </Link>
         <div className="bg-gradient-primary h-[1.5px]"></div>
       </div>
