@@ -29,8 +29,11 @@ const Footer = async () => {
             <div className="flex flex-col gap-5">
               <div className="flex flex-col md:items-start items-center gap-3.5">
                 {/* logo */}
-                <div className="">
+                <div className="md:block hidden">
                   <Logo alignLeft />
+                </div>
+                <div className="md:hidden block">
+                  <Logo />
                 </div>
                 <p className="whitespace-pre-wrap text-black-80 md:text-sm text-xs md:text-start text-center">
                   {footer?.data?.description}
