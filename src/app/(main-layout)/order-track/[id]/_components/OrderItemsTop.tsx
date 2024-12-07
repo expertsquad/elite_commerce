@@ -33,7 +33,7 @@ const OrderItemsTop = ({
         </span>
         <div className="flex items-center text-black-50 text-xs md:text-sm whitespace-nowrap">
           <IconTruckDelivery stroke={1} size={18} />
-          <span>Estimated Delivery : {formatDate(updatedAt)}</span>
+          <span>Estimated Delivery : 2 - 5 Days</span>
         </div>
       </div>
     </div>

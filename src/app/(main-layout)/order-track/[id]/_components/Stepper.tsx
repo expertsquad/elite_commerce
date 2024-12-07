@@ -26,12 +26,14 @@ const Stepper = ({
     >
       <span className="font-bold text-[30px] md:text-5xl">{serialNumber}</span>
       <div>
-        <span>{title}</span>
+        <span className="font-bold">{title}</span>
         <div>
           {isCompleted ? (
-            <div>
+            <div className="text-sm">
               <span>{formatDate(iscompletedDate)}</span>{" "}
-              <span>{new Date(iscompletedTime).toLocaleTimeString()}</span>
+              <span className="">
+                {new Date(iscompletedTime).toLocaleTimeString()}
+              </span>
             </div>
           ) : (
             <span>{loadingText}</span>

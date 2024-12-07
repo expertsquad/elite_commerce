@@ -56,7 +56,7 @@ const OrderSummary = ({
             ({orderQuanity} Package, {orderItemsLength} Items)
           </span>
         </div>
-        <span className="font-bold text-gradient-primary">
+        <span className="text-xl font-bold text-gradient-primary">
           {currencyIcon}
           {total}
         </span>

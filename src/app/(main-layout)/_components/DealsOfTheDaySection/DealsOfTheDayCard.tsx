@@ -34,7 +34,7 @@ const DealsOfTheDayCard = ({ deal, index }: IDealsOfThedayCardProps) => {
       <div
         className={`${
           index % 2 === 0
-            ? "bg-image-background"
+            ? "bg-gradient-primary-light"
             : "bg-gradient-secondary-light"
         } md:h-[500px] h-[450px] pt-[clamp(10px,2.5vw,20px)]`}
       >
@@ -64,7 +64,7 @@ const DealsOfTheDayCard = ({ deal, index }: IDealsOfThedayCardProps) => {
         </div>
         <div className="flex items-center justify-center mt-3 md:mt-5">
           <Link
-            href={`${deal?.link}`}
+            href={`products/${deal?.link}`}
             className={`${
               index % 2 === 0 ? "bg-gradient-primary" : "bg-gradient-secondary"
             } rounded-full flex items-center justify-center text-white text-sm py-2.5 px-4 uppercase transition-all duration-300 hover:scale-105`}

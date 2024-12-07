@@ -63,10 +63,7 @@ const OrderTrackPage = async ({ params }: { params: { id: string } }) => {
         <div className="md:w-1/3">
           <OrderInformation
             ordreInformation={response?.data?.buyer}
-            paymentMethod={
-              response?.data?.payment?.paymentGateway ||
-              response?.data?.payment?.paymentMethod
-            }
+            paymentMethod={response?.data?.payment?.paymentMethod}
           />
         </div>
       </div>

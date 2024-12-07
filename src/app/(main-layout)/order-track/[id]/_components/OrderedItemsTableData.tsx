@@ -47,7 +47,7 @@ const OrderedItemsTableData = async ({
             <div key={item?._id} className="mb-5 flex items-center">
               {/* Product Details */}
               <div className="flex items-center w-full md:w-[45%]">
-                <div className="w-[55px] h-[60px] shrink-0 relative bg-gradient-primary-light rounded-md mr-2.5">
+                <div className="w-[55px] h-[60px] shrink-0 relative bg-image-background rounded-md mr-2.5">
                   <Image
                     src={`${server_url + item?.productPhotos?.[0]}`}
                     alt="product photo"
