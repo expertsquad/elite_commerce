@@ -12,9 +12,13 @@ const TopSmallBanner = ({
   topOffer: heroTopSmallBanner;
   currencyIcon: string;
 }) => {
+  const isExternalLink = topOffer?.link?.startsWith("http");
   const handleLink = () => {
-    if (topOffer?.link && topOffer?.backgroundPhoto) {
+    if (topOffer?.link && isExternalLink && topOffer?.backgroundPhoto) {
       window.open(topOffer?.link, "_blank");
+    }
+    if (topOffer?.link && !isExternalLink) {
+      window.location.href = "/products/" + topOffer?.link;
     }
   };
   return (
