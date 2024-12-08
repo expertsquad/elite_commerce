@@ -88,11 +88,11 @@ export const fetchProtectedData = async ({
       },
     });
 
-    if (!res.headers.get("content-type")?.includes("application/json")) {
-      const text = await res.text();
-      // console.error("Non-JSON response:", text);
-      throw new Error("Expected JSON but received non-JSON response.");
-    }
+    // if (!res.headers.get("content-type")?.includes("application/json")) {
+    //   const text = await res.text();
+    //   // console.error("Non-JSON response:", text);
+    //   throw new Error("Expected JSON but received non-JSON response.");
+    // }
 
     const data = await res.json();
     return data;
