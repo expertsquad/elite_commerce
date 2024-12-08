@@ -82,7 +82,7 @@ const AddCommentModalContent = ({
         toast.error(response?.message);
       }
     } catch (error) {
-      console.log("An error occurred while submitting your review.");
+      // console.log("An error occurred while submitting your review.");
     } finally {
       router.push("/profile/review/all-review-history");
       setAddComments(false);

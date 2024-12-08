@@ -35,7 +35,7 @@ const VerifyEmail = async ({
       revalidateTagAction("/user");
       permanentRedirect("/login");
     } else {
-      console.error(res?.error);
+      // console.error(res?.error);
     }
   };
 

@@ -34,7 +34,7 @@ const useGetColors = () => {
           );
         }
       } catch (error) {
-        console.error("Failed to fetch colors:", error);
+        // console.error("Failed to fetch colors:", error);
       }
     }
 

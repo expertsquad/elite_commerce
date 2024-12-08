@@ -32,7 +32,7 @@ async function fetchMetadata(): Promise<Metadata> {
       },
     };
   } catch (error) {
-    console.error("Error fetching metadata:", error);
+    // console.error("Error fetching metadata:", error);
     // Fallback metadata
     return {
       title: "Home",

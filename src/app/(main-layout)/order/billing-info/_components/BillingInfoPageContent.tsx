@@ -87,7 +87,7 @@ const BillingInfoPageContent = ({
         });
       }
     } catch (error) {
-      console.error("Address mutation error:", error);
+      // console.error("Address mutation error:", error);
       // Optional: You can show a toast or log an error here if desired
     }
 
@@ -115,7 +115,7 @@ const BillingInfoPageContent = ({
         toast.error(result?.message);
       }
     } catch (error) {
-      console.error("Order submission error:", error);
+      // console.error("Order submission error:", error);
     } finally {
       setLoading(false);
     }

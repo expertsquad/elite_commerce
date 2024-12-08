@@ -16,8 +16,6 @@ const ProfilePhotoOrIcon = ({
   const { user } = useContext(UserContext);
   const pathName = usePathname();
 
-  console.log(user);
-
   const isProfilePath = pathName.startsWith("/profile");
 
   if (accessToken && !user?._id) {

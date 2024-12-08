@@ -35,7 +35,7 @@ const OrderCancelModal = ({ id }: { id: string }) => {
         setShow(false);
       }
     } catch (error) {
-      console.error("Error cancelling the order:", error);
+      // console.error("Error cancelling the order:", error);
     } finally {
       setLoading(false);
       setShow(false);

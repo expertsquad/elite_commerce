@@ -17,7 +17,7 @@ const useGetSingleProduct = (productId: string) => {
         const res = await fetchData({ route: `/product/${productId}` });
         setSingleProduct(res?.data);
       } catch (error) {
-        console.error(error);
+        // console.error(error);
         setError("Failed To Fetch Product");
       } finally {
         setLoading(false);

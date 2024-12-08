@@ -70,7 +70,7 @@ const page = async () => {
       </div>
     );
   } catch (error) {
-    console.error("Error loading shipping address page:", error);
+    // console.error("Error loading shipping address page:", error);
     // Handle errors or return fallback UI
     return (
       <div className="relative">

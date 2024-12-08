@@ -10,7 +10,7 @@ export async function revalidateTagAction(tag: string) {
     await revalidateTag(tag);
     return { revalidated: true };
   } catch (error: any) {
-    console.error(`Error revalidating tag "${tag}":`, error);
+    // console.error(`Error revalidating tag "${tag}":`, error);
     return { revalidated: false, error: error.message };
   }
 }

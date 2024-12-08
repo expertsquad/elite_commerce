@@ -15,6 +15,6 @@ export const getWishlistRemoteAndLocalDataAndMerge = async () => {
     const mergedProducts = mergeProducts(localProducts, remoteProducts);
     await updatedWishlistMutation(mergedProducts);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };

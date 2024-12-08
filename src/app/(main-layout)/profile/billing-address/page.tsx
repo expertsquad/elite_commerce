@@ -68,7 +68,7 @@ const page = async () => {
       </div>
     );
   } catch (error) {
-    console.error("Error loading billing address page:", error);
+    // console.error("Error loading billing address page:", error);
     // Handle errors or return fallback UI
     return (
       <div className="relative">

@@ -43,7 +43,7 @@ const AccountDetails = async () => {
       });
       revalidateTagAction("/user/me");
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 

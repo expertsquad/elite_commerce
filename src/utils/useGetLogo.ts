@@ -15,7 +15,7 @@ const useGetLogo = () => {
         const res = await fetchData({ route: `/settings/shop` });
         setLogo(res?.data?.shopLogo);
       } catch (error) {
-        console.error(error);
+        // console.error(error);
         setError("Failed To Fetch Product");
       } finally {
         setLoading(false);

@@ -85,7 +85,7 @@ const page = async () => {
       </section>
     );
   } catch (error) {
-    console.error("Error loading shipping info page:", error);
+    // console.error("Error loading shipping info page:", error);
     // Handle errors or return fallback UI
     return (
       <div className="relative">
