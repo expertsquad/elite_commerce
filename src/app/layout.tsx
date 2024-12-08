@@ -11,41 +11,41 @@ import ClientProvider from "@/Components/ClientProvider";
 
 const inter = Open_Sans({ subsets: ["latin"] });
 
-// Dynamic metadata
-async function fetchMetadata(): Promise<Metadata> {
-  try {
-    const response = await fetchData({
-      route: "/settings/home-page-meta",
-    });
+// // Dynamic metadata
+// async function fetchMetadata(): Promise<Metadata> {
+//   try {
+//     const response = await fetchData({
+//       route: "/settings/home-page-meta",
+//     });
 
-    const data = response?.data;
-    const shopInfo = await fetchData({
-      route: "/settings/shop",
-    });
-    const shopData = shopInfo?.data;
+//     const data = response?.data;
+//     const shopInfo = await fetchData({
+//       route: "/settings/shop",
+//     });
+//     const shopData = shopInfo?.data;
 
-    return {
-      title: `${data?.metaTitle} | ${shopData?.shopName}`,
-      description: data?.metaDescription || "Description",
-      icons: {
-        icon: `${server_url + shopData?.favIcon}` || `${favicon}`,
-      },
-    };
-  } catch (error) {
-    // console.error("Error fetching metadata:", error);
-    // Fallback metadata
-    return {
-      title: "Home",
-      description: "Home",
-      icons: {
-        icon: `${favicon}`,
-      },
-    };
-  }
-}
-export async function generateMetadata(): Promise<Metadata> {
-  return await fetchMetadata();
-}
+//     return {
+//       title: `${data?.metaTitle} | ${shopData?.shopName}`,
+//       description: data?.metaDescription || "Description",
+//       icons: {
+//         icon: `${server_url + shopData?.favIcon}` || `${favicon}`,
+//       },
+//     };
+//   } catch (error) {
+//     // console.error("Error fetching metadata:", error);
+//     // Fallback metadata
+//     return {
+//       title: "Home",
+//       description: "Home",
+//       icons: {
+//         icon: `${favicon}`,
+//       },
+//     };
+//   }
+// }
+// export async function generateMetadata(): Promise<Metadata> {
+//   return await fetchMetadata();
+// }
 
 export default async function RootLayout({
   children,
