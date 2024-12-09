@@ -40,8 +40,8 @@ export const fetchData = async ({
         next,
       }
     );
-    const data = await res.json();
 
+    const data = await res.json();
     if (revalidate) {
       next.revalidate = revalidate;
     }

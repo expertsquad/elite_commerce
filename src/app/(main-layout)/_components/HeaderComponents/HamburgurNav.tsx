@@ -77,7 +77,7 @@ const HamburgurNav = ({ categories }: { categories: ICategory[] }) => {
         <IconArrowNarrowLeft />
       </Button>
       <ul className="flex flex-col">
-        {categories.map((category) => (
+        {categories?.map((category) => (
           <li
             key={category?.categoryName}
             className="hover:bg-gradient-primary hover:text-white flex items-center justify-between group/category"
