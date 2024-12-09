@@ -1,8 +1,4 @@
-// import smallLogo from "/small-logo.svg";
-// import fullLogo from "../../public/fullLogo.svg";
 import brandTestImage from "./Images/brandTest.svg";
-import demoProductPhoto from "./Images/demoslkdf.svg";
-import testWidget from "./Images/demoProduct.svg";
 import facebookIcon from "./SocialIcons/Facebook.svg";
 import redditIcon from "./SocialIcons/reddit.svg";
 import youtubeIcon from "./SocialIcons/YouTube.svg";
@@ -25,14 +21,11 @@ import gradientLine from "./Images/gradient-line.svg";
 import wave from "./Images/wave.svg";
 import cornerGolden from "./Images/corner-gold.svg";
 import cornerBlue from "./Images/corner-blue.svg";
-import demoIphone from "./Images/demoiphone.svg";
 import orderPlacedDesign from "./Images/orderplacedesign.svg";
 import orderPlacedDesign2 from "./Images/orderplaceddesign2.svg";
 import orderPlacedDesignTemplate from "./Images/orderplaceddesigntemplate.svg";
-import demoBrand from "./Images/demoBrandImg.svg";
 import loginSignupBackground from "./Images/login&signupBackground.svg";
 import loginSignupTopShapeBg from "./Images/login&signupTopShapeBackground.svg";
-import bestDealsBG from "./Images/best-deals-bg.png";
 import arrowLeftCustom from "./Images/arrow-left.png";
 import successGif from "./Images/success.gif";
 import favicon from "./Images/favicon.svg";
@@ -46,8 +39,6 @@ export {
   // smallLogo,
   // fullLogo,
   brandTestImage,
-  demoProductPhoto,
-  testWidget,
   facebookIcon,
   redditIcon,
   youtubeIcon,
@@ -70,14 +61,11 @@ export {
   wave,
   cornerGolden,
   cornerBlue,
-  demoIphone,
   orderPlacedDesign,
   orderPlacedDesign2,
   orderPlacedDesignTemplate,
-  demoBrand,
   loginSignupBackground,
   loginSignupTopShapeBg,
-  bestDealsBG,
   arrowLeftCustom,
   successGif,
   favicon,
